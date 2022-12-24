@@ -40,6 +40,8 @@ private:
 	std::map <string, CImage*> m_imageList;
 	std::map <string, vImage*> m_vectorImageList;
 	std::vector<CImage*> m_tileImages;
+	std::map<string, CImage*> m_structureImages;
+
 
 
 	IWICImagingFactory* factory;
@@ -61,6 +63,8 @@ public:
 	ID2D1Bitmap* AddBitmap(std::wstring path, UINT* Width, UINT* Height);
 	CImage* AddImage(const std::string key, std::wstring path);
 	CImage* AddTileImage(std::wstring path);
+	CImage* AddStructureImage(std::string key, std::wstring path);
+
 	CImage* FindImage(const std::string key);
 
 	vImage* AddImageVector(const std::string key, std::wstring path, int startIndex, int endIndex);
@@ -87,6 +91,11 @@ public:
 	vector<CImage*> GetTileImages()
 	{
 		return m_tileImages;
+	}
+
+	map<string, CImage*> GetStructureImages()
+	{
+		return m_structureImages;
 	}
 };
 

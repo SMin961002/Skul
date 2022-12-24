@@ -44,7 +44,15 @@ using namespace std;
 enum ObjectTag
 {
 	eObject,
+	ePlayer,
 	eEndTag
+};
+
+struct StructureData
+{
+	string key;
+	float x;
+	float y;
 };
 
 #define WIN_NAME "금강상태"
