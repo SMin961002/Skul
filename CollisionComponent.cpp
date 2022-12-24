@@ -19,6 +19,8 @@ void CollisionComponent::Update()
 
 void CollisionComponent::Render()
 {
+	if (IMAGEMANAGER->GetViewCollision())
+		IMAGEMANAGER->DrawCircle(m_collisionX, m_collisionY, m_range);
 }
 
 void CollisionComponent::Release()

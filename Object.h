@@ -7,14 +7,25 @@ public:
 private:
 	string name;
 	vector<Component*> m_components;
+	CollisionComponent* m_collision;
+	bool m_isObjectDestroyed = false;
 public:
 	void Init();
 	void Update();
 	void Render();
 	void Release();
+	void OnCollision(Object * other);
 
 	void SetPosition(float x, float y) { this->x = x; this->y = y; }
 	void SetName(string str) { name = str; }
+
+	bool GetIsObjectDestroyed() { return m_isObjectDestroyed; }
+	void ObjectDestroyed() { m_isObjectDestroyed = true; }
+
+	CollisionComponent* GetCollisionComponent()
+	{
+		return m_collision;
+	}
 
 	template <class T>
 	T* AddComponent()
