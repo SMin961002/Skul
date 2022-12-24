@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "CollisionComponent.h"
 class Object : public Component
 {
 public:
@@ -18,9 +19,15 @@ public:
 
 	void SetPosition(float x, float y) { this->x = x; this->y = y; }
 	void SetName(string str) { name = str; }
+	string GetName() { return name; }
 
 	bool GetIsObjectDestroyed() { return m_isObjectDestroyed; }
 	void ObjectDestroyed() { m_isObjectDestroyed = true; }
+
+	void SetCollisionComponent(CollisionComponent* cc) 
+	{
+		m_collision = cc;
+	}
 
 	CollisionComponent* GetCollisionComponent()
 	{

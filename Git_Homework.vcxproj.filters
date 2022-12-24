@@ -66,10 +66,10 @@
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Object\Charactor\Enemy</Filter>
+      <Filter>Game\Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="LeoniaSoldier.cpp">
-      <Filter>Game\Object\Charactor\Enemy\LeoniaSoldier</Filter>
+      <Filter>Game\Object\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,10 +140,10 @@
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Game\Object\Charactor\Enemy</Filter>
+      <Filter>Game\Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="LeoniaSoldier.h">
-      <Filter>Game\Object\Charactor\Enemy\LeoniaSoldier</Filter>
+      <Filter>Game\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -222,11 +222,8 @@
     <Filter Include="Game\Component\RigidBodyComponent">
       <UniqueIdentifier>{05dcc7ba-e1b5-4631-9c2a-fb10ff3f4449}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Charactor\Enemy">
-      <UniqueIdentifier>{3f540b54-adee-4a44-886f-544cdc202dcb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Charactor\Enemy\LeoniaSoldier">
-      <UniqueIdentifier>{29cc53dc-8485-4ded-bf1a-1d556db523ff}</UniqueIdentifier>
+    <Filter Include="Game\Object\Enemy">
+      <UniqueIdentifier>{5fe81d37-64a5-425f-b474-a46d7ebd14a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
