@@ -87,18 +87,18 @@ void ImageManager::LoadImages()
 	AddImageVector("Ex_Idle", L"./Resources/Png/Idle/", 1, 6);
 
 	//타일 이미지
-	AddTileImage(L"./Resources/Tile/3/tile01.png");
-	AddTileImage(L"./Resources/Tile/3/tile02.png");
-	AddTileImage(L"./Resources/Tile/3/tile03.png");
-	AddTileImage(L"./Resources/Tile/3/tile04.png");
-	AddTileImage(L"./Resources/Tile/3/tile05.png");
-	AddTileImage(L"./Resources/Tile/3/tile06.png");
-	AddTileImage(L"./Resources/Tile/3/tile07.png");
-	AddTileImage(L"./Resources/Tile/3/tile08.png");
-	AddTileImage(L"./Resources/Tile/3/tile09.png");
-	AddTileImage(L"./Resources/Tile/3/tile10.png");
-	AddTileImage(L"./Resources/Tile/3/tile11.png");
-	AddTileImage(L"./Resources/Tile/3/tile12.png");
+	////AddTileImage(L"./Resources/Tile/3/tile01.png");
+	////AddTileImage(L"./Resources/Tile/3/tile02.png");
+	////AddTileImage(L"./Resources/Tile/3/tile03.png");
+	////AddTileImage(L"./Resources/Tile/3/tile04.png");
+	////AddTileImage(L"./Resources/Tile/3/tile05.png");
+	////AddTileImage(L"./Resources/Tile/3/tile06.png");
+	////AddTileImage(L"./Resources/Tile/3/tile07.png");
+	////AddTileImage(L"./Resources/Tile/3/tile08.png");
+	////AddTileImage(L"./Resources/Tile/3/tile09.png");
+	////AddTileImage(L"./Resources/Tile/3/tile10.png");
+	////AddTileImage(L"./Resources/Tile/3/tile11.png");
+	////AddTileImage(L"./Resources/Tile/3/tile12.png");
 	//AddImage("Frame_1SKill", L"./Resources/Tile/3/.png");
 	//AddImage("Frame_1SKill", L"./Resources/Tile/3/.png");
 	//AddImage("Frame_1SKill", L"./Resources/Tile/3/.png");
