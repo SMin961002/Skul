@@ -42,13 +42,13 @@ private:
 	std::vector<CImage*> m_tileImages;
 	std::map<string, CImage*> m_structureImages;
 
-
-
 	IWICImagingFactory* factory;
 	ID2D1HwndRenderTarget* pRT = NULL;
 	ID2D1Factory* pD2DFactory;
 	IDWriteTextFormat* tf;
 	ID2D1SolidColorBrush* m_brush;
+
+	bool m_isViewCollision = false;
 
 public:
 	ImageManager();
@@ -99,6 +99,9 @@ public:
 	{
 		return m_structureImages;
 	}
+
+	void SetViewCollision(bool isView) { m_isViewCollision = isView; }
+	bool GetViewCollision() { return m_isViewCollision; }
 };
 
 #define IMAGEMANAGER ImageManager::GetInstance()

@@ -12,5 +12,9 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 	void Setting(float range, float x, float y);
+
+	float GetCollisionPosX() { return m_collisionX; }
+	float GetCollisionPosY() { return m_collisionY; }
+	float GetRange() { return m_range; }
 };
 
