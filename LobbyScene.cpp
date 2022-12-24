@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "LobbyScene.h"
-#include "ExObject.h"
+#include "Player.h"
 LobbyScene::LobbyScene()
 {
 }
@@ -11,7 +11,7 @@ LobbyScene::~LobbyScene()
 
 void LobbyScene::Init()
 {
-	OBJECTMANAGER->AddObject("Example",WINSIZE_X/2,400,0)->AddComponent<ExObject>();
+	OBJECTMANAGER->AddObject("Example",WINSIZE_X/2,400,0)->AddComponent<Player>();
 }
 
 void LobbyScene::Update()

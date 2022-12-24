@@ -5,3 +5,5 @@ Resource
           └Motion
              └(action)
           └Effect
+
+Destroyer, Predator 정리필요
