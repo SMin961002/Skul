@@ -10,7 +10,7 @@ void Main::Init()
 
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
-	SCENEMANAGER->ChangeScene("LobbyScene");
+	SCENEMANAGER->ChangeScene("MapToolMapSelectScene");
 }
 
 void Main::Update()
