@@ -122,6 +122,7 @@ public:
 		m_timeDelay = t;
 		m_isLoop = isLoop;
 		m_nowTimeDelay = 0;
+		m_frame = 0;
 	}
 
 	void Render(float x, float y, float sizeX, float sizeY, float rot)
@@ -129,7 +130,7 @@ public:
 		if (m_isEnd == false)
 			m_nowTimeDelay += DELTA_TIME;
 
-		if (m_nowTimeDelay <= m_timeDelay)
+		if (m_nowTimeDelay >= m_timeDelay)
 		{
 			if (m_frame >= GetImageSize() - 1)
 			{
