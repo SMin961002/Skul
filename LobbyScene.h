@@ -2,6 +2,8 @@
 #include "Scene.h"
 class LobbyScene : public Scene
 {
+private:
+	CImage* img;
 public:
 	LobbyScene();
 	~LobbyScene();

@@ -142,6 +142,7 @@
     <ClCompile Include="Consercration.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="ExObject.cpp" />
+    <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Nervousness.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -174,6 +176,7 @@
     <ClInclude Include="Consercration.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="ExObject.h" />
+    <ClInclude Include="Gambler.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="IOFillManager.h" />
     <ClInclude Include="KeyManager.h" />
@@ -184,6 +187,7 @@
     <ClInclude Include="Nervousness.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="singleton.h" />

@@ -80,29 +80,49 @@ void ImageManager::Init()
 void ImageManager::LoadImages()
 {
 	//맵툴 UI 이미지
-	//AddImage("newFile",L"./MapFile/newFile.png");
+	AddImage("newFile", L"./MapFile/newFile.png");
 
 	//예시 이미지
-	//AddImage("Frame_1SKill", L"./Resources/Frame_1SKill.png");
-	//AddImageVector("Ex_Idle", L"./Resources/Png/Idle/", 1, 6);
+	AddImage("Frame_1SKill", L"./Resources/Frame_1SKill.png");
+	AddImageVector("Ex_Idle", L"./Resources/Png/Idle/", 1, 6);
 
 	//타일 이미지
-	//AddTileImage(L"./Resources/Tile/3/tile01.png");
-	//AddTileImage(L"./Resources/Tile/3/tile02.png");
-	//AddTileImage(L"./Resources/Tile/3/tile03.png");
-	//AddTileImage(L"./Resources/Tile/3/tile04.png");
-	//AddTileImage(L"./Resources/Tile/3/tile05.png");
-	//AddTileImage(L"./Resources/Tile/3/tile06.png");
-	//AddTileImage(L"./Resources/Tile/3/tile07.png");
-	//AddTileImage(L"./Resources/Tile/3/tile08.png");
-	//AddTileImage(L"./Resources/Tile/3/tile09.png");
-	//AddTileImage(L"./Resources/Tile/3/tile10.png");
-	//AddTileImage(L"./Resources/Tile/3/tile11.png");
-	//AddTileImage(L"./Resources/Tile/3/tile12.png");
-	//AddImage("Frame_1SKill", L"./Resources/Tile/3/.png");
-	//AddImage("Frame_1SKill", L"./Resources/Tile/3/.png");
-	//AddImage("Frame_1SKill", L"./Resources/Tile/3/.png");
-	//AddImage("Frame_1SKill", L"./Resources/Tile/3/.png");
+	AddTileImage(L"./Resources/Tile/4Stage/01.png");
+	AddTileImage(L"./Resources/Tile/4Stage/02.png");
+	AddTileImage(L"./Resources/Tile/4Stage/03.png");
+	AddTileImage(L"./Resources/Tile/4Stage/04.png");
+	AddTileImage(L"./Resources/Tile/4Stage/05.png");
+	AddTileImage(L"./Resources/Tile/4Stage/06.png");
+	AddTileImage(L"./Resources/Tile/4Stage/07.png");
+	AddTileImage(L"./Resources/Tile/4Stage/08.png");
+	AddTileImage(L"./Resources/Tile/4Stage/09.png");
+	AddTileImage(L"./Resources/Tile/4Stage/10.png");
+	AddTileImage(L"./Resources/Tile/4Stage/11.png");
+	AddTileImage(L"./Resources/Tile/4Stage/12.png");
+	AddTileImage(L"./Resources/Tile/4Stage/13.png");
+	AddTileImage(L"./Resources/Tile/4Stage/14.png");
+	AddTileImage(L"./Resources/Tile/4Stage/15.png");
+	AddTileImage(L"./Resources/Tile/4Stage/16.png");
+	AddTileImage(L"./Resources/Tile/4Stage/17.png");
+	AddTileImage(L"./Resources/Tile/4Stage/18.png");
+	AddTileImage(L"./Resources/Tile/4Stage/19.png");
+	AddTileImage(L"./Resources/Tile/4Stage/20.png");
+	AddTileImage(L"./Resources/Tile/4Stage/21.png");
+	AddTileImage(L"./Resources/Tile/4Stage/22.png");
+	AddTileImage(L"./Resources/Tile/4Stage/23.png");
+	AddTileImage(L"./Resources/Tile/4Stage/24.png");
+	AddTileImage(L"./Resources/Tile/4Stage/25.png");
+	AddTileImage(L"./Resources/Tile/4Stage/26.png");
+	AddTileImage(L"./Resources/Tile/4Stage/27.png");
+	AddTileImage(L"./Resources/Tile/4Stage/28.png");
+	AddTileImage(L"./Resources/Tile/4Stage/29.png");
+	AddTileImage(L"./Resources/Tile/4Stage/30.png");
+	AddTileImage(L"./Resources/Tile/4Stage/31.png");
+	AddTileImage(L"./Resources/Tile/4Stage/32.png");
+	AddTileImage(L"./Resources/Tile/4Stage/33.png");
+	AddTileImage(L"./Resources/Tile/4Stage/34.png");
+	AddTileImage(L"./Resources/Tile/4Stage/35.png");
+	AddTileImage(L"./Resources/Tile/4Stage/36.png");
 
 	//배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
@@ -112,6 +132,10 @@ void ImageManager::LoadImages()
 	//보스 이미지
 	AddImageVector("Boss", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Ready/Casting_Ready_", 1, 7);
 
+	// 맵 구조물 이미지
+	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
+	AddStructureImage("arch1", L"./Resources/Tile/4Stage/Structure/arch1.png");
+	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
@@ -150,6 +174,14 @@ CImage* ImageManager::AddTileImage(std::wstring path)
 	CImage* img = new CImage(AddBitmap(path, &_width, &_height), _width, _height);
 	m_tileImages.push_back(img);
 	return img;
+}
+
+CImage* ImageManager::AddStructureImage(std::string key, std::wstring path)
+{
+	UINT _width = 0, _height = 0;
+	CImage* img = new CImage(AddBitmap(path, &_width, &_height), _width, _height);
+	m_structureImages.insert(make_pair(key, img));
+	return nullptr;
 }
 
 CImage* ImageManager::FindImage(const std::string key)
@@ -233,11 +265,11 @@ void ImageManager::DrawRect(RECT rt)
 	color.g = 255;
 
 	D2D1_MATRIX_3X2_F mat;
-	mat = D2D1::Matrix3x2F::Translation(0,0);
+	mat = D2D1::Matrix3x2F::Translation(0, 0);
 	pRT->SetTransform(&mat);
 	pRT->CreateSolidColorBrush(color, &m_brush);
 
-	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left ,(float)rt.top,(float)rt.right,(float)rt.bottom}, (m_brush));
+	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left ,(float)rt.top,(float)rt.right,(float)rt.bottom }, (m_brush));
 }
 
 void ImageManager::D2dTextOut(wstring str, float x, float y)
@@ -259,6 +291,17 @@ void ImageManager::Render(CImage* img, float x, float y, float sizeX, float size
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 	matT = D2D1::Matrix3x2F::Translation(x - camera.x, y - camera.y);
 	matR = D2D1::Matrix3x2F::Rotation(rot, { x + img->GetWidth() / 2,y + img->GetHeight() / 2 });
+	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
+	pRT->SetTransform((matS * matT * matR));
+	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+}
+
+void ImageManager::CenterRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot)
+{
+	D2D1_MATRIX_3X2_F matT, matR, matS;
+
+	matT = D2D1::Matrix3x2F::Translation((x - img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
+	matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
 	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
 	pRT->SetTransform((matS * matT * matR));
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);

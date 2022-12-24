@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "LobbyScene.h"
-#include "ExObject.h"
+#include "Player.h"
 LobbyScene::LobbyScene()
 {
 }
@@ -11,7 +11,8 @@ LobbyScene::~LobbyScene()
 
 void LobbyScene::Init()
 {
-	//OBJECTMANAGER->AddObject("Example",WINSIZE_X/2,400,0)->AddComponent<ExObject>();
+	OBJECTMANAGER->AddObject("Example",WINSIZE_X/2,400,0)->AddComponent<Player>();
+	img = IMAGEMANAGER->FindImage("Frame_1SKill");
 }
 
 void LobbyScene::Update()
@@ -20,9 +21,10 @@ void LobbyScene::Update()
 
 void LobbyScene::Render()
 {
-	//IMAGEMANAGER->Render(IMAGEMANAGER->FindImage("Frame_1SKill"), WINSIZE_X / 2, WINSIZE_Y/2);
+	IMAGEMANAGER->Render(img, WINSIZE_X / 2, WINSIZE_Y/2);
+	IMAGEMANAGER->CenterRender(img, WINSIZE_X / 2, WINSIZE_Y / 2,1,1,90);
 
-	//TIMERMANAGER->Render();
+	TIMERMANAGER->Render();
 }
 
 void LobbyScene::Release()

@@ -56,6 +56,12 @@
     <ClCompile Include="MapToolMapSelectScene.cpp">
       <Filter>Game\Scene\MapTool\MapToolMapSelectScene</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Object\Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="Gambler.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClCompile>
     <ClCompile Include="BossScene.cpp">
       <Filter>Game\Scene\Boss</Filter>
     </ClCompile>
@@ -139,6 +145,12 @@
     <ClInclude Include="Nervousness.h" />
     <ClInclude Include="Baptism.h" />
     <ClInclude Include="Consercration.h" />
+    <ClInclude Include="Player.h">
+      <Filter>Game\Object\Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="Gambler.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -221,6 +233,12 @@
     </Filter>
     <Filter Include="Game\Object\Boss\Pattern\Phase_2">
       <UniqueIdentifier>{f02695e5-06dc-487f-b68a-919740b88e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor">
+      <UniqueIdentifier>{b02c8b66-cd68-4c8d-b8c6-2015530ad898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Head">
+      <UniqueIdentifier>{7528eb48-f244-4dc5-aab2-5f6e7dd1a441}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
