@@ -44,6 +44,7 @@ using namespace std;
 enum ObjectTag
 {
 	eObject,
+	eEnemy,
 	ePlayer,
 	eEndTag
 };

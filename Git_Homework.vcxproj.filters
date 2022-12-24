@@ -62,6 +62,15 @@
     <ClCompile Include="Gambler.cpp">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
+    <ClCompile Include="RigidBodyComponent.cpp">
+      <Filter>Game\Component\RigidBodyComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Object\Charactor\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="LeoniaSoldier.cpp">
+      <Filter>Game\Object\Charactor\Enemy\LeoniaSoldier</Filter>
+    </ClCompile>
     <ClCompile Include="BossScene.cpp">
       <Filter>Game\Scene\Boss</Filter>
     </ClCompile>
@@ -151,6 +160,15 @@
     <ClInclude Include="Gambler.h">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
+    <ClInclude Include="RigidBodyComponent.h">
+      <Filter>Game\Component\RigidBodyComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game\Object\Charactor\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="LeoniaSoldier.h">
+      <Filter>Game\Object\Charactor\Enemy\LeoniaSoldier</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -239,6 +257,15 @@
     </Filter>
     <Filter Include="Game\Object\Charactor\Head">
       <UniqueIdentifier>{7528eb48-f244-4dc5-aab2-5f6e7dd1a441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component\RigidBodyComponent">
+      <UniqueIdentifier>{05dcc7ba-e1b5-4631-9c2a-fb10ff3f4449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Enemy">
+      <UniqueIdentifier>{3f540b54-adee-4a44-886f-544cdc202dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Enemy\LeoniaSoldier">
+      <UniqueIdentifier>{29cc53dc-8485-4ded-bf1a-1d556db523ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

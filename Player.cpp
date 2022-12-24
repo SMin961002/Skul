@@ -28,6 +28,7 @@ void Player::Init()
 	img = IMAGEMANAGER->FindImageVector("Ex_Idle");
 	img->Setting(3, true);
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
+
 }
 
 void Player::Update()

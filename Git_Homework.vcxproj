@@ -141,11 +141,13 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Consercration.cpp" />
     <ClCompile Include="CTimer.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="ExObject.cpp" />
     <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
+    <ClCompile Include="LeoniaSoldier.cpp" />
     <ClCompile Include="LobbyScene.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapToolMapSelectScene.cpp" />
@@ -154,6 +156,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -175,11 +178,13 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Consercration.h" />
     <ClInclude Include="CTimer.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="ExObject.h" />
     <ClInclude Include="Gambler.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="IOFillManager.h" />
     <ClInclude Include="KeyManager.h" />
+    <ClInclude Include="LeoniaSoldier.h" />
     <ClInclude Include="LobbyScene.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MapToolMapSelectScene.h" />
@@ -188,6 +193,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="singleton.h" />

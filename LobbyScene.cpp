@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "LobbyScene.h"
 #include "Player.h"
+#include"LeoniaSoldier.h"
 LobbyScene::LobbyScene()
 {
 }
