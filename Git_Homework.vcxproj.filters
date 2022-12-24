@@ -65,6 +65,12 @@
     <ClCompile Include="RigidBodyComponent.cpp">
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Object\Charactor\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="LeoniaSoldier.cpp">
+      <Filter>Game\Object\Charactor\Enemy\LeoniaSoldier</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -132,6 +138,12 @@
     </ClInclude>
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>Game\Component\RigidBodyComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game\Object\Charactor\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="LeoniaSoldier.h">
+      <Filter>Game\Object\Charactor\Enemy\LeoniaSoldier</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +221,12 @@
     </Filter>
     <Filter Include="Game\Component\RigidBodyComponent">
       <UniqueIdentifier>{05dcc7ba-e1b5-4631-9c2a-fb10ff3f4449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Enemy">
+      <UniqueIdentifier>{3f540b54-adee-4a44-886f-544cdc202dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Enemy\LeoniaSoldier">
+      <UniqueIdentifier>{29cc53dc-8485-4ded-bf1a-1d556db523ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
