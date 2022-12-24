@@ -56,6 +56,18 @@
     <ClCompile Include="MapToolMapSelectScene.cpp">
       <Filter>Game\Scene\MapTool\MapToolMapSelectScene</Filter>
     </ClCompile>
+    <ClCompile Include="BossScene.cpp">
+      <Filter>Game\Scene\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossObject.cpp">
+      <Filter>Game\Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Worship.cpp">
+      <Filter>Game\Object\Boss\Pattern\Phase_1</Filter>
+    </ClCompile>
+    <ClCompile Include="Nervousness.cpp" />
+    <ClCompile Include="Baptism.cpp" />
+    <ClCompile Include="Consercration.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -115,6 +127,18 @@
     <ClInclude Include="MapToolMapSelectScene.h">
       <Filter>Game\Scene\MapTool\MapToolMapSelectScene</Filter>
     </ClInclude>
+    <ClInclude Include="BossScene.h">
+      <Filter>Game\Scene\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossObject.h">
+      <Filter>Game\Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Worship.h">
+      <Filter>Game\Object\Boss\Pattern\Phase_1</Filter>
+    </ClInclude>
+    <ClInclude Include="Nervousness.h" />
+    <ClInclude Include="Baptism.h" />
+    <ClInclude Include="Consercration.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -182,6 +206,21 @@
     </Filter>
     <Filter Include="Game\Scene\MapTool\MapToolMapSelectScene">
       <UniqueIdentifier>{82704bb3-9a8c-4066-b1ee-c82524186a37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\Boss">
+      <UniqueIdentifier>{92c1ec2f-3d47-4374-b41e-8838323064f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss">
+      <UniqueIdentifier>{25aa4a54-3d16-46fe-afa2-033599799676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Pattern">
+      <UniqueIdentifier>{af9005a4-b44e-4070-883d-60a365006137}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Pattern\Phase_1">
+      <UniqueIdentifier>{b4c5c92b-9bed-447e-bc74-79bd6d59d7dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Pattern\Phase_2">
+      <UniqueIdentifier>{f02695e5-06dc-487f-b68a-919740b88e6a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

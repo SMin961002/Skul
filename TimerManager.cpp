@@ -31,7 +31,7 @@ void TimerManager::Render()
 #ifdef _DEBUG 
 	if (_timer != nullptr)
 	{
-		wstr = L"FramePerSec: " + to_wstring(_timer->gerFrameRate());
+		wstr = L"FramePerSec: " + to_wstring(_timer->getFrameRate());
 		IMAGEMANAGER->D2dTextOut(wstr, 0, 0);
 
 		wstr = L"ElapsedTime: " + to_wstring(DELTA_TIME);

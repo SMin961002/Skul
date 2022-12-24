@@ -4,7 +4,7 @@
 class ExObject : public Component
 {
 public:
-	vImage* img;
+	//vImage* img;
 	ExObject() {}
 	~ExObject() {}
 	// Component을(를) 통해 상속됨

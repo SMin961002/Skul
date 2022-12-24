@@ -120,7 +120,7 @@ public:
 		if (m_isEnd == false)
 			m_nowTimeDelay += DELTA_TIME;
 
-		if (m_nowTimeDelay <= m_timeDelay)
+		if (m_nowTimeDelay >= m_timeDelay)
 		{
 			if (m_frame >= GetImageSize() - 1)
 			{

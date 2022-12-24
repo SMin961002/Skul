@@ -80,29 +80,37 @@ void ImageManager::Init()
 void ImageManager::LoadImages()
 {
 	//맵툴 UI 이미지
-	AddImage("newFile",L"./MapFile/newFile.png");
+	//AddImage("newFile",L"./MapFile/newFile.png");
 
 	//예시 이미지
-	AddImage("Frame_1SKill", L"./Resources/Frame_1SKill.png");
-	AddImageVector("Ex_Idle", L"./Resources/Png/Idle/", 1, 6);
+	//AddImage("Frame_1SKill", L"./Resources/Frame_1SKill.png");
+	//AddImageVector("Ex_Idle", L"./Resources/Png/Idle/", 1, 6);
 
 	//타일 이미지
-	AddTileImage(L"./Resources/Tile/3/tile01.png");
-	AddTileImage(L"./Resources/Tile/3/tile02.png");
-	AddTileImage(L"./Resources/Tile/3/tile03.png");
-	AddTileImage(L"./Resources/Tile/3/tile04.png");
-	AddTileImage(L"./Resources/Tile/3/tile05.png");
-	AddTileImage(L"./Resources/Tile/3/tile06.png");
-	AddTileImage(L"./Resources/Tile/3/tile07.png");
-	AddTileImage(L"./Resources/Tile/3/tile08.png");
-	AddTileImage(L"./Resources/Tile/3/tile09.png");
-	AddTileImage(L"./Resources/Tile/3/tile10.png");
-	AddTileImage(L"./Resources/Tile/3/tile11.png");
-	AddTileImage(L"./Resources/Tile/3/tile12.png");
+	//AddTileImage(L"./Resources/Tile/3/tile01.png");
+	//AddTileImage(L"./Resources/Tile/3/tile02.png");
+	//AddTileImage(L"./Resources/Tile/3/tile03.png");
+	//AddTileImage(L"./Resources/Tile/3/tile04.png");
+	//AddTileImage(L"./Resources/Tile/3/tile05.png");
+	//AddTileImage(L"./Resources/Tile/3/tile06.png");
+	//AddTileImage(L"./Resources/Tile/3/tile07.png");
+	//AddTileImage(L"./Resources/Tile/3/tile08.png");
+	//AddTileImage(L"./Resources/Tile/3/tile09.png");
+	//AddTileImage(L"./Resources/Tile/3/tile10.png");
+	//AddTileImage(L"./Resources/Tile/3/tile11.png");
+	//AddTileImage(L"./Resources/Tile/3/tile12.png");
 	//AddImage("Frame_1SKill", L"./Resources/Tile/3/.png");
 	//AddImage("Frame_1SKill", L"./Resources/Tile/3/.png");
 	//AddImage("Frame_1SKill", L"./Resources/Tile/3/.png");
 	//AddImage("Frame_1SKill", L"./Resources/Tile/3/.png");
+
+	//배경 이미지
+	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
+	AddImage("Building", L"./Resources/BackGround/Boss_Stage_Building.png");
+	AddImage("Lion", L"./Resources/BackGround/Boss_Stage_Lion.png");
+
+	//보스 이미지
+	AddImageVector("Boss", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Ready/Casting_Ready_", 1, 7);
 
 }
 
