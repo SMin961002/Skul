@@ -132,7 +132,8 @@ void ImageManager::LoadImages()
 	//몬스터 이미지
 	AddImageVector("leonidle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
 	AddImageVector("leonattack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
-	AddImageVector("leonrun", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
+	AddImageVector("leonrun", L"Resources/Monster/Leonia Soldier/Run/", 1, 8);
+	AddImageVector("leonhit", L"Resources/Monster/Leonia Soldier/Hit/",1,1);
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
