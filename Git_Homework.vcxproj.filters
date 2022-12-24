@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="Scene.cpp">
+      <Filter>Core\Manager\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Core\Manager\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Core\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Core\Main\stdafx</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>Core\Manager\ImageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>Core\Manager\KeyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Core\Manager\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Core\Manager\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimer.cpp">
+      <Filter>Core\Util\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponent.cpp">
+      <Filter>Game\Component\CollisionComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="ExObject.cpp">
+      <Filter>Game\Object\Example</Filter>
+    </ClCompile>
+    <ClCompile Include="LobbyScene.cpp">
+      <Filter>Game\Scene\Example</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>Core\Manager\TimerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MapToolScene.cpp">
+      <Filter>Game\Scene\MapTool</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Core\Util\MyUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="IOFillManager.cpp">
+      <Filter>Core\Manager\FileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MapToolMapSelectScene.cpp">
+      <Filter>Game\Scene\MapTool\MapToolMapSelectScene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Scene.h">
+      <Filter>Core\Manager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Core\Manager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="singleton.h">
+      <Filter>Core\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Core\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Core\Main\stdafx</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>Core\Manager\ImageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>Core\Manager\KeyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Core\Manager\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Core\Manager\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimer.h">
+      <Filter>Core\Util\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Game\Component\CollisionComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="ExObject.h">
+      <Filter>Game\Object\Example</Filter>
+    </ClInclude>
+    <ClInclude Include="LobbyScene.h">
+      <Filter>Game\Scene\Example</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerManager.h">
+      <Filter>Core\Manager\TimerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MapToolScene.h">
+      <Filter>Game\Scene\MapTool</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Core\Util\MyUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="IOFillManager.h">
+      <Filter>Core\Manager\FileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MapToolMapSelectScene.h">
+      <Filter>Game\Scene\MapTool\MapToolMapSelectScene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{cf8433bd-7075-4003-a6a7-fcb870133b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager">
+      <UniqueIdentifier>{be349cf7-cac6-4c31-822b-c67d54e7cf28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\Scene">
+      <UniqueIdentifier>{43a4cb9e-c00f-4977-abc1-bedd5ecc97af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{214c1593-240d-4c35-b4ca-365537ef2da9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene">
+      <UniqueIdentifier>{0a66f05b-d0e3-4f3b-89c3-5a98524ce061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\ImageManager">
+      <UniqueIdentifier>{97340737-561e-48ca-b053-d0c0c53c0b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\KeyManager">
+      <UniqueIdentifier>{160734f0-554d-4af1-921e-77c1282e78a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component">
+      <UniqueIdentifier>{bb42cb0f-0af3-4067-9f85-b5cbf8f2accb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\ObjectManager">
+      <UniqueIdentifier>{ac7a1757-844b-414d-a470-b71f5708a69c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Util">
+      <UniqueIdentifier>{d986a7ed-42a6-4bb0-b647-f384867dabd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Util\Timer">
+      <UniqueIdentifier>{ae3ed177-4fcf-4182-806a-7419f9e28e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component\CollisionComponent">
+      <UniqueIdentifier>{06894790-b68e-4067-affc-5e93b2c6e677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Main">
+      <UniqueIdentifier>{b95eb196-5c6c-4095-9639-19624250f899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Main\stdafx">
+      <UniqueIdentifier>{db3244d0-43db-45d8-b3d4-ce776a5b3575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object">
+      <UniqueIdentifier>{bb518579-6682-4e35-8f19-4495419d48df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Example">
+      <UniqueIdentifier>{24902e67-6ba8-415a-b850-ae51b5ad6b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\Example">
+      <UniqueIdentifier>{644234f1-82ad-45a2-917d-a521d646d5d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\TimerManager">
+      <UniqueIdentifier>{68e9d4aa-1788-4e9b-822c-3f82837c76c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\MapTool">
+      <UniqueIdentifier>{19fec77e-0437-438c-9c18-5497f6b8fbb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Util\MyUtil">
+      <UniqueIdentifier>{f4e45859-f3b1-47ad-84d8-80df8f004e2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\FileManager">
+      <UniqueIdentifier>{08c9d0b8-8bd5-4ba2-aed8-4579ae603bfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\MapTool\MapToolMapSelectScene">
+      <UniqueIdentifier>{82704bb3-9a8c-4066-b1ee-c82524186a37}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
