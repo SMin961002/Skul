@@ -1,0 +1,33 @@
+#include "stdafx.h"
+#include "CollisionComponent.h"
+
+CollisionComponent::CollisionComponent()
+{
+}
+
+CollisionComponent::~CollisionComponent()
+{
+}
+
+void CollisionComponent::Init()
+{
+}
+
+void CollisionComponent::Update()
+{
+}
+
+void CollisionComponent::Render()
+{
+}
+
+void CollisionComponent::Release()
+{
+}
+
+void CollisionComponent::Setting(float range, float x, float y)
+{
+	m_collisionX = x;
+	m_collisionY = y;
+	m_range = range;
+}
