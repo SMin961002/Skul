@@ -1,0 +1,7 @@
+Resource
+ └Png
+    └Skul
+       └(type)
+          └Motion
+             └(action)
+          └Effect
