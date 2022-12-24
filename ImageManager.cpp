@@ -128,6 +128,11 @@ void ImageManager::LoadImages()
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
 	AddStructureImage("arch1", L"./Resources/Tile/4Stage/Structure/arch1.png");
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
+
+	//몬스터 이미지
+	AddImageVector("leonidle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
+	AddImageVector("leonattack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
+	AddImageVector("leonrun", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
