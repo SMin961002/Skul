@@ -1,37 +1,29 @@
 #include "stdafx.h"
 #include "Player.h"
 
-<<<<<<< HEAD
-=======
-void Player::move()
-{
-	if (KEYMANAGER->GetStayKeyDown(VK_LEFT))
-	{
-		m_obj->x -= 3;
-	}
-	if (KEYMANAGER->GetStayKeyDown(VK_RIGHT))
-	{
-		m_obj->x += 3;
-	}
-	if (KEYMANAGER->GetStayKeyDown(VK_UP))
-	{
-		m_obj->y -= 3;
-	}
-	if (KEYMANAGER->GetStayKeyDown(VK_DOWN))
-	{
-		m_obj->y += 3;
-	}
-
-	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
-}
-
->>>>>>> e99ecd8bd632eef02770364620912b7f6dd69d3b
 void Player::Init()
 {
-	img = IMAGEMANAGER->FindImageVector("Basic_Idle");
-	img->Setting(3, true);
+	//이미지 삽입
+	img[eIdle] = IMAGEMANAGER->FindImageVector("Basic_Idle");
+	img[eWalk] = IMAGEMANAGER->FindImageVector("Basic_Walk");
+	img[eDash] = IMAGEMANAGER->FindImageVector("Basic_Dash");
+	img[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Basic_Attack1");
+	img[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Basic_Attack2");
+	img[eJump] = IMAGEMANAGER->FindImageVector("Basic_JumpStart");
+	img[eJumpDown] = IMAGEMANAGER->FindImageVector("Basic_JumpRepeat");	//JumpFall 이미지는 착지순간만 재생, img변수 따로 두었음
+	img_jumpFall = IMAGEMANAGER->FindImageVector("Basic_JumpFall");
+	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Basic_Skill");
+	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Basic_Idle");	//머리가본체는 별도의 이미지가 없음(서있는상태로 뿅 이펙트만 존재)
+	img_reborn = IMAGEMANAGER->FindImageVector("Basic_Reborn");
+	
+	for (short i = 0; i < eActionTagNumber; i++)
+	{
+	img[i]->Setting(0.1f, true);
+	}
+	img_jumpFall->Setting(0.1f, true);
+	img_reborn->Setting(0.1f, true);
+
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
-<<<<<<< HEAD
 	m_action = eIdle;
 	m_action_prev = eIdle;
 
@@ -56,15 +48,13 @@ void Player::Init()
 	m_skillCoolA = 6000;
 	m_skillCoolS = 3000;
 	m_skillCoolD = 0;
-=======
->>>>>>> e99ecd8bd632eef02770364620912b7f6dd69d3b
 
 }
 
 void Player::Update()
 {
 	Move();
-	Action();
+	//Action();
 
 }
 
@@ -79,34 +69,33 @@ void Player::Release()
 
 void Player::Draw()
 {
-<<<<<<< HEAD
 	//프레임끝에 도달한 시간을 WaitingTime에 +delay해서 저장, 커맨드 추가로 입력된 시간이 이 안에 있으면 2회차
 	//프레임 순환이 끝나면 현재 action을 idle로 바꾸기
-	switch(m_action)
-	{
-	case eAutoAttack_1:
-		break;
-	case eAutoAttack_2:
-		break;
-	case eJump : 
-		break;
-	case eDash:
-		break;
-	case eSkill_1:
-		break;
-	case eSkill_2:
+	//switch(m_action)
+	//{
+	//case eAutoAttack_1:
+	//	break;
 
-		break;
+	//case eAutoAttack_2:
+	//	break;
 
-		case eIdle:
-		default:
-	}
-		img->Render(m_obj->x, m_obj->y, 1, 1, 0);
-=======
-	img->Render(m_obj->x, m_obj->y, 1, 1, 0);
-	img->CenterRender(m_obj->x, m_obj->y, 1, 1, 0);
+	//case eJump : 
+	//	break;
 
->>>>>>> e99ecd8bd632eef02770364620912b7f6dd69d3b
+	//case eDash:
+	//	break;
+
+	//case eSkill_1:
+	//	break;
+
+	//case eSkill_2:
+
+	//	break;
+
+	//	case eIdle:
+	//	default:
+	//}
+	img[m_action]->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
 }
 
 void Player::Move()
@@ -115,13 +104,17 @@ void Player::Move()
 	if (KEYMANAGER->GetStayKeyDown(VK_LEFT))
 	{
 		m_isLeft = true;
-		m_action = eWalk;
+		if (m_action == eIdle) {
+			m_action = eWalk;
+		}
 		m_obj->x -= m_moveSpeed;
 	}
 	if (KEYMANAGER->GetStayKeyDown(VK_RIGHT))
 	{
 		m_isLeft = false;
-		m_action = eWalk;
+		if (m_action == eIdle) {
+			m_action = eWalk;
+		}
 		m_obj->x += m_moveSpeed;
 	}
 	if (KEYMANAGER->GetStayKeyDown(VK_DOWN))
@@ -136,29 +129,5 @@ void Player::Move()
 	{
 		m_action = eDash;
 	}
-
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
-}
-
-void Player::Action()
-{
-	//z대시 x공격 c점프
-	if (KEYMANAGER->GetOnceKeyDown('X'))
-	{
-			m_action = eAutoAttack_1;
-	}
-
-	//a s스킬
-	if (KEYMANAGER->GetOnceKeyDown('A'))
-	{
-		m_action = eSkill_1;
-	}
-	if (KEYMANAGER->GetOnceKeyDown('S'))
-	{
-		m_action = eSkill_2;
-	}
-	//d정수
-	if (KEYMANAGER->GetOnceKeyDown('D'))
-	{
-	}
 }

@@ -86,7 +86,7 @@ void ImageManager::LoadImages()
 	AddImage("Frame_1SKill", L"./Resources/Frame_1SKill.png");
 	AddImageVector("Ex_Idle", L"./Resources/Png/Idle/", 1, 6);
 
-	//일반스컬 모션 이미지(headless 추가 필요)
+	//일반스컬 모션 이미지
 	AddImageVector("Basic_Idle", L"./Resources/Png/Skul/Basic/Motion/Idle/", 1, 4);
 	AddImageVector("Basic_Walk", L"./Resources/Png/Skul/Basic/Motion/Walk/", 1, 8);
 	AddImageVector("Basic_Dash", L"./Resources/Png/Skul/Basic/Motion/Dash/", 1, 1);
@@ -103,12 +103,12 @@ void ImageManager::LoadImages()
 
 	//디스트로이어 모션 이미지
 
-	//갬블러스컬 모션 이미지
+	//갬블러스컬 모션 이미지 경로수정중
 	AddImageVector("Gambler_Idle", L"./Resources/Png/Skul/Gambler/Motion/Idle/", 1, 7);
-	AddImageVector("Gambler_Walk", L"./Resources/Png/Skul/Gambler/Motion/Attack2/", 1, 6);
-	AddImageVector("Gambler_Dash", L"./Resources/Png/Skul/Gambler/Motion/Dash/", 1, 5);
-	AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 5);
-	AddImageVector("Gambler_AttackA2", L"./Resources/Png/Skul/Gambler/Motion/AttackA2/", 1, 6);
+	AddImageVector("Gambler_Walk", L"./Resources/Png/Skul/Gambler/Motion/Walk/", 1, 6);
+	//AddImageVector("Gambler_Dash", L"./Resources/Png/Skul/Gambler/Motion/Dash/", 1, 5);
+	//AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 5);
+	//AddImageVector("Gambler_AttackA2", L"./Resources/Png/Skul/Gambler/Motion/AttackA2/", 1, 6);
 	//AddImageVector("Gambler_AttackB1", L"./Resources/Png/Skul/Gambler/Motion/AttackB1/", 1, 6);
 	//AddImageVector("Gambler_AttackB2", L"./Resources/Png/Skul/Gambler/Motion/AttackB2/", 1, 6);
 	//AddImageVector("Gambler_AttackB3", L"./Resources/Png/Skul/Gambler/Motion/AttackB3/", 1, 8);

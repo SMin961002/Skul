@@ -5,11 +5,6 @@ class LobbyScene : public Scene
 private:
 	CImage* img;
 public:
-	//캐릭터 이동 실험하려고 임시로 만듦
-	RECT floor;
-	RECT blockA;
-	RECT blockB;
-
 	LobbyScene();
 	~LobbyScene();
 	// Scene을(를) 통해 상속됨
