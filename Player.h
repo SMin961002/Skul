@@ -50,6 +50,7 @@ public:
 		eIdle
 	};
 
+	bool m_isReverse = false;
 	vImage* img;
 	virtual void Init() override;
 	virtual void Update() override;

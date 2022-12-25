@@ -25,6 +25,7 @@ void Player::move()
 
 void Player::Init()
 {
+	m_isReverse = false;
 	img = IMAGEMANAGER->FindImageVector("Ex_Idle");
 	img->Setting(3, true);
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
@@ -33,6 +34,11 @@ void Player::Init()
 
 void Player::Update()
 {
+	if (KEYMANAGER->GetOnceKeyDown(VK_F1))
+	{
+		m_isReverse = !m_isReverse;
+	}
+
 	move();
 }
 
@@ -48,6 +54,5 @@ void Player::Release()
 void Player::draw()
 {
 	img->Render(m_obj->x, m_obj->y, 1, 1, 0);
-	img->CenterRender(m_obj->x, m_obj->y, 1, 1, 0);
-
+	img->CenterRender(m_obj->x, m_obj->y, 1, 1, 0,m_isReverse);
 }

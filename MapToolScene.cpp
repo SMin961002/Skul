@@ -56,7 +56,7 @@ void MapToolScene::Update()
 		m_streuctureKey = "";
 		m_page = 0;
 		m_kind = -1;
-}
+	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_F2))
 	{
 		m_kind = -1;
@@ -71,7 +71,6 @@ void MapToolScene::Update()
 		m_kind = -1;
 		m_state = eCollisionBatch;
 		m_streuctureKey = "";
-
 	}
 }
 
@@ -80,6 +79,11 @@ void MapToolScene::Render()
 	IMAGEMANAGER->Render(IMAGEMANAGER->FindImage("exBg"), IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 1);
 
 	int y1 = 0;
+	for (auto iter : m_sturctDatas)
+	{
+		if (iter->isBack == true)
+			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
+	}
 	for (auto iter : m_tiles)
 	{
 		int x = 0;
@@ -95,7 +99,8 @@ void MapToolScene::Render()
 
 	for (auto iter : m_sturctDatas)
 	{
-		IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y,1.5,1.5);
+		if (iter->isBack == false)
+			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
 	}
 	int y = 0;
 	int idx = 0;
@@ -108,19 +113,19 @@ void MapToolScene::Render()
 	}
 	if (m_state == eTileBatch)
 	{
-	for (auto iter : m_tileImages)
-	{
-		idx++;
-		if (idx >= m_maxIndex * m_page)
+		for (auto iter : m_tileImages)
 		{
-			if (y == m_maxIndex)
+			idx++;
+			if (idx >= m_maxIndex * m_page)
 			{
-				break;
+				if (y == m_maxIndex)
+				{
+					break;
+				}
+				IMAGEMANAGER->UIRender(iter, 900 + (y / 6) * 100, (1 + y % 6) * (2 * m_width + 10), 2, 2);
+				y++;
 			}
-			IMAGEMANAGER->UIRender(iter, 900 + (y / 6) * 100, (1 + y % 6) * (2 * m_width + 10), 2, 2);
-			y++;
 		}
-	}
 	}
 	else if (m_state == eStructureBatch)
 	{
@@ -140,28 +145,51 @@ void MapToolScene::Render()
 			}
 		}
 	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_RBUTTON))
+	{
+		if (m_streuctureKey != "")
+		{
+			if (_ptMouse.x < 800)
+			{
+				StructureData* sd = new StructureData();
+				sd->key = m_streuctureKey;
+				sd->x = _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x;
+				sd->y = _ptMouse.y + IMAGEMANAGER->GetCameraPosition().y;
+				sd->isBack = true;
+				m_sturctDatas.push_back(sd);
+			}
+		}
+	}
 
+	if (KEYMANAGER->GetOnceKeyDown(VK_CONTROL))
+	{
+		if (m_sturctDatas.size() != 0)
+		{
+			SAFE_DELETE(*(m_sturctDatas.end() - 1));
+			m_sturctDatas.pop_back();
+		}
+	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_LBUTTON))
 	{
 		y = 0;
 		idx = 0;
 		if (m_state == eTileBatch)
 		{
-		for (auto iter : m_tileImages)
-		{
-			idx++;
-			if (idx >= m_maxIndex * m_page)
+			for (auto iter : m_tileImages)
 			{
+				idx++;
+				if (idx >= m_maxIndex * m_page)
+				{
 					RECT rt = {
 					900 + (y / 6) * 100,
 					(1 + y % 6) * (2 * m_width + 10),
 					900 + (y / 6) * 100 + m_width * 2,
 					(1 + y % 6) * (2 * m_width + 10) + m_width * 2
 					};
-				if (rt.left < _ptMouse.x && rt.right > _ptMouse.x && rt.top < _ptMouse.y && rt.bottom>_ptMouse.y)
-				{
-					m_kind = idx - 1;
-				}
+					if (rt.left < _ptMouse.x && rt.right > _ptMouse.x && rt.top < _ptMouse.y && rt.bottom>_ptMouse.y)
+					{
+						m_kind = idx - 1;
+					}
 					if (idx >= m_maxIndex * (m_page + 1))
 					{
 						break;
@@ -188,12 +216,12 @@ void MapToolScene::Render()
 						m_streuctureKey = iter.first;
 					}
 					if (idx >= m_maxIndex * (m_page + 1))
-				{
-					break;
+					{
+						break;
+					}
+					y++;
 				}
-				y++;
 			}
-		}
 			if (m_streuctureKey != "")
 			{
 				if (_ptMouse.x < 800)
@@ -202,6 +230,7 @@ void MapToolScene::Render()
 					sd->key = m_streuctureKey;
 					sd->x = _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x;
 					sd->y = _ptMouse.y + IMAGEMANAGER->GetCameraPosition().y;
+					sd->isBack = false;
 					m_sturctDatas.push_back(sd);
 				}
 			}
@@ -214,26 +243,26 @@ void MapToolScene::Render()
 		{
 			if (m_state == eTileBatch)
 			{
-			int y2 = 0;
-			for (auto& iter : m_tiles)
-			{
-				int x2 = 0;
-				for (auto& _iter = iter.begin(); _iter != iter.end(); _iter++)
+				int y2 = 0;
+				for (auto& iter : m_tiles)
 				{
-					RECT rt = { x2 * m_width, y2 * m_width , x2 * m_width + m_width , y2 * m_width + m_width };
-					if (x2 * m_width - IMAGEMANAGER->GetCameraPosition().x < 800)
+					int x2 = 0;
+					for (auto& _iter = iter.begin(); _iter != iter.end(); _iter++)
 					{
-						if (rt.left < _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.right > _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.top < _ptMouse.y + IMAGEMANAGER->GetCameraPosition().y && rt.bottom>_ptMouse.y + IMAGEMANAGER->GetCameraPosition().y)
+						RECT rt = { x2 * m_width, y2 * m_width , x2 * m_width + m_width , y2 * m_width + m_width };
+						if (x2 * m_width - IMAGEMANAGER->GetCameraPosition().x < 800)
 						{
-							(*_iter) = m_kind;
+							if (rt.left < _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.right > _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.top < _ptMouse.y + IMAGEMANAGER->GetCameraPosition().y && rt.bottom>_ptMouse.y + IMAGEMANAGER->GetCameraPosition().y)
+							{
+								(*_iter) = m_kind;
+							}
+							x2++;
 						}
-						x2++;
 					}
+					y2++;
 				}
-				y2++;
 			}
 		}
-	}
 	}
 	if (KEYMANAGER->GetStayKeyDown(VK_RBUTTON))
 	{
@@ -260,8 +289,8 @@ void MapToolScene::Render()
 	{
 		if (m_state == eTileBatch)
 		{
-		IMAGEMANAGER->UIRender(m_tileImages[m_kind], _ptMouse.x, _ptMouse.y, 0.5f, 0.5f);
-	}
+			IMAGEMANAGER->UIRender(m_tileImages[m_kind], _ptMouse.x, _ptMouse.y, 0.5f, 0.5f);
+		}
 	}
 	if (m_streuctureKey != "")
 	{
@@ -281,6 +310,12 @@ void MapToolScene::Render()
 
 void MapToolScene::Release()
 {
+	for (auto iter : m_sturctDatas)
+	{
+		SAFE_DELETE(iter);
+	}
+	m_sturctDatas.clear();
+
 	m_tiles.clear();
 	m_tileImages.clear();
 }

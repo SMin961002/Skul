@@ -54,6 +54,7 @@ struct StructureData
 	string key;
 	float x;
 	float y;
+	bool isBack;
 };
 
 #define WIN_NAME "금강상태"
