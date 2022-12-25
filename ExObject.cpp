@@ -5,8 +5,6 @@ void ExObject::Init()
 {
 	img = IMAGEMANAGER->FindImageVector("Ex_Idle");
 	img->Setting(3, true);
-	
-	
 }
 
 void ExObject::Update()
