@@ -18,8 +18,8 @@ public:
 
 	void SetNowStageFile(string st) { m_nowStageFileName = st; }
 
-	void GetFileData(string section, string key, string path);
-
+	void GetFileData(string section, string key);
+	void WriteFileData(string section, string key, string inputStr);
 };
 
 #define FILEMANAGER IOFillManager::GetInstance()
