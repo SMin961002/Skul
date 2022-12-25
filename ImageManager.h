@@ -42,13 +42,13 @@ private:
 	std::vector<CImage*> m_tileImages;
 	std::map<string, CImage*> m_structureImages;
 
-
-
 	IWICImagingFactory* factory;
 	ID2D1HwndRenderTarget* pRT = NULL;
 	ID2D1Factory* pD2DFactory;
 	IDWriteTextFormat* tf;
 	ID2D1SolidColorBrush* m_brush;
+
+	bool m_isViewCollision = false;
 
 public:
 	ImageManager();
@@ -57,6 +57,8 @@ public:
 	void Init();
 	void LoadImages();
 	void Render(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0);
+	void CenterRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0, bool isReverse = false);
+
 	void UIRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0);
 
 	// CenterRender 및 AlphaRender등 추가될 예정
@@ -97,6 +99,9 @@ public:
 	{
 		return m_structureImages;
 	}
+
+	void SetViewCollision(bool isView) { m_isViewCollision = isView; }
+	bool GetViewCollision() { return m_isViewCollision; }
 };
 
 #define IMAGEMANAGER ImageManager::GetInstance()
@@ -122,6 +127,14 @@ public:
 		m_timeDelay = t;
 		m_isLoop = isLoop;
 		m_nowTimeDelay = 0;
+		m_frame = 0;
+	}
+
+	void Reset()
+	{
+		m_nowTimeDelay = 0;
+		m_frame = 0;
+		m_isEnd = false;
 	}
 
 	void Render(float x, float y, float sizeX, float sizeY, float rot)
@@ -129,7 +142,7 @@ public:
 		if (m_isEnd == false)
 			m_nowTimeDelay += DELTA_TIME;
 
-		if (m_nowTimeDelay <= m_timeDelay)
+		if (m_nowTimeDelay >= m_timeDelay)
 		{
 			if (m_frame >= GetImageSize() - 1)
 			{
@@ -149,6 +162,33 @@ public:
 			m_nowTimeDelay = 0;
 		}
 		IMAGEMANAGER->Render(m_images[m_frame], x, y, sizeX, sizeY, rot);
+	}
+
+	void CenterRender(float x, float y, float sizeX, float sizeY, float rot, bool isReverse = false)
+	{
+		if (m_isEnd == false)
+			m_nowTimeDelay += DELTA_TIME;
+
+		if (m_nowTimeDelay >= m_timeDelay)
+		{
+			if (m_frame >= GetImageSize() - 1)
+			{
+				if (m_isLoop == true)
+				{
+					m_frame = 0;
+				}
+				else
+				{
+					m_isEnd = true;
+				}
+			}
+			else
+			{
+				m_frame++;
+			}
+			m_nowTimeDelay = 0;
+		}
+		IMAGEMANAGER->CenterRender(m_images[m_frame], x, y, sizeX, sizeY, rot, isReverse);
 	}
 
 	void AddImage(CImage* image)

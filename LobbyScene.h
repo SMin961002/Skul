@@ -2,6 +2,8 @@
 #include "Scene.h"
 class LobbyScene : public Scene
 {
+private:
+	CImage* img;
 public:
 	//캐릭터 이동 실험하려고 임시로 만듦
 	RECT floor;

@@ -18,9 +18,11 @@ private:
 	};
 	int m_state;
 	int m_page;
+
 public:
 	MapToolScene();
 	~MapToolScene();
+
 public:
 	virtual void Init() override;
 	virtual void Update() override;

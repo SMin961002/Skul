@@ -1,11 +1,37 @@
 #include "stdafx.h"
 #include "Player.h"
 
+<<<<<<< HEAD
+=======
+void Player::move()
+{
+	if (KEYMANAGER->GetStayKeyDown(VK_LEFT))
+	{
+		m_obj->x -= 3;
+	}
+	if (KEYMANAGER->GetStayKeyDown(VK_RIGHT))
+	{
+		m_obj->x += 3;
+	}
+	if (KEYMANAGER->GetStayKeyDown(VK_UP))
+	{
+		m_obj->y -= 3;
+	}
+	if (KEYMANAGER->GetStayKeyDown(VK_DOWN))
+	{
+		m_obj->y += 3;
+	}
+
+	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
+}
+
+>>>>>>> e99ecd8bd632eef02770364620912b7f6dd69d3b
 void Player::Init()
 {
 	img = IMAGEMANAGER->FindImageVector("Basic_Idle");
 	img->Setting(3, true);
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
+<<<<<<< HEAD
 	m_action = eIdle;
 	m_action_prev = eIdle;
 
@@ -30,6 +56,8 @@ void Player::Init()
 	m_skillCoolA = 6000;
 	m_skillCoolS = 3000;
 	m_skillCoolD = 0;
+=======
+>>>>>>> e99ecd8bd632eef02770364620912b7f6dd69d3b
 
 }
 
@@ -51,6 +79,7 @@ void Player::Release()
 
 void Player::Draw()
 {
+<<<<<<< HEAD
 	//프레임끝에 도달한 시간을 WaitingTime에 +delay해서 저장, 커맨드 추가로 입력된 시간이 이 안에 있으면 2회차
 	//프레임 순환이 끝나면 현재 action을 idle로 바꾸기
 	switch(m_action)
@@ -73,6 +102,11 @@ void Player::Draw()
 		default:
 	}
 		img->Render(m_obj->x, m_obj->y, 1, 1, 0);
+=======
+	img->Render(m_obj->x, m_obj->y, 1, 1, 0);
+	img->CenterRender(m_obj->x, m_obj->y, 1, 1, 0);
+
+>>>>>>> e99ecd8bd632eef02770364620912b7f6dd69d3b
 }
 
 void Player::Move()
