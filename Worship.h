@@ -1,6 +1,5 @@
 #pragma once
-class Worship :
-    public Nervousness
+class Worship
 {
 };
 

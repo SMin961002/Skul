@@ -7,6 +7,7 @@ void BossScene::Init()
 	_imgMoon = IMAGEMANAGER->FindImage("Moon");
 	_imgBuilding = IMAGEMANAGER->FindImage("Building");
 	_imgLion = IMAGEMANAGER->FindImage("Lion");
+
 	OBJECTMANAGER->AddObject("Joanna",WINSIZE_X/2,400,0)->AddComponent<BossObject>();
 
 }

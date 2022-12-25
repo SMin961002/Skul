@@ -66,23 +66,29 @@
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Object\Charactor\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="LeoniaSoldier.cpp">
-      <Filter>Game\Object\Charactor\Enemy\LeoniaSoldier</Filter>
-    </ClCompile>
-    <ClCompile Include="BossScene.cpp">
-      <Filter>Game\Scene\Boss</Filter>
+      <Filter>Game\Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="BossObject.cpp">
       <Filter>Game\Object\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="Consercration.cpp">
+      <Filter>Game\Object\Boss\Pattern\Phase_1</Filter>
+    </ClCompile>
+    <ClCompile Include="Nervousness.cpp">
+      <Filter>Game\Object\Boss\Pattern\Phase_1</Filter>
+    </ClCompile>
     <ClCompile Include="Worship.cpp">
       <Filter>Game\Object\Boss\Pattern\Phase_1</Filter>
     </ClCompile>
-    <ClCompile Include="Nervousness.cpp" />
-    <ClCompile Include="Baptism.cpp" />
-    <ClCompile Include="Consercration.cpp" />
+    <ClCompile Include="Baptism.cpp">
+      <Filter>Game\Object\Boss\Pattern\Phase_1</Filter>
+    </ClCompile>
+    <ClCompile Include="LeoniaSoldier.cpp">
+      <Filter>Game\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BossScene.cpp">
+      <Filter>Game\Scene\BossScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -142,18 +148,6 @@
     <ClInclude Include="MapToolMapSelectScene.h">
       <Filter>Game\Scene\MapTool\MapToolMapSelectScene</Filter>
     </ClInclude>
-    <ClInclude Include="BossScene.h">
-      <Filter>Game\Scene\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="BossObject.h">
-      <Filter>Game\Object\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="Worship.h">
-      <Filter>Game\Object\Boss\Pattern\Phase_1</Filter>
-    </ClInclude>
-    <ClInclude Include="Nervousness.h" />
-    <ClInclude Include="Baptism.h" />
-    <ClInclude Include="Consercration.h" />
     <ClInclude Include="Player.h">
       <Filter>Game\Object\Charactor</Filter>
     </ClInclude>
@@ -164,10 +158,28 @@
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Game\Object\Charactor\Enemy</Filter>
+      <Filter>Game\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BossObject.h">
+      <Filter>Game\Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Consercration.h">
+      <Filter>Game\Object\Boss\Pattern\Phase_1</Filter>
+    </ClInclude>
+    <ClInclude Include="Nervousness.h">
+      <Filter>Game\Object\Boss\Pattern\Phase_1</Filter>
+    </ClInclude>
+    <ClInclude Include="Worship.h">
+      <Filter>Game\Object\Boss\Pattern\Phase_1</Filter>
+    </ClInclude>
+    <ClInclude Include="Baptism.h">
+      <Filter>Game\Object\Boss\Pattern\Phase_1</Filter>
     </ClInclude>
     <ClInclude Include="LeoniaSoldier.h">
-      <Filter>Game\Object\Charactor\Enemy\LeoniaSoldier</Filter>
+      <Filter>Game\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BossScene.h">
+      <Filter>Game\Scene\BossScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -237,21 +249,6 @@
     <Filter Include="Game\Scene\MapTool\MapToolMapSelectScene">
       <UniqueIdentifier>{82704bb3-9a8c-4066-b1ee-c82524186a37}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Scene\Boss">
-      <UniqueIdentifier>{92c1ec2f-3d47-4374-b41e-8838323064f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Boss">
-      <UniqueIdentifier>{25aa4a54-3d16-46fe-afa2-033599799676}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Boss\Pattern">
-      <UniqueIdentifier>{af9005a4-b44e-4070-883d-60a365006137}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Boss\Pattern\Phase_1">
-      <UniqueIdentifier>{b4c5c92b-9bed-447e-bc74-79bd6d59d7dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Boss\Pattern\Phase_2">
-      <UniqueIdentifier>{f02695e5-06dc-487f-b68a-919740b88e6a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Object\Charactor">
       <UniqueIdentifier>{b02c8b66-cd68-4c8d-b8c6-2015530ad898}</UniqueIdentifier>
     </Filter>
@@ -261,11 +258,20 @@
     <Filter Include="Game\Component\RigidBodyComponent">
       <UniqueIdentifier>{05dcc7ba-e1b5-4631-9c2a-fb10ff3f4449}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Charactor\Enemy">
-      <UniqueIdentifier>{3f540b54-adee-4a44-886f-544cdc202dcb}</UniqueIdentifier>
+    <Filter Include="Game\Object\Boss">
+      <UniqueIdentifier>{1e657a8d-1f18-40aa-bb3d-d2470faaa087}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Charactor\Enemy\LeoniaSoldier">
-      <UniqueIdentifier>{29cc53dc-8485-4ded-bf1a-1d556db523ff}</UniqueIdentifier>
+    <Filter Include="Game\Object\Boss\Pattern">
+      <UniqueIdentifier>{5c7b9cc3-fcae-4180-aca3-4ee289a036a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Pattern\Phase_1">
+      <UniqueIdentifier>{d4fdf66d-695d-478f-a2e9-7361ab5c9806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy">
+      <UniqueIdentifier>{492843e1-9a1c-42d8-86d6-27a29a03a6c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\BossScene">
+      <UniqueIdentifier>{4b9ee83b-4ff7-4986-ac37-bbaacf2c2b64}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
