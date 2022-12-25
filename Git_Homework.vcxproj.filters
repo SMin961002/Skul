@@ -89,6 +89,9 @@
     <ClCompile Include="Worship.cpp">
       <Filter>Game\Object\Boss\Pattern</Filter>
     </ClCompile>
+    <ClCompile Include="Idle.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -179,6 +182,9 @@
       <Filter>Game\Object\Boss\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="Worship.h">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Idle.h">
       <Filter>Game\Object\Boss\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
