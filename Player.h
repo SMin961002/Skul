@@ -70,7 +70,7 @@ protected:
 	short m_dashMax;		//최대 대시 가능 횟수
 		  
 	float m_jumpSpeed;		//점프 시작속도
-	float m_jumpGravity;	//점프 속도 (가속->감속, 속도 -되면 jumpDown 계산필요)
+	float m_jumpGravity;	//점프 속도 (가속->감속, 속도 -되면 jumpDown 2차식 계산필요)
 	short m_jumpCount;		//현재 점프 몇회인지
 	short m_jumpMax;		//최대 점프 가능 횟수		  
 		  
