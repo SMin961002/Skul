@@ -3,6 +3,7 @@
 #include "LobbyScene.h"
 #include "MapToolScene.h"
 #include "MapToolMapSelectScene.h"
+#include "BossScene.h"
 
 SceneManager::SceneManager()
 {
@@ -15,6 +16,7 @@ SceneManager::~SceneManager()
 
 void SceneManager::Init()
 {
+	AddScene("BossScene", new BossScene);
 	AddScene("LobbyScene", new LobbyScene);
 	AddScene("MapToolMapSelectScene", new MapToolMapSelectScene);
 	AddScene("MapToolScene",new MapToolScene);

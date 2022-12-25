@@ -5,10 +5,10 @@
 void LeoniaSoldier::Init()
 {
 	m_vimage[eIdle] = IMAGEMANAGER->FindImageVector("leonidle");
-	m_vimage[eIdle]->Setting(0.3f,true);
-	
+	m_vimage[eIdle]->Setting(0.3f, true);
+
 	m_vimage[eAttack] = IMAGEMANAGER->FindImageVector("leonattack");
-	m_vimage[eAttack]->Setting(0.8f, true);
+	m_vimage[eAttack]->Setting(0.1f, true);
 
 	m_vimage[eRun] = IMAGEMANAGER->FindImageVector("leonrun");
 	m_vimage[eRun]->Setting(0.8f, true);

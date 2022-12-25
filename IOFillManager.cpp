@@ -75,3 +75,14 @@ void IOFillManager::MapFileWrite(string section, string key, vector<string> mapL
 	outputFile << vecValue;
 	outputFile.close();
 }
+
+void IOFillManager::GetFileData(string section, string key, string path)
+{
+	char* cBuf = NULL;
+	cBuf = (char*)malloc(sizeof(char) * 256);
+	memset(cBuf, 0x00, sizeof(cBuf));
+
+	// Read 
+	GetPrivateProfileString("GiveupServiceVDN", "VDN1", "-", cBuf, 256, "C:\\»õ Æú´õ\\test.ini");
+	printf("%s \n", cBuf);
+}
