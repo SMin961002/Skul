@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="Scene.cpp">
       <Filter>Core\Manager\Scene</Filter>
     </ClCompile>
@@ -70,6 +69,25 @@
     </ClCompile>
     <ClCompile Include="LeoniaSoldier.cpp">
       <Filter>Game\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BossObject.cpp">
+      <Filter>Game\Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossScene.cpp">
+      <Filter>Game\Scene\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Baptism.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="Consercration.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Nervousness.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Worship.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +162,24 @@
     </ClInclude>
     <ClInclude Include="LeoniaSoldier.h">
       <Filter>Game\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BossObject.h">
+      <Filter>Game\Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossScene.h">
+      <Filter>Game\Scene\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Baptism.h">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Consercration.h">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Nervousness.h">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Worship.h">
+      <Filter>Game\Object\Boss\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +260,15 @@
     </Filter>
     <Filter Include="Game\Object\Enemy">
       <UniqueIdentifier>{5fe81d37-64a5-425f-b474-a46d7ebd14a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss">
+      <UniqueIdentifier>{7db6574f-d152-4a8b-aee3-9e8eaa4fee1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\Boss">
+      <UniqueIdentifier>{f773afaf-1130-4845-8f13-0a2e5c97e438}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Pattern">
+      <UniqueIdentifier>{20dc091b-8839-4257-a7f4-5dd4ac0ddecd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 #include "LobbyScene.h"
 #include "MapToolScene.h"
 #include "MapToolMapSelectScene.h"
+#include "BossScene.h"
 
 SceneManager::SceneManager()
 {
@@ -15,9 +16,10 @@ SceneManager::~SceneManager()
 
 void SceneManager::Init()
 {
-	AddScene("LobbyScene", new LobbyScene);
-	AddScene("MapToolMapSelectScene", new MapToolMapSelectScene);
-	AddScene("MapToolScene",new MapToolScene);
+	AddScene("BossScene", new BossScene);
+	//AddScene("LobbyScene", new LobbyScene);
+	//AddScene("MapToolMapSelectScene", new MapToolMapSelectScene);
+	//AddScene("MapToolScene",new MapToolScene);
 	flag = 0;
 	// 페이드인아웃 할때 다른플레그이면 알파값을 초기화해줌
 	// 초기화를해줘야하는데 어떻게 해야할지 몰라서 해둠

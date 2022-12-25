@@ -85,14 +85,14 @@ void ImageManager::Init()
 
 void ImageManager::LoadImages()
 {
-	//맵툴 UI 이미지
+	// 맵툴 UI 이미지
 	AddImage("newFile", L"./MapFile/newFile.png");
 
-	//예시 이미지
+	// 예시 이미지
 	AddImage("Frame_1SKill", L"./Resources/Frame_1SKill.png");
 	AddImageVector("Ex_Idle", L"./Resources/Png/Idle/", 1, 6);
 
-	//타일 이미지
+	// 타일 이미지
 	AddTileImage(L"./Resources/Tile/4Stage/01.png");
 	AddTileImage(L"./Resources/Tile/4Stage/02.png");
 	AddTileImage(L"./Resources/Tile/4Stage/03.png");
@@ -130,12 +130,41 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/35.png");
 	AddTileImage(L"./Resources/Tile/4Stage/36.png");
 
+	// 배경 이미지
+	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
+	AddImage("Building", L"./Resources/BackGround/Boss_Stage_Building.png");
+	AddImage("Lion", L"./Resources/BackGround/Boss_Stage_Lion.png");
+
+
+	// 1페이즈_대기
+	AddImageVector("Boss_Idle", L"./Resources/Saint_Joanna/Phase1_Intro_1/Idle_", 1, 7);
+	// 1페이즈_지팡이
+	AddImageVector("Boss_Casting_Ready", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Ready/Casting_Ready_", 1, 7);
+	AddImageVector("Boss_Casting_Attack", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Attack/Casting_Attack_Loop_", 1, 7);
+	AddImageVector("Boss_Casting_End", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Attack/Casting_Attack_Loop_", 1, 7);
+	// 1페이즈_초이스
+	AddImageVector("Boss_Choice_Ready", L"./Resources/Saint_Joanna/Phase_1/Choice/Boss/Ready/Ready/Choice_Ready_", 1, 7);
+	AddImageVector("Boss_Choice_Ready_Loop", L"./Resources/Saint_Joanna/Phase_1/Choice/Boss/Ready/Loop/Choice_Ready_Loop_", 1, 7);
+	AddImageVector("Boss_Choice_Attack", L"./Resources/Saint_Joanna/Phase_1/Choice/Boss/Attack/Choice_Attack_Loop_", 1, 7);
+	AddImageVector("Boss_Choice_End", L"./Resources/Saint_Joanna/Phase_1/Choice/Boss/End/Choice_End_", 1, 7);
+	// 1페이즈_땅찍기
+	AddImageVector("Boss_Nervousness_Ready", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Ready/Ready/Nervousness_Ready_", 1, 14);
+	AddImageVector("Boss_Nervousness_Ready_Loop", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Ready/Loop/Nervousness_Ready_Loop_", 1, 7);
+	AddImageVector("Boss_Nervousness_Attack", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Attack/Attack/Nervousness_Attack_", 1, 7);
+	AddImageVector("Boss_Nervousness_Attack_Loop", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Attack/Loop/Nervousness_Attack_Loop_", 1, 7);
+	AddImageVector("Boss_Nervousness_End", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/End/Nervousness_End_", 1, 7);
+	// 1페이즈_분수대
+	
+
+
+	// 1페이즈_땅찍기
+
 	// 맵 구조물 이미지
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
 	AddStructureImage("arch1", L"./Resources/Tile/4Stage/Structure/arch1.png");
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
 
-	//몬스터 이미지
+	// 몬스터 이미지
 	AddImageVector("leonidle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
 	AddImageVector("leonattack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
 	AddImageVector("leonrun", L"Resources/Monster/Leonia Soldier/Run/", 1, 8);
