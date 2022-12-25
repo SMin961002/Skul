@@ -15,6 +15,14 @@ void Main::Init()
 
 void Main::Update()
 {
+	if (KEYMANAGER->GetToggleKey(VK_F12))
+	{
+		IMAGEMANAGER->SetViewCollision(true);
+	}
+	else
+	{
+		IMAGEMANAGER->SetViewCollision(false);
+	}
 	SCENEMANAGER->Update();
 	OBJECTMANAGER->Update();
 }

@@ -13,6 +13,7 @@ LobbyScene::~LobbyScene()
 void LobbyScene::Init()
 {
 	OBJECTMANAGER->AddObject("Example",WINSIZE_X/2,400,0)->AddComponent<Player>();
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
 	img = IMAGEMANAGER->FindImage("Frame_1SKill");
 }
 
