@@ -1,11 +1,12 @@
 #pragma once
 #include "Component.h"
 
-#define MOVE_SPEED	3
-#define JUMP_SPEED	3
-#define DASH_MULTIPLE	2
-#define DASH_COLLTIME	
-#define COMMAND_ReENTRY_TIME
+#define MOVE_SPEED				3
+#define JUMP_SPEED				3
+#define DASH_MULTIPLE			2
+#define DASH_COLLTIME			
+#define COMMAND_ReENTRY_TIME	
+#define HISTORY_MAX				10
 
 enum SkulTag
 {
@@ -16,12 +17,6 @@ enum SkulTag
 };
 class Player : public Component
 {
-	//공격스킬 2가지
-	//일반공격
-	//점프
-	//점프공격
-	//대시
-	//이동
 	/*
 	점프2회, 대시2회 섞기가능
 	점프중 대시 쿨 돌아오면 새 대시 세트 가능,
@@ -35,9 +30,6 @@ class Player : public Component
 	점프어택이 몇회까지 되는지 분석 필요
 	*/
 
-private:
-	RECT m_hitBox;
-
 public:
 	virtual enum ActionTag
 	{
@@ -50,12 +42,25 @@ public:
 		eIdle
 	};
 
+protected:
+	RECT m_hitBox;
+	//이미지로 행동
+
+//공격스킬 2가지
+//일반공격
+//점프
+//점프공격
+//대시
+//이동
+
+public:
 	vImage* img;
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
 
-	virtual void move();
-	virtual void draw();
+	virtual void Move();
+	virtual void Action();
+	virtual void Draw();
 };
