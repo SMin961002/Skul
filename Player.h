@@ -1,12 +1,13 @@
 #pragma once
 #include "Component.h"
 
-#define MOVE_SPEED				3
-#define JUMP_SPEED				3
-#define DASH_MULTIPLE			2
-#define DASH_COLLTIME			
-#define COMMAND_ReENTRY_TIME	
-#define HISTORY_MAX				10
+//#define MOVE_SPEED				3
+//#define JUMP_SPEED				3
+//#define JUMP_MULTIPLE			2	//점프 기본 최대 횟수
+//#define DASH_MULTIPLE			2	//대시 기본 최대 횟수
+//#define JUMP_DELAY				2000	//단위 밀리초
+//#define DASH_DELAY				2000	//단위 밀리초
+//#define COMMAND_WATINGTIME		1000	//기본공격, 대시, 이단점프 두번째커멘드 들어오기까지 기다려주는시간. 단위 밀리초
 
 enum SkulTag
 {
@@ -33,19 +34,55 @@ class Player : public Component
 public:
 	virtual enum ActionTag
 	{
+		eIdle=0,
+		eWalk,
 		eAutoAttack_1,
 		eAutoAttack_2,
 		eJump,
+		eJumpDown,
 		eDash,
 		eSkill_1,
-		eSkill_2,
-		eIdle
+		eSkill_2
 	};
 
 protected:
 	RECT m_hitBox;
-	//이미지로 행동
+	ActionTag m_action;
+	ActionTag m_action_prev;
 
+	float m_physicalDamage;
+	float m_masicalDamage;
+	float m_physicalDeffence;
+	float m_masicalDeffence;
+
+	float m_level;
+
+	//이동관련
+	float m_moveSpeed;
+	bool  m_isLeft;
+	bool  m_down;
+	//대시
+	float m_dashDelay;
+	float m_dashWaitingTime;
+	short m_dashCount;
+	//점프
+	float m_jumpSpeed;
+	float m_jumpDelay;
+	float m_jumpWaitingTime;
+	short m_jumpCount;
+
+	//공격
+	float m_attackWaitingTime;
+	float m_attackCount;
+	//스킬
+	float m_skillCoolA;
+	float m_skillCoolS;
+	float m_skillCoolD;
+
+
+	//이미지로 행동
+//z대시 x공격 c점프
+//a s 스킬 d
 //공격스킬 2가지
 //일반공격
 //점프

@@ -76,7 +76,7 @@ static const float g_deltaTime;
 extern HWND _hWnd;
 extern POINT _ptMouse;
 #include "TimerManager.h"
-#define DELTA_TIME TIME_SCALE *  TimerManager::GetInstance()->GerElapsedTime()
+#define DELTA_TIME TIME_SCALE *  TimerManager::GetInstance()->GetElapsedTime()
 #include "ObjectManager.h"
 #include "KeyManager.h"
 #include "ImageManager.h"
