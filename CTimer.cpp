@@ -62,7 +62,7 @@ void Timer::tick(float lockFPS)
 	}
 }
 
-unsigned long Timer::gerFrameRate(char* str) const
+unsigned long Timer::getFrameRate(char* str) const
 {
 	if (str != nullptr)
 	{
