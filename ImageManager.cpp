@@ -133,7 +133,7 @@ void ImageManager::LoadImages()
 	AddImageVector("leonidle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
 	AddImageVector("leonattack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
 	AddImageVector("leonrun", L"Resources/Monster/Leonia Soldier/Run/", 1, 8);
-	AddImageVector("leonhit", L"Resources/Monster/Leonia Soldier/Hit/",1,1);
+	AddImageVector("leonhit", L"Resources/Monster/Leonia Soldier/Hit/", 1, 1);
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
@@ -294,13 +294,22 @@ void ImageManager::Render(CImage* img, float x, float y, float sizeX, float size
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 }
 
-void ImageManager::CenterRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot)
+void ImageManager::CenterRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse)
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 
-	matT = D2D1::Matrix3x2F::Translation((x - img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
-	matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
-	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
+	if (isReverse == false)
+	{
+		matT = D2D1::Matrix3x2F::Translation((x - img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
+		matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
+	}
+	else
+	{
+		matT = D2D1::Matrix3x2F::Translation((x + img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
+		matS = D2D1::Matrix3x2F::Scale(-sizeX, sizeY);
+	}
 	pRT->SetTransform((matS * matT * matR));
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 }

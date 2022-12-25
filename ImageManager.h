@@ -57,7 +57,7 @@ public:
 	void Init();
 	void LoadImages();
 	void Render(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0);
-	void CenterRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0);
+	void CenterRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0, bool isReverse = false);
 
 	void UIRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0);
 
@@ -164,7 +164,7 @@ public:
 		IMAGEMANAGER->Render(m_images[m_frame], x, y, sizeX, sizeY, rot);
 	}
 
-	void CenterRender(float x, float y, float sizeX, float sizeY, float rot)
+	void CenterRender(float x, float y, float sizeX, float sizeY, float rot, bool isReverse = false)
 	{
 		if (m_isEnd == false)
 			m_nowTimeDelay += DELTA_TIME;
@@ -188,7 +188,7 @@ public:
 			}
 			m_nowTimeDelay = 0;
 		}
-		IMAGEMANAGER->CenterRender(m_images[m_frame], x, y, sizeX, sizeY, rot);
+		IMAGEMANAGER->CenterRender(m_images[m_frame], x, y, sizeX, sizeY, rot, isReverse);
 	}
 
 	void AddImage(CImage* image)
