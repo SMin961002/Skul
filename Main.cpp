@@ -10,7 +10,7 @@ void Main::Init()
 
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
-	SCENEMANAGER->ChangeScene("BossScene");
+	SCENEMANAGER->ChangeScene("MapToolMapSelectScene");
 }
 
 void Main::Update()

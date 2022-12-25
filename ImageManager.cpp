@@ -29,6 +29,12 @@ ImageManager::~ImageManager()
 	}
 	m_imageList.clear();
 
+	for (auto iter : m_structureImages)
+	{
+		SAFE_DELETE(iter.second);
+	}
+	m_structureImages.clear();
+
 	m_brush->Release();
 	tf->Release();
 }
@@ -134,8 +140,8 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Idle", L"./Resources/Saint_Joanna/Phase1_Intro_1/Idle_", 1, 7);
 	// 1페이즈_지팡이
 	AddImageVector("Boss_Casting_Ready", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Ready/Casting_Ready_", 1, 7);
-	AddImageVector("Boss_Casting_Attack", L"./Resources/Saint_Joanna/Phase_1/Casting\Boss\Attack/Casting_Attack_Loop_", 1, 7);
-	AddImageVector("Boss_Casting_End", L"./Resources/Saint_Joanna/Phase_1/Casting\Boss\Attack/Casting_Attack_Loop_", 1, 7);
+	AddImageVector("Boss_Casting_Attack", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Attack/Casting_Attack_Loop_", 1, 7);
+	AddImageVector("Boss_Casting_End", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Attack/Casting_Attack_Loop_", 1, 7);
 	// 1페이즈_초이스
 	AddImageVector("Boss_Choice_Ready", L"./Resources/Saint_Joanna/Phase_1/Choice/Boss/Ready/Ready/Choice_Ready_", 1, 7);
 	AddImageVector("Boss_Choice_Ready_Loop", L"./Resources/Saint_Joanna/Phase_1/Choice/Boss/Ready/Loop/Choice_Ready_Loop_", 1, 7);
@@ -145,10 +151,10 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Nervousness_Ready", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Ready/Ready/Nervousness_Ready_", 1, 14);
 	AddImageVector("Boss_Nervousness_Ready_Loop", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Ready/Loop/Nervousness_Ready_Loop_", 1, 7);
 	AddImageVector("Boss_Nervousness_Attack", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Attack/Attack/Nervousness_Attack_", 1, 7);
-	AddImageVector("Boss_Nervousness_Attack_Loop", L".Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Attack/Loop/Nervousness_Attack_Loop_", 1, 7);
+	AddImageVector("Boss_Nervousness_Attack_Loop", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Attack/Loop/Nervousness_Attack_Loop_", 1, 7);
 	AddImageVector("Boss_Nervousness_End", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/End/Nervousness_End_", 1, 7);
 	// 1페이즈_분수대
-	AddImageVector("Boss_Barrier", L"./Resources/Saint_Joanna/Phase_1/Barrier/Nervousness_Ready_", 1, 14);
+	
 
 
 	// 1페이즈_땅찍기
