@@ -75,3 +75,9 @@ void IOFillManager::MapFileWrite(string section, string key, vector<string> mapL
 	outputFile << vecValue;
 	outputFile.close();
 }
+
+void IOFillManager::GetFileData(string section, string key, string path)
+{
+
+
+}

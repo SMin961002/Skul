@@ -29,6 +29,12 @@ ImageManager::~ImageManager()
 	}
 	m_imageList.clear();
 
+	for (auto iter : m_structureImages)
+	{
+		SAFE_DELETE(iter.second);
+	}
+	m_structureImages.clear();
+
 	m_brush->Release();
 	tf->Release();
 }
