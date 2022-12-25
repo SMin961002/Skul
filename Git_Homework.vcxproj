@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -143,6 +143,7 @@
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="ExObject.cpp" />
+    <ClCompile Include="Fanatic.cpp" />
     <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ExObject.h" />
+    <ClInclude Include="Fanatic.h" />
     <ClInclude Include="Gambler.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="IOFillManager.h" />

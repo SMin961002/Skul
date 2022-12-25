@@ -168,7 +168,14 @@ void ImageManager::LoadImages()
 	AddImageVector("leonidle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
 	AddImageVector("leonattack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
 	AddImageVector("leonrun", L"Resources/Monster/Leonia Soldier/Run/", 1, 8);
-	AddImageVector("leonhit", L"Resources/Monster/Leonia Soldier/Hit/", 1, 1);
+	AddImageVector("leonhit", L"Resources/Monster/Leonia Soldier/Hit/",1,1);
+	
+	AddImageVector("Fanaticidle", L"Resources/Monster/Fanatic/Idle/", 1, 6);
+	AddImageVector("FanaticattackIdle", L"Resources/Monster/Fanatic/Attack Idle/", 1, 5);
+	AddImageVector("Fanaticattack", L"Resources/Monster/Fanatic/Attack/", 1, 13);
+	AddImageVector("Fanaticrunattack", L"Resources/Monster/Fanatic/Walk Attack/", 1, 8);
+	AddImageVector("Fanaticrun", L"Resources/Monster/Fanatic/Walk Idle/", 1, 6);
+	AddImageVector("Fanaticsetcrifice", L"Resources/Monster/Fanatic/Setcrifice/", 1, 9);
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
