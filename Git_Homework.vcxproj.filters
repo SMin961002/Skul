@@ -71,6 +71,9 @@
     <ClCompile Include="LeoniaSoldier.cpp">
       <Filter>Game\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Fanatic.cpp">
+      <Filter>Game\Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -143,6 +146,9 @@
       <Filter>Game\Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="LeoniaSoldier.h">
+      <Filter>Game\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Fanatic.h">
       <Filter>Game\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
