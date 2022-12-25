@@ -1,12 +1,12 @@
 #pragma once
 #include "Component.h"
 
-#define MOVE_SPEED				3
-#define JUMP_SPEED				3
-#define DASH_MULTIPLE			2
-#define DASH_COLLTIME			
-#define COMMAND_ReENTRY_TIME	
-#define HISTORY_MAX				10
+//#define MOVE_SPEED				3
+//#define JUMP_SPEED				3
+//#define DASH_MULTIPLE			2
+//#define DASH_COLLTIME			
+//#define COMMAND_ReENTRY_TIME	
+//#define HISTORY_MAX				10
 
 enum SkulTag
 {
@@ -50,29 +50,33 @@ protected:
 	vImage* img[eActionTagNumber];
 	vImage* img_reborn;
 	vImage* img_jumpFall;
+	vImage* nowImg;
 	RECT m_hitBox;
 
-	//이미지로 제어
+	//이미지, 시간으로 제어
 	ActionTag m_action;
 	ActionTag m_action_prev;
+	float m_actionTick;		//행동지속시간
 
-	float	m_moveSpeed;
-	bool 	m_isLeft;
-	bool m_down;
-	
-	float m_dashDelay;
-	float m_dashWaitingTime;
-	short m_dashCount = 0;
-
-	float m_jumpSpeed;
-	float m_jumpDelay;
-	float m_jumpWaitingTime;
-	short m_jumpCount;
-
-
+	float m_moveSpeed;
+	bool  m_isLeft;
+	bool  m_down;
+	bool  m_commandInput;
+		  
+	float m_dashSpeed;		//대시 속도 (가속->감속 계산필요)
+	float m_dashDelay;		//대시 끝나고 다음 대시세트 시작까지 걸리는 쿨타임
+	float m_dashTime;		//대시 발동되는 시간 (이 안에 입력해야 2단대시 가능)
+	short m_dashCount;		//현재 몇회차 대시인지
+	short m_dashMax;		//최대 대시 가능 횟수
+		  
+	float m_jumpSpeed;		//점프 시작속도
+	float m_jumpGravity;	//점프 속도 (가속->감속, 속도 -되면 jumpDown 계산필요)
+	short m_jumpCount;		//현재 점프 몇회인지
+	short m_jumpMax;		//최대 점프 가능 횟수		  
+		  
 	float m_attackWaitingTime;
 	short m_attackCount;
-	
+		  
 	float m_skillCoolA;
 	float m_skillCoolS;
 	float m_skillCoolD;
