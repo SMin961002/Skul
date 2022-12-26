@@ -157,6 +157,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Nervousness_Effect_Attack", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Effect/Attack/Phase1_Nervousness_Attack_", 1, 33);
 	AddImageVector("Boss_Nervousness_Effect_Projectile", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Effect/Projectile/Phase1_Nervousness_Projectile_", 1, 12);
 	// 1페이즈_분수 구슬
+	// 
 	// 1페이즈_분수
 	// 1페이즈_방어막
 	AddImageVector("Boss_Barrier_Intro", L"./Resources/Saint_Joanna/Phase_1/Barrier/Intro/Phase1_Barrier_Intro_", 1, 30);
@@ -176,10 +177,10 @@ void ImageManager::LoadImages()
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
 
 	// 몬스터 이미지
-	AddImageVector("leonidle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
-	AddImageVector("leonattack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
-	AddImageVector("leonrun", L"Resources/Monster/Leonia Soldier/Run/", 1, 8);
-	AddImageVector("leonhit", L"Resources/Monster/Leonia Soldier/Hit/",1,1);
+	AddImageVector("Leon_Idle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
+	AddImageVector("Leon_Attack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
+	AddImageVector("Leon_Run", L"Resources/Monster/Leonia Soldier/Run/", 1, 8);
+	AddImageVector("Leon_Hit", L"Resources/Monster/Leonia Soldier/Hit/", 1, 1);
 	
 	AddImageVector("Fanaticidle", L"Resources/Monster/Fanatic/Idle/", 1, 6);
 	AddImageVector("FanaticattackIdle", L"Resources/Monster/Fanatic/Attack Idle/", 1, 5);
