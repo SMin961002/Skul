@@ -134,12 +134,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Baptism.cpp" />
+    <ClCompile Include="BlackFanatic.cpp" />
     <ClCompile Include="BossObject.cpp" />
     <ClCompile Include="BossScene.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Consercration.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="ExObject.cpp" />
@@ -153,7 +152,6 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapToolMapSelectScene.cpp" />
     <ClCompile Include="MapToolScene.cpp" />
-    <ClCompile Include="Nervousness.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -169,15 +167,13 @@
     <ClCompile Include="WinMain.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Worship.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Baptism.h" />
+    <ClInclude Include="BlackFanatic.h" />
     <ClInclude Include="BossObject.h" />
     <ClInclude Include="BossScene.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="Consercration.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ExObject.h" />
@@ -191,7 +187,6 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="MapToolMapSelectScene.h" />
     <ClInclude Include="MapToolScene.h" />
-    <ClInclude Include="Nervousness.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
@@ -202,7 +197,6 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TimerManager.h" />
     <ClInclude Include="Utility.h" />
-    <ClInclude Include="Worship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -179,6 +179,11 @@ void ImageManager::LoadImages()
 	AddImageVector("Fanaticsetcrificeloop", L"Resources/Monster/Fanatic/Setcrifice Loop/", 1, 1);
 	AddImageVector("Fanaticsetcrificeready", L"Resources/Monster/Fanatic/Setcrifice Ready/", 1, 6);
 	AddImageVector("Fanatichit", L"Resources/Monster/Fanatic/Hit/", 1, 1);
+
+	AddImageVector("Bfanaticidle", L"Resources/Monster/Black Fanatic/Idle/", 1, 6);
+	AddImageVector("BfanaticattackIdle", L"Resources/Monster/Black Fanatic/Attack Idle/", 1, 5);
+	AddImageVector("BFanaticrunattack", L"Resources/Monster/Black Fanatic/Walk Attack/", 1, 8);
+	AddImageVector("BFanaticrun", L"Resources/Monster/Black Fanatic/Walk/", 1, 6);
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
