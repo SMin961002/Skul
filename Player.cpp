@@ -117,7 +117,7 @@ void Player::Move()
 		{
 			m_isLeft = true;
 			if (m_action == eIdle) {
-				m_actionTick = 0.3 + TIMERMANAGER->GerWorldTime();
+				m_actionTick +=0.3;
 			}
 			m_obj->x -= m_moveSpeed;
 		}
@@ -125,7 +125,8 @@ void Player::Move()
 		{
 			m_isLeft = false;
 			if (m_action == eIdle) {
-				m_actionTick = 0.3 + TIMERMANAGER->GerWorldTime();
+				m_actionTick +=0.3;
+				//m_actionTick = 0.3 + TIMERMANAGER->GerWorldTime();
 			}
 			m_obj->x += m_moveSpeed;
 		}
