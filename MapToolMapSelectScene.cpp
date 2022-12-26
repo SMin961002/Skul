@@ -55,8 +55,6 @@ void MapToolMapSelectScene::Render()
 			FILEMANAGER->MapFileWrite("Map", "name", m_maps, "./MapFile/mapList.ini");
 		}
 	}
-
-	
 }
 
 void MapToolMapSelectScene::Release()
