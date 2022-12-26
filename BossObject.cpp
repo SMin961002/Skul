@@ -9,16 +9,18 @@ void BossObject::Init()
 
 void BossObject::Update()
 {
-
+	Pattern();
 }
 
 void BossObject::Render()
 {
 	_imgBoss->Render(WINSIZE_X/2, WINSIZE_Y/1.5, 1, 1, 0);
-
-	TIMERMANAGER->Render();
 }
 
 void BossObject::Release()
+{
+}
+
+void BossObject::Pattern()
 {
 }

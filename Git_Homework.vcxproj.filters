@@ -74,6 +74,22 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Baptism.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="Consercration.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Nervousness.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Worship.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Idle.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
     <ClCompile Include="BlackFanatic.cpp">
       <Filter>Game\Object\Enemy\BlackFanatic</Filter>
     </ClCompile>
@@ -159,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Game\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Idle.h">
+      <Filter>Game\Object\Boss\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="BlackFanatic.h">
       <Filter>Game\Object\Enemy\BlackFanatic</Filter>
