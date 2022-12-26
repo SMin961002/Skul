@@ -20,7 +20,7 @@ private:
 	32비트에서 롱은 4비트 -> 64비트에서롱은 8비트
 	*/
 
-	unsigned long _frameRate;  //(초당프레임수)
+	unsigned long	_frameRate;  //(초당프레임수)
 	unsigned long   _FPSFrameCount; //fps 카운트
 	float			_FPSTimeElapsed; //FPS 시간 경과량
 	float			_worldTime;		 // 게임이 시작된 후 경과된 전체시간
@@ -32,7 +32,7 @@ public:
 
 
 	//현재 FPS
-	unsigned long gerFrameRate(char* str = nullptr) const; //?
+	unsigned long getFrameRate(char* str = nullptr) const; //?
 	//마지막 시간과 현재 시간의 경과량
 	inline float getElapsedTime(void) const { return _timeElapsed; } //?
 	// 전체 경과 시간

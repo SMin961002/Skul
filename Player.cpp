@@ -89,18 +89,18 @@ void Player::Move()
 		if(KEYMANAGER->GetOnceKeyDown('Z')&&m_dashCount<2)
 		{
 			m_action = eDash;
-			m_actionTick = 0.4 + TIMERMANAGER->GerWorldTime();
+			m_actionTick = 0.4 + TIMERMANAGER->GetWorldTime();
 			m_dashCount++;
 		}
 	}//end case dash
 		break;
 
 	case eAutoAttack_1:
-		if (TIMERMANAGER->GerWorldTime() > m_actionTick - 0.3)
+		if (TIMERMANAGER->GetWorldTime() > m_actionTick - 0.3)
 			if (KEYMANAGER->GetOnceKeyDown('X'))
 			{
 				m_action = eAutoAttack_2;
-			m_actionTick = 0.15 * (img[eAutoAttack_2]->GetImageSize()) + TIMERMANAGER->GerWorldTime();
+			m_actionTick = 0.15 * (img[eAutoAttack_2]->GetImageSize()) + TIMERMANAGER->GetWorldTime();
 			img[eAutoAttack_2]->Reset();
 			nowImg = img[eAutoAttack_2];
 		}
@@ -126,7 +126,7 @@ void Player::Move()
 			m_isLeft = false;
 			if (m_action == eIdle) {
 				m_actionTick +=0.3;
-				//m_actionTick = 0.3 + TIMERMANAGER->GerWorldTime();
+				//m_actionTick = 0.3 + TIMERMANAGER->GetWorldTime();
 			}
 			m_obj->x += m_moveSpeed;
 		}
@@ -141,7 +141,7 @@ void Player::Move()
 			m_isLeft = true;
 			if (m_action == eIdle) {
 				m_action = eWalk;
-				m_actionTick = 0.3 + TIMERMANAGER->GerWorldTime();
+				m_actionTick = 0.3 + TIMERMANAGER->GetWorldTime();
 				nowImg = img[eWalk];
 			}
 			m_obj->x -= m_moveSpeed;
@@ -151,7 +151,7 @@ void Player::Move()
 			m_isLeft = false;
 			if (m_action == eIdle) {
 				m_action = eWalk;
-				m_actionTick = 0.3 + TIMERMANAGER->GerWorldTime();
+				m_actionTick = 0.3 + TIMERMANAGER->GetWorldTime();
 				nowImg = img[eWalk];
 			}
 			m_obj->x += m_moveSpeed;
@@ -169,21 +169,21 @@ void Player::Move()
 		if (KEYMANAGER->GetOnceKeyDown('Z'))
 		{
 			m_action = eDash;
-			m_actionTick = 0.4 + TIMERMANAGER->GerWorldTime();
+			m_actionTick = 0.4 + TIMERMANAGER->GetWorldTime();
 			nowImg = img[eDash];
 			m_dashCount++;
 		}
 		if (KEYMANAGER->GetOnceKeyDown('X'))
 		{
-			if(TIMERMANAGER->GerWorldTime()> m_actionTick-0.3)
+			if(TIMERMANAGER->GetWorldTime()> m_actionTick-0.3)
 			m_action = eAutoAttack_1;
-			m_actionTick = 0.15 * (img[eAutoAttack_1]->GetImageSize()) + TIMERMANAGER->GerWorldTime();
+			m_actionTick = 0.15 * (img[eAutoAttack_1]->GetImageSize()) + TIMERMANAGER->GetWorldTime();
 			img[eAutoAttack_1]->Reset();
 			nowImg = img[eAutoAttack_1];
 		}
 	}//end case idle&walk&default
 	}//end switch
-	if (m_actionTick < TIMERMANAGER->GerWorldTime())
+	if (m_actionTick < TIMERMANAGER->GetWorldTime())
 	{
 		m_action = eIdle;
 		nowImg = img[eIdle];
