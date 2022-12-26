@@ -200,25 +200,25 @@ void ImageManager::LoadImages()
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
 
 	// 몬스터 이미지
-	AddImageVector("leonidle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
-	AddImageVector("leonattack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
-	AddImageVector("leonrun", L"Resources/Monster/Leonia Soldier/Run/", 1, 8);
-	AddImageVector("leonhit", L"Resources/Monster/Leonia Soldier/Hit/",1,1);
+	AddImageVector("Leon_Idle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
+	AddImageVector("Leon_Attack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
+	AddImageVector("Leon_Run", L"Resources/Monster/Leonia Soldier/Run/", 1, 8);
+	AddImageVector("Leon_Hit", L"Resources/Monster/Leonia Soldier/Hit/",1,1);
 	
-	AddImageVector("Fanaticidle", L"Resources/Monster/Fanatic/Idle/", 1, 6);
-	AddImageVector("FanaticattackIdle", L"Resources/Monster/Fanatic/Attack Idle/", 1, 5);
-	AddImageVector("Fanaticattack", L"Resources/Monster/Fanatic/Attack/", 1, 13);
-	AddImageVector("Fanaticrunattack", L"Resources/Monster/Fanatic/Walk Attack/", 1, 8);
-	AddImageVector("Fanaticrun", L"Resources/Monster/Fanatic/Walk Idle/", 1, 6);
-	AddImageVector("Fanaticsetcrifice", L"Resources/Monster/Fanatic/Setcrifice/", 1, 9);
-	AddImageVector("Fanaticsetcrificeloop", L"Resources/Monster/Fanatic/Setcrifice Loop/", 1, 1);
-	AddImageVector("Fanaticsetcrificeready", L"Resources/Monster/Fanatic/Setcrifice Ready/", 1, 6);
-	AddImageVector("Fanatichit", L"Resources/Monster/Fanatic/Hit/", 1, 1);
+	AddImageVector("Fanatic_Idle", L"Resources/Monster/Fanatic/Idle/", 1, 6);
+	AddImageVector("Fanatic_AttackIdle", L"Resources/Monster/Fanatic/Attack Idle/", 1, 5);
+	AddImageVector("Fanatic_Attack", L"Resources/Monster/Fanatic/Attack/", 1, 13);
+	AddImageVector("Fanatic_Runattack", L"Resources/Monster/Fanatic/Walk Attack/", 1, 8);
+	AddImageVector("Fanatic_Run", L"Resources/Monster/Fanatic/Walk Idle/", 1, 6);
+	AddImageVector("Fanatic_Setcrifice", L"Resources/Monster/Fanatic/Setcrifice/", 1, 9);
+	AddImageVector("Fanatic_Setcrificeloop", L"Resources/Monster/Fanatic/Setcrifice Loop/", 1, 1);
+	AddImageVector("Fanatic_Setcrificeready", L"Resources/Monster/Fanatic/Setcrifice Ready/", 1, 6);
+	AddImageVector("Fanatic_Hit", L"Resources/Monster/Fanatic/Hit/", 1, 1);
 
-	AddImageVector("Bfanaticidle", L"Resources/Monster/Black Fanatic/Idle/", 1, 6);
-	AddImageVector("BfanaticattackIdle", L"Resources/Monster/Black Fanatic/Attack Idle/", 1, 5);
-	AddImageVector("BFanaticrunattack", L"Resources/Monster/Black Fanatic/Walk Attack/", 1, 8);
-	AddImageVector("BFanaticrun", L"Resources/Monster/Black Fanatic/Walk/", 1, 6);
+	AddImageVector("Bfanatic_Idle", L"Resources/Monster/Black Fanatic/Idle/", 1, 6);
+	AddImageVector("Bfanatic_AttackIdle", L"Resources/Monster/Black Fanatic/Attack Idle/", 1, 5);
+	AddImageVector("BFanatic_Runattack", L"Resources/Monster/Black Fanatic/Walk Attack/", 1, 8);
+	AddImageVector("BFanatic_Run", L"Resources/Monster/Black Fanatic/Walk/", 1, 6);
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)

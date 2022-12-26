@@ -3,16 +3,16 @@
 
 void BlackFanatic::Init()
 {
-	m_vimage[eIdle] = IMAGEMANAGER->FindImageVector("Bfanaticidle");
+	m_vimage[eIdle] = IMAGEMANAGER->FindImageVector("Bfanatic_Idle");
 	m_vimage[eIdle]->Setting(0.3f, true);
 	
-	m_vimage[eAttackIdle] = IMAGEMANAGER->FindImageVector("BfanaticattackIdle");
+	m_vimage[eAttackIdle] = IMAGEMANAGER->FindImageVector("Bfanatic_AttackIdle");
 	m_vimage[eAttackIdle]->Setting(0.3f, true);
 	
-	m_vimage[eRunAttack] = IMAGEMANAGER->FindImageVector("BFanaticrunattack");
+	m_vimage[eRunAttack] = IMAGEMANAGER->FindImageVector("BFanatic_Runattack");
 	m_vimage[eRunAttack]->Setting(0.3f, true);
 	
-	m_vimage[eRun] = IMAGEMANAGER->FindImageVector("BFanaticrun");
+	m_vimage[eRun] = IMAGEMANAGER->FindImageVector("BFanatic_Run");
 	m_vimage[eRun]->Setting(0.3f, true);
 }
 
