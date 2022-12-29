@@ -86,7 +86,9 @@ void MapToolScene::Render()
 	
 	IMAGEMANAGER->DrawMapTile(m_tiles);
 
+	IMAGEMANAGER->DrawMapTilePixel(m_tiles);
 	IMAGEMANAGER->DrawMapStructureFoward(m_sturctDatas);
+
 
 	for (auto iter : m_sturctDatas)
 	{
