@@ -179,8 +179,8 @@ void ImageManager::LoadImages()
 
 	AddImage("CollisionPlatform", L"./Resources/Tile/4Stage/CollisionPlatform.png");
 	AddImage("CollisionBox", L"./Resources/Tile/4Stage/CollisionBox.png");
-	
-	AddPixelmage("CollisionBox", "./Resources/Tile/4Stage/CollisionBox.bmp", 32 * 2, 32 * 2);
+
+	AddPixelmage("CollisionBox", "./Resources/Tile/4Stage/CollisionBox.bmp", 32, 32);
 
 	// 보스 ====================================================================================
 	// 1페이즈_대기
@@ -446,7 +446,7 @@ void ImageManager::DrawRectCenter(RECT rt, CImage* img)
 	mat = D2D1::Matrix3x2F::Translation(0, 0);
 	pRT->SetTransform(&mat);
 	pRT->CreateSolidColorBrush(color, &m_brush);
-	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left+img->GetWidth()/2,(float)rt.top+img->GetHeight()/2,(float)rt.right+img->GetWidth()/2,(float)rt.bottom+img->GetHeight()/2 }, m_brush);
+	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left + img->GetWidth() / 2,(float)rt.top + img->GetHeight() / 2,(float)rt.right + img->GetWidth() / 2,(float)rt.bottom + img->GetHeight() / 2 }, m_brush);
 
 
 }
@@ -460,7 +460,7 @@ void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
 		int x = 0;
 		for (auto _iter : iter)
 		{
-			if (_iter == 0||_iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7||_iter == 8 || _iter == 9 || _iter == 10|| _iter == 11||_iter == 12||_iter == 13 || _iter == 14 ||_iter == 36 || _iter == 37)
+			if (_iter == 0 || _iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7 || _iter == 8 || _iter == 9 || _iter == 10 || _iter == 11 || _iter == 12 || _iter == 13 || _iter == 14 || _iter == 36 || _iter == 37)
 			{
 				IMAGEMANAGER->Render(FindImage("CollisionBox"), x * m_width, y1 * m_width);
 			}
@@ -530,8 +530,8 @@ void ImageManager::UIRender(CImage* img, float x, float y, float sizeX, float si
 
 HRESULT GImage::init(const char* fileName, float width, float height)
 {
-	 HDC hdc = GetDC(_hWnd);
-	 
+	HDC hdc = GetDC(_hWnd);
+
 	_imageInfo = new IMAGE_INFO;
 	_imageInfo->loadType = LOAD_FILE;
 	_imageInfo->resID = 0;

@@ -32,6 +32,7 @@ void Main::Render()
 	IMAGEMANAGER->Begin();
 	SCENEMANAGER->Render();
 	OBJECTMANAGER->Render();
+	TIMERMANAGER->Render();
 	IMAGEMANAGER->End();
 }
 
