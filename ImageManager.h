@@ -5,8 +5,9 @@ class CImage
 {
 private:
 	float alpha;
-	int width;
-	int height;
+	int	  width;
+	int	  height;
+	float delay;
 	ID2D1Bitmap* bitmap;
 public:
 	CImage(ID2D1Bitmap* bitmap, int width, int height) :
@@ -19,11 +20,13 @@ public:
 		bitmap->Release();
 	}
 
-	float GetAlpha() { return alpha; }
-	int GetWidth() { return width; }
-	int GetHeight() { return height; }
+	float GetAlpha()  { return alpha; }
+	int   GetWidth()  { return width; }
+	int   GetHeight() { return height;}
+	float GetDelay()  { return delay; }
 
 	void SetAlpha(float a) { alpha = a; }
+	void SetDelay(float t) { delay = t; }
 	ID2D1Bitmap* GetBitMap() { return bitmap; }
 };
 
@@ -111,21 +114,39 @@ class vImage // 벡터 이미지라는 뜻 나중에 타이머 들어간후 제대로 만들어서 파일 �
 private:
 	vector<CImage*> m_images;
 	bool m_isEnd;
-	float m_timeDelay;
 	float m_nowTimeDelay;
 
+	float m_totalDelay;
 	bool m_isLoop;
 	int m_frame;
 public:
 	vImage() : m_isEnd(false) {}
 	~vImage() {}
+	bool IsImageEnded() { return m_isEnd; }	//물어보기
 	vector<CImage*> GetImages() { return m_images; }
 	int GetImageSize() { return m_images.size(); }
+	float GetTotalDelay() {	return m_totalDelay; }
 
-	void Setting(float t, bool isLoop)
+	void Setting(float delayTime, bool isLoop)
 	{
-		m_timeDelay = t;
+		vector<CImage*>::iterator iter;
+		for (iter = m_images.begin(); iter != m_images.end(); iter++)
+		{
+			(*iter)->SetDelay(delayTime);
+		}
+		m_totalDelay = m_images.size() * delayTime;
 		m_isLoop = isLoop;
+		m_nowTimeDelay = 0;
+		m_frame = 0;
+	}
+
+	//벡터에 들어간 CImage 한장마다의 delay를 설정하기 위한 함수
+	//frame번째 이미지 delay를 delayTime으로 설정
+	void Setting(int frame, float delayTime)
+	{
+		m_totalDelay -= m_images[frame]->GetDelay();
+		m_totalDelay += delayTime;
+		m_images[frame]->SetDelay(delayTime);
 		m_nowTimeDelay = 0;
 		m_frame = 0;
 	}
@@ -142,7 +163,7 @@ public:
 		if (m_isEnd == false)
 			m_nowTimeDelay += DELTA_TIME;
 
-		if (m_nowTimeDelay >= m_timeDelay)
+		if (m_nowTimeDelay >= m_images[m_frame]->GetDelay())
 		{
 			if (m_frame >= GetImageSize() - 1)
 			{
@@ -169,7 +190,7 @@ public:
 		if (m_isEnd == false)
 			m_nowTimeDelay += DELTA_TIME;
 
-		if (m_nowTimeDelay >= m_timeDelay)
+		if (m_nowTimeDelay >= m_images[m_frame]->GetDelay())
 		{
 			if (m_frame >= GetImageSize() - 1)
 			{

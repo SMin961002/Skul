@@ -9,187 +9,217 @@ void Player::Init()
 	img[eWalk] = IMAGEMANAGER->FindImageVector("Basic_Walk");
 	img[eWalk]->Setting(0.1f, true);
 	img[eDash] = IMAGEMANAGER->FindImageVector("Basic_Dash");
+	img[eDash]->Setting(0.4f, false);
 	img[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Basic_Attack1");
-	img[eAutoAttack_1]->Setting(0.15f, false);
+	img[eAutoAttack_1]->Setting(0.11f, false);
 	img[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Basic_Attack2");
 	img[eAutoAttack_2]->Setting(0.15f, false);
+
+	//↓↓setting 필요↓↓
+	//↓↓setting 필요↓↓
+	//↓↓setting 필요↓↓	##
 	img[eJump] = IMAGEMANAGER->FindImageVector("Basic_JumpStart");
+	img[eJumpAttack] = IMAGEMANAGER->FindImageVector("Basic_JumpAttack");
 	img[eJumpDown] = IMAGEMANAGER->FindImageVector("Basic_JumpRepeat");	//JumpFall 이미지는 착지순간만 재생, img변수 따로 두었음
-	img_jumpFall = IMAGEMANAGER->FindImageVector("Basic_JumpFall");
+	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Basic_JumpFall");
 	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Basic_Skill");
 	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Basic_Idle");	//머리가본체는 별도의 이미지가 없음(서있는상태로 뿅 이펙트만 존재)
+	//↑↑setting 필요↑↑
+	//↑↑setting 필요↑↑
+	//↑↑setting 필요↑↑
 	img_reborn = IMAGEMANAGER->FindImageVector("Basic_Reborn");
-	img_jumpFall->Setting(0.1f, true);
 	img_reborn->Setting(0.1f, true);
 
 	nowImg = img[eIdle];
 
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
 	m_action = eIdle;
-	m_action_prev = eIdle;
-	m_actionTick = 0;
 
 	m_moveSpeed = 3;
 	m_isLeft = false;
 	m_down = false;
-	m_commandInput = false;
 
-	m_dashSpeed = 3.5;
-	m_dashDelay = 2000;
-	m_dashTime = 400;
+	m_dashSpeed = 3.5;	//##dash 이동식 수정 필요
+	m_dashTime = 0.4f;
+	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
+	m_dashCool = 1;
+	m_dashNowCool = 0;
 	m_dashCount = 0;
 	m_dashMax = 2;
+	m_dashing = false;
 
 	m_jumpSpeed = 3;
-	m_jumpGravity = 0.2;
+	m_jumpNowSpeed = 0.2;
 	m_jumpCount = 0;
 	m_jumpMax = 2;
+	m_jumpping = false;
 
-
-	m_attackWaitingTime = 1000;
 	m_attackCount = 0;
 	
-	m_skillCoolA = 6000;
-	m_skillCoolS = 3000;
-	m_skillCoolD = 0;
+	m_skillCoolA = 6;
+	m_skillCoolS = 3;
+	m_artifactCoolD = 0;
+	m_haveArtifact = false;
+
+	m_commandInput = false;
 }
 
 void Player::Update()
-{
-	Move();
-	//Action();
-
+{	
+	if (m_action != eSkill_1 && m_action != eSkill_2)	//스킬 끝날 때까지 다른 동작이 들어가지 못하게 하기 위함
+	{
+		Move();
+		Act();
+	}
+	InputArtifactKey();
 }
 
 void Player::Render()
 {
-	Draw();
+	DrawCharactor();
 }
 
 void Player::Release()
 {
 }
 
-void Player::Draw()
+void Player::DrawCharactor()
 {
-	img[m_action]->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
+	if (m_commandInput)
+	{
+		nowImg = img[m_action];
+	}
+	if (nowImg->IsImageEnded())
+	{
+		nowImg->Reset();
+		if (m_attackCast) m_action = eAutoAttack_2;	//3타가 있으면 switch(m_attackCount)로 검사
+		else m_action = eIdle;
+		nowImg = img[m_action];
+	}
+
+	nowImg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
+}
+
+void Player::DrawEffect()
+{
 }
 
 void Player::Move()
 {
-	switch (m_action)
-	{
-	case eDash:
-	{
-		if (m_isLeft)
-		{
-			m_obj->x -= m_dashSpeed;
-		}
-		else m_obj->x += m_dashSpeed;
-		if(KEYMANAGER->GetOnceKeyDown('Z')&&m_dashCount<2)
-		{
-			m_action = eDash;
-			m_actionTick = 0.4 + TIMERMANAGER->GetWorldTime();
-			m_dashCount++;
-		}
-	}//end case dash
-		break;
-
-	case eAutoAttack_1:
-		if (TIMERMANAGER->GetWorldTime() > m_actionTick - 0.3)
-			if (KEYMANAGER->GetOnceKeyDown('X'))
-			{
-				m_action = eAutoAttack_2;
-			m_actionTick = 0.15 * (img[eAutoAttack_2]->GetImageSize()) + TIMERMANAGER->GetWorldTime();
-			img[eAutoAttack_2]->Reset();
-			nowImg = img[eAutoAttack_2];
-		}
-		break;
-	case eAutoAttack_2:
-		break;
-	case eJump:
-		break;
-	case eJumpDown:
-		break;
-
-	case eWalk:
-		if (KEYMANAGER->GetStayKeyDown(VK_LEFT))
-		{
-			m_isLeft = true;
-			if (m_action == eIdle) {
-				m_actionTick +=0.3;
-			}
-			m_obj->x -= m_moveSpeed;
-		}
-		if (KEYMANAGER->GetStayKeyDown(VK_RIGHT))
-		{
-			m_isLeft = false;
-			if (m_action == eIdle) {
-				m_actionTick +=0.3;
-				//m_actionTick = 0.3 + TIMERMANAGER->GetWorldTime();
-			}
-			m_obj->x += m_moveSpeed;
-		}
-
-		break;
-	case eIdle:
-	default:
-	{
-		m_down = false;
-		if (KEYMANAGER->GetStayKeyDown(VK_LEFT))
-		{
-			m_isLeft = true;
-			if (m_action == eIdle) {
-				m_action = eWalk;
-				m_actionTick = 0.3 + TIMERMANAGER->GetWorldTime();
-				nowImg = img[eWalk];
-			}
-			m_obj->x -= m_moveSpeed;
-		}
-		if (KEYMANAGER->GetStayKeyDown(VK_RIGHT))
-		{
-			m_isLeft = false;
-			if (m_action == eIdle) {
-				m_action = eWalk;
-				m_actionTick = 0.3 + TIMERMANAGER->GetWorldTime();
-				nowImg = img[eWalk];
-			}
-			m_obj->x += m_moveSpeed;
-		}
-		if (KEYMANAGER->GetStayKeyDown(VK_DOWN))
-		{
-			m_down = true;
-		}
-		if (KEYMANAGER->GetOnceKeyDown('C'))
-		{
-			m_action = m_down ? eJumpDown : eJump;
-			m_commandInput = true;
-
-		}
-		if (KEYMANAGER->GetOnceKeyDown('Z'))
-		{
-			m_action = eDash;
-			m_actionTick = 0.4 + TIMERMANAGER->GetWorldTime();
-			nowImg = img[eDash];
-			m_dashCount++;
-		}
-		if (KEYMANAGER->GetOnceKeyDown('X'))
-		{
-			if(TIMERMANAGER->GetWorldTime()> m_actionTick-0.3)
-			m_action = eAutoAttack_1;
-			m_actionTick = 0.15 * (img[eAutoAttack_1]->GetImageSize()) + TIMERMANAGER->GetWorldTime();
-			img[eAutoAttack_1]->Reset();
-			nowImg = img[eAutoAttack_1];
-		}
-	}//end case idle&walk&default
-	}//end switch
-	if (m_actionTick < TIMERMANAGER->GetWorldTime())
+	m_commandInput = false;
+	if (m_action == eWalk)
 	{
 		m_action = eIdle;
-		nowImg = img[eIdle];
-		m_dashCount = 0;
-		m_jumpCount = 0;
 	}
+	InputJumpKey();
+	InputDashKey();
+	if (!m_dashing)
+	{
+		InputArrowKey();
 
-	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
+		if (m_dashNowCool != 0)
+		{
+			if (m_dashNowCool > 0)	m_dashNowCool -= DELTA_TIME;
+			else
+			{
+				ResetDash();
+			}
+		}
+	}
+	else	//대시 발동중일때
+	{		//##dash 이동식 수정 필요
+		if (m_isLeft) { m_obj->x -= m_dashSpeed; }
+		else { m_obj->x += m_dashSpeed; }
+
+		if (nowImg != img[eDash])
+		{
+			m_dashing = false;
+			m_dashNowCool = m_dashCool;
+		}
+	}
+	if (nowImg != img[m_action])
+	{
+
+	}
+}
+
+void Player::Act()
+{
+	InputAttackKey();
+	InputSkillKey();
+}
+
+void Player::InputArrowKey()
+{
+	//방향키 왼쪽 입력시
+	if (KEYMANAGER->GetStayKeyDown(VK_LEFT))
+	{
+		m_isLeft = true;
+		m_obj->x -= m_moveSpeed;
+		/*if (!m_jumpping)##*/m_action = eWalk;
+		m_commandInput = true;
+	}
+	//방향키 오른쪽 입력시
+	if (KEYMANAGER->GetStayKeyDown(VK_RIGHT))
+	{
+		m_isLeft = false;
+		m_obj->x += m_moveSpeed;
+		/*if (!m_jumpping)##*/m_action = eWalk;
+		m_commandInput = true;
+	}
+}
+
+void Player::InputDashKey()
+{
+	if (KEYMANAGER->GetOnceKeyDown('Z'))
+	{
+		if (m_dashCount < 2&& m_dashNowCool<=0)
+		{
+			ResetJump();
+			m_dashing = true;
+			m_dashCount++;
+			m_action = eDash;
+			if (m_dashing) cout << "dash" << endl;
+			m_commandInput = true;
+			img[eDash]->Reset();
+			nowImg = img[eDash];
+		}
+	}
+}
+
+void Player::InputAttackKey()
+{
+	if (KEYMANAGER->GetOnceKeyDown('X'))
+	{
+		if (m_jumpping)
+		{
+			m_action = eJumpAttack;
+		}
+
+		m_commandInput = true;
+	}
+}
+
+void Player::InputArtifactKey()
+{
+	
+}
+
+void Player::InputSkillKey()
+{
+	if (KEYMANAGER->GetOnceKeyDown('A'))
+	{
+		m_action = eSkill_1;
+		m_commandInput = true;
+	}
+	else if(KEYMANAGER->GetOnceKeyDown('S'))
+	{
+		m_action = eSkill_2;
+		m_commandInput = true;
+	}
+}
+
+void Player::InputJumpKey()
+{
+	m_commandInput = true;
 }
