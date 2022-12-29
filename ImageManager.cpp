@@ -105,6 +105,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Basic_Reborn", L"./Resources/Png/Skul/Basic/Motion/Reborn/", 1, 27);
 	AddImageVector("Basic_Skill", L"./Resources/Png/Skul/Basic/Motion/Skill/", 1, 4);
 
+	AddImage("exBg", L"./Resources/exBg.png");
 	//약탈자 모션 이미지
 
 	//디스트로이어 모션 이미지
@@ -164,6 +165,9 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/34.png");
 	AddTileImage(L"./Resources/Tile/4Stage/35.png");
 	AddTileImage(L"./Resources/Tile/4Stage/36.png");
+	AddTileImage(L"./Resources/Tile/4Stage/37.png");
+	AddTileImage(L"./Resources/Tile/4Stage/38.png");
+
 
 	// 배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
@@ -210,6 +214,7 @@ void ImageManager::LoadImages()
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
 	AddStructureImage("arch1", L"./Resources/Tile/4Stage/Structure/arch1.png");
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
+	AddStructureImage("Elevator", L"./Resources/Tile/4Stage/Structure/elevator.png");
 
 	// 몬스터 이미지
 	AddImageVector("Leon_Idle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
@@ -365,6 +370,41 @@ void ImageManager::DrawRect(RECT rt)
 	pRT->CreateSolidColorBrush(color, &m_brush);
 
 	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left ,(float)rt.top,(float)rt.right,(float)rt.bottom }, (m_brush));
+}
+
+void ImageManager::DrawMapTile(vector<vector<int>> vec)
+{
+	int y1 = 0;
+	int m_width = m_tileImages[0]->GetWidth();
+	for (auto iter : vec)
+	{
+		int x = 0;
+		for (auto _iter : iter)
+		{
+			if (_iter != -1)
+					IMAGEMANAGER->Render(m_tileImages[_iter], x * m_width, y1 * m_width);
+			x++;
+		}
+		y1++;
+	}
+}
+
+void ImageManager::DrawMapStructureBack(vector<StructureData*> vec)
+{
+	for (auto iter : vec)
+	{
+		if (iter->isBack == true)
+			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
+	}
+}
+
+void ImageManager::DrawMapStructureFoward(vector<StructureData*> vec)
+{
+	for (auto iter : vec)
+	{
+		if (iter->isBack == false)
+			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
+	}
 }
 
 void ImageManager::D2dTextOut(wstring str, float x, float y)

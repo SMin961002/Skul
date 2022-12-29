@@ -48,7 +48,7 @@ void Player::Init()
 
 	m_attackWaitingTime = 1000;
 	m_attackCount = 0;
-	
+
 	m_skillCoolA = 6000;
 	m_skillCoolS = 3000;
 	m_skillCoolD = 0;
@@ -58,7 +58,7 @@ void Player::Update()
 {
 	Move();
 	//Action();
-
+	IMAGEMANAGER->SetCameraPosition(m_obj->x - WINSIZE_X / 2, m_obj->y - 150);
 }
 
 void Player::Render()
@@ -86,24 +86,24 @@ void Player::Move()
 			m_obj->x -= m_dashSpeed;
 		}
 		else m_obj->x += m_dashSpeed;
-		if(KEYMANAGER->GetOnceKeyDown('Z')&&m_dashCount<2)
+		if (KEYMANAGER->GetOnceKeyDown('Z') && m_dashCount < 2)
 		{
 			m_action = eDash;
 			m_actionTick = 0.4 + TIMERMANAGER->GetWorldTime();
 			m_dashCount++;
 		}
 	}//end case dash
-		break;
+	break;
 
 	case eAutoAttack_1:
 		if (TIMERMANAGER->GetWorldTime() > m_actionTick - 0.3)
 			if (KEYMANAGER->GetOnceKeyDown('X'))
 			{
 				m_action = eAutoAttack_2;
-			m_actionTick = 0.15 * (img[eAutoAttack_2]->GetImageSize()) + TIMERMANAGER->GetWorldTime();
-			img[eAutoAttack_2]->Reset();
-			nowImg = img[eAutoAttack_2];
-		}
+				m_actionTick = 0.15 * (img[eAutoAttack_2]->GetImageSize()) + TIMERMANAGER->GetWorldTime();
+				img[eAutoAttack_2]->Reset();
+				nowImg = img[eAutoAttack_2];
+			}
 		break;
 	case eAutoAttack_2:
 		break;
@@ -117,7 +117,7 @@ void Player::Move()
 		{
 			m_isLeft = true;
 			if (m_action == eIdle) {
-				m_actionTick +=0.3;
+				m_actionTick += 0.3;
 			}
 			m_obj->x -= m_moveSpeed;
 		}
@@ -125,7 +125,7 @@ void Player::Move()
 		{
 			m_isLeft = false;
 			if (m_action == eIdle) {
-				m_actionTick +=0.3;
+				m_actionTick += 0.3;
 				//m_actionTick = 0.3 + TIMERMANAGER->GetWorldTime();
 			}
 			m_obj->x += m_moveSpeed;
@@ -175,8 +175,8 @@ void Player::Move()
 		}
 		if (KEYMANAGER->GetOnceKeyDown('X'))
 		{
-			if(TIMERMANAGER->GetWorldTime()> m_actionTick-0.3)
-			m_action = eAutoAttack_1;
+			if (TIMERMANAGER->GetWorldTime() > m_actionTick - 0.3)
+				m_action = eAutoAttack_1;
 			m_actionTick = 0.15 * (img[eAutoAttack_1]->GetImageSize()) + TIMERMANAGER->GetWorldTime();
 			img[eAutoAttack_1]->Reset();
 			nowImg = img[eAutoAttack_1];
