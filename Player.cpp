@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "PixelCollisionComponent.h"
 
 void Player::Init()
 {
@@ -54,12 +55,18 @@ void Player::Init()
     m_skillCoolS = 3000;
     m_skillCoolD = 0;
 
+    m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x,&m_obj->y);
+
     m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
     m_obj->GetCollisionComponent()->Setting(100, m_obj->x, m_obj->y);
 }
 
 void Player::Update()
 {
+    if (false==m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
+    {
+        m_obj->y += 1;
+    }
     Move();
     //Action();
     IMAGEMANAGER->SetCameraPosition(m_obj->x - WINSIZE_X / 2, m_obj->y - 150);

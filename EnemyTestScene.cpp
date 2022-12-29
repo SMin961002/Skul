@@ -17,15 +17,15 @@ void EnemyTestScene::Init()
 	m_castle = IMAGEMANAGER->FindImage("Castle");
 	m_cloude = IMAGEMANAGER->FindImage("Cloud");
 
-	FILEMANAGER->SetNowStageFile("map_3");
+	FILEMANAGER->SetNowStageFile("map_0");
 	FILEMANAGER->TileFileRead(&SCENEMANAGER->m_tiles);
 
 	string strData;
 	strData = FILEMANAGER->GetFileData("Structure", "batch");
 	MY_UTILITY::ConvertStructureString2Vec(&m_sturctDatas, strData);
 
-	OBJECTMANAGER->AddObject("player", 200, 200, ePlayer)->AddComponent<Player>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+	OBJECTMANAGER->AddObject("player", 500 , -100, ePlayer)->AddComponent<Player>();
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
 
 }
 

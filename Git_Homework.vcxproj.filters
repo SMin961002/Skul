@@ -93,8 +93,12 @@
       <Filter>Game\Object\Boss\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="Idle.cpp" />
-    <ClCompile Include="EnemyTestScene.cpp" />
-    <ClCompile Include="PixelCollisionComponent.cpp" />
+    <ClCompile Include="PixelCollisionComponent.cpp">
+      <Filter>Game\Component\PixelCollisionComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTestScene.cpp">
+      <Filter>Game\Scene\EnemyTestScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -188,8 +192,12 @@
       <Filter>Game\Object\Boss</Filter>
     </ClInclude>
     <ClInclude Include="Idle.h" />
-    <ClInclude Include="EnemyTestScene.h" />
-    <ClInclude Include="PixelCollisionComponent.h" />
+    <ClInclude Include="PixelCollisionComponent.h">
+      <Filter>Game\Component\PixelCollisionComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTestScene.h">
+      <Filter>Game\Scene\EnemyTestScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -290,6 +298,12 @@
     </Filter>
     <Filter Include="Game\Object\Boss\Pattern\Casting">
       <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component\PixelCollisionComponent">
+      <UniqueIdentifier>{8b711143-5b02-4feb-ac72-9bcf52f51972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\EnemyTestScene">
+      <UniqueIdentifier>{f23dbd71-00c7-4b9e-be17-a7ffbdfdef95}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
