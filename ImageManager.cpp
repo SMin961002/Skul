@@ -179,6 +179,8 @@ void ImageManager::LoadImages()
 
 	AddImage("CollisionPlatform", L"./Resources/Tile/4Stage/CollisionPlatform.png");
 	AddImage("CollisionBox", L"./Resources/Tile/4Stage/CollisionBox.png");
+	
+	AddPixelmage("CollisionBox", "./Resources/Tile/4Stage/CollisionBox.bmp", 32 * 2, 32 * 2);
 
 	// 보스 ====================================================================================
 	// 1페이즈_대기
@@ -339,6 +341,25 @@ vImage* ImageManager::FindImageVector(const std::string key)
 	}
 	cout << "애니메이션 key 없음 : " << key << "\n";
 	return nullptr;
+}
+
+GImage* ImageManager::AddPixelmage(string strKey, const char* fileName, int width, int height)
+{
+	GImage* img;
+	img = new GImage;
+	img->init(fileName, width, height);
+	m_gimages.insert(make_pair(strKey, img));
+	return img;
+}
+
+GImage* ImageManager::FindPixelImage(string strKey)
+{
+	auto find = m_gimages.find(strKey);
+	if (find == m_gimages.end())
+	{
+		return nullptr;
+	}
+	return find->second;
 }
 
 void ImageManager::DrawCircle(float x, float y, float width)
@@ -505,4 +526,19 @@ void ImageManager::UIRender(CImage* img, float x, float y, float sizeX, float si
 	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
 	pRT->SetTransform((matS * matT * matR));
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+}
+
+HRESULT GImage::init(const char* fileName, float width, float height)
+{
+	 HDC hdc = GetDC(_hWnd);
+	 
+	_imageInfo = new IMAGE_INFO;
+	_imageInfo->loadType = LOAD_FILE;
+	_imageInfo->resID = 0;
+	_imageInfo->hMemDC = CreateCompatibleDC(hdc);
+	_imageInfo->hBit = (HBITMAP)LoadImage(hInst, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+	_imageInfo->hOBit = (HBITMAP)SelectObject(_imageInfo->hMemDC, _imageInfo->hBit);
+	_imageInfo->width = width;
+	_imageInfo->height = height;
+	return S_OK;
 }

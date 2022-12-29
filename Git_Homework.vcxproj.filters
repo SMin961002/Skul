@@ -89,32 +89,12 @@
     <ClCompile Include="Idle.cpp">
       <Filter>Game\Object\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="Choice.cpp">
-      <Filter>Game\Object\Boss\Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="Nervousness.cpp">
-      <Filter>Game\Object\Boss\Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="HollyFountain.cpp">
-      <Filter>Game\Object\Boss</Filter>
-    </ClCompile>
     <ClCompile Include="WinMain.cpp">
       <Filter>Game\Object\Boss\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Casting.cpp">
-      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
-    </ClCompile>
-    <ClCompile Include="Baptism.cpp">
-      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
-    </ClCompile>
-    <ClCompile Include="Consercration.cpp">
-      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
-    </ClCompile>
-    <ClCompile Include="Worship.cpp">
-      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
-    </ClCompile>
     <ClCompile Include="Idle.cpp" />
     <ClCompile Include="EnemyTestScene.cpp" />
+    <ClCompile Include="PixelCollisionComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -207,29 +187,9 @@
     <ClInclude Include="Idle.h">
       <Filter>Game\Object\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="Choice.h">
-      <Filter>Game\Object\Boss\Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="Nervousness.h">
-      <Filter>Game\Object\Boss\Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="HollyFountain.h">
-      <Filter>Game\Object\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="Casting.h">
-      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
-    </ClInclude>
-    <ClInclude Include="Baptism.h">
-      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
-    </ClInclude>
-    <ClInclude Include="Consercration.h">
-      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
-    </ClInclude>
-    <ClInclude Include="Worship.h">
-      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
-    </ClInclude>
     <ClInclude Include="Idle.h" />
     <ClInclude Include="EnemyTestScene.h" />
+    <ClInclude Include="PixelCollisionComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

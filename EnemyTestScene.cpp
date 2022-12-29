@@ -17,8 +17,8 @@ void EnemyTestScene::Init()
 	m_castle = IMAGEMANAGER->FindImage("Castle");
 	m_cloude = IMAGEMANAGER->FindImage("Cloud");
 
-	FILEMANAGER->SetNowStageFile("map_0");
-	FILEMANAGER->TileFileRead(&m_tiles);
+	FILEMANAGER->SetNowStageFile("map_3");
+	FILEMANAGER->TileFileRead(&SCENEMANAGER->m_tiles);
 
 	string strData;
 	strData = FILEMANAGER->GetFileData("Structure", "batch");
@@ -44,19 +44,20 @@ void EnemyTestScene::Render()
 
 	IMAGEMANAGER->DrawMapStructureBack(m_sturctDatas);
 
-	IMAGEMANAGER->DrawMapTile(m_tiles);
+	IMAGEMANAGER->DrawMapTile(SCENEMANAGER->m_tiles);
 
 	IMAGEMANAGER->DrawMapStructureFoward(m_sturctDatas);
 
 	if (KEYMANAGER->GetToggleKey(VK_F2))
 	{
-		IMAGEMANAGER->DrawMapTilePixel(m_tiles);
+		IMAGEMANAGER->DrawMapTilePixel(SCENEMANAGER->m_tiles);
 	}
 
 }
 
 void EnemyTestScene::Release()
 {
+	SCENEMANAGER->m_tiles.clear();
 	for (auto iter : m_sturctDatas)
 	{
 		SAFE_DELETE(iter);

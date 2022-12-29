@@ -2,6 +2,7 @@
 #include "LeoniaSoldier.h"
 #include "CollisionComponent.h"
 #include"Player.h"
+#include"PixelCollisionComponent.h"
 
 void LeoniaSoldier::Init()
 {
@@ -20,7 +21,8 @@ void LeoniaSoldier::Init()
 	m_attack = false;
 	m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
 	m_obj->GetCollisionComponent()->Setting(100,m_obj->x,m_obj->y); //<- 충돌범위와 위치
-
+	m_obj->AddComponent<PixelCollisionComponent>();
+	m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x,&m_obj->y);
 }
 
 void LeoniaSoldier::Update()

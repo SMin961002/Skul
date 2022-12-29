@@ -6,7 +6,6 @@
 
 Main mg;
 int countS = 0;
-HINSTANCE hInst;
 
 #pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
 

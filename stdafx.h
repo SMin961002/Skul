@@ -90,3 +90,6 @@ extern POINT _ptMouse;
 //	return;
 //}
 
+
+extern HINSTANCE hInst;
+
