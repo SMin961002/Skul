@@ -107,6 +107,9 @@ void ImageManager::LoadImages()
 
 	AddImage("exBg", L"./Resources/exBg.png");
 	//약탈자 모션 이미지
+	AddImage("Background", L"./MapFile/BackGround/background.png");
+	AddImage("Castle", L"./MapFile/BackGround/castle.png");
+	AddImage("Cloud", L"./MapFile/BackGround/cloud.png");
 
 	//디스트로이어 모션 이미지
 
@@ -174,6 +177,9 @@ void ImageManager::LoadImages()
 	AddImage("Building", L"./Resources/BackGround/Boss_Stage_Building.png");
 	AddImage("Lion", L"./Resources/BackGround/Boss_Stage_Lion.png");
 
+	AddImage("CollisionPlatform", L"./Resources/Tile/4Stage/CollisionPlatform.png");
+	AddImage("CollisionBox", L"./Resources/Tile/4Stage/CollisionBox.png");
+
 	// 보스 ====================================================================================
 	// 1페이즈_대기
 	AddImageVector("Boss_Idle", L"./Resources/Saint_Joanna/Phase1_Intro_1/Idle_", 1, 7);
@@ -220,8 +226,8 @@ void ImageManager::LoadImages()
 	AddImageVector("Leon_Idle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
 	AddImageVector("Leon_Attack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
 	AddImageVector("Leon_Run", L"Resources/Monster/Leonia Soldier/Run/", 1, 8);
-	AddImageVector("Leon_Hit", L"Resources/Monster/Leonia Soldier/Hit/",1,1);
-	
+	AddImageVector("Leon_Hit", L"Resources/Monster/Leonia Soldier/Hit/", 1, 1);
+
 	AddImageVector("Fanatic_Idle", L"Resources/Monster/Fanatic/Idle/", 1, 6);
 	AddImageVector("Fanatic_AttackIdle", L"Resources/Monster/Fanatic/Attack Idle/", 1, 5);
 	AddImageVector("Fanatic_Attack", L"Resources/Monster/Fanatic/Attack/", 1, 13);
@@ -382,7 +388,7 @@ void ImageManager::DrawMapTile(vector<vector<int>> vec)
 		for (auto _iter : iter)
 		{
 			if (_iter != -1)
-					IMAGEMANAGER->Render(m_tileImages[_iter], x * m_width, y1 * m_width);
+				IMAGEMANAGER->Render(m_tileImages[_iter], x * m_width, y1 * m_width);
 			x++;
 		}
 		y1++;
@@ -404,6 +410,29 @@ void ImageManager::DrawMapStructureFoward(vector<StructureData*> vec)
 	{
 		if (iter->isBack == false)
 			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
+	}
+}
+
+void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
+{
+	int y1 = 0;
+	int m_width = m_tileImages[0]->GetWidth();
+	for (auto iter : vec)
+	{
+		int x = 0;
+		for (auto _iter : iter)
+		{
+			if (_iter == 0||_iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7||_iter == 8 || _iter == 9 || _iter == 10|| _iter == 11||_iter == 12||_iter == 13 || _iter == 14 ||_iter == 36 || _iter == 37)
+			{
+				IMAGEMANAGER->Render(FindImage("CollisionBox"), x * m_width, y1 * m_width);
+			}
+			else if (_iter == 19 || _iter == 18 || _iter == 17 || _iter == 16)
+			{
+				IMAGEMANAGER->Render(FindImage("CollisionPlatform"), x * m_width, y1 * m_width);
+			}
+			x++;
+		}
+		y1++;
 	}
 }
 
