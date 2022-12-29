@@ -10,7 +10,7 @@ public:
 	IOFillManager();
 	~IOFillManager();
 public:
-	HRESULT TileFileRead( vector<vector<int>>* tiles);
+	HRESULT TileFileRead(vector<vector<int>>* tiles);
 	void TileFileWrite(string section, string key, vector<vector<int>> vec);
 
 	HRESULT MapFileRead(string section, string key, vector<string>* mapList);
@@ -18,8 +18,8 @@ public:
 
 	void SetNowStageFile(string st) { m_nowStageFileName = st; }
 
-	void GetFileData(string section, string key, string path);
-
+	string GetFileData(string section, string key);
+	void WriteFileData(string section, string key, string inputStr);
 };
 
 #define FILEMANAGER IOFillManager::GetInstance()

@@ -14,7 +14,7 @@ void MapToolScene::Init()
 	m_page = 0;
 	m_streuctureKey = "";
 	m_state = eTileBatch;
-	IMAGEMANAGER->AddImage("exBg", L"./Resources/exBg.png");
+
 
 	m_tileImages = IMAGEMANAGER->GetTileImages();
 	m_structureImages = IMAGEMANAGER->GetStructureImages();
@@ -30,6 +30,10 @@ void MapToolScene::Init()
 			iter.resize(100, -1);
 		}
 	}
+	string strData;
+	strData = FILEMANAGER->GetFileData("Structure", "batch");
+	MY_UTILITY::ConvertStructureString2Vec(&m_sturctDatas, strData);
+	cout << "";
 }
 
 void MapToolScene::Update()
@@ -78,24 +82,11 @@ void MapToolScene::Render()
 {
 	IMAGEMANAGER->Render(IMAGEMANAGER->FindImage("exBg"), IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 1);
 
-	int y1 = 0;
-	for (auto iter : m_sturctDatas)
-	{
-		if (iter->isBack == true)
-			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
-	}
-	for (auto iter : m_tiles)
-	{
-		int x = 0;
-		for (auto _iter : iter)
-		{
-			if (_iter != -1)
-				if (x * m_width - IMAGEMANAGER->GetCameraPosition().x < 800)
-					IMAGEMANAGER->Render(m_tileImages[_iter], x * m_width, y1 * m_width);
-			x++;
-		}
-		y1++;
-	}
+	IMAGEMANAGER->DrawMapStructureBack(m_sturctDatas);
+	
+	IMAGEMANAGER->DrawMapTile(m_tiles);
+
+	IMAGEMANAGER->DrawMapStructureFoward(m_sturctDatas);
 
 	for (auto iter : m_sturctDatas)
 	{
@@ -302,6 +293,9 @@ void MapToolScene::Render()
 
 	if (KEYMANAGER->GetOnceKeyDown(VK_BACK))
 	{
+		string str = "";
+		MY_UTILITY::ConvertVec2StructureString(m_sturctDatas, &str);
+		FILEMANAGER->WriteFileData("Structure", "batch", str);
 		FILEMANAGER->TileFileWrite("Test1", "TileMap", m_tiles);
 		cout << "ÀúÀå";
 		SCENEMANAGER->ChangeScene("MapToolMapSelectScene");
