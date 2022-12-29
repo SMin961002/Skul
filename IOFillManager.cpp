@@ -95,4 +95,12 @@ void IOFillManager::WriteFileData(string section, string key, string inputStr)
 	string path = "./MapFile/Structures/" + m_nowStageFileName + ".ini";
 
 	WritePrivateProfileString(section.c_str(), key.c_str(), inputStr.c_str(), path.c_str());
+	printf("%s \n", cBuf);
+}
+
+void IOFillManager::WriteFileData(string section, string key, string inputStr)
+{
+	string path = "./MapFile/Structures/" + m_nowStageFileName + ".ini";
+
+	WritePrivateProfileString(section.c_str(), key.c_str(), inputStr.c_str(), path.c_str());
 }
