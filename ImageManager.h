@@ -77,6 +77,7 @@ public:
 	void DrawMapTile(vector<vector<int>> vec);
 	void DrawMapStructureBack(vector<StructureData*> vec);
 	void DrawMapStructureFoward(vector<StructureData*> vec);
+	void DrawMapTilePixel(vector<vector<int>> vec);
 
 	void Begin() { pRT->BeginDraw(); }
 	void End() { pRT->EndDraw(); }
