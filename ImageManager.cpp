@@ -92,6 +92,42 @@ void ImageManager::LoadImages()
 	AddImage("Frame_1SKill", L"./Resources/Frame_1SKill.png");
 	AddImageVector("Ex_Idle", L"./Resources/Png/Idle/", 1, 6);
 
+	//일반스컬 모션 이미지
+	AddImageVector("Basic_Idle", L"./Resources/Png/Skul/Basic/Motion/Idle/", 1, 4);
+	AddImageVector("Basic_Walk", L"./Resources/Png/Skul/Basic/Motion/Walk/", 1, 8);
+	AddImageVector("Basic_Dash", L"./Resources/Png/Skul/Basic/Motion/Dash/", 1, 1);
+	AddImageVector("Basic_Attack1", L"./Resources/Png/Skul/Basic/Motion/Attack1/", 1, 5);
+	AddImageVector("Basic_Attack2", L"./Resources/Png/Skul/Basic/Motion/Attack2/", 1, 4);
+	AddImageVector("Basic_JumpStart", L"./Resources/Png/Skul/Basic/Motion/JumpStart/", 1, 2);
+	AddImageVector("Basic_JumpRepeat", L"./Resources/Png/Skul/Basic/Motion/JumpRepeat/", 1, 3);
+	AddImageVector("Basic_JumpFall", L"./Resources/Png/Skul/Basic/Motion/JumpFall/", 1, 2);
+	AddImageVector("Basic_JumpAttack", L"./Resources/Png/Skul/Basic/Motion/JumpAttack/", 1, 4);
+	AddImageVector("Basic_Reborn", L"./Resources/Png/Skul/Basic/Motion/Reborn/", 1, 27);
+	AddImageVector("Basic_Skill", L"./Resources/Png/Skul/Basic/Motion/Skill/", 1, 4);
+
+	AddImage("exBg", L"./Resources/exBg.png");
+	//약탈자 모션 이미지
+
+	//디스트로이어 모션 이미지
+
+	//갬블러스컬 모션 이미지 경로수정중
+	AddImageVector("Gambler_Idle", L"./Resources/Png/Skul/Gambler/Motion/Idle/", 1, 7);
+	AddImageVector("Gambler_Walk", L"./Resources/Png/Skul/Gambler/Motion/Walk/", 1, 6);
+	//AddImageVector("Gambler_Dash", L"./Resources/Png/Skul/Gambler/Motion/Dash/", 1, 5);
+	//AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 5);
+	//AddImageVector("Gambler_AttackA2", L"./Resources/Png/Skul/Gambler/Motion/AttackA2/", 1, 6);
+	//AddImageVector("Gambler_AttackB1", L"./Resources/Png/Skul/Gambler/Motion/AttackB1/", 1, 6);
+	//AddImageVector("Gambler_AttackB2", L"./Resources/Png/Skul/Gambler/Motion/AttackB2/", 1, 6);
+	//AddImageVector("Gambler_AttackB3", L"./Resources/Png/Skul/Gambler/Motion/AttackB3/", 1, 8);
+	//AddImageVector("Gambler_JumpStart", L"./Resources/Png/Skul/Gambler/Motion/JumpStart/", 1, 3);
+	//AddImageVector("Gambler_JumpRepeat", L"./Resources/Png/Skul/Gambler/Motion/JumpRepeat/", 1, 2);
+	//AddImageVector("Gambler_JumpFall", L"./Resources/Png/Skul/Gambler/Motion/JumpFall/", 1, 3);
+	//AddImageVector("Gambler_JumpAttack", L"./Resources/Png/Skul/Gambler/Motion/JumpAttack/", 1, 5);
+	//AddImageVector("Gambler_RussianRoulette", L"./Resources/Png/Skul/Gambler/Motion/RussianRoulette/", 1, 8);
+
+
+
+	//타일 이미지
 	// 타일 이미지
 	AddTileImage(L"./Resources/Tile/4Stage/01.png");
 	AddTileImage(L"./Resources/Tile/4Stage/02.png");
@@ -129,13 +165,16 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/34.png");
 	AddTileImage(L"./Resources/Tile/4Stage/35.png");
 	AddTileImage(L"./Resources/Tile/4Stage/36.png");
+	AddTileImage(L"./Resources/Tile/4Stage/37.png");
+	AddTileImage(L"./Resources/Tile/4Stage/38.png");
+
 
 	// 배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
 	AddImage("Building", L"./Resources/BackGround/Boss_Stage_Building.png");
 	AddImage("Lion", L"./Resources/BackGround/Boss_Stage_Lion.png");
 
-
+	// 보스 ====================================================================================
 	// 1페이즈_대기
 	AddImageVector("Boss_Idle", L"./Resources/Saint_Joanna/Phase1_Intro_1/Idle_", 1, 7);
 	// 1페이즈_지팡이
@@ -153,16 +192,29 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Nervousness_Attack", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Attack/Attack/Nervousness_Attack_", 1, 7);
 	AddImageVector("Boss_Nervousness_Attack_Loop", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Attack/Loop/Nervousness_Attack_Loop_", 1, 7);
 	AddImageVector("Boss_Nervousness_End", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/End/Nervousness_End_", 1, 7);
-	// 1페이즈_분수대
-	
-
-
-	// 1페이즈_땅찍기
+	// 1페이즈_땅찍기 이펙트
+	AddImageVector("Boss_Nervousness_Effect_Attack", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Effect/Attack/Phase1_Nervousness_Attack_", 1, 33);
+	AddImageVector("Boss_Nervousness_Effect_Projectile", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Effect/Projectile/Phase1_Nervousness_Projectile_", 1, 12);
+	// 1페이즈_분수 구슬
+	// 
+	// 1페이즈_분수
+	// 1페이즈_방어막
+	AddImageVector("Boss_Barrier_Intro", L"./Resources/Saint_Joanna/Phase_1/Barrier/Intro/Phase1_Barrier_Intro_", 1, 30);
+	AddImageVector("Boss_Barrier_Loop", L"./Resources/Saint_Joanna/Phase_1/Barrier/Loop/Phase1_Barrier_Loop_", 1, 24);
+	AddImageVector("Boss_Barrier_Crack_Impact", L"./Resources/Saint_Joanna/Phase_1/Barrier/Crack/Crack_Impact/Phase1_Barrier_Crack_Impact_", 1, 12);
+	AddImageVector("Boss_Barrier_Crack_Spark", L"./Resources/Saint_Joanna/Phase_1/Barrier/Spark/Phase1_Barrier_Impact_Spark_", 1, 26);
+	// 1페이즈_떨어지는 구슬
+	AddImageVector("Boss_Baptism_Attack", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Attack/Phase1_Baptism_Attack_", 1, 36);
+	AddImageVector("Boss_Baptism_Projectile", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile/Phase1_Batism_Projectile_", 1, 21);
+	AddImageVector("Boss_Baptism_Projectile_Dewspawn", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile_Despawn/Phase1_Baptism_Projectile_Despawn_", 1, 24);
+	// 1페이즈_레이저
+	// 1페이즈_좌우 구슬
 
 	// 맵 구조물 이미지
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
 	AddStructureImage("arch1", L"./Resources/Tile/4Stage/Structure/arch1.png");
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
+	AddStructureImage("Elevator", L"./Resources/Tile/4Stage/Structure/elevator.png");
 
 	// 몬스터 이미지
 	AddImageVector("Leon_Idle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
@@ -318,6 +370,41 @@ void ImageManager::DrawRect(RECT rt)
 	pRT->CreateSolidColorBrush(color, &m_brush);
 
 	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left ,(float)rt.top,(float)rt.right,(float)rt.bottom }, (m_brush));
+}
+
+void ImageManager::DrawMapTile(vector<vector<int>> vec)
+{
+	int y1 = 0;
+	int m_width = m_tileImages[0]->GetWidth();
+	for (auto iter : vec)
+	{
+		int x = 0;
+		for (auto _iter : iter)
+		{
+			if (_iter != -1)
+					IMAGEMANAGER->Render(m_tileImages[_iter], x * m_width, y1 * m_width);
+			x++;
+		}
+		y1++;
+	}
+}
+
+void ImageManager::DrawMapStructureBack(vector<StructureData*> vec)
+{
+	for (auto iter : vec)
+	{
+		if (iter->isBack == true)
+			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
+	}
+}
+
+void ImageManager::DrawMapStructureFoward(vector<StructureData*> vec)
+{
+	for (auto iter : vec)
+	{
+		if (iter->isBack == false)
+			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
+	}
 }
 
 void ImageManager::D2dTextOut(wstring str, float x, float y)

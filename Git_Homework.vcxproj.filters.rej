@@ -1,0 +1,11 @@
+diff a/Git_Homework.vcxproj.filters b/Git_Homework.vcxproj.filters	(rejected hunks)
+@@ -130,6 +130,9 @@
+     <ClInclude Include="Gambler.h">
+       <Filter>Game\Object\Charactor\Head</Filter>
+     </ClInclude>
++    <ClInclude Include="RigidBodyComponent.h">
++      <Filter>Game\Component\RigidBodyComponent</Filter>
++    </ClInclude>
+   </ItemGroup>
+   <ItemGroup>
+     <Filter Include="Core">

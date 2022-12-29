@@ -74,9 +74,13 @@ public:
 
 	void DrawCircle(float x, float y, float width);
 	void DrawRect(RECT rt);
+	void DrawMapTile(vector<vector<int>> vec);
+	void DrawMapStructureBack(vector<StructureData*> vec);
+	void DrawMapStructureFoward(vector<StructureData*> vec);
 
 	void Begin() { pRT->BeginDraw(); }
 	void End() { pRT->EndDraw(); }
+
 	sCamera GetCameraPosition()
 	{
 		return camera;

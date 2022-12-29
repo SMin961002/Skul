@@ -141,9 +141,11 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyTestScene.cpp" />
     <ClCompile Include="ExObject.cpp" />
     <ClCompile Include="Fanatic.cpp" />
     <ClCompile Include="Gambler.cpp" />
+    <ClCompile Include="Idle.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
@@ -176,9 +178,11 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyTestScene.h" />
     <ClInclude Include="ExObject.h" />
     <ClInclude Include="Fanatic.h" />
     <ClInclude Include="Gambler.h" />
+    <ClInclude Include="Idle.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="IOFillManager.h" />
     <ClInclude Include="KeyManager.h" />

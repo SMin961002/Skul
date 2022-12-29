@@ -1,0 +1,80 @@
+diff a/Player.h b/Player.h	(rejected hunks)
+@@ -1,12 +1,13 @@
+ #pragma once
+ #include "Component.h"
+ 
+-#define MOVE_SPEED				3
+-#define JUMP_SPEED				3
+-#define DASH_MULTIPLE			2
+-#define DASH_COLLTIME			
+-#define COMMAND_ReENTRY_TIME	
+-#define HISTORY_MAX				10
++//#define MOVE_SPEED				3
++//#define JUMP_SPEED				3
++//#define JUMP_MULTIPLE			2	//���� �⺻ �ִ� Ƚ��
++//#define DASH_MULTIPLE			2	//��� �⺻ �ִ� Ƚ��
++//#define JUMP_DELAY				2000	//���� �и���
++//#define DASH_DELAY				2000	//���� �и���
++//#define COMMAND_WATINGTIME		1000	//�⺻����, ���, �̴����� �ι�°Ŀ��� ��������� ��ٷ��ִ½ð�. ���� �и���
+ 
+ enum SkulTag
+ {
+@@ -33,19 +34,55 @@
+ public:
+ 	virtual enum ActionTag
+ 	{
++		eIdle=0,
++		eWalk,
+ 		eAutoAttack_1,
+ 		eAutoAttack_2,
+ 		eJump,
++		eJumpDown,
+ 		eDash,
+ 		eSkill_1,
+-		eSkill_2,
+-		eIdle
++		eSkill_2
+ 	};
+ 
+ protected:
+ 	RECT m_hitBox;
+-	//�̹����� �ൿ
++	ActionTag m_action;
++	ActionTag m_action_prev;
++
++	float m_physicalDamage;
++	float m_masicalDamage;
++	float m_physicalDeffence;
++	float m_masicalDeffence;
++
++	float m_level;
++
++	//�̵�����
++	float m_moveSpeed;
++	bool  m_isLeft;
++	bool  m_down;
++	//���
++	float m_dashDelay;
++	float m_dashWaitingTime;
++	short m_dashCount;
++	//����
++	float m_jumpSpeed;
++	float m_jumpDelay;
++	float m_jumpWaitingTime;
++	short m_jumpCount;
+ 
++	//����
++	float m_attackWaitingTime;
++	float m_attackCount;
++	//��ų
++	float m_skillCoolA;
++	float m_skillCoolS;
++	float m_skillCoolD;
++
++
++	//�̹����� �ൿ
++//z��� x���� c����
++//a s ��ų d
+ //���ݽ�ų 2����
+ //�Ϲݰ���
+ //����
