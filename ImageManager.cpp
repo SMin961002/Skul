@@ -179,6 +179,8 @@ void ImageManager::LoadImages()
 
 	AddImage("CollisionPlatform", L"./Resources/Tile/4Stage/CollisionPlatform.png");
 	AddImage("CollisionBox", L"./Resources/Tile/4Stage/CollisionBox.png");
+	
+	AddPixelmage("CollisionBox", "./Resources/Tile/4Stage/CollisionBox.bmp", 32 * 2, 32 * 2);
 
 	// 보스 ====================================================================================
 	// 1페이즈_대기
@@ -341,6 +343,25 @@ vImage* ImageManager::FindImageVector(const std::string key)
 	return nullptr;
 }
 
+GImage* ImageManager::AddPixelmage(string strKey, const char* fileName, int width, int height)
+{
+	GImage* img;
+	img = new GImage;
+	img->init(fileName, width, height);
+	m_gimages.insert(make_pair(strKey, img));
+	return img;
+}
+
+GImage* ImageManager::FindPixelImage(string strKey)
+{
+	auto find = m_gimages.find(strKey);
+	if (find == m_gimages.end())
+	{
+		return nullptr;
+	}
+	return find->second;
+}
+
 void ImageManager::DrawCircle(float x, float y, float width)
 {
 	D2D1_ELLIPSE ellipse;
@@ -350,12 +371,12 @@ void ImageManager::DrawCircle(float x, float y, float width)
 	ellipse.point.y = 0;
 	D2D1_COLOR_F color;
 	color.b = 255;
-	color.a = 255;
+	color.a = 0.5f;
 	color.r = 255;
 	color.g = 255;
 
 	D2D1_MATRIX_3X2_F mat;
-	mat = D2D1::Matrix3x2F::Translation(x - width / 2, y - width / 2);
+	mat = D2D1::Matrix3x2F::Translation(x - width / 2 - camera.x, y - width / 2 - camera.y);
 	pRT->SetTransform(&mat);
 	pRT->CreateSolidColorBrush(color, &m_brush);
 
@@ -411,6 +432,23 @@ void ImageManager::DrawMapStructureFoward(vector<StructureData*> vec)
 		if (iter->isBack == false)
 			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
 	}
+}
+
+void ImageManager::DrawRectCenter(RECT rt, CImage* img)
+{
+	D2D1_COLOR_F color;
+	color.b = 255;
+	color.a = 255;
+	color.r = 255;
+	color.g = 255;
+
+	D2D1_MATRIX_3X2_F mat;
+	mat = D2D1::Matrix3x2F::Translation(0, 0);
+	pRT->SetTransform(&mat);
+	pRT->CreateSolidColorBrush(color, &m_brush);
+	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left+img->GetWidth()/2,(float)rt.top+img->GetHeight()/2,(float)rt.right+img->GetWidth()/2,(float)rt.bottom+img->GetHeight()/2 }, m_brush);
+
+
 }
 
 void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
@@ -488,4 +526,19 @@ void ImageManager::UIRender(CImage* img, float x, float y, float sizeX, float si
 	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
 	pRT->SetTransform((matS * matT * matR));
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+}
+
+HRESULT GImage::init(const char* fileName, float width, float height)
+{
+	 HDC hdc = GetDC(_hWnd);
+	 
+	_imageInfo = new IMAGE_INFO;
+	_imageInfo->loadType = LOAD_FILE;
+	_imageInfo->resID = 0;
+	_imageInfo->hMemDC = CreateCompatibleDC(hdc);
+	_imageInfo->hBit = (HBITMAP)LoadImage(hInst, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+	_imageInfo->hOBit = (HBITMAP)SelectObject(_imageInfo->hMemDC, _imageInfo->hBit);
+	_imageInfo->width = width;
+	_imageInfo->height = height;
+	return S_OK;
 }

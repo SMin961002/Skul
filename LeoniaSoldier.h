@@ -12,8 +12,9 @@ private:
 		eHit,
 		eEnd
 	};
-
+	
 	vImage* m_vimage[eEnd];
+	bool m_attack;
 	
 public:
 	virtual void Init() override;
@@ -21,6 +22,9 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 	virtual void OnCollision(Object * other) override;
+	
+	void move();
+
 	LeoniaSoldier() {}
 	~LeoniaSoldier() {}
 };

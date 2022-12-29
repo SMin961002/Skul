@@ -1,6 +1,54 @@
 #pragma once
 #include "singleton.h"
 
+class GImage
+{
+private:
+public:
+	enum IMAGE_LOAD_KIND
+	{
+		LOAD_RESOURCE = 0, LOAD_FILE,	//리소스로 로딩, 파일로 로딩
+		LOAD_EMPTY, LOAD_END		//빈 비트맵 로딩
+	};
+
+	typedef struct tagImage
+	{
+		DWORD		resID;			//리소스 ID
+		HBITMAP		hBit;			//비트맵
+		HBITMAP		hOBit;			//올드 비트맵
+		int			width;			//이미지 가로크기
+		int			height;			//이미지 세로크기
+		BYTE		loadType;		//이미지 로드 타입
+		HDC			hMemDC;
+		tagImage()
+		{
+			resID = 0;
+			hMemDC = nullptr;
+			hBit = nullptr;
+			hOBit = nullptr;
+			width = 0;
+			height = 0;
+			loadType = LOAD_RESOURCE;
+		}
+	}IMAGE_INFO, * LPIMAGE_INFO;
+
+private:
+	LPIMAGE_INFO	_imageInfo;		//이미지 정보
+	char* _fileName;		//이미지 이름
+	bool			_isTrans;		//배경색
+	COLORREF		_transColor;	//배경색 없앨 RGB (RGB(255,0,255))
+
+	BLENDFUNCTION _blendFunc;		//알파 블렌드 기능
+	LPIMAGE_INFO _blendImage;		//알파 블렌드 이미지
+
+
+public:
+	HRESULT init(const char* fileName, float width, float height);
+	HDC GetMemDC() { return _imageInfo->hMemDC; }
+	float GetWidth() {return _imageInfo->width; }
+	float GetHight() { return _imageInfo->height; }
+};
+
 class CImage
 {
 private:
@@ -41,6 +89,7 @@ private:
 	std::map <string, vImage*> m_vectorImageList;
 	std::vector<CImage*> m_tileImages;
 	std::map<string, CImage*> m_structureImages;
+	std::map<string, GImage*> m_gimages;
 
 	IWICImagingFactory* factory;
 	ID2D1HwndRenderTarget* pRT = NULL;
@@ -72,15 +121,19 @@ public:
 	vImage* AddImageVector(const std::string key, std::wstring path, int startIndex, int endIndex);
 	vImage* FindImageVector(const std::string key);
 
+	GImage* AddPixelmage(string strKey, const char* fileName, int width, int height);
+	GImage* FindPixelImage(string strKey);
+
+	void Begin() { pRT->BeginDraw(); }
+	void End() { pRT->EndDraw(); }
+
 	void DrawCircle(float x, float y, float width);
 	void DrawRect(RECT rt);
+	void DrawRectCenter(RECT rt, CImage* img);
 	void DrawMapTile(vector<vector<int>> vec);
 	void DrawMapStructureBack(vector<StructureData*> vec);
 	void DrawMapStructureFoward(vector<StructureData*> vec);
 	void DrawMapTilePixel(vector<vector<int>> vec);
-
-	void Begin() { pRT->BeginDraw(); }
-	void End() { pRT->EndDraw(); }
 
 	sCamera GetCameraPosition()
 	{

@@ -9,6 +9,7 @@ public:
 	CImage* fadeImage;
 	int flag;
 	std::map<std::string, Scene*> m_sceneList;
+	vector<vector<int>> m_tiles;
 
 	SceneManager();
 	~SceneManager();
