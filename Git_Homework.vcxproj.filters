@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="Scene.cpp">
       <Filter>Core\Manager\Scene</Filter>
     </ClCompile>
@@ -86,6 +85,33 @@
     </ClCompile>
     <ClCompile Include="BossScene.cpp">
       <Filter>Game\Scene\BossScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Idle.cpp">
+      <Filter>Game\Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Choice.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Nervousness.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="HollyFountain.cpp">
+      <Filter>Game\Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Casting.cpp">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClCompile>
+    <ClCompile Include="Baptism.cpp">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClCompile>
+    <ClCompile Include="Consercration.cpp">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClCompile>
+    <ClCompile Include="Worship.cpp">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
     </ClCompile>
     <ClCompile Include="Idle.cpp" />
     <ClCompile Include="EnemyTestScene.cpp" />
@@ -177,6 +203,30 @@
     </ClInclude>
     <ClInclude Include="BossScene.h">
       <Filter>Game\Scene\BossScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Idle.h">
+      <Filter>Game\Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Choice.h">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Nervousness.h">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="HollyFountain.h">
+      <Filter>Game\Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Casting.h">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClInclude>
+    <ClInclude Include="Baptism.h">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClInclude>
+    <ClInclude Include="Consercration.h">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClInclude>
+    <ClInclude Include="Worship.h">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
     </ClInclude>
     <ClInclude Include="Idle.h" />
     <ClInclude Include="EnemyTestScene.h" />
@@ -274,6 +324,12 @@
     </Filter>
     <Filter Include="Game\Scene\BossScene">
       <UniqueIdentifier>{82ae5685-45dc-434f-99b6-443444280934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Pattern">
+      <UniqueIdentifier>{45cef852-d6b6-445e-9704-ad24137bf8f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Pattern\Casting">
+      <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

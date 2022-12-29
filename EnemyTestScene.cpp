@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "EnemyTestScene.h"
 #include "Player.h"
+#include"LeoniaSoldier.h"
 EnemyTestScene::EnemyTestScene()
 {
 }
@@ -24,6 +25,8 @@ void EnemyTestScene::Init()
 	MY_UTILITY::ConvertStructureString2Vec(&m_sturctDatas, strData);
 
 	OBJECTMANAGER->AddObject("player", 200, 200, ePlayer)->AddComponent<Player>();
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+
 }
 
 void EnemyTestScene::Update()

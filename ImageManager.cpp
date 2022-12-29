@@ -350,12 +350,12 @@ void ImageManager::DrawCircle(float x, float y, float width)
 	ellipse.point.y = 0;
 	D2D1_COLOR_F color;
 	color.b = 255;
-	color.a = 255;
+	color.a = 0.5f;
 	color.r = 255;
 	color.g = 255;
 
 	D2D1_MATRIX_3X2_F mat;
-	mat = D2D1::Matrix3x2F::Translation(x - width / 2, y - width / 2);
+	mat = D2D1::Matrix3x2F::Translation(x - width / 2 - camera.x, y - width / 2 - camera.y);
 	pRT->SetTransform(&mat);
 	pRT->CreateSolidColorBrush(color, &m_brush);
 
@@ -411,6 +411,23 @@ void ImageManager::DrawMapStructureFoward(vector<StructureData*> vec)
 		if (iter->isBack == false)
 			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
 	}
+}
+
+void ImageManager::DrawRectCenter(RECT rt, CImage* img)
+{
+	D2D1_COLOR_F color;
+	color.b = 255;
+	color.a = 255;
+	color.r = 255;
+	color.g = 255;
+
+	D2D1_MATRIX_3X2_F mat;
+	mat = D2D1::Matrix3x2F::Translation(0, 0);
+	pRT->SetTransform(&mat);
+	pRT->CreateSolidColorBrush(color, &m_brush);
+	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left+img->GetWidth()/2,(float)rt.top+img->GetHeight()/2,(float)rt.right+img->GetWidth()/2,(float)rt.bottom+img->GetHeight()/2 }, m_brush);
+
+
 }
 
 void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)

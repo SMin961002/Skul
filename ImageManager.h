@@ -72,15 +72,16 @@ public:
 	vImage* AddImageVector(const std::string key, std::wstring path, int startIndex, int endIndex);
 	vImage* FindImageVector(const std::string key);
 
+	void Begin() { pRT->BeginDraw(); }
+	void End() { pRT->EndDraw(); }
+	
 	void DrawCircle(float x, float y, float width);
 	void DrawRect(RECT rt);
+	void DrawRectCenter(RECT rt, CImage* img);
 	void DrawMapTile(vector<vector<int>> vec);
 	void DrawMapStructureBack(vector<StructureData*> vec);
 	void DrawMapStructureFoward(vector<StructureData*> vec);
 	void DrawMapTilePixel(vector<vector<int>> vec);
-
-	void Begin() { pRT->BeginDraw(); }
-	void End() { pRT->EndDraw(); }
 
 	sCamera GetCameraPosition()
 	{

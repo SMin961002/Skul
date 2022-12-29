@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ObjectManager.h"
 #include "CollisionComponent.h"
+#include"Player.h"
 ObjectManager::ObjectManager()
 {
 }

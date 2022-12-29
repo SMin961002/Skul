@@ -93,8 +93,10 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	virtual void OnCollision(Object* other) override;
 
 	virtual void Move();
 	//virtual void Action();
 	virtual void Draw();
+	float GetplayerX(void) { return m_obj->x; }
 };
