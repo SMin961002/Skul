@@ -1,17 +1,19 @@
 #pragma once
-#include "Scene.h"
-class LobbyScene : public Scene
+class EnemyTestScene : public Scene
 {
 private:
-	CImage* img;
+	CImage* m_backGround;
+	CImage* m_cloude;
+	float m_speed;
+	CImage* m_castle;
+	vector<StructureData*> m_sturctDatas;
 public:
-	LobbyScene();
-	~LobbyScene();
+	EnemyTestScene();
+	~EnemyTestScene();
 	// Scene을(를) 통해 상속됨
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
-	
 };
 

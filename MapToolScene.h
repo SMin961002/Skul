@@ -2,9 +2,9 @@
 class MapToolScene : public Scene
 {
 private:
-	vector<vector<int>> m_tiles;
-	vector<CImage*> m_tileImages;
 	map<string,CImage*> m_structureImages;
+	vector<CImage*> m_tileImages;
+	vector<vector<int>> m_tiles;
 	vector<StructureData*> m_sturctDatas;
 	string m_streuctureKey;
 	int m_width;

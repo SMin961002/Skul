@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "PixelCollisionComponent.h"
 
 void Player::Init()
 {
@@ -30,7 +31,7 @@ void Player::Init()
 	img_reborn = IMAGEMANAGER->FindImageVector("Basic_Reborn");
 	img_reborn->Setting(0.1f, true);
 
-	nowImg = img[eIdle];
+    nowImg = img[eIdle];
 
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
 	m_action = eIdle;
@@ -66,13 +67,20 @@ void Player::Init()
 }
 
 void Player::Update()
-{	
+{
+    if (false==m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
+    {
+        m_obj->y += 1;
+    }
+    IMAGEMANAGER->SetCameraPosition(m_obj->x - WINSIZE_X / 2, m_obj->y - 150);
+    m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
 	if (!m_skillUsing)	//스킬 끝날 때까지 다른 동작이 들어가지 못하게 하기 위함
 	{
 		Move();
 		Act();
 	}
 	InputArtifactKey();
+	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
 }
 
 void Player::Render()
@@ -226,4 +234,11 @@ void Player::InputSkillKey()
 void Player::InputJumpKey()
 {
 	m_commandInput = true;
+}
+   
+void Player::OnCollision(Object* other)
+{
+	if (other->GetName() == "Enemy")
+	{
+	}
 }

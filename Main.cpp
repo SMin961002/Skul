@@ -10,7 +10,7 @@ void Main::Init()
 
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
-	SCENEMANAGER->ChangeScene("LobbyScene");
+	SCENEMANAGER->ChangeScene("EnemyTestScene");
 }
 
 void Main::Update()
@@ -32,6 +32,7 @@ void Main::Render()
 	IMAGEMANAGER->Begin();
 	SCENEMANAGER->Render();
 	OBJECTMANAGER->Render();
+	TIMERMANAGER->Render();
 	IMAGEMANAGER->End();
 }
 

@@ -109,7 +109,11 @@ void ImageManager::LoadImages()
 	AddImageVector("Basic_Reborn", L"./Resources/Png/Skul/Basic/Motion/Reborn/", 1, 27);
 	AddImageVector("Basic_Skill", L"./Resources/Png/Skul/Basic/Motion/Skill/", 1, 4);
 
+	AddImage("exBg", L"./Resources/exBg.png");
 	//약탈자 모션 이미지
+	AddImage("Background", L"./MapFile/BackGround/background.png");
+	AddImage("Castle", L"./MapFile/BackGround/castle.png");
+	AddImage("Cloud", L"./MapFile/BackGround/cloud.png");
 
 	//디스트로이어 모션 이미지
 
@@ -168,11 +172,19 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/34.png");
 	AddTileImage(L"./Resources/Tile/4Stage/35.png");
 	AddTileImage(L"./Resources/Tile/4Stage/36.png");
+	AddTileImage(L"./Resources/Tile/4Stage/37.png");
+	AddTileImage(L"./Resources/Tile/4Stage/38.png");
+
 
 	// 배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
 	AddImage("Building", L"./Resources/BackGround/Boss_Stage_Building.png");
 	AddImage("Lion", L"./Resources/BackGround/Boss_Stage_Lion.png");
+
+	AddImage("CollisionPlatform", L"./Resources/Tile/4Stage/CollisionPlatform.png");
+	AddImage("CollisionBox", L"./Resources/Tile/4Stage/CollisionBox.png");
+
+	AddPixelmage("CollisionBox", "./Resources/Tile/4Stage/CollisionBox.bmp", 32, 32);
 
 	// 보스 ====================================================================================
 	// 1페이즈_대기
@@ -214,13 +226,14 @@ void ImageManager::LoadImages()
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
 	AddStructureImage("arch1", L"./Resources/Tile/4Stage/Structure/arch1.png");
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
+	AddStructureImage("Elevator", L"./Resources/Tile/4Stage/Structure/elevator.png");
 
 	// 몬스터 이미지
 	AddImageVector("Leon_Idle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
 	AddImageVector("Leon_Attack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);
 	AddImageVector("Leon_Run", L"Resources/Monster/Leonia Soldier/Run/", 1, 8);
-	AddImageVector("Leon_Hit", L"Resources/Monster/Leonia Soldier/Hit/",1,1);
-	
+	AddImageVector("Leon_Hit", L"Resources/Monster/Leonia Soldier/Hit/", 1, 1);
+
 	AddImageVector("Fanatic_Idle", L"Resources/Monster/Fanatic/Idle/", 1, 6);
 	AddImageVector("Fanatic_AttackIdle", L"Resources/Monster/Fanatic/Attack Idle/", 1, 5);
 	AddImageVector("Fanatic_Attack", L"Resources/Monster/Fanatic/Attack/", 1, 13);
@@ -334,6 +347,25 @@ vImage* ImageManager::FindImageVector(const std::string key)
 	return nullptr;
 }
 
+GImage* ImageManager::AddPixelmage(string strKey, const char* fileName, int width, int height)
+{
+	GImage* img;
+	img = new GImage;
+	img->init(fileName, width, height);
+	m_gimages.insert(make_pair(strKey, img));
+	return img;
+}
+
+GImage* ImageManager::FindPixelImage(string strKey)
+{
+	auto find = m_gimages.find(strKey);
+	if (find == m_gimages.end())
+	{
+		return nullptr;
+	}
+	return find->second;
+}
+
 void ImageManager::DrawCircle(float x, float y, float width)
 {
 	D2D1_ELLIPSE ellipse;
@@ -343,12 +375,12 @@ void ImageManager::DrawCircle(float x, float y, float width)
 	ellipse.point.y = 0;
 	D2D1_COLOR_F color;
 	color.b = 255;
-	color.a = 255;
+	color.a = 0.5f;
 	color.r = 255;
 	color.g = 255;
 
 	D2D1_MATRIX_3X2_F mat;
-	mat = D2D1::Matrix3x2F::Translation(x - width / 2, y - width / 2);
+	mat = D2D1::Matrix3x2F::Translation(x - width / 2 - camera.x, y - width / 2 - camera.y);
 	pRT->SetTransform(&mat);
 	pRT->CreateSolidColorBrush(color, &m_brush);
 
@@ -369,6 +401,81 @@ void ImageManager::DrawRect(RECT rt)
 	pRT->CreateSolidColorBrush(color, &m_brush);
 
 	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left ,(float)rt.top,(float)rt.right,(float)rt.bottom }, (m_brush));
+}
+
+void ImageManager::DrawMapTile(vector<vector<int>> vec)
+{
+	int y1 = 0;
+	int m_width = m_tileImages[0]->GetWidth();
+	for (auto iter : vec)
+	{
+		int x = 0;
+		for (auto _iter : iter)
+		{
+			if (_iter != -1)
+				IMAGEMANAGER->Render(m_tileImages[_iter], x * m_width, y1 * m_width);
+			x++;
+		}
+		y1++;
+	}
+}
+
+void ImageManager::DrawMapStructureBack(vector<StructureData*> vec)
+{
+	for (auto iter : vec)
+	{
+		if (iter->isBack == true)
+			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
+	}
+}
+
+void ImageManager::DrawMapStructureFoward(vector<StructureData*> vec)
+{
+	for (auto iter : vec)
+	{
+		if (iter->isBack == false)
+			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
+	}
+}
+
+void ImageManager::DrawRectCenter(RECT rt, CImage* img)
+{
+	D2D1_COLOR_F color;
+	color.b = 255;
+	color.a = 255;
+	color.r = 255;
+	color.g = 255;
+
+	D2D1_MATRIX_3X2_F mat;
+	mat = D2D1::Matrix3x2F::Translation(0, 0);
+	pRT->SetTransform(&mat);
+	pRT->CreateSolidColorBrush(color, &m_brush);
+	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left + img->GetWidth() / 2,(float)rt.top + img->GetHeight() / 2,(float)rt.right + img->GetWidth() / 2,(float)rt.bottom + img->GetHeight() / 2 }, m_brush);
+
+
+}
+
+void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
+{
+	int y1 = 0;
+	int m_width = m_tileImages[0]->GetWidth();
+	for (auto iter : vec)
+	{
+		int x = 0;
+		for (auto _iter : iter)
+		{
+			if (_iter == 0 || _iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7 || _iter == 8 || _iter == 9 || _iter == 10 || _iter == 11 || _iter == 12 || _iter == 13 || _iter == 14 || _iter == 36 || _iter == 37)
+			{
+				IMAGEMANAGER->Render(FindImage("CollisionBox"), x * m_width, y1 * m_width);
+			}
+			else if (_iter == 19 || _iter == 18 || _iter == 17 || _iter == 16)
+			{
+				IMAGEMANAGER->Render(FindImage("CollisionPlatform"), x * m_width, y1 * m_width);
+			}
+			x++;
+		}
+		y1++;
+	}
 }
 
 void ImageManager::D2dTextOut(wstring str, float x, float y)
@@ -423,4 +530,19 @@ void ImageManager::UIRender(CImage* img, float x, float y, float sizeX, float si
 	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
 	pRT->SetTransform((matS * matT * matR));
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+}
+
+HRESULT GImage::init(const char* fileName, float width, float height)
+{
+	HDC hdc = GetDC(_hWnd);
+
+	_imageInfo = new IMAGE_INFO;
+	_imageInfo->loadType = LOAD_FILE;
+	_imageInfo->resID = 0;
+	_imageInfo->hMemDC = CreateCompatibleDC(hdc);
+	_imageInfo->hBit = (HBITMAP)LoadImage(hInst, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+	_imageInfo->hOBit = (HBITMAP)SelectObject(_imageInfo->hMemDC, _imageInfo->hBit);
+	_imageInfo->width = width;
+	_imageInfo->height = height;
+	return S_OK;
 }

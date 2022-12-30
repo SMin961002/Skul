@@ -141,6 +141,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyTestScene.cpp" />
     <ClCompile Include="ExObject.cpp" />
     <ClCompile Include="Fanatic.cpp" />
     <ClCompile Include="Gambler.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="MapToolScene.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="PixelCollisionComponent.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -177,6 +179,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyTestScene.h" />
     <ClInclude Include="ExObject.h" />
     <ClInclude Include="Fanatic.h" />
     <ClInclude Include="Gambler.h" />
@@ -191,6 +194,7 @@
     <ClInclude Include="MapToolScene.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="PixelCollisionComponent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="Scene.h" />
