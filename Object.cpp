@@ -25,6 +25,7 @@ void Object::Release()
 {
 	for (auto iter : m_components)
 	{
+		iter->Release();
 		SAFE_DELETE(iter);
 	}
 	m_components.clear();

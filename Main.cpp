@@ -4,17 +4,21 @@
 void Main::Init()
 {
 	SetTimer(_hWnd, 1, 1, NULL);
+	TIMERMANAGER->Init();
 	IMAGEMANAGER->Init();
 	SCENEMANAGER->Init();
 	KEYMANAGER->Init();
+	
 
 	IMAGEMANAGER->LoadImages();
-	TIMERMANAGER->Init();
-	SCENEMANAGER->ChangeScene("EnemyTestScene");
 }
 
 void Main::Update()
 {
+	if (KEYMANAGER->GetOnceKeyDown(VK_F7))
+	{
+		SCENEMANAGER->ChangeScene("EnemyTestScene");
+	}
 	if (KEYMANAGER->GetToggleKey(VK_F12))
 	{
 		IMAGEMANAGER->SetViewCollision(true);

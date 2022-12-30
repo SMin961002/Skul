@@ -12,6 +12,7 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
+
 	Release();
 }
 
@@ -60,6 +61,11 @@ void SceneManager::Render()
 
 void SceneManager::Release()
 {
+	for (auto iter : m_tiles)
+	{
+		iter.clear();
+	}
+	m_tiles.clear();
 	for (auto iter : m_sceneList)
 	{
 		iter.second->Release();

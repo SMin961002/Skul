@@ -33,7 +33,6 @@ public:
 	}IMAGE_INFO, * LPIMAGE_INFO;
 
 private:
-	LPIMAGE_INFO	_imageInfo;		//이미지 정보
 	char* _fileName;		//이미지 이름
 	bool			_isTrans;		//배경색
 	COLORREF		_transColor;	//배경색 없앨 RGB (RGB(255,0,255))
@@ -41,12 +40,14 @@ private:
 	BLENDFUNCTION _blendFunc;		//알파 블렌드 기능
 	LPIMAGE_INFO _blendImage;		//알파 블렌드 이미지
 
+	LPIMAGE_INFO	_imageInfo;		//이미지 정보
 
 public:
 	HRESULT init(const char* fileName, float width, float height);
 	HDC GetMemDC() { return _imageInfo->hMemDC; }
-	float GetWidth() {return _imageInfo->width; }
+	float GetWidth() { return _imageInfo->width; }
 	float GetHight() { return _imageInfo->height; }
+	void Release() { SAFE_DELETE(_imageInfo); }
 };
 
 class CImage
