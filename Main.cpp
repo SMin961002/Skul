@@ -10,7 +10,7 @@ void Main::Init()
 
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
-	SCENEMANAGER->ChangeScene("EnemyTestScene");
+	SCENEMANAGER->ChangeScene("BossScene");
 }
 
 void Main::Update()

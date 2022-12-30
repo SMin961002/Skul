@@ -1,10 +1,7 @@
 #pragma once
-#include "BossObject.h"
 
-class Baptism : public BossObject
+class Baptism
 {
-public:
-	virtual void Pattern(void) override;
 };
 
 

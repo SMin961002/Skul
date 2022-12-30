@@ -185,7 +185,7 @@ void ImageManager::LoadImages()
 	// 보스 ====================================================================================
 	// 1페이즈_대기
 	AddImageVector("Boss_Idle", L"./Resources/Saint_Joanna/Phase1_Intro_1/Idle_", 1, 7);
-	// 1페이즈_지팡이
+	// 1페이즈_지팡이 들기
 	AddImageVector("Boss_Casting_Ready", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Ready/Casting_Ready_", 1, 7);
 	AddImageVector("Boss_Casting_Attack", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Attack/Casting_Attack_Loop_", 1, 7);
 	AddImageVector("Boss_Casting_End", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Attack/Casting_Attack_Loop_", 1, 7);
@@ -204,8 +204,11 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Nervousness_Effect_Attack", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Effect/Attack/Phase1_Nervousness_Attack_", 1, 33);
 	AddImageVector("Boss_Nervousness_Effect_Projectile", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Effect/Projectile/Phase1_Nervousness_Projectile_", 1, 12);
 	// 1페이즈_분수 구슬
-	// 
+	AddImageVector("Boss_HolyFountain_Start", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/HolyBarrierOrb/Start/Phase1_HolyBarrier_Orb_Start_", 1, 22);
+	AddImageVector("Boss_HolyFountain_Orb", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/HolyBarrierOrb/Orb/Phase1_HolyBarrier_Orb_", 1, 47);
+	AddImageVector("Boss_HolyFountain_End", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/HolyBarrierOrb/End/Phase1_HolyBarrier_Orb_End_", 1, 24);
 	// 1페이즈_분수
+	AddImageVector("Boss_HolyFountain_Activate", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/Fountain/Active/Activate_", 1, 8);
 	// 1페이즈_방어막
 	AddImageVector("Boss_Barrier_Intro", L"./Resources/Saint_Joanna/Phase_1/Barrier/Intro/Phase1_Barrier_Intro_", 1, 30);
 	AddImageVector("Boss_Barrier_Loop", L"./Resources/Saint_Joanna/Phase_1/Barrier/Loop/Phase1_Barrier_Loop_", 1, 24);
@@ -216,7 +219,13 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Baptism_Projectile", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile/Phase1_Batism_Projectile_", 1, 21);
 	AddImageVector("Boss_Baptism_Projectile_Dewspawn", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile_Despawn/Phase1_Baptism_Projectile_Despawn_", 1, 24);
 	// 1페이즈_레이저
+	AddImageVector("Boss_Consecration_Start", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/Start/Phase1_Consecration_Start_", 1, 27);
+	AddImageVector("Boss_Consecration_Sign", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/Sign/Phase1_Consecration_Sign_", 1, 23);
+	AddImageVector("Boss_Consecration_Loop", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/Loop/Phase1_Consecration_Loop_", 1, 33);
+	AddImageVector("Boss_Consecration_End", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/End/Phase1_Consecration_End_", 1, 21);
+
 	// 1페이즈_좌우 구슬
+	AddImageVector("Boss_Worship", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Worship/Phase1_Worship_Projectile_", 1, 60);
 
 	// 맵 구조물 이미지
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
