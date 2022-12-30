@@ -76,13 +76,23 @@ void IOFillManager::MapFileWrite(string section, string key, vector<string> mapL
 	outputFile.close();
 }
 
-void IOFillManager::GetFileData(string section, string key, string path)
+string IOFillManager::GetFileData(string section, string key)
 {
 	char* cBuf = NULL;
-	cBuf = (char*)malloc(sizeof(char) * 256);
+	cBuf = (char*)malloc(sizeof(char) * 1000);
 	memset(cBuf, 0x00, sizeof(cBuf));
+	string path = "./MapFile/Structures/" + m_nowStageFileName + ".ini";
 
-	// Read 
-	GetPrivateProfileString("GiveupServiceVDN", "VDN1", "-", cBuf, 256, "C:\\»õ Æú´õ\\test.ini");
-	printf("%s \n", cBuf);
+	GetPrivateProfileString(section.c_str(), key.c_str(), "", cBuf, 1000, path.c_str());
+
+	string val = cBuf;
+	SAFE_DELETE(cBuf);
+	return val;
+}
+
+void IOFillManager::WriteFileData(string section, string key, string inputStr)
+{
+	string path = "./MapFile/Structures/" + m_nowStageFileName + ".ini";
+
+	WritePrivateProfileString(section.c_str(), key.c_str(), inputStr.c_str(), path.c_str());
 }

@@ -10,7 +10,7 @@
 #include <time.h>
 #include <mmsystem.h>
 #include <functional>
-
+#include <queue>
 #include <iostream>
 #include <chrono>
 #include <random>
@@ -89,4 +89,7 @@ extern POINT _ptMouse;
 //{
 //	return;
 //}
+
+
+extern HINSTANCE hInst;
 
