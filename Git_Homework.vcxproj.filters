@@ -70,9 +70,6 @@
     <ClCompile Include="Fanatic.cpp">
       <Filter>Game\Object\Enemy\Fanatic</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Object\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="BlackFanatic.cpp">
       <Filter>Game\Object\Enemy\BlackFanatic</Filter>
@@ -93,11 +90,22 @@
       <Filter>Game\Object\Boss\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="Idle.cpp" />
-    <ClCompile Include="PixelCollisionComponent.cpp">
-      <Filter>Game\Component\PixelCollisionComponent</Filter>
+    <ClCompile Include="EnemyTestScene.cpp" />
+    <ClCompile Include="PixelCollisionComponent.cpp" />
+    <ClCompile Include="CandleFanatic.cpp">
+      <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyTestScene.cpp">
-      <Filter>Game\Scene\EnemyTestScene</Filter>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TentaclesOfLight.cpp">
+      <Filter>Game\Object\Enemy\TentaclesOfLight</Filter>
+    </ClCompile>
+    <ClCompile Include="LampFanatic.cpp">
+      <Filter>Game\Object\Enemy\LampFanatic</Filter>
+    </ClCompile>
+    <ClCompile Include="BallFanatic.cpp">
+      <Filter>Game\Object\Enemy\BellFanatic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +181,6 @@
     <ClInclude Include="Fanatic.h">
       <Filter>Game\Object\Enemy\Fanatic</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Game\Object\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="BlackFanatic.h">
       <Filter>Game\Object\Enemy\BlackFanatic</Filter>
     </ClInclude>
@@ -192,11 +197,22 @@
       <Filter>Game\Object\Boss</Filter>
     </ClInclude>
     <ClInclude Include="Idle.h" />
-    <ClInclude Include="PixelCollisionComponent.h">
-      <Filter>Game\Component\PixelCollisionComponent</Filter>
+    <ClInclude Include="EnemyTestScene.h" />
+    <ClInclude Include="PixelCollisionComponent.h" />
+    <ClInclude Include="CandleFanatic.h">
+      <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyTestScene.h">
-      <Filter>Game\Scene\EnemyTestScene</Filter>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TentaclesOfLight.h">
+      <Filter>Game\Object\Enemy\TentaclesOfLight</Filter>
+    </ClInclude>
+    <ClInclude Include="LampFanatic.h">
+      <Filter>Game\Object\Enemy\LampFanatic</Filter>
+    </ClInclude>
+    <ClInclude Include="BallFanatic.h">
+      <Filter>Game\Object\Enemy\BellFanatic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -299,11 +315,17 @@
     <Filter Include="Game\Object\Boss\Pattern\Casting">
       <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Component\PixelCollisionComponent">
-      <UniqueIdentifier>{8b711143-5b02-4feb-ac72-9bcf52f51972}</UniqueIdentifier>
+    <Filter Include="Game\Object\Enemy\TentaclesOfLight">
+      <UniqueIdentifier>{605e43c2-86d5-48b0-a786-c02efd8906fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Scene\EnemyTestScene">
-      <UniqueIdentifier>{f23dbd71-00c7-4b9e-be17-a7ffbdfdef95}</UniqueIdentifier>
+    <Filter Include="Game\Object\Enemy\LampFanatic">
+      <UniqueIdentifier>{5a90643a-1cd3-4b6a-a531-16c6076c156e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\CandleFanatic">
+      <UniqueIdentifier>{20c2d25e-70d1-49f6-b46e-1a83b3ebdaa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\BellFanatic">
+      <UniqueIdentifier>{b66a0c3b-8884-4271-9f5d-f2cb2324c7fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

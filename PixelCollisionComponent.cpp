@@ -1,7 +1,8 @@
-#include "stdafx.h"
+#include"stdafx.h"
 #include "PixelCollisionComponent.h"
 
 void PixelCollisionComponent::Init()
+
 {
 	m_isCheck = false;
 	m_image = IMAGEMANAGER->FindPixelImage("CollisionBox");
