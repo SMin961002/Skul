@@ -48,7 +48,7 @@ void EnemyTestScene::Render()
 
 	IMAGEMANAGER->DrawMapStructureFoward(m_sturctDatas);
 
-	if (KEYMANAGER->GetToggleKey(VK_F2))
+	if (IMAGEMANAGER->GetViewCollision())
 	{
 		IMAGEMANAGER->DrawMapTilePixel(SCENEMANAGER->m_tiles);
 	}

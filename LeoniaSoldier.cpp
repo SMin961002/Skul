@@ -21,16 +21,16 @@ void LeoniaSoldier::Init()
 	m_attack = false;
 	m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
 	m_obj->GetCollisionComponent()->Setting(100, m_obj->x, m_obj->y); //<- 충돌범위와 위치
-	m_obj->AddComponent<PixelCollisionComponent>();
-	m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
+	//m_obj->AddComponent<PixelCollisionComponent>();
+	//m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 }
 
 void LeoniaSoldier::Update()
 {
-	if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision() == false)
-	{
-		m_obj->y += 0.1;
-	}
+	//if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision() == false)
+	//{
+	//	m_obj->y += 0.1;
+	//}
 	m_obj->GetCollisionComponent()->Setting(20, m_obj->x + 50, m_obj->y + 40);
 	move();
 }

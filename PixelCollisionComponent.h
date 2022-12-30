@@ -6,6 +6,16 @@ private:
 	float* x;
 	float* y;
 	bool m_isCheck;
+	float m_checkY;
+	float m_checkX;
+
+	RECT rtL, rtT, rtB, rtR;
+
+	bool m_isLeftCheck;
+	bool m_isRightCheck;
+	bool m_isBottomCheck;
+	bool m_isTopCheck;
+
 	GImage* m_image;
 	vector<vector<int>> m_tiles;
 public:
@@ -15,6 +25,23 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 	void setting(vector<vector<int>>tiles, float* x, float* y);
+	float GetCheckY() { return m_checkY; }
+	float GetCheckX() { return m_checkX; }
+
+	void BottomCollision();
+	void TopCollision();
+	void LeftCollision();
+	void RightCollision();
+
+	bool GetIsLeftCollision() { return m_isLeftCheck; }
+	bool GetIsRightCollision() { return m_isRightCheck; }
+	bool GetIsTopCollision() { return m_isTopCheck; }
+	bool GetIsBottomCollision() { return m_isBottomCheck; }
+
+	void RSettingRect(RECT rt) { rtR = rt; }
+	void LSettingRect(RECT rt) { rtL = rt; }
+	void TSettingRect(RECT rt) { rtT = rt; }
+	void BSettingRect(RECT rt) { rtB = rt; }
 
 	PixelCollisionComponent() {}
 	~PixelCollisionComponent() {}

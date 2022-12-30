@@ -115,5 +115,12 @@ namespace MY_UTILITY // utility
 			vec->push_back(sd);
 		}
 	}
+
+	inline Vector2 GetLerpVec2(Vector2* vec, Vector2 vec1, Vector2 vec2, float t)
+	{
+		vec->x = vec1.x * (1 - t) + vec2.x * t;
+		vec->y = vec1.y * (1 - t) + vec2.y * t;
+		return *vec;
+	}
 };
 
