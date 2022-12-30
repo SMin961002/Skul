@@ -62,7 +62,11 @@ void Player::Init()
 	m_skillUsing = false;
 	m_artifactCoolD = 0;
 	m_haveArtifact = false;
+	m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
 
+
+	m_obj->AddComponent<PixelCollisionComponent>();
+	m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x, &m_obj->y);
 	m_commandInput = false;
 }
 
