@@ -7,3 +7,4 @@ public:
 	virtual void Pattern(void) override;
 };
 
+
