@@ -180,7 +180,7 @@ private:
 public:
 	vImage() : m_isEnd(false) {}
 	~vImage() {}
-	bool IsImageEnded() { return m_isEnd; }	//물어보기
+	bool GetIsImageEnded() { return m_isEnd; }	//물어보기
 	vector<CImage*> GetImages() { return m_images; }
 	int GetImageSize() { return m_images.size(); }
 	float GetTotalDelay() {	return m_totalDelay; }

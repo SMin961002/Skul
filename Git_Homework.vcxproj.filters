@@ -99,6 +99,12 @@
     <ClCompile Include="EnemyTestScene.cpp">
       <Filter>Game\Scene\EnemyTestScene</Filter>
     </ClCompile>
+    <ClCompile Include="Head.cpp">
+      <Filter>Game\Object\Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="Head_Basic.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -197,6 +203,12 @@
     </ClInclude>
     <ClInclude Include="EnemyTestScene.h">
       <Filter>Game\Scene\EnemyTestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Head.h">
+      <Filter>Game\Object\Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="Head_Basic.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
