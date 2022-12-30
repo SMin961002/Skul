@@ -311,7 +311,11 @@ void MapToolScene::Release()
 		SAFE_DELETE(iter);
 	}
 	m_sturctDatas.clear();
-
+	
+	for (auto iter : m_tiles)
+	{
+		iter.clear();
+	}
 	m_tiles.clear();
 	m_tileImages.clear();
 }

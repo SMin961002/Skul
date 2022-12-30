@@ -1,10 +1,13 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "PixelCollisionComponent.h"
+#include "RigidBodyComponent.h"
 
 void Player::Init()
 {
 	//이미지 삽입
+
+	OBJECTMANAGER->m_player = this;
+
 	img[eIdle] = IMAGEMANAGER->FindImageVector("Basic_Idle");
 	img[eIdle]->Setting(0.15f, true);
 	img[eWalk] = IMAGEMANAGER->FindImageVector("Basic_Walk");
@@ -31,7 +34,7 @@ void Player::Init()
 	img_reborn = IMAGEMANAGER->FindImageVector("Basic_Reborn");
 	img_reborn->Setting(0.1f, true);
 
-    nowImg = img[eIdle];
+	nowImg = img[eIdle];
 
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
 	m_action = eIdle;
@@ -56,7 +59,7 @@ void Player::Init()
 	m_jumpping = false;
 
 	m_attackCount = 0;
-	
+
 	m_skillCoolA = 6;
 	m_skillCoolS = 3;
 	m_skillUsing = false;
@@ -65,19 +68,25 @@ void Player::Init()
 	m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
 
 
-	m_obj->AddComponent<PixelCollisionComponent>();
-	m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x, &m_obj->y);
+	m_obj->AddComponent<RigidBodyComponent>();
+	//m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x, &m_obj->y);
 	m_commandInput = false;
 }
 
 void Player::Update()
 {
-    if (false==m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
-    {
-        m_obj->y += 1;
-    }
-    IMAGEMANAGER->SetCameraPosition(m_obj->x - WINSIZE_X / 2, m_obj->y - 150);
-    m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
+	Vector2 v;
+	MY_UTILITY::GetLerpVec2(&v, { m_obj->x - WINSIZE_X / 2,m_obj->y - 400 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
+	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
+	Move();
+	//Action();
+	m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
+
+	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
+	{
+		m_obj->y += 1;
+	}
+
 	if (!m_skillUsing)	//스킬 끝날 때까지 다른 동작이 들어가지 못하게 하기 위함
 	{
 		Move();
@@ -111,7 +120,7 @@ void Player::DrawCharactor()
 		nowImg = img[m_action];
 	}
 
-	nowImg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
+	nowImg->CenterRender(m_obj->x, m_obj->y-50, 2, 2, 0, m_isLeft);
 }
 
 void Player::DrawEffect()
@@ -187,7 +196,7 @@ void Player::InputDashKey()
 {
 	if (KEYMANAGER->GetOnceKeyDown('Z'))
 	{
-		if (m_dashCount < 2&& m_dashNowCool<=0)
+		if (m_dashCount < 2 && m_dashNowCool <= 0)
 		{
 			ResetJump();
 			m_dashing = true;
@@ -210,13 +219,13 @@ void Player::InputAttackKey()
 			m_action = eJumpAttack;
 		}
 		else //##
-		m_commandInput = true;
+			m_commandInput = true;
 	}
 }
 
 void Player::InputArtifactKey()
 {
-	
+
 }
 
 void Player::InputSkillKey()
@@ -227,7 +236,7 @@ void Player::InputSkillKey()
 		m_skillUsing = true;
 		m_commandInput = true;
 	}
-	else if(KEYMANAGER->GetOnceKeyDown('S'))
+	else if (KEYMANAGER->GetOnceKeyDown('S'))
 	{
 		m_action = eSkill_2;
 		m_skillUsing = true;
@@ -239,7 +248,7 @@ void Player::InputJumpKey()
 {
 	m_commandInput = true;
 }
-   
+
 void Player::OnCollision(Object* other)
 {
 	if (other->GetName() == "Enemy")

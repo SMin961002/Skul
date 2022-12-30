@@ -37,6 +37,13 @@ ImageManager::~ImageManager()
 
 	m_brush->Release();
 	tf->Release();
+
+	for (auto iter : m_gimages)
+	{
+		iter.second->Release();
+		SAFE_DELETE(iter.second);
+	}
+	m_gimages.clear();
 }
 
 void ImageManager::Init()
@@ -396,7 +403,7 @@ void ImageManager::DrawRect(RECT rt)
 	color.g = 255;
 
 	D2D1_MATRIX_3X2_F mat;
-	mat = D2D1::Matrix3x2F::Translation(0, 0);
+	mat = D2D1::Matrix3x2F::Translation(-camera.x, -camera.y);
 	pRT->SetTransform(&mat);
 	pRT->CreateSolidColorBrush(color, &m_brush);
 
@@ -413,7 +420,7 @@ void ImageManager::DrawMapTile(vector<vector<int>> vec)
 		for (auto _iter : iter)
 		{
 			if (_iter != -1)
-				IMAGEMANAGER->Render(m_tileImages[_iter], x * m_width, y1 * m_width);
+				IMAGEMANAGER->Render(m_tileImages[_iter], x * (m_width - 1), y1 * (m_width - 1));
 			x++;
 		}
 		y1++;
@@ -458,7 +465,7 @@ void ImageManager::DrawRectCenter(RECT rt, CImage* img)
 void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
 {
 	int y1 = 0;
-	int m_width = m_tileImages[0]->GetWidth();
+	int m_width = m_tileImages[0]->GetWidth() - 1;
 	for (auto iter : vec)
 	{
 		int x = 0;
