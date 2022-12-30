@@ -58,6 +58,7 @@ void Player::Init()
 	
 	m_skillCoolA = 6;
 	m_skillCoolS = 3;
+	m_skillUsing = false;
 	m_artifactCoolD = 0;
 	m_haveArtifact = false;
 
@@ -66,7 +67,7 @@ void Player::Init()
 
 void Player::Update()
 {	
-	if (m_action != eSkill_1 && m_action != eSkill_2)	//스킬 끝날 때까지 다른 동작이 들어가지 못하게 하기 위함
+	if (!m_skillUsing)	//스킬 끝날 때까지 다른 동작이 들어가지 못하게 하기 위함
 	{
 		Move();
 		Act();
@@ -92,6 +93,7 @@ void Player::DrawCharactor()
 	if (nowImg->IsImageEnded())
 	{
 		nowImg->Reset();
+		if (m_skillUsing) m_skillUsing = false;
 		if (m_attackCast) m_action = eAutoAttack_2;	//3타가 있으면 switch(m_attackCount)로 검사
 		else m_action = eIdle;
 		nowImg = img[m_action];
@@ -107,12 +109,11 @@ void Player::DrawEffect()
 void Player::Move()
 {
 	m_commandInput = false;
-	if (m_action == eWalk)
+	if (m_action == this->eWalk)
 	{
-		m_action = eIdle;
+		m_action = this->eIdle;
 	}
 	InputJumpKey();
-	InputDashKey();
 	if (!m_dashing)
 	{
 		InputArrowKey();
@@ -137,6 +138,7 @@ void Player::Move()
 			m_dashNowCool = m_dashCool;
 		}
 	}
+	InputDashKey();
 	if (nowImg != img[m_action])
 	{
 
@@ -195,7 +197,7 @@ void Player::InputAttackKey()
 		{
 			m_action = eJumpAttack;
 		}
-
+		else //##
 		m_commandInput = true;
 	}
 }
@@ -210,11 +212,13 @@ void Player::InputSkillKey()
 	if (KEYMANAGER->GetOnceKeyDown('A'))
 	{
 		m_action = eSkill_1;
+		m_skillUsing = true;
 		m_commandInput = true;
 	}
 	else if(KEYMANAGER->GetOnceKeyDown('S'))
 	{
 		m_action = eSkill_2;
+		m_skillUsing = true;
 		m_commandInput = true;
 	}
 }

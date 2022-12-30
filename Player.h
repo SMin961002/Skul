@@ -43,8 +43,9 @@ public:
 		eJump,
 		eJumpDown,
 		eJumpLand,
+		eBasicActionTagNumberCount,
 //=↑=↑=여기까진 앵간하면 고정행동=↑=↑=//
-		eAutoAttack_1,
+		eAutoAttack_1= eBasicActionTagNumberCount,
 		eAutoAttack_2,
 		eJumpAttack,
 		eSkill_1,
@@ -92,6 +93,7 @@ protected:
 	float m_skillNowCoolA;
 	float m_skillCoolS;
 	float m_skillNowCoolS;
+	bool  m_skillUsing;
 	float m_artifactCoolD;
 	float m_artifactNowCoolD;
 	bool  m_haveArtifact;
@@ -151,7 +153,7 @@ public:
 	void ResetSkill() {
 		m_skillNowCoolA = 0;
 		m_skillNowCoolS = 0;
-		m_artifactNowCoolD = 0;
+		m_skillUsing = false;
 	}
 };
 
@@ -159,22 +161,31 @@ public:
 /*
 	/ C / O / M / M / E / N / T /
 
-# 추가작업 필요한 부분은 ##로 표시해두었음.
+# 추가작업 필요한 부분은 코드 중간에 ##로 표시해두었음.
+
 # jump, dash부분 보강 필요
  - jump 전체 구현해야함
- - 
-
+ - 공격모션 출력
+ - 스킬 출력
+ 
+ - effect 출력
+ - 추상화
 
 
 
 
 
 ※ 작업일지 ※
+12/30
+
 12/29
 1. 전체적으로 모션 작동 방식 수정하였습니다.
 	- 커멘드 입력시 동작별 tick 넣고, update시에 -DELTA_TIME 한 뒤 0이 되면 Idle로 돌리는 방식에서
 	  Image delay를 이용해 동작 제어하는 방식으로 변경
-	- 키입력시 
-
-
+	  | 부자연스러운 걷기모션 개선됨
+	  | 
+	- 키입력시 action에 동작을 넣는다
+	  : 더 높은 우선순위를 가진 동작의 입력을 뒤에서 받아온다 (최종적으로 뒤에 입력한 동작이 출력됨)
+	    대시, 점프의 경우 이미지는 캔슬돼도 가로, 세로 동작은 남아있는 경우가 다수라 각각 bool값을 주었음
+2. 이미지에 프레임별 체류시간을 넣었습니다. (태웅씨 컨펌 완료)
 */
