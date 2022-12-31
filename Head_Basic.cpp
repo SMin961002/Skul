@@ -87,8 +87,11 @@ void Head_Basic::ParameterSetting()
 
 void Head_Basic::CollisionSetting()
 {
-	collision[eAutoAttack_1coll] = m_obj->AddComponent<CollisionComponent>();
-	
+	CollisionComponent* attack1 = m_obj->AddComponent<CollisionComponent>();
+	attack1->Setting(36, m_obj->x + 6, m_obj->y - 24,"기본공격1타");
+		//94,64 기본공격범위 x-30~x+42(중심점 x+6, 범위반지름 36). y-56~y+8(중심점 y-24, 범위반지름 32)
+	attack1->SetIsActive(false);
+	m_obj->AddCollisionComponent(attack1);
 }
 
 void Head_Basic::InputSkillKey()
@@ -113,6 +116,17 @@ void Head_Basic::InputSkillKey()
 void Head_Basic::ActionArrangement()
 {
 	Head::ActionArrangement();
+}
+
+void Head_Basic::CollisionUpdate()
+{
+	for (auto iter : (m_obj->GetCollisionComponent()))
+	{
+		if (iter->GetName() == "기본공격1타")
+		{
+			iter->Setting(m_obj->x + 6, m_obj->y - 24);
+		}
+	}
 }
 
 void Head_Basic::DrawCharactor()

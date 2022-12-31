@@ -12,6 +12,7 @@ public:
 	virtual void CollisionSetting() override;
 
 	virtual void ActionArrangement() override;
+	virtual void CollisionUpdate() override;
 	virtual void DrawCharactor() override;
 
 	void InputSkillKey();

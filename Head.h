@@ -52,8 +52,6 @@ protected:
 	vImage* img_reborn;
 	vImage* nowImg;
 
-	CollisionComponent* collision[eCollisionArrTagNumCount];
-
 	//이미지, 시간으로 제어
 	ActionTag m_action;
 
@@ -103,6 +101,7 @@ public:
 
 	//Update 안에 들어가는 함수
 	virtual void ActionArrangement();
+	virtual void CollisionUpdate();
 	//	in move
 	virtual void InputJumpKey();
 	virtual void InputDashKey();

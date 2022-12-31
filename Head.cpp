@@ -12,7 +12,7 @@ void Head::Init()
 void Head::Update()
 {
 	m_imageChange = false;
-
+	
 	CoolDown();
 	if (!m_skillUsing)	//스킬 끝날 때까지 다른 동작이 들어가지 못하게 하기 위함
 	{
@@ -20,6 +20,7 @@ void Head::Update()
 		Act();
 	}
 	ActionArrangement();
+	CollisionUpdate();
 }
 
 void Head::Render()
@@ -226,7 +227,14 @@ void Head::InputAttackKey()
 			if (m_attackCount == 0)
 			{
 				m_action = eAutoAttack_1;
-				m_attackCount++;
+				m_attackCount = 1;
+				for (auto iter : m_obj->GetCollisionComponent())
+				{
+					if (iter->GetName() == "기본공격1타")
+					{
+						iter->SetIsActive(true);
+					}
+				}
 				m_imageChange = true;
 			}
 			else 
@@ -237,7 +245,6 @@ void Head::InputAttackKey()
 		}//end else jumpping
 	}//end 'X'
 }
-
 
 void Head::InputSkillKey()
 {
@@ -262,6 +269,13 @@ void Head::ActionArrangement()
 			nowImg = img[eIdle];
 			m_attackCount = 0;
 		}
+		for (auto iter : m_obj->GetCollisionComponent())
+		{
+			if (iter->GetName() == "기본공격1타")
+			{
+				//iter->SetIsActive(false);
+			}
+		}
 	}
 	if (m_imageChange)
 	{
@@ -274,6 +288,13 @@ void Head::ActionArrangement()
 		}
 		//m_attackCount = 0;
 	}
+}
+
+void Head::CollisionUpdate()
+{
+	/*
+	Do Notiong
+	*/
 }
 
 void Head::DrawCharactor()

@@ -34,7 +34,7 @@ void Player::Update()
 	//m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
 	MY_UTILITY::GetLerpVec2(&v, { m_obj->x - WINSIZE_X / 2,m_obj->y - 400 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
-
+	coll->Setting(25,m_obj->x,m_obj->y,"HitRange");
 	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
 	{
 		m_obj->y += 1;

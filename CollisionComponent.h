@@ -13,7 +13,10 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	//세팅(이름,범위, 중심점 설정)
 	void Setting(float range, float x, float y, string name);
+	//세팅(충돌중심점 옮기기)
+	void Setting(float x, float y);
 
 	float GetCollisionPosX() { return m_collisionX; }
 	float GetCollisionPosY() { return m_collisionY; }
