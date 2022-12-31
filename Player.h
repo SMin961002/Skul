@@ -113,7 +113,8 @@ public:
 	virtual void Release() override;
 	virtual void OnCollision(string collisionName, Object* other) override;
 	float GetplayerX(void) { return m_obj->x; }
-
+	CollisionComponent* coll;
+	 
 	virtual void Move();
 	virtual void Act();
 
