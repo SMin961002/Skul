@@ -485,6 +485,31 @@ void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
 	}
 }
 
+void ImageManager::DrawColorRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse,D2D1_COLOR_F colr)
+{
+	D2D1_MATRIX_3X2_F matT, matR, matS;
+
+	if (isReverse == false)
+	{
+		matT = D2D1::Matrix3x2F::Translation((x - img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
+		matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
+	}
+	else
+	{
+		matT = D2D1::Matrix3x2F::Translation((x + img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
+		matS = D2D1::Matrix3x2F::Scale(-sizeX, sizeY);
+	}
+	pRT->SetTransform((matS * matT * matR));
+	ID2D1SolidColorBrush* color;
+	pRT->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+	pRT->CreateSolidColorBrush(colr, &color);
+
+	pRT->FillOpacityMask(img->GetBitMap(), color, D2D1_OPACITY_MASK_CONTENT_GRAPHICS, D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()));
+
+}
+
 void ImageManager::D2dTextOut(wstring str, float x, float y)
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
