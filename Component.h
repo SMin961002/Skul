@@ -16,7 +16,7 @@ public:
 	virtual void Update() PURE;
 	virtual void Render() PURE;
 	virtual void Release() PURE;
-	virtual void OnCollision(Object * other);
+	virtual void OnCollision(string collisionName, Object* other);
 	bool GetIsActive()
 	{
 		return m_isActive;

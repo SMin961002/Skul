@@ -65,8 +65,9 @@ void Player::Init()
 	m_skillUsing = false;
 	m_artifactCoolD = 0;
 	m_haveArtifact = false;
-	m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
-
+	//m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
+	coll = m_obj->AddComponent<CollisionComponent>();
+	m_obj->GetCollisionComponent().push_back(coll);
 
 	m_obj->AddComponent<RigidBodyComponent>();
 	//m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x, &m_obj->y);
@@ -75,12 +76,14 @@ void Player::Init()
 
 void Player::Update()
 {
+
+
 	Vector2 v;
 	MY_UTILITY::GetLerpVec2(&v, { m_obj->x - WINSIZE_X / 2,m_obj->y - 400 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
 	Move();
 	//Action();
-	m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
+	//m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
 
 	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
 	{
@@ -120,7 +123,7 @@ void Player::DrawCharactor()
 		nowImg = img[m_action];
 	}
 
-	nowImg->CenterRender(m_obj->x, m_obj->y-50, 2, 2, 0, m_isLeft);
+	nowImg->CenterRender(m_obj->x, m_obj->y - 50, 2, 2, 0, m_isLeft);
 }
 
 void Player::DrawEffect()
@@ -249,9 +252,12 @@ void Player::InputJumpKey()
 	m_commandInput = true;
 }
 
-void Player::OnCollision(Object* other)
+void Player::OnCollision(string collisionName, Object* other)
 {
-	if (other->GetName() == "Enemy")
+	if (collisionName == "EnemyAttack")
 	{
+		if (other->GetName() == "Enemy")
+		{
+		}
 	}
 }
