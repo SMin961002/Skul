@@ -38,20 +38,29 @@ void ObjectManager::Update()
 				{
 					if (i != j)
 					{
-						CollisionComponent* coll1 = (*iter)->GetCollisionComponent();
-						CollisionComponent* coll2 = other->GetCollisionComponent();
-						if (coll2 != coll1 && coll1 != nullptr && coll2 != nullptr)
+						for (auto coll1 : (*iter)->GetCollisionComponent())
 						{
-							if (coll2->GetIsActive() && coll1->GetIsActive())
+							for (auto coll2 : other->GetCollisionComponent())
 							{
-								float d = sqrt((coll1->GetCollisionPosX() - coll2->GetCollisionPosX()) * (coll1->GetCollisionPosX() - coll2->GetCollisionPosX()) +
-									(coll1->GetCollisionPosY() - coll2->GetCollisionPosY()) * (coll1->GetCollisionPosY() - coll2->GetCollisionPosY()));
-								if (d < coll1->GetRange() + coll2->GetRange())
-								{
-									(*iter)->OnCollision(other);
-								}
+								(*iter)->OnCollision(coll2->GetName(), other);
 							}
 						}
+
+						//(iter)
+						//CollisionComponent* coll1 = (*iter)->GetCollisionComponent();
+						//CollisionComponent* coll2 = other->GetCollisionComponent();
+						//if (coll2 != coll1 && coll1 != nullptr && coll2 != nullptr)
+						//{
+						//	if (coll2->GetIsActive() && coll1->GetIsActive())
+						//	{
+						//		float d = sqrt((coll1->GetCollisionPosX() - coll2->GetCollisionPosX()) * (coll1->GetCollisionPosX() - coll2->GetCollisionPosX()) +
+						//			(coll1->GetCollisionPosY() - coll2->GetCollisionPosY()) * (coll1->GetCollisionPosY() - coll2->GetCollisionPosY()));
+						//		if (d < coll1->GetRange() + coll2->GetRange())
+						//		{
+						//			//(*iter)->OnCollision(other);
+						//		}
+						//	}
+						//}
 					}
 				}
 			}

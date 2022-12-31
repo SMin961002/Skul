@@ -15,9 +15,13 @@ void Main::Init()
 
 void Main::Update()
 {
-	if (KEYMANAGER->GetOnceKeyDown(VK_F7))
+	if (KEYMANAGER->GetOnceKeyDown(VK_F6))
 	{
 		SCENEMANAGER->ChangeScene("EnemyTestScene");
+	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_F7))
+	{
+		SCENEMANAGER->ChangeScene("MapToolMapSelectScene");
 	}
 	if (KEYMANAGER->GetToggleKey(VK_F12))
 	{

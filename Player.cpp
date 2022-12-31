@@ -65,7 +65,7 @@ void Player::Init()
 	m_skillUsing = false;
 	m_artifactCoolD = 0;
 	m_haveArtifact = false;
-	m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
+	//m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
 
 
 	m_obj->AddComponent<RigidBodyComponent>();
@@ -80,7 +80,7 @@ void Player::Update()
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
 	Move();
 	//Action();
-	m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
+	//m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
 
 	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
 	{
@@ -120,7 +120,7 @@ void Player::DrawCharactor()
 		nowImg = img[m_action];
 	}
 
-	nowImg->CenterRender(m_obj->x, m_obj->y-50, 2, 2, 0, m_isLeft);
+	nowImg->CenterRender(m_obj->x, m_obj->y - 50, 2, 2, 0, m_isLeft);
 }
 
 void Player::DrawEffect()
@@ -249,7 +249,7 @@ void Player::InputJumpKey()
 	m_commandInput = true;
 }
 
-void Player::OnCollision(Object* other)
+void Player::OnCollision(string collisionName, Object* other)
 {
 	if (other->GetName() == "Enemy")
 	{
