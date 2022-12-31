@@ -265,6 +265,38 @@ void ImageManager::LoadImages()
 	AddImageVector("Bfanatic_AttackIdle", L"Resources/Monster/Black Fanatic/Attack Idle/", 1, 5);
 	AddImageVector("BFanatic_Runattack", L"Resources/Monster/Black Fanatic/Walk Attack/", 1, 8);
 	AddImageVector("BFanatic_Run", L"Resources/Monster/Black Fanatic/Walk/", 1, 6);
+	
+	AddImageVector("Cfanatic_Idle", L"Resources/Monster/Candle_Fanatic/Idle/",1, 6);
+	AddImageVector("Cfanatic_AttackReady", L"Resources/Monster/Candle_Fanatic/Attack_Ready/", 1, 17);
+	AddImageVector("Cfanatic_Attack", L"Resources/Monster/Candle_Fanatic/Attack/", 1, 10);
+	AddImageVector("Cfanatic_Run", L"Resources/Monster/Candle_Fanatic/Run/",1, 8);
+	AddImageVector("Cfanatic_Hit", L"Resources/Monster/Candle_Fanatic/Hit/", 1, 1);
+	AddImageVector("Cfanatic_Satcrifice", L"Resources/Monster/Candle_Fanatic/Setcrifice/", 1, 15);
+	AddImageVector("Cfanatic_SatcrificeReady", L"Resources/Monster/Candle_Fanatic/Setcrifice_Ready/",1, 6);
+	AddImageVector("Cfanatic_SatcrificeLoop", L"Resources/Monster/Candle_Fanatic/Setcrifice_Loop/",1, 5);
+
+	AddImageVector("Tentacles_Idle", L"Resources/Monster/Tentacles_Of_Light/Idle/", 1, 10);
+	AddImageVector("Tentacles_Attack", L"Resources/Monster/Tentacles_Of_Light/Attack/", 1, 8);
+	AddImageVector("Tntackles_Recovery", L"Resources/Monster/Tentacles_Of_Light/Recovery/", 1, 12);
+
+	AddImageVector("Lfanatic_Idle", L"Resources/Monster/Lamp_Fanatic/Idle/", 1, 8);
+	AddImageVector("Lfanatic_Mass", L"Resources/Monster/Lamp_Fanatic/Mass/", 1, 3);
+	AddImageVector("Lfanatic_MassLoop", L"Resources/Monster/Lamp_Fanatic/Mass_Loop/", 1, 3);
+	AddImageVector("Lfanatic_MassReady", L"Resources/Monster/Lamp_Fanatic/Mass_Ready/", 1, 3);
+	AddImageVector("Lfanatic_MassReadyLoop", L"Resources/Monster/Lamp_Fanatic/Mass_Ready_Loop/", 1, 3);
+	AddImageVector("Lfanatic_Run", L"Resources/Monster/Lamp_Fanatic/Run/", 1, 8);
+	AddImageVector("Lfanatic_SummonReady", L"Resources/Monster/Lamp_Fanatic/Summon_Ready/", 1, 5);
+	AddImageVector("Lfanatic_Summons", L"Resources/Monster/Lamp_Fanatic/Summons/", 1, 8);
+
+	AddImageVector("Befanatic_Idle", L"Resources/Monster/Bell_Fanatic/Idle/", 1, 7);
+	AddImageVector("Befanatic_Sacrifice", L"Resources/Monster/Bell_Fanatic/Sacrifice/", 1, 6);
+	AddImageVector("Befanatic_SacrificeLoop", L"Resources/Monster/Bell_Fanatic/Sacrifice_Loop/", 1, 1);
+	AddImageVector("Befanatic_SummonLoop", L"Resources/Monster/Bell_Fanatic/Summon_Loop/", 1, 12);
+	AddImageVector("Befanatic_SummonReady", L"Resources/Monster/Bell_Fanatic/Summon_Ready/", 1, 4);
+	
+	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/",1, 40);
+	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
+	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
@@ -493,6 +525,31 @@ void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
 		}
 		y1++;
 	}
+}
+
+void ImageManager::DrawColorRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse,D2D1_COLOR_F colr)
+{
+	D2D1_MATRIX_3X2_F matT, matR, matS;
+
+	if (isReverse == false)
+	{
+		matT = D2D1::Matrix3x2F::Translation((x - img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
+		matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
+	}
+	else
+	{
+		matT = D2D1::Matrix3x2F::Translation((x + img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
+		matS = D2D1::Matrix3x2F::Scale(-sizeX, sizeY);
+	}
+	pRT->SetTransform((matS * matT * matR));
+	ID2D1SolidColorBrush* color;
+	pRT->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+	pRT->CreateSolidColorBrush(colr, &color);
+
+	pRT->FillOpacityMask(img->GetBitMap(), color, D2D1_OPACITY_MASK_CONTENT_GRAPHICS, D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()));
+
 }
 
 void ImageManager::D2dTextOut(wstring str, float x, float y)

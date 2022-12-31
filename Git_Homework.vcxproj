@@ -134,9 +134,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AngelStatue.cpp" />
+    <ClCompile Include="BallFanatic.cpp" />
     <ClCompile Include="BlackFanatic.cpp" />
     <ClCompile Include="BossObject.cpp" />
     <ClCompile Include="BossScene.cpp" />
+    <ClCompile Include="CandleFanatic.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CTimer.cpp" />
@@ -151,6 +154,7 @@
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
+    <ClCompile Include="LampFanatic.cpp" />
     <ClCompile Include="LeoniaSoldier.cpp" />
     <ClCompile Include="LobbyScene.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -167,6 +171,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TentaclesOfLight.cpp" />
     <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="WinMain.cpp">
@@ -174,9 +179,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AngelStatue.h" />
+    <ClInclude Include="BallFanatic.h" />
     <ClInclude Include="BlackFanatic.h" />
     <ClInclude Include="BossObject.h" />
     <ClInclude Include="BossScene.h" />
+    <ClInclude Include="CandleFanatic.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CTimer.h" />
@@ -191,6 +199,7 @@
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="IOFillManager.h" />
     <ClInclude Include="KeyManager.h" />
+    <ClInclude Include="LampFanatic.h" />
     <ClInclude Include="LeoniaSoldier.h" />
     <ClInclude Include="LobbyScene.h" />
     <ClInclude Include="Main.h" />
@@ -205,6 +214,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="singleton.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TentaclesOfLight.h" />
     <ClInclude Include="TimerManager.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>

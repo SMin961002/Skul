@@ -21,9 +21,10 @@ void Player::Init()
 
 	//m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
 	coll = m_obj->AddComponent<CollisionComponent>();
-	m_obj->AddComponent<PixelCollisionComponent>();
-	m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x, &m_obj->y);
+	m_obj->GetCollisionComponent().push_back(coll);
 
+	m_obj->AddCollisionComponent(coll);
+	m_obj->AddComponent<RigidBodyComponent>();
 	m_obj->AddComponent<RigidBodyComponent>();	
 }
 
@@ -64,10 +65,11 @@ void Player::Release()
 
 void Player::OnCollision(string collisionName, Object* other)
 {
-	if (collisionName == "EnemyAttack")
+	if (collisionName == coll->GetName())
 	{
 		if (other->GetName() == "Enemy")
 		{
+
 		}
 	}
 }

@@ -138,6 +138,7 @@ public:
 	void DrawMapStructureBack(vector<StructureData*> vec);
 	void DrawMapStructureFoward(vector<StructureData*> vec);
 	void DrawMapTilePixel(vector<vector<int>> vec);
+	void DrawColorRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse, D2D1_COLOR_F colr);
 
 	sCamera GetCameraPosition()
 	{

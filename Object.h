@@ -24,6 +24,8 @@ public:
 	bool GetIsObjectDestroyed() { return m_isObjectDestroyed; }
 	void ObjectDestroyed() { m_isObjectDestroyed = true; }
 
+
+	void AddCollisionComponent(CollisionComponent* coll) { m_collisions.push_back(coll); };
 	vector<CollisionComponent*> GetCollisionComponent()
 	{
 		return m_collisions;

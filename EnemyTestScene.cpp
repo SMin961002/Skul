@@ -2,6 +2,11 @@
 #include "EnemyTestScene.h"
 #include "Player.h"
 #include"LeoniaSoldier.h"
+#include"CandleFanatic.h"
+#include"TentaclesOfLight.h"
+#include"LampFanatic.h"
+#include"BallFanatic.h"
+#include"AngelStatue.h"
 EnemyTestScene::EnemyTestScene()
 {
 }
@@ -26,7 +31,11 @@ void EnemyTestScene::Init()
 
 	OBJECTMANAGER->AddObject("player", 500 , -100, ePlayer)->AddComponent<Player>();
 	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
-
+	//BJECTMANAGER->AddObject("Enemy2", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<CandleFanatic>();
+	//OBJECTMANAGER->AddObject("Enemy3", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<TentaclesOfLight>();
+	//OBJECTMANAGER->AddObject("Enemy4", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<LampFanatic>();
+	//BJECTMANAGER->AddObject("Enemy5", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<BallFanatic>();
+	//OBJECTMANAGER->AddObject("Enemy6", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<AngelStatue>();
 }
 
 void EnemyTestScene::Update()
