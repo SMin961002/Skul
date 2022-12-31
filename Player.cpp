@@ -1,12 +1,13 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "RigidBodyComponent.h"
-
+#include "Enemy.h"
 void Player::Init()
 {
 	//ÀÌ¹ÌÁö »ðÀÔ
 
 	OBJECTMANAGER->m_player = this;
+	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 
 	img[eIdle] = IMAGEMANAGER->FindImageVector("Basic_Idle");
 	img[eIdle]->Setting(0.15f, true);
@@ -259,7 +260,7 @@ void Player::OnCollision(string collisionName, Object* other)
 	{
 		if (other->GetName() == "Enemy")
 		{
-
+			other->GetComponent<Enemy>()->HitEnemy(0);
 		}
 	}
 }

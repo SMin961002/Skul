@@ -9,7 +9,8 @@ void Object::Update()
 {
 	for (auto iter : m_components)
 	{
-		iter->Update();
+		if (iter->GetIsActive() == true)
+			iter->Update();
 	}
 }
 
@@ -17,7 +18,8 @@ void Object::Render()
 {
 	for (auto iter : m_components)
 	{
-		iter->Render();
+		if (iter->GetIsActive() == true)
+			iter->Render();
 	}
 }
 
@@ -35,6 +37,6 @@ void Object::OnCollision(string collisionName, Object* other)
 {
 	for (auto iter : m_components)
 	{
-		iter->OnCollision(collisionName,other);
+		iter->OnCollision(collisionName, other);
 	}
 }
