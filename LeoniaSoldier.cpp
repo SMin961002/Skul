@@ -19,8 +19,8 @@ void LeoniaSoldier::Init()
 	m_vimage[eHit]->Setting(0.4f, true);
 
 	m_attack = false;
-	m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
-	m_obj->GetCollisionComponent()->Setting(100, m_obj->x, m_obj->y); //<- 충돌범위와 위치
+	//m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
+	//m_obj->GetCollisionComponent()->Setting(100, m_obj->x, m_obj->y); //<- 충돌범위와 위치
 	//m_obj->AddComponent<PixelCollisionComponent>();
 	//m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 }
@@ -31,7 +31,7 @@ void LeoniaSoldier::Update()
 	//{
 	//	m_obj->y += 0.1;
 	//}
-	m_obj->GetCollisionComponent()->Setting(20, m_obj->x + 50, m_obj->y + 40);
+	//m_obj->GetCollisionComponent()->Setting(20, m_obj->x + 50, m_obj->y + 40);
 	move();
 	if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
 	{
@@ -74,7 +74,7 @@ void LeoniaSoldier::Release()
 
 }
 
-void LeoniaSoldier::OnCollision(Object* other)
+void LeoniaSoldier::OnCollision(string collisionName, Object* other)
 {
 	if (other->GetName() == "player")
 	{

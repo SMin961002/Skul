@@ -9,7 +9,7 @@ Component::~Component()
 {
 }
 
-void Component::OnCollision(Object* other)
+void Component::OnCollision(string collisionName,Object* other)
 {
 }
 

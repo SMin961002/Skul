@@ -21,7 +21,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
-	virtual void OnCollision(Object * other) override;
+	virtual void OnCollision(string collisionName,Object * other) override;
 	
 	void move();
 
