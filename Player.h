@@ -26,6 +26,8 @@ private:
 	RECT m_hitBox;
 
 	short m_life;
+	float m_attack;
+	float m_deffendence;
 
 	float m_artifactCoolD;
 	float m_artifactNowCoolD;

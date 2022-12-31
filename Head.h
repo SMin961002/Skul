@@ -57,6 +57,7 @@ protected:
 
 	float m_moveSpeed;
 	bool  m_isLeft;
+	bool  m_isDown;
 
 	float m_dashSpeed;		//대시 속도 (가속->감속 계산필요)
 	float m_dashCool;		//대시 끝나고 다음 대시세트 시작까지 걸리는 쿨타임

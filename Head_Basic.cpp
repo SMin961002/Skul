@@ -58,6 +58,7 @@ void Head_Basic::ParameterSetting()
 
 	m_moveSpeed = 3;
 	m_isLeft = false;
+	m_isDown = false;
 
 	m_dashSpeed = 3.5;	//##dash 이동식 수정 필요
 	m_dashTime = 2 * img[eDash]->GetTotalDelay();
@@ -88,8 +89,7 @@ void Head_Basic::ParameterSetting()
 void Head_Basic::CollisionSetting()
 {
 	CollisionComponent* attack1 = m_obj->AddComponent<CollisionComponent>();
-	attack1->Setting(36, m_obj->x + 6, m_obj->y - 24,"기본공격1타");
-		//94,64 기본공격범위 x-30~x+42(중심점 x+6, 범위반지름 36). y-56~y+8(중심점 y-24, 범위반지름 32)
+	attack1->Setting(50, m_obj->x + 6 + 40, m_obj->y - 24 + 72,"기본공격");
 	attack1->SetIsActive(false);
 	m_obj->AddCollisionComponent(attack1);
 }
@@ -115,21 +115,98 @@ void Head_Basic::InputSkillKey()
 
 void Head_Basic::ActionArrangement()
 {
-	Head::ActionArrangement();
+	if (nowImg->GetIsImageEnded())
+	{
+		nowImg->Reset();
+		if (m_attackCast)
+		{
+			nowImg = img[eAutoAttack_2];
+			m_attackCount = 2;
+			for (auto iter : m_obj->GetCollisionComponent())
+			{
+				if (iter->GetName() == "기본공격")
+				{
+					iter->SetIsActive(true);
+				}
+			}
+			m_attackCast = false;
+		}
+		else
+		{
+			nowImg = img[eIdle];
+			m_attackCount = 0;
+			for (auto iter : m_obj->GetCollisionComponent())
+			{
+				if (iter->GetName() == "기본공격")
+				{
+					iter->SetIsActive(false);
+				}
+			}//end colli autoAttack false
+		}
+	}
+	if (m_imageChange)
+	{
+		m_attackCast = false;
+
+		if (nowImg != img[m_action])
+		{
+			nowImg->Reset();
+			nowImg = img[m_action];
+		}
+		//m_attackCount = 0;
+	}
 }
 
 void Head_Basic::CollisionUpdate()
 {
 	for (auto iter : (m_obj->GetCollisionComponent()))
 	{
-		if (iter->GetName() == "기본공격1타")
+		if (iter->GetName() == "기본공격")
 		{
-			iter->Setting(m_obj->x + 6, m_obj->y - 24);
+			if (m_isLeft)
+				iter->Setting(m_obj->x, m_obj->y);
+			else iter->Setting(m_obj->x + 50, m_obj->y - 16);
 		}
 	}
 }
 
+void Head_Basic::InputAttackKey()
+{
+	if (KEYMANAGER->GetOnceKeyDown('X'))
+	{
+		if (m_jumpping)
+		{
+			if (m_attackCount < 1)
+			{
+				m_action = eJumpAttack;
+				m_attackCount = m_attackMax;
+				m_imageChange = true;
+			}
+		}//end if jumpping
+		else
+		{
+			if (m_attackCount == 0)
+			{
+				m_action = eAutoAttack_1;
+				m_attackCount = 1;
+				for (auto iter : m_obj->GetCollisionComponent())
+				{
+					if (iter->GetName() == "기본공격")
+					{
+						iter->SetIsActive(true);
+					}
+				}
+				m_imageChange = true;
+			}
+			else
+			{
+				m_attackCast = true;
+			}
+		}//end else jumpping
+	}//end 'X'
+}
+
 void Head_Basic::DrawCharactor()
 {
-	nowImg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
+	nowImg->CenterRender(m_obj->x, m_obj->y-56, 2, 2, 0, m_isLeft);
 }

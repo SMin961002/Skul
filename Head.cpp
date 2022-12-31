@@ -111,14 +111,14 @@ void Head::Move()
 	//점프중일 때
 	if (m_jumpping)
 	{
-		m_obj->y += m_jumpNowSpeed;
-		//천장머리쿵 구현되어있음 적용방법 고민해보기
+		m_obj->y -= m_jumpNowSpeed;
+		//##천장머리쿵 구현되어있음 적용방법 고민해보기, 점프계수수정필
 		m_jumpNowSpeed = -m_obj->GetComponent<RigidBodyComponent>()->GetGravity();
-		if (m_jumpNowSpeed < 0)
+		if (m_jumpNowSpeed < m_obj->GetComponent<RigidBodyComponent>()->GetGravity())
 		{
-			m_jumpNowSpeed = 0;
+			m_jumpNowSpeed = -m_obj->GetComponent<RigidBodyComponent>()->GetGravity();
 		}
-		if (m_jumpNowSpeed == 0)
+		if (m_jumpNowSpeed == -m_obj->GetComponent<RigidBodyComponent>()->GetGravity())
 		{
 			if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision() == true)
 			{
@@ -147,13 +147,20 @@ void Head::InputJumpKey()
 	{
 		if (m_jumpCount < m_jumpMax)
 		{
-			m_attackCount = 0;
+			if (m_isDown)
+			{
+			}
+			else
+			{
+				m_attackCount = 0;
 
-			m_action = eJump;
-			m_jumpCount++;
-			m_jumpNowSpeed = m_jumpSpeed;
-			m_jumpping = true;
-			m_imageChange = true;
+				m_action = eJump;
+				m_jumpCount++;
+				m_jumpNowSpeed = m_jumpSpeed;
+				m_jumpping = true;
+				m_imageChange = true;
+
+			}
 		}
 	}//end 'C'
 }
@@ -178,14 +185,13 @@ void Head::InputDashKey()
 			nowImg = img[eDash];
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);//##중력이 왜 안꺼질까
 			m_dashNowTime = m_dashTime;
-			
-			if (m_dashing) cout << "dash" << endl;
 		}
 	}
 }
 
 void Head::InputArrowKey()
 {
+	m_isDown = false;
 	//방향키 왼쪽 입력시
 	if (KEYMANAGER->GetStayKeyDown(VK_LEFT))
 	{
@@ -207,43 +213,15 @@ void Head::InputArrowKey()
 			m_imageChange = true;
 		}
 	}
+	//아래 방향키 입력시
+	if (KEYMANAGER->GetStayKeyDown(VK_DOWN))
+	{
+		m_isDown = true;
+	}
 }
 
 void Head::InputAttackKey()
 {
-	if (KEYMANAGER->GetOnceKeyDown('X'))
-	{
-		if (m_jumpping)
-		{
-			if (m_attackCount < 1)
-			{
-				m_action = eJumpAttack;
-				m_attackCount = m_attackMax;
-				m_imageChange = true;
-			}
-		}//end if jumpping
-		else
-		{
-			if (m_attackCount == 0)
-			{
-				m_action = eAutoAttack_1;
-				m_attackCount = 1;
-				for (auto iter : m_obj->GetCollisionComponent())
-				{
-					if (iter->GetName() == "기본공격1타")
-					{
-						iter->SetIsActive(true);
-					}
-				}
-				m_imageChange = true;
-			}
-			else 
-			{
-				cout << "attack cast" << endl;
-				m_attackCast = true;
-			}
-		}//end else jumpping
-	}//end 'X'
 }
 
 void Head::InputSkillKey()
@@ -255,39 +233,6 @@ void Head::InputSkillKey()
 
 void Head::ActionArrangement()
 {
-	if (nowImg->GetIsImageEnded())
-	{
-		nowImg->Reset();	
-		if (m_attackCast)
-		{
-			nowImg = img[eAutoAttack_2];
-			m_attackCount = 2;
-			m_attackCast = false;
-		}
-		else
-		{
-			nowImg = img[eIdle];
-			m_attackCount = 0;
-		}
-		for (auto iter : m_obj->GetCollisionComponent())
-		{
-			if (iter->GetName() == "기본공격1타")
-			{
-				//iter->SetIsActive(false);
-			}
-		}
-	}
-	if (m_imageChange)
-	{
-		m_attackCast = false;
-
-		if (nowImg != img[m_action])
-		{
-			nowImg->Reset();
-			nowImg = img[m_action];
-		}
-		//m_attackCount = 0;
-	}
 }
 
 void Head::CollisionUpdate()

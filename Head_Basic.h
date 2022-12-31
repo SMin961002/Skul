@@ -13,6 +13,9 @@ public:
 
 	virtual void ActionArrangement() override;
 	virtual void CollisionUpdate() override;
+
+	virtual void InputAttackKey() override;
+
 	virtual void DrawCharactor() override;
 
 	void InputSkillKey();
