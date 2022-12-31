@@ -27,8 +27,9 @@ void CollisionComponent::Release()
 {
 }
 
-void CollisionComponent::Setting(float range, float x, float y)
+void CollisionComponent::Setting(float range, float x, float y, string name)
 {
+	m_collisionName = name;
 	m_collisionX = x;
 	m_collisionY = y;
 	m_range = range;

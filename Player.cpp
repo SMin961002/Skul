@@ -69,6 +69,7 @@ void Player::Init()
 	coll = m_obj->AddComponent<CollisionComponent>();
 	m_obj->GetCollisionComponent().push_back(coll);
 
+	m_obj->AddCollisionComponent(coll);
 	m_obj->AddComponent<RigidBodyComponent>();
 	//m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x, &m_obj->y);
 	m_commandInput = false;
@@ -77,7 +78,7 @@ void Player::Init()
 void Player::Update()
 {
 
-
+	coll->Setting(30, m_obj->x + 17, m_obj->y - 20, "AttackEnemyLsoldier");
 	Vector2 v;
 	MY_UTILITY::GetLerpVec2(&v, { m_obj->x - WINSIZE_X / 2,m_obj->y - 400 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
@@ -254,10 +255,11 @@ void Player::InputJumpKey()
 
 void Player::OnCollision(string collisionName, Object* other)
 {
-	if (collisionName == "EnemyAttack")
+	if (collisionName == coll->GetName())
 	{
 		if (other->GetName() == "Enemy")
 		{
+
 		}
 	}
 }

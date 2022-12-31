@@ -46,7 +46,18 @@ void ObjectManager::Update()
 								{
 									if (coll2->GetIsActive())
 									{
-										(*iter)->OnCollision(coll2->GetName(), other);
+										if (coll2 != coll1 && coll1 != nullptr && coll2 != nullptr)
+										{
+											if (coll2->GetIsActive() && coll1->GetIsActive())
+											{
+												float d = sqrt((coll1->GetCollisionPosX() - coll2->GetCollisionPosX()) * (coll1->GetCollisionPosX() - coll2->GetCollisionPosX()) +
+													(coll1->GetCollisionPosY() - coll2->GetCollisionPosY()) * (coll1->GetCollisionPosY() - coll2->GetCollisionPosY()));
+												if (d < coll1->GetRange() + coll2->GetRange())
+												{
+													(*iter)->OnCollision(coll1->GetName(), other);
+												}
+											}
+										}
 									}
 								}
 							}

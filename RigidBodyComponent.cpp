@@ -43,12 +43,6 @@ void RigidBodyComponent::Update()
 	{
 		m_obj->y = m_obj->GetComponent<PixelCollisionComponent>()->GetCheckY() + 60;
 	}
-
-	if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
-	{
-		m_obj->y -= 15;
-		m_speed = 5;
-	}
 }
 
 void RigidBodyComponent::Render()
