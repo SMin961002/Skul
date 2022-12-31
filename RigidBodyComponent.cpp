@@ -21,8 +21,11 @@ void RigidBodyComponent::Update()
 
 	if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision() == false)
 	{
-		m_speed -= m_gravity;
-		m_obj->y -= m_speed;
+		if (m_isGravity == true)
+		{
+			m_speed -= m_gravity;
+			m_obj->y -= m_speed;
+		}
 	}
 	else
 	{

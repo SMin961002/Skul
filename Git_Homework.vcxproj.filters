@@ -110,6 +110,12 @@
     <ClCompile Include="AngelStatue.cpp">
       <Filter>Game\Object\Enemy\AngelStatue</Filter>
     </ClCompile>
+    <ClCompile Include="Head.cpp">
+      <Filter>Game\Object\Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="Head_Basic.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -219,6 +225,12 @@
     </ClInclude>
     <ClInclude Include="AngelStatue.h">
       <Filter>Game\Object\Enemy\AngelStatue</Filter>
+    </ClInclude>
+    <ClInclude Include="Head.h">
+      <Filter>Game\Object\Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="Head_Basic.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

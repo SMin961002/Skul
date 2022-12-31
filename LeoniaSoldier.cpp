@@ -64,7 +64,7 @@ void LeoniaSoldier::Update()
 	{
 		m_move = false;
 	}
-	if(m_vimage[eAttack]->IsImageEnded())
+	if(m_vimage[eAttack]->GetIsImageEnded())
 	{
 		if (m_attackleft)
 		{

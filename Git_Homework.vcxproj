@@ -148,6 +148,8 @@
     <ClCompile Include="ExObject.cpp" />
     <ClCompile Include="Fanatic.cpp" />
     <ClCompile Include="Gambler.cpp" />
+    <ClCompile Include="Head.cpp" />
+    <ClCompile Include="Head_Basic.cpp" />
     <ClCompile Include="Idle.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
@@ -191,6 +193,8 @@
     <ClInclude Include="ExObject.h" />
     <ClInclude Include="Fanatic.h" />
     <ClInclude Include="Gambler.h" />
+    <ClInclude Include="Head.h" />
+    <ClInclude Include="Head_Basic.h" />
     <ClInclude Include="Idle.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="IOFillManager.h" />

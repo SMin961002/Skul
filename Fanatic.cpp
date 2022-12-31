@@ -107,7 +107,7 @@ void Fanatic::HitEnemy(float dmg)
 
 void Fanatic::ImageResetCheck()
 {
-	if (m_isAttack == true && m_vimage[eAttack]->IsImageEnded() == true)
+	if (m_isAttack == true && m_vimage[eAttack]->GetIsImageEnded() == true)
 	{
 		m_isAttack = false;
 	}

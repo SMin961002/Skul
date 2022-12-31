@@ -115,12 +115,22 @@ void ImageManager::LoadImages()
 	AddImageVector("Basic_JumpAttack", L"./Resources/Png/Skul/Basic/Motion/JumpAttack/", 1, 4);
 	AddImageVector("Basic_Reborn", L"./Resources/Png/Skul/Basic/Motion/Reborn/", 1, 27);
 	AddImageVector("Basic_Skill", L"./Resources/Png/Skul/Basic/Motion/Skill/", 1, 4);
+	//일반스컬 - 머리 없는 모션 이미지
+	AddImageVector("Basic_Headless_Idle", L"./Resources/Png/Skul/Basic/Headless/HeadlessIdle/", 1, 4);
+	AddImageVector("Basic_Headless_Walk", L"./Resources/Png/Skul/Basic/Headless/HeadlessWalk/", 1, 8);
+	AddImageVector("Basic_Headless_Dash", L"./Resources/Png/Skul/Basic/Headless/HeadlessDash/", 1, 1);
+	AddImageVector("Basic_Headless_Attack1", L"./Resources/Png/Skul/Basic/Headless/HeadlessAttack1/", 1, 5);
+	AddImageVector("Basic_Headless_Attack2", L"./Resources/Png/Skul/Basic/Headless/HeadlessAttack2/", 1, 4);
+	AddImageVector("Basic_Headless_JumpStart", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpStart/", 1, 2);
+	AddImageVector("Basic_Headless_JumpRepeat", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpRepeat/", 1, 3);
+	AddImageVector("Basic_Headless_JumpFall", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpFall/", 1, 2);
+	AddImageVector("Basic_Headless_JumpAttack", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpAttack/", 1, 4);
 
 	AddImage("exBg", L"./Resources/exBg.png");
-	//약탈자 모션 이미지
 	AddImage("Background", L"./MapFile/BackGround/background.png");
 	AddImage("Castle", L"./MapFile/BackGround/castle.png");
 	AddImage("Cloud", L"./MapFile/BackGround/cloud.png");
+	//약탈자 모션 이미지
 
 	//디스트로이어 모션 이미지
 
