@@ -29,9 +29,16 @@ void ObjectManager::Update()
 {
 	for (int i = 0; i < eEndTag; i++)
 	{
+		for (auto iter : m_objects[i])
+		{
+			(iter)->Update();
+		}
+	}
+	for (int i = 0; i < eEndTag; i++)
+	{
 		for (auto iter = m_objects[i].begin(); iter != m_objects[i].end();)
 		{
-			(*iter)->Update();
+
 			for (int j = 0; j < ObjectTag::eEndTag; j++)
 			{
 				for (auto& other : m_objects[j])
@@ -65,6 +72,7 @@ void ObjectManager::Update()
 					}
 				}
 			}
+
 			if ((*iter)->GetIsObjectDestroyed() == true)
 			{
 				(*iter)->Release();

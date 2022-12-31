@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "RigidBodyComponent.h"
-
+#include "Enemy.h"
 void Player::Init()
 {
 	m_life = 100;
@@ -13,6 +13,7 @@ void Player::Init()
 	m_headSlot[1] = m_headList[0];
 	OBJECTMANAGER->m_player = this;
 	m_nowHead = m_headSlot[0];
+	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 
 	m_artifactCoolD = 0;
 	m_haveArtifact = false;
@@ -25,7 +26,7 @@ void Player::Init()
 
 	m_obj->AddCollisionComponent(coll);
 	m_obj->AddComponent<RigidBodyComponent>();
-	m_obj->AddComponent<RigidBodyComponent>();	
+	//m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x, &m_obj->y);
 }
 
 void Player::Update()
@@ -69,7 +70,7 @@ void Player::OnCollision(string collisionName, Object* other)
 	{
 		if (other->GetName() == "Enemy")
 		{
-
+			other->GetComponent<Enemy>()->HitEnemy(0);
 		}
 	}
 }

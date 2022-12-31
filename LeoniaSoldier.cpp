@@ -9,6 +9,8 @@ void LeoniaSoldier::Init()
 {	
 	m_attackleft = false;
 	m_move = false;
+	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
+
 	m_hp = 10;
 	m_vimage[eIdle] = IMAGEMANAGER->FindImageVector("Leon_Idle");
 	m_vimage[eIdle]->Setting(0.3f, true);

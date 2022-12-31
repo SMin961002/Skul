@@ -69,10 +69,10 @@ public:
 		bitmap->Release();
 	}
 
-	float GetAlpha()  { return alpha; }
-	int   GetWidth()  { return width; }
-	int   GetHeight() { return height;}
-	float GetDelay()  { return delay; }
+	float GetAlpha() { return alpha; }
+	int   GetWidth() { return width; }
+	int   GetHeight() { return height; }
+	float GetDelay() { return delay; }
 
 	void SetAlpha(float a) { alpha = a; }
 	void SetDelay(float t) { delay = t; }
@@ -185,7 +185,7 @@ public:
 	bool GetIsImageEnded() { return m_isEnd; }	//물어보기
 	vector<CImage*> GetImages() { return m_images; }
 	int GetImageSize() { return m_images.size(); }
-	float GetTotalDelay() {	return m_totalDelay; }
+	float GetTotalDelay() { return m_totalDelay; }
 
 	void Setting(float delayTime, bool isLoop)
 	{
