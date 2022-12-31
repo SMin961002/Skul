@@ -283,6 +283,10 @@ void ImageManager::LoadImages()
 	AddImageVector("Befanatic_SacrificeLoop", L"Resources/Monster/Bell_Fanatic/Sacrifice_Loop/", 1, 1);
 	AddImageVector("Befanatic_SummonLoop", L"Resources/Monster/Bell_Fanatic/Summon_Loop/", 1, 12);
 	AddImageVector("Befanatic_SummonReady", L"Resources/Monster/Bell_Fanatic/Summon_Ready/", 1, 4);
+	
+	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/",1, 40);
+	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
+	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)

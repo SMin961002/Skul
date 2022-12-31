@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AngelStatue.cpp" />
     <ClCompile Include="BallFanatic.cpp" />
     <ClCompile Include="BlackFanatic.cpp" />
     <ClCompile Include="BossObject.cpp" />
@@ -176,6 +177,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AngelStatue.h" />
     <ClInclude Include="BallFanatic.h" />
     <ClInclude Include="BlackFanatic.h" />
     <ClInclude Include="BossObject.h" />

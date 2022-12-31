@@ -3,14 +3,18 @@
 #include "CollisionComponent.h"
 #include"Player.h"
 #include"PixelCollisionComponent.h"
+#include"RigidBodyComponent.h"
 
 void LeoniaSoldier::Init()
 {
+	m_hp = 10;
 	m_vimage[eIdle] = IMAGEMANAGER->FindImageVector("Leon_Idle");
 	m_vimage[eIdle]->Setting(0.3f, true);
 
 	m_vimage[eAttack] = IMAGEMANAGER->FindImageVector("Leon_Attack");
 	m_vimage[eAttack]->Setting(0.1f, false);
+	m_vimage[eAttack]->Setting(0,1.0f);
+
 
 	m_vimage[eRun] = IMAGEMANAGER->FindImageVector("Leon_Run");
 	m_vimage[eRun]->Setting(0.1f, true);
@@ -23,6 +27,9 @@ void LeoniaSoldier::Init()
 	//m_obj->GetCollisionComponent()->Setting(100, m_obj->x, m_obj->y); //<- 충돌범위와 위치
 	//m_obj->AddComponent<PixelCollisionComponent>();
 	//m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
+	m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
+	//m_obj->GetCollisionComponent()->Setting(80, m_obj->x, m_obj->y); //<- 충돌범위와 위치
+	m_obj->AddComponent<RigidBodyComponent>();
 }
 
 void LeoniaSoldier::Update()
@@ -31,13 +38,13 @@ void LeoniaSoldier::Update()
 	//{
 	//	m_obj->y += 0.1;
 	//}
-	//m_obj->GetCollisionComponent()->Setting(20, m_obj->x + 50, m_obj->y + 40);
+	m_obj->GetCollisionComponent()->Setting(30, m_obj->x + 10, m_obj->y - 10);
 	move();
-	if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
+	if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x && m_attack == false)
 	{
 		m_obj->x -= 1.0f;
 	}
-	if (OBJECTMANAGER->m_player->GetplayerX() >= m_obj->x)
+	if (OBJECTMANAGER->m_player->GetplayerX() >= m_obj->x&& m_attack == false)
 	{
 		m_obj->x += 1.0f;
 	}

@@ -107,6 +107,9 @@
     <ClCompile Include="BallFanatic.cpp">
       <Filter>Game\Object\Enemy\BellFanatic</Filter>
     </ClCompile>
+    <ClCompile Include="AngelStatue.cpp">
+      <Filter>Game\Object\Enemy\AngelStatue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -213,6 +216,9 @@
     </ClInclude>
     <ClInclude Include="BallFanatic.h">
       <Filter>Game\Object\Enemy\BellFanatic</Filter>
+    </ClInclude>
+    <ClInclude Include="AngelStatue.h">
+      <Filter>Game\Object\Enemy\AngelStatue</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +332,9 @@
     </Filter>
     <Filter Include="Game\Object\Enemy\BellFanatic">
       <UniqueIdentifier>{b66a0c3b-8884-4271-9f5d-f2cb2324c7fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\AngelStatue">
+      <UniqueIdentifier>{69a7fdb2-de1f-4adc-922c-ad186893eab6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
