@@ -31,6 +31,9 @@ private:
 	float m_artifactNowCoolD;
 
 public:
+	CollisionComponent* coll;
+
+public:
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Release() override;
@@ -39,7 +42,7 @@ public:
 	void InputArtifactKey();	
 	bool  m_haveArtifact;
 
-	void OnCollision(Object* other);
+	void OnCollision(string collisionName, Object* other);
 	float GetplayerX(void) { return m_obj->x; }
 
 	Player() : m_life(100) {};
@@ -55,7 +58,7 @@ public:
  - jump 전체 구현해야함
  - 공격모션 출력 
  - 스킬 출력
- 
+
  - effect 출력
  - 추상화(진행중!)
 
@@ -77,9 +80,9 @@ public:
 	- 커멘드 입력시 동작별 tick 넣고, update시에 -DELTA_TIME 한 뒤 0이 되면 Idle로 돌리는 방식에서
 	  Image delay를 이용해 동작 제어하는 방식으로 변경
 	  | 부자연스러운 걷기모션 개선됨
-	  | 
+	  |
 	- 키입력시 action에 동작을 넣는다
 	  : 더 높은 우선순위를 가진 동작의 입력을 뒤에서 받아온다 (최종적으로 뒤에 입력한 동작이 출력됨)
-	    대시, 점프의 경우 이미지는 캔슬돼도 가로, 세로 동작은 남아있는 경우가 다수라 각각 bool값을 주었음
+		대시, 점프의 경우 이미지는 캔슬돼도 가로, 세로 동작은 남아있는 경우가 다수라 각각 bool값을 주었음
 2. 이미지에 프레임별 체류시간을 넣었습니다. (태웅씨 컨펌 완료)
 */

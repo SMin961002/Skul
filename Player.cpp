@@ -11,7 +11,7 @@ void Player::Init()
 
 	m_headSlot[0] = m_headList[0];
 	m_headSlot[1] = m_headList[0];
-
+	OBJECTMANAGER->m_player = this;
 	m_nowHead = m_headSlot[0];
 
 	m_artifactCoolD = 0;
@@ -19,8 +19,8 @@ void Player::Init()
 
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
 
-	m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
-
+	//m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
+	coll = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddComponent<PixelCollisionComponent>();
 	m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x, &m_obj->y);
 
@@ -29,13 +29,10 @@ void Player::Init()
 
 void Player::Update()
 {
-
-	IMAGEMANAGER->SetCameraPosition(m_obj->x - WINSIZE_X / 2, m_obj->y - 150);
-	m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
 	Vector2 v;
+	//m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
 	MY_UTILITY::GetLerpVec2(&v, { m_obj->x - WINSIZE_X / 2,m_obj->y - 400 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
-	m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
 
 	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
 	{
@@ -62,12 +59,15 @@ void Player::InputArtifactKey()
 
 void Player::Release()
 {
+	SAFE_DELETE(*m_headList);
 }
 
-void Player::OnCollision(Object* other)
+void Player::OnCollision(string collisionName, Object* other)
 {
-	if (other->GetName() == "Enemy")
+	if (collisionName == "EnemyAttack")
 	{
-		m_life -= 5;
+		if (other->GetName() == "Enemy")
+		{
+		}
 	}
 }

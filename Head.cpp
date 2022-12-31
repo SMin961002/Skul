@@ -6,20 +6,26 @@ void Head::Init()
 {
 	ImageSetting();
 	ParameterSetting();
+	CollisionSetting();
 }
 
 void Head::Update()
 {
+	m_imageChange = false;
+
+	CoolDown();
 	if (!m_skillUsing)	//스킬 끝날 때까지 다른 동작이 들어가지 못하게 하기 위함
 	{
 		Move();
 		Act();
 	}
+	ActionArrangement();
 }
 
 void Head::Render()
 {
 	DrawCharactor();
+	DrawEffect();
 }
 
 void Head::Release()
@@ -40,48 +46,95 @@ void Head::ParameterSetting()
 	*/
 }
 
+void Head::CollisionSetting()
+{
+	/*
+	Do Nothing
+	*/
+}
+
+void Head::CoolDown()
+{
+	float deltaTime = DELTA_TIME;
+	if (m_dashNowCool > 0)
+	{
+		m_dashNowCool -= deltaTime;
+		if (m_dashNowCool < 0) m_dashNowCool = 0;
+	}
+	if (m_dashNowTime > 0)
+	{
+		m_dashNowTime -= deltaTime;
+		if (m_dashNowTime < 0)
+		{
+			m_dashNowTime = 0;
+			m_dashCount = 0;
+			m_dashing = false;
+			m_dashNowCool = m_dashCool;
+			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
+		}
+	}
+
+	if (m_skillNowCoolA > 0)
+	{
+		m_skillNowCoolA -= deltaTime;
+		if (m_skillNowCoolA < 0)m_skillNowCoolA = 0;
+	}
+	if (m_skillNowCoolS > 0)
+	{
+		m_skillNowCoolS -= deltaTime;
+		if (m_skillNowCoolS < 0) m_skillNowCoolS = 0;
+	}
+}
+
 void Head::Move()
 {
-	m_commandInput = false;
-	if (m_action == this->eWalk)
+	if (m_action == eWalk)
 	{
 		m_action = this->eIdle;
+		m_imageChange = true;
 	}
 	InputJumpKey();
 	InputDashKey();
-	if (!m_dashing)
-	{
-		//if(m_attackCount == 0)
-		InputArrowKey();
 
-		if (m_dashNowCool != 0)
-		{
-			if (m_dashNowCool > 0)	m_dashNowCool -= DELTA_TIME;
-			else
-			{
-				ResetDash();
-			}
-		}
-	}
-	else	//대시 발동중일때
+	//대시중일 때
+	if (m_dashing)
 	{		//##dash 이동식 수정 필요
 		if (m_isLeft) { m_obj->x -= m_dashSpeed; }
 		else { m_obj->x += m_dashSpeed; }
-		m_dashNowTime -= DELTA_TIME;
-		if (m_dashNowTime <= 0)
+	}
+	else if (m_attackCount == 0)
+	{
+		InputArrowKey();	//대시, 공격중에 걷기 불가하므로
+	}
+
+	//점프중일 때
+	if (m_jumpping)
+	{
+		m_obj->y += m_jumpNowSpeed;
+		//천장머리쿵 구현되어있음 적용방법 고민해보기
+		m_jumpNowSpeed = -m_obj->GetComponent<RigidBodyComponent>()->GetGravity();
+		if (m_jumpNowSpeed < 0)
 		{
-			m_dashing = false;
-			m_dashNowCool = m_dashCool;
-			m_obj->GetComponent<RigidBodyComponent>()->SetGravity(true);
+			m_jumpNowSpeed = 0;
+		}
+		if (m_jumpNowSpeed == 0)
+		{
+			if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision() == true)
+			{
+				ResetJump();
+				nowImg->Reset();
+				nowImg = img[eJumpLand];
+				nowImg->Reset();
+				m_action = eIdle;
+			}
 		}
 	}
 }
 
 void Head::Act()
 {
-	if (!m_attackCast && m_attackCount < m_attackMax)
+	if (m_attackCount < m_attackMax)
 	{
-		cout << "attack count " << m_attackCount << endl;
 		InputAttackKey();
 	}
 	InputSkillKey();
@@ -91,11 +144,17 @@ void Head::InputJumpKey()
 {
 	if (KEYMANAGER->GetOnceKeyDown('C'))
 	{
-		m_jumpCount++;
+		if (m_jumpCount < m_jumpMax)
+		{
+			m_attackCount = 0;
 
-		m_attackCount = 0;
-		m_commandInput = true;
-	}
+			m_action = eJump;
+			m_jumpCount++;
+			m_jumpNowSpeed = m_jumpSpeed;
+			m_jumpping = true;
+			m_imageChange = true;
+		}
+	}//end 'C'
 }
 
 void Head::InputDashKey()
@@ -104,32 +163,37 @@ void Head::InputDashKey()
 	{
 		if (m_dashCount < m_dashMax && m_dashNowCool <= 0)
 		{
-			ResetJump();
+			m_imageChange = true;
+
+			m_jumpping = false;
+			m_jumpNowSpeed = 0;
+
 			ResetAttack();
+
 			m_dashing = true;
 			m_dashCount++;
 			m_action = eDash;
-			if (m_dashing) cout << "dash" << endl;
-			m_commandInput = true;
 			img[eDash]->Reset();
 			nowImg = img[eDash];
-			m_obj->GetComponent<RigidBodyComponent>()->SetGravity(false);//##중력이 왜 안꺼질까
+			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);//##중력이 왜 안꺼질까
 			m_dashNowTime = m_dashTime;
+			
+			if (m_dashing) cout << "dash" << endl;
 		}
 	}
 }
 
 void Head::InputArrowKey()
 {
-	m_commandInput = true;
 	//방향키 왼쪽 입력시
 	if (KEYMANAGER->GetStayKeyDown(VK_LEFT))
 	{
 		m_isLeft = true;
+		if(m_attackCount == 0)
 		m_obj->x -= m_moveSpeed;
 		if (!m_jumpping) {
 			m_action = eWalk;
-			m_commandInput = true;
+			m_imageChange = true;
 		}
 	}
 	//방향키 오른쪽 입력시
@@ -139,7 +203,7 @@ void Head::InputArrowKey()
 		m_obj->x += m_moveSpeed;
 		if(!m_jumpping) {
 			m_action = eWalk;
-			m_commandInput = true;
+			m_imageChange = true;
 		}
 	}
 }
@@ -154,25 +218,26 @@ void Head::InputAttackKey()
 			{
 				m_action = eJumpAttack;
 				m_attackCount = m_attackMax;
-				m_commandInput = true;
+				m_imageChange = true;
 			}
 		}//end if jumpping
 		else
 		{
 			if (m_attackCount == 0)
 			{
-				m_commandInput = true;
 				m_action = eAutoAttack_1;
-				++m_attackCount;
+				m_attackCount++;
+				m_imageChange = true;
 			}
 			else 
 			{
-				cout << "attackCount"<< m_attackCount << endl;
+				cout << "attack cast" << endl;
 				m_attackCast = true;
 			}
 		}//end else jumpping
-	}//end donw 'X'
+	}//end 'X'
 }
+
 
 void Head::InputSkillKey()
 {
@@ -181,46 +246,38 @@ void Head::InputSkillKey()
 */
 }
 
-void Head::DrawCharactor()
+void Head::ActionArrangement()
 {
-	if (m_commandInput)
-	{
-		if (nowImg != img[m_action])
-			img[m_action]->Reset();
-		nowImg = img[m_action];
-	}
-
 	if (nowImg->GetIsImageEnded())
 	{
-		cout << m_attackCast << endl;
-		switch (m_action)
+		nowImg->Reset();	
+		if (m_attackCast)
 		{
-		case eAutoAttack_1:
-			if (m_attackCast)
-			{
-				m_action = eAutoAttack_2;
-				m_attackCast = false;
-			}//end if 
-			else
-			{
-				ResetAttack();
-				m_action = eIdle;
-			}
-			break;
-		case eJumpDown:
-			/*
-			* ## 점프 떨어지고나서 eJumpLand로 바꾸는 방식 넣어야함
-			*/
-			break;
-		default:
-			ResetAll();
+			nowImg = img[eAutoAttack_2];
+			m_attackCount = 2;
+			m_attackCast = false;
 		}
-
-		//##공격, 점프, 대시, 기타등등 count초기화하는짓 어디서 구현할지 깔끔하게 생각하기
-		nowImg->Reset();
-		nowImg = img[m_action];
+		else
+		{
+			nowImg = img[eIdle];
+			m_attackCount = 0;
+		}
 	}
-	
+	if (m_imageChange)
+	{
+		m_attackCast = false;
+
+		if (nowImg != img[m_action])
+		{
+			nowImg->Reset();
+			nowImg = img[m_action];
+		}
+		//m_attackCount = 0;
+	}
+}
+
+void Head::DrawCharactor()
+{
 	nowImg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
 }
 

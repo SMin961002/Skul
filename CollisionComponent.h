@@ -2,11 +2,13 @@
 class CollisionComponent : public Component
 {
 public:
+	string m_collisionName;
 	float m_range;
 	float m_collisionX, m_collisionY;
 	CollisionComponent();
 	~CollisionComponent();
 public:
+
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;
@@ -16,5 +18,6 @@ public:
 	float GetCollisionPosX() { return m_collisionX; }
 	float GetCollisionPosY() { return m_collisionY; }
 	float GetRange() { return m_range; }
+	string GetName() { return m_collisionName; }
 };
 

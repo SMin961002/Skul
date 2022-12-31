@@ -20,8 +20,8 @@ public:
 	~RigidBodyComponent();
 
 	
-	
-	void SetGravity(bool isGravity) 
+	float  GetGravity() { return m_gravity; }
+	void SetGravityOnOff(bool isGravity) 
 	{
 		m_isGravity = isGravity;
 	}

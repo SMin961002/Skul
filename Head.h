@@ -35,6 +35,16 @@ public:
 		eActionTagNumber
 	};
 
+	virtual enum eCollisionArrTag
+	{
+		eAutoAttack_1coll,
+		eAutoAttack_2coll,
+		eSkill_1coll,
+		eSkill_2coll,
+
+		eCollisionArrTagNumCount
+	};
+
 protected:
 	eSkulSpecies m_species;
 
@@ -42,20 +52,19 @@ protected:
 	vImage* img_reborn;
 	vImage* nowImg;
 
+	CollisionComponent* collision[eCollisionArrTagNumCount];
+
 	//이미지, 시간으로 제어
 	ActionTag m_action;
 
 	float m_moveSpeed;
 	bool  m_isLeft;
-	bool  m_down;
 
 	float m_dashSpeed;		//대시 속도 (가속->감속 계산필요)
 	float m_dashCool;		//대시 끝나고 다음 대시세트 시작까지 걸리는 쿨타임
 	float m_dashNowCool;	//현재 대시 쿨타임 (0 되면 다음 대시 가능)
-//↓↓현재는 이용 없음↓↓ 대시타임동간 틱당 이동거리 계산할 때 필요할 수도 있을 것 같아서 남겨둠
 	float m_dashTime;		//대시 발동되는 시간 (이 안에 입력해야 2단대시 가능)
 	float m_dashNowTime;	//대시 후 지나간 시간
-//↑↑현재는 이용 없음↑↑
 	short m_dashCount;		//현재 몇회차 대시인지
 	short m_dashMax;		//최대 대시 가능 횟수
 	bool  m_dashing;
@@ -76,7 +85,7 @@ protected:
 	float m_skillNowCoolS;
 	bool  m_skillUsing;
 
-	bool  m_commandInput;	//무언가 동작을 입력하면 true가 된다.
+	bool  m_imageChange;	//무언가 동작을 입력하면 true가 된다.
 
 public:
 	void Init();
@@ -86,11 +95,14 @@ public:
 
 	virtual void ImageSetting();
 	virtual void ParameterSetting();
+	virtual void CollisionSetting();
 
+	virtual void CoolDown();
 	virtual void Move();
 	virtual void Act();
 
 	//Update 안에 들어가는 함수
+	virtual void ActionArrangement();
 	//	in move
 	virtual void InputJumpKey();
 	virtual void InputDashKey();
@@ -98,6 +110,7 @@ public:
 	//	in act
 	virtual void InputSkillKey();
 	virtual void InputAttackKey();
+
 
 	//Render 안에 들어가는 함수
 	virtual void DrawCharactor();
@@ -109,15 +122,13 @@ public:
 		ResetDash();
 		ResetAttack();
 		ResetSkill();
-		m_commandInput = false;
-		m_down = false;
+		m_imageChange = false;
 		m_action = eIdle;
 	}
 	void ResetJump() {
 		m_jumpCount = 0;
 		m_jumpping = false;
 		m_jumpNowSpeed = 0;
-		m_down = false;
 	}
 	void ResetDash() {
 		m_dashCount = 0;

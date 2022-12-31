@@ -58,10 +58,9 @@ void Head_Basic::ParameterSetting()
 
 	m_moveSpeed = 3;
 	m_isLeft = false;
-	m_down = false;
 
 	m_dashSpeed = 3.5;	//##dash 이동식 수정 필요
-	m_dashTime = 2* img[eDash]->GetTotalDelay();
+	m_dashTime = 2 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
 	m_dashCool = 1;
 	m_dashNowCool = 0;
@@ -69,7 +68,7 @@ void Head_Basic::ParameterSetting()
 	m_dashMax = 2;			//대시 최대 횟수
 	m_dashing = false;
 
-	m_jumpSpeed = 3;
+	m_jumpSpeed = 50;
 	m_jumpNowSpeed = 0.2;
 	m_jumpCount = 0;
 	m_jumpMax = 2;
@@ -83,68 +82,40 @@ void Head_Basic::ParameterSetting()
 	m_skillCoolS = 3;
 	m_skillUsing = false;
 	m_headThrow = false;
-	m_commandInput = false;
+	m_imageChange = false;
 }
 
+void Head_Basic::CollisionSetting()
+{
+	collision[eAutoAttack_1coll] = m_obj->AddComponent<CollisionComponent>();
+	
+}
 
 void Head_Basic::InputSkillKey()
 {
 	if (KEYMANAGER->GetOnceKeyDown('A'))
 	{
+		m_skillNowCoolS = m_skillCoolA;
 		m_action = eSkill_1;
 		m_skillUsing = true;
 		m_headThrow = true;
-		m_commandInput = true;
+		m_imageChange = true;
 	}
 	else if (KEYMANAGER->GetOnceKeyDown('S'))
 	{
-		m_action = eSkill_2;
-		m_skillUsing = true;
+		m_action = eIdle;
 		m_headThrow = false;
-		m_skillNowCoolA = 0;
-		m_commandInput = true;
+		//m_obj->x = 머리obj.x ; m_obj->y = 머리obj->y;
+		m_skillNowCoolS = m_skillCoolS;
 	}
+}
+
+void Head_Basic::ActionArrangement()
+{
+	Head::ActionArrangement();
 }
 
 void Head_Basic::DrawCharactor()
 {
-	if (m_commandInput)
-	{
-		if (nowImg != img[m_action])
-			img[m_action]->Reset();
-		nowImg = img[m_action];
-	}
-
-	if (nowImg->GetIsImageEnded())
-	{
-		cout << m_attackCast << endl;
-		switch (m_action)
-		{
-		case eAutoAttack_1:
-			if (m_attackCast)
-			{
-				m_action = eAutoAttack_2;
-				m_attackCast = false;
-			}//end if 
-			else
-			{
-				ResetAttack();
-				m_action = eIdle;
-			}
-			break;
-		case eJumpDown:
-			/*
-			* ## 점프 떨어지고나서 eJumpLand로 바꾸는 방식 넣어야함
-			*/
-			break;
-		default:
-			ResetAll();
-		}
-
-		//##공격, 점프, 대시, 기타등등 count초기화하는짓 어디서 구현할지 깔끔하게 생각하기
-		nowImg->Reset();
-		nowImg = m_headThrow? img_headless[m_action] : img[m_action];
-	}
-
 	nowImg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
 }
