@@ -19,11 +19,28 @@ void Head_Basic::ImageSetting()
 	//↓↓setting 필요↓↓
 	//↓↓setting 필요↓↓	##
 	img[eJump] = IMAGEMANAGER->FindImageVector("Basic_JumpStart");
+	img[eJump]->Setting(0.1, false);
 	img[eJumpAttack] = IMAGEMANAGER->FindImageVector("Basic_JumpAttack");
+	img[eJumpAttack]->Setting(0.1, false);
+	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize()-1,0.2);
 	img[eJumpDown] = IMAGEMANAGER->FindImageVector("Basic_JumpRepeat");	//JumpFall 이미지는 착지순간만 재생, img변수 따로 두었음
+	img[eJumpDown]->Setting(0.1, true);
 	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Basic_JumpFall");
+	img[eJumpLand]->Setting(0.1, false);
 	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Basic_Skill");
-	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Basic_Idle");	//머리가본체는 별도의 이미지가 없음(서있는상태로 뿅 이펙트만 존재)
+	img[eSkill_1]->Setting(0.1, false);
+
+	img_headless[eIdle] = IMAGEMANAGER->FindImageVector("Basic_Headless_Idle");
+	img_headless[eIdle]->Setting(0.15f, true);
+	img_headless[eWalk] = IMAGEMANAGER->FindImageVector("Basic_Headless_Walk");
+	img_headless[eWalk]->Setting(0.1f, true);
+	img_headless[eDash] = IMAGEMANAGER->FindImageVector("Basic_Headless_Dash");
+	img_headless[eDash]->Setting(0.4f, false);
+	img_headless[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Basic_Headless_Attack1");
+	img_headless[eAutoAttack_1]->Setting(0.11f, false);
+	img_headless[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Basic_Headless_Attack2");
+	img_headless[eAutoAttack_2]->Setting(0.15f, false);
+
 	//↑↑setting 필요↑↑
 	//↑↑setting 필요↑↑
 	//↑↑setting 필요↑↑
@@ -44,7 +61,7 @@ void Head_Basic::ParameterSetting()
 	m_down = false;
 
 	m_dashSpeed = 3.5;	//##dash 이동식 수정 필요
-	m_dashTime = 0.4f;
+	m_dashTime = 2* img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
 	m_dashCool = 1;
 	m_dashNowCool = 0;
@@ -65,8 +82,7 @@ void Head_Basic::ParameterSetting()
 	m_skillCoolA = 6;
 	m_skillCoolS = 3;
 	m_skillUsing = false;
-	m_artifactCoolD = 0;
-	m_haveArtifact = false;
+	m_headThrow = false;
 	m_commandInput = false;
 }
 
@@ -77,12 +93,58 @@ void Head_Basic::InputSkillKey()
 	{
 		m_action = eSkill_1;
 		m_skillUsing = true;
+		m_headThrow = true;
 		m_commandInput = true;
 	}
 	else if (KEYMANAGER->GetOnceKeyDown('S'))
 	{
 		m_action = eSkill_2;
 		m_skillUsing = true;
+		m_headThrow = false;
+		m_skillNowCoolA = 0;
 		m_commandInput = true;
 	}
+}
+
+void Head_Basic::DrawCharactor()
+{
+	if (m_commandInput)
+	{
+		if (nowImg != img[m_action])
+			img[m_action]->Reset();
+		nowImg = img[m_action];
+	}
+
+	if (nowImg->GetIsImageEnded())
+	{
+		cout << m_attackCast << endl;
+		switch (m_action)
+		{
+		case eAutoAttack_1:
+			if (m_attackCast)
+			{
+				m_action = eAutoAttack_2;
+				m_attackCast = false;
+			}//end if 
+			else
+			{
+				ResetAttack();
+				m_action = eIdle;
+			}
+			break;
+		case eJumpDown:
+			/*
+			* ## 점프 떨어지고나서 eJumpLand로 바꾸는 방식 넣어야함
+			*/
+			break;
+		default:
+			ResetAll();
+		}
+
+		//##공격, 점프, 대시, 기타등등 count초기화하는짓 어디서 구현할지 깔끔하게 생각하기
+		nowImg->Reset();
+		nowImg = m_headThrow? img_headless[m_action] : img[m_action];
+	}
+
+	nowImg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
 }

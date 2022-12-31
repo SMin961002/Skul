@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Head.h"
+#include "RigidBodyComponent.h"
 
 void Head::Init()
 {
@@ -50,6 +51,7 @@ void Head::Move()
 	InputDashKey();
 	if (!m_dashing)
 	{
+		//if(m_attackCount == 0)
 		InputArrowKey();
 
 		if (m_dashNowCool != 0)
@@ -65,11 +67,12 @@ void Head::Move()
 	{		//##dash 이동식 수정 필요
 		if (m_isLeft) { m_obj->x -= m_dashSpeed; }
 		else { m_obj->x += m_dashSpeed; }
-
-		if (nowImg != img[eDash])
+		m_dashNowTime -= DELTA_TIME;
+		if (m_dashNowTime <= 0)
 		{
 			m_dashing = false;
 			m_dashNowCool = m_dashCool;
+			m_obj->GetComponent<RigidBodyComponent>()->SetGravity(true);
 		}
 	}
 }
@@ -78,7 +81,7 @@ void Head::Act()
 {
 	if (!m_attackCast && m_attackCount < m_attackMax)
 	{
-		cout << "action count " << m_attackCount << endl;
+		cout << "attack count " << m_attackCount << endl;
 		InputAttackKey();
 	}
 	InputSkillKey();
@@ -110,6 +113,8 @@ void Head::InputDashKey()
 			m_commandInput = true;
 			img[eDash]->Reset();
 			nowImg = img[eDash];
+			m_obj->GetComponent<RigidBodyComponent>()->SetGravity(false);//##중력이 왜 안꺼질까
+			m_dashNowTime = m_dashTime;
 		}
 	}
 }
@@ -215,7 +220,7 @@ void Head::DrawCharactor()
 		nowImg->Reset();
 		nowImg = img[m_action];
 	}
-
+	
 	nowImg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
 }
 

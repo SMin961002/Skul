@@ -27,13 +27,17 @@ private:
 
 	short m_life;
 
+	float m_artifactCoolD;
+	float m_artifactNowCoolD;
+
 public:
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Release() override;
 	virtual void Render() override;
 
-	void InputAttackKey();
+	void InputArtifactKey();	
+	bool  m_haveArtifact;
 
 	void OnCollision(Object* other);
 	float GetplayerX(void) { return m_obj->x; }
@@ -49,7 +53,7 @@ public:
 
 # jump, dash부분 보강 필요
  - jump 전체 구현해야함
- - 공격모션 출력
+ - 공격모션 출력 
  - 스킬 출력
  
  - effect 출력
@@ -60,7 +64,13 @@ public:
 
 
 ※ 작업일지 ※
+12/31
+오늘할거 : basic skul A, S만들기
+			jump만들기
+			점프, 대시 이펙트 만들기
+
 12/30
+...
 
 12/29
 1. 전체적으로 모션 작동 방식 수정하였습니다.

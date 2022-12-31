@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "PixelCollisionComponent.h"
+#include "RigidBodyComponent.h"
 
 void Player::Init()
 {
@@ -14,26 +14,36 @@ void Player::Init()
 
 	m_nowHead = m_headSlot[0];
 
+	m_artifactCoolD = 0;
+	m_haveArtifact = false;
+
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
 
 	m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
 
 	m_obj->AddComponent<PixelCollisionComponent>();
 	m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x, &m_obj->y);
+
+	m_obj->AddComponent<RigidBodyComponent>();	
 }
 
 void Player::Update()
 {
+
+	IMAGEMANAGER->SetCameraPosition(m_obj->x - WINSIZE_X / 2, m_obj->y - 150);
+	m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
+	Vector2 v;
+	MY_UTILITY::GetLerpVec2(&v, { m_obj->x - WINSIZE_X / 2,m_obj->y - 400 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
+	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
+	m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
+
 	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
 	{
 		m_obj->y += 1;
 	}
-	IMAGEMANAGER->SetCameraPosition(m_obj->x - WINSIZE_X / 2, m_obj->y - 150);
-	m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
 
 	m_nowHead->Update();
-	InputAttackKey();
-
+	InputArtifactKey();
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
 }
 
@@ -42,7 +52,7 @@ void Player::Render()
 	m_nowHead->Render();
 }
 
-void Player::InputAttackKey()
+void Player::InputArtifactKey()
 {
 	if (KEYMANAGER->GetOnceKeyDown('D'))
 	{

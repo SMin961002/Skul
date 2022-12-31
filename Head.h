@@ -75,9 +75,6 @@ protected:
 	float m_skillCoolS;
 	float m_skillNowCoolS;
 	bool  m_skillUsing;
-	float m_artifactCoolD;
-	float m_artifactNowCoolD;
-	bool  m_haveArtifact;
 
 	bool  m_commandInput;	//무언가 동작을 입력하면 true가 된다.
 
@@ -137,6 +134,5 @@ public:
 		m_skillNowCoolS = 0;
 		m_skillUsing = false;
 	}
-
 };
 
