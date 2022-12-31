@@ -1,13 +1,12 @@
 #pragma once
 #include"Enemy.h"
-class TentaclesOfLight :public Enemy
+class AngelStatue : public Enemy
 {
-private:
 	enum IamgeState
 	{
 		eIdle,
 		eAttack,
-		eRecovery,
+		eEndAttack,
 		eEnd
 	};
 
@@ -20,6 +19,8 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 	virtual void OnCollision(string collisionName, Object* other) override;
+
+
 
 };
 

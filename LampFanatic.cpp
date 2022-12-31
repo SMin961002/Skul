@@ -51,6 +51,6 @@ void LampFanatic::Release()
 {
 }
 
-void LampFanatic::OnCollision(Object* other)
+void LampFanatic::OnCollision(string collisionName, Object* other)
 {
 }

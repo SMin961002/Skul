@@ -31,6 +31,6 @@ void TentaclesOfLight::Release()
 {
 }
 
-void TentaclesOfLight::OnCollision(Object* other)
+void TentaclesOfLight::OnCollision(string collisionName, Object* other)
 {
 }

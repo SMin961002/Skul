@@ -51,6 +51,6 @@ void CandleFanatic::Release()
 {
 }
 
-void CandleFanatic::OnCollision(Object* other)
+void CandleFanatic::OnCollision(string collisionName, Object* other)
 {
 }
