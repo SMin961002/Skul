@@ -134,10 +134,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AngelStatue.cpp" />
+    <ClCompile Include="BallFanatic.cpp" />
     <ClCompile Include="Baptism.cpp" />
     <ClCompile Include="BlackFanatic.cpp" />
     <ClCompile Include="BossObject.cpp" />
     <ClCompile Include="BossScene.cpp" />
+    <ClCompile Include="CandleFanatic.cpp" />
     <ClCompile Include="Casting.cpp" />
     <ClCompile Include="Choice.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
@@ -149,11 +152,14 @@
     <ClCompile Include="ExObject.cpp" />
     <ClCompile Include="Fanatic.cpp" />
     <ClCompile Include="Gambler.cpp" />
+    <ClCompile Include="Head.cpp" />
+    <ClCompile Include="Head_Basic.cpp" />
     <ClCompile Include="HollyFountain.cpp" />
     <ClCompile Include="Idle.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
+    <ClCompile Include="LampFanatic.cpp" />
     <ClCompile Include="LeoniaSoldier.cpp" />
     <ClCompile Include="LobbyScene.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -171,6 +177,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TentaclesOfLight.cpp" />
     <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="WinMain.cpp">
@@ -179,10 +186,13 @@
     <ClCompile Include="Worship.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AngelStatue.h" />
+    <ClInclude Include="BallFanatic.h" />
     <ClInclude Include="Baptism.h" />
     <ClInclude Include="BlackFanatic.h" />
     <ClInclude Include="BossObject.h" />
     <ClInclude Include="BossScene.h" />
+    <ClInclude Include="CandleFanatic.h" />
     <ClInclude Include="Casting.h" />
     <ClInclude Include="Choice.h" />
     <ClInclude Include="CollisionComponent.h" />
@@ -194,11 +204,14 @@
     <ClInclude Include="ExObject.h" />
     <ClInclude Include="Fanatic.h" />
     <ClInclude Include="Gambler.h" />
+    <ClInclude Include="Head.h" />
+    <ClInclude Include="Head_Basic.h" />
     <ClInclude Include="HollyFountain.h" />
     <ClInclude Include="Idle.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="IOFillManager.h" />
     <ClInclude Include="KeyManager.h" />
+    <ClInclude Include="LampFanatic.h" />
     <ClInclude Include="LeoniaSoldier.h" />
     <ClInclude Include="LobbyScene.h" />
     <ClInclude Include="Main.h" />
@@ -214,6 +227,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="singleton.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TentaclesOfLight.h" />
     <ClInclude Include="TimerManager.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Worship.h" />

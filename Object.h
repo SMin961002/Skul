@@ -8,14 +8,14 @@ public:
 private:
 	string name;
 	vector<Component*> m_components;
-	CollisionComponent* m_collision;
+	vector < CollisionComponent*> m_collisions;
 	bool m_isObjectDestroyed = false;
 public:
 	void Init();
 	void Update();
 	void Render();
 	void Release();
-	void OnCollision(Object * other);
+	void OnCollision(string collisionName, Object* other);
 
 	void SetPosition(float x, float y) { this->x = x; this->y = y; }
 	void SetName(string str) { name = str; }
@@ -24,14 +24,11 @@ public:
 	bool GetIsObjectDestroyed() { return m_isObjectDestroyed; }
 	void ObjectDestroyed() { m_isObjectDestroyed = true; }
 
-	void SetCollisionComponent(CollisionComponent* cc) 
-	{
-		m_collision = cc;
-	}
 
-	CollisionComponent* GetCollisionComponent()
+	void AddCollisionComponent(CollisionComponent* coll) { m_collisions.push_back(coll); };
+	vector<CollisionComponent*> GetCollisionComponent()
 	{
-		return m_collision;
+		return m_collisions;
 	}
 
 	template <class T>

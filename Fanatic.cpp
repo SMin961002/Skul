@@ -1,55 +1,119 @@
 #include "stdafx.h"
 #include "Fanatic.h"
-
+#include "RigidBodyComponent.h"
+#include "CollisionComponent.h"
+#include "Player.h"
 void Fanatic::Init()
 {
+	m_hitTimer = 0;
+	m_isHit = false;
+	m_state = eIdle;
+	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
+
 	m_vimage[eIdle] = IMAGEMANAGER->FindImageVector("Fanatic_Idle");
-	m_vimage[eIdle]->Setting(0.3f, true);
-	
+	m_vimage[eIdle]->Setting(0.1f, true);
 	m_vimage[eAttackIdle] = IMAGEMANAGER->FindImageVector("Fanatic_AttackIdle");
-	m_vimage[eAttackIdle]->Setting(0.3f, true);
-
+	m_vimage[eAttackIdle]->Setting(0.1f, true);
 	m_vimage[eAttack] = IMAGEMANAGER->FindImageVector("Fanatic_Attack");
-	m_vimage[eAttack]->Setting(0.3f, true);
-
+	m_vimage[eAttack]->Setting(0.1f, false);
 	m_vimage[eRunAttack] = IMAGEMANAGER->FindImageVector("Fanatic_Runattack");
-	m_vimage[eRunAttack]->Setting(0.3f, true);
-
+	m_vimage[eRunAttack]->Setting(0.1f, true);
 	m_vimage[eRun] = IMAGEMANAGER->FindImageVector("Fanatic_Run");
-	m_vimage[eRun]->Setting(0.3f, true);
-
+	m_vimage[eRun]->Setting(0.1f, true);
 	m_vimage[Setcrifice] = IMAGEMANAGER->FindImageVector("Fanatic_Setcrifice");
-	m_vimage[Setcrifice]->Setting(0.3f, true);
-		
-
+	m_vimage[Setcrifice]->Setting(0.1f, true);
 	m_vimage[SetcrificeLoop] = IMAGEMANAGER->FindImageVector("Fanatic_Setcrificeloop");
-	m_vimage[SetcrificeLoop]->Setting(0.3f, true);
-	
+	m_vimage[SetcrificeLoop]->Setting(0.1f, true);
 	m_vimage[SetcrificeReady] = IMAGEMANAGER->FindImageVector("Fanatic_Setcrificeready");
-	m_vimage[SetcrificeReady]->Setting(0.3f, true);
-
+	m_vimage[SetcrificeReady]->Setting(0.1f, true);
 	m_vimage[eHit] = IMAGEMANAGER->FindImageVector("Fanatic_Hit");
-	m_vimage[eHit]->Setting(0.3f, true);
-	
+	m_vimage[eHit]->Setting(0.2f, false);
+
+	m_isReverse = false;
+	m_isAttack = false;
+
+	m_hitCollision = m_obj->AddComponent<CollisionComponent>();
+	m_obj->AddComponent<RigidBodyComponent>();
+	m_obj->AddCollisionComponent(m_hitCollision);
 }
 
 void Fanatic::Update()
 {
+	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+
+	m_hitCollision->Setting(30,m_obj->x,m_obj->y,"HitCollision");
+	if (m_isHit == true)
+	{
+		m_hitTimer += DELTA_TIME;
+	}
+	else
+	{
+	}
+	float xDest = m_obj->x - OBJECTMANAGER->m_player->GetplayerX();
+	if (m_isAttack == false && m_isHit == false)
+	{
+		if (xDest < 300 && xDest > -300)
+		{
+			if (xDest < 100 && xDest > -100)
+			{
+				m_state = eAttack;
+				m_vimage[eAttack]->Reset();
+
+				m_isAttack = true;
+			}
+			else
+			{
+				m_state = eRun;
+				m_obj->x += m_isReverse ? -DELTA_TIME * 50 : DELTA_TIME * 50;
+			}
+			m_isReverse = xDest > 0;
+		}
+		else
+		{
+			m_state = eIdle;
+		}
+	}
+
+	ImageResetCheck();
+	if (KEYMANAGER->GetOnceKeyDown(VK_F3))
+	{
+
+	}
 }
 
 void Fanatic::Render()
 {
-	m_vimage[eIdle]->Render(WINSIZE_X / 2 + 50, WINSIZE_Y / 2+100, 1, 1, 0);
-	m_vimage[eAttackIdle]->Render(WINSIZE_X / 2 + 50, WINSIZE_Y / 2 + 100, 1, 1, 0);
-	m_vimage[eAttack]->Render(WINSIZE_X / 2 + 100, WINSIZE_Y / 2 + 100, 1, 1, 0);
-	m_vimage[eRunAttack]->Render(WINSIZE_X / 2 + 150, WINSIZE_Y / 2 + 100, 1, 1, 0);
-	m_vimage[eRun]->Render(WINSIZE_X / 2 + 200, WINSIZE_Y / 2 + 100, 1, 1, 0);
-	m_vimage[Setcrifice]->Render(WINSIZE_X / 2 + 250, WINSIZE_Y / 2 + 100, 1, 1, 0);
-	m_vimage[SetcrificeLoop]->Render(WINSIZE_X / 2 + 300, WINSIZE_Y / 2 + 100, 1, 1, 0);
-	m_vimage[SetcrificeReady]->Render(WINSIZE_X / 2 + 350, WINSIZE_Y / 2 + 100, 1, 1, 0);
-	m_vimage[eHit]->Render(WINSIZE_X / 2 + 400, WINSIZE_Y / 2 + 100, 1, 1, 0);
+	m_vimage[m_state]->CenterRender(m_obj->x, m_obj->y - 55, 2, 2, 0, m_isReverse);
 }
 
 void Fanatic::Release()
 {
+}
+
+void Fanatic::OnCollision(string collisionName, Object* other)
+{
+}
+
+void Fanatic::HitEnemy(float dmg)
+{
+	m_isAttack = false;
+	m_isHit = true;
+	m_state = eHit;
+	m_vimage[eHit]->Reset();
+	m_obj->x += m_isReverse ? DELTA_TIME * 500 : -DELTA_TIME * 500;
+	m_obj->y -= 10;
+	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
+}
+
+void Fanatic::ImageResetCheck()
+{
+	if (m_isAttack == true && m_vimage[eAttack]->GetIsImageEnded() == true)
+	{
+		m_isAttack = false;
+	}
+	else if (m_hitTimer >= 0.3f)
+	{
+		m_isHit = false;
+		m_hitTimer = 0;
+	}
 }

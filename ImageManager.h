@@ -69,10 +69,10 @@ public:
 		bitmap->Release();
 	}
 
-	float GetAlpha()  { return alpha; }
-	int   GetWidth()  { return width; }
-	int   GetHeight() { return height;}
-	float GetDelay()  { return delay; }
+	float GetAlpha() { return alpha; }
+	int   GetWidth() { return width; }
+	int   GetHeight() { return height; }
+	float GetDelay() { return delay; }
 
 	void SetAlpha(float a) { alpha = a; }
 	void SetDelay(float t) { delay = t; }
@@ -138,6 +138,7 @@ public:
 	void DrawMapStructureBack(vector<StructureData*> vec);
 	void DrawMapStructureFoward(vector<StructureData*> vec);
 	void DrawMapTilePixel(vector<vector<int>> vec);
+	void DrawColorRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse, D2D1_COLOR_F colr);
 
 	sCamera GetCameraPosition()
 	{
@@ -181,10 +182,10 @@ private:
 public:
 	vImage() : m_isEnd(false) {}
 	~vImage() {}
-	bool IsImageEnded() { return m_isEnd; }	//물어보기
+	bool GetIsImageEnded() { return m_isEnd; }	//물어보기
 	vector<CImage*> GetImages() { return m_images; }
 	int GetImageSize() { return m_images.size(); }
-	float GetTotalDelay() {	return m_totalDelay; }
+	float GetTotalDelay() { return m_totalDelay; }
 
 	void Setting(float delayTime, bool isLoop)
 	{

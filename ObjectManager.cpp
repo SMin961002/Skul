@@ -29,32 +29,50 @@ void ObjectManager::Update()
 {
 	for (int i = 0; i < eEndTag; i++)
 	{
+		for (auto iter : m_objects[i])
+		{
+			(iter)->Update();
+		}
+	}
+	for (int i = 0; i < eEndTag; i++)
+	{
 		for (auto iter = m_objects[i].begin(); iter != m_objects[i].end();)
 		{
-			(*iter)->Update();
+
 			for (int j = 0; j < ObjectTag::eEndTag; j++)
 			{
 				for (auto& other : m_objects[j])
 				{
 					if (i != j)
 					{
-						CollisionComponent* coll1 = (*iter)->GetCollisionComponent();
-						CollisionComponent* coll2 = other->GetCollisionComponent();
-						if (coll2 != coll1 && coll1 != nullptr && coll2 != nullptr)
+						for (auto coll1 : (*iter)->GetCollisionComponent())
 						{
-							if (coll2->GetIsActive() && coll1->GetIsActive())
+							if (coll1->GetIsActive())
 							{
-								float d = sqrt((coll1->GetCollisionPosX() - coll2->GetCollisionPosX()) * (coll1->GetCollisionPosX() - coll2->GetCollisionPosX()) +
-									(coll1->GetCollisionPosY() - coll2->GetCollisionPosY()) * (coll1->GetCollisionPosY() - coll2->GetCollisionPosY()));
-								if (d < coll1->GetRange() + coll2->GetRange())
+								for (auto coll2 : other->GetCollisionComponent())
 								{
-									(*iter)->OnCollision(other);
+									if (coll2->GetIsActive())
+									{
+										if (coll2 != coll1 && coll1 != nullptr && coll2 != nullptr)
+										{
+											if (coll2->GetIsActive() && coll1->GetIsActive())
+											{
+												float d = sqrt((coll1->GetCollisionPosX() - coll2->GetCollisionPosX()) * (coll1->GetCollisionPosX() - coll2->GetCollisionPosX()) +
+													(coll1->GetCollisionPosY() - coll2->GetCollisionPosY()) * (coll1->GetCollisionPosY() - coll2->GetCollisionPosY()));
+												if (d < coll1->GetRange() + coll2->GetRange())
+												{
+													(*iter)->OnCollision(coll1->GetName(), other);
+												}
+											}
+										}
+									}
 								}
 							}
 						}
 					}
 				}
 			}
+
 			if ((*iter)->GetIsObjectDestroyed() == true)
 			{
 				(*iter)->Release();

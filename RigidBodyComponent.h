@@ -7,7 +7,7 @@ private:
 	bool m_isGravity;
 	float m_gravity;
 	float m_speed;
-	PixelCollisionComponent * pixelCollisionComponent;
+	PixelCollisionComponent* pixelCollisionComponent;
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -20,10 +20,11 @@ public:
 	~RigidBodyComponent();
 
 	
-	
-	void SetGravity(bool isGravity) 
+	float  GetGravity() { return m_gravity; }
+	void SetGravityOnOff(bool isGravity) 
 	{
 		m_isGravity = isGravity;
 	}
+	void SetGravityPower(float power) { m_speed = power; }
 };
 

@@ -7,7 +7,6 @@ void RigidBodyComponent::Init()
 	m_gravity = 9.8 * DELTA_TIME;
 	cout << DELTA_TIME;
 	m_isGravity = false;
-	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 	pixelCollisionComponent = m_obj->GetComponent<PixelCollisionComponent>();
 
 	pixelCollisionComponent->RSettingRect({ 25 , -30, 30 , -15 });
@@ -22,8 +21,11 @@ void RigidBodyComponent::Update()
 
 	if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision() == false)
 	{
-		m_speed -= m_gravity;
-		m_obj->y -= m_speed;
+		if (m_isGravity == true)
+		{
+			m_speed -= m_gravity;
+			m_obj->y -= m_speed;
+		}
 	}
 	else
 	{
@@ -42,12 +44,6 @@ void RigidBodyComponent::Update()
 	if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsTopCollision() == true)
 	{
 		m_obj->y = m_obj->GetComponent<PixelCollisionComponent>()->GetCheckY() + 60;
-	}
-
-	if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
-	{
-		m_obj->y -= 15;
-		m_speed = 5;
 	}
 }
 
