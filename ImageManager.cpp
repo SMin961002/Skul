@@ -262,11 +262,6 @@ void ImageManager::LoadImages()
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
 	AddStructureImage("Elevator", L"./Resources/Tile/4Stage/Structure/elevator.png");
 
-	// 몬스터 체력바 이미지
-	AddImageVector("Hpbar_Empty", L"./Resources/Monster/Hpbar/Empty/", 1, 1);
-	AddImageVector("Hpbar_Down", L"./Resources/Monster/Hpbar/Down/", 1, 1);
-	AddImageVector("Hpbar_Up", L"./Resources/Monster/Hpbar/Up/",1,1);
-
 	// 몬스터 이미지
 	AddImageVector("Leon_Idle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
 	AddImageVector("Leon_Attack", L"Resources/Monster/Leonia Soldier/Attack/", 1, 4);

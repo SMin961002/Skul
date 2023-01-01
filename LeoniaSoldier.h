@@ -10,19 +10,15 @@ private:
 		eAttack,
 		eRun,
 		eHit,
-		eHpbarUp,
-		eHpbarDown,
-		eHPbarEmpty,
 		eEnd
 	};
 
-	
 	vImage* m_vimage[eEnd];
 	bool m_attack;
 	bool m_move;
 	bool m_attackleft;
-	CollisionComponent* m_collision;
-	CollisionComponent* m_hitpointcollision;
+	CollisionComponent* collision;
+	CollisionComponent* collision2;
 public:
 	virtual void Init() override;
 	virtual void Update() override;

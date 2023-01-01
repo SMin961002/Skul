@@ -7,9 +7,7 @@ private:
 	
 
 protected:
-	float m_maxhp; // ¸â¹öº¯¼ö
-	float m_currenthp;
-	float m_hpbar;
+	float m_hp; // ¸â¹öº¯¼ö
 	float m_attack; 
 	float m_power;
 

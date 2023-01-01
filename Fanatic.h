@@ -17,9 +17,6 @@ private:
 		SetcrificeLoop,
 		SetcrificeReady,
 		eHit,
-		eHPbarEmpty,
-		eHpbarDown,
-		eHpbarUp,
 		eEnd
 	};
 	float m_hitTimer;

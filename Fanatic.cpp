@@ -5,9 +5,6 @@
 #include "Player.h"
 void Fanatic::Init()
 {
-	m_maxhp = 300.0f;
-	m_currenthp = 300.0f;
-	m_hpbar = 0;
 	m_hitTimer = 0;
 	m_isHit = false;
 	m_state = eIdle;
@@ -31,13 +28,6 @@ void Fanatic::Init()
 	m_vimage[SetcrificeReady]->Setting(0.1f, true);
 	m_vimage[eHit] = IMAGEMANAGER->AddImageVectorCopy("Fanatic_Hit");
 	m_vimage[eHit]->Setting(0.2f, false);
-
-	m_vimage[eHPbarEmpty] = IMAGEMANAGER->AddImageVectorCopy("Hpbar_Empty");
-	m_vimage[eHPbarEmpty]->Setting(0.4f, false);
-	m_vimage[eHpbarDown] = IMAGEMANAGER->AddImageVectorCopy("Hpbar_Down");
-	m_vimage[eHpbarDown]->Setting(0.4f, false);
-	m_vimage[eHpbarUp] = IMAGEMANAGER->AddImageVectorCopy("Hpbar_Up");
-	m_vimage[eHpbarUp]->Setting(0.4f, false);
 
 	m_isReverse = false;
 	m_isAttack = false;
@@ -83,7 +73,7 @@ void Fanatic::Update()
 			m_state = eIdle;
 		}
 	}
-	m_hpbar = (1 / m_maxhp);
+
 	ImageResetCheck();
 	if (KEYMANAGER->GetOnceKeyDown(VK_F3))
 	{
@@ -93,17 +83,7 @@ void Fanatic::Update()
 
 void Fanatic::Render()
 {
-	if (m_currenthp >= 0)
-	{
-		m_vimage[m_state]->CenterRender(m_obj->x, m_obj->y - 55, 2, 2, 0, m_isReverse);
-		m_vimage[eHPbarEmpty]->Render(m_obj->x - 20, m_obj->y + 15, 1, 1, 0);
-		m_vimage[eHpbarDown]->Render(m_obj->x - 20, m_obj->y + 15, 1, 1, 0);
-		m_vimage[eHpbarUp]->Render(m_obj->x - 20, m_obj->y + 15, (m_currenthp * m_hpbar), 1, 0);
-	}
-	else
-	{
-		m_obj->Release();
-	}
+	m_vimage[m_state]->CenterRender(m_obj->x, m_obj->y - 55, 2, 2, 0, m_isReverse);
 }
 
 void Fanatic::Release()
@@ -123,8 +103,6 @@ void Fanatic::HitEnemy(float dmg)
 	m_obj->x += m_isReverse ? DELTA_TIME * 500 : -DELTA_TIME * 500;
 	m_obj->y -= 10;
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
-	dmg = 10; //-= 플레이어 어택 데미지 상의
-	m_currenthp -= dmg;
 }
 
 void Fanatic::ImageResetCheck()
