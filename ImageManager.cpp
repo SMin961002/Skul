@@ -44,6 +44,12 @@ ImageManager::~ImageManager()
 		SAFE_DELETE(iter.second);
 	}
 	m_gimages.clear();
+
+	for (auto iter : m_vImages)
+	{
+		SAFE_DELETE(iter);
+	}
+	m_vImages.clear();
 }
 
 void ImageManager::Init()
@@ -243,7 +249,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Consecration_End", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/End/Phase1_Consecration_End_", 1, 21);
 	// 1페이즈_좌우 구슬
 	AddImageVector("Boss_Worship", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Worship/Phase1_Worship_Projectile_", 1, 60);
-	
+
 	// 2페이즈_대기
 	AddImageVector("Phase2_Boss_Idle", L"./Resources/Saint_Joanna/Phase_2/Idle/Phase2_Idle_", 1, 6);
 	// 구체 생성
@@ -276,15 +282,15 @@ void ImageManager::LoadImages()
 	AddImageVector("Bfanatic_AttackIdle", L"Resources/Monster/Black Fanatic/Attack Idle/", 1, 5);
 	AddImageVector("BFanatic_Runattack", L"Resources/Monster/Black Fanatic/Walk Attack/", 1, 8);
 	AddImageVector("BFanatic_Run", L"Resources/Monster/Black Fanatic/Walk/", 1, 6);
-	
-	AddImageVector("Cfanatic_Idle", L"Resources/Monster/Candle_Fanatic/Idle/",1, 6);
+
+	AddImageVector("Cfanatic_Idle", L"Resources/Monster/Candle_Fanatic/Idle/", 1, 6);
 	AddImageVector("Cfanatic_AttackReady", L"Resources/Monster/Candle_Fanatic/Attack_Ready/", 1, 17);
 	AddImageVector("Cfanatic_Attack", L"Resources/Monster/Candle_Fanatic/Attack/", 1, 10);
-	AddImageVector("Cfanatic_Run", L"Resources/Monster/Candle_Fanatic/Run/",1, 8);
+	AddImageVector("Cfanatic_Run", L"Resources/Monster/Candle_Fanatic/Run/", 1, 8);
 	AddImageVector("Cfanatic_Hit", L"Resources/Monster/Candle_Fanatic/Hit/", 1, 1);
 	AddImageVector("Cfanatic_Satcrifice", L"Resources/Monster/Candle_Fanatic/Setcrifice/", 1, 15);
-	AddImageVector("Cfanatic_SatcrificeReady", L"Resources/Monster/Candle_Fanatic/Setcrifice_Ready/",1, 6);
-	AddImageVector("Cfanatic_SatcrificeLoop", L"Resources/Monster/Candle_Fanatic/Setcrifice_Loop/",1, 5);
+	AddImageVector("Cfanatic_SatcrificeReady", L"Resources/Monster/Candle_Fanatic/Setcrifice_Ready/", 1, 6);
+	AddImageVector("Cfanatic_SatcrificeLoop", L"Resources/Monster/Candle_Fanatic/Setcrifice_Loop/", 1, 5);
 
 	AddImageVector("Tentacles_Idle", L"Resources/Monster/Tentacles_Of_Light/Idle/", 1, 10);
 	AddImageVector("Tentacles_Attack", L"Resources/Monster/Tentacles_Of_Light/Attack/", 1, 8);
@@ -304,8 +310,8 @@ void ImageManager::LoadImages()
 	AddImageVector("Befanatic_SacrificeLoop", L"Resources/Monster/Bell_Fanatic/Sacrifice_Loop/", 1, 1);
 	AddImageVector("Befanatic_SummonLoop", L"Resources/Monster/Bell_Fanatic/Summon_Loop/", 1, 12);
 	AddImageVector("Befanatic_SummonReady", L"Resources/Monster/Bell_Fanatic/Summon_Ready/", 1, 4);
-	
-	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/",1, 40);
+
+	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/", 1, 40);
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
 }
@@ -404,6 +410,21 @@ vImage* ImageManager::FindImageVector(const std::string key)
 		return find->second;
 	}
 	cout << "애니메이션 key 없음 : " << key << "\n";
+	return nullptr;
+}
+
+vImage* ImageManager::AddImageVectorCopy(const std::string key)
+{
+	auto find = m_vectorImageList.find(key);
+	if (find != m_vectorImageList.end())
+	{
+		vImage* vimg = new vImage();
+		for (auto iter : find->second->GetImages())
+		{
+			vimg->AddImage(iter);
+		}
+		return vimg;
+	}
 	return nullptr;
 }
 
@@ -538,7 +559,7 @@ void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
 	}
 }
 
-void ImageManager::DrawColorRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse,D2D1_COLOR_F colr)
+void ImageManager::DrawColorRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse, D2D1_COLOR_F colr)
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 
