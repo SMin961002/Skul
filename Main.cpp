@@ -12,7 +12,7 @@ void Main::Init()
 
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
-	SCENEMANAGER->ChangeScene("EnemyTestScene");
+	//SCENEMANAGER->ChangeScene("EnemyTestScene");
 }
 
 void Main::Update()
@@ -24,6 +24,10 @@ void Main::Update()
 	if (KEYMANAGER->GetOnceKeyDown(VK_F7))
 	{
 		SCENEMANAGER->ChangeScene("MapToolMapSelectScene");
+	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_F8))
+	{
+		SCENEMANAGER->ChangeScene("BossScene");
 	}
 	if (KEYMANAGER->GetToggleKey(VK_F12))
 	{

@@ -2,8 +2,6 @@
 
 class Idle
 {
-	vImage* _imgBoss;
-	RECT _rcBoss;
 
 public:
 	void Init();
