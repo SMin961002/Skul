@@ -247,6 +247,10 @@ void ImageManager::LoadImages()
 	// 1페이즈_좌우 구슬
 	AddImageVector("Boss_Worship", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Worship/Phase1_Worship_Projectile_", 1, 60);
 	// 2페이즈_대기
+	AddImageVector("Phase2_Boss_Idle", L"./Resources/Saint_Joanna/Phase_2/Idle/Phase2_Idle_", 1, 7);
+	// 2페이즈_회전 구체 생성
+	AddImageVector("Phase2_Boss_CreateBall_Ready", L"./Resources/Saint_Joanna/Phase_2/Idle/Phase2_Idle_", 1, 7);
+
 	//==========================================================================================================
 	// 맵 구조물 이미지
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
