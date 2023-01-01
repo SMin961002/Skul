@@ -30,13 +30,16 @@ void EnemyTestScene::Init()
 	strData = FILEMANAGER->GetFileData("Structure", "batch");
 	MY_UTILITY::ConvertStructureString2Vec(&m_sturctDatas, strData);
 
-	OBJECTMANAGER->AddObject("player", 500 , -100, ePlayer)->AddComponent<Player>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 400, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 500, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-
+	OBJECTMANAGER->AddObject("player", 500, -100, ePlayer)->AddComponent<Player>();
+	for (int i = 0; i < 5; i++)
+	{
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + (100*i), 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + (200*i), 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+	}
+	
 	//BJECTMANAGER->AddObject("Enemy2", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<CandleFanatic>();
 	//OBJECTMANAGER->AddObject("Enemy3", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<TentaclesOfLight>();
 	//OBJECTMANAGER->AddObject("Enemy4", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<LampFanatic>();
