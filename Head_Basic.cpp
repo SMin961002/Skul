@@ -22,7 +22,7 @@ void Head_Basic::ImageSetting()
 	img[eJump]->Setting(0.1, false);
 	img[eJumpAttack] = IMAGEMANAGER->FindImageVector("Basic_JumpAttack");
 	img[eJumpAttack]->Setting(0.1, false);
-	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize()-1,0.2);
+	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize() - 1, 0.2);
 	img[eJumpDown] = IMAGEMANAGER->FindImageVector("Basic_JumpRepeat");	//JumpFall 이미지는 착지순간만 재생, img변수 따로 두었음
 	img[eJumpDown]->Setting(0.1, true);
 	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Basic_JumpFall");
@@ -89,7 +89,7 @@ void Head_Basic::ParameterSetting()
 void Head_Basic::CollisionSetting()
 {
 	CollisionComponent* attack1 = m_obj->AddComponent<CollisionComponent>();
-	attack1->Setting(50, m_obj->x + 6 + 40, m_obj->y - 24 + 72,"기본공격");
+	attack1->Setting(50, m_obj->x + 6 + 40, m_obj->y - 24 + 72, "기본공격");
 	attack1->SetIsActive(false);
 	m_obj->AddCollisionComponent(attack1);
 }
@@ -120,6 +120,7 @@ void Head_Basic::ActionArrangement()
 		nowImg->Reset();
 		if (m_attackCast)
 		{
+			m_action = eAutoAttack_2;
 			nowImg = img[eAutoAttack_2];
 			m_attackCount = 2;
 			for (auto iter : m_obj->GetCollisionComponent())
@@ -163,6 +164,31 @@ void Head_Basic::CollisionUpdate()
 	{
 		if (iter->GetName() == "기본공격")
 		{
+			if (m_action == eAutoAttack_1)
+			{
+				if (img[eAutoAttack_1]->GetFrame() > 1 && img[eAutoAttack_1]->GetFrame() < 3)
+				{
+					iter->SetIsActive(true);
+				}
+				else
+				{
+					iter->SetIsActive(false);
+				}
+			}
+			else if (m_action == eAutoAttack_2)
+			{
+				if (img[eAutoAttack_2]->GetFrame() > 0 && img[eAutoAttack_2]->GetFrame() < 2)
+				{
+					iter->SetIsActive(true);
+				}
+				else
+				{
+					iter->SetIsActive(false);
+				}
+			}
+
+
+
 			if (m_isLeft)
 				iter->Setting(m_obj->x, m_obj->y);
 			else iter->Setting(m_obj->x + 50, m_obj->y - 16);
@@ -208,5 +234,5 @@ void Head_Basic::InputAttackKey()
 
 void Head_Basic::DrawCharactor()
 {
-	nowImg->CenterRender(m_obj->x, m_obj->y-56, 2, 2, 0, m_isLeft);
+	nowImg->CenterRender(m_obj->x, m_obj->y - 56, 2, 2, 0, m_isLeft);
 }

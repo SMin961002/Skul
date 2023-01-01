@@ -186,7 +186,7 @@ public:
 	vector<CImage*> GetImages() { return m_images; }
 	int GetImageSize() { return m_images.size(); }
 	float GetTotalDelay() { return m_totalDelay; }
-
+	float GetFrame() { return m_frame; }
 	void Setting(float delayTime, bool isLoop)
 	{
 		vector<CImage*>::iterator iter;
