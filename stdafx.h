@@ -51,10 +51,11 @@ enum ObjectTag
 
 struct StructureData
 {
-	string key;
-	float x;
-	float y;
-	bool isBack;
+	string key = "";
+	float x = 0;
+	float y = 0;
+	bool isBack = false;
+	int page = 0;
 };
 
 #define WIN_NAME "금강상태"

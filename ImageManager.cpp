@@ -314,6 +314,16 @@ void ImageManager::LoadImages()
 	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/", 1, 40);
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
+
+	//맵툴 오브젝트 이미지 저장
+	AddObjectImage("Leon", L"Resources/Monster/Leonia Soldier/Idle/01.png");
+	AddObjectImage("Fanatic", L"Resources/Monster/Fanatic/Idle/01.png");
+	AddObjectImage("Bfanatic", L"Resources/Monster/Black Fanatic/Idle/01.png");
+	AddObjectImage("Cfanatic", L"Resources/Monster/Candle_Fanatic/Idle/01.png");
+	AddObjectImage("Tentacles", L"Resources/Monster/Tentacles_Of_Light/Idle/01.png");
+	AddObjectImage("Lfanatic", L"Resources/Monster/Lamp_Fanatic/Idle/01.png");
+	AddObjectImage("Befanatic", L"Resources/Monster/Bell_Fanatic/Idle/01.png");
+	AddObjectImage("AStatue", L"Resources/Monster/Angel_Statue/Idle/01.png");
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
@@ -359,6 +369,14 @@ CImage* ImageManager::AddStructureImage(std::string key, std::wstring path)
 	UINT _width = 0, _height = 0;
 	CImage* img = new CImage(AddBitmap(path, &_width, &_height), _width, _height);
 	m_structureImages.insert(make_pair(key, img));
+	return nullptr;
+}
+
+CImage* ImageManager::AddObjectImage(std::string key, std::wstring path)
+{
+	UINT _width = 0, _height = 0;
+	CImage* img = new CImage(AddBitmap(path, &_width, &_height), _width, _height);
+	m_objectImages.insert(make_pair(key, img));
 	return nullptr;
 }
 

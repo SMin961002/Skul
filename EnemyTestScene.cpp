@@ -30,12 +30,29 @@ void EnemyTestScene::Init()
 	strData = FILEMANAGER->GetFileData("Structure", "batch");
 	MY_UTILITY::ConvertStructureString2Vec(&m_sturctDatas, strData);
 
+	string strData2;
+	strData2 = FILEMANAGER->GetFileData("Object", "batch");
+	MY_UTILITY::ConvertStructureString2Vec(&m_objectDatas, strData2);
+	
+
+	for (auto iter : m_objectDatas)
+	{
+		if (iter->key == "Fanatic")
+		{
+			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+		}
+		else if (iter->key == "Leon")
+		{
+			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+		}
+	}
+
 	OBJECTMANAGER->AddObject("player", 500 , -100, ePlayer)->AddComponent<Player>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 400, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 500, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 400, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 500, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 
 	//BJECTMANAGER->AddObject("Enemy2", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<CandleFanatic>();
 	//OBJECTMANAGER->AddObject("Enemy3", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<TentaclesOfLight>();
@@ -75,6 +92,12 @@ void EnemyTestScene::Release()
 {
 	SCENEMANAGER->m_tiles.clear();
 	for (auto iter : m_sturctDatas)
+	{
+		SAFE_DELETE(iter);
+	}
+	m_sturctDatas.clear();
+
+	for (auto iter : m_objectDatas)
 	{
 		SAFE_DELETE(iter);
 	}
