@@ -43,6 +43,8 @@ void LeoniaSoldier::Init()
 
 void LeoniaSoldier::Update()
 {
+	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+
 	collision->Setting(30,m_obj->x+17,m_obj->y-20,"Attack");
 	
 	//collision2->Setting(5, m_obj->x, m_obj->y, "Attack2");
@@ -117,4 +119,15 @@ void LeoniaSoldier::OnCollision(string collisionName, Object* other)
 			m_move = false;	
 		}
 	}
+}
+
+void LeoniaSoldier::HitEnemy(float dmg)
+{
+	/*m_isAttack = false;
+	m_isHit = true;
+	m_state = eHit;*/
+	m_vimage[eHit]->Reset();
+	m_obj->x += m_obj->x > OBJECTMANAGER->m_player->GetplayerX() ? DELTA_TIME * 500 : -DELTA_TIME * 500;
+	m_obj->y -= 10;
+	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 }

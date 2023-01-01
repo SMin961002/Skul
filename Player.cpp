@@ -21,7 +21,6 @@ void Player::Init()
 	OBJECTMANAGER->m_player = this;
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 	coll = m_obj->AddComponent<CollisionComponent>();
-	m_obj->GetCollisionComponent().push_back(coll);
 	m_obj->AddCollisionComponent(coll);
 	m_obj->AddComponent<RigidBodyComponent>();
 
@@ -68,6 +67,16 @@ void Player::Release()
 void Player::OnCollision(string collisionName, Object* other)
 {
 	if (collisionName == coll->GetName())
+	{
+		if (other->GetName() == "Enemy")
+		{
+			//##데미지 받기
+			m_life -= 10;
+			if (m_life < 0) m_life = 0;
+			cout << m_life << endl;
+		}
+	}
+	if (collisionName == "기본공격")
 	{
 		if (other->GetName() == "Enemy")
 		{

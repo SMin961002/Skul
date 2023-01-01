@@ -41,7 +41,7 @@ void Fanatic::Update()
 {
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 
-	m_hitCollision->Setting(30,m_obj->x,m_obj->y,"HitCollision");
+	m_hitCollision->Setting(30,m_obj->x+15,m_obj->y-10,"HitCollision");
 	if (m_isHit == true)
 	{
 		m_hitTimer += DELTA_TIME;

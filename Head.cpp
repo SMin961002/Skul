@@ -153,13 +153,11 @@ void Head::InputJumpKey()
 			else
 			{
 				m_attackCount = 0;
-
 				m_action = eJump;
 				m_jumpCount++;
 				m_jumpNowSpeed = m_jumpSpeed;
 				m_jumpping = true;
 				m_imageChange = true;
-
 			}
 		}
 	}//end 'C'
