@@ -33,6 +33,9 @@ void EnemyTestScene::Init()
 	OBJECTMANAGER->AddObject("player", 500 , -100, ePlayer)->AddComponent<Player>();
 	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
 	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 400, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 500, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 
 	//BJECTMANAGER->AddObject("Enemy2", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<CandleFanatic>();
 	//OBJECTMANAGER->AddObject("Enemy3", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<TentaclesOfLight>();
