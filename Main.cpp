@@ -11,6 +11,8 @@ void Main::Init()
 	
 
 	IMAGEMANAGER->LoadImages();
+	TIMERMANAGER->Init();
+	SCENEMANAGER->ChangeScene("EnemyTestScene");
 }
 
 void Main::Update()

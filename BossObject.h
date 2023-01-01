@@ -4,7 +4,6 @@
 class BossObject : public Component
 {
 private:
-	vImage* _imgBoss;
 
 public:
 	virtual void Init() override;
@@ -12,7 +11,6 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 
-	virtual void Pattern();
 
 	BossObject() {}
 	~BossObject() {}

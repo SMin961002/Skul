@@ -116,6 +116,27 @@
     <ClCompile Include="Head_Basic.cpp">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
+    <ClCompile Include="Baptism.cpp">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClCompile>
+    <ClCompile Include="Casting.cpp">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClCompile>
+    <ClCompile Include="HollyFountain.cpp">
+      <Filter>Game\Object\Boss\HolyFountain</Filter>
+    </ClCompile>
+    <ClCompile Include="Worship.cpp">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClCompile>
+    <ClCompile Include="Consercration.cpp">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClCompile>
+    <ClCompile Include="Choice.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Nervousness.cpp">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -232,6 +253,27 @@
     <ClInclude Include="Head_Basic.h">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
+    <ClInclude Include="Baptism.h">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClInclude>
+    <ClInclude Include="Casting.h">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClInclude>
+    <ClInclude Include="HollyFountain.h">
+      <Filter>Game\Object\Boss\HolyFountain</Filter>
+    </ClInclude>
+    <ClInclude Include="Worship.h">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClInclude>
+    <ClInclude Include="Consercration.h">
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
+    </ClInclude>
+    <ClInclude Include="Choice.h">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Nervousness.h">
+      <Filter>Game\Object\Boss\Pattern</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -347,6 +389,9 @@
     </Filter>
     <Filter Include="Game\Object\Enemy\AngelStatue">
       <UniqueIdentifier>{69a7fdb2-de1f-4adc-922c-ad186893eab6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\HolyFountain">
+      <UniqueIdentifier>{e3708110-68e5-4ccd-9104-715376429e00}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
