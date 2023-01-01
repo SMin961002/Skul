@@ -6,7 +6,7 @@ void RigidBodyComponent::Init()
 	m_speed = 0;
 	m_gravity = 9.8 * DELTA_TIME;
 	cout << DELTA_TIME;
-	m_isGravity = false;
+	m_isGravity = true;
 	pixelCollisionComponent = m_obj->GetComponent<PixelCollisionComponent>();
 
 	pixelCollisionComponent->RSettingRect({ 25 , -30, 30 , -15 });

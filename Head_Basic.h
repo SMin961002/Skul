@@ -11,6 +11,8 @@ public:
 	virtual void ParameterSetting() override;
 	virtual void CollisionSetting() override;
 
+	virtual void CoolDown() override;
+
 	virtual void ActionArrangement() override;
 	virtual void CollisionUpdate() override;
 

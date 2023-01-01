@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Head_Basic.h"
+#include "RigidBodyComponent.h"
 
 void Head_Basic::ImageSetting()
 {
@@ -14,16 +15,12 @@ void Head_Basic::ImageSetting()
 	img[eAutoAttack_1]->Setting(0.11f, false);
 	img[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Basic_Attack2");
 	img[eAutoAttack_2]->Setting(0.15f, false);
-
-	//↓↓setting 필요↓↓
-	//↓↓setting 필요↓↓
-	//↓↓setting 필요↓↓	##
 	img[eJump] = IMAGEMANAGER->FindImageVector("Basic_JumpStart");
-	img[eJump]->Setting(0.1, false);
+	img[eJump]->Setting(0.1, true);
 	img[eJumpAttack] = IMAGEMANAGER->FindImageVector("Basic_JumpAttack");
 	img[eJumpAttack]->Setting(0.1, false);
 	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize()-1,0.2);
-	img[eJumpDown] = IMAGEMANAGER->FindImageVector("Basic_JumpRepeat");	//JumpFall 이미지는 착지순간만 재생, img변수 따로 두었음
+	img[eJumpDown] = IMAGEMANAGER->FindImageVector("Basic_JumpRepeat");
 	img[eJumpDown]->Setting(0.1, true);
 	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Basic_JumpFall");
 	img[eJumpLand]->Setting(0.1, false);
@@ -41,9 +38,6 @@ void Head_Basic::ImageSetting()
 	img_headless[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Basic_Headless_Attack2");
 	img_headless[eAutoAttack_2]->Setting(0.15f, false);
 
-	//↑↑setting 필요↑↑
-	//↑↑setting 필요↑↑
-	//↑↑setting 필요↑↑
 	img_reborn = IMAGEMANAGER->FindImageVector("Basic_Reborn");
 	img_reborn->Setting(0.1f, true);
 
@@ -56,11 +50,11 @@ void Head_Basic::ParameterSetting()
 
 	m_action = eIdle;
 
-	m_moveSpeed = 3;
+	m_moveSpeed = 180;
 	m_isLeft = false;
 	m_isDown = false;
 
-	m_dashSpeed = 3.5;	//##dash 이동식 수정 필요
+	m_dashSpeed = 240;		//##dash 이동식 수정 필요
 	m_dashTime = 2 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
 	m_dashCool = 1;
@@ -69,8 +63,8 @@ void Head_Basic::ParameterSetting()
 	m_dashMax = 2;			//대시 최대 횟수
 	m_dashing = false;
 
-	m_jumpSpeed = 50;
-	m_jumpNowSpeed = 0.2;
+	m_jumpSpeed = 8;
+	m_jumpStart = false;
 	m_jumpCount = 0;
 	m_jumpMax = 2;
 	m_jumpping = false;
@@ -92,6 +86,39 @@ void Head_Basic::CollisionSetting()
 	attack1->Setting(50, m_obj->x + 6 + 40, m_obj->y - 24 + 72,"기본공격");
 	attack1->SetIsActive(false);
 	m_obj->AddCollisionComponent(attack1);
+}
+
+void Head_Basic::CoolDown()
+{
+	float deltaTime = DELTA_TIME;
+	if (m_dashNowCool > 0)
+	{
+		m_dashNowCool -= deltaTime;
+		if (m_dashNowCool < 0) m_dashNowCool = 0;
+	}
+	if (m_dashNowTime > 0)
+	{
+		m_dashNowTime -= deltaTime;
+		if (m_dashNowTime < 0)
+		{
+			m_dashNowTime = 0;
+			m_dashCount = 0;
+			m_dashing = false;
+			m_dashNowCool = m_dashCool;
+			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
+		}
+	}
+
+	if (m_skillNowCoolA > 0)
+	{
+		m_skillNowCoolA -= deltaTime;
+		if (m_skillNowCoolA < 0)m_skillNowCoolA = 0;
+	}
+	if (m_skillNowCoolS > 0)
+	{
+		m_skillNowCoolS -= deltaTime;
+		if (m_skillNowCoolS < 0) m_skillNowCoolS = 0;
+	}
 }
 
 void Head_Basic::InputSkillKey()
@@ -152,6 +179,10 @@ void Head_Basic::ActionArrangement()
 		{
 			nowImg->Reset();
 			nowImg = img[m_action];
+			if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
+			{
+				m_action = eIdle;
+			}
 		}
 		//m_attackCount = 0;
 	}
@@ -164,8 +195,8 @@ void Head_Basic::CollisionUpdate()
 		if (iter->GetName() == "기본공격")
 		{
 			if (m_isLeft)
-				iter->Setting(m_obj->x, m_obj->y);
-			else iter->Setting(m_obj->x + 50, m_obj->y - 16);
+				iter->Setting(m_obj->x, m_obj->y-10);
+			else iter->Setting(m_obj->x + 50, m_obj->y-10);
 		}
 	}
 }
@@ -180,6 +211,13 @@ void Head_Basic::InputAttackKey()
 			{
 				m_action = eJumpAttack;
 				m_attackCount = m_attackMax;
+				for (auto iter : m_obj->GetCollisionComponent())
+				{
+					if (iter->GetName() == "기본공격")
+					{
+						iter->SetIsActive(true);
+					}
+				}
 				m_imageChange = true;
 			}
 		}//end if jumpping

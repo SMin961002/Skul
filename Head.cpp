@@ -33,103 +33,52 @@ void Head::Release()
 {
 }
 
-void Head::ImageSetting()
-{
-	/*
-	Do Nothing
-	*/
-}
-
-void Head::ParameterSetting()
-{
-	/*
-	Do Nothing
-	*/
-}
-
-void Head::CollisionSetting()
-{
-	/*
-	Do Nothing
-	*/
-}
-
-void Head::CoolDown()
-{
-	float deltaTime = DELTA_TIME;
-	if (m_dashNowCool > 0)
-	{
-		m_dashNowCool -= deltaTime;
-		if (m_dashNowCool < 0) m_dashNowCool = 0;
-	}
-	if (m_dashNowTime > 0)
-	{
-		m_dashNowTime -= deltaTime;
-		if (m_dashNowTime < 0)
-		{
-			m_dashNowTime = 0;
-			m_dashCount = 0;
-			m_dashing = false;
-			m_dashNowCool = m_dashCool;
-			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
-		}
-	}
-
-	if (m_skillNowCoolA > 0)
-	{
-		m_skillNowCoolA -= deltaTime;
-		if (m_skillNowCoolA < 0)m_skillNowCoolA = 0;
-	}
-	if (m_skillNowCoolS > 0)
-	{
-		m_skillNowCoolS -= deltaTime;
-		if (m_skillNowCoolS < 0) m_skillNowCoolS = 0;
-	}
-}
-
 void Head::Move()
 {
+	cout << m_jumpCount << endl;
+
 	if (m_action == eWalk)
 	{
 		m_action = this->eIdle;
 		m_imageChange = true;
 	}
-	InputJumpKey();
 	InputDashKey();
 
 	//대시중일 때
 	if (m_dashing)
 	{		//##dash 이동식 수정 필요
-		if (m_isLeft) { m_obj->x -= m_dashSpeed; }
-		else { m_obj->x += m_dashSpeed; }
+		if (m_isLeft) { m_obj->x -= m_dashSpeed * DELTA_TIME; }
+		else { m_obj->x += m_dashSpeed*DELTA_TIME; }
 	}
 	else if (m_attackCount == 0)
 	{
 		InputArrowKey();	//대시, 공격중에 걷기 불가하므로
 	}
 
+	//바닥에서 발이 떠있을 때
+	if(!m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision())
+	{
+		m_jumpping = true;	//점프중으로 인식하기
+	}
+
 	//점프중일 때
 	if (m_jumpping)
 	{
-		m_obj->y -= m_jumpNowSpeed;
-		//##천장머리쿵 구현되어있음 적용방법 고민해보기, 점프계수수정필
-		m_jumpNowSpeed = -m_obj->GetComponent<RigidBodyComponent>()->GetGravity();
-		if (m_jumpNowSpeed < m_obj->GetComponent<RigidBodyComponent>()->GetGravity())
+		if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision())
 		{
-			m_jumpNowSpeed = -m_obj->GetComponent<RigidBodyComponent>()->GetGravity();
+			ResetJump();
+			img[eJumpDown]->Reset();
+			nowImg->Reset();
+			m_action = eJumpLand;
 		}
-		if (m_jumpNowSpeed == -m_obj->GetComponent<RigidBodyComponent>()->GetGravity())
-		{
-			if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision() == true)
-			{
-				ResetJump();
-				nowImg->Reset();
-				nowImg = img[eJumpLand];
-				nowImg->Reset();
-				m_action = eIdle;
-			}
-		}
+		else if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsTopCollision())
+			m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(0);
+		if (m_obj->GetComponent<RigidBodyComponent>()->GetGravityPower() < 0)
+			if(m_action != eJumpAttack) m_action = eJumpDown;
+
+		m_imageChange = true;
 	}
+	InputJumpKey();
 }
 
 void Head::Act()
@@ -147,19 +96,20 @@ void Head::InputJumpKey()
 	{
 		if (m_jumpCount < m_jumpMax)
 		{
-			if (m_isDown)
+			if (m_isDown)	//아래점프
 			{
+				m_obj->y += 11;
 			}
-			else
+			else			//일반점프
 			{
+				m_obj->y -= 11;			//점프직후 바닥충돌판정걸려서 탐지봉 길이만큼 미리 띄워줌
+
 				m_attackCount = 0;
-
-				m_action = eJump;
-				m_jumpCount++;
-				m_jumpNowSpeed = m_jumpSpeed;
 				m_jumpping = true;
+				m_action = eJump;
 				m_imageChange = true;
-
+				m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(m_jumpSpeed);
+				++m_jumpCount;
 			}
 		}
 	}//end 'C'
@@ -174,7 +124,7 @@ void Head::InputDashKey()
 			m_imageChange = true;
 
 			m_jumpping = false;
-			m_jumpNowSpeed = 0;
+			m_jumpStart = 0;
 
 			ResetAttack();
 
@@ -183,7 +133,7 @@ void Head::InputDashKey()
 			m_action = eDash;
 			img[eDash]->Reset();
 			nowImg = img[eDash];
-			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);//##중력이 왜 안꺼질까
+			//m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);//##점프상승이 안들어가
 			m_dashNowTime = m_dashTime;
 		}
 	}
@@ -197,7 +147,7 @@ void Head::InputArrowKey()
 	{
 		m_isLeft = true;
 		if(m_attackCount == 0)
-		m_obj->x -= m_moveSpeed;
+		m_obj->x -= m_moveSpeed * DELTA_TIME;
 		if (!m_jumpping) {
 			m_action = eWalk;
 			m_imageChange = true;
@@ -207,7 +157,7 @@ void Head::InputArrowKey()
 	if (KEYMANAGER->GetStayKeyDown(VK_RIGHT))
 	{
 		m_isLeft = false;
-		m_obj->x += m_moveSpeed;
+		m_obj->x += m_moveSpeed * DELTA_TIME;
 		if(!m_jumpping) {
 			m_action = eWalk;
 			m_imageChange = true;
@@ -218,28 +168,6 @@ void Head::InputArrowKey()
 	{
 		m_isDown = true;
 	}
-}
-
-void Head::InputAttackKey()
-{
-}
-
-void Head::InputSkillKey()
-{
-/*
-	Do Nothing
-*/
-}
-
-void Head::ActionArrangement()
-{
-}
-
-void Head::CollisionUpdate()
-{
-	/*
-	Do Notiong
-	*/
 }
 
 void Head::DrawCharactor()
