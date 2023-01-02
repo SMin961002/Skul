@@ -6,6 +6,7 @@
 #include"TentaclesOfLight.h"
 #include "Fanatic.h"
 #include"LampFanatic.h"
+#include "DoorObject.h"
 #include"BallFanatic.h"
 #include"AngelStatue.h"
 EnemyTestScene::EnemyTestScene()
@@ -18,6 +19,7 @@ EnemyTestScene::~EnemyTestScene()
 
 void EnemyTestScene::Init()
 {
+	isStart = false;
 	m_speed = 0;
 	m_backGround = IMAGEMANAGER->FindImage("Background");
 	m_castle = IMAGEMANAGER->FindImage("Castle");
@@ -33,8 +35,15 @@ void EnemyTestScene::Init()
 	string strData2;
 	strData2 = FILEMANAGER->GetFileData("Object", "batch");
 	MY_UTILITY::ConvertStructureString2Vec(&m_objectDatas, strData2);
-	
 
+
+	for (auto iter : m_objectDatas)
+	{
+		if (iter->key == "Basic")
+		{
+			OBJECTMANAGER->AddObject("player", iter->x, iter->y, ePlayer)->AddComponent<Player>();
+		}
+	}
 	for (auto iter : m_objectDatas)
 	{
 		if (iter->key == "Fanatic")
@@ -45,9 +54,17 @@ void EnemyTestScene::Init()
 		{
 			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
 		}
+		else if (iter->key == "NormalRoom")
+		{
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(0);
+		}
+		else if (iter->key == "SkulRoom")
+		{
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(1);
+		}
 	}
 
-	OBJECTMANAGER->AddObject("player", 500 , -100, ePlayer)->AddComponent<Player>();
+
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
@@ -67,6 +84,7 @@ void EnemyTestScene::Update()
 
 void EnemyTestScene::Render()
 {
+
 	m_speed += 100 * DELTA_TIME;
 	float RenderPos = (int)m_speed % (m_cloude->GetWidth() * 2);
 	IMAGEMANAGER->Render(m_backGround, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
@@ -102,4 +120,12 @@ void EnemyTestScene::Release()
 		SAFE_DELETE(iter);
 	}
 	m_objectDatas.clear();
+}
+
+void EnemyTestScene::UIRender()
+{
+	if (isStart == false)
+	{
+		SCENEMANAGER->FadeIn(0.02, [&]() {isStart = true; }, 15);
+	}
 }

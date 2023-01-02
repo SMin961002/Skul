@@ -96,6 +96,17 @@ void ObjectManager::Render()
 	}
 }
 
+void ObjectManager::UIRender()
+{
+	for (int i = 0; i < eEndTag; i++) // 먼저 그려주면 뒤에 그려지니까 렌더 순서를 정해줌 eEndTag F12눌러서 보십쇼
+	{
+		for (auto iter : m_objects[i])
+		{
+			iter->UIRender();
+		}
+	}
+}
+
 void ObjectManager::Release()
 {
 	for (int i = 0; i < eEndTag; i++)

@@ -86,7 +86,6 @@
     <ClCompile Include="WinMain.cpp">
       <Filter>Game\Object\Boss\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Idle.cpp" />
     <ClCompile Include="CandleFanatic.cpp">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClCompile>
@@ -172,6 +171,11 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Idle.cpp">
+      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuUI.cpp" />
+    <ClCompile Include="DoorObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -258,7 +262,6 @@
     <ClInclude Include="BossScene.h">
       <Filter>Game\Scene\BossScene</Filter>
     </ClInclude>
-    <ClInclude Include="Idle.h" />
     <ClInclude Include="CandleFanatic.h">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClInclude>
@@ -325,6 +328,11 @@
     <ClInclude Include="BossEffect.h">
       <Filter>Game\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Idle.h">
+      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuUI.h" />
+    <ClInclude Include="DoorObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

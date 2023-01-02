@@ -20,12 +20,19 @@ class Player : public Component
 	*/
 
 private:
+	enum UITag
+	{
+		ePlayerStatus,
+		eEnd
+	};
+	CImage* m_UIImage[UITag::eEnd];
+
 	Head* m_headList[1];
 	Head* m_headSlot[2];
 	Head* m_nowHead;
 	RECT m_hitBox;
 
-	short m_life;
+	int m_life;
 	float m_attack;
 	float m_deffendence;
 
@@ -40,6 +47,7 @@ public:
 	virtual void Update() override;
 	virtual void Release() override;
 	virtual void Render() override;
+	virtual void UIRender() override;
 
 	void InputArtifactKey();	
 	bool  m_haveArtifact;

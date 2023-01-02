@@ -4,6 +4,8 @@
 #include "Enemy.h"
 void Player::Init()
 {
+	m_UIImage[ePlayerStatus] = IMAGEMANAGER->FindImage("PlayerStatusUI");
+
 	m_life = 100;
 	m_headList[0] = new Head_Basic;
 	m_headList[0]->SetObject(m_obj);
@@ -49,6 +51,11 @@ void Player::Update()
 void Player::Render()
 {
 	m_nowHead->Render();
+}
+
+void Player::UIRender()
+{
+	IMAGEMANAGER->UIRender(m_UIImage[ePlayerStatus],0,430,2,2,0);
 }
 
 void Player::InputArtifactKey()

@@ -2,7 +2,6 @@
 
 class Idle
 {
-
 public:
 	void Init();
 	void Update();
