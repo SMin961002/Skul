@@ -29,6 +29,7 @@ private:
 	float m_motiontimer;
 	bool m_hitpoint;
 	bool m_sercrifice;
+
 	CollisionComponent* m_hitCollision;
 	CollisionComponent* m_hitpointCollision;
 
