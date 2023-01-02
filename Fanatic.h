@@ -6,6 +6,7 @@ private:
 	bool m_isReverse;
 	bool m_isHit;
 	bool m_isAttack;
+	bool m_hit;
 	enum IamgeState
 	{
 		eIdle,
@@ -17,11 +18,18 @@ private:
 		SetcrificeLoop,
 		SetcrificeReady,
 		eHit,
+		eHPbarEmpty,
+		eHpbarDown,
+		eHpbarUp,
 		eEnd
 	};
 	float m_hitTimer;
 	int m_state;
+	float m_hpbartimer;
+	float m_motiontimer;
+	bool m_hitpoint;
 	CollisionComponent* m_hitCollision;
+	CollisionComponent* m_hitpointCollision;
 
 	vImage* m_vimage[eEnd];
 public:
