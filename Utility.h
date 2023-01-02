@@ -86,6 +86,8 @@ namespace MY_UTILITY // utility
 			ss << (*iter)->x;
 			ss << ",";
 			ss << (*iter)->y;
+			ss << ",";
+			ss << (*iter)->page;
 		}
 		*str = ss.str();
 	}
@@ -111,6 +113,8 @@ namespace MY_UTILITY // utility
 			sd->x = stoi(_vec.front());
 			_vec.pop();
 			sd->y = stoi(_vec.front());
+			_vec.pop();
+			sd->page = stoi(_vec.front());
 			_vec.pop();
 			vec->push_back(sd);
 		}

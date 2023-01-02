@@ -10,6 +10,9 @@ void Fanatic::Init()
 	m_hpbar = 0;
 	m_hitTimer = 0;
 	m_isHit = false;
+	m_hit = false;
+	m_hitTimer = 0;
+	m_motiontimer = 0;
 	m_state = eIdle;
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 
@@ -43,8 +46,10 @@ void Fanatic::Init()
 	m_isAttack = false;
 
 	m_hitCollision = m_obj->AddComponent<CollisionComponent>();
+	m_hitpointCollision = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddComponent<RigidBodyComponent>();
 	m_obj->AddCollisionComponent(m_hitCollision);
+	m_obj->AddCollisionComponent(m_hitpointCollision);
 }
 
 void Fanatic::Update()
@@ -52,6 +57,10 @@ void Fanatic::Update()
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 
 	m_hitCollision->Setting(30,m_obj->x+15,m_obj->y-10,"HitCollision");
+	if (m_hit)
+	{
+		m_hpbartimer += DELTA_TIME;
+	}
 	if (m_isHit == true)
 	{
 		m_hitTimer += DELTA_TIME;
@@ -60,13 +69,30 @@ void Fanatic::Update()
 	{
 	}
 	float xDest = m_obj->x - OBJECTMANAGER->m_player->GetplayerX();
+	if (m_vimage[eAttack]->GetFrame() >= 9 && m_vimage[eAttack]->GetFrame() <= 10)
+	{
+		m_hitpointCollision->SetIsActive(true);
+	}
+	else
+	{
+		m_hitpointCollision->SetIsActive(false);
+	}
 	if (m_isAttack == false && m_isHit == false)
 	{
+		
 		if (xDest < 300 && xDest > -300)
 		{
 			if (xDest < 100 && xDest > -100)
 			{
 				m_state = eAttack;
+				if (OBJECTMANAGER->m_player->GetplayerX()<= m_obj->x)
+				{
+					m_hitpointCollision->Setting(40, m_obj->x - 17, m_obj->y - 20, "AttackPoint");
+				}
+				else
+				{
+					m_hitpointCollision->Setting(40, m_obj->x + 65, m_obj->y - 20, "AttackPoint");
+				}
 				m_vimage[eAttack]->Reset();
 
 				m_isAttack = true;
@@ -83,12 +109,12 @@ void Fanatic::Update()
 			m_state = eIdle;
 		}
 	}
+	if (m_isAttack == false)
+	{
+		m_hitpointCollision->SetIsActive(false);
+	}
 	m_hpbar = (1 / m_maxhp);
 	ImageResetCheck();
-	if (KEYMANAGER->GetOnceKeyDown(VK_F3))
-	{
-
-	}
 }
 
 void Fanatic::Render()
@@ -96,14 +122,24 @@ void Fanatic::Render()
 	if (m_currenthp >= 0)
 	{
 		m_vimage[m_state]->CenterRender(m_obj->x, m_obj->y - 55, 2, 2, 0, m_isReverse);
-		m_vimage[eHPbarEmpty]->Render(m_obj->x - 20, m_obj->y + 15, 1, 1, 0);
-		m_vimage[eHpbarDown]->Render(m_obj->x - 20, m_obj->y + 15, 1, 1, 0);
-		m_vimage[eHpbarUp]->Render(m_obj->x - 20, m_obj->y + 15, (m_currenthp * m_hpbar), 1, 0);
+		
+		if (m_hpbartimer <= 2 && m_hit == true)
+		{
+			m_vimage[eHPbarEmpty]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
+			m_vimage[eHpbarDown]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
+			m_vimage[eHpbarUp]->Render(m_obj->x - 35, m_obj->y + 15, (m_currenthp * m_hpbar), 1, 0);
+		}
+		else
+		{
+			m_hit = false;
+			m_hpbartimer = 0;
+		}
 	}
 	else
 	{
-		m_obj->Release();
+		m_obj->ObjectDestroyed();
 	}
+	cout << m_hitpointCollision->GetIsActive()<< endl;
 }
 
 void Fanatic::Release()
@@ -118,6 +154,7 @@ void Fanatic::HitEnemy(float dmg)
 {
 	m_isAttack = false;
 	m_isHit = true;
+	m_hit = true;
 	m_state = eHit;
 	m_vimage[eHit]->Reset();
 	m_obj->x += m_isReverse ? DELTA_TIME * 500 : -DELTA_TIME * 500;
