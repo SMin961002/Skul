@@ -101,5 +101,5 @@ void EnemyTestScene::Release()
 	{
 		SAFE_DELETE(iter);
 	}
-	m_sturctDatas.clear();
+	m_objectDatas.clear();
 }
