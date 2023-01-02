@@ -54,6 +54,7 @@ public:
 
 	void OnCollision(string collisionName, Object* other);
 	float GetplayerX(void) { return m_obj->x; }
+	float GetplayerY(void) { return m_obj->y; }
 
 	Player() : m_life(100) {};
 };	

@@ -202,6 +202,7 @@ void ImageManager::LoadImages()
 
 	AddImage("CollisionPlatform", L"./Resources/Tile/4Stage/CollisionPlatform.png");
 	AddImage("CollisionBox", L"./Resources/Tile/4Stage/CollisionBox.png");
+	AddImage("Light", L"./Resources/Light.png");
 
 	AddPixelmage("CollisionBox", "./Resources/Tile/4Stage/CollisionBox.bmp", 32, 32);
 
@@ -652,7 +653,7 @@ void ImageManager::Render(CImage* img, float x, float y, float sizeX, float size
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 }
 
-void ImageManager::CenterRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse)
+void ImageManager::CenterRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse, float alpha)
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 
@@ -669,7 +670,14 @@ void ImageManager::CenterRender(CImage* img, float x, float y, float sizeX, floa
 		matS = D2D1::Matrix3x2F::Scale(-sizeX, sizeY);
 	}
 	pRT->SetTransform((matS * matT * matR));
-	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+	ID2D1BitmapBrush* color;
+	pRT->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+	pRT->CreateBitmapBrush(img->GetBitMap(), &color);
+
+	color->SetBitmap(img->GetBitMap());
+	color->SetOpacity(alpha);
+	pRT->FillOpacityMask(img->GetBitMap(), color, D2D1_OPACITY_MASK_CONTENT_GRAPHICS, D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()));
+	color->Release();
 }
 
 void ImageManager::UIRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, float alpha) // Ä«¸Þ¶ó X
