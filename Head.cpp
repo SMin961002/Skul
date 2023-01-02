@@ -63,6 +63,7 @@ void Head::Move()
 	//점프중일 때
 	if (m_jumpping)
 	{
+
 		if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision())
 		{
 			ResetJump();
