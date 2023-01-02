@@ -11,6 +11,7 @@ void Fanatic::Init()
 	m_hitTimer = 0;
 	m_isHit = false;
 	m_hit = false;
+	m_sercrifice = false;
 	m_hitTimer = 0;
 	m_motiontimer = 0;
 	m_state = eIdle;
@@ -27,11 +28,11 @@ void Fanatic::Init()
 	m_vimage[eRun] = IMAGEMANAGER->AddImageVectorCopy("Fanatic_Run");
 	m_vimage[eRun]->Setting(0.1f, true);
 	m_vimage[Setcrifice] = IMAGEMANAGER->AddImageVectorCopy("Fanatic_Setcrifice");
-	m_vimage[Setcrifice]->Setting(0.1f, true);
+	m_vimage[Setcrifice]->Setting(0.2f, false);
 	m_vimage[SetcrificeLoop] = IMAGEMANAGER->AddImageVectorCopy("Fanatic_Setcrificeloop");
-	m_vimage[SetcrificeLoop]->Setting(0.1f, true);
+	m_vimage[SetcrificeLoop]->Setting(0.2f, false);
 	m_vimage[SetcrificeReady] = IMAGEMANAGER->AddImageVectorCopy("Fanatic_Setcrificeready");
-	m_vimage[SetcrificeReady]->Setting(0.1f, true);
+	m_vimage[SetcrificeReady]->Setting(0.2f, false);
 	m_vimage[eHit] = IMAGEMANAGER->AddImageVectorCopy("Fanatic_Hit");
 	m_vimage[eHit]->Setting(0.2f, false);
 
@@ -77,38 +78,58 @@ void Fanatic::Update()
 	{
 		m_hitpointCollision->SetIsActive(false);
 	}
-	if (m_isAttack == false && m_isHit == false)
-	{
-		
-		if (xDest < 300 && xDest > -300)
+	
+		if (m_isAttack == false && m_isHit == false)
 		{
-			if (xDest < 100 && xDest > -100)
+
+			if (xDest < 300 && xDest > -300)
 			{
-				m_state = eAttack;
-				if (OBJECTMANAGER->m_player->GetplayerX()<= m_obj->x)
+				if (xDest < 100 && xDest > -100)
 				{
-					m_hitpointCollision->Setting(40, m_obj->x - 17, m_obj->y - 20, "AttackPoint");
+					m_state = eAttack;
+					if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
+					{
+						m_hitpointCollision->Setting(40, m_obj->x - 17, m_obj->y - 20, "AttackPoint");
+					}
+					else
+					{
+						m_hitpointCollision->Setting(40, m_obj->x + 65, m_obj->y - 20, "AttackPoint");
+					}
+					m_vimage[eAttack]->Reset();
+
+					m_isAttack = true;
 				}
 				else
 				{
-					m_hitpointCollision->Setting(40, m_obj->x + 65, m_obj->y - 20, "AttackPoint");
+					m_state = eRun;
+					m_obj->x += m_isReverse ? -DELTA_TIME * 50 : DELTA_TIME * 50;
 				}
-				m_vimage[eAttack]->Reset();
-
-				m_isAttack = true;
+				m_isReverse = xDest > 0;
 			}
 			else
 			{
-				m_state = eRun;
-				m_obj->x += m_isReverse ? -DELTA_TIME * 50 : DELTA_TIME * 50;
+				m_state = eIdle;
 			}
-			m_isReverse = xDest > 0;
 		}
-		else
+		if (m_currenthp <= 50)
 		{
-			m_state = eIdle;
+			m_sercrifice = true;
+			m_state = SetcrificeReady;
+				if (m_vimage[SetcrificeReady]->GetIsImageEnded())
+				{
+					m_state = SetcrificeLoop;
+					if (m_vimage[SetcrificeLoop]->GetIsImageEnded())
+					{
+						m_state = Setcrifice;
+						if (m_vimage[Setcrifice]->GetIsImageEnded())
+						{
+							m_currenthp -= m_maxhp;
+						}
+					}
+				
+				}
 		}
-	}
+	
 	if (m_isAttack == false)
 	{
 		m_hitpointCollision->SetIsActive(false);
@@ -123,7 +144,7 @@ void Fanatic::Render()
 	{
 		m_vimage[m_state]->CenterRender(m_obj->x, m_obj->y - 55, 2, 2, 0, m_isReverse);
 		
-		if (m_hpbartimer <= 2 && m_hit == true)
+		if (m_hpbartimer <= 2 && (m_hit == true || m_sercrifice == true))
 		{
 			m_vimage[eHPbarEmpty]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
 			m_vimage[eHpbarDown]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
@@ -151,6 +172,8 @@ void Fanatic::OnCollision(string collisionName, Object* other)
 
 void Fanatic::HitEnemy(float dmg)
 {
+	if(m_currenthp >= 50)
+	{
 	m_isAttack = false;
 	m_isHit = true;
 	m_hit = true;
@@ -159,7 +182,8 @@ void Fanatic::HitEnemy(float dmg)
 	m_obj->x += m_isReverse ? DELTA_TIME * 500 : -DELTA_TIME * 500;
 	m_obj->y -= 10;
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
-	dmg = 10; //-= 플레이어 어택 데미지 상의
+	}
+	dmg = 3; //-= 플레이어 어택 데미지 상의
 	m_currenthp -= dmg;
 }
 

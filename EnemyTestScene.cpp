@@ -85,7 +85,7 @@ void EnemyTestScene::Render()
 		IMAGEMANAGER->DrawMapTilePixel(SCENEMANAGER->m_tiles);
 	}
 
-	IMAGEMANAGER->DrawColorRender(m_backGround, WINSIZE_X / 2, WINSIZE_Y / 2, 2, 2, 0, false, { 255,0,255,0.5 });
+	//IMAGEMANAGER->DrawColorRender(m_backGround, WINSIZE_X / 2, WINSIZE_Y / 2, 2, 2, 0, false, { 255,0,255,0.5 });
 }
 
 void EnemyTestScene::Release()
@@ -101,5 +101,5 @@ void EnemyTestScene::Release()
 	{
 		SAFE_DELETE(iter);
 	}
-	m_sturctDatas.clear();
+	m_objectDatas.clear();
 }

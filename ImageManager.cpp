@@ -210,12 +210,13 @@ void ImageManager::LoadImages()
 	// 1페이즈_지팡이 들기
 	AddImageVector("Boss_Casting_Ready", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Ready/Casting_Ready_", 1, 7);
 	AddImageVector("Boss_Casting_Attack", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Attack/Casting_Attack_Loop_", 1, 7);
-	AddImageVector("Boss_Casting_End", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Attack/Casting_Attack_Loop_", 1, 7);
+	AddImageVector("Boss_Casting_End", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/End/Casting_End_", 1, 7);
 	// 1페이즈_초이스
 	AddImageVector("Boss_Choice_Ready", L"./Resources/Saint_Joanna/Phase_1/Choice/Boss/Ready/Ready/Choice_Ready_", 1, 7);
 	AddImageVector("Boss_Choice_Ready_Loop", L"./Resources/Saint_Joanna/Phase_1/Choice/Boss/Ready/Loop/Choice_Ready_Loop_", 1, 7);
 	AddImageVector("Boss_Choice_Attack", L"./Resources/Saint_Joanna/Phase_1/Choice/Boss/Attack/Choice_Attack_Loop_", 1, 7);
 	AddImageVector("Boss_Choice_End", L"./Resources/Saint_Joanna/Phase_1/Choice/Boss/End/Choice_End_", 1, 7);
+	AddImageVector("Boss_Choice_Spark", L"./Resources/Saint_Joanna/Phase_1/Choice/Effect/Phase1_Choice_Spark_", 1, 12);
 	// 1페이즈_땅찍기
 	AddImageVector("Boss_Nervousness_Ready", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Ready/Ready/Nervousness_Ready_", 1, 14);
 	AddImageVector("Boss_Nervousness_Ready_Loop", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Boss/Ready/Loop/Nervousness_Ready_Loop_", 1, 7);
@@ -233,10 +234,14 @@ void ImageManager::LoadImages()
 	AddImage("Fountain_Deactivate", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/Fountain/Deactive/Deactivate_01.png");
 	AddImageVector("Boss_HolyFountain_Activate", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/Fountain/Active/Activate_", 1, 8);
 	// 1페이즈_방어막
-	AddImageVector("Boss_Barrier_Intro", L"./Resources/Saint_Joanna/Phase_1/Barrier/Intro/Phase1_Barrier_Intro_", 1, 30);
-	AddImageVector("Boss_Barrier_Loop", L"./Resources/Saint_Joanna/Phase_1/Barrier/Loop/Phase1_Barrier_Loop_", 1, 24);
+	AddImageVector("Boss_Barrier_Intro_Front", L"./Resources/Saint_Joanna/Phase_1/Barrier/Intro_Front/Phase1_Barrier_Intro_Front_", 1, 30);
+	AddImageVector("Boss_Barrier_Intro_Behind", L"./Resources/Saint_Joanna/Phase_1/Barrier/Intro_Behind/Phase1_Barrier_Intro_Behind_", 1, 30);
+	AddImageVector("Boss_Barrier_Loop_Front", L"./Resources/Saint_Joanna/Phase_1/Barrier/Loop_Front/Phase1_Barrier_Loop_Front_", 1, 24);
+	AddImageVector("Boss_Barrier_Loop_Behind", L"./Resources/Saint_Joanna/Phase_1/Barrier/Loop_Behind/Phase1_Barrier_Loop_Behind_", 1, 24);
+	AddImageVector("Boss_Barrier_Impact", L"./Resources/Saint_Joanna/Phase_1/Barrier/Impact/Phase1_Barrier_Impact_", 1, 12);
+	AddImageVector("Boss_Barrier_Spark", L"./Resources/Saint_Joanna/Phase_1/Barrier/Spark/Phase1_Barrier_Impact_Spark_", 1, 26);
+	AddImage("Boss_Barrier_Crack", L"./Resources/Saint_Joanna/Phase_1/Barrier/Crack/Crack/Phase1_Barrier_Crack_01.png");
 	AddImageVector("Boss_Barrier_Crack_Impact", L"./Resources/Saint_Joanna/Phase_1/Barrier/Crack/Crack_Impact/Phase1_Barrier_Crack_Impact_", 1, 12);
-	AddImageVector("Boss_Barrier_Crack_Spark", L"./Resources/Saint_Joanna/Phase_1/Barrier/Spark/Phase1_Barrier_Impact_Spark_", 1, 26);
 	// 1페이즈_떨어지는 구슬
 	AddImageVector("Boss_Baptism_Attack", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Attack/Phase1_Baptism_Attack_", 1, 36);
 	AddImageVector("Boss_Baptism_Projectile", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile/Phase1_Batism_Projectile_", 1, 21);
