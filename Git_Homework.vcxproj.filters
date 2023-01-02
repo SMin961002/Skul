@@ -88,7 +88,6 @@
     </ClCompile>
     <ClCompile Include="Idle.cpp" />
     <ClCompile Include="EnemyTestScene.cpp" />
-    <ClCompile Include="PixelCollisionComponent.cpp" />
     <ClCompile Include="CandleFanatic.cpp">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClCompile>
@@ -225,7 +224,6 @@
     </ClInclude>
     <ClInclude Include="Idle.h" />
     <ClInclude Include="EnemyTestScene.h" />
-    <ClInclude Include="PixelCollisionComponent.h" />
     <ClInclude Include="CandleFanatic.h">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClInclude>

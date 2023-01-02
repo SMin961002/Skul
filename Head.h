@@ -1,5 +1,5 @@
 #pragma once
-#include "Component.h"
+#include "PlayerEffect.h"
 
 enum class eSkulSpecies
 {
@@ -37,10 +37,7 @@ public:
 
 	virtual enum eCollisionArrTag
 	{
-		eAutoAttack_1coll,
-		eAutoAttack_2coll,
-		eSkill_1coll,
-		eSkill_2coll,
+		eAutoAttack,
 
 		eCollisionArrTagNumCount
 	};
@@ -69,7 +66,6 @@ protected:
 	bool  m_dashing;
 
 	float m_jumpSpeed;		//점프 시작속도
-	float m_jumpNowSpeed;	//점프 속도 (가속->감속, 속도 -되면 jumpDown 2차식 계산필요)
 	short m_jumpCount;		//현재 점프 몇회인지
 	short m_jumpMax;		//최대 점프 가능 횟수		
 	bool  m_jumpping;
@@ -92,29 +88,30 @@ public:
 	void Render();
 	void Release();
 
-	virtual void ImageSetting();
-	virtual void ParameterSetting();
-	virtual void CollisionSetting();
+	inline bool GetIsDashing() { return m_dashing; }
 
-	virtual void CoolDown();
+	virtual void ImageSetting() {};
+	virtual void ParameterSetting() {};
+	virtual void CollisionSetting() {};
+
+	//Update 안에 들어가는 함수
 	virtual void Move();
 	virtual void Act();
 
-	//Update 안에 들어가는 함수
-	virtual void ActionArrangement();
-	virtual void CollisionUpdate();
+	virtual void CoolDown() {};
+	virtual void ActionArrangement() {};
+	virtual void CollisionUpdate() {};
 	//	in move
 	virtual void InputJumpKey();
 	virtual void InputDashKey();
 	virtual void InputArrowKey();
 	//	in act
-	virtual void InputSkillKey();
-	virtual void InputAttackKey();
+	virtual void InputSkillKey() {};
+	virtual void InputAttackKey() {};
 
 
 	//Render 안에 들어가는 함수
 	virtual void DrawCharactor();
-	virtual void DrawEffect();	//이펙트는 오브젝트라고 생각하고 생성소멸시키기.
 
 	void ResetAll()
 	{
@@ -128,7 +125,6 @@ public:
 	void ResetJump() {
 		m_jumpCount = 0;
 		m_jumpping = false;
-		m_jumpNowSpeed = 0;
 	}
 	void ResetDash() {
 		m_dashCount = 0;
@@ -146,4 +142,3 @@ public:
 		m_skillUsing = false;
 	}
 };
-

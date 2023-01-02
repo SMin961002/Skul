@@ -39,6 +39,7 @@ void Main::Update()
 	}
 	SCENEMANAGER->Update();
 	OBJECTMANAGER->Update();
+	EFFECTMANAGER->Update();
 }
 
 void Main::Render()
@@ -47,6 +48,7 @@ void Main::Render()
 	SCENEMANAGER->Render();
 	OBJECTMANAGER->Render();
 	TIMERMANAGER->Render();
+	EFFECTMANAGER->Render();
 	IMAGEMANAGER->End();
 }
 
@@ -56,6 +58,7 @@ void Main::Release()
 	ImageManager::ReleaseInstance();
 	ObjectManager::ReleaseInstance();
 	TIMERMANAGER->Release();
+	EffectManager::ReleaseInstance();
 	TimerManager::ReleaseInstance();
 	KeyManager::ReleaseInstance();
 	IOFillManager::ReleaseInstance();

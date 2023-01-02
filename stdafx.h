@@ -92,6 +92,7 @@ struct Vector2
 #include "SceneManager.h"
 #include "IOFillManager.h"
 #include "Utility.h"
+#include "EffectManager.h"
 //inline static float GetDeltaTime()
 //{
 //	return;

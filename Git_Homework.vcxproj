@@ -138,6 +138,7 @@
     <ClCompile Include="BallFanatic.cpp" />
     <ClCompile Include="Baptism.cpp" />
     <ClCompile Include="BlackFanatic.cpp" />
+    <ClCompile Include="BossEffect.cpp" />
     <ClCompile Include="BossObject.cpp" />
     <ClCompile Include="BossScene.cpp" />
     <ClCompile Include="CandleFanatic.cpp" />
@@ -147,7 +148,10 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Consercration.cpp" />
     <ClCompile Include="CTimer.cpp" />
+    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyEffect.cpp" />
     <ClCompile Include="EnemyTestScene.cpp" />
     <ClCompile Include="ExObject.cpp" />
     <ClCompile Include="Fanatic.cpp" />
@@ -170,6 +174,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PixelCollisionComponent.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerEffect.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -190,6 +195,7 @@
     <ClInclude Include="BallFanatic.h" />
     <ClInclude Include="Baptism.h" />
     <ClInclude Include="BlackFanatic.h" />
+    <ClInclude Include="BossEffect.h" />
     <ClInclude Include="BossObject.h" />
     <ClInclude Include="BossScene.h" />
     <ClInclude Include="CandleFanatic.h" />
@@ -199,7 +205,10 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Consercration.h" />
     <ClInclude Include="CTimer.h" />
+    <ClInclude Include="Effect.h" />
+    <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyEffect.h" />
     <ClInclude Include="EnemyTestScene.h" />
     <ClInclude Include="ExObject.h" />
     <ClInclude Include="Fanatic.h" />
@@ -222,6 +231,7 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PixelCollisionComponent.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerEffect.h" />
     <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
