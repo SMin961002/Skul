@@ -69,8 +69,12 @@ public:
 
 
 ※ 작업일지 ※
-1/1
+1/2
 오늘할거 : basic skul A, S만들기
+bool canWalk, canDash, canJump, canSkillA, B, canAttack등등의 변수 만들어서
+update에서 해당 변수 on off 함수실행 조절하는 방식 고려해보기
+
+1/1
 			jump만들기
 			점프, 대시 이펙트 만들기
 

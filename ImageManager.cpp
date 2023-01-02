@@ -130,6 +130,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Basic_Headless_JumpRepeat", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpRepeat/", 1, 3);
 	AddImageVector("Basic_Headless_JumpFall", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpFall/", 1, 2);
 	AddImageVector("Basic_Headless_JumpAttack", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpAttack/", 1, 4);
+	AddImage("Basic_Skull", L"./Resources/Png/Skul/Basic/Effect/Skul.png");
 
 	AddImage("exBg", L"./Resources/exBg.png");
 	AddImage("Background", L"./MapFile/BackGround/background.png");

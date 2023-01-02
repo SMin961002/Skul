@@ -12,6 +12,12 @@ public:
 	void Render();
 	void Release();
 
+	template<class T>
+	void SetEffectOff()	//##
+	{
+
+	}
+
 	//예외처리 안되어있으니 클래스 넣을때 주의해주세요~
 	template <class T>
 	void AddEffect(float startX, float startY, bool isReversed)
