@@ -56,10 +56,10 @@
       <Filter>Game\Scene\MapTool\MapToolMapSelectScene</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Game\Object\Charactor</Filter>
+      <Filter>Game\Object\Boss\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="Gambler.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
+      <Filter>Game\Object\Boss\Charactor\Head</Filter>
     </ClCompile>
     <ClCompile Include="RigidBodyComponent.cpp">
       <Filter>Game\Component\RigidBodyComponent</Filter>
@@ -108,10 +108,10 @@
       <Filter>Game\Object\Enemy\AngelStatue</Filter>
     </ClCompile>
     <ClCompile Include="Head.cpp">
-      <Filter>Game\Object\Charactor</Filter>
+      <Filter>Game\Object\Boss\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="Head_Basic.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
+      <Filter>Game\Object\Boss\Charactor\Head</Filter>
     </ClCompile>
     <ClCompile Include="Baptism.cpp">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
@@ -197,10 +197,10 @@
       <Filter>Game\Scene\MapTool\MapToolMapSelectScene</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Game\Object\Charactor</Filter>
+      <Filter>Game\Object\Boss\Charactor</Filter>
     </ClInclude>
     <ClInclude Include="Gambler.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
+      <Filter>Game\Object\Boss\Charactor\Head</Filter>
     </ClInclude>
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>Game\Component\RigidBodyComponent</Filter>
@@ -245,10 +245,10 @@
       <Filter>Game\Object\Enemy\AngelStatue</Filter>
     </ClInclude>
     <ClInclude Include="Head.h">
-      <Filter>Game\Object\Charactor</Filter>
+      <Filter>Game\Object\Boss\Charactor</Filter>
     </ClInclude>
     <ClInclude Include="Head_Basic.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
+      <Filter>Game\Object\Boss\Charactor\Head</Filter>
     </ClInclude>
     <ClInclude Include="Baptism.h">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
@@ -342,12 +342,6 @@
     <Filter Include="Game\Scene\MapTool\MapToolMapSelectScene">
       <UniqueIdentifier>{82704bb3-9a8c-4066-b1ee-c82524186a37}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Charactor">
-      <UniqueIdentifier>{b02c8b66-cd68-4c8d-b8c6-2015530ad898}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Charactor\Head">
-      <UniqueIdentifier>{7528eb48-f244-4dc5-aab2-5f6e7dd1a441}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Component\RigidBodyComponent">
       <UniqueIdentifier>{05dcc7ba-e1b5-4631-9c2a-fb10ff3f4449}</UniqueIdentifier>
     </Filter>
@@ -392,6 +386,12 @@
     </Filter>
     <Filter Include="Game\Object\Boss\Pattern%28do nothing%29\Casting">
       <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Charactor">
+      <UniqueIdentifier>{b02c8b66-cd68-4c8d-b8c6-2015530ad898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Charactor\Head">
+      <UniqueIdentifier>{7528eb48-f244-4dc5-aab2-5f6e7dd1a441}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
