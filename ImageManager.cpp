@@ -103,7 +103,6 @@ void ImageManager::LoadImages()
 
 	// 예시 이미지
 	AddImage("Frame_1SKill", L"./Resources/Frame_1SKill.png");
-	AddImageVector("Ex_Idle", L"./Resources/Png/Idle/", 1, 6);
 
 	//캐릭터 대시, 점프 이펙트
 	AddImageVector("DashSmoke", L"./Resources/Png/Skul/Effect_DashSmoke/", 1, 13);
@@ -131,6 +130,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Basic_Headless_JumpRepeat", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpRepeat/", 1, 3);
 	AddImageVector("Basic_Headless_JumpFall", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpFall/", 1, 2);
 	AddImageVector("Basic_Headless_JumpAttack", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpAttack/", 1, 4);
+	AddImage("Basic_Skull", L"./Resources/Png/Skul/Basic/Effect/Skul.png");
 
 	AddImage("exBg", L"./Resources/exBg.png");
 	AddImage("Background", L"./MapFile/BackGround/background.png");

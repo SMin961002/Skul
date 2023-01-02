@@ -48,6 +48,9 @@ void Head_Basic::ParameterSetting()
 {
 	m_species = eSkulSpecies::eBasic;
 
+	//m_projectileHead = new ProjectileHeadSkull;
+	//m_projectileHead->Init();
+
 	m_action = eIdle;
 
 	m_moveSpeed = 180;
@@ -82,7 +85,7 @@ void Head_Basic::ParameterSetting()
 void Head_Basic::CollisionSetting()
 {
 	CollisionComponent* attack1 = m_obj->AddComponent<CollisionComponent>();
-	attack1->Setting(50, m_obj->x + 6 + 40, m_obj->y - 24 + 72, "기본공격");
+	attack1->Setting(50, m_obj->x + 6 + 40, m_obj->y - 24 + 72, "BasicAttack_BasicSkul");
 	attack1->SetIsActive(false);
 	m_obj->AddCollisionComponent(attack1);
 }
@@ -130,61 +133,92 @@ void Head_Basic::InputSkillKey()
 		m_headThrow = true;
 		m_imageChange = true;
 	}
-	else if (KEYMANAGER->GetOnceKeyDown('S'))
-	{
-		m_action = eIdle;
-		m_headThrow = false;
-		//m_obj->x = 머리obj.x ; m_obj->y = 머리obj->y;
-		m_skillNowCoolS = m_skillCoolS;
-	}
+	if (m_headThrow) {
+		if (KEYMANAGER->GetOnceKeyDown('S'))
+		{
+			m_action = eIdle;
+			m_headThrow = false;
+			//##m_obj->x = 머리obj.x ; m_obj->y = 머리obj->y;
+			m_skillNowCoolS = m_skillCoolS;
+		}
+	}//end if headThrow
 }
 
 void Head_Basic::ActionArrangement()
 {
 	if (nowImg->GetIsImageEnded())
 	{
-		nowImg->Reset();
+		vImage* tempActionImage = new vImage;
+		tempActionImage = m_headThrow ? img_headless[m_action] : img[m_action];
+		if(nowImg!=tempActionImage)
+			nowImg->Reset();
 		if (m_attackCast)
 		{
 			m_action = eAutoAttack_2;
-			nowImg = img[eAutoAttack_2];
+			nowImg = m_headThrow ? img_headless[eAutoAttack_2] : img[eAutoAttack_2];
+			nowImg->Reset();
 			m_attackCount = 2;
-			for (auto iter : m_obj->GetCollisionComponent())
-			{
-				if (iter->GetName() == "기본공격")
-				{
-					iter->SetIsActive(true);
-				}
-			}
 			m_attackCast = false;
+			if (m_isLeft)
+			{
+				m_obj->x -= m_moveSpeed/10;
+			}
+			else m_obj->x += m_moveSpeed/10;
 		}
 		else
 		{
-			nowImg = img[eIdle];
+			nowImg = m_headThrow ? img_headless[eIdle] : img[eIdle];
+			m_action = eIdle;
 			m_attackCount = 0;
-			for (auto iter : m_obj->GetCollisionComponent())
-			{
-				if (iter->GetName() == "기본공격")
-				{
-					iter->SetIsActive(false);
-				}
-			}//end colli autoAttack false
 		}
+		m_skillUsing = false;
 	}
 	if (m_imageChange)
 	{
 		m_attackCast = false;
-
-		if (nowImg != img[m_action])
+		if (m_headThrow)	//머리 없을때
 		{
-			nowImg->Reset();
-			nowImg = img[m_action];
-			if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
+			switch (m_action)
 			{
-				m_action = eIdle;
+			case eIdle:
+			case eDash:
+			case eAutoAttack_1:
+			case eAutoAttack_2:
+			case eJump:
+			case eJumpDown:
+			case eJumpAttack:
+				if (nowImg != img_headless[m_action])
+				{
+					nowImg->Reset();
+					nowImg = img_headless[m_action];
+					if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
+					{
+						m_action = eIdle;
+					}
+				}
+				//m_attackCount = 0;
+				break;
+			case eSkill_1:
+				nowImg = img[eSkill_1];
+			default:
+				NULL;
+				break;
+			}//end switch
+		}//end if headTrow
+		else	//머리 있을때
+		{
+			if (nowImg != img[m_action])
+			{
+				nowImg->Reset();
+				nowImg = img[m_action];
+				nowImg->Reset();
+				if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
+				{
+					m_action = eIdle;
+				}
 			}
-		}
-		//m_attackCount = 0;
+			//m_attackCount = 0;
+		}//end else headThrow
 	}
 }
 
@@ -192,7 +226,7 @@ void Head_Basic::CollisionUpdate()
 {
 	for (auto iter : (m_obj->GetCollisionComponent()))
 	{
-		if (iter->GetName() == "기본공격")
+		if (iter->GetName() == "BasicAttack_BasicSkul")
 		{
 			if (m_action == eAutoAttack_1)
 			{
@@ -207,7 +241,7 @@ void Head_Basic::CollisionUpdate()
 			}
 			else if (m_action == eAutoAttack_2)
 			{
-				if (img[eAutoAttack_2]->GetFrame() > 1 && img[eAutoAttack_2]->GetFrame() < 2)
+				if (img[eAutoAttack_2]->GetFrame() > 0 && img[eAutoAttack_2]->GetFrame() < 2)
 				{
 					iter->SetIsActive(true);
 				}
@@ -227,11 +261,13 @@ void Head_Basic::CollisionUpdate()
 					iter->SetIsActive(false);
 				}
 			}
-
+			else iter->SetIsActive(false);
 
 			if (m_isLeft)
 				iter->Setting(m_obj->x, m_obj->y-10);
-			else iter->Setting(m_obj->x + 50, m_obj->y-10);	//##else iter->Setting(m_obj->x + 50, m_obj->y - 16);
+			else iter->Setting(m_obj->x + 50, m_obj->y-10);
+
+			break;
 		}
 	}
 }
@@ -255,13 +291,6 @@ void Head_Basic::InputAttackKey()
 			{
 				m_action = eAutoAttack_1;
 				m_attackCount = 1;
-				for (auto iter : m_obj->GetCollisionComponent())
-				{
-					if (iter->GetName() == "기본공격")
-					{
-						iter->SetIsActive(true);
-					}
-				}
 				m_imageChange = true;
 			}
 			else
@@ -275,4 +304,42 @@ void Head_Basic::InputAttackKey()
 void Head_Basic::DrawCharactor()
 {
 	nowImg->CenterRender(m_obj->x, m_obj->y - 56, 2, 2, 0, m_isLeft);
+}
+
+void ProjectileHeadSkull::Init()
+{
+	m_img = IMAGEMANAGER->FindImage("Basic_Skull");
+	m_isThrowed = false;
+	m_isReverse = false;
+	m_hit = false;
+	m_speed = 60;
+	m_rot = 0;
+	m_obj->AddComponent<RigidBodyComponent>();
+	m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
+	m_colHeadSkull = m_obj->AddComponent<CollisionComponent>();
+	m_colHeadSkull->Setting(14, m_obj->x, m_obj->y - 24, "ThrowHeadSkull");
+	m_colHeadSkull->SetIsActive(false);
+}
+
+void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
+{
+	if (collisionName == m_colHeadSkull->GetName())
+	{
+		if (other->GetName() == "Enemy")
+		{
+			m_hit = true;
+			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
+			other->GetComponent<Enemy>()->HitEnemy(20);
+		}
+		else if (other->GetName() == "PlayerHitRange")
+		{
+			m_isThrowed = false;
+		}
+	}
+	if (collisionName == "BasicAttack_BasicSkul")
+	{
+		if (other->GetName() == "Enemy")
+		{
+		}
+	}
 }

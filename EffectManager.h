@@ -12,13 +12,19 @@ public:
 	void Render();
 	void Release();
 
+	template<class T>
+	void SetEffectOff()	//##
+	{
+
+	}
+
 	//예외처리 안되어있으니 클래스 넣을때 주의해주세요~
 	template <class T>
-	void AddEffect(float startX, float startY, bool isReversed)
+	void AddEffect(float startX, float startY, bool isReversed, float scale = 1)
 	{
 		Effect* effect = new T;
 		effect->Init();
-		effect->SetEffectStart(startX, startY, isReversed);
+		effect->SetEffectStart(startX, startY, isReversed, float scale = 1);
 		m_vectorEffectList.push_back(effect);
 	}
 };

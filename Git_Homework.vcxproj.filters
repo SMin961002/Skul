@@ -90,9 +90,6 @@
     <ClCompile Include="CandleFanatic.cpp">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
     <ClCompile Include="TentaclesOfLight.cpp">
       <Filter>Game\Object\Enemy\TentaclesOfLight</Filter>
     </ClCompile>
@@ -155,6 +152,25 @@
     </ClCompile>
     <ClCompile Include="BossEffect.cpp">
       <Filter>Game\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelCollisionComponent.cpp" />
+    <ClCompile Include="BossEffect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyEffect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerEffect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Core\Manager\EffectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +261,6 @@
     <ClInclude Include="Idle.h" />
     <ClInclude Include="CandleFanatic.h">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="TentaclesOfLight.h">
       <Filter>Game\Object\Enemy\TentaclesOfLight</Filter>
