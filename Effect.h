@@ -19,7 +19,6 @@ public:
 		m_obj->y = startY;
 		m_img->Reset();
 		m_obj->SetIsActive(true);
-		cout << m_isReversed << endl;
 	}
 
 	virtual void Move() {};	//이펙트가 움직일 필요가 있을 경우 오버라이드 해서 사용

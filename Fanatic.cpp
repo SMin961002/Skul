@@ -139,7 +139,6 @@ void Fanatic::Render()
 	{
 		m_obj->ObjectDestroyed();
 	}
-	cout << m_hitpointCollision->GetIsActive()<< endl;
 }
 
 void Fanatic::Release()

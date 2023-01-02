@@ -134,7 +134,7 @@ void Head_Basic::InputSkillKey()
 	{
 		m_action = eIdle;
 		m_headThrow = false;
-		//m_obj->x = 머리obj.x ; m_obj->y = 머리obj->y;
+		//##m_obj->x = 머리obj.x ; m_obj->y = 머리obj->y;
 		m_skillNowCoolS = m_skillCoolS;
 	}
 }
@@ -143,7 +143,8 @@ void Head_Basic::ActionArrangement()
 {
 	if (nowImg->GetIsImageEnded())
 	{
-		nowImg->Reset();
+		if(nowImg!=img[m_action])
+			nowImg->Reset();
 		if (m_attackCast)
 		{
 			m_action = eAutoAttack_2;
@@ -162,13 +163,6 @@ void Head_Basic::ActionArrangement()
 		{
 			nowImg = img[eIdle];
 			m_attackCount = 0;
-			for (auto iter : m_obj->GetCollisionComponent())
-			{
-				if (iter->GetName() == "기본공격")
-				{
-					iter->SetIsActive(false);
-				}
-			}//end colli autoAttack false
 		}
 	}
 	if (m_imageChange)
@@ -228,10 +222,11 @@ void Head_Basic::CollisionUpdate()
 				}
 			}
 
-
 			if (m_isLeft)
 				iter->Setting(m_obj->x, m_obj->y-10);
-			else iter->Setting(m_obj->x + 50, m_obj->y-10);	//##else iter->Setting(m_obj->x + 50, m_obj->y - 16);
+			else iter->Setting(m_obj->x + 50, m_obj->y-10);
+
+			break;
 		}
 	}
 }
@@ -255,13 +250,6 @@ void Head_Basic::InputAttackKey()
 			{
 				m_action = eAutoAttack_1;
 				m_attackCount = 1;
-				for (auto iter : m_obj->GetCollisionComponent())
-				{
-					if (iter->GetName() == "기본공격")
-					{
-						iter->SetIsActive(true);
-					}
-				}
 				m_imageChange = true;
 			}
 			else

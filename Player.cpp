@@ -72,18 +72,13 @@ void Player::OnCollision(string collisionName, Object* other)
 			//##데미지 받기
 			m_life -= 10;
 			if (m_life < 0) m_life = 0;
-			cout << m_life << endl;
 		}
 	}
 	if (collisionName == "기본공격")
 	{
 		if (other->GetName() == "Enemy")
 		{
-			other->GetComponent<Enemy>()->HitEnemy(0);
-			//##데미지 받기
-			m_life -= 10;
-			if (m_life < 0) m_life = 0;
-			cout << m_life << endl;
+			other->GetComponent<Enemy>()->HitEnemy(10);
 		}
 	}
 }

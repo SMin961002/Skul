@@ -91,9 +91,6 @@
     <ClCompile Include="CandleFanatic.cpp">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
     <ClCompile Include="TentaclesOfLight.cpp">
       <Filter>Game\Object\Enemy\TentaclesOfLight</Filter>
     </ClCompile>
@@ -135,6 +132,25 @@
     </ClCompile>
     <ClCompile Include="Idle.cpp">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelCollisionComponent.cpp" />
+    <ClCompile Include="BossEffect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyEffect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerEffect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Core\Manager\EffectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,9 +243,6 @@
     <ClInclude Include="CandleFanatic.h">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
     <ClInclude Include="TentaclesOfLight.h">
       <Filter>Game\Object\Enemy\TentaclesOfLight</Filter>
     </ClInclude>
@@ -271,6 +284,25 @@
     </ClInclude>
     <ClInclude Include="Idle.h">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelCollisionComponent.h" />
+    <ClInclude Include="BossEffect.h">
+      <Filter>Game\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Game\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyEffect.h">
+      <Filter>Game\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEffect.h">
+      <Filter>Game\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>Core\Manager\EffectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -390,6 +422,12 @@
     </Filter>
     <Filter Include="Game\Object\Boss\Pattern%28do nothing%29\Casting">
       <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Effect">
+      <UniqueIdentifier>{64f8c5c1-2fef-442a-b017-9408cf2e8ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\EffectManager">
+      <UniqueIdentifier>{9bb1974b-ca7c-43b6-9956-2433050c748c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
