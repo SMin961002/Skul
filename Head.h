@@ -1,5 +1,5 @@
 #pragma once
-#include "Component.h"
+#include "PlayerEffect.h"
 
 enum class eSkulSpecies
 {
@@ -37,10 +37,7 @@ public:
 
 	virtual enum eCollisionArrTag
 	{
-		eAutoAttack_1coll,
-		eAutoAttack_2coll,
-		eSkill_1coll,
-		eSkill_2coll,
+		eAutoAttack,
 
 		eCollisionArrTagNumCount
 	};
@@ -48,7 +45,7 @@ public:
 protected:
 	eSkulSpecies m_species;
 
-	vector<Object*> m_vEffectObj;
+	vector<Effect*> m_vEffect;
 
 	vImage* img[eActionTagNumber];
 	vImage* img_reborn;
@@ -73,7 +70,6 @@ protected:
 	float m_jumpSpeed;		//점프 시작속도
 	short m_jumpCount;		//현재 점프 몇회인지
 	short m_jumpMax;		//최대 점프 가능 횟수		
-	bool  m_jumpStart;		//점프 첫틱 발판인식 안하려고
 	bool  m_jumpping;
 
 	short m_attackCount;
@@ -107,6 +103,7 @@ public:
 	virtual void CoolDown() {};
 	virtual void ActionArrangement() {};
 	virtual void CollisionUpdate() {};
+	virtual void EffectUpdate();
 	//	in move
 	virtual void InputJumpKey();
 	virtual void InputDashKey();
@@ -132,7 +129,6 @@ public:
 	void ResetJump() {
 		m_jumpCount = 0;
 		m_jumpping = false;
-		m_jumpStart = false;
 	}
 	void ResetDash() {
 		m_dashCount = 0;

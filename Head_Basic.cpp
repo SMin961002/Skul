@@ -57,14 +57,13 @@ void Head_Basic::ParameterSetting()
 	m_dashSpeed = 240;		//##dash 이동식 수정 필요
 	m_dashTime = 2 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
-	m_dashCool = 1;
+	m_dashCool = 0.5;
 	m_dashNowCool = 0;
 	m_dashCount = 0;
 	m_dashMax = 2;			//대시 최대 횟수
 	m_dashing = false;
 
 	m_jumpSpeed = 8;
-	m_jumpStart = false;
 	m_jumpCount = 0;
 	m_jumpMax = 2;
 	m_jumpping = false;

@@ -21,6 +21,7 @@ void Head::Update()
 	}
 	ActionArrangement();
 	CollisionUpdate();
+	EffectUpdate();
 }
 
 void Head::Render()
@@ -35,8 +36,6 @@ void Head::Release()
 
 void Head::Move()
 {
-	cout << m_jumpCount << endl;
-
 	if (m_action == eWalk)
 	{
 		m_action = this->eIdle;
@@ -74,7 +73,7 @@ void Head::Move()
 		else if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsTopCollision())
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(0);
 		if (m_obj->GetComponent<RigidBodyComponent>()->GetGravityPower() < 0)
-			if(m_action != eJumpAttack) m_action = eJumpDown;
+			if(!m_dashing && m_action != eJumpAttack) m_action = eJumpDown;
 
 		m_imageChange = true;
 	}
@@ -88,6 +87,26 @@ void Head::Act()
 		InputAttackKey();
 	}
 	InputSkillKey();
+}
+
+void Head::EffectUpdate()
+{
+	if (!m_vEffect.empty())
+	{
+		vector<Effect*>::iterator iter;
+		for (iter = m_vEffect.begin(); iter != m_vEffect.end();)
+		{
+			if ((*iter)->GetIsActive()==true)
+			{
+				(*iter)->Update();
+				iter++;
+			}
+			else{
+				(*iter)->Release();
+				iter = m_vEffect.erase(iter);
+			}
+		}//end for
+	}//end exist Effect
 }
 
 void Head::InputJumpKey()
@@ -109,7 +128,14 @@ void Head::InputJumpKey()
 				m_action = eJump;
 				m_imageChange = true;
 				m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(m_jumpSpeed);
-				++m_jumpCount;
+				if (++m_jumpCount >= 2)
+				{
+					Effect* jumpSmoke;
+					jumpSmoke = new DoubleJumpSmoke;
+					jumpSmoke->Init();
+					jumpSmoke->SetEffectStart(m_obj->x, m_obj->y, m_isLeft);
+					m_vEffect.push_back(jumpSmoke);
+				}				
 			}
 		}
 	}//end 'C'
@@ -122,10 +148,7 @@ void Head::InputDashKey()
 		if (m_dashCount < m_dashMax && m_dashNowCool <= 0)
 		{
 			m_imageChange = true;
-
 			m_jumpping = false;
-			m_jumpStart = 0;
-
 			ResetAttack();
 
 			m_dashing = true;
@@ -133,6 +156,13 @@ void Head::InputDashKey()
 			m_action = eDash;
 			img[eDash]->Reset();
 			nowImg = img[eDash];
+			{
+				Effect* dashSmoke;
+				dashSmoke = new DashSmoke;
+				dashSmoke->Init();
+				dashSmoke->SetEffectStart(m_obj->x, m_obj->y, m_isLeft);
+				m_vEffect.push_back(dashSmoke);
+			}
 			//m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);//##점프상승이 안들어가
 			m_dashNowTime = m_dashTime;
 		}
@@ -177,4 +207,12 @@ void Head::DrawCharactor()
 
 void Head::DrawEffect()
 {
+	if (!m_vEffect.empty())
+	{
+		vector<Effect*>::iterator iter;
+		for (iter = m_vEffect.begin(); iter!=m_vEffect.end();iter++)
+		{
+			(*iter)->Render();
+		}//end for
+	}//end exist Effect
 }

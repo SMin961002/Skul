@@ -143,6 +143,7 @@
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CTimer.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyTestScene.cpp" />
     <ClCompile Include="ExObject.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PixelCollisionComponent.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerEffect.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -188,6 +190,7 @@
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CTimer.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyTestScene.h" />
     <ClInclude Include="ExObject.h" />
@@ -209,6 +212,7 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PixelCollisionComponent.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerEffect.h" />
     <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />

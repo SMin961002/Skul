@@ -100,8 +100,8 @@ void ImageManager::LoadImages()
 	AddImageVector("Ex_Idle", L"./Resources/Png/Idle/", 1, 6);
 
 	//캐릭터 대시, 점프 이펙트
-	AddImageVector("Jump_Smoke", L"./Resources/Png/Skul/Effect_DashSmoke/", 1, 13);
-	AddImageVector("Jump_Smoke", L"./Resources/Png/Skul/Effect_DoubleJumpSmoke/", 1, 10);
+	AddImageVector("DashSmoke", L"./Resources/Png/Skul/Effect_DashSmoke/", 1, 13);
+	AddImageVector("JumpSmoke", L"./Resources/Png/Skul/Effect_DoubleJumpSmoke/", 1, 10);
 
 	//일반스컬 모션 이미지
 	AddImageVector("Basic_Idle", L"./Resources/Png/Skul/Basic/Motion/Idle/", 1, 4);
