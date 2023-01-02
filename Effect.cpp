@@ -23,56 +23,12 @@ void Effect::Update()
 
 void Effect::Render()
 {
-	m_img->CenterRender(m_obj->x, m_obj->y, 2, 2, m_isReversed);
+	m_img->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isReversed);
+	cout << "·»´õ m_isReversed:" << m_isReversed << endl;
 }
 
 void Effect::Release()
 {
 	m_obj->Release();
 	SAFE_DELETE(m_obj);
-}
-
-void EffectManager::Update()
-{
-	if (!m_vEffect.empty())
-	{
-		vector<Effect*>::iterator iter;
-		for (iter = m_vEffect.begin(); iter != m_vEffect.end();)
-		{
-			if ((*iter)->GetIsActive() == true)
-			{
-				(*iter)->Update();
-				iter++;
-			}
-			else {
-				(*iter)->Release();
-				iter = m_vEffect.erase(iter);
-			}
-		}//end for
-	}//end exist Effect
-}
-
-void EffectManager::Render()
-{
-	if (!m_vEffect.empty())
-	{
-		vector<Effect*>::iterator iter;
-		for (iter = m_vEffect.begin(); iter != m_vEffect.end(); iter++)
-		{
-			(*iter)->Render();
-		}//end for
-	}//end exist Effect
-}
-
-void EffectManager::Release()
-{
-	if (!m_vEffect.empty())
-	{
-		vector<Effect*>::iterator iter;
-		for (iter = m_vEffect.begin(); iter != m_vEffect.end();)
-		{
-			(*iter)->Release();
-			iter = m_vEffect.erase(iter);	
-		}//end for
-	}//end exist Effect
 }

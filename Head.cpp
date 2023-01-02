@@ -21,13 +21,11 @@ void Head::Update()
 	}
 	ActionArrangement();
 	CollisionUpdate();
-	EffectUpdate();
 }
 
 void Head::Render()
 {
 	DrawCharactor();
-	DrawEffect();
 }
 
 void Head::Release()
@@ -90,26 +88,6 @@ void Head::Act()
 	InputSkillKey();
 }
 
-void Head::EffectUpdate()
-{
-	if (!m_vEffect.empty())
-	{
-		vector<Effect*>::iterator iter;
-		for (iter = m_vEffect.begin(); iter != m_vEffect.end();)
-		{
-			if ((*iter)->GetIsActive()==true)
-			{
-				(*iter)->Update();
-				iter++;
-			}
-			else{
-				(*iter)->Release();
-				iter = m_vEffect.erase(iter);
-			}
-		}//end for
-	}//end exist Effect
-}
-
 void Head::InputJumpKey()
 {
 	if (KEYMANAGER->GetOnceKeyDown('C'))
@@ -131,11 +109,7 @@ void Head::InputJumpKey()
 				m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(m_jumpSpeed);
 				if (++m_jumpCount >= 2)
 				{
-					Effect* jumpSmoke;
-					jumpSmoke = new DoubleJumpSmoke;
-					jumpSmoke->Init();
-					jumpSmoke->SetEffectStart(m_obj->x, m_obj->y, m_isLeft);
-					m_vEffect.push_back(jumpSmoke);
+					EFFECTMANAGER->AddEffect<DoubleJumpSmoke>(m_obj->x, m_obj->y, m_isLeft);
 				}				
 			}
 		}
@@ -157,13 +131,7 @@ void Head::InputDashKey()
 			m_action = eDash;
 			img[eDash]->Reset();
 			nowImg = img[eDash];
-			{
-				Effect* dashSmoke;
-				dashSmoke = new DashSmoke;
-				dashSmoke->Init();
-				dashSmoke->SetEffectStart(m_obj->x, m_obj->y, m_isLeft);
-				m_vEffect.push_back(dashSmoke);
-			}
+			EFFECTMANAGER->AddEffect<DashSmoke>(m_obj->x, m_obj->y, m_isLeft);
 			//m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);//##점프상승이 안들어가
 			m_dashNowTime = m_dashTime;
 		}
@@ -204,16 +172,4 @@ void Head::InputArrowKey()
 void Head::DrawCharactor()
 {
 	nowImg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
-}
-
-void Head::DrawEffect()
-{
-	if (!m_vEffect.empty())
-	{
-		vector<Effect*>::iterator iter;
-		for (iter = m_vEffect.begin(); iter!=m_vEffect.end();iter++)
-		{
-			(*iter)->Render();
-		}//end for
-	}//end exist Effect
 }

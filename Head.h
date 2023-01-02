@@ -45,8 +45,6 @@ public:
 protected:
 	eSkulSpecies m_species;
 
-	vector<Effect*> m_vEffect;
-
 	vImage* img[eActionTagNumber];
 	vImage* img_reborn;
 	vImage* nowImg;
@@ -103,7 +101,6 @@ public:
 	virtual void CoolDown() {};
 	virtual void ActionArrangement() {};
 	virtual void CollisionUpdate() {};
-	virtual void EffectUpdate();
 	//	in move
 	virtual void InputJumpKey();
 	virtual void InputDashKey();
@@ -115,7 +112,6 @@ public:
 
 	//Render 안에 들어가는 함수
 	virtual void DrawCharactor();
-	virtual void DrawEffect();	//이펙트는 오브젝트라고 생각하고 생성소멸시키기.
 
 	void ResetAll()
 	{
