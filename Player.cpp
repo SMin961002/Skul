@@ -23,9 +23,6 @@ void Player::Init()
 	coll = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(coll);
 	m_obj->AddComponent<RigidBodyComponent>();
-
-	//m_obj->SetCollisionComponent(m_obj->AddComponent<CollisionComponent>());
-	//m_obj->GetComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles,&m_obj->x, &m_obj->y);
 }
 
 void Player::Update()
@@ -34,14 +31,16 @@ void Player::Update()
 	//m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
 	MY_UTILITY::GetLerpVec2(&v, { m_obj->x - WINSIZE_X / 2,m_obj->y - 400 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
-	coll->Setting(25,m_obj->x,m_obj->y,"HitRange");
+	coll->Setting(25,m_obj->x+14,m_obj->y-15,"HitRange");
 	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
 	{
 		m_obj->y += 1;
 	}
 
-	m_nowHead->Update();
 	InputArtifactKey();
+	m_nowHead->Update();
+	
+	coll->SetIsActive(!m_nowHead->GetIsDashing());
 
 	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
 }
