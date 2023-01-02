@@ -44,6 +44,12 @@ ImageManager::~ImageManager()
 		SAFE_DELETE(iter.second);
 	}
 	m_gimages.clear();
+
+	for (auto iter : m_vImages)
+	{
+		SAFE_DELETE(iter);
+	}
+	m_vImages.clear();
 }
 
 void ImageManager::Init()
@@ -149,9 +155,6 @@ void ImageManager::LoadImages()
 	//AddImageVector("Gambler_JumpAttack", L"./Resources/Png/Skul/Gambler/Motion/JumpAttack/", 1, 5);
 	//AddImageVector("Gambler_RussianRoulette", L"./Resources/Png/Skul/Gambler/Motion/RussianRoulette/", 1, 8);
 
-
-
-	//타일 이미지
 	// 타일 이미지
 	AddTileImage(L"./Resources/Tile/4Stage/01.png");
 	AddTileImage(L"./Resources/Tile/4Stage/02.png");
@@ -192,7 +195,6 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/37.png");
 	AddTileImage(L"./Resources/Tile/4Stage/38.png");
 
-
 	// 배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
 	AddImage("Building", L"./Resources/BackGround/Boss_Stage_Building.png");
@@ -206,7 +208,7 @@ void ImageManager::LoadImages()
 	// 보스 ====================================================================================
 	// 1페이즈_대기
 	AddImageVector("Boss_Idle", L"./Resources/Saint_Joanna/Phase1_Intro_1/Idle_", 1, 7);
-	// 1페이즈_지팡이
+	// 1페이즈_지팡이 들기
 	AddImageVector("Boss_Casting_Ready", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Ready/Casting_Ready_", 1, 7);
 	AddImageVector("Boss_Casting_Attack", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Attack/Casting_Attack_Loop_", 1, 7);
 	AddImageVector("Boss_Casting_End", L"./Resources/Saint_Joanna/Phase_1/Casting/Boss/Attack/Casting_Attack_Loop_", 1, 7);
@@ -225,8 +227,12 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Nervousness_Effect_Attack", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Effect/Attack/Phase1_Nervousness_Attack_", 1, 33);
 	AddImageVector("Boss_Nervousness_Effect_Projectile", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Effect/Projectile/Phase1_Nervousness_Projectile_", 1, 12);
 	// 1페이즈_분수 구슬
-	// 
+	AddImageVector("Boss_HolyFountain_Start", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/HolyBarrierOrb/Start/Phase1_HolyBarrier_Orb_Start_", 1, 22);
+	AddImageVector("Boss_HolyFountain_Orb", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/HolyBarrierOrb/Orb/Phase1_HolyBarrier_Orb_", 1, 47);
+	AddImageVector("Boss_HolyFountain_End", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/HolyBarrierOrb/End/Phase1_HolyBarrier_Orb_End_", 1, 24);
 	// 1페이즈_분수
+	AddImage("Fountain_Deactivate", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/Fountain/Deactive/Deactivate_01.png");
+	AddImageVector("Boss_HolyFountain_Activate", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/Fountain/Active/Activate_", 1, 8);
 	// 1페이즈_방어막
 	AddImageVector("Boss_Barrier_Intro", L"./Resources/Saint_Joanna/Phase_1/Barrier/Intro/Phase1_Barrier_Intro_", 1, 30);
 	AddImageVector("Boss_Barrier_Loop", L"./Resources/Saint_Joanna/Phase_1/Barrier/Loop/Phase1_Barrier_Loop_", 1, 24);
@@ -237,13 +243,29 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Baptism_Projectile", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile/Phase1_Batism_Projectile_", 1, 21);
 	AddImageVector("Boss_Baptism_Projectile_Dewspawn", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile_Despawn/Phase1_Baptism_Projectile_Despawn_", 1, 24);
 	// 1페이즈_레이저
+	AddImageVector("Boss_Consecration_Start", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/Start/Phase1_Consecration_Start_", 1, 27);
+	AddImageVector("Boss_Consecration_Sign", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/Sign/Phase1_Consecration_Sign_", 1, 23);
+	AddImageVector("Boss_Consecration_Loop", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/Loop/Phase1_Consecration_Loop_", 1, 33);
+	AddImageVector("Boss_Consecration_End", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/End/Phase1_Consecration_End_", 1, 21);
 	// 1페이즈_좌우 구슬
+	AddImageVector("Boss_Worship", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Worship/Phase1_Worship_Projectile_", 1, 60);
 
+	// 2페이즈_대기
+	AddImageVector("Phase2_Boss_Idle", L"./Resources/Saint_Joanna/Phase_2/Idle/Phase2_Idle_", 1, 6);
+	// 구체 생성
+	AddImageVector("Phase2_Boss_CreateBall_Ready", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/Ready/Sacrament_Ready_", 1, 6);
+
+	//==========================================================================================================
 	// 맵 구조물 이미지
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
 	AddStructureImage("arch1", L"./Resources/Tile/4Stage/Structure/arch1.png");
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
 	AddStructureImage("Elevator", L"./Resources/Tile/4Stage/Structure/elevator.png");
+
+	// 몬스터 체력바 이미지
+	AddImageVector("Hpbar_Empty", L"./Resources/Monster/Hpbar/Empty/", 1, 1);
+	AddImageVector("Hpbar_Down", L"./Resources/Monster/Hpbar/Down/", 1, 1);
+	AddImageVector("Hpbar_Up", L"./Resources/Monster/Hpbar/Up/",1,1);
 
 	// 몬스터 이미지
 	AddImageVector("Leon_Idle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
@@ -265,15 +287,15 @@ void ImageManager::LoadImages()
 	AddImageVector("Bfanatic_AttackIdle", L"Resources/Monster/Black Fanatic/Attack Idle/", 1, 5);
 	AddImageVector("BFanatic_Runattack", L"Resources/Monster/Black Fanatic/Walk Attack/", 1, 8);
 	AddImageVector("BFanatic_Run", L"Resources/Monster/Black Fanatic/Walk/", 1, 6);
-	
-	AddImageVector("Cfanatic_Idle", L"Resources/Monster/Candle_Fanatic/Idle/",1, 6);
+
+	AddImageVector("Cfanatic_Idle", L"Resources/Monster/Candle_Fanatic/Idle/", 1, 6);
 	AddImageVector("Cfanatic_AttackReady", L"Resources/Monster/Candle_Fanatic/Attack_Ready/", 1, 17);
 	AddImageVector("Cfanatic_Attack", L"Resources/Monster/Candle_Fanatic/Attack/", 1, 10);
-	AddImageVector("Cfanatic_Run", L"Resources/Monster/Candle_Fanatic/Run/",1, 8);
+	AddImageVector("Cfanatic_Run", L"Resources/Monster/Candle_Fanatic/Run/", 1, 8);
 	AddImageVector("Cfanatic_Hit", L"Resources/Monster/Candle_Fanatic/Hit/", 1, 1);
 	AddImageVector("Cfanatic_Satcrifice", L"Resources/Monster/Candle_Fanatic/Setcrifice/", 1, 15);
-	AddImageVector("Cfanatic_SatcrificeReady", L"Resources/Monster/Candle_Fanatic/Setcrifice_Ready/",1, 6);
-	AddImageVector("Cfanatic_SatcrificeLoop", L"Resources/Monster/Candle_Fanatic/Setcrifice_Loop/",1, 5);
+	AddImageVector("Cfanatic_SatcrificeReady", L"Resources/Monster/Candle_Fanatic/Setcrifice_Ready/", 1, 6);
+	AddImageVector("Cfanatic_SatcrificeLoop", L"Resources/Monster/Candle_Fanatic/Setcrifice_Loop/", 1, 5);
 
 	AddImageVector("Tentacles_Idle", L"Resources/Monster/Tentacles_Of_Light/Idle/", 1, 10);
 	AddImageVector("Tentacles_Attack", L"Resources/Monster/Tentacles_Of_Light/Attack/", 1, 8);
@@ -293,10 +315,20 @@ void ImageManager::LoadImages()
 	AddImageVector("Befanatic_SacrificeLoop", L"Resources/Monster/Bell_Fanatic/Sacrifice_Loop/", 1, 1);
 	AddImageVector("Befanatic_SummonLoop", L"Resources/Monster/Bell_Fanatic/Summon_Loop/", 1, 12);
 	AddImageVector("Befanatic_SummonReady", L"Resources/Monster/Bell_Fanatic/Summon_Ready/", 1, 4);
-	
-	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/",1, 40);
+
+	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/", 1, 40);
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
+
+	//맵툴 오브젝트 이미지 저장
+	AddObjectImage("Leon", L"Resources/Monster/Leonia Soldier/Idle/01.png");
+	AddObjectImage("Fanatic", L"Resources/Monster/Fanatic/Idle/01.png");
+	AddObjectImage("Bfanatic", L"Resources/Monster/Black Fanatic/Idle/01.png");
+	AddObjectImage("Cfanatic", L"Resources/Monster/Candle_Fanatic/Idle/01.png");
+	AddObjectImage("Tentacles", L"Resources/Monster/Tentacles_Of_Light/Idle/01.png");
+	AddObjectImage("Lfanatic", L"Resources/Monster/Lamp_Fanatic/Idle/01.png");
+	AddObjectImage("Befanatic", L"Resources/Monster/Bell_Fanatic/Idle/01.png");
+	AddObjectImage("AStatue", L"Resources/Monster/Angel_Statue/Idle/01.png");
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
@@ -342,6 +374,14 @@ CImage* ImageManager::AddStructureImage(std::string key, std::wstring path)
 	UINT _width = 0, _height = 0;
 	CImage* img = new CImage(AddBitmap(path, &_width, &_height), _width, _height);
 	m_structureImages.insert(make_pair(key, img));
+	return nullptr;
+}
+
+CImage* ImageManager::AddObjectImage(std::string key, std::wstring path)
+{
+	UINT _width = 0, _height = 0;
+	CImage* img = new CImage(AddBitmap(path, &_width, &_height), _width, _height);
+	m_objectImages.insert(make_pair(key, img));
 	return nullptr;
 }
 
@@ -393,6 +433,21 @@ vImage* ImageManager::FindImageVector(const std::string key)
 		return find->second;
 	}
 	cout << "애니메이션 key 없음 : " << key << "\n";
+	return nullptr;
+}
+
+vImage* ImageManager::AddImageVectorCopy(const std::string key)
+{
+	auto find = m_vectorImageList.find(key);
+	if (find != m_vectorImageList.end())
+	{
+		vImage* vimg = new vImage();
+		for (auto iter : find->second->GetImages())
+		{
+			vimg->AddImage(iter);
+		}
+		return vimg;
+	}
 	return nullptr;
 }
 
@@ -527,7 +582,7 @@ void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
 	}
 }
 
-void ImageManager::DrawColorRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse,D2D1_COLOR_F colr)
+void ImageManager::DrawColorRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse, D2D1_COLOR_F colr)
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 

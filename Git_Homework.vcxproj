@@ -136,13 +136,17 @@
   <ItemGroup>
     <ClCompile Include="AngelStatue.cpp" />
     <ClCompile Include="BallFanatic.cpp" />
+    <ClCompile Include="Baptism.cpp" />
     <ClCompile Include="BlackFanatic.cpp" />
     <ClCompile Include="BossEffect.cpp" />
     <ClCompile Include="BossObject.cpp" />
     <ClCompile Include="BossScene.cpp" />
     <ClCompile Include="CandleFanatic.cpp" />
+    <ClCompile Include="Casting.cpp" />
+    <ClCompile Include="Choice.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Consercration.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
@@ -154,6 +158,7 @@
     <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="Head.cpp" />
     <ClCompile Include="Head_Basic.cpp" />
+    <ClCompile Include="HollyFountain.cpp" />
     <ClCompile Include="Idle.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
@@ -164,6 +169,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapToolMapSelectScene.cpp" />
     <ClCompile Include="MapToolScene.cpp" />
+    <ClCompile Include="Nervousness.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PixelCollisionComponent.cpp" />
@@ -182,17 +188,22 @@
     <ClCompile Include="WinMain.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Worship.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AngelStatue.h" />
     <ClInclude Include="BallFanatic.h" />
+    <ClInclude Include="Baptism.h" />
     <ClInclude Include="BlackFanatic.h" />
     <ClInclude Include="BossEffect.h" />
     <ClInclude Include="BossObject.h" />
     <ClInclude Include="BossScene.h" />
     <ClInclude Include="CandleFanatic.h" />
+    <ClInclude Include="Casting.h" />
+    <ClInclude Include="Choice.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Consercration.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
@@ -204,6 +215,7 @@
     <ClInclude Include="Gambler.h" />
     <ClInclude Include="Head.h" />
     <ClInclude Include="Head_Basic.h" />
+    <ClInclude Include="HollyFountain.h" />
     <ClInclude Include="Idle.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="IOFillManager.h" />
@@ -214,6 +226,7 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="MapToolMapSelectScene.h" />
     <ClInclude Include="MapToolScene.h" />
+    <ClInclude Include="Nervousness.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PixelCollisionComponent.h" />
@@ -227,6 +240,7 @@
     <ClInclude Include="TentaclesOfLight.h" />
     <ClInclude Include="TimerManager.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="Worship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

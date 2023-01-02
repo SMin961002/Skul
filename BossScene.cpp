@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "BossScene.h"
 #include "BossObject.h"
+#include "HollyFountain.h"
 
 void BossScene::Init()
 {
@@ -8,8 +9,8 @@ void BossScene::Init()
 	_imgBuilding = IMAGEMANAGER->FindImage("Building");
 	_imgLion = IMAGEMANAGER->FindImage("Lion");
 
-	OBJECTMANAGER->AddObject("Joanna",WINSIZE_X/2,400,0)->AddComponent<BossObject>();
-
+	OBJECTMANAGER->AddObject("Joanna", WINSIZE_X / 2, 400, 0)->AddComponent<BossObject>();
+	//OBJECTMANAGER->AddObject("Fountain", 300, 400, 0)->AddComponent<HollyFountain>();
 }
 
 void BossScene::Update()

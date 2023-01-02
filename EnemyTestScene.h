@@ -7,6 +7,7 @@ private:
 	float m_speed;
 	CImage* m_castle;
 	vector<StructureData*> m_sturctDatas;
+	vector<StructureData*> m_objectDatas;
 public:
 	EnemyTestScene();
 	~EnemyTestScene();

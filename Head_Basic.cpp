@@ -82,7 +82,7 @@ void Head_Basic::ParameterSetting()
 void Head_Basic::CollisionSetting()
 {
 	CollisionComponent* attack1 = m_obj->AddComponent<CollisionComponent>();
-	attack1->Setting(50, m_obj->x + 6 + 40, m_obj->y - 24 + 72,"기본공격");
+	attack1->Setting(50, m_obj->x + 6 + 40, m_obj->y - 24 + 72, "기본공격");
 	attack1->SetIsActive(false);
 	m_obj->AddCollisionComponent(attack1);
 }
@@ -146,6 +146,7 @@ void Head_Basic::ActionArrangement()
 		nowImg->Reset();
 		if (m_attackCast)
 		{
+			m_action = eAutoAttack_2;
 			nowImg = img[eAutoAttack_2];
 			m_attackCount = 2;
 			for (auto iter : m_obj->GetCollisionComponent())
@@ -193,9 +194,44 @@ void Head_Basic::CollisionUpdate()
 	{
 		if (iter->GetName() == "기본공격")
 		{
+			if (m_action == eAutoAttack_1)
+			{
+				if (img[eAutoAttack_1]->GetFrame() > 1 && img[eAutoAttack_1]->GetFrame() < 3)
+				{
+					iter->SetIsActive(true);
+				}
+				else
+				{
+					iter->SetIsActive(false);
+				}
+			}
+			else if (m_action == eAutoAttack_2)
+			{
+				if (img[eAutoAttack_2]->GetFrame() > 1 && img[eAutoAttack_2]->GetFrame() < 2)
+				{
+					iter->SetIsActive(true);
+				}
+				else
+				{
+					iter->SetIsActive(false);
+				}
+			}
+			else if (m_action == eJumpAttack)
+			{
+				if (img[eJumpAttack]->GetFrame() > 0 && img[eJumpAttack]->GetFrame() < 3)
+				{
+					iter->SetIsActive(true);
+				}
+				else
+				{
+					iter->SetIsActive(false);
+				}
+			}
+
+
 			if (m_isLeft)
 				iter->Setting(m_obj->x, m_obj->y-10);
-			else iter->Setting(m_obj->x + 50, m_obj->y-10);
+			else iter->Setting(m_obj->x + 50, m_obj->y-10);	//##else iter->Setting(m_obj->x + 50, m_obj->y - 16);
 		}
 	}
 }
@@ -210,13 +246,6 @@ void Head_Basic::InputAttackKey()
 			{
 				m_action = eJumpAttack;
 				m_attackCount = m_attackMax;
-				for (auto iter : m_obj->GetCollisionComponent())
-				{
-					if (iter->GetName() == "기본공격")
-					{
-						iter->SetIsActive(true);
-					}
-				}
 				m_imageChange = true;
 			}
 		}//end if jumpping
@@ -245,5 +274,5 @@ void Head_Basic::InputAttackKey()
 
 void Head_Basic::DrawCharactor()
 {
-	nowImg->CenterRender(m_obj->x, m_obj->y-56, 2, 2, 0, m_isLeft);
+	nowImg->CenterRender(m_obj->x, m_obj->y - 56, 2, 2, 0, m_isLeft);
 }

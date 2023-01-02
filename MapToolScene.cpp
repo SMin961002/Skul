@@ -18,7 +18,7 @@ void MapToolScene::Init()
 
 	m_tileImages = IMAGEMANAGER->GetTileImages();
 	m_structureImages = IMAGEMANAGER->GetStructureImages();
-
+	m_objectImages = IMAGEMANAGER->GetObjectImages();
 	m_width = m_tileImages[0]->GetWidth();
 	m_kind = -1;
 	HRESULT hr = FILEMANAGER->TileFileRead(&m_tiles);
@@ -30,9 +30,15 @@ void MapToolScene::Init()
 			iter.resize(100, -1);
 		}
 	}
+	IMAGEMANAGER->SetCameraPosition(0,0);
 	string strData;
 	strData = FILEMANAGER->GetFileData("Structure", "batch");
+	string objData;
+	objData = FILEMANAGER->GetFileData("Object", "batch");
+
 	MY_UTILITY::ConvertStructureString2Vec(&m_sturctDatas, strData);
+	MY_UTILITY::ConvertStructureString2Vec(&m_objectDatas, objData);
+
 	cout << "";
 }
 
@@ -73,7 +79,7 @@ void MapToolScene::Update()
 	{
 		m_page = 0;
 		m_kind = -1;
-		m_state = eCollisionBatch;
+		m_state = eObjectBatch;
 		m_streuctureKey = "";
 	}
 }
@@ -83,18 +89,21 @@ void MapToolScene::Render()
 	IMAGEMANAGER->Render(IMAGEMANAGER->FindImage("exBg"), IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 1);
 
 	IMAGEMANAGER->DrawMapStructureBack(m_sturctDatas);
-	
+
 	IMAGEMANAGER->DrawMapTile(m_tiles);
 
 	IMAGEMANAGER->DrawMapTilePixel(m_tiles);
 	IMAGEMANAGER->DrawMapStructureFoward(m_sturctDatas);
-
-
 	for (auto iter : m_sturctDatas)
 	{
 		if (iter->isBack == false)
 			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
 	}
+	for (auto iter : m_objectDatas)
+	{
+		IMAGEMANAGER->CenterRender(m_objectImages[iter->key], iter->x, iter->y, 2, 2);
+	}
+
 	int y = 0;
 	int idx = 0;
 	for (char i = '0'; i <= '9'; i++)
@@ -138,6 +147,24 @@ void MapToolScene::Render()
 			}
 		}
 	}
+	else if (m_state == eObjectBatch)
+	{
+		for (auto iter : m_objectImages)
+		{
+			idx++;
+			if (idx >= m_maxIndex * m_page)
+			{
+				if (y == m_maxIndex)
+				{
+					break;
+				}
+				IMAGEMANAGER->UIRender(iter.second, 900 + (y / 6) * 100, (1 + y % 6) * (2 * m_width + 10),
+					1.f / iter.second->GetWidth() * (iter.second->GetWidth() - (iter.second->GetWidth() - m_tileImages[0]->GetWidth() * 2)),
+					1.f / iter.second->GetHeight() * (iter.second->GetHeight() - (iter.second->GetHeight() - m_tileImages[0]->GetHeight() * 2)));
+				y++;
+			}
+		}
+	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_RBUTTON))
 	{
 		if (m_streuctureKey != "")
@@ -156,10 +183,21 @@ void MapToolScene::Render()
 
 	if (KEYMANAGER->GetOnceKeyDown(VK_CONTROL))
 	{
-		if (m_sturctDatas.size() != 0)
+		if (m_state == eStructureBatch)
 		{
-			SAFE_DELETE(*(m_sturctDatas.end() - 1));
-			m_sturctDatas.pop_back();
+			if (m_sturctDatas.size() != 0)
+			{
+				SAFE_DELETE(*(m_sturctDatas.end() - 1));
+				m_sturctDatas.pop_back();
+			}
+		}
+		else if (m_state == eObjectBatch)
+		{
+			if (m_objectDatas.size() != 0)
+			{
+				SAFE_DELETE(*(m_objectDatas.end() - 1));
+				m_objectDatas.pop_back();
+			}
 		}
 	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_LBUTTON))
@@ -228,6 +266,43 @@ void MapToolScene::Render()
 				}
 			}
 		}
+		else if (m_state == eObjectBatch)
+		{
+			for (auto iter : m_objectImages)
+			{
+				idx++;
+				if (idx >= m_maxIndex * m_page)
+				{
+					RECT rt = {
+					900 + (y / 6) * 100,
+					(1 + y % 6) * (2 * m_width + 10),
+					900 + (y / 6) * 100 + m_width * 2,
+					(1 + y % 6) * (2 * m_width + 10) + m_width * 2
+					};
+					if (rt.left < _ptMouse.x && rt.right > _ptMouse.x && rt.top < _ptMouse.y && rt.bottom>_ptMouse.y)
+					{
+						m_streuctureKey = iter.first;
+					}
+					if (idx >= m_maxIndex * (m_page + 1))
+					{
+						break;
+					}
+					y++;
+				}
+			}
+			if (m_streuctureKey != "")
+			{
+				if (_ptMouse.x < 800)
+				{
+					StructureData* sd = new StructureData();
+					sd->key = m_streuctureKey;
+					sd->x = _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x;
+					sd->y = _ptMouse.y + IMAGEMANAGER->GetCameraPosition().y;
+					sd->isBack = false;
+					m_objectDatas.push_back(sd);
+				}
+			}
+		}
 	}
 
 	if (m_kind != -1)
@@ -259,23 +334,26 @@ void MapToolScene::Render()
 	}
 	if (KEYMANAGER->GetStayKeyDown(VK_RBUTTON))
 	{
-		int y2 = 0;
-		for (auto& iter : m_tiles)
+		if (m_state == eStructureBatch)
 		{
-			int x2 = 0;
-			for (auto& _iter = iter.begin(); _iter != iter.end(); _iter++)
+			int y2 = 0;
+			for (auto& iter : m_tiles)
 			{
-				RECT rt = { x2 * m_width, y2 * m_width , x2 * m_width + m_width , y2 * m_width + m_width };
-				if (x2 * m_width - IMAGEMANAGER->GetCameraPosition().x < 800)
+				int x2 = 0;
+				for (auto& _iter = iter.begin(); _iter != iter.end(); _iter++)
 				{
-					if (rt.left < _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.right > _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.top < _ptMouse.y + IMAGEMANAGER->GetCameraPosition().y && rt.bottom>_ptMouse.y + IMAGEMANAGER->GetCameraPosition().y)
+					RECT rt = { x2 * m_width, y2 * m_width , x2 * m_width + m_width , y2 * m_width + m_width };
+					if (x2 * m_width - IMAGEMANAGER->GetCameraPosition().x < 800)
 					{
-						(*_iter) = -1;
+						if (rt.left < _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.right > _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.top < _ptMouse.y + IMAGEMANAGER->GetCameraPosition().y && rt.bottom>_ptMouse.y + IMAGEMANAGER->GetCameraPosition().y)
+						{
+							(*_iter) = -1;
+						}
+						x2++;
 					}
-					x2++;
 				}
+				y2++;
 			}
-			y2++;
 		}
 	}
 	if (m_kind != -1)
@@ -291,6 +369,10 @@ void MapToolScene::Render()
 		{
 			IMAGEMANAGER->UIRender(m_structureImages[m_streuctureKey], _ptMouse.x, _ptMouse.y, 2, 2);
 		}
+		else if (m_state == eObjectBatch)
+		{
+			IMAGEMANAGER->UIRender(m_objectImages[m_streuctureKey], _ptMouse.x, _ptMouse.y, 2, 2);
+		}
 	}
 
 	if (KEYMANAGER->GetOnceKeyDown(VK_BACK))
@@ -299,6 +381,10 @@ void MapToolScene::Render()
 		MY_UTILITY::ConvertVec2StructureString(m_sturctDatas, &str);
 		FILEMANAGER->WriteFileData("Structure", "batch", str);
 		FILEMANAGER->TileFileWrite("Test1", "TileMap", m_tiles);
+		string objStr = "";
+		MY_UTILITY::ConvertVec2StructureString(m_objectDatas, &objStr);
+		FILEMANAGER->WriteFileData("Object", "batch", objStr);
+
 		cout << "ÀúÀå";
 		SCENEMANAGER->ChangeScene("MapToolMapSelectScene");
 	}
@@ -311,11 +397,17 @@ void MapToolScene::Release()
 		SAFE_DELETE(iter);
 	}
 	m_sturctDatas.clear();
-	
+
 	for (auto iter : m_tiles)
 	{
 		iter.clear();
 	}
 	m_tiles.clear();
 	m_tileImages.clear();
+
+	for (auto iter : m_objectDatas)
+	{
+		SAFE_DELETE(iter);
+	}
+	m_objectDatas.clear();
 }

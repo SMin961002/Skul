@@ -94,6 +94,9 @@ private:
 	std::vector<CImage*> m_tileImages;
 	std::map<string, CImage*> m_structureImages;
 	std::map<string, GImage*> m_gimages;
+	std::map<string, CImage*> m_objectImages;
+
+	vector<vImage* >m_vImages;
 
 	IWICImagingFactory* factory;
 	ID2D1HwndRenderTarget* pRT = NULL;
@@ -119,11 +122,13 @@ public:
 	CImage* AddImage(const std::string key, std::wstring path);
 	CImage* AddTileImage(std::wstring path);
 	CImage* AddStructureImage(std::string key, std::wstring path);
+	CImage* AddObjectImage(std::string key, std::wstring path);
 
 	CImage* FindImage(const std::string key);
 
 	vImage* AddImageVector(const std::string key, std::wstring path, int startIndex, int endIndex);
 	vImage* FindImageVector(const std::string key);
+	vImage* AddImageVectorCopy(const std::string key);
 
 	GImage* AddPixelmage(string strKey, const char* fileName, int width, int height);
 	GImage* FindPixelImage(string strKey);
@@ -158,6 +163,11 @@ public:
 		return m_tileImages;
 	}
 
+	map<string, CImage*> GetObjectImages()
+	{
+		return m_objectImages;
+	}
+
 	map<string, CImage*> GetStructureImages()
 	{
 		return m_structureImages;
@@ -186,7 +196,7 @@ public:
 	vector<CImage*> GetImages() { return m_images; }
 	int GetImageSize() { return m_images.size(); }
 	float GetTotalDelay() { return m_totalDelay; }
-
+	int GetFrame() { return m_frame; }
 	void Setting(float delayTime, bool isLoop)
 	{
 		vector<CImage*>::iterator iter;
