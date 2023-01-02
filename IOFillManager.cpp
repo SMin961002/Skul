@@ -79,11 +79,11 @@ void IOFillManager::MapFileWrite(string section, string key, vector<string> mapL
 string IOFillManager::GetFileData(string section, string key)
 {
 	char* cBuf = NULL;
-	cBuf = (char*)malloc(sizeof(char) * 1000);
+	cBuf = (char*)malloc(sizeof(char) * 10000);
 	memset(cBuf, 0x00, sizeof(cBuf));
 	string path = "./MapFile/Structures/" + m_nowStageFileName + ".ini";
 
-	GetPrivateProfileString(section.c_str(), key.c_str(), "", cBuf, 1000, path.c_str());
+	GetPrivateProfileString(section.c_str(), key.c_str(), "", cBuf, 10000, path.c_str());
 
 	string val = cBuf;
 	SAFE_DELETE(cBuf);
