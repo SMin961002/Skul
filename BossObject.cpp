@@ -138,7 +138,7 @@ void BossObject::Update()
 void BossObject::Render()
 {
 	// 보스 1페이즈 대기 상태
-	if (_isIdle == true)
+	if (_isIdle == true && _isCasting == false && _isNervousness == false && _isChoice == false)
 	{
 		_imgBoss->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
 	}
@@ -193,7 +193,8 @@ void BossObject::Render()
 		_imgPhase1BarrierSpark->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
 		_imgPhase1BarrierImpact->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
 	}
-
+	cout << _leftFountainHP << endl;
+	cout << _rightFountainHP << endl;
 	// 보스 1페이즈 캐스팅 작동 예시
 	// ㄴ 1. Ready 작동
 	// ㄴ 2. Attack이 작동하고 패턴시작

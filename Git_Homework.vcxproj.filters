@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
-      <Filter>Core\Manager\Scene</Filter>
+      <Filter>Core\Manager\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Core\Manager\Scene</Filter>
+      <Filter>Core\Manager\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Core\Main</Filter>
@@ -56,10 +56,10 @@
       <Filter>Game\Scene\MapTool\MapToolMapSelectScene</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Game\Object\Boss\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="Gambler.cpp">
-      <Filter>Game\Object\Boss\Charactor\Head</Filter>
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
     <ClCompile Include="RigidBodyComponent.cpp">
       <Filter>Game\Component\RigidBodyComponent</Filter>
@@ -86,8 +86,6 @@
     <ClCompile Include="WinMain.cpp">
       <Filter>Game\Object\Boss\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Idle.cpp" />
-    <ClCompile Include="EnemyTestScene.cpp" />
     <ClCompile Include="CandleFanatic.cpp">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClCompile>
@@ -107,10 +105,10 @@
       <Filter>Game\Object\Enemy\AngelStatue</Filter>
     </ClCompile>
     <ClCompile Include="Head.cpp">
-      <Filter>Game\Object\Boss\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="Head_Basic.cpp">
-      <Filter>Game\Object\Boss\Charactor\Head</Filter>
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
     <ClCompile Include="Baptism.cpp">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
@@ -136,13 +134,37 @@
     <ClCompile Include="Idle.cpp">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
     </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Core\Manager\Effectmanager</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelCollisionComponent.cpp">
+      <Filter>Game\Component\PixelCollisionComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Core\Manager\Effectmanager</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTestScene.cpp">
+      <Filter>Game\Scene\Example</Filter>
+    </ClCompile>
+    <ClCompile Include="BossEffect.cpp">
+      <Filter>Game\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyEffect.cpp">
+      <Filter>Game\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerEffect.cpp">
+      <Filter>Game\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Idle.cpp">
+      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
-      <Filter>Core\Manager\Scene</Filter>
+      <Filter>Core\Manager\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Core\Manager\Scene</Filter>
+      <Filter>Core\Manager\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="singleton.h">
       <Filter>Core\Manager</Filter>
@@ -196,10 +218,10 @@
       <Filter>Game\Scene\MapTool\MapToolMapSelectScene</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Game\Object\Boss\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClInclude>
     <ClInclude Include="Gambler.h">
-      <Filter>Game\Object\Boss\Charactor\Head</Filter>
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>Game\Component\RigidBodyComponent</Filter>
@@ -222,8 +244,6 @@
     <ClInclude Include="BossScene.h">
       <Filter>Game\Scene\BossScene</Filter>
     </ClInclude>
-    <ClInclude Include="Idle.h" />
-    <ClInclude Include="EnemyTestScene.h" />
     <ClInclude Include="CandleFanatic.h">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClInclude>
@@ -243,10 +263,10 @@
       <Filter>Game\Object\Enemy\AngelStatue</Filter>
     </ClInclude>
     <ClInclude Include="Head.h">
-      <Filter>Game\Object\Boss\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClInclude>
     <ClInclude Include="Head_Basic.h">
-      <Filter>Game\Object\Boss\Charactor\Head</Filter>
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
     <ClInclude Include="Baptism.h">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
@@ -272,6 +292,30 @@
     <ClInclude Include="Idle.h">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
     </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>Core\Manager\Effectmanager</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelCollisionComponent.h">
+      <Filter>Game\Component\PixelCollisionComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Core\Manager\Effectmanager</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTestScene.h">
+      <Filter>Game\Scene\Example</Filter>
+    </ClInclude>
+    <ClInclude Include="BossEffect.h">
+      <Filter>Game\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyEffect.h">
+      <Filter>Game\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEffect.h">
+      <Filter>Game\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Idle.h">
+      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -279,9 +323,6 @@
     </Filter>
     <Filter Include="Core\Manager">
       <UniqueIdentifier>{be349cf7-cac6-4c31-822b-c67d54e7cf28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Manager\Scene">
-      <UniqueIdentifier>{43a4cb9e-c00f-4977-abc1-bedd5ecc97af}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{214c1593-240d-4c35-b4ca-365537ef2da9}</UniqueIdentifier>
@@ -385,10 +426,22 @@
     <Filter Include="Game\Object\Boss\Pattern%28do nothing%29\Casting">
       <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Boss\Charactor">
+    <Filter Include="Core\Manager\SceneManager">
+      <UniqueIdentifier>{43a4cb9e-c00f-4977-abc1-bedd5ecc97af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\Effectmanager">
+      <UniqueIdentifier>{313a59be-f147-4820-831e-f73354121627}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component\PixelCollisionComponent">
+      <UniqueIdentifier>{527d2bd9-5b69-49c6-ba36-3d165c227727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Effect">
+      <UniqueIdentifier>{88d36aa7-ac8b-448a-aa35-a9c571ed24ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor">
       <UniqueIdentifier>{b02c8b66-cd68-4c8d-b8c6-2015530ad898}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Boss\Charactor\Head">
+    <Filter Include="Game\Object\Charactor\Head">
       <UniqueIdentifier>{7528eb48-f244-4dc5-aab2-5f6e7dd1a441}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
