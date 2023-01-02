@@ -2,6 +2,7 @@
 class EnemyTestScene : public Scene
 {
 private:
+	bool isStart = false;
 	CImage* m_backGround;
 	CImage* m_cloude;
 	float m_speed;
@@ -16,5 +17,6 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	virtual void UIRender() override;
 };
 

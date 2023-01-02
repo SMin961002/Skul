@@ -66,8 +66,7 @@ struct StructureData
 #define WINSIZE_Y 560
 
 
-static float g_TimeScale = 1;
-static const float g_deltaTime;
+extern float g_TimeScale;
 
 #define TIME_SCALE g_TimeScale
 
@@ -85,7 +84,7 @@ struct Vector2
 	float x;
 	float y;
 };
-#define DELTA_TIME TIME_SCALE *  TimerManager::GetInstance()->GetElapsedTime()
+#define DELTA_TIME g_TimeScale *  TimerManager::GetInstance()->GetElapsedTime()
 #include "ObjectManager.h"
 #include "KeyManager.h"
 #include "ImageManager.h"

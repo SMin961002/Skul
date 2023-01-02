@@ -16,7 +16,7 @@ public:
 	void Render();
 	void Release();
 	void OnCollision(string collisionName, Object* other);
-
+	void UIRender();
 	void SetPosition(float x, float y) { this->x = x; this->y = y; }
 	void SetName(string str) { name = str; }
 	string GetName() { return name; }

@@ -17,6 +17,7 @@ public:
 	void Init();
 	void Update();
 	void Render();
+	void UIRender();
 	void Release();
 
 	void AddScene(std::string key, Scene* scene);

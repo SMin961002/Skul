@@ -266,11 +266,13 @@ void ImageManager::LoadImages()
 	AddStructureImage("arch1", L"./Resources/Tile/4Stage/Structure/arch1.png");
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
 	AddStructureImage("Elevator", L"./Resources/Tile/4Stage/Structure/elevator.png");
+	AddStructureImage("DoorBack", L"Resources/Door/DoorBack.png");
+	AddStructureImage("Reword", L"Resources/Door/Reword.png");
 
 	// 몬스터 체력바 이미지
 	AddImageVector("Hpbar_Empty", L"./Resources/Monster/Hpbar/Empty/", 1, 1);
 	AddImageVector("Hpbar_Down", L"./Resources/Monster/Hpbar/Down/", 1, 1);
-	AddImageVector("Hpbar_Up", L"./Resources/Monster/Hpbar/Up/",1,1);
+	AddImageVector("Hpbar_Up", L"./Resources/Monster/Hpbar/Up/", 1, 1);
 
 	// 몬스터 이미지
 	AddImageVector("Leon_Idle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
@@ -325,6 +327,15 @@ void ImageManager::LoadImages()
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
 
+
+	//맵 오브젝트
+	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
+	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
+
+	//맵 오브젝트 애니메이션
+	AddImageVector("NormalRoom", L"Resources/Door/NormalRoom/", 1, 8);
+	AddImageVector("SkulRoom", L"Resources/Door/SkulRoom/", 1, 7);
+
 	//맵툴 오브젝트 이미지 저장
 	AddObjectImage("Leon", L"Resources/Monster/Leonia Soldier/Idle/01.png");
 	AddObjectImage("Fanatic", L"Resources/Monster/Fanatic/Idle/01.png");
@@ -334,6 +345,11 @@ void ImageManager::LoadImages()
 	AddObjectImage("Lfanatic", L"Resources/Monster/Lamp_Fanatic/Idle/01.png");
 	AddObjectImage("Befanatic", L"Resources/Monster/Bell_Fanatic/Idle/01.png");
 	AddObjectImage("AStatue", L"Resources/Monster/Angel_Statue/Idle/01.png");
+	AddObjectImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
+	AddObjectImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
+	AddObjectImage("Basic", L"./Resources/Png/Skul/Basic/Motion/Idle/01.png");
+
+	AddImage("PlayerStatusUI", L"./Resources/UI/PlayerStatusUI.png");
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
@@ -626,7 +642,7 @@ void ImageManager::D2dTextOut(wstring str, float x, float y)
 	pRT->DrawTextA(str.c_str(), str.size(), tf, fRect, m_brush);
 }
 
-void ImageManager::Render(CImage* img, float x, float y, float sizeX, float sizeY, float rot) // 카메라 O
+void ImageManager::Render(CImage* img, float x, float y, float sizeX, float sizeY, float rot, float alpha) // 카메라 O
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 	matT = D2D1::Matrix3x2F::Translation(x - camera.x, y - camera.y);
@@ -656,12 +672,31 @@ void ImageManager::CenterRender(CImage* img, float x, float y, float sizeX, floa
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 }
 
-void ImageManager::UIRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot) // 카메라 X
+void ImageManager::UIRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, float alpha) // 카메라 X
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 	matT = D2D1::Matrix3x2F::Translation(x, y);
 	matR = D2D1::Matrix3x2F::Rotation(rot, { x ,y });
 	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
+	pRT->SetTransform((matS * matT * matR));
+
+	ID2D1BitmapBrush* color;
+	pRT->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+	pRT->CreateBitmapBrush(img->GetBitMap(), &color);
+
+	color->SetBitmap(img->GetBitMap());
+	color->SetOpacity(alpha);
+	pRT->FillOpacityMask(img->GetBitMap(), color, D2D1_OPACITY_MASK_CONTENT_GRAPHICS, D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()));
+	color->Release();
+}
+
+void ImageManager::UICenterRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot)
+{
+	D2D1_MATRIX_3X2_F matT, matR, matS;
+	matT = D2D1::Matrix3x2F::Translation((x - img->GetWidth() * sizeX / 2), (y - img->GetHeight() * sizeY / 2));
+	matR = D2D1::Matrix3x2F::Rotation(rot, { x ,y });
+	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
+
 	pRT->SetTransform((matS * matT * matR));
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 }

@@ -24,7 +24,7 @@ public:
 	{
 		Effect* effect = new T;
 		effect->Init();
-		effect->SetEffectStart(startX, startY, isReversed, float scale = 1);
+		effect->SetEffectStart(startX, startY, isReversed, scale);
 		m_vectorEffectList.push_back(effect);
 	}
 };
