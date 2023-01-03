@@ -194,6 +194,11 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/36.png");
 	AddTileImage(L"./Resources/Tile/4Stage/37.png");
 	AddTileImage(L"./Resources/Tile/4Stage/38.png");
+	AddTileImage(L"./Resources/Tile/4Stage/39.png");
+	AddTileImage(L"./Resources/Tile/4Stage/40.png");
+	AddTileImage(L"./Resources/Tile/4Stage/41.png");
+	AddTileImage(L"./Resources/Tile/4Stage/42.png");
+	AddTileImage(L"./Resources/Tile/4Stage/43.png");
 
 	// 배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
@@ -269,6 +274,10 @@ void ImageManager::LoadImages()
 	AddStructureImage("Elevator", L"./Resources/Tile/4Stage/Structure/elevator.png");
 	AddStructureImage("DoorBack", L"Resources/Door/DoorBack.png");
 	AddStructureImage("Reword", L"Resources/Door/Reword.png");
+	AddStructureImage("_01", L"./Resources/Tile/4Stage/Structure/_01.png");
+	AddStructureImage("01", L"./Resources/Tile/4Stage/Structure/01.png");
+	AddStructureImage("banch", L"./Resources/Tile/4Stage/Structure/banch.png");
+
 
 	// 몬스터 체력바 이미지
 	AddImageVector("Hpbar_Empty", L"./Resources/Monster/Hpbar/Empty/", 1, 1);
@@ -327,7 +336,7 @@ void ImageManager::LoadImages()
 	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/", 1, 40);
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
-	
+
 	// 몬스터 이펙트
 	AddImageVector("Secrifice", L"Resources/Monster/Effect/Secrifice/", 1, 11);
 	AddImageVector("SkulAttack", L"Resources/Monster/Effect/SkulAttack/", 1, 10);
@@ -355,6 +364,8 @@ void ImageManager::LoadImages()
 	AddObjectImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
 	AddObjectImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
 	AddObjectImage("Basic", L"./Resources/Png/Skul/Basic/Motion/Idle/01.png");
+	AddObjectImage("Atifact", L"./Resources/Shop/Atifact/Deactivate_0 #80153.png");
+	AddObjectImage("FoodShop", L"./Resources/Shop/FoodShop/Deactivate_0 #80158.png");
 
 	AddImage("PlayerStatusUI", L"./Resources/UI/PlayerStatusUI.png");
 }
@@ -596,7 +607,7 @@ void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
 		int x = 0;
 		for (auto _iter : iter)
 		{
-			if (_iter == 0 || _iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7 || _iter == 8 || _iter == 9 || _iter == 10 || _iter == 11 || _iter == 12 || _iter == 13 || _iter == 14 || _iter == 36 || _iter == 37)
+			if (_iter == 0 || _iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7 || _iter == 8 || _iter == 9 || _iter == 10 || _iter == 11 || _iter == 12 || _iter == 13 || _iter == 14 || _iter == 36 || _iter == 37 || _iter == 38 || _iter == 39 || _iter == 40 || _iter == 41)
 			{
 				IMAGEMANAGER->Render(FindImage("CollisionBox"), x * m_width, y1 * m_width);
 			}
@@ -666,13 +677,13 @@ void ImageManager::CenterRender(CImage* img, float x, float y, float sizeX, floa
 	if (isReverse == false)
 	{
 		matT = D2D1::Matrix3x2F::Translation((x - img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
-		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.x,y - camera.y });
 		matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
 	}
 	else
 	{
 		matT = D2D1::Matrix3x2F::Translation((x + img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
-		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.x,y - camera.y });
 		matS = D2D1::Matrix3x2F::Scale(-sizeX, sizeY);
 	}
 	pRT->SetTransform((matS * matT * matR));
