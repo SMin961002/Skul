@@ -4,17 +4,22 @@
 #include"Player.h"
 #include"PixelCollisionComponent.h"
 #include"RigidBodyComponent.h"
+#include"EnemyEffect.h"
+
 
 void LeoniaSoldier::Init()
 {	
 	m_maxhp = 300.0f;
 	m_currenthp = 300.0f;
 	m_hpbar = 0;
+	m_die = false;
 	m_attackleft = false;
 	m_attack = false;
 	m_move = false;
 	m_hit = false;
+	m_hiteffecttimer = 0;
 	m_hpbartimer = 0;
+	m_dietimer = 0;
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 	m_vimage[eIdle] = IMAGEMANAGER->AddImageVectorCopy("Leon_Idle");
 	m_vimage[eIdle]->Setting(0.3f, true);
@@ -103,6 +108,8 @@ void LeoniaSoldier::Update()
 		m_hitpointcollision->SetIsActive(false);
 	}
 	m_hpbar = (1 / m_maxhp);
+	m_hiteffecttimer += DELTA_TIME;
+	m_dietimer += DELTA_TIME;
 }
 
 void LeoniaSoldier::Render()
@@ -138,13 +145,23 @@ void LeoniaSoldier::Render()
 		{
 			m_hit = false;
 			m_hpbartimer = 0;
-		}
+
+		}	
 	}
 	else
 	{
-		m_obj->ObjectDestroyed();
+
+		if (!m_die && m_dietimer >= 1)
+		{
+			EFFECTMANAGER->AddEffect<DeadEffect>(m_obj->x, m_obj->y, 1, 1.5);
+			m_dietimer = 0;
+		}
+		m_die = true;
+		if (m_dietimer >= 0.5f)
+		{
+			m_obj->ObjectDestroyed();
+		}
 	}
-	
 }
 
 void LeoniaSoldier::Release()
@@ -179,11 +196,23 @@ void LeoniaSoldier::HitEnemy(float dmg)
 	/*m_isAttack = false;
 	m_isHit = true;
 	m_state = eHit;*/
-	m_vimage[eHit]->Reset();
-	m_obj->x += m_obj->x > OBJECTMANAGER->m_player->GetplayerX() ? DELTA_TIME * 500 : -DELTA_TIME * 500;
-	m_obj->y -= 10;
-	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
+	//m_vimage[eHit]->Reset();
+	//m_obj->x += m_obj->x > OBJECTMANAGER->m_player->GetplayerX() ? DELTA_TIME * 500 : -DELTA_TIME * 500;
+	//m_obj->y -= 10;
+	//m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 	dmg = 10; //-= 플레이어 어택 데미지 상의
 	m_currenthp -= dmg;
-	m_hit = true;
+	if (!m_hit && m_hiteffecttimer >= 0.7f)
+	{
+		if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
+		{
+			EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 0,2);
+		}
+		else
+		{
+			EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 1,2);
+		}
+		m_hit = true;
+		m_hiteffecttimer = 0;
+	}
 }
