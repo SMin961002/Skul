@@ -17,6 +17,10 @@ void Main::Init()
 
 void Main::Update()
 {
+	if (KEYMANAGER->GetOnceKeyDown(VK_F5))
+	{
+		SCENEMANAGER->ChangeScene("ShopScene");
+	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_F6))
 	{
 		SCENEMANAGER->ChangeScene("EnemyTestScene");

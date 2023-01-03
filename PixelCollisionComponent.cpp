@@ -82,7 +82,7 @@ void PixelCollisionComponent::BottomCollision()
 				{
 					if (w < m_tiles[0].size())
 					{
-						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41 || m_tiles[h][w] == 42 || m_tiles[h][w] == 43)
 						{
 							float _x = int(*x) % int(m_image->GetWidth() - 1);
 							float _y = int(*y) % int(m_image->GetHight() - 1);
@@ -127,7 +127,7 @@ void PixelCollisionComponent::TopCollision()
 					int w = j / (m_image->GetWidth() - 1);
 					if (w < m_tiles[0].size())
 					{
-						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41 || m_tiles[h][w] == 42 || m_tiles[h][w] == 43)
 						{
 							float _x = int(*x) % int(m_image->GetWidth() - 1);
 							float _y = int(*y) % int(m_image->GetHight() - 1);
@@ -171,7 +171,7 @@ void PixelCollisionComponent::LeftCollision()
 				{
 					if (j == (int)*x + rtL.right - 1 || j == (int)*x + rtL.right - 1 || i == (int)*y + rtL.top || i == (int)*y + rtL.bottom - 1)
 					{
-						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41 || m_tiles[h][w] == 42 || m_tiles[h][w] == 43)
 						{
 							float _x = int(*x) % int(m_image->GetWidth() - 1);
 							float _y = int(*y) % int(m_image->GetHight() - 1);
@@ -216,7 +216,7 @@ void PixelCollisionComponent::RightCollision()
 				{
 					if (i == (int)*y + rtR.top || i == (int)*y + rtR.bottom - 1 || j == (int)*x + rtR.left || j == (int)*x + rtR.right - 1)
 					{
-						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41 || m_tiles[h][w] == 42 || m_tiles[h][w] == 43)
 						{
 							float _x = int(*x) % int(m_image->GetWidth() - 1);
 							float _y = int(*y) % int(m_image->GetHight() - 1);

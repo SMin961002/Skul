@@ -9,6 +9,7 @@
 #include "DoorObject.h"
 #include"BallFanatic.h"
 #include"AngelStatue.h"
+
 EnemyTestScene::EnemyTestScene()
 {
 }
@@ -48,11 +49,11 @@ void EnemyTestScene::Init()
 	{
 		if (iter->key == "Fanatic")
 		{
-			//OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 		}
 		else if (iter->key == "Leon")
 		{
-			//OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
 		}
 		else if (iter->key == "NormalRoom")
 		{
@@ -83,7 +84,6 @@ void EnemyTestScene::Update()
 {
 	Vector2 v;
 	float a = (150 + IMAGEMANAGER->GetCameraPosition().y + WINSIZE_Y * 0.5f) - (OBJECTMANAGER->m_player->GetplayerY());
-	//MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2, IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y - 50 }, 0.5);
 	if (a > 150|| a < -0.1f)
 	{
 		Vector2 v2;
@@ -95,7 +95,6 @@ void EnemyTestScene::Update()
 	{
 		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	}
-	cout << a << endl;
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
 }
 

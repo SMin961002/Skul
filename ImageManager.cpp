@@ -277,6 +277,8 @@ void ImageManager::LoadImages()
 	AddStructureImage("_01", L"./Resources/Tile/4Stage/Structure/_01.png");
 	AddStructureImage("01", L"./Resources/Tile/4Stage/Structure/01.png");
 	AddStructureImage("banch", L"./Resources/Tile/4Stage/Structure/banch.png");
+	AddStructureImage("shop", L"./Resources/Tile/4Stage/Structure/shop.png");
+	AddStructureImage("factory", L"./Resources/Tile/4Stage/Structure/factory.png");
 
 
 	// 몬스터 체력바 이미지
@@ -349,6 +351,14 @@ void ImageManager::LoadImages()
 	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
 	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
 
+	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
+	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
+
+	AddImage("ShopBackGround", L"Resources/Shop/backGround.png");
+	AddImage("ShopCloud", L"Resources/Shop/Cloud.png");
+	AddImage("ShopStruecture", L"Resources/Shop/Struecture.png");
+
+
 	//맵 오브젝트 애니메이션
 	AddImageVector("NormalRoom", L"Resources/Door/NormalRoom/", 1, 8);
 	AddImageVector("SkulRoom", L"Resources/Door/SkulRoom/", 1, 7);
@@ -367,6 +377,9 @@ void ImageManager::LoadImages()
 	AddObjectImage("Basic", L"./Resources/Png/Skul/Basic/Motion/Idle/01.png");
 	AddObjectImage("Atifact", L"./Resources/Shop/Atifact/Deactivate_0 #80153.png");
 	AddObjectImage("FoodShop", L"./Resources/Shop/FoodShop/Deactivate_0 #80158.png");
+	AddObjectImage("Blacksmith", L"./Resources/Shop/Blacksmith/Deactivate_0 #80166.png");
+	AddObjectImage("ItemView", L"./Resources/Shop/ItemView/01.png");
+	AddObjectImage("Head", L"./Resources/Shop/Head/01.png");
 
 	AddImage("PlayerStatusUI", L"./Resources/UI/PlayerStatusUI.png");
 }
