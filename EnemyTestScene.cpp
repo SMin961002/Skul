@@ -63,9 +63,10 @@ void EnemyTestScene::Init()
 			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(1);
 		}
 	}
+	//BJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<TentaclesOfLight>();
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 
-
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 400, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();

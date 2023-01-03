@@ -2,7 +2,7 @@
 #include"Enemy.h"
 class LampFanatic : public Enemy 
 {
-	enum IamgeState
+	enum ImageState
 	{
 		eIdle,
 		eMass,
