@@ -2,6 +2,7 @@
 class MenuUI
 {
 public:
+	CImage* img;
 	MenuUI();
 	~MenuUI();
 	void Init();

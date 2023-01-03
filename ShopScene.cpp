@@ -2,6 +2,7 @@
 #include "ShopScene.h"
 #include "NpcObject.h"
 #include "Player.h"
+#include "DoorObject.h"
 
 void ShopScene::Init()
 {
@@ -28,13 +29,24 @@ void ShopScene::Init()
 			OBJECTMANAGER->AddObject("player", iter->x, iter->y, ePlayer)->AddComponent<Player>();
 		}
 	}
+	for (auto iter : m_objects)
+	{
+		if (iter->key == "Atifact" ||iter->key == "Blacksmith" || iter->key == "FoodShop" || iter->key == "Head" || iter->key == "ItemView")
+		{
+			OBJECTMANAGER->AddObject("NPC", iter->x, iter->y, eNPC)->AddComponent<NpcObject>()->Setting(iter->key);
+		}
+		if (iter->key == "NormalRoom")
+		{
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(1);
+		}
+	}
 }
 
 void ShopScene::Update()
 {
 	Vector2 v;
 	float a = (150 + IMAGEMANAGER->GetCameraPosition().y + WINSIZE_Y * 0.5f) - (OBJECTMANAGER->m_player->GetplayerY());
-	
+
 	if (a > 150 || a < -0.1f)
 	{
 		Vector2 v2;
@@ -49,7 +61,7 @@ void ShopScene::Update()
 
 	if (IMAGEMANAGER->GetCameraPosition().x < 0)
 	{
-		IMAGEMANAGER->SetCameraPosition(WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y) ;
+		IMAGEMANAGER->SetCameraPosition(WINSIZE_X / 2, IMAGEMANAGER->GetCameraPosition().y);
 	}
 	cout << IMAGEMANAGER->GetCameraPosition().x << endl;
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
@@ -58,8 +70,8 @@ void ShopScene::Update()
 void ShopScene::Render()
 {
 	IMAGEMANAGER->UIRender(m_backGround, 0, -200, 1.6, 1.6);
-	IMAGEMANAGER->Render(m_structure,200 - IMAGEMANAGER->GetCameraPosition().x*0.2, 0 + 100 , 1, 1);
-	IMAGEMANAGER->Render(m_cloude, 500 - IMAGEMANAGER->GetCameraPosition().x * 0.1, 0, 1.5, 1.5);
+	IMAGEMANAGER->Render(m_structure, 200 - IMAGEMANAGER->GetCameraPosition().x * 0.01, 0 + 100, 1, 1);
+	IMAGEMANAGER->Render(m_cloude, 500 - IMAGEMANAGER->GetCameraPosition().x * 0.02, 0, 1.5, 1.5);
 
 	IMAGEMANAGER->DrawMapStructureBack(m_struectures);
 	IMAGEMANAGER->DrawMapTile(m_tiles);
@@ -69,4 +81,18 @@ void ShopScene::Render()
 
 void ShopScene::Release()
 {
+	for (auto iter : m_objects)
+	{
+		SAFE_DELETE(iter);
+	}
+	m_objects.clear();
+
+	for (auto iter : m_struectures)
+	{
+		SAFE_DELETE(iter)
+	}
+	m_struectures.clear();
+
+	m_tiles.clear();
+	SCENEMANAGER->m_tiles.clear();
 }

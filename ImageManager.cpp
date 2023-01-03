@@ -76,7 +76,7 @@ void ImageManager::Init()
 	);
 
 	m_pDWriteFactory->CreateTextFormat(
-		L"맑음 고딕",                  // 폰트 패밀리 이름의 문자열
+		L"NotoSansKR-Black.otf",                  // 폰트 패밀리 이름의 문자열
 		NULL,                        // 폰트 컬렉션 객체, NULL=시스템 폰트 컬렉션
 		DWRITE_FONT_WEIGHT_NORMAL,   // 폰트 굵기. LIGHT, NORMAL, BOLD 등.
 		DWRITE_FONT_STYLE_NORMAL,    // 폰트 스타일. NORMAL, OBLIQUE, ITALIC.
@@ -98,6 +98,9 @@ void ImageManager::Init()
 
 void ImageManager::LoadImages()
 {
+	// UI 이미지
+	AddImage("Pause_Frame", L"./Resources/UI/Pause_Frame.png");
+
 	// 맵툴 UI 이미지
 	AddImage("newFile", L"./MapFile/newFile.png");
 
@@ -345,7 +348,12 @@ void ImageManager::LoadImages()
 	AddImageVector("SkulAttack", L"Resources/Monster/Effect/SkulAttack/", 1, 10);
 	AddImageVector("DeadEffect", L"Resources/Monster/Effect/Dead/", 1, 6);
 
-
+	// 상점 오브젝트 
+	AddImageVector("Atifact", L"Resources/Shop/Atifact/", 1, 24);
+	AddImageVector("Blacksmith", L"Resources/Shop/Blacksmith/", 1, 8);
+	AddImageVector("FoodShop", L"Resources/Shop/FoodShop/", 1, 8);
+	AddImageVector("Head", L"Resources/Shop/Head/", 1, 7);
+	AddImageVector("ItemView", L"Resources/Shop/ItemView/", 1, 5);
 
 	//맵 오브젝트
 	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
@@ -608,8 +616,6 @@ void ImageManager::DrawRectCenter(RECT rt, CImage* img)
 	pRT->SetTransform(&mat);
 	pRT->CreateSolidColorBrush(color, &m_brush);
 	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left + img->GetWidth() / 2,(float)rt.top + img->GetHeight() / 2,(float)rt.right + img->GetWidth() / 2,(float)rt.bottom + img->GetHeight() / 2 }, m_brush);
-
-
 }
 
 void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)

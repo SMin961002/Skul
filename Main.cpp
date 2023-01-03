@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Main.h"
-
 void Main::Init()
 {
 	SetTimer(_hWnd, 1, 1, NULL);
@@ -13,10 +12,14 @@ void Main::Init()
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
 	//SCENEMANAGER->ChangeScene("EnemyTestScene");
+	menu = new MenuUI;
+	menu->Init();
 }
 
 void Main::Update()
 {
+	if (menu)
+		menu->Update();
 	if (KEYMANAGER->GetOnceKeyDown(VK_F5))
 	{
 		SCENEMANAGER->ChangeScene("ShopScene");
@@ -66,6 +69,8 @@ void Main::Render()
 	EFFECTMANAGER->Render();
 	OBJECTMANAGER->UIRender();
 	SCENEMANAGER->UIRender();
+	//if (menu)
+	//	menu->Render();
 	IMAGEMANAGER->End();
 }
 
