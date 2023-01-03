@@ -75,11 +75,14 @@ void DoorObject::OnCollision(string collisionName, Object* other)
 {
 	if (collisionName == m_coll->GetName())
 	{
-		if (other->GetName() == "player")
+		if (m_isClear == true)
 		{
-			if (KEYMANAGER->GetOnceKeyDown(VK_UP))
+			if (other->GetName() == "player")
 			{
-				m_isChange = true;
+				if (KEYMANAGER->GetOnceKeyDown(VK_UP))
+				{
+					m_isChange = true;
+				}
 			}
 		}
 	}
