@@ -327,6 +327,12 @@ void ImageManager::LoadImages()
 	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/", 1, 40);
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
+	
+	// 몬스터 이펙트
+	AddImageVector("Secrifice", L"Resources/Monster/Effect/Secrifice/", 1, 11);
+	AddImageVector("SkulAttack", L"Resources/Monster/Effect/SkulAttack/", 1, 10);
+	AddImageVector("DeadEffect", L"Resources/Monster/Effect/Dead/", 1, 6);
+
 
 
 	//맵 오브젝트

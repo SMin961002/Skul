@@ -27,8 +27,10 @@ private:
 	int m_state;
 	float m_hpbartimer;
 	float m_motiontimer;
+	float m_hiteffecttimer;
 	bool m_hitpoint;
 	bool m_sercrifice;
+	bool m_sercrieffect;
 
 	CollisionComponent* m_hitCollision;
 	CollisionComponent* m_hitpointCollision;
