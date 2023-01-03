@@ -3,28 +3,94 @@
 #include "CollisionComponent.h"
 #include "Player.h"
 #include "PixelCollisionComponent.h"
+#include"PixelCollisionComponent.h"
+#include"RigidBodyComponent.h"
 
 void TentaclesOfLight::Init()
 {
-	m_vimage[eIdle] = IMAGEMANAGER->FindImageVector("Tentacles_Idle");
-	m_vimage[eIdle]->Setting(0.3f, true);
+	m_maxhp = 0;
+	m_memergeend = false;
+	m_attack = false;
+	m_recovery = false;
+	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 
-	m_vimage[eAttack] = IMAGEMANAGER->FindImageVector("Tentacles_Attack");
-	m_vimage[eAttack]->Setting(0.3f, true);
+	m_vimage[eIdle] = IMAGEMANAGER->AddImageVectorCopy("Tentacles_Idle");
+	m_vimage[eIdle]->Setting(0.1f, true);
 
-	m_vimage[eRecovery] = IMAGEMANAGER->FindImageVector("Tntackles_Recovery");
-	m_vimage[eRecovery]->Setting(0.3f, true);
+	m_vimage[eAttack] = IMAGEMANAGER->AddImageVectorCopy("Tentacles_Attack");
+	m_vimage[eAttack]->Setting(0.1f, false);
+
+	m_vimage[eRecovery] = IMAGEMANAGER->AddImageVectorCopy("Tntackles_Recovery");
+	m_vimage[eRecovery]->Setting(0.1f, false);
+
+	m_vimage[eMemerge] = IMAGEMANAGER->AddImageVectorCopy("Tentacles_Emerge");
+	m_vimage[eMemerge]->Setting(0.1f, false);
+
+	m_collision = m_obj->AddComponent<CollisionComponent>();
+	m_hitpointcollision = m_obj->AddComponent<CollisionComponent>();
+
+	m_obj->GetCollisionComponent().push_back(m_collision);
+	m_obj->GetCollisionComponent().push_back(m_hitpointcollision);
+
+
+	m_obj->AddComponent<RigidBodyComponent>();
+	m_obj->AddCollisionComponent(m_collision);
+	m_obj->AddCollisionComponent(m_hitpointcollision);
 }
 
 void TentaclesOfLight::Update()
 {
+	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+	m_collision->Setting(40, m_obj->x + 17, m_obj->y - 20, "Attack");
+	
+	if (m_vimage[eAttack]->GetFrame() >= 2&& m_vimage[eAttack]->GetFrame()<= 7 )
+	{
+		m_hitpointcollision->SetIsActive(true);
+		if (m_isleft)
+		{
+			m_hitpointcollision->Setting(50, m_obj->x - 35, m_obj->y - 20, "AttackPoint");
+		}
+		else
+		{
+			m_hitpointcollision->Setting(50, m_obj->x + 80, m_obj->y - 20, "AttackPoint");
+		}
+	}
+	if (m_vimage[eAttack]->GetFrame() >= 7)
+	{
+		m_hitpointcollision->SetIsActive(false);
+	}
+	if (m_memergeend == false)
+	{
+		m_state = eMemerge;
+	}
+	if (m_vimage[eMemerge]->GetIsImageEnded())
+	{
+		m_memergeend = true;
+	}
+	if (m_memergeend == true && m_attack == false)
+	{
+		m_state = eIdle;
+	}
+	else if (m_attack == true)
+	{
+		m_state = eAttack;
+		if (m_vimage[eAttack]->GetIsImageEnded())
+		{
+			m_recovery = true;
+			m_state = eRecovery;
+		}
+		if (m_vimage[eRecovery]->GetIsImageEnded())
+		{
+			m_attack = false;
+			m_recovery = false;
+		}
+	}
+	cout << m_attack << endl;
 }
 
 void TentaclesOfLight::Render()
 {
-	m_vimage[eIdle]->CenterRender((int)m_obj->x, (int)m_obj->y + 56, 1.5, 1.5, 0, 1);
-	m_vimage[eAttack]->CenterRender((int)m_obj->x+50, (int)m_obj->y + 26, 1.5, 1.5, 0, 1);
-	m_vimage[eRecovery]->CenterRender((int)m_obj->x+100, (int)m_obj->y + 26, 1.5, 1.5, 0, 1);
+	m_vimage[m_state]->CenterRender((int)m_obj->x, (int)m_obj->y - 63, 1.5, 1.5, 0, m_isleft);
 }
 
 void TentaclesOfLight::Release()
@@ -33,4 +99,36 @@ void TentaclesOfLight::Release()
 
 void TentaclesOfLight::OnCollision(string collisionName, Object* other)
 {
+	if (collisionName == m_collision->GetName())
+	{
+		if (other->GetName() == "player")
+		{
+			if (m_attack == false)
+			{
+				m_vimage[eAttack]->Reset();
+				m_vimage[eRecovery]->Reset();
+				if (m_attack == false && m_recovery == false)
+				{
+					if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+					{
+						m_isleft = true;
+					}
+					else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+					{
+						m_isleft = false;
+					}
+				}
+			}
+			m_attack = true;
+			//other->GetComponent<Player>()-플레이어 상태쉉
+		}
+	}
+
+	if (collisionName == m_hitpointcollision->GetName())
+	{
+		if (other->GetName() == "player")
+		{
+			//m_hitpoint = true;
+		}
+	}
 }

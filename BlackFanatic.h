@@ -3,7 +3,7 @@
 class BlackFanatic :public Enemy
 {
 private:
-	enum IamgeState
+	enum ImageState
 	{
 		eIdle,
 		eAttackIdle,
