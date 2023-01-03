@@ -26,6 +26,8 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	virtual void HitEnemy(float dmg) override;
+
 	virtual void OnCollision(string collisionName, Object* other) override;
 
 };

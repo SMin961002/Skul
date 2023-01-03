@@ -8,7 +8,7 @@
 
 void TentaclesOfLight::Init()
 {
-	m_maxhp = 0;
+	m_maxhp = 1;
 	m_memergeend = false;
 	m_attack = false;
 	m_recovery = false;
@@ -85,7 +85,11 @@ void TentaclesOfLight::Update()
 			m_recovery = false;
 		}
 	}
-	cout << m_attack << endl;
+	if (m_maxhp <= 0)
+	{
+		m_obj->ObjectDestroyed();
+	}
+
 }
 
 void TentaclesOfLight::Render()
@@ -96,6 +100,7 @@ void TentaclesOfLight::Render()
 void TentaclesOfLight::Release()
 {
 }
+
 
 void TentaclesOfLight::OnCollision(string collisionName, Object* other)
 {
@@ -131,4 +136,10 @@ void TentaclesOfLight::OnCollision(string collisionName, Object* other)
 			//m_hitpoint = true;
 		}
 	}
+}
+
+void TentaclesOfLight::HitEnemy(float dmg)
+{
+	dmg = 1;
+	m_maxhp -= dmg;
 }

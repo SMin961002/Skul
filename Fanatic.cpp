@@ -137,11 +137,11 @@ void Fanatic::Update()
 				m_state = Setcrifice;
 				if (m_vimage[Setcrifice]->GetIsImageEnded())
 				{	
+					m_hitpointCollision->SetIsActive(false);
+					m_hitCollision->SetIsActive(false);
 					OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, ObjectTag::eSummons)->AddComponent<TentaclesOfLight>();
 					m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 					m_obj->GetComponent< PixelCollisionComponent>()->SetIsActive(false);
-					m_hitpointCollision->SetIsActive(false);
-					m_hitCollision->SetIsActive(false);
 					m_die2 = true;
 				}
 			}
@@ -208,10 +208,10 @@ void Fanatic::OnCollision(string collisionName, Object* other)
 
 void Fanatic::HitEnemy(float dmg)
 {
+	m_hitpointCollision->SetIsActive(false);
 	if (!m_die2)
 	{
 			if (m_currenthp >= 50)
-			{
 			m_isAttack = false;
 			m_isHit = true;
 			m_state = eHit;
