@@ -29,8 +29,16 @@ void MapToolScene::Init()
 		{
 			iter.resize(100, -1);
 		}
+
+		for (auto& iter : m_tiles)
+		{
+			for (auto& _iter : iter)
+			{
+				_iter = -1;
+			}
+		}
 	}
-	IMAGEMANAGER->SetCameraPosition(0,0);
+	IMAGEMANAGER->SetCameraPosition(0, 0);
 	string strData;
 	strData = FILEMANAGER->GetFileData("Structure", "batch");
 	string objData;
@@ -92,7 +100,7 @@ void MapToolScene::Render()
 
 	IMAGEMANAGER->DrawMapTile(m_tiles);
 
-	IMAGEMANAGER->DrawMapTilePixel(m_tiles);
+
 	IMAGEMANAGER->DrawMapStructureFoward(m_sturctDatas);
 	for (auto iter : m_sturctDatas)
 	{
@@ -102,6 +110,10 @@ void MapToolScene::Render()
 	for (auto iter : m_objectDatas)
 	{
 		IMAGEMANAGER->CenterRender(m_objectImages[iter->key], iter->x, iter->y, 2, 2);
+	}
+	if (KEYMANAGER->GetToggleKey(VK_F11))
+	{
+		IMAGEMANAGER->DrawMapTilePixel(m_tiles);
 	}
 
 	int y = 0;

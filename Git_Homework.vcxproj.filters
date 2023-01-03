@@ -176,6 +176,8 @@
     </ClCompile>
     <ClCompile Include="MenuUI.cpp" />
     <ClCompile Include="DoorObject.cpp" />
+    <ClCompile Include="ShopScene.cpp" />
+    <ClCompile Include="NpcObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -334,6 +336,8 @@
     <ClInclude Include="MenuUI.h" />
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="ShopScene.h" />
+    <ClInclude Include="NpcObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
