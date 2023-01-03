@@ -6,6 +6,7 @@
 #include"TentaclesOfLight.h"
 #include "Fanatic.h"
 #include"LampFanatic.h"
+#include "DoorObject.h"
 #include"BallFanatic.h"
 #include"AngelStatue.h"
 EnemyTestScene::EnemyTestScene()
@@ -18,6 +19,7 @@ EnemyTestScene::~EnemyTestScene()
 
 void EnemyTestScene::Init()
 {
+	isStart = false;
 	m_speed = 0;
 	m_backGround = IMAGEMANAGER->FindImage("Background");
 	m_castle = IMAGEMANAGER->FindImage("Castle");
@@ -33,22 +35,37 @@ void EnemyTestScene::Init()
 	string strData2;
 	strData2 = FILEMANAGER->GetFileData("Object", "batch");
 	MY_UTILITY::ConvertStructureString2Vec(&m_objectDatas, strData2);
-	
 
+
+	for (auto iter : m_objectDatas)
+	{
+		if (iter->key == "Basic")
+		{
+			OBJECTMANAGER->AddObject("player", iter->x, iter->y, ePlayer)->AddComponent<Player>();
+		}
+	}
 	for (auto iter : m_objectDatas)
 	{
 		if (iter->key == "Fanatic")
 		{
-			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+			//OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 		}
 		else if (iter->key == "Leon")
 		{
-			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+			//OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+		}
+		else if (iter->key == "NormalRoom")
+		{
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(0);
+		}
+		else if (iter->key == "SkulRoom")
+		{
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(1);
 		}
 	}
 
-	OBJECTMANAGER->AddObject("player", 500 , -100, ePlayer)->AddComponent<Player>();
-	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 400, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
@@ -63,10 +80,27 @@ void EnemyTestScene::Init()
 
 void EnemyTestScene::Update()
 {
+	Vector2 v;
+	float a = (150 + IMAGEMANAGER->GetCameraPosition().y + WINSIZE_Y * 0.5f) - (OBJECTMANAGER->m_player->GetplayerY());
+	//MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2, IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y - 50 }, 0.5);
+	if (a > 150|| a < -0.1f)
+	{
+		Vector2 v2;
+		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,OBJECTMANAGER->m_player->GetplayerY() - WINSIZE_Y / 2 - 150 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.96f);
+		MY_UTILITY::GetLerpVec2(&v2, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
+		v.x = v2.x;
+	}
+	else
+	{
+		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
+	}
+	cout << a << endl;
+	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
 }
 
 void EnemyTestScene::Render()
 {
+
 	m_speed += 100 * DELTA_TIME;
 	float RenderPos = (int)m_speed % (m_cloude->GetWidth() * 2);
 	IMAGEMANAGER->Render(m_backGround, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
@@ -102,4 +136,25 @@ void EnemyTestScene::Release()
 		SAFE_DELETE(iter);
 	}
 	m_objectDatas.clear();
+}
+
+void EnemyTestScene::UIRender()
+{
+	for (auto iter : m_sturctDatas)
+	{
+		if (iter->key == "DoorBack")
+		{
+			float x = abs((iter->x + 300) - OBJECTMANAGER->m_player->GetplayerX());
+
+			if (x < 50)
+				IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage("Light"), iter->x + 300, iter->y - 40, 1, 1, 0, 0, 0.5 / 500.f * (500 - 50));
+
+			else if (x < 500)
+				IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage("Light"), iter->x + 300, iter->y - 40, 1, 1, 0, 0, 0.5 / 500.f * (500 - x));
+		}
+	}
+	if (isStart == false)
+	{
+		SCENEMANAGER->FadeIn(0.02, [&]() {isStart = true; }, 15);
+	}
 }

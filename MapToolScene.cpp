@@ -29,8 +29,16 @@ void MapToolScene::Init()
 		{
 			iter.resize(100, -1);
 		}
+
+		for (auto& iter : m_tiles)
+		{
+			for (auto& _iter : iter)
+			{
+				_iter = -1;
+			}
+		}
 	}
-	IMAGEMANAGER->SetCameraPosition(0,0);
+	IMAGEMANAGER->SetCameraPosition(0, 0);
 	string strData;
 	strData = FILEMANAGER->GetFileData("Structure", "batch");
 	string objData;
@@ -46,19 +54,19 @@ void MapToolScene::Update()
 {
 	if (KEYMANAGER->GetStayKeyDown(VK_LEFT))
 	{
-		IMAGEMANAGER->SetCameraPosition(IMAGEMANAGER->GetCameraPosition().x - 1, IMAGEMANAGER->GetCameraPosition().y);
+		IMAGEMANAGER->SetCameraPosition(IMAGEMANAGER->GetCameraPosition().x - 5, IMAGEMANAGER->GetCameraPosition().y);
 	}
 	if (KEYMANAGER->GetStayKeyDown(VK_RIGHT))
 	{
-		IMAGEMANAGER->SetCameraPosition(IMAGEMANAGER->GetCameraPosition().x + 1, IMAGEMANAGER->GetCameraPosition().y);
+		IMAGEMANAGER->SetCameraPosition(IMAGEMANAGER->GetCameraPosition().x + 5, IMAGEMANAGER->GetCameraPosition().y);
 	}
 	if (KEYMANAGER->GetStayKeyDown(VK_UP))
 	{
-		IMAGEMANAGER->SetCameraPosition(IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y - 1);
+		IMAGEMANAGER->SetCameraPosition(IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y - 5);
 	}
 	if (KEYMANAGER->GetStayKeyDown(VK_DOWN))
 	{
-		IMAGEMANAGER->SetCameraPosition(IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y + 1);
+		IMAGEMANAGER->SetCameraPosition(IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y + 5);
 	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_F1))
 	{
@@ -92,7 +100,7 @@ void MapToolScene::Render()
 
 	IMAGEMANAGER->DrawMapTile(m_tiles);
 
-	IMAGEMANAGER->DrawMapTilePixel(m_tiles);
+
 	IMAGEMANAGER->DrawMapStructureFoward(m_sturctDatas);
 	for (auto iter : m_sturctDatas)
 	{
@@ -102,6 +110,10 @@ void MapToolScene::Render()
 	for (auto iter : m_objectDatas)
 	{
 		IMAGEMANAGER->CenterRender(m_objectImages[iter->key], iter->x, iter->y, 2, 2);
+	}
+	if (KEYMANAGER->GetToggleKey(VK_F11))
+	{
+		IMAGEMANAGER->DrawMapTilePixel(m_tiles);
 	}
 
 	int y = 0;
@@ -334,7 +346,7 @@ void MapToolScene::Render()
 	}
 	if (KEYMANAGER->GetStayKeyDown(VK_RBUTTON))
 	{
-		if (m_state == eStructureBatch)
+		if (m_state == eTileBatch)
 		{
 			int y2 = 0;
 			for (auto& iter : m_tiles)
@@ -371,7 +383,7 @@ void MapToolScene::Render()
 		}
 		else if (m_state == eObjectBatch)
 		{
-			IMAGEMANAGER->UIRender(m_objectImages[m_streuctureKey], _ptMouse.x, _ptMouse.y, 2, 2);
+			IMAGEMANAGER->UICenterRender(m_objectImages[m_streuctureKey], _ptMouse.x, _ptMouse.y, 2, 2);
 		}
 	}
 

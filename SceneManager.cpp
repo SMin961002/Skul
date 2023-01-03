@@ -29,7 +29,7 @@ void SceneManager::Init()
 
 	//페이드인 아웃 만드려고
 	//아직 이미지없으니까 주석처리해뒀음
-	//fadeImage = IMAGEMANAGER->AddImage("fadeImage",L"fadeImage"); 
+	fadeImage = IMAGEMANAGER->AddImage("fadeImage", L"./Resources/FadeImage.png");
 }
 
 void SceneManager::Update()
@@ -56,6 +56,14 @@ void SceneManager::Render()
 	if (m_curScene != nullptr)
 	{
 		m_curScene->Render();
+	}
+}
+
+void SceneManager::UIRender()
+{
+	if (m_curScene != nullptr)
+	{
+		m_curScene->UIRender();
 	}
 }
 
@@ -113,8 +121,9 @@ bool SceneManager::FadeIn(float t, function<void()> func, int flag)
 		func();
 		return true;
 	}
-	//여기서 렌더해줘야하는데 알파 렌더를 아직 안만들었음
-	//fadeImage
+
+	IMAGEMANAGER->UIRender(fadeImage, 0, 0, 2, 2, 0, fadeImage->GetAlpha());
+
 	return false;
 }
 
@@ -135,7 +144,7 @@ bool SceneManager::FadeOut(float t, function<void()> func, int flag)
 		func();
 		return true;
 	}
-	//여기서 렌더해줘야하는데 알파 렌더를 아직 안만들었음
-	//fadeImage
+	IMAGEMANAGER->UIRender(fadeImage, 0, 0, 2, 2, 0, fadeImage->GetAlpha());
+
 	return false;
 }

@@ -20,12 +20,19 @@ class Player : public Component
 	*/
 
 private:
+	enum UITag
+	{
+		ePlayerStatus,
+		eEnd
+	};
+	CImage* m_UIImage[UITag::eEnd];
+
 	Head* m_headList[1];
 	Head* m_headSlot[2];
 	Head* m_nowHead;
 	RECT m_hitBox;
 
-	short m_life;
+	int m_life;
 	float m_attack;
 	float m_deffendence;
 
@@ -40,6 +47,7 @@ public:
 	virtual void Update() override;
 	virtual void Release() override;
 	virtual void Render() override;
+	virtual void UIRender() override;
 
 	//물리공격 데미지를 입력해주세요
 	void HitPlayerPhysicAttack(float dmg)
@@ -63,6 +71,7 @@ public:
 
 	void OnCollision(string collisionName, Object* other);
 	float GetplayerX(void) { return m_obj->x; }
+	float GetplayerY(void) { return m_obj->y; }
 
 	Player() : m_life(100) {};
 };	

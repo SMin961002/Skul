@@ -14,6 +14,7 @@ public:
 	Object* AddObject(string name, float x, float y, int tagNum);
 	void Update();
 	void Render();
+	void UIRender();
 	void Release();
 };
 

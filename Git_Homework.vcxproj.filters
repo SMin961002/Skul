@@ -86,8 +86,6 @@
     <ClCompile Include="WinMain.cpp">
       <Filter>Game\Object\Boss\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Idle.cpp" />
-    <ClCompile Include="EnemyTestScene.cpp" />
     <ClCompile Include="CandleFanatic.cpp">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClCompile>
@@ -155,6 +153,13 @@
     <ClCompile Include="ProjectileHeadSkull.cpp">
       <Filter>Game\Object\Charactor\Head\Basic</Filter>
     </ClCompile>
+    <ClCompile Include="Idle.cpp">
+      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuUI.cpp" />
+    <ClCompile Include="DoorObject.cpp" />
+    <ClCompile Include="ShopScene.cpp" />
+    <ClCompile Include="NpcObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -241,8 +246,6 @@
     <ClInclude Include="BossScene.h">
       <Filter>Game\Scene\BossScene</Filter>
     </ClInclude>
-    <ClInclude Include="Idle.h" />
-    <ClInclude Include="EnemyTestScene.h" />
     <ClInclude Include="CandleFanatic.h">
       <Filter>Game\Object\Enemy\CandleFanatic</Filter>
     </ClInclude>
@@ -310,6 +313,14 @@
     <ClInclude Include="ProjectileHeadSkull.h">
       <Filter>Game\Object\Charactor\Head\Basic</Filter>
     </ClInclude>
+    <ClInclude Include="Idle.h">
+      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuUI.h" />
+    <ClInclude Include="DoorObject.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="ShopScene.h" />
+    <ClInclude Include="NpcObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

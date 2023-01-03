@@ -4,6 +4,8 @@
 #include "Enemy.h"
 void Player::Init()
 {
+	m_UIImage[ePlayerStatus] = IMAGEMANAGER->FindImage("PlayerStatusUI");
+
 	m_life = 100;
 	m_headList[0] = new Head_Basic;
 	m_headList[0]->SetObject(m_obj);
@@ -30,8 +32,7 @@ void Player::Update()
 {
 	Vector2 v;
 	//m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
-	MY_UTILITY::GetLerpVec2(&v, { m_obj->x - WINSIZE_X / 2,m_obj->y - 400 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
-	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
+
 	coll->Setting(m_obj->x+14,m_obj->y-15);
 	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
 	{
@@ -49,6 +50,11 @@ void Player::Update()
 void Player::Render()
 {
 	m_nowHead->Render();
+}
+
+void Player::UIRender()
+{
+	IMAGEMANAGER->UIRender(m_UIImage[ePlayerStatus],0,430,2,2,0);
 }
 
 void Player::InputArtifactKey()

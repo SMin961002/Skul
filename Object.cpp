@@ -40,3 +40,11 @@ void Object::OnCollision(string collisionName, Object* other)
 		iter->OnCollision(collisionName, other);
 	}
 }
+
+void Object::UIRender()
+{
+	for (auto iter : m_components)
+	{
+		iter->UIRender();
+	}
+}

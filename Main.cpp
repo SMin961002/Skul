@@ -8,7 +8,7 @@ void Main::Init()
 	IMAGEMANAGER->Init();
 	SCENEMANAGER->Init();
 	KEYMANAGER->Init();
-	
+
 
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
@@ -37,9 +37,20 @@ void Main::Update()
 	{
 		IMAGEMANAGER->SetViewCollision(false);
 	}
+
 	SCENEMANAGER->Update();
-	OBJECTMANAGER->Update();
-	EFFECTMANAGER->Update();
+
+	if (!KEYMANAGER->GetToggleKey(VK_TAB))
+	{
+		g_TimeScale = 1;
+		OBJECTMANAGER->Update();
+		EFFECTMANAGER->Update();
+	}
+	else
+	{
+		g_TimeScale = 0;
+	}
+
 }
 
 void Main::Render()
@@ -49,6 +60,8 @@ void Main::Render()
 	OBJECTMANAGER->Render();
 	TIMERMANAGER->Render();
 	EFFECTMANAGER->Render();
+	OBJECTMANAGER->UIRender();
+	SCENEMANAGER->UIRender();
 	IMAGEMANAGER->End();
 }
 
