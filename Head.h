@@ -142,4 +142,9 @@ public:
 		m_skillNowCoolS = 0;
 		m_skillUsing = false;
 	}
+
+	virtual void OnCollision(string collisionName, Object* other) override 
+	{
+		cout << "" << endl;
+	};
 };

@@ -25,23 +25,22 @@ public:
 
 	void InputSkillKey() override;
 
-	void OnColiision(string collisionName, Object* other)
+	void PutOnHead()
 	{
+		m_skillNowCoolA = 0;
+		m_headThrow = false;
+		m_imageChange = true;
+		m_skillUsing = false;
+	};
+	virtual void OnCollision(string collisionName, Object* other) override
+	{
+			cout << "공격충돌" << endl;
 		if (collisionName == "BasicAttack_BasicSkul")
 		{
 			if (other->GetName() == "Enemy")
 			{
+				cout << "적에게공격" << endl;
 				other->GetComponent<Enemy>()->HitEnemy(10);
-			}
-			else if (collisionName == "PlayerHitRange")
-			{
-				if (other->GetName() == "ThrowHeadSkull")
-				{
-					m_headThrow = false;
-					m_skillNowCoolS = 0;
-					m_skillUsing = false;
-					m_imageChange = true;
-				}
 			}
 		}//end collision Name BasicAttack
 	}

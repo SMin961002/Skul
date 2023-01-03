@@ -46,6 +46,7 @@ enum ObjectTag
 	eObject,
 	eEnemy,
 	ePlayer,
+	ePlayerHead,
 	eEndTag
 };
 

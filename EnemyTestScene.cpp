@@ -94,7 +94,7 @@ void EnemyTestScene::Update()
 	{
 		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	}
-	cout << a << endl;
+	//cout << a << endl;
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
 }
 

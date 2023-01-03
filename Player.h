@@ -48,7 +48,7 @@ public:
 	virtual void Release() override;
 	virtual void Render() override;
 	virtual void UIRender() override;
-
+	Head* GetNowHead() { return m_nowHead; }
 	//물리공격 데미지를 입력해주세요
 	void HitPlayerPhysicAttack(float dmg)
 	{
@@ -69,7 +69,7 @@ public:
 	void InputArtifactKey();	
 	bool  m_haveArtifact;
 
-	void OnCollision(string collisionName, Object* other);
+	virtual void OnCollision(string collisionName, Object* other) override;
 	float GetplayerX(void) { return m_obj->x; }
 	float GetplayerY(void) { return m_obj->y; }
 

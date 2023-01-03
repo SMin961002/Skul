@@ -1,11 +1,13 @@
 #pragma once
 #include "Component.h"
 
+class Head_Basic;
 class ProjectileHeadSkull : public Component
 {
 	CollisionComponent* m_colHeadSkull;
 	CImage* m_img;
-	bool m_isThrowed;
+	Head_Basic* m_Head;
+
 	bool m_isReverse;
 	bool m_hit;
 
@@ -25,8 +27,9 @@ public:
 	void Update();
 	void Release() {}
 	void Render();
+	void Off(); // 머리 안 던졌을때
+	void On(); // 머리 던졌을때
 
-	void OnCollision(string collisionName, Object* other);
-
+	virtual void OnCollision(string collisionName, Object* other) override;
 };
 

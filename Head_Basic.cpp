@@ -19,7 +19,7 @@ void Head_Basic::ImageSetting()
 	img[eJump]->Setting(0.1, true);
 	img[eJumpAttack] = IMAGEMANAGER->FindImageVector("Basic_JumpAttack");
 	img[eJumpAttack]->Setting(0.1, false);
-	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize()-1,0.2);
+	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize() - 1, 0.2);
 	img[eJumpDown] = IMAGEMANAGER->FindImageVector("Basic_JumpRepeat");
 	img[eJumpDown]->Setting(0.1, true);
 	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Basic_JumpFall");
@@ -57,9 +57,8 @@ void Head_Basic::ParameterSetting()
 {
 	m_species = eSkulSpecies::eBasic;
 
-	m_projectileHead = new ProjectileHeadSkull;
-	m_projectileHead->Init();
-
+	m_projectileHead = OBJECTMANAGER->AddObject("Head", m_obj->x, m_obj->y, ePlayerHead)->AddComponent<ProjectileHeadSkull>();
+	m_projectileHead->Off();
 	m_action = eIdle;
 
 	m_moveSpeed = 180;
@@ -84,6 +83,8 @@ void Head_Basic::ParameterSetting()
 	m_attackMax = 2;
 	m_attackCast = false;
 
+	m_skillNowCoolA = 0;
+	m_skillNowCoolS = 0;
 	m_skillCoolA = 6;
 	m_skillCoolS = 3;
 	m_skillUsing = false;
@@ -134,33 +135,34 @@ void Head_Basic::CoolDown()
 	{
 		m_skillNowCoolS -= deltaTime;
 		if (m_skillNowCoolS < 0) m_skillNowCoolS = 0;
+		PutOnHead();
 	}
 }
 
 void Head_Basic::InputSkillKey()
 {
-	if (!m_headThrow) 
+	if (KEYMANAGER->GetOnceKeyDown('A'))
 	{
-		if (KEYMANAGER->GetOnceKeyDown('A'))
-		{
-			m_skillNowCoolS = m_skillCoolA;
-			m_action = eSkill_1;
-			m_skillUsing = true;
-			m_headThrow = true;
-			m_imageChange = true;
-			m_projectileHead->SetSkullThrow(m_obj->x, m_obj->y, m_isLeft);
-		}
-	}
-	else {
-		if (KEYMANAGER->GetOnceKeyDown('S'))
-		{
+		if (m_skillNowCoolA <= 0)
+			if (!m_headThrow)
+			{
+				m_projectileHead->On();
+				m_projectileHead->SetSkullThrow(m_obj->x, m_obj->y, m_isLeft);
+				m_headThrow = true;
+				m_skillNowCoolA = m_skillCoolA;
+				m_action = eSkill_1;
+				m_imageChange = true;
+			}
+	}//end headThrow
+	if (KEYMANAGER->GetOnceKeyDown('S') && m_headThrow)
+	{
+		if (m_skillNowCoolS <= 0) {
 			m_action = eIdle;
-			m_headThrow = false;
+			m_projectileHead->Off();
 			m_obj->x = m_projectileHead->GetX();
 			m_obj->y = m_projectileHead->GetY();
-			m_projectileHead->SetIsntActive();
 			m_skillNowCoolS = m_skillCoolS;
-			m_imageChange = true;
+			PutOnHead();
 		}
 	}//end if headThrow
 }
@@ -170,7 +172,6 @@ void Head_Basic::ActionArrangement()
 	if (!m_headThrow) {
 		if (nowImg->GetIsImageEnded())
 		{
-
 			if (nowImg != img[m_action])
 				nowImg->Reset();
 			if (m_attackCast)
@@ -188,7 +189,7 @@ void Head_Basic::ActionArrangement()
 			}
 			else
 			{
-				nowImg =img[eIdle];
+				nowImg = img[eIdle];
 				m_action = eIdle;
 				m_attackCount = 0;
 			}
@@ -197,25 +198,23 @@ void Head_Basic::ActionArrangement()
 		if (m_imageChange)
 		{
 			m_attackCast = false;
-				if (nowImg != img[m_action])
+			if (nowImg != img[m_action])
+			{
+				nowImg->Reset();
+				nowImg = img[m_action];
+				nowImg->Reset();
+				if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
 				{
-					nowImg->Reset();
-					nowImg = img[m_action];
-					nowImg->Reset();
-					if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
-					{
-						m_action = eIdle;
-					}
+					m_action = eIdle;
 				}
-				//m_attackCount = 0;
+			}
+			//m_attackCount = 0;
 		}
 	}//end if !headThrow
 	else
 	{
-		m_projectileHead->Update();
 		if (nowImg->GetIsImageEnded())
 		{
-
 			if (nowImg != img_headless[m_action])
 				nowImg->Reset();
 			if (m_attackCast)
@@ -304,9 +303,9 @@ void Head_Basic::CollisionUpdate()
 			}
 			else iter->SetIsActive(false);
 
-			if(m_isLeft)
-				iter->Setting(m_obj->x, m_obj->y-10);
-			else iter->Setting(m_obj->x + 50, m_obj->y-10);
+			if (m_isLeft)
+				iter->Setting(m_obj->x, m_obj->y - 10);
+			else iter->Setting(m_obj->x + 50, m_obj->y - 10);
 
 			break;
 		}
@@ -345,8 +344,4 @@ void Head_Basic::InputAttackKey()
 void Head_Basic::DrawCharactor()
 {
 	nowImg->CenterRender(m_obj->x, m_obj->y - 56, 2, 2, 0, m_isLeft);
-	if (m_headThrow)
-	{
-		m_projectileHead->Render();
-	}
 }

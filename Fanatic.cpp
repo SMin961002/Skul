@@ -176,7 +176,7 @@ void Fanatic::Render()
 	{// ÀÌ°÷¿¡ ÅÙÅ¸Å¬ÃË¼ö
 		m_obj->ObjectDestroyed();
 	}
-	cout << m_hit << endl;
+	//cout << m_hit << endl;
 	m_hiteffecttimer += DELTA_TIME;
 
 }

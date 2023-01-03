@@ -214,6 +214,6 @@ void LeoniaSoldier::HitEnemy(float dmg)
 		}
 		m_hit = true;
 		m_hiteffecttimer = 0;
-		cout << m_hiteffecttimer << endl;
+		//cout << m_hiteffecttimer << endl;
 	}
 }
