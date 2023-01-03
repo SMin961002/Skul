@@ -3,12 +3,27 @@
 
 class HollyFountain;
 
+struct tagBaptism
+{
+	vImage* _imgPhase1BossBaptismProjectile;
+	vImage* _imgPhase1BossBaptismProjectileDespawn;
+	float angle;
+	float speed;
+	bool fire;
+};
+
 class BossObject : public Component
 {
 private:
+	RECT _rcCenter;
+
+	float _castingTime;
+
+	// 보스 1페이즈 대화
+	vImage* _imgBossTalk;
+
 	// 보스 1페이즈 대기 상태
-	vImage* _imgBoss;
-	RECT _rcBossIdle;
+	vImage* _imgBossIdle;
 
 	// 보스 1페이즈 땅찍기
 	vImage* _imgPhase1BossNervousReady;
@@ -28,8 +43,6 @@ private:
 	// 보스 1페이즈 캐스팅 선택지
 	// 비산되는 구슬
 	vImage* _imgPhase1BossBaptismAttack;
-	vImage* _imgPhase1BossBaptismProjectile;
-	vImage* _imgPhase1BossBaptismProjectileDespawn;
 	// 레이저
 	vImage* _imgPhase1BossConsecrationSign;
 	vImage* _imgPhase1BossConsercrationStart;
@@ -58,20 +71,37 @@ private:
 private:
 	bool _isIdle;
 	bool _isIntro;
+
 	bool _isBarrierLoop;
 	bool _isBarrierCrack;
+
 	bool _isCasting;
+	bool _isCastingReady;
+
 	bool _isNervousness;
+	bool _isNervousnessEffectOn;
 	bool _isChoice;
 
 	int _leftFountainHP;
 	int _rightFountainHP;
+
+	int _rndCasting;
+
+	vector<tagBaptism> _vBaptism;
+	vector<tagBaptism>::iterator _viBaptism;
 public:
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
 
+	void Baptism();
+	void Consercration();
+	void Worship();
+	void Casting();
+	void Nervousness();
+	void Barrier();
+	void Choice();
 
 	BossObject() {}
 	~BossObject() {}

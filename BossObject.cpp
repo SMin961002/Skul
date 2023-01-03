@@ -4,13 +4,16 @@
 
 void BossObject::Init()
 {
+	// 보스 1페이즈 대화
+	_imgBossTalk = IMAGEMANAGER->FindImageVector("Boss_Intro_Talk");
+	_imgBossTalk->Setting(0.1, false);
 	// 보스 1페이즈 대기 상태
-	_imgBoss = IMAGEMANAGER->FindImageVector("Boss_Idle");
-	_imgBoss->Setting(0.1, true);
+	_imgBossIdle = IMAGEMANAGER->FindImageVector("Boss_Idle");
+	_imgBossIdle->Setting(0.1, true);
 	
 	// 보스 1페이즈 캐스팅
 	_imgPhase1BossCastingReady = IMAGEMANAGER->FindImageVector("Boss_Casting_Ready");
-	_imgPhase1BossCastingReady->Setting(0.1,false);
+	_imgPhase1BossCastingReady->Setting(0.1, false);
 	_imgPhase1BossCastingAttack = IMAGEMANAGER->FindImageVector("Boss_Casting_Attack");
 	_imgPhase1BossCastingAttack->Setting(0.1, true);
 	_imgPhase1BossCastingEnd = IMAGEMANAGER->FindImageVector("Boss_Casting_End");
@@ -18,11 +21,7 @@ void BossObject::Init()
 	// 보스 1페이즈 캐스팅 선택지
 	// 비산되는 구슬
 	_imgPhase1BossBaptismAttack = IMAGEMANAGER->FindImageVector("Boss_Baptism_Attack");
-	_imgPhase1BossBaptismAttack->Setting(0.1, false);
-	_imgPhase1BossBaptismProjectile = IMAGEMANAGER->FindImageVector("Boss_Baptism_Projectile");
-	_imgPhase1BossBaptismProjectile->Setting(0.1, true);
-	_imgPhase1BossBaptismProjectileDespawn = IMAGEMANAGER->FindImageVector("Boss_Baptism_Projectile_Dewspawn");
-	_imgPhase1BossBaptismProjectileDespawn->Setting(0.1, false);
+	_imgPhase1BossBaptismAttack->Setting(0.1, true);
 	// 레이저
 	_imgPhase1BossConsecrationSign = IMAGEMANAGER->FindImageVector("Boss_Consecration_Sign");
 	_imgPhase1BossConsecrationSign->Setting(0.1, false);
@@ -38,17 +37,17 @@ void BossObject::Init()
 	
 	// 보스 1페이즈 땅찍기
 	_imgPhase1BossNervousReady = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Ready");
-	_imgPhase1BossNervousReady->Setting(0.1, true);
+	_imgPhase1BossNervousReady->Setting(0.1, false);
 	_imgPhase1BossNervousReadyLoop = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Ready_Loop");
 	_imgPhase1BossNervousReadyLoop->Setting(0.1, true);
 	_imgPhase1BossNervousAttack = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Attack");
-	_imgPhase1BossNervousAttack->Setting(0.1, true);
+	_imgPhase1BossNervousAttack->Setting(0.1, false);
 	_imgPhase1BossNervousAttackLoop = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Attack_Loop");
 	_imgPhase1BossNervousAttackLoop->Setting(0.1, true);
 	_imgPhase1BossNervousEnd = IMAGEMANAGER->FindImageVector("Boss_Nervousness_End");
-	_imgPhase1BossNervousEnd->Setting(0.1, true);
+	_imgPhase1BossNervousEnd->Setting(0.1, false);
 	_imgPhase1NervousEffectShine = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Effect_Attack");
-	_imgPhase1NervousEffectShine->Setting(0.1, true);
+	_imgPhase1NervousEffectShine->Setting(0.1, false);
 	_imgPhase1NervousEffectImpact = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Effect_Projectile");
 	_imgPhase1NervousEffectImpact->Setting(0.1, true);
 	
@@ -58,7 +57,7 @@ void BossObject::Init()
 	_imgPhase1ChoiceReadyLoop = IMAGEMANAGER->FindImageVector("Boss_Choice_Ready_Loop");
 	_imgPhase1ChoiceReadyLoop->Setting(0.1, true);
 	_imgPhase1ChoiceAttack = IMAGEMANAGER->FindImageVector("Boss_Choice_Attack");
-	_imgPhase1ChoiceAttack->Setting(0.1, true);
+	_imgPhase1ChoiceAttack->Setting(0.1, false);
 	_imgPhase1ChoiceEnd = IMAGEMANAGER->FindImageVector("Boss_Choice_End");
 	_imgPhase1ChoiceEnd->Setting(0.1, false);
 	_imgPhase1ChoiceSpark = IMAGEMANAGER->FindImageVector("Boss_Choice_Spark");
@@ -81,13 +80,30 @@ void BossObject::Init()
 	_imgPhase1BarrierCrackImpact->Setting(0.1, false);
 	_imgPhase1BarrierCrack = IMAGEMANAGER->FindImage("Boss_Barrier_Crack");
 
-	_isIdle = true;
+	_isIntro = true;
+	_isIdle = false;
 	_isCasting = false;
 	_isNervousness = false;
 	_isChoice = false;
 
 	_leftFountainHP = 500;
 	_rightFountainHP = 500;
+
+	_castingTime = 0;
+
+	for (int i = 0; i < 15; i++)
+	{
+		tagBaptism baptism;
+		baptism._imgPhase1BossBaptismProjectile = IMAGEMANAGER->AddImageVectorCopy("Boss_Baptism_Projectile");
+		baptism._imgPhase1BossBaptismProjectile->Setting(0.1, true);
+		baptism._imgPhase1BossBaptismProjectileDespawn = IMAGEMANAGER->AddImageVectorCopy("Boss_Baptism_Projectile_Dewspawn");
+		baptism._imgPhase1BossBaptismProjectileDespawn->Setting(0.1, true);
+		baptism.speed = 3;
+
+		baptism.fire = false;
+
+		_vBaptism.push_back(baptism);
+	}
 }
 
 void BossObject::Update()
@@ -137,100 +153,163 @@ void BossObject::Update()
 
 void BossObject::Render()
 {
-	// 보스 1페이즈 대기 상태
-	if (_isIdle == true && _isCasting == false && _isNervousness == false && _isChoice == false)
+	// Boss 1 Phase Intro
+	if (_isIntro == true && _isIdle == false)
 	{
-		_imgBoss->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+		_imgBossTalk->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+
+		if (_imgBossTalk->GetIsImageEnded() == true)
+		{
+			_isIdle = true;
+		}
+	}
+	// Boss 1 Phase Idle
+	if (_isIdle == true)
+	{
+		_imgBossIdle->CenterRender(WINSIZE_X / 2 - 30, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+
+		_isIntro = false;
 	}
 
-	// 보스 1페이즈 배리어 작동 예시
-	// ㄴ 1. 처음 등장 후 보스 작동 시작하면 Intro 두 개가 동시 작동시작
-	// ㄴ 2. 작동 시작후 Loop 두 개가 동시작동
-	// ㄴ 3. 분수 한쪽의 구슬이 깨지면 Crack_Impact발동 후 Spark 지속
-	// ㄴ 4. 분수 양쪽의 구슬이 다 깨지면 Impact 발동 후 Loop 종료
-
-	if (_isIdle == true && _isIntro == true)
+	// Boss 1 Phase Barrier
+	if (_isIdle == true)
 	{
-		_imgPhase1BarrierIntroFront->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.6, 1.8, 0, false);
-		_imgPhase1BarrierIntroBehind->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.6, 1.8, 0, false);
-		
+		_imgPhase1BarrierIntroFront->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+		_imgPhase1BarrierIntroBehind->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+
 		if (_imgPhase1BarrierIntroFront->GetIsImageEnded() == true &&
 			_imgPhase1BarrierIntroBehind->GetIsImageEnded() == true)
 		{
 			_isBarrierLoop = true;
 		}
 	}
-
-	if (_isBarrierLoop == true && _rightFountainHP > 0 && _leftFountainHP > 0)
-	{
-		_isIntro = false;
-	}
 	if (_isBarrierLoop == true && _leftFountainHP > 0)
 	{
-		_imgPhase1BarrierLoopFront->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.6, 1.6, 0, false);
+		_imgPhase1BarrierLoopFront->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
 	}
 	if (_isBarrierLoop == true && _rightFountainHP > 0)
 	{
-		_imgPhase1BarrierLoopBehind->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.6, 1.6, 0, false);
+		_imgPhase1BarrierLoopBehind->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
 	}
-
-	if ((_leftFountainHP <= 0 || _rightFountainHP <= 0 ) && _isBarrierCrack == false)
+	if ((_leftFountainHP <= 0 || _rightFountainHP <= 0) && _isBarrierCrack == false)
 	{
-		_imgPhase1BarrierCrackImpact->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+		_imgPhase1BarrierCrackImpact->CenterRender(WINSIZE_X / 2 - 21, WINSIZE_Y - 157, 1.7, 1.7, 0, false);
 	}
-
 	if (_imgPhase1BarrierCrackImpact->GetIsImageEnded() == true)
 	{
 		_isBarrierCrack = true;
 	}
-	
 	if (_isBarrierCrack == true)
 	{
-		IMAGEMANAGER->CenterRender(_imgPhase1BarrierCrack, WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+		IMAGEMANAGER->CenterRender(_imgPhase1BarrierCrack, WINSIZE_X / 2 - 21, WINSIZE_Y - 160, 1.7, 1.7, 0, false);
 	}
 	if (_leftFountainHP <= 0 && _rightFountainHP <= 0 && _isBarrierCrack == true)
 	{
 		_imgPhase1BarrierSpark->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
 		_imgPhase1BarrierImpact->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
 	}
-	cout << _leftFountainHP << endl;
-	cout << _rightFountainHP << endl;
-	// 보스 1페이즈 캐스팅 작동 예시
-	// ㄴ 1. Ready 작동
-	// ㄴ 2. Attack이 작동하고 패턴시작
-	// ㄴ 3. 패턴이 끝나면서 End작동
+
+	// Boss 1 Phase Casting
 	if (_isCasting == true)
 	{
 		_imgPhase1BossCastingReady->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+
+		if (_imgPhase1BossCastingReady->GetIsImageEnded() == true)
+		{
+			_isCastingReady = true;
+		}
+	}
+	if (_isCastingReady == true)
+	{
 		_imgPhase1BossCastingAttack->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
-		_imgPhase1BossCastingEnd->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
-		// 보스 1페이즈 캐스팅 선택지
-		// 비산되는 구슬
-		_imgPhase1BossBaptismAttack->CenterRender(100, 100, 1.8, 1.8, 0, false);
-		_imgPhase1BossBaptismProjectile->CenterRender(300, 100, 1.8, 1.8, 0, false);
-		_imgPhase1BossBaptismProjectileDespawn->CenterRender(500, 100, 1.8, 1.8, 0, false);
+		
+		
+		if(_castingTime == 0) _rndCasting = MY_UTILITY::getFromIntTo(0, 2);
+
+		_castingTime += DELTA_TIME;
+	}
+
+
+
+
+
+	if (_isCastingReady == true && _rndCasting == 0)
+	{
+		// 비산하는 구슬
+		for (_viBaptism = _vBaptism.begin(); _viBaptism != _vBaptism.end(); ++_viBaptism)
+		{
+				_viBaptism->_imgPhase1BossBaptismProjectile->CenterRender(0,
+					100, 1.8, 1.8, 0, false);
+				_viBaptism->_imgPhase1BossBaptismProjectileDespawn->CenterRender(MY_UTILITY::getFromFloatTo(0, 1000),
+					100, 1.8, 1.8, 0, false);
+		}
+		_imgPhase1BossBaptismAttack->CenterRender(WINSIZE_X/2+100, 100, 1, 1, 0, false);
+	}
+
+
+
+
+
+
+
+	if (_isCastingReady == true && _rndCasting == 1)
+	{
 		// 레이저
 		_imgPhase1BossConsecrationSign->CenterRender(100, 100, 1.8, 1.8, 0, false);
-		_imgPhase1BossConsercrationStart->CenterRender(300, 100, 1.8, 1.8, 0, false);
-		_imgPhase1BossConsercrationLoop->CenterRender(500, 100, 1.8, 1.8, 0, false);
+
+		if (_imgPhase1BossConsecrationSign->GetIsImageEnded() == true)
+		{
+			_imgPhase1BossConsercrationStart->CenterRender(300, 100, 1.8, 1.8, 0, false);
+			if (_imgPhase1BossConsercrationStart->GetIsImageEnded() == true)
+			{
+				_imgPhase1BossConsercrationLoop->CenterRender(500, 100, 1.8, 1.8, 0, false);
+			}
+		}
 		_imgPhase1BossConsercrationEnd->CenterRender(700, 100, 1.8, 1.8, 0, false);
-		// 좌우로 오는 구슬
+	}
+
+	if (_isCastingReady == true && _rndCasting == 2)
+	{
+		// 좌우 이동 구슬
 		_imgPhase1BossWorship->CenterRender(100, 100, 1.8, 1.8, 0, false);
 	}
-	 
+	
+_imgPhase1BossCastingEnd->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+	
+
 	// 보스 1페이즈 땅찍기
 	if (_isNervousness == true)
 	{
 		_imgPhase1BossNervousReady->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
-		_imgPhase1BossNervousReadyLoop->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
-		_imgPhase1BossNervousAttack->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
-		_imgPhase1BossNervousAttackLoop->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
-		_imgPhase1BossNervousEnd->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
-		_imgPhase1NervousEffectShine->CenterRender(300, 300, 1.8, 1.8, 0, false);
-		_imgPhase1NervousEffectImpact->CenterRender(500, 300, 1.8, 1.8, 0, true);
-		_imgPhase1NervousEffectImpact->CenterRender(700, 300, 1.8, 1.8, 0, false);
+		if (_imgPhase1BossNervousReady->GetIsImageEnded() == true)
+		{
+			_imgPhase1BossNervousReadyLoop->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+
+			if (_imgPhase1BossNervousReadyLoop->GetIsImageEnded() == true)
+			{
+				_imgPhase1BossNervousAttack->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+
+				if (_imgPhase1BossNervousReadyLoop->GetIsImageEnded() == true)
+
+					_imgPhase1BossNervousAttackLoop->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+				_imgPhase1NervousEffectShine->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+
+				_isNervousnessEffectOn = true;
+			}
+		}
 	}
-	
+
+	if (_isNervousnessEffectOn == true)
+	{
+		_imgPhase1NervousEffectImpact->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, true);
+		_imgPhase1NervousEffectImpact->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+		
+		//if(_imgPhase1NervousEffectImpact->) -> X좌표가 맵을 넘어갔을 시
+		_imgPhase1BossNervousEnd->CenterRender(WINSIZE_X / 2, WINSIZE_Y - 160, 1.8, 1.8, 0, false);
+	}
+
+
+
 	// 보스 1페이즈 초이스
 	if (_isChoice == true)
 	{
@@ -243,6 +322,34 @@ void BossObject::Render()
 }
 
 void BossObject::Release()
+{
+}
+
+void BossObject::Baptism()
+{
+}
+
+void BossObject::Consercration()
+{
+}
+
+void BossObject::Worship()
+{
+}
+
+void BossObject::Casting()
+{
+}
+
+void BossObject::Nervousness()
+{
+}
+
+void BossObject::Barrier()
+{
+}
+
+void BossObject::Choice()
 {
 }
 

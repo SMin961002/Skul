@@ -126,5 +126,38 @@ namespace MY_UTILITY // utility
 		vec->y = vec1.y * (1 - t) + vec2.y * t;
 		return *vec;
 	}
-};
 
+	inline int getInt(int num)
+	{
+		srand(GetTickCount64());
+
+		return rand() % num;
+	}
+
+	inline int getFromIntTo(int fromNum, int toNum)
+	{
+		srand(GetTickCount64());
+		return rand() % (toNum - fromNum + 1) + fromNum;
+	}
+
+	inline float getFloat(void)
+	{
+		srand(GetTickCount64());
+
+		return (float)rand() / (float)RAND_MAX;
+	}
+
+	inline float getFloat(float num)
+	{
+		srand(GetTickCount64());
+
+		return (float)rand() / (float)RAND_MAX * num;
+	}
+	inline float getFromFloatTo(float fromNum, float toNum)
+	{
+		srand(GetTickCount64());
+
+		float rnd = (float)rand() / (float)RAND_MAX;
+		return (rnd * (toNum - fromNum)) + fromNum;
+	}
+};

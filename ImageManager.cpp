@@ -199,6 +199,7 @@ void ImageManager::LoadImages()
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
 	AddImage("Building", L"./Resources/BackGround/Boss_Stage_Building.png");
 	AddImage("Lion", L"./Resources/BackGround/Boss_Stage_Lion.png");
+	AddImage("Fence", L"./Resources/BackGround/Boss_Stage_Fence.png");
 
 	AddImage("CollisionPlatform", L"./Resources/Tile/4Stage/CollisionPlatform.png");
 	AddImage("CollisionBox", L"./Resources/Tile/4Stage/CollisionBox.png");
@@ -206,6 +207,9 @@ void ImageManager::LoadImages()
 	AddPixelmage("CollisionBox", "./Resources/Tile/4Stage/CollisionBox.bmp", 32, 32);
 
 	// 보스 ====================================================================================
+	// 1페이즈_대화
+	AddImageVector("Boss_Intro_Talk", L"./Resources/Saint_Joanna/Phase1_Intro_2/Idle_Talk_Loop_", 1, 7);
+
 	// 1페이즈_대기
 	AddImageVector("Boss_Idle", L"./Resources/Saint_Joanna/Phase1_Intro_1/Idle_", 1, 7);
 	// 1페이즈_지팡이 들기
@@ -257,9 +261,13 @@ void ImageManager::LoadImages()
 
 	// 2페이즈_대기
 	AddImageVector("Phase2_Boss_Idle", L"./Resources/Saint_Joanna/Phase_2/Idle/Phase2_Idle_", 1, 6);
-	// 구체 생성
+	// 2페이즈_구체 생성
 	AddImageVector("Phase2_Boss_CreateBall_Ready", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/Ready/Sacrament_Ready_", 1, 6);
+	AddImageVector("Phase2_Boss_CreateBall_Attack", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/Attack/Sacrament_Attack_Loop_", 1, 7);
+	AddImageVector("Phase2_Boss_CreateBall_End", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/End/Sacrament_End_", 1, 7);
+	// 2페이즈_상단 텔포, 직선 레이저
 
+	
 	//==========================================================================================================
 	// 맵 구조물 이미지
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");

@@ -2,6 +2,7 @@
 
 class Idle
 {
+private:
 
 public:
 	void Init();
