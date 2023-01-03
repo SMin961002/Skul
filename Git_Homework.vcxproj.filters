@@ -333,6 +333,7 @@
     </ClInclude>
     <ClInclude Include="MenuUI.h" />
     <ClInclude Include="DoorObject.h" />
+    <ClInclude Include="Enemy.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

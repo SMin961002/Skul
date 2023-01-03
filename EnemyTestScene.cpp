@@ -80,6 +80,22 @@ void EnemyTestScene::Init()
 
 void EnemyTestScene::Update()
 {
+	Vector2 v;
+	float a = (150 + IMAGEMANAGER->GetCameraPosition().y + WINSIZE_Y * 0.5f) - (OBJECTMANAGER->m_player->GetplayerY());
+	//MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2, IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y - 50 }, 0.5);
+	if (a > 150|| a < -0.1f)
+	{
+		Vector2 v2;
+		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,OBJECTMANAGER->m_player->GetplayerY() - WINSIZE_Y / 2 - 150 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.96f);
+		MY_UTILITY::GetLerpVec2(&v2, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
+		v.x = v2.x;
+	}
+	else
+	{
+		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
+	}
+	cout << a << endl;
+	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
 }
 
 void EnemyTestScene::Render()
@@ -124,6 +140,19 @@ void EnemyTestScene::Release()
 
 void EnemyTestScene::UIRender()
 {
+	for (auto iter : m_sturctDatas)
+	{
+		if (iter->key == "DoorBack")
+		{
+			float x = abs((iter->x + 300) - OBJECTMANAGER->m_player->GetplayerX());
+
+			if (x < 50)
+				IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage("Light"), iter->x + 300, iter->y - 40, 1, 1, 0, 0, 0.5 / 500.f * (500 - 50));
+
+			else if (x < 500)
+				IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage("Light"), iter->x + 300, iter->y - 40, 1, 1, 0, 0, 0.5 / 500.f * (500 - x));
+		}
+	}
 	if (isStart == false)
 	{
 		SCENEMANAGER->FadeIn(0.02, [&]() {isStart = true; }, 15);
