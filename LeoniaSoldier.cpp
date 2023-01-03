@@ -9,17 +9,16 @@
 
 void LeoniaSoldier::Init()
 {
-	m_maxhp = 300.0f;
-	m_currenthp = 300.0f;
+	m_maxhp = 100.0f;
+	m_currenthp = 100.0f;
+	m_hiteffecttimer = 0;
+	m_hpbartimer = 0;
 	m_hpbar = 0;
 	m_die = false;
 	m_attackleft = false;
 	m_attack = false;
 	m_move = false;
 	m_hit = false;
-	m_hiteffecttimer = 0;
-	m_hpbartimer = 0;
-	m_dietimer = 0;
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 	m_vimage[eIdle] = IMAGEMANAGER->AddImageVectorCopy("Leon_Idle");
 	m_vimage[eIdle]->Setting(0.3f, true);
@@ -60,7 +59,6 @@ void LeoniaSoldier::Update()
 {
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 	m_collision->Setting(30, m_obj->x + 17, m_obj->y - 20, "Attack");
-
 	if (m_hit)
 	{
 		m_hpbartimer += DELTA_TIME;
@@ -145,7 +143,6 @@ void LeoniaSoldier::Render()
 		{
 			m_hit = false;
 			m_hpbartimer = 0;
-
 		}
 	}
 	else
@@ -159,9 +156,11 @@ void LeoniaSoldier::Render()
 		m_die = true;
 		if (m_dietimer >= 0.5f)
 		{
+			m_hitpointcollision->SetIsActive(false);
 			m_obj->ObjectDestroyed();
 		}
 	}
+	cout << m_currenthp << endl;
 }
 
 void LeoniaSoldier::Release()
@@ -204,6 +203,7 @@ void LeoniaSoldier::HitEnemy(float dmg)
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 		dmg = 10; //-= 플레이어 어택 데미지 상의
 		m_currenthp -= dmg;
+		
 		if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
 		{
 			EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 0, 2);
@@ -214,6 +214,6 @@ void LeoniaSoldier::HitEnemy(float dmg)
 		}
 		m_hit = true;
 		m_hiteffecttimer = 0;
-		//cout << m_hiteffecttimer << endl;
+		
 	}
 }

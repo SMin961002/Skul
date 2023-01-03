@@ -2,7 +2,7 @@
 #include"Enemy.h"
 class AngelStatue : public Enemy
 {
-	enum IamgeState
+	enum ImageState
 	{
 		eIdle,
 		eAttack,

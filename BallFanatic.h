@@ -2,7 +2,7 @@
 #include"Enemy.h"
 class BallFanatic : public Enemy
 {
-	enum IamgeState
+	enum ImageState
 	{
 		eIdle,
 		eSacrifice,
