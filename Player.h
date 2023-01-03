@@ -41,6 +41,23 @@ public:
 	virtual void Release() override;
 	virtual void Render() override;
 
+	//물리공격 데미지를 입력해주세요
+	void HitPlayerPhysicAttack(float dmg)
+	{
+		m_life -= dmg;
+	}
+	//마법공격 데미지를 입력해주세요
+	void HitPlayerMagicAttack(float dmg)
+	{
+		m_life -= dmg;
+	}
+	//피격시 플레이어 밀림(플레이어가 x+moveX, y+moveY포인트로 옮겨집니다)
+	void HitPlayerKnockBack(float moveX, float moveY)
+	{
+		m_obj->x += moveX;
+		m_obj->y += moveY;
+	}
+
 	void InputArtifactKey();	
 	bool  m_haveArtifact;
 
@@ -73,6 +90,9 @@ public:
 오늘할거 : basic skul A, S만들기
 bool canWalk, canDash, canJump, canSkillA, B, canAttack등등의 변수 만들어서
 update에서 해당 변수 on off 함수실행 조절하는 방식 고려해보기
+
+A 투사체 붕붕 고치기
+S 좌표이동 구현
 
 1/1
 			jump만들기

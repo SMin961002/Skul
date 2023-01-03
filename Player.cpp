@@ -75,11 +75,4 @@ void Player::OnCollision(string collisionName, Object* other)
 			if (m_life < 0) m_life = 0;
 		}
 	}
-	if (collisionName == "BasicAttack_BasicSkul")
-	{
-		if (other->GetName() == "Enemy")
-		{
-			other->GetComponent<Enemy>()->HitEnemy(10);
-		}
-	}
 }

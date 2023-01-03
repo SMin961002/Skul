@@ -1,7 +1,7 @@
 #pragma once
 #include "Head.h" //94,64 BasicAttack_BasicSkul범위 x-30~x+42(중심점 x+6, 범위반지름 36). y-56~y+8(중심점 y-24, 범위반지름 32)
 #include "Enemy.h"
-class ProjectileHeadSkull;
+#include "ProjectileHeadSkull.h"
 class Head_Basic : public Head
 {
 private:
@@ -23,5 +23,26 @@ public:
 
 	void DrawCharactor() override;
 
-	void InputSkillKey();
+	void InputSkillKey() override;
+
+	void OnColiision(string collisionName, Object* other)
+	{
+		if (collisionName == "BasicAttack_BasicSkul")
+		{
+			if (other->GetName() == "Enemy")
+			{
+				other->GetComponent<Enemy>()->HitEnemy(10);
+			}
+			else if (collisionName == "PlayerHitRange")
+			{
+				if (other->GetName() == "ThrowHeadSkull")
+				{
+					m_headThrow = false;
+					m_skillNowCoolS = 0;
+					m_skillUsing = false;
+					m_imageChange = true;
+				}
+			}
+		}//end collision Name BasicAttack
+	}
 };

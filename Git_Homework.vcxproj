@@ -175,6 +175,7 @@
     <ClCompile Include="PixelCollisionComponent.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerEffect.cpp" />
+    <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="PixelCollisionComponent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerEffect.h" />
+    <ClInclude Include="ProjectileHeadSkull.h" />
     <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
