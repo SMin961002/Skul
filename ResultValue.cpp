@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "ResultValue.h"
 #include "CollisionComponent.h"
+#include "Gold.h"
+
 void ResultValue::Init()
 {
 	m_isCheck = false;
@@ -12,6 +14,10 @@ void ResultValue::Init()
 
 void ResultValue::Update()
 {
+	if (KEYMANAGER->GetOnceKeyDown(VK_F3))
+	{
+		OBJECTMANAGER->AddObject("Gold", m_obj->x, m_obj->y, eItem)->AddComponent<Gold>()->Setting(10);
+	}
 }
 
 void ResultValue::Render()

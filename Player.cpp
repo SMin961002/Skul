@@ -32,6 +32,15 @@ void Player::Init()
 	m_haveArtifact = false;
 	m_supperArmarTime = 0.5f;
 
+	m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
+	
+	OBJECTMANAGER->m_player = this;
+	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
+	coll = m_obj->AddComponent<CollisionComponent>();
+	coll->Setting(25, m_obj->x + 14, m_obj->y - 15, "PlayerHitRange");
+	m_obj->AddCollisionComponent(coll);
+	m_obj->AddComponent<RigidBodyComponent>();
+	m_obj->GetComponent<PixelCollisionComponent>()->BSettingRect({ -10 , -10, 10 , 0 });
 
 	m_supperArmarNowTime = 0;
 }

@@ -64,19 +64,6 @@ void Fanatic::Update()
 {
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 
-	if (m_lastX != m_obj->x || m_lastY != m_obj->y)
-	{
-		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
-		m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(true);
-
-		m_lastX = m_obj->x;
-		m_lastY = m_obj->y;
-	}
-	else
-	{
-		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
-		m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(false);
-	}
 	m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "HitCollision");
 	if (m_hit)
 	{
