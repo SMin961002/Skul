@@ -5,11 +5,12 @@
 #include "Player.h"
 #include"EnemyEffect.h"
 #include"TentaclesOfLight.h"
+#include"Gold.h"
 void Fanatic::Init()
 {
 	m_hpbartimer = 0;
-	m_maxhp = 70.0f;
-	m_currenthp = 70.0f;
+	m_maxhp = 35.0f;
+	m_currenthp = 35.0f;
 	m_hpbar = 0;
 	m_hitTimer = 0;
 	m_motiontimer = 0;
@@ -136,7 +137,7 @@ void Fanatic::Update()
 				m_motiontimer += 0.1f;
 				m_state = Setcrifice;
 				if (m_vimage[Setcrifice]->GetIsImageEnded())
-				{	
+				{
 					m_hitpointCollision->SetIsActive(false);
 					m_hitCollision->SetIsActive(false);
 					OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, ObjectTag::eSummons)->AddComponent<TentaclesOfLight>();
@@ -182,16 +183,22 @@ void Fanatic::Render()
 			{
 				EFFECTMANAGER->AddEffect<DeadEffect>(m_obj->x, m_obj->y, 1, 1.5);
 				m_dietimer = 0;
+				for (int i = 0; i < 4; i++)
+				{
+					OBJECTMANAGER->AddObject("Gold", m_obj->x, m_obj->y - 50, ObjectTag::eItem)->AddComponent<Gold>();
+				}
 			}
 			m_die = true;
 			if (m_dietimer >= 0.5f&&!m_die2)
 			{
+				
 				m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 				m_obj->GetComponent< PixelCollisionComponent>()->SetIsActive(false);
 				m_hitpointCollision->SetIsActive(false);
 				m_hitCollision->SetIsActive(false);
 				m_obj->ObjectDestroyed();
 			}
+			
 		}
 		cout << m_currenthp << endl;
 	
@@ -226,7 +233,7 @@ void Fanatic::HitEnemy(float dmg)
 			}
 			m_obj->y -= 30;
 			m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
-			}
+	}
 		if (m_hiteffecttimer >= 0.7f)
 		{
 			if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
@@ -239,10 +246,10 @@ void Fanatic::HitEnemy(float dmg)
 			}
 			m_hit = true;
 			m_hiteffecttimer = 0;
-		dmg = 10; //-= 플레이어 어택 데미지 상의
+		dmg = 40; //-= 플레이어 어택 데미지 상의
 		m_currenthp -= dmg;
 		}
-	}
+	
 }
 
 void Fanatic::ImageResetCheck()
