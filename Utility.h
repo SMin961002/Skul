@@ -155,7 +155,6 @@ namespace MY_UTILITY // utility
 	}
 	inline float getFromFloatTo(float fromNum, float toNum)
 	{
-		srand(GetTickCount64());
 
 		float rnd = (float)rand() / (float)RAND_MAX;
 		return (rnd * (toNum - fromNum)) + fromNum;

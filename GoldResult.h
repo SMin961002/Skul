@@ -1,14 +1,12 @@
 #pragma once
-class GoldResult : public Component
+#include "ResultValue.h"
+class GoldResult : public ResultValue
 {
 public:
-	vImage* img;
 	GoldResult() {}
 	~GoldResult() {}
-	// Component을(를) 통해 상속됨
-	virtual void Init() override;
-	virtual void Update() override;
-	virtual void Render() override;
-	virtual void Release() override;
+
+	virtual void Setting() override;
+	virtual void Reword() override;
 };
 

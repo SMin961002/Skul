@@ -302,7 +302,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Phase2_Boss_CreateBall_End", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/End/Sacrament_End_", 1, 7);
 	// 2페이즈_상단 텔포, 직선 레이저
 
-	
+
 	//==========================================================================================================
 	// 맵 구조물 이미지
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
@@ -376,7 +376,7 @@ void ImageManager::LoadImages()
 	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/", 1, 40);
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
-	AddImageVector("GoldResoult", L"Resources/Gold/", 1, 19);
+	AddImageVector("GoldResoult", L"Resources/Gold/Idle/", 1, 19);
 
 
 	// 몬스터 이펙트
@@ -390,6 +390,11 @@ void ImageManager::LoadImages()
 	AddImageVector("FoodShop", L"Resources/Shop/FoodShop/", 1, 8);
 	AddImageVector("Head", L"Resources/Shop/Head/", 1, 7);
 	AddImageVector("ItemView", L"Resources/Shop/ItemView/", 1, 5);
+	//아이템
+	AddImageVector("Gold", L"Resources/Item/Gold/GoldUnit/", 1, 9);
+	AddImageVector("GetGold", L"Resources/Item/Gold/GetGold/", 1, 29);
+	AddImageVector("HeadResult", L"./Resources/HeadResult/Idle/", 1, 1);
+	AddImageVector("HeadResultActive", L"./Resources/HeadResult/Active/", 1, 7);
 
 	//맵 오브젝트
 	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
@@ -424,7 +429,9 @@ void ImageManager::LoadImages()
 	AddObjectImage("Blacksmith", L"./Resources/Shop/Blacksmith/Deactivate_0 #80166.png");
 	AddObjectImage("ItemView", L"./Resources/Shop/ItemView/01.png");
 	AddObjectImage("Head", L"./Resources/Shop/Head/01.png");
-	AddObjectImage("GoldResoult", L"./Resources/Gold/01.png");
+	AddObjectImage("GoldResoult", L"./Resources/Gold/Idle/01.png");
+	AddObjectImage("HeadResult", L"./Resources/HeadResult/Idle/01.png");
+
 
 
 	// 인게임 UI이미지
