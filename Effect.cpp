@@ -23,8 +23,7 @@ void Effect::Update()
 
 void Effect::Render()
 {
-	m_img->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, m_isReversed);
-	cout << "·»´õ m_isReversed:" << m_isReversed << endl;
+	m_img->CenterRender(m_obj->x, m_obj->y, m_scale, m_scale, 0, m_isReversed);
 }
 
 void Effect::Release()

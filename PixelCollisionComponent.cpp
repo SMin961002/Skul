@@ -78,23 +78,26 @@ void PixelCollisionComponent::BottomCollision()
 			for (int j = *x + rtB.left; j < *x + rtB.right; j++)
 			{
 				int w = j / (m_image->GetWidth() - 1);
-				if (w < m_tiles[0].size())
+				if (i == (int)*y + rtB.top || i == (int)*y + rtB.bottom || j == (int)*x + rtB.left || j == (int)*x + rtB.right)
 				{
-					if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
+					if (w < m_tiles[0].size())
 					{
-						float _x = int(*x) % int(m_image->GetWidth() - 1);
-						float _y = int(*y) % int(m_image->GetHight() - 1);
-						if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41)
 						{
-							COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
-							int r = GetRValue(color);
-							int g = GetGValue(color);
-							int b = GetBValue(color);
-							if (r == 255 && g == 0 && b == 255)
+							float _x = int(*x) % int(m_image->GetWidth() - 1);
+							float _y = int(*y) % int(m_image->GetHight() - 1);
+							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								m_checkY = i; // 높은곳에서 떨어졌을때 땅파고들어가는것 방지
-								m_isBottomCheck = true;
-								break;
+								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								int r = GetRValue(color);
+								int g = GetGValue(color);
+								int b = GetBValue(color);
+								if (r == 255 && g == 0 && b == 255)
+								{
+									m_checkY = i; // 높은곳에서 떨어졌을때 땅파고들어가는것 방지
+									m_isBottomCheck = true;
+									break;
+								}
 							}
 						}
 					}
@@ -119,24 +122,27 @@ void PixelCollisionComponent::TopCollision()
 		{
 			for (int j = *x + rtT.left; j < *x + rtT.right; j++)
 			{
-				int w = j / (m_image->GetWidth() - 1);
-				if (w < m_tiles[0].size())
+				if (i == (int)*y + rtT.bottom - 1 || i == (int)*y + rtT.top || j == (int)*x + rtT.left || j == (int)*x + rtT.right - 1)
 				{
-					if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
+					int w = j / (m_image->GetWidth() - 1);
+					if (w < m_tiles[0].size())
 					{
-						float _x = int(*x) % int(m_image->GetWidth() - 1);
-						float _y = int(*y) % int(m_image->GetHight() - 1);
-						if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
 						{
-							COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
-							int r = GetRValue(color);
-							int g = GetGValue(color);
-							int b = GetBValue(color);
-							if (r == 255 && g == 0 && b == 255)
+							float _x = int(*x) % int(m_image->GetWidth() - 1);
+							float _y = int(*y) % int(m_image->GetHight() - 1);
+							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								m_checkY = i; // 높은곳에서 떨어졌을때 땅파고들어가는것 방지
-								m_isTopCheck = true;
-								break;
+								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								int r = GetRValue(color);
+								int g = GetGValue(color);
+								int b = GetBValue(color);
+								if (r == 255 && g == 0 && b == 255)
+								{
+									m_checkY = i; // 높은곳에서 떨어졌을때 땅파고들어가는것 방지
+									m_isTopCheck = true;
+									break;
+								}
 							}
 						}
 					}
@@ -163,21 +169,24 @@ void PixelCollisionComponent::LeftCollision()
 				int w = j / (m_image->GetWidth() - 1);
 				if (w < m_tiles[0].size())
 				{
-					if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
+					if (j == (int)*x + rtL.right - 1 || j == (int)*x + rtL.right - 1 || i == (int)*y + rtL.top || i == (int)*y + rtL.bottom - 1)
 					{
-						float _x = int(*x) % int(m_image->GetWidth() - 1);
-						float _y = int(*y) % int(m_image->GetHight() - 1);
-						if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
 						{
-							COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
-							int r = GetRValue(color);
-							int g = GetGValue(color);
-							int b = GetBValue(color);
-							if (r == 255 && g == 0 && b == 255)
+							float _x = int(*x) % int(m_image->GetWidth() - 1);
+							float _y = int(*y) % int(m_image->GetHight() - 1);
+							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								m_checkX = j; // 높은곳에서 떨어졌을때 땅파고들어가는것 방지
-								m_isLeftCheck = true;
-								break;
+								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								int r = GetRValue(color);
+								int g = GetGValue(color);
+								int b = GetBValue(color);
+								if (r == 255 && g == 0 && b == 255)
+								{
+									m_checkX = j; // 높은곳에서 떨어졌을때 땅파고들어가는것 방지
+									m_isLeftCheck = true;
+									break;
+								}
 							}
 						}
 					}
@@ -205,21 +214,24 @@ void PixelCollisionComponent::RightCollision()
 				int w = j / (m_image->GetWidth() - 1);
 				if (w < m_tiles[0].size())
 				{
-					if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
+					if (i == (int)*y + rtR.top || i == (int)*y + rtR.bottom - 1 || j == (int)*x + rtR.left || j == (int)*x + rtR.right - 1)
 					{
-						float _x = int(*x) % int(m_image->GetWidth() - 1);
-						float _y = int(*y) % int(m_image->GetHight() - 1);
-						if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
 						{
-							COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
-							int r = GetRValue(color);
-							int g = GetGValue(color);
-							int b = GetBValue(color);
-							if (r == 255 && g == 0 && b == 255)
+							float _x = int(*x) % int(m_image->GetWidth() - 1);
+							float _y = int(*y) % int(m_image->GetHight() - 1);
+							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								m_checkX = j; // 높은곳에서 떨어졌을때 땅파고들어가는것 방지
-								m_isRightCheck = true;
-								break;
+								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								int r = GetRValue(color);
+								int g = GetGValue(color);
+								int b = GetBValue(color);
+								if (r == 255 && g == 0 && b == 255)
+								{
+									m_checkX = j; // 높은곳에서 떨어졌을때 땅파고들어가는것 방지
+									m_isRightCheck = true;
+									break;
+								}
 							}
 						}
 					}

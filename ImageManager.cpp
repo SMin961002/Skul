@@ -103,7 +103,6 @@ void ImageManager::LoadImages()
 
 	// 예시 이미지
 	AddImage("Frame_1SKill", L"./Resources/Frame_1SKill.png");
-	AddImageVector("Ex_Idle", L"./Resources/Png/Idle/", 1, 6);
 
 	//캐릭터 대시, 점프 이펙트
 	AddImageVector("DashSmoke", L"./Resources/Png/Skul/Effect_DashSmoke/", 1, 13);
@@ -131,6 +130,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Basic_Headless_JumpRepeat", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpRepeat/", 1, 3);
 	AddImageVector("Basic_Headless_JumpFall", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpFall/", 1, 2);
 	AddImageVector("Basic_Headless_JumpAttack", L"./Resources/Png/Skul/Basic/Headless/HeadlessJumpAttack/", 1, 4);
+	AddImage("Basic_Skull", L"./Resources/Png/Skul/Basic/Effect/Skul.png");
 
 	AddImage("exBg", L"./Resources/exBg.png");
 	AddImage("Background", L"./MapFile/BackGround/background.png");
@@ -194,6 +194,11 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/36.png");
 	AddTileImage(L"./Resources/Tile/4Stage/37.png");
 	AddTileImage(L"./Resources/Tile/4Stage/38.png");
+	AddTileImage(L"./Resources/Tile/4Stage/39.png");
+	AddTileImage(L"./Resources/Tile/4Stage/40.png");
+	AddTileImage(L"./Resources/Tile/4Stage/41.png");
+	AddTileImage(L"./Resources/Tile/4Stage/42.png");
+	AddTileImage(L"./Resources/Tile/4Stage/43.png");
 
 	// 배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
@@ -203,6 +208,7 @@ void ImageManager::LoadImages()
 
 	AddImage("CollisionPlatform", L"./Resources/Tile/4Stage/CollisionPlatform.png");
 	AddImage("CollisionBox", L"./Resources/Tile/4Stage/CollisionBox.png");
+	AddImage("Light", L"./Resources/Light.png");
 
 	AddPixelmage("CollisionBox", "./Resources/Tile/4Stage/CollisionBox.bmp", 32, 32);
 
@@ -275,11 +281,17 @@ void ImageManager::LoadImages()
 	AddStructureImage("arch1", L"./Resources/Tile/4Stage/Structure/arch1.png");
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
 	AddStructureImage("Elevator", L"./Resources/Tile/4Stage/Structure/elevator.png");
+	AddStructureImage("DoorBack", L"Resources/Door/DoorBack.png");
+	AddStructureImage("Reword", L"Resources/Door/Reword.png");
+	AddStructureImage("_01", L"./Resources/Tile/4Stage/Structure/_01.png");
+	AddStructureImage("01", L"./Resources/Tile/4Stage/Structure/01.png");
+	AddStructureImage("banch", L"./Resources/Tile/4Stage/Structure/banch.png");
+
 
 	// 몬스터 체력바 이미지
 	AddImageVector("Hpbar_Empty", L"./Resources/Monster/Hpbar/Empty/", 1, 1);
 	AddImageVector("Hpbar_Down", L"./Resources/Monster/Hpbar/Down/", 1, 1);
-	AddImageVector("Hpbar_Up", L"./Resources/Monster/Hpbar/Up/",1,1);
+	AddImageVector("Hpbar_Up", L"./Resources/Monster/Hpbar/Up/", 1, 1);
 
 	// 몬스터 이미지
 	AddImageVector("Leon_Idle", L"Resources/Monster/Leonia Soldier/Idle/", 1, 5);
@@ -314,6 +326,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Tentacles_Idle", L"Resources/Monster/Tentacles_Of_Light/Idle/", 1, 10);
 	AddImageVector("Tentacles_Attack", L"Resources/Monster/Tentacles_Of_Light/Attack/", 1, 8);
 	AddImageVector("Tntackles_Recovery", L"Resources/Monster/Tentacles_Of_Light/Recovery/", 1, 12);
+	AddImageVector("Tentacles_Emerge", L"Resources/Monster/Tentacles_Of_Light/Emerge/", 1, 5);
 
 	AddImageVector("Lfanatic_Idle", L"Resources/Monster/Lamp_Fanatic/Idle/", 1, 8);
 	AddImageVector("Lfanatic_Mass", L"Resources/Monster/Lamp_Fanatic/Mass/", 1, 3);
@@ -334,6 +347,21 @@ void ImageManager::LoadImages()
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
 
+	// 몬스터 이펙트
+	AddImageVector("Secrifice", L"Resources/Monster/Effect/Secrifice/", 1, 11);
+	AddImageVector("SkulAttack", L"Resources/Monster/Effect/SkulAttack/", 1, 10);
+	AddImageVector("DeadEffect", L"Resources/Monster/Effect/Dead/", 1, 6);
+
+
+
+	//맵 오브젝트
+	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
+	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
+
+	//맵 오브젝트 애니메이션
+	AddImageVector("NormalRoom", L"Resources/Door/NormalRoom/", 1, 8);
+	AddImageVector("SkulRoom", L"Resources/Door/SkulRoom/", 1, 7);
+
 	//맵툴 오브젝트 이미지 저장
 	AddObjectImage("Leon", L"Resources/Monster/Leonia Soldier/Idle/01.png");
 	AddObjectImage("Fanatic", L"Resources/Monster/Fanatic/Idle/01.png");
@@ -343,6 +371,13 @@ void ImageManager::LoadImages()
 	AddObjectImage("Lfanatic", L"Resources/Monster/Lamp_Fanatic/Idle/01.png");
 	AddObjectImage("Befanatic", L"Resources/Monster/Bell_Fanatic/Idle/01.png");
 	AddObjectImage("AStatue", L"Resources/Monster/Angel_Statue/Idle/01.png");
+	AddObjectImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
+	AddObjectImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
+	AddObjectImage("Basic", L"./Resources/Png/Skul/Basic/Motion/Idle/01.png");
+	AddObjectImage("Atifact", L"./Resources/Shop/Atifact/Deactivate_0 #80153.png");
+	AddObjectImage("FoodShop", L"./Resources/Shop/FoodShop/Deactivate_0 #80158.png");
+
+	AddImage("PlayerStatusUI", L"./Resources/UI/PlayerStatusUI.png");
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
@@ -582,7 +617,7 @@ void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
 		int x = 0;
 		for (auto _iter : iter)
 		{
-			if (_iter == 0 || _iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7 || _iter == 8 || _iter == 9 || _iter == 10 || _iter == 11 || _iter == 12 || _iter == 13 || _iter == 14 || _iter == 36 || _iter == 37)
+			if (_iter == 0 || _iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7 || _iter == 8 || _iter == 9 || _iter == 10 || _iter == 11 || _iter == 12 || _iter == 13 || _iter == 14 || _iter == 36 || _iter == 37 || _iter == 38 || _iter == 39 || _iter == 40 || _iter == 41)
 			{
 				IMAGEMANAGER->Render(FindImage("CollisionBox"), x * m_width, y1 * m_width);
 			}
@@ -635,7 +670,7 @@ void ImageManager::D2dTextOut(wstring str, float x, float y)
 	pRT->DrawTextA(str.c_str(), str.size(), tf, fRect, m_brush);
 }
 
-void ImageManager::Render(CImage* img, float x, float y, float sizeX, float sizeY, float rot) // 카메라 O
+void ImageManager::Render(CImage* img, float x, float y, float sizeX, float sizeY, float rot, float alpha) // 카메라 O
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 	matT = D2D1::Matrix3x2F::Translation(x - camera.x, y - camera.y);
@@ -645,32 +680,58 @@ void ImageManager::Render(CImage* img, float x, float y, float sizeX, float size
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 }
 
-void ImageManager::CenterRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse)
+void ImageManager::CenterRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse, float alpha)
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 
 	if (isReverse == false)
 	{
 		matT = D2D1::Matrix3x2F::Translation((x - img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
-		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.x,y - camera.y });
 		matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
 	}
 	else
 	{
 		matT = D2D1::Matrix3x2F::Translation((x + img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
-		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.y,y - camera.y });
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.x,y - camera.y });
 		matS = D2D1::Matrix3x2F::Scale(-sizeX, sizeY);
 	}
 	pRT->SetTransform((matS * matT * matR));
-	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+	ID2D1BitmapBrush* color;
+	pRT->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+	pRT->CreateBitmapBrush(img->GetBitMap(), &color);
+
+	color->SetBitmap(img->GetBitMap());
+	color->SetOpacity(alpha);
+	pRT->FillOpacityMask(img->GetBitMap(), color, D2D1_OPACITY_MASK_CONTENT_GRAPHICS, D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()));
+	color->Release();
 }
 
-void ImageManager::UIRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot) // 카메라 X
+void ImageManager::UIRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, float alpha) // 카메라 X
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 	matT = D2D1::Matrix3x2F::Translation(x, y);
 	matR = D2D1::Matrix3x2F::Rotation(rot, { x ,y });
 	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
+	pRT->SetTransform((matS * matT * matR));
+
+	ID2D1BitmapBrush* color;
+	pRT->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+	pRT->CreateBitmapBrush(img->GetBitMap(), &color);
+
+	color->SetBitmap(img->GetBitMap());
+	color->SetOpacity(alpha);
+	pRT->FillOpacityMask(img->GetBitMap(), color, D2D1_OPACITY_MASK_CONTENT_GRAPHICS, D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()));
+	color->Release();
+}
+
+void ImageManager::UICenterRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot)
+{
+	D2D1_MATRIX_3X2_F matT, matR, matS;
+	matT = D2D1::Matrix3x2F::Translation((x - img->GetWidth() * sizeX / 2), (y - img->GetHeight() * sizeY / 2));
+	matR = D2D1::Matrix3x2F::Rotation(rot, { x ,y });
+	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
+
 	pRT->SetTransform((matS * matT * matR));
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 }

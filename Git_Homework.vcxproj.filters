@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
-      <Filter>Core\Manager\SceneManager</Filter>
+      <Filter>Core\Manager\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Core\Manager\SceneManager</Filter>
+      <Filter>Core\Manager\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Core\Main</Filter>
@@ -129,13 +129,10 @@
       <Filter>Game\Component\PixelCollisionComponent</Filter>
     </ClCompile>
     <ClCompile Include="Effect.cpp">
-      <Filter>Core\Manager\Effectmanager</Filter>
+      <Filter>Core\Manager\EffectManager</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyTestScene.cpp">
-      <Filter>Game\Scene\Example</Filter>
-    </ClCompile>
-    <ClCompile Include="BossEffect.cpp">
-      <Filter>Game\Effect</Filter>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Core\Manager\EffectManager</Filter>
     </ClCompile>
     <ClCompile Include="EnemyEffect.cpp">
       <Filter>Game\Effect</Filter>
@@ -143,16 +140,36 @@
     <ClCompile Include="PlayerEffect.cpp">
       <Filter>Game\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="BossEffect.cpp">
+      <Filter>Game\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelCollisionComponent.cpp" />
+    <ClCompile Include="BossEffect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyEffect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerEffect.cpp">
+      <Filter>Game\Object\Effect</Filter>
+    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="MenuUI.cpp" />
+    <ClCompile Include="DoorObject.cpp" />
+    <ClCompile Include="ShopScene.cpp" />
+    <ClCompile Include="NpcObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
-      <Filter>Core\Manager\SceneManager</Filter>
+      <Filter>Core\Manager\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Core\Manager\SceneManager</Filter>
+      <Filter>Core\Manager\Scene</Filter>
     </ClInclude>
     <ClInclude Include="singleton.h">
       <Filter>Core\Manager</Filter>
@@ -274,14 +291,11 @@
     <ClInclude Include="PixelCollisionComponent.h">
       <Filter>Game\Component\PixelCollisionComponent</Filter>
     </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>Core\Manager\EffectManager</Filter>
+    </ClInclude>
     <ClInclude Include="Effect.h">
-      <Filter>Core\Manager\Effectmanager</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyTestScene.h">
-      <Filter>Game\Scene\Example</Filter>
-    </ClInclude>
-    <ClInclude Include="BossEffect.h">
-      <Filter>Game\Effect</Filter>
+      <Filter>Core\Manager\EffectManager</Filter>
     </ClInclude>
     <ClInclude Include="EnemyEffect.h">
       <Filter>Game\Effect</Filter>
@@ -292,6 +306,11 @@
     <ClInclude Include="Enemy.h">
       <Filter>Game\Object\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="MenuUI.h" />
+    <ClInclude Include="DoorObject.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="ShopScene.h" />
+    <ClInclude Include="NpcObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -299,6 +318,9 @@
     </Filter>
     <Filter Include="Core\Manager">
       <UniqueIdentifier>{be349cf7-cac6-4c31-822b-c67d54e7cf28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\Scene">
+      <UniqueIdentifier>{43a4cb9e-c00f-4977-abc1-bedd5ecc97af}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{214c1593-240d-4c35-b4ca-365537ef2da9}</UniqueIdentifier>
@@ -357,6 +379,12 @@
     <Filter Include="Game\Scene\MapTool\MapToolMapSelectScene">
       <UniqueIdentifier>{82704bb3-9a8c-4066-b1ee-c82524186a37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Object\Charactor">
+      <UniqueIdentifier>{b02c8b66-cd68-4c8d-b8c6-2015530ad898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Head">
+      <UniqueIdentifier>{7528eb48-f244-4dc5-aab2-5f6e7dd1a441}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Game\Component\RigidBodyComponent">
       <UniqueIdentifier>{05dcc7ba-e1b5-4631-9c2a-fb10ff3f4449}</UniqueIdentifier>
     </Filter>
@@ -402,23 +430,17 @@
     <Filter Include="Game\Object\Boss\Pattern%28do nothing%29\Casting">
       <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Manager\SceneManager">
-      <UniqueIdentifier>{43a4cb9e-c00f-4977-abc1-bedd5ecc97af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Manager\Effectmanager">
-      <UniqueIdentifier>{313a59be-f147-4820-831e-f73354121627}</UniqueIdentifier>
+    <Filter Include="Game\Scene\TestScene">
+      <UniqueIdentifier>{640150ea-85d8-4b69-aac1-335f330d07a4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Component\PixelCollisionComponent">
-      <UniqueIdentifier>{527d2bd9-5b69-49c6-ba36-3d165c227727}</UniqueIdentifier>
+      <UniqueIdentifier>{265e459c-3bd6-472e-9af0-be3438464184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\EffectManager">
+      <UniqueIdentifier>{a4a2d6e1-6a9b-4762-88c5-d513b5104231}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Effect">
-      <UniqueIdentifier>{88d36aa7-ac8b-448a-aa35-a9c571ed24ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Charactor">
-      <UniqueIdentifier>{b02c8b66-cd68-4c8d-b8c6-2015530ad898}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Charactor\Head">
-      <UniqueIdentifier>{7528eb48-f244-4dc5-aab2-5f6e7dd1a441}</UniqueIdentifier>
+      <UniqueIdentifier>{0f9b9c36-9701-4df1-a2a6-2e13754d6b99}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

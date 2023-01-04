@@ -62,6 +62,7 @@ public:
 	CImage(ID2D1Bitmap* bitmap, int width, int height) :
 		bitmap(bitmap), width(width), height(height)
 	{
+		alpha = 1;
 	}
 
 	~CImage()
@@ -112,10 +113,11 @@ public:
 public:
 	void Init();
 	void LoadImages();
-	void Render(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0);
-	void CenterRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0, bool isReverse = false);
+	void Render(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0, float alpha = 1);
+	void CenterRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0, bool isReverse = false, float alpha = 1);
 
-	void UIRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0);
+	void UIRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0, float alpha = 1);
+	void UICenterRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0);
 
 	// CenterRender 및 AlphaRender등 추가될 예정
 	ID2D1Bitmap* AddBitmap(std::wstring path, UINT* Width, UINT* Height);

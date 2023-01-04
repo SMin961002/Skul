@@ -81,6 +81,7 @@ protected:
 	bool  m_skillUsing;
 
 	bool  m_imageChange;	//무언가 동작을 입력하면 true가 된다.
+	bool m_canAction[eActionTagNumber];
 
 public:
 	void Init();

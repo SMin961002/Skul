@@ -4,7 +4,7 @@
 class LeoniaSoldier :public Enemy
 {
 private:
-	enum IamgeState
+	enum ImageState
 	{
 		eIdle,
 		eAttack,
@@ -18,11 +18,16 @@ private:
 
 	
 	vImage* m_vimage[eEnd];
+	
 	bool m_attack;
 	bool m_move;
 	bool m_attackleft;
 	bool m_hit;
 	bool m_hitpoint;
+	bool m_die;
+	
+	float m_dietimer;
+	float m_hiteffecttimer;
 	float m_hpbartimer;
 	CollisionComponent* m_collision;
 	CollisionComponent* m_hitpointcollision;

@@ -20,12 +20,19 @@ class Player : public Component
 	*/
 
 private:
+	enum UITag
+	{
+		ePlayerStatus,
+		eEnd
+	};
+	CImage* m_UIImage[UITag::eEnd];
+
 	Head* m_headList[1];
 	Head* m_headSlot[2];
 	Head* m_nowHead;
 	RECT m_hitBox;
 
-	short m_life;
+	int m_life;
 	float m_attack;
 	float m_deffendence;
 
@@ -40,12 +47,14 @@ public:
 	virtual void Update() override;
 	virtual void Release() override;
 	virtual void Render() override;
+	virtual void UIRender() override;
 
 	void InputArtifactKey();	
 	bool  m_haveArtifact;
 
 	void OnCollision(string collisionName, Object* other);
 	float GetplayerX(void) { return m_obj->x; }
+	float GetplayerY(void) { return m_obj->y; }
 
 	Player() : m_life(100) {};
 };	
@@ -69,8 +78,12 @@ public:
 
 
 ※ 작업일지 ※
-1/1
+1/2
 오늘할거 : basic skul A, S만들기
+bool canWalk, canDash, canJump, canSkillA, B, canAttack등등의 변수 만들어서
+update에서 해당 변수 on off 함수실행 조절하는 방식 고려해보기
+
+1/1
 			jump만들기
 			점프, 대시 이펙트 만들기
 

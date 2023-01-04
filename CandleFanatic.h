@@ -3,7 +3,7 @@
 class CandleFanatic :public Enemy
 {
 private:
-	enum IamgeState
+	enum ImageState
 	{
 		eIdle,
 		eAttackReady,
