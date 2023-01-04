@@ -26,6 +26,7 @@ void Player::Init()
 	coll->Setting(25, m_obj->x + 14, m_obj->y - 15, "PlayerHitRange");
 	m_obj->AddCollisionComponent(coll);
 	m_obj->AddComponent<RigidBodyComponent>();
+	m_obj->GetComponent<PixelCollisionComponent>()->BSettingRect({ -10 , -10, 10 , 0 });
 }
 
 void Player::Update()

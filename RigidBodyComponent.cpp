@@ -12,18 +12,19 @@ void RigidBodyComponent::Init()
 	pixelCollisionComponent->RSettingRect({ 25 , -30, 30 , -15 });
 	pixelCollisionComponent->LSettingRect({ -30 , -30, -25 , -15 });
 	pixelCollisionComponent->TSettingRect({ -10 , -60, 10 , -55 });
-	pixelCollisionComponent->BSettingRect({ -10 , -10, 10 , 10 });
+	pixelCollisionComponent->BSettingRect({ -10 , -10, 10 , 1 });
 }
 
 void RigidBodyComponent::Update()
 {
 
-	if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision() == false)
+	if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision() == false&&
+		m_obj->GetComponent<PixelCollisionComponent>()->GetIsPlatformCollision() == false)
 	{
 		if (m_isGravity == true)
 		{
-			m_speed -= m_gravity;
-			m_obj->y -= m_speed;
+			m_speed -= m_gravity ;
+			m_obj->y -= m_speed ;
 		}
 	}
 	else
@@ -34,15 +35,15 @@ void RigidBodyComponent::Update()
 
 	if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsLeftCollision() == true)
 	{
-		m_obj->x = m_obj->GetComponent<PixelCollisionComponent>()->GetCheckX()+31;
+		m_obj->x = m_obj->GetComponent<PixelCollisionComponent>()->GetCheckX();
 	}
 	if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsRightCollision() == true)
 	{
-		m_obj->x = m_obj->GetComponent<PixelCollisionComponent>()->GetCheckX() - 31;
+		m_obj->x = m_obj->GetComponent<PixelCollisionComponent>()->GetCheckX();
 	}
 	if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsTopCollision() == true)
 	{
-		m_obj->y = m_obj->GetComponent<PixelCollisionComponent>()->GetCheckY() + 60;
+		m_obj->y = m_obj->GetComponent<PixelCollisionComponent>()->GetCheckY();
 	}
 }
 
@@ -65,4 +66,9 @@ RigidBodyComponent::RigidBodyComponent()
 
 RigidBodyComponent::~RigidBodyComponent()
 {
+}
+
+bool RigidBodyComponent::GetCollisionY()
+{
+	return m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision();
 }

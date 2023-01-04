@@ -23,6 +23,7 @@ public:
 	
 	float GetGravity() { return m_gravity; }
 	float GetGravityPower() { return m_speed; }
+	bool GetCollisionY();
 	void SetGravityOnOff(bool isGravity) 
 	{
 		m_isGravity = isGravity;

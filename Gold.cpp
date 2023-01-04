@@ -8,6 +8,7 @@ void Gold::Init()
 {
 	m_goldx = 0;
 	m_goldy = 0;
+	state = 0;
 	m_goldy2 = 0;
 	m_updown = 0;
 	m_drop = false;
@@ -25,12 +26,12 @@ void Gold::Init()
 
 	//m_obj->GetCollisionComponent().push_back();
 	//m_obj->GetCollisionComponent().push_back(m_hitpointcollision);
-	
+
 	m_obj->AddComponent<RigidBodyComponent>();
-	m_goldy =MY_UTILITY::getFromFloatTo(2, 5);
-	m_goldx = MY_UTILITY::getFromFloatTo(-200, 300)/100.f;
+	m_goldy = MY_UTILITY::getFromFloatTo(2, 5);
+	m_goldx = MY_UTILITY::getFromFloatTo(-200, 300) / 100.f;
 	m_goldy2 = MY_UTILITY::getFromFloatTo(15, 25);
-	m_obj->AddComponent<RigidBodyComponent>()->SetGravityPower(m_goldy);
+	m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(m_goldy);
 	//m_obj->GetComponent<RigidBodyComponent>()->SetGravityOngetFromIntToOff(true);
 
 }
@@ -41,37 +42,42 @@ void Gold::Update()
 	{
 		m_obj->ObjectDestroyed();
 	}
-		if (m_drop == false)
-		{
-			state = eGlod;
-		}
-		if (m_drop == true)
-		{
-			m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(false);
-			m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 
-			state = eGetgold;
-		}
-		if (m_obj->GetComponent<RigidBodyComponent>()->GetGravityPower() < 0)
-		{
+	if (m_drop == true)
+	{
+		m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(false);
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 
-			m_obj->x = m_obj->x + m_goldx;
-		}
-		else if (m_obj->GetComponent<RigidBodyComponent>()->GetGravityPower() == 0 && m_updown < 2)
-		{
-			m_obj->y = m_obj->y - m_goldy2;
-			m_updown++;
-		}
-		else
-		{
-			m_drop = true;
-		}
-	
+		state = eGetgold;
+	}
+	if (m_drop == false)
+	{
+		state = eGlod;
+	}
+
+	if (m_updown == 2)
+	{
+		m_drop = true;
+	}
+	else
+	{
+		m_obj->x = m_obj->x + m_goldx;
+	}
+
+	if (m_obj->GetComponent<RigidBodyComponent>()->GetCollisionY() == true && m_updown < 2)
+	{
+		m_obj->y = m_obj->y - m_goldy2;
+		m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(2);
+		m_updown++;
+	}
+	else
+	{
+	}
 }
 
 void Gold::Render()
-{	
-	m_vimage[state]->CenterRender(m_obj->x, m_obj->y-4, 2, 2, 0, 1);
+{
+	m_vimage[state]->CenterRender(m_obj->x, m_obj->y - 4, 2, 2, 0, 1);
 }
 
 void Gold::Release()
