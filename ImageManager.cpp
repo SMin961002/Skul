@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ImageManager.h"
+#include <wrl.h>
 
 ImageManager::ImageManager()
 {
@@ -67,7 +68,7 @@ void ImageManager::Init()
 	CoInitialize(0);
 	CoCreateInstance(CLSID_WICImagingFactory, 0, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&factory));
 
-	IDWriteFactory* m_pDWriteFactory = nullptr;
+	IDWriteFactory3* m_pDWriteFactory = nullptr;
 
 	DWriteCreateFactory(
 		DWRITE_FACTORY_TYPE_SHARED,
@@ -75,8 +76,25 @@ void ImageManager::Init()
 		reinterpret_cast<IUnknown**>(&m_pDWriteFactory)
 	);
 
+	IDWriteFontFile* fontFileReference;
+
+	m_pDWriteFactory->CreateFontFileReference(L"./Resources/Font/NotoSansKR-Black.otf", nullptr, &fontFileReference);
+
+	IDWriteFontSetBuilder1* fontSetBuilder;
+	m_pDWriteFactory->CreateFontSetBuilder(reinterpret_cast<IDWriteFontSetBuilder**>(&fontSetBuilder));
+
+	fontSetBuilder->AddFontFile(fontFileReference);
+
+	IDWriteFontSet* customFontSet;
+	fontSetBuilder->CreateFontSet(&customFontSet);
+	IDWriteFontCollection1* col;
+	m_pDWriteFactory->CreateFontCollectionFromFontSet(
+		customFontSet
+		, &col
+	);
+
 	m_pDWriteFactory->CreateTextFormat(
-		L"맑음 고딕",                  // 폰트 패밀리 이름의 문자열
+		L"Noto Sans KR",                  // 폰트 패밀리 이름의 문자열
 		NULL,                        // 폰트 컬렉션 객체, NULL=시스템 폰트 컬렉션
 		DWRITE_FONT_WEIGHT_NORMAL,   // 폰트 굵기. LIGHT, NORMAL, BOLD 등.
 		DWRITE_FONT_STYLE_NORMAL,    // 폰트 스타일. NORMAL, OBLIQUE, ITALIC.
@@ -85,7 +103,6 @@ void ImageManager::Init()
 		L"ko",                         // 로케일을 문자열로 명시.  영어-미국=L"en-us", 한국어-한국=L"ko-kr"
 		&tf
 	);
-
 	D2D1_COLOR_F color;
 	color.a = 1;
 	color.r = 1;
@@ -93,11 +110,22 @@ void ImageManager::Init()
 	color.b = 1;
 	pRT->CreateSolidColorBrush(color, &m_brush);
 
+	IDWriteFontFamily* fontFamily;
+	IDWriteLocalizedStrings* localizedFontName;
+	WCHAR* c_styleFontName = new WCHAR[70];
+
+	col->GetFontFamily(0, &fontFamily);
+	fontFamily->GetFamilyNames(&localizedFontName);
+	localizedFontName->GetString(0, c_styleFontName, 65);
+
 	m_pDWriteFactory->Release();
 }
 
 void ImageManager::LoadImages()
 {
+	// UI 이미지
+	AddImage("Pause_Frame", L"./Resources/UI/Pause_Frame.png");
+
 	// 맵툴 UI 이미지
 	AddImage("newFile", L"./MapFile/newFile.png");
 
@@ -274,7 +302,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Phase2_Boss_CreateBall_End", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/End/Sacrament_End_", 1, 7);
 	// 2페이즈_상단 텔포, 직선 레이저
 
-	
+
 	//==========================================================================================================
 	// 맵 구조물 이미지
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
@@ -286,6 +314,8 @@ void ImageManager::LoadImages()
 	AddStructureImage("_01", L"./Resources/Tile/4Stage/Structure/_01.png");
 	AddStructureImage("01", L"./Resources/Tile/4Stage/Structure/01.png");
 	AddStructureImage("banch", L"./Resources/Tile/4Stage/Structure/banch.png");
+	AddStructureImage("shop", L"./Resources/Tile/4Stage/Structure/shop.png");
+	AddStructureImage("factory", L"./Resources/Tile/4Stage/Structure/factory.png");
 
 
 	// 몬스터 체력바 이미지
@@ -346,19 +376,38 @@ void ImageManager::LoadImages()
 	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/", 1, 40);
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
+	AddImageVector("GoldResoult", L"Resources/GoldResult/Idle/", 1, 19);
+	AddImageVector("GoldResoultActive", L"Resources/GoldResult/Idle/", 1, 1);
+
 
 	// 몬스터 이펙트
 	AddImageVector("Secrifice", L"Resources/Monster/Effect/Secrifice/", 1, 11);
 	AddImageVector("SkulAttack", L"Resources/Monster/Effect/SkulAttack/", 1, 10);
 	AddImageVector("DeadEffect", L"Resources/Monster/Effect/Dead/", 1, 6);
 
+	// 상점 오브젝트 
+	AddImageVector("Atifact", L"Resources/Shop/Atifact/", 1, 24);
+	AddImageVector("Blacksmith", L"Resources/Shop/Blacksmith/", 1, 8);
+	AddImageVector("FoodShop", L"Resources/Shop/FoodShop/", 1, 8);
+	AddImageVector("Head", L"Resources/Shop/Head/", 1, 7);
+	AddImageVector("ItemView", L"Resources/Shop/ItemView/", 1, 5);
 	//아이템
 	AddImageVector("Gold", L"Resources/Item/Gold/GoldUnit/", 1, 9);
 	AddImageVector("GetGold", L"Resources/Item/Gold/GetGold/", 1, 29);
+	AddImageVector("HeadResult", L"./Resources/HeadResult/Idle/", 1, 1);
+	AddImageVector("HeadResultActive", L"./Resources/HeadResult/Active/", 1, 7);
 
 	//맵 오브젝트
 	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
 	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
+
+	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
+	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
+
+	AddImage("ShopBackGround", L"Resources/Shop/backGround.png");
+	AddImage("ShopCloud", L"Resources/Shop/Cloud.png");
+	AddImage("ShopStruecture", L"Resources/Shop/Struecture.png");
+
 
 	//맵 오브젝트 애니메이션
 	AddImageVector("NormalRoom", L"Resources/Door/NormalRoom/", 1, 8);
@@ -378,8 +427,18 @@ void ImageManager::LoadImages()
 	AddObjectImage("Basic", L"./Resources/Png/Skul/Basic/Motion/Idle/01.png");
 	AddObjectImage("Atifact", L"./Resources/Shop/Atifact/Deactivate_0 #80153.png");
 	AddObjectImage("FoodShop", L"./Resources/Shop/FoodShop/Deactivate_0 #80158.png");
+	AddObjectImage("Blacksmith", L"./Resources/Shop/Blacksmith/Deactivate_0 #80166.png");
+	AddObjectImage("ItemView", L"./Resources/Shop/ItemView/01.png");
+	AddObjectImage("Head", L"./Resources/Shop/Head/01.png");
+	AddObjectImage("GoldResoult", L"./Resources/GoldResult/Idle/01.png");
+	AddObjectImage("HeadResult", L"./Resources/HeadResult/Idle/01.png");
 
+
+
+	// 인게임 UI이미지
+	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");
 	AddImage("PlayerStatusUI", L"./Resources/UI/PlayerStatusUI.png");
+
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
@@ -606,8 +665,6 @@ void ImageManager::DrawRectCenter(RECT rt, CImage* img)
 	pRT->SetTransform(&mat);
 	pRT->CreateSolidColorBrush(color, &m_brush);
 	pRT->FillRectangle(D2D1_RECT_F{ (float)rt.left + img->GetWidth() / 2,(float)rt.top + img->GetHeight() / 2,(float)rt.right + img->GetWidth() / 2,(float)rt.bottom + img->GetHeight() / 2 }, m_brush);
-
-
 }
 
 void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
@@ -658,17 +715,21 @@ void ImageManager::DrawColorRender(CImage* img, float x, float y, float sizeX, f
 
 }
 
-void ImageManager::D2dTextOut(wstring str, float x, float y)
+void ImageManager::D2dTextOut(wstring str, float x, float y, D2D1_COLOR_F color, float scale)
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 	matT = D2D1::Matrix3x2F::Translation(x, y);
+	matS = D2D1::Matrix3x2F::Scale(scale, scale);
 
-	pRT->SetTransform((matT));
 	D2D1_RECT_F fRect;
-	fRect.left = x;
-	fRect.top = y;
-	fRect.right = x + 1080;
-	fRect.bottom = y + 1920;
+	fRect.left = 0;
+	fRect.top = 0;
+	fRect.right = 1080;
+	fRect.bottom = 1920;
+
+	pRT->SetTransform((matS * matT));
+
+	m_brush->SetColor({ 1.f / 255 * color.r,1.f / 255 * color.g,1.f / 255 * color.b,1 });
 	pRT->DrawTextA(str.c_str(), str.size(), tf, fRect, m_brush);
 }
 
@@ -679,6 +740,7 @@ void ImageManager::Render(CImage* img, float x, float y, float sizeX, float size
 	matR = D2D1::Matrix3x2F::Rotation(rot, { x + img->GetWidth() / 2,y + img->GetHeight() / 2 });
 	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
 	pRT->SetTransform((matS * matT * matR));
+
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 }
 
@@ -750,5 +812,13 @@ HRESULT GImage::init(const char* fileName, float width, float height)
 	_imageInfo->hOBit = (HBITMAP)SelectObject(_imageInfo->hMemDC, _imageInfo->hBit);
 	_imageInfo->width = width;
 	_imageInfo->height = height;
+
+	for (int j = 0; j < height; j++)
+	{
+		for (int i = 0; i < width; i++)
+		{
+			pixel[i][j] = GetPixel(GetMemDC(), i, j);
+		}
+	}
 	return S_OK;
 }

@@ -15,11 +15,12 @@ private:
 	bool m_drop;
 	int state;
 	int m_updown;
-	int m_goldy;
-	int m_goldy2;
-	int m_goldx;
+	float m_goldy;
+	float m_goldy2;
+	float m_goldx;
 
 public:
+	void Setting(float y) { m_goldy += y; }
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;

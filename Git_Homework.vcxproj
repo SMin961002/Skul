@@ -156,10 +156,14 @@
     <ClCompile Include="Fanatic.cpp" />
     <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="Gold.cpp" />
+    <ClCompile Include="GoldResult.cpp" />
     <ClCompile Include="Head.cpp" />
+    <ClCompile Include="HeadItem.cpp" />
+    <ClCompile Include="HeadResult.cpp" />
     <ClCompile Include="Head_Basic.cpp" />
     <ClCompile Include="HollyFountain.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="KeyManager.cpp" />
@@ -177,6 +181,7 @@
     <ClCompile Include="PixelCollisionComponent.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerEffect.cpp" />
+    <ClCompile Include="ResultValue.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -216,10 +221,14 @@
     <ClInclude Include="Fanatic.h" />
     <ClInclude Include="Gambler.h" />
     <ClInclude Include="Gold.h" />
+    <ClInclude Include="GoldResult.h" />
     <ClInclude Include="Head.h" />
+    <ClInclude Include="HeadItem.h" />
+    <ClInclude Include="HeadResult.h" />
     <ClInclude Include="Head_Basic.h" />
     <ClInclude Include="HollyFountain.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="IOFillManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="KeyManager.h" />
@@ -237,6 +246,7 @@
     <ClInclude Include="PixelCollisionComponent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerEffect.h" />
+    <ClInclude Include="ResultValue.h" />
     <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />

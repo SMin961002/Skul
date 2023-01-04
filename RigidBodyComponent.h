@@ -9,6 +9,7 @@ private:
 	float m_speed;
 	PixelCollisionComponent* pixelCollisionComponent;
 public:
+	bool m_isGold;
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;

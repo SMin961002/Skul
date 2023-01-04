@@ -19,6 +19,7 @@ private:
 	GImage* m_image;
 	vector<vector<int>> m_tiles;
 public:
+	bool m_isGold;
 	bool GetIsCollision() { return m_isCheck; }
 	virtual void Init() override;
 	virtual void Update() override;

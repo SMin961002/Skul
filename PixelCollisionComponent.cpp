@@ -2,7 +2,6 @@
 #include "PixelCollisionComponent.h"
 
 void PixelCollisionComponent::Init()
-
 {
 	m_isCheck = false;
 	m_image = IMAGEMANAGER->FindPixelImage("CollisionBox");
@@ -13,6 +12,7 @@ void PixelCollisionComponent::Init()
 	m_isRightCheck = false;
 	m_isBottomCheck = false;
 	m_isTopCheck = false;
+	m_isGold = false;
 }
 
 void PixelCollisionComponent::Update()
@@ -23,9 +23,13 @@ void PixelCollisionComponent::Update()
 	m_isBottomCheck = false;
 	m_isTopCheck = false;
 
-	LeftCollision();
-	RightCollision();
-	TopCollision();
+	//if (m_isGold == false)
+	//{
+	//	LeftCollision();
+	//	RightCollision();
+	//	TopCollision();
+	//}
+
 	BottomCollision();
 }
 
@@ -66,7 +70,7 @@ void PixelCollisionComponent::BottomCollision()
 {
 
 	int y1 = 0;
-	for (int i = *y + rtB.top; i < *y + rtB.bottom; i++)
+	for (int i = *y + rtB.top; i < *y + rtB.bottom; i += 2)
 	{
 		if (m_isBottomCheck == true)
 		{
@@ -75,20 +79,20 @@ void PixelCollisionComponent::BottomCollision()
 		int h = i / (m_image->GetHight() - 1);
 		if (h < m_tiles.size())
 		{
-			for (int j = *x + rtB.left; j < *x + rtB.right; j++)
+			for (int j = *x + rtB.left; j < *x + rtB.right; j += 2)
 			{
 				int w = j / (m_image->GetWidth() - 1);
 				if (i == (int)*y + rtB.top || i == (int)*y + rtB.bottom || j == (int)*x + rtB.left || j == (int)*x + rtB.right)
 				{
 					if (w < m_tiles[0].size())
 					{
-						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41 || m_tiles[h][w] == 42 || m_tiles[h][w] == 43)
 						{
 							float _x = int(*x) % int(m_image->GetWidth() - 1);
 							float _y = int(*y) % int(m_image->GetHight() - 1);
 							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								COLORREF color = m_image->pixel[(int)_x][(int)_y];
 								int r = GetRValue(color);
 								int g = GetGValue(color);
 								int b = GetBValue(color);
@@ -111,7 +115,7 @@ void PixelCollisionComponent::TopCollision()
 {
 
 	int y1 = 0;
-	for (int i = *y + rtT.bottom; i > *y + rtT.top; i--)
+	for (int i = *y + rtT.bottom; i > *y + rtT.top; i -= 2)
 	{
 		if (m_isTopCheck == true)
 		{
@@ -120,20 +124,20 @@ void PixelCollisionComponent::TopCollision()
 		int h = i / (m_image->GetHight() - 1);
 		if (h < m_tiles.size())
 		{
-			for (int j = *x + rtT.left; j < *x + rtT.right; j++)
+			for (int j = *x + rtT.left; j < *x + rtT.right; j += 2)
 			{
 				if (i == (int)*y + rtT.bottom - 1 || i == (int)*y + rtT.top || j == (int)*x + rtT.left || j == (int)*x + rtT.right - 1)
 				{
 					int w = j / (m_image->GetWidth() - 1);
 					if (w < m_tiles[0].size())
 					{
-						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41 || m_tiles[h][w] == 42 || m_tiles[h][w] == 43)
 						{
 							float _x = int(*x) % int(m_image->GetWidth() - 1);
 							float _y = int(*y) % int(m_image->GetHight() - 1);
 							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								COLORREF color = m_image->pixel[(int)_x][(int)_y];
 								int r = GetRValue(color);
 								int g = GetGValue(color);
 								int b = GetBValue(color);
@@ -155,7 +159,7 @@ void PixelCollisionComponent::TopCollision()
 void PixelCollisionComponent::LeftCollision()
 {
 	int y1 = 0;
-	for (int i = *y + rtL.top; i < *y + rtL.bottom; i++)
+	for (int i = *y + rtL.top; i < *y + rtL.bottom; i += 2)
 	{
 		if (m_isLeftCheck == true)
 		{
@@ -164,20 +168,20 @@ void PixelCollisionComponent::LeftCollision()
 		int h = i / (m_image->GetHight() - 1);
 		if (h < m_tiles.size())
 		{
-			for (int j = *x + rtL.right; j > *x + rtL.left; j--)
+			for (int j = *x + rtL.right; j > *x + rtL.left; j -= 2)
 			{
 				int w = j / (m_image->GetWidth() - 1);
 				if (w < m_tiles[0].size())
 				{
 					if (j == (int)*x + rtL.right - 1 || j == (int)*x + rtL.right - 1 || i == (int)*y + rtL.top || i == (int)*y + rtL.bottom - 1)
 					{
-						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41 || m_tiles[h][w] == 42 || m_tiles[h][w] == 43)
 						{
 							float _x = int(*x) % int(m_image->GetWidth() - 1);
 							float _y = int(*y) % int(m_image->GetHight() - 1);
 							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								COLORREF color = m_image->pixel[(int)_x][(int)_y];
 								int r = GetRValue(color);
 								int g = GetGValue(color);
 								int b = GetBValue(color);
@@ -200,7 +204,7 @@ void PixelCollisionComponent::RightCollision()
 {
 
 	int y1 = 0;
-	for (int i = *y + rtR.top; i < *y + rtR.bottom; i++)
+	for (int i = *y + rtR.top; i < *y + rtR.bottom; i += 2)
 	{
 		if (m_isRightCheck == true)
 		{
@@ -209,20 +213,20 @@ void PixelCollisionComponent::RightCollision()
 		int h = i / (m_image->GetHight() - 1);
 		if (h < m_tiles.size())
 		{
-			for (int j = *x + rtR.left; j < *x + rtR.right; j++)
+			for (int j = *x + rtR.left; j < *x + rtR.right; j += 2)
 			{
 				int w = j / (m_image->GetWidth() - 1);
 				if (w < m_tiles[0].size())
 				{
 					if (i == (int)*y + rtR.top || i == (int)*y + rtR.bottom - 1 || j == (int)*x + rtR.left || j == (int)*x + rtR.right - 1)
 					{
-						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37)
+						if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41 || m_tiles[h][w] == 42 || m_tiles[h][w] == 43)
 						{
 							float _x = int(*x) % int(m_image->GetWidth() - 1);
 							float _y = int(*y) % int(m_image->GetHight() - 1);
 							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								COLORREF color = m_image->pixel[(int)_x][(int)_y];
 								int r = GetRValue(color);
 								int g = GetGValue(color);
 								int b = GetBValue(color);

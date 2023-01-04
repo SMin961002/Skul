@@ -27,7 +27,7 @@ void MapToolMapSelectScene::Render()
 		wstring wstr = L"";
 		wstr.assign(iter.begin(), iter.end());
 		IMAGEMANAGER->DrawRect({ 50 + x % 4 * 200,50 + x / 4 * 200,50 + 150 + x % 4 * 200,200 + x / 4 * 200 });
-		IMAGEMANAGER->D2dTextOut(wstr, 44 + x % 4 * 100, x / 4 * 100);
+		IMAGEMANAGER->D2dTextOut(wstr, 44 + x % 4 * 100, x / 4 * 100, { 255,255,255,1 });
 		x++;
 	}
 
