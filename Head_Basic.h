@@ -9,10 +9,15 @@ private:
 	ProjectileHeadSkull* m_projectileHead;	//머리던지기 투사체 구조체
 	bool m_headThrow;
 
+	CollisionComponent* m_BasicHeadAttack;
+	CollisionComponent* m_TagAttack;
+
 public:
 	void ImageSetting() override;
 	void ParameterSetting() override;
 	void CollisionSetting() override;
+
+	void Release() override;
 
 	void CoolDown() override;
 
@@ -20,10 +25,11 @@ public:
 	void CollisionUpdate() override;
 
 	void InputAttackKey() override;
+	void InputSkillKey() override;
+
+	void TagAction() override;
 
 	void DrawCharactor() override;
-
-	void InputSkillKey() override;
 
 	void PutOnHead()
 	{
@@ -31,17 +37,8 @@ public:
 		m_headThrow = false;
 		m_imageChange = true;
 		m_skillUsing = false;
+		m_projectileHead->Off();
 	};
-	virtual void OnCollision(string collisionName, Object* other) override
-	{
-			cout << "공격충돌" << endl;
-		if (collisionName == "BasicAttack_BasicSkul")
-		{
-			if (other->GetName() == "Enemy")
-			{
-				cout << "적에게공격" << endl;
-				other->GetComponent<Enemy>()->HitEnemy(10);
-			}
-		}//end collision Name BasicAttack
-	}
+	void OnCollision(string collisionName, Object* other)
+	{}
 };

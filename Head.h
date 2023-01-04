@@ -1,16 +1,9 @@
 #pragma once
 #include "PlayerEffect.h"
 
-enum class eSkulSpecies
-{
-	eBasic,
-	ePredator,
-	eDestroyer,
-	eGambler
-};
-
+class Player;
 //머리들이 계승받는 상위클래스
-class Head : public Component
+class Head
 {
 public:
 	virtual enum ActionTag
@@ -28,18 +21,11 @@ public:
 		eJumpAttack,
 		eSkill_1,
 		eSkill_2,
-		eAppearEffect,
+		eTagAction,
 
 		eReborn,
 
 		eActionTagNumber
-	};
-
-	virtual enum eCollisionArrTag
-	{
-		eAutoAttack,
-
-		eCollisionArrTagNumCount
 	};
 
 protected:
@@ -48,13 +34,20 @@ protected:
 	vImage* img[eActionTagNumber];
 	vImage* img_reborn;
 	vImage* nowImg;
+	CollisionComponent* m_collAutoAttack;	//##공격 발동하면 여기에 어택collision을 대입한다.
+	CollisionComponent* m_collSkill;	//##스킬 발동하면 여기에 스킬 collision을 대입한다.
 
 	//이미지, 시간으로 제어
 	ActionTag m_action;
 
+	float* m_x = nullptr, * m_y = nullptr;
+	bool* m_isLeft = nullptr;
+	bool* m_isDown = nullptr;
+	bool*  m_dashing;
+	bool*  m_jumpping;
+
+	//=============이동에 필요한 변수===========
 	float m_moveSpeed;
-	bool  m_isLeft;
-	bool  m_isDown;
 
 	float m_dashSpeed;		//대시 속도 (가속->감속 계산필요)
 	float m_dashCool;		//대시 끝나고 다음 대시세트 시작까지 걸리는 쿨타임
@@ -63,12 +56,11 @@ protected:
 	float m_dashNowTime;	//대시 후 지나간 시간
 	short m_dashCount;		//현재 몇회차 대시인지
 	short m_dashMax;		//최대 대시 가능 횟수
-	bool  m_dashing;
 
 	float m_jumpSpeed;		//점프 시작속도
 	short m_jumpCount;		//현재 점프 몇회인지
 	short m_jumpMax;		//최대 점프 가능 횟수		
-	bool  m_jumpping;
+	//============이동에 필요한 변수end==========
 
 	short m_attackCount;
 	short m_attackMax;
@@ -84,13 +76,30 @@ protected:
 	bool m_canAction[eActionTagNumber];
 
 public:
-	void Init();
-	void Update();
-	void Render();
-	void Release();
+	virtual void Init();
+	virtual void Update();
+	virtual void Render();
+	virtual void Release();
 
-	inline bool GetIsDashing() { return m_dashing; }
-
+	inline void SetPlayerXY(float* x, float* y, bool* left, bool* down) { m_x = x, m_y = y, m_isLeft = left; }
+	inline void SetImage(ActionTag image, bool isImageEqualAction = true, ActionTag action = eIdle)
+	{
+		nowImg->Reset();
+		img[image]->Reset();
+		nowImg = img[image];
+		m_action = isImageEqualAction ? image : action;
+	}
+	inline void SetAction(ActionTag action, bool doWantToChangeImage=true)
+	{
+		m_action = action;
+		if (doWantToChangeImage) m_imageChange = true;
+	}
+	inline eSkulSpecies GetSpecies() { return m_species; }
+	inline bool GetIsAttack() { if (m_attackCount > 0) return true; else return false; }
+	inline ActionTag GetAction() { return m_action; }
+	inline CollisionComponent* GetCollAutoAttack() { return m_collAutoAttack; }
+	inline CollisionComponent* GetCollSkill() { return m_collSkill; }
+	
 	virtual void ImageSetting() {};
 	virtual void ParameterSetting() {};
 	virtual void CollisionSetting() {};
@@ -102,36 +111,33 @@ public:
 	virtual void CoolDown() {};
 	virtual void ActionArrangement() {};
 	virtual void CollisionUpdate() {};
-	//	in move
-	virtual void InputJumpKey();
-	virtual void InputDashKey();
-	virtual void InputArrowKey();
 	//	in act
 	virtual void InputSkillKey() {};
 	virtual void InputAttackKey() {};
 
+	virtual void TagAction() {};
 
 	//Render 안에 들어가는 함수
 	virtual void DrawCharactor();
 
+	void SetPlayerMoveParameter(float* moveSpeed, float* dashSpeed, float* dashtime, short* dashMax, bool* dashing,float* jumpSpeed, short* jumpMax, bool* jumpping)
+	{
+		*moveSpeed = m_moveSpeed;
+		*dashSpeed = m_dashSpeed;
+		*dashtime = m_dashTime;
+		*dashMax = m_dashMax;
+		m_dashing = dashing;
+		*jumpSpeed = m_jumpSpeed;
+		*jumpMax = m_jumpMax;
+		m_jumpping = jumpping;
+	}
+
 	void ResetAll()
 	{
-		ResetJump();
-		ResetDash();
 		ResetAttack();
 		ResetSkill();
 		m_imageChange = false;
 		m_action = eIdle;
-	}
-	void ResetJump() {
-		m_jumpCount = 0;
-		m_jumpping = false;
-	}
-	void ResetDash() {
-		m_dashCount = 0;
-		m_dashing = false;
-		m_dashNowTime = 0;
-		m_dashNowCool = 0;
 	}
 	void ResetAttack() {
 		m_attackCast = false;
@@ -142,9 +148,4 @@ public:
 		m_skillNowCoolS = 0;
 		m_skillUsing = false;
 	}
-
-	virtual void OnCollision(string collisionName, Object* other) override 
-	{
-		cout << "" << endl;
-	};
 };

@@ -5,20 +5,6 @@
 //head가 컴포넌트를 갖고, 머리교체할 때 init에서 m_obj연결?
 class Player : public Component
 {
-	/*
-	점프2회, 대시2회 섞기가능
-	점프중 대시 쿨 돌아오면 새 대시 세트 가능,
-	1점프->2단대시->2점프->2단대시->땅에닿기직전 2단대시 가능
-	(추락고도가 높으면 추가대시 더 가능)
-	
-	1회차 대시 직후 일정시간 이내에 대시키 눌러야 2회차 대시 가능
-	(안그러면 쿨 돌아감. 쿨 끝날때까지 대시 불가)
-	대시 쿨탐분석필
-	점프어택이 몇회까지 되는지 분석 필요
-
-	행동제어 이미지 delay
-	*/
-
 private:
 	enum UITag
 	{
@@ -28,9 +14,8 @@ private:
 	CImage* m_UIImage[UITag::eEnd];
 
 	Head* m_headList[1];
-	Head* m_headSlot[2];
+	eSkulSpecies m_headSlot;
 	Head* m_nowHead;
-	RECT m_hitBox;
 
 	int m_life;
 	float m_attack;
@@ -39,8 +24,35 @@ private:
 	float m_artifactCoolD;
 	float m_artifactNowCoolD;
 
+	//=============이동에 필요한 변수===========
+	float m_moveSpeed;
+	bool  m_isLeft;
+	bool  m_isDown;
+
+	float m_dashSpeed;		//대시 속도 (가속->감속 계산필요)
+	float m_dashCool;		//대시 끝나고 다음 대시세트 시작까지 걸리는 쿨타임
+	float m_dashNowCool;	//현재 대시 쿨타임 (0 되면 다음 대시 가능)
+	float m_dashTime;		//대시 발동되는 시간 (이 안에 입력해야 2단대시 가능)
+	float m_dashNowTime;	//대시 후 지나간 시간
+	short m_dashCount;		//현재 몇회차 대시인지
+	short m_dashMax;		//최대 대시 가능 횟수
+	bool  m_dashing;
+
+	float m_jumpSpeed;		//점프 시작속도
+	short m_jumpCount;		//현재 점프 몇회인지
+	short m_jumpMax;		//최대 점프 가능 횟수		
+	bool  m_jumpping;
+	//============이동에 필요한 변수end==========
+	
+	//=============이동에 필요한 변수===========
+	float m_supperArmarTime;
+	float m_supperArmarNowTime;
+	//============이동에 필요한 변수end==========
+
 public:
-	CollisionComponent* coll;
+	CollisionComponent* m_playerHitBox;
+	CollisionComponent* m_collAutoAttack;
+	CollisionComponent* m_collSkill;
 
 public:
 	virtual void Init() override;
@@ -48,25 +60,65 @@ public:
 	virtual void Release() override;
 	virtual void Render() override;
 	virtual void UIRender() override;
+
+	void Move();
+	//	in move
+	void InputJumpKey();
+	void InputDashKey();
+	void InputArrowKey();
+
+	void ResetJump() {
+		m_jumpCount = 0;
+		m_jumpping = false;
+	}
+	void ResetDash() {
+		m_dashCount = 0;
+		m_dashing = false;
+		m_dashNowTime = 0;
+		m_dashNowCool = 0;
+	}
+
+	void CoolDown();
+	void ChangeHead();
+	void GetHead(eSkulSpecies type)
+	{
+		if (m_headSlot == eSkulSpecies::Empty)
+		{
+
+		}
+		else
+		{
+			Head* tmp = m_nowHead;
+		}
+	}
 	Head* GetNowHead() { return m_nowHead; }
+
 	//물리공격 데미지를 입력해주세요
 	void HitPlayerPhysicAttack(float dmg)
 	{
+		m_supperArmarNowTime = m_supperArmarTime;
+		m_playerHitBox->SetIsActive(false);
 		m_life -= dmg;
+		EFFECTMANAGER->AddEffect<PlayerHit>((m_obj->GetComponent<CollisionComponent>()->GetCollisionPosX())
+			, m_obj->GetComponent<CollisionComponent>()->GetCollisionPosY(), m_isLeft);
 	}
 	//마법공격 데미지를 입력해주세요
 	void HitPlayerMagicAttack(float dmg)
 	{
+		m_supperArmarNowTime = m_supperArmarTime;
+		m_playerHitBox->SetIsActive(false);
 		m_life -= dmg;
+		EFFECTMANAGER->AddEffect<PlayerHit>((m_obj->GetComponent<CollisionComponent>()->GetCollisionPosX())
+			, m_obj->GetComponent<CollisionComponent>()->GetCollisionPosY(), m_isLeft);
 	}
 	//피격시 플레이어 밀림(플레이어가 x+moveX, y+moveY포인트로 옮겨집니다)
 	void HitPlayerKnockBack(float moveX, float moveY)
 	{
-		m_obj->x += moveX;
+		m_obj->x += (m_isLeft ? moveX : -moveX);
 		m_obj->y += moveY;
 	}
 
-	void InputArtifactKey();	
+	void InputArtifactKey();
 	bool  m_haveArtifact;
 
 	virtual void OnCollision(string collisionName, Object* other) override;
@@ -74,7 +126,7 @@ public:
 	float GetplayerY(void) { return m_obj->y; }
 
 	Player() : m_life(100) {};
-};	
+};
 
 
 /*
@@ -84,7 +136,7 @@ public:
 
 # jump, dash부분 보강 필요
  - jump 전체 구현해야함
- - 공격모션 출력 
+ - 공격모션 출력
  - 스킬 출력
 
  - effect 출력
@@ -94,11 +146,24 @@ public:
 
 
 
-※ 작업일지 ※
-1/2
-오늘할거 : basic skul A, S만들기
 bool canWalk, canDash, canJump, canSkillA, B, canAttack등등의 변수 만들어서
 update에서 해당 변수 on off 함수실행 조절하는 방식 고려해보기
+※ 작업일지 ※
+1/4
+해야할 일 : Hit이펙트 이미지 중심맞추기
+			태그 액션 만들기
+			머리통 움직임 동작 플레이어로 이관
+			점프 고치기
+			충돌 고치기
+
+1/3
+자잘한 버그픽스....
+A, S스킬 구현 완
+이펙트 넣었고
+충돌함수넣음
+
+1/2
+basic skul A, S만들기
 
 A 투사체 붕붕 고치기
 S 좌표이동 구현

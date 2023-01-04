@@ -11,3 +11,15 @@ class DashSmoke : public Effect
 public:
 	void Init() override;
 };
+
+class PlayerHit : public Effect
+{
+public:
+	void Init() override;
+};
+
+class TeleportationToHead : public Effect
+{
+public:
+	void Init() override;
+};

@@ -60,6 +60,15 @@ struct StructureData
 	int page = 0;
 };
 
+enum class eSkulSpecies
+{
+	eBasic,
+	ePredator,
+	eDestroyer,
+	eGambler,
+	Empty
+};
+
 #define WIN_NAME "금강상태"
 #define WINSTYLE WS_CAPTION | WS_SYSMENU
 #define WINSTART_X 0

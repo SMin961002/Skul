@@ -11,7 +11,7 @@ void ProjectileHeadSkull::SetSkullThrow(float x, float y, bool reversed)
 	m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
 	m_colHeadSkull->SetIsActive(true);
 	m_isReverse = reversed;
-	m_obj->x = m_startX = reversed ? x-104:x+104;
+	m_obj->x = m_startX = reversed ? x-54:x+54;
 	m_obj->y = m_startY = y-50;
 	
 	m_rot = 0;
@@ -40,8 +40,8 @@ void ProjectileHeadSkull::Update()
 	{
 			if (m_isReverse)
 		{
-			m_obj->x -= 500 * DELTA_TIME;
-			m_rot += 10;
+			m_obj->x -= 600 * DELTA_TIME;
+			m_rot += 20;
 
 			if (m_startX - m_obj->x > 400)
 			{
@@ -51,8 +51,8 @@ void ProjectileHeadSkull::Update()
 		}
 		else
 		{
-			m_obj->x += 500 * DELTA_TIME;
-			m_rot -= 10;
+			m_obj->x += 600 * DELTA_TIME;
+			m_rot -= 20;
 
 			if (m_obj->x - m_startX > 400)
 			{
@@ -84,7 +84,6 @@ void ProjectileHeadSkull::On()
 
 void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
 {
-	cout << "oncollision" << endl;
 	if (collisionName == m_colHeadSkull->GetName())
 	{
 		if (!m_hit)
@@ -96,14 +95,15 @@ void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
 				other->GetComponent<Enemy>()->HitEnemy(20);
 			}
 		}//end nonhit
-		if (other->GetName() == "player")
+		if(other->GetName() == "player")
 		{
+		//if (other->GetName() == "player")
+		// {
 			Head_Basic* head;
 			head = dynamic_cast<Head_Basic*>( other->GetComponent<Player>()->GetNowHead());
 			head->PutOnHead();
 			Off();
 			//m_colHeadSkull->SetIsActive(false);
 		}
-		cout << "머리충돌" << endl;
 	}
 }

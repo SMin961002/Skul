@@ -58,9 +58,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
-    <ClCompile Include="Gambler.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClCompile>
     <ClCompile Include="RigidBodyComponent.cpp">
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClCompile>
@@ -100,9 +97,6 @@
     </ClCompile>
     <ClCompile Include="AngelStatue.cpp">
       <Filter>Game\Object\Enemy\AngelStatue</Filter>
-    </ClCompile>
-    <ClCompile Include="Head.cpp">
-      <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="Baptism.cpp">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
@@ -160,6 +154,16 @@
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="NpcObject.cpp" />
+    <ClCompile Include="EnemyTestScene.cpp" />
+    <ClCompile Include="Gambler.cpp">
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+    </ClCompile>
+    <ClCompile Include="Head.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadManager.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -222,9 +226,6 @@
     <ClInclude Include="Player.h">
       <Filter>Game\Object\Charactor</Filter>
     </ClInclude>
-    <ClInclude Include="Gambler.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClInclude>
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClInclude>
@@ -260,9 +261,6 @@
     </ClInclude>
     <ClInclude Include="AngelStatue.h">
       <Filter>Game\Object\Enemy\AngelStatue</Filter>
-    </ClInclude>
-    <ClInclude Include="Head.h">
-      <Filter>Game\Object\Charactor</Filter>
     </ClInclude>
     <ClInclude Include="Baptism.h">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
@@ -321,6 +319,16 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ShopScene.h" />
     <ClInclude Include="NpcObject.h" />
+    <ClInclude Include="EnemyTestScene.h" />
+    <ClInclude Include="Gambler.h">
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadManager.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
+    <ClInclude Include="Head.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -448,6 +456,9 @@
     </Filter>
     <Filter Include="Game\Object\Charactor\Head\Basic">
       <UniqueIdentifier>{32f4dcb1-efdf-4ff4-b25d-b649700220c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Head\Gambler">
+      <UniqueIdentifier>{ada1de88-9493-4c56-9d72-3c0c964f42bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
