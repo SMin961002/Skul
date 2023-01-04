@@ -171,10 +171,12 @@
       <Filter>Game\Scene\TestScene</Filter>
     </ClCompile>
     <ClCompile Include="HeadItem.cpp" />
-    <ClCompile Include="Item.cpp">
-      <Filter>Game\Object\Item</Filter>
+    <ClCompile Include="Hporb.cpp" />
+    <ClCompile Include="ProjectileHeadSkull.cpp" />
+    <ClCompile Include="HeadManager.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
-    <ClCompile Include="Hporb.cpp">
+    <ClCompile Include="Item.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="Gold.cpp">
@@ -330,17 +332,21 @@
     <ClInclude Include="NpcObject.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="GoldResult.h" />
-    <ClInclude Include="BossEffect.h" />
     <ClInclude Include="HeadResult.h" />
     <ClInclude Include="ResultValue.h" />
     <ClInclude Include="EnemyTestScene.h">
       <Filter>Game\Scene\TestScene</Filter>
     </ClInclude>
     <ClInclude Include="HeadItem.h" />
-    <ClInclude Include="Item.h">
-      <Filter>Game\Object\Item</Filter>
+    <ClInclude Include="Hporb.h" />
+    <ClInclude Include="ProjectileHeadSkull.h" />
+    <ClInclude Include="BossEffect.h">
+      <Filter>Game\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Hporb.h">
+    <ClInclude Include="HeadManager.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="Gold.h">
@@ -478,7 +484,7 @@
       <UniqueIdentifier>{0f9b9c36-9701-4df1-a2a6-2e13754d6b99}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Object\Item">
-      <UniqueIdentifier>{1f13099f-003d-4e7c-b325-4c41ab12c689}</UniqueIdentifier>
+      <UniqueIdentifier>{6527fbcc-7795-49bb-8880-efc966795820}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

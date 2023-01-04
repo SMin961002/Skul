@@ -1,5 +1,6 @@
 #include"stdafx.h"
 #include "PixelCollisionComponent.h"
+#include "RigidBodyComponent.h"
 
 void PixelCollisionComponent::Init()
 {
