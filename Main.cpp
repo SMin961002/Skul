@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Main.h"
-
 void Main::Init()
 {
 	SetTimer(_hWnd, 1, 1, NULL);
@@ -9,14 +8,36 @@ void Main::Init()
 	SCENEMANAGER->Init();
 	KEYMANAGER->Init();
 
-
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
 	//SCENEMANAGER->ChangeScene("EnemyTestScene");
+	menu = new MenuUI;
+	menu->Init();
 }
 
 void Main::Update()
 {
+	if (KEYMANAGER->GetOnceKeyDown(VK_ESCAPE))
+	{
+		SCENEMANAGER->SetMenuActive(!SCENEMANAGER->GetMenuActive());
+	}
+
+	if (SCENEMANAGER->GetMenuActive() == true)
+	{
+		if (menu)
+			menu->Update();
+		g_TimeScale = 0;
+	}
+	else
+	{
+		g_TimeScale = 1;
+		OBJECTMANAGER->Update();
+		EFFECTMANAGER->Update();
+	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_F5))
+	{
+		SCENEMANAGER->ChangeScene("ShopScene");
+	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_F6))
 	{
 		SCENEMANAGER->ChangeScene("EnemyTestScene");
@@ -42,13 +63,10 @@ void Main::Update()
 
 	if (!KEYMANAGER->GetToggleKey(VK_TAB))
 	{
-		g_TimeScale = 1;
-		OBJECTMANAGER->Update();
-		EFFECTMANAGER->Update();
+
 	}
 	else
 	{
-		g_TimeScale = 0;
 	}
 
 }
@@ -62,6 +80,12 @@ void Main::Render()
 	EFFECTMANAGER->Render();
 	OBJECTMANAGER->UIRender();
 	SCENEMANAGER->UIRender();
+	if (SCENEMANAGER->GetMenuActive() == true)
+	{
+		IMAGEMANAGER->UIRender(SCENEMANAGER->GetPadeImage(), 0, 0, 2, 2,0,0.5f);
+		if (menu)
+			menu->Render();
+	}
 	IMAGEMANAGER->End();
 }
 
@@ -100,9 +124,6 @@ LRESULT Main::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		switch (wParam)
 		{
 		case VK_SPACE:
-			break;
-		case VK_ESCAPE:
-			PostMessage(hWnd, WM_DESTROY, 0, 0);
 			break;
 		default:
 			break;

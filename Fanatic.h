@@ -3,6 +3,7 @@
 class Fanatic :public Enemy
 {
 private:
+	float m_lastX, m_lastY;
 	enum ImageState
 	{
 		eIdle,

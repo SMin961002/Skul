@@ -1,14 +1,18 @@
 #include "stdafx.h"
 #include "EnemyTestScene.h"
 #include "Player.h"
-#include"LeoniaSoldier.h"
-#include"CandleFanatic.h"
-#include"TentaclesOfLight.h"
+#include "LeoniaSoldier.h"
+#include "CandleFanatic.h"
+#include "TentaclesOfLight.h"
 #include "Fanatic.h"
-#include"LampFanatic.h"
+#include "LampFanatic.h"
 #include "DoorObject.h"
-#include"BallFanatic.h"
-#include"AngelStatue.h"
+#include "BallFanatic.h"
+#include "Gold.h"
+#include "AngelStatue.h"
+#include "GoldResult.h"
+#include "HeadResult.h"
+
 EnemyTestScene::EnemyTestScene()
 {
 }
@@ -48,7 +52,7 @@ void EnemyTestScene::Init()
 	{
 		if (iter->key == "Fanatic")
 		{
-			//OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 		}
 		else if (iter->key == "Leon")
 		{
@@ -56,16 +60,23 @@ void EnemyTestScene::Init()
 		}
 		else if (iter->key == "NormalRoom")
 		{
-			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(0);
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(0);
 		}
 		else if (iter->key == "SkulRoom")
 		{
-			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(1);
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(1);
+		}
+		else if (iter->key == "GoldResoult")
+		{
+			OBJECTMANAGER->AddObject("GoldResult", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<GoldResult>();
+		}
+		else if (iter->key == "HeadResult")
+		{
+			OBJECTMANAGER->AddObject("HeadResult", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<HeadResult>();
 		}
 	}
-	//BJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<TentaclesOfLight>();
+	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<TentaclesOfLight>();
 	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+200, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
@@ -83,8 +94,7 @@ void EnemyTestScene::Update()
 {
 	Vector2 v;
 	float a = (150 + IMAGEMANAGER->GetCameraPosition().y + WINSIZE_Y * 0.5f) - (OBJECTMANAGER->m_player->GetplayerY());
-	//MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2, IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y - 50 }, 0.5);
-	if (a > 150|| a < -0.1f)
+	if (a > 150 || a < -0.1f)
 	{
 		Vector2 v2;
 		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,OBJECTMANAGER->m_player->GetplayerY() - WINSIZE_Y / 2 - 150 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.96f);
@@ -95,7 +105,6 @@ void EnemyTestScene::Update()
 	{
 		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	}
-	//cout << a << endl;
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
 }
 

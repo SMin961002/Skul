@@ -7,6 +7,7 @@ private:
 	CImage* _imgMoon;
 	CImage* _imgBuilding;
 	CImage* _imgLion;
+	CImage* _imgFence;
 public:
 	BossScene() {}
 	~BossScene() {}

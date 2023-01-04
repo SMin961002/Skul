@@ -1,7 +1,11 @@
 #pragma once
-
+#include "MenuUI.h"
+//#include  ""
 class Main
 {
+private:
+	MenuUI* menu = nullptr;
+	//MenuUI* menu = nullptr;
 public:
 	Main() {}
 	~Main() {}

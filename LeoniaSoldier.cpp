@@ -5,6 +5,7 @@
 #include"PixelCollisionComponent.h"
 #include"RigidBodyComponent.h"
 #include"EnemyEffect.h"
+#include"Gold.h"
 
 
 void LeoniaSoldier::Init()
@@ -42,7 +43,8 @@ void LeoniaSoldier::Init()
 	m_vimage[eHpbarUp] = IMAGEMANAGER->AddImageVectorCopy("Hpbar_Up");
 	m_vimage[eHpbarUp]->Setting(0.4f, false);
 
-
+	m_lastX = m_obj->x;
+	m_lastY = m_obj->y;
 	m_collision = m_obj->AddComponent<CollisionComponent>();
 	m_hitpointcollision = m_obj->AddComponent<CollisionComponent>();
 
@@ -58,6 +60,20 @@ void LeoniaSoldier::Init()
 void LeoniaSoldier::Update()
 {
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+	if (m_lastX != m_obj->x || m_lastY != m_obj->y)
+	{
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+		m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(true);
+
+		m_lastX = m_obj->x;
+		m_lastY = m_obj->y;
+	}
+	else
+	{
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
+		m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(false);
+	}
+
 	m_collision->Setting(30, m_obj->x + 17, m_obj->y - 20, "Attack");
 	if (m_hit)
 	{
@@ -157,6 +173,10 @@ void LeoniaSoldier::Render()
 		if (m_dietimer >= 0.5f)
 		{
 			m_hitpointcollision->SetIsActive(false);
+			for (int i = 0; i < 4; i++)
+			{
+				OBJECTMANAGER->AddObject("Gold", m_obj->x, m_obj->y - 50, ObjectTag::eItem)->AddComponent<Gold>();
+			}
 			m_obj->ObjectDestroyed();
 		}
 	}
