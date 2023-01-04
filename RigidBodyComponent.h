@@ -20,7 +20,6 @@ public:
 	RigidBodyComponent();
 	~RigidBodyComponent();
 
-	
 	float GetGravity() { return m_gravity; }
 	float GetGravityPower() { return m_speed; }
 	bool GetCollisionY();

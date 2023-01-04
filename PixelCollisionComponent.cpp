@@ -6,6 +6,7 @@ void PixelCollisionComponent::Init()
 {
 	m_isCheck = false;
 	m_image = IMAGEMANAGER->FindPixelImage("CollisionBox");
+	m_imagePlatform = IMAGEMANAGER->FindPixelImage("CollisionPlatform");
 	m_checkY = 0;
 	m_checkX = 0;
 	m_isLeftCheck = false;
@@ -69,13 +70,13 @@ void PixelCollisionComponent::setting(vector<vector<int>> tiles, float* x, float
 
 void PixelCollisionComponent::BottomCollision()
 {
-	PixcelCollision((*x + rtB.left) / (m_image->GetWidth() - 1), (*y + rtB.bottom) / (m_image->GetHight() - 1), &m_isBottomCheck, "B");
+	PixcelCollision((*x + rtB.left) / (m_image->GetWidth() - 1), (*y + rtB.bottom) / (m_image->GetHight() - 1), true, "B");
 	if (m_isBottomCheck == false)
-		PixcelCollision((*x + rtB.right) / (m_image->GetWidth() - 1), (*y + rtB.bottom) / (m_image->GetHight() - 1), &m_isBottomCheck, "B");
+		PixcelCollision((*x + rtB.right) / (m_image->GetWidth() - 1), (*y + rtB.bottom) / (m_image->GetHight() - 1), true, "B");
 	if (m_isBottomCheck == false)
-		PixcelCollision((*x + rtB.left) / (m_image->GetWidth() - 1), (*y + rtB.top) / (m_image->GetHight() - 1), &m_isBottomCheck, "B");
+		PixcelCollision((*x + rtB.left) / (m_image->GetWidth() - 1), (*y + rtB.top) / (m_image->GetHight() - 1), false, "B");
 	if (m_isBottomCheck == false)
-		PixcelCollision((*x + rtB.right) / (m_image->GetWidth() - 1), (*y + rtB.top) / (m_image->GetHight() - 1), &m_isBottomCheck, "B");
+		PixcelCollision((*x + rtB.right) / (m_image->GetWidth() - 1), (*y + rtB.top) / (m_image->GetHight() - 1), false, "B");
 }
 
 void PixelCollisionComponent::TopCollision()
@@ -156,19 +157,27 @@ void PixelCollisionComponent::PixcelCollision(float w, float h, bool isCheck, st
 			}
 		}
 	}
-	else if (m_tiles[h][w] == 17 || m_tiles[h][w] == 18 || m_tiles[h][w] == 19 || m_tiles[h][w] == 20)
+	if (dir == "B")
 	{
-		float _x = int(*x) % int(m_image->GetWidth() - 1);
-		float _y = int(*y) % int(m_image->GetHight() - 1);
-		if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
+		if (isCheck == true && m_obj->GetComponent<RigidBodyComponent>()->GetGravityPower() <= 0)
 		{
-			COLORREF color = m_image->pixel[(int)_x][(int)_y];
-			int r = GetRValue(color);
-			int g = GetGValue(color);
-			int b = GetBValue(color);
-			if (r == 255 && g == 0 && b == 254)
+			if (m_tiles[h][w] == 17 || m_tiles[h][w] == 18 || m_tiles[h][w] == 19 || m_tiles[h][w] == 20)
 			{
-				m_isBottomCheck = true;
+				float _x = int(*x) % int(m_image->GetWidth() - 1);
+				float _y = int(*y) % int(m_image->GetHight() - 1);
+				if (_x >= 0 && _x <= m_imagePlatform->GetWidth() - 1 && _y >= 0 && _y <= m_imagePlatform->GetHight() - 1)
+				{
+					COLORREF color = m_imagePlatform->pixel[(int)_x][(int)_y];
+					int r = GetRValue(color);
+					int g = GetGValue(color);
+					int b = GetBValue(color);
+					if (r == 255 && g == 0 && b == 254)
+					{
+						m_checkY = *y - _y + 2;
+						m_isBottomCheck = true;
+						return;
+					}
+				}
 			}
 		}
 	}
