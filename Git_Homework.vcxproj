@@ -142,11 +142,9 @@
     <ClCompile Include="BossObject.cpp" />
     <ClCompile Include="BossScene.cpp" />
     <ClCompile Include="CandleFanatic.cpp" />
-    <ClCompile Include="Casting.cpp" />
-    <ClCompile Include="Choice.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Consercration.cpp" />
+    <ClCompile Include="Consecration.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -160,7 +158,6 @@
     <ClCompile Include="Head.cpp" />
     <ClCompile Include="Head_Basic.cpp" />
     <ClCompile Include="HollyFountain.cpp" />
-    <ClCompile Include="Idle.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
@@ -203,11 +200,9 @@
     <ClInclude Include="BossObject.h" />
     <ClInclude Include="BossScene.h" />
     <ClInclude Include="CandleFanatic.h" />
-    <ClInclude Include="Casting.h" />
-    <ClInclude Include="Choice.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="Consercration.h" />
+    <ClInclude Include="Consecration.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="Effect.h" />
@@ -221,7 +216,6 @@
     <ClInclude Include="Head.h" />
     <ClInclude Include="Head_Basic.h" />
     <ClInclude Include="HollyFountain.h" />
-    <ClInclude Include="Idle.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="IOFillManager.h" />
     <ClInclude Include="KeyManager.h" />

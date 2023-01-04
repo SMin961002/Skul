@@ -24,7 +24,7 @@ void HollyFountain::Update()
 void HollyFountain::Render()
 {
 	IMAGEMANAGER->CenterRender(_imgFountainDeActivate, 100, WINSIZE_Y - 100, 1.5, 1.5, 0, false);
-	IMAGEMANAGER->CenterRender(_imgFountainDeActivate, WINSIZE_X-100, WINSIZE_Y-100, 1.5, 1.5, 0, false);
+	IMAGEMANAGER->CenterRender(_imgFountainDeActivate, WINSIZE_X - 100, WINSIZE_Y - 100, 1.5, 1.5, 0, false);
 	_imgOrbStart->CenterRender(200, WINSIZE_Y - 100, 1, 1, 0, false);
 	_imgOrbStart->CenterRender(WINSIZE_X - 200, WINSIZE_Y - 100, 1, 1, 0, false);
 

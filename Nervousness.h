@@ -1,15 +1,33 @@
 #pragma once
 #include "Component.h"
 
-class Nervousness : public Component
+
+class LeftImpact : public Component
 {
 private:
-public:
-	void Init();
-	void Update();
-	void Render();
-	void Release();
+	vImage* _imgPhase1NervousEffectImpactRight;
 
-	Nervousness() {}
-	~Nervousness() {}
+public:
+	virtual void Init() override;
+	virtual void Update() override;
+	virtual void Render() override;
+	virtual void Release() override;
+
+	LeftImpact() {}
+	~LeftImpact() {}
+};
+
+class RightImpact : public Component
+{
+private:
+	vImage* _imgPhase1NervousEffectImpactLeft;
+
+public:
+	virtual void Init() override;
+	virtual void Update() override;
+	virtual void Render() override;
+	virtual void Release() override;
+
+	RightImpact() {}
+	~RightImpact() {}
 };
