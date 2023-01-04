@@ -376,7 +376,8 @@ void ImageManager::LoadImages()
 	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/", 1, 40);
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
-	AddImageVector("GoldResoult", L"Resources/Gold/Idle/", 1, 19);
+	AddImageVector("GoldResoult", L"Resources/GoldResult/Idle/", 1, 19);
+	AddImageVector("GoldResoultActive", L"Resources/GoldResult/Idle/", 1, 1);
 
 
 	// 몬스터 이펙트
@@ -429,7 +430,7 @@ void ImageManager::LoadImages()
 	AddObjectImage("Blacksmith", L"./Resources/Shop/Blacksmith/Deactivate_0 #80166.png");
 	AddObjectImage("ItemView", L"./Resources/Shop/ItemView/01.png");
 	AddObjectImage("Head", L"./Resources/Shop/Head/01.png");
-	AddObjectImage("GoldResoult", L"./Resources/Gold/Idle/01.png");
+	AddObjectImage("GoldResoult", L"./Resources/GoldResult/Idle/01.png");
 	AddObjectImage("HeadResult", L"./Resources/HeadResult/Idle/01.png");
 
 
@@ -811,5 +812,13 @@ HRESULT GImage::init(const char* fileName, float width, float height)
 	_imageInfo->hOBit = (HBITMAP)SelectObject(_imageInfo->hMemDC, _imageInfo->hBit);
 	_imageInfo->width = width;
 	_imageInfo->height = height;
+
+	for (int j = 0; j < height; j++)
+	{
+		for (int i = 0; i < width; i++)
+		{
+			pixel[i][j] = GetPixel(GetMemDC(), i, j);
+		}
+	}
 	return S_OK;
 }

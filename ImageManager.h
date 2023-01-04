@@ -5,6 +5,7 @@ class GImage
 {
 private:
 public:
+	COLORREF pixel[32][32];
 	enum IMAGE_LOAD_KIND
 	{
 		LOAD_RESOURCE = 0, LOAD_FILE,	//리소스로 로딩, 파일로 로딩
@@ -40,9 +41,9 @@ private:
 	BLENDFUNCTION _blendFunc;		//알파 블렌드 기능
 	LPIMAGE_INFO _blendImage;		//알파 블렌드 이미지
 
-	LPIMAGE_INFO	_imageInfo;		//이미지 정보
 
 public:
+	LPIMAGE_INFO	_imageInfo;		//이미지 정보
 	HRESULT init(const char* fileName, float width, float height);
 	HDC GetMemDC() { return _imageInfo->hMemDC; }
 	float GetWidth() { return _imageInfo->width; }

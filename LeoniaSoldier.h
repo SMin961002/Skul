@@ -15,6 +15,8 @@ private:
 		eHPbarEmpty,
 		eEnd
 	};
+	float m_lastY;
+	float m_lastX;
 
 	
 	vImage* m_vimage[eEnd];

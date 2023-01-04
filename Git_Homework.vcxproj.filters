@@ -165,6 +165,14 @@
     <ClCompile Include="NpcObject.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="GoldResult.cpp" />
+    <ClCompile Include="HeadResult.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Gold.cpp" />
+    <ClCompile Include="ResultValue.cpp" />
+    <ClCompile Include="EnemyTestScene.cpp">
+      <Filter>Game\Scene\TestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -315,6 +323,15 @@
     <ClInclude Include="NpcObject.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="GoldResult.h" />
+    <ClInclude Include="BossEffect.h" />
+    <ClInclude Include="HeadResult.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Gold.h" />
+    <ClInclude Include="ResultValue.h" />
+    <ClInclude Include="EnemyTestScene.h">
+      <Filter>Game\Scene\TestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadItem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

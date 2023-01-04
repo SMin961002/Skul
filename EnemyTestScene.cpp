@@ -1,16 +1,18 @@
 #include "stdafx.h"
 #include "EnemyTestScene.h"
 #include "Player.h"
-#include"LeoniaSoldier.h"
-#include"CandleFanatic.h"
-#include"TentaclesOfLight.h"
+#include "LeoniaSoldier.h"
+#include "CandleFanatic.h"
+#include "TentaclesOfLight.h"
 #include "Fanatic.h"
-#include"LampFanatic.h"
+#include "LampFanatic.h"
 #include "DoorObject.h"
-#include"BallFanatic.h"
-#include"Gold.h"
-#include"AngelStatue.h"
+#include "BallFanatic.h"
+#include "Gold.h"
+#include "AngelStatue.h"
 #include "GoldResult.h"
+#include "HeadResult.h"
+
 EnemyTestScene::EnemyTestScene()
 {
 }
@@ -92,7 +94,7 @@ void EnemyTestScene::Update()
 {
 	Vector2 v;
 	float a = (150 + IMAGEMANAGER->GetCameraPosition().y + WINSIZE_Y * 0.5f) - (OBJECTMANAGER->m_player->GetplayerY());
-	if (a > 150|| a < -0.1f)
+	if (a > 150 || a < -0.1f)
 	{
 		Vector2 v2;
 		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,OBJECTMANAGER->m_player->GetplayerY() - WINSIZE_Y / 2 - 150 }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.96f);

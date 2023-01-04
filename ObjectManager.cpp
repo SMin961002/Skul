@@ -3,6 +3,8 @@
 #include "CollisionComponent.h"
 #include"Player.h"
 #include"Item.h"
+#include "PixelCollisionComponent.h"
+#include "RigidBodyComponent.h"
 ObjectManager::ObjectManager()
 {
 }

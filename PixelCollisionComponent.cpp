@@ -2,7 +2,6 @@
 #include "PixelCollisionComponent.h"
 
 void PixelCollisionComponent::Init()
-
 {
 	m_isCheck = false;
 	m_image = IMAGEMANAGER->FindPixelImage("CollisionBox");
@@ -13,6 +12,7 @@ void PixelCollisionComponent::Init()
 	m_isRightCheck = false;
 	m_isBottomCheck = false;
 	m_isTopCheck = false;
+	m_isGold = false;
 }
 
 void PixelCollisionComponent::Update()
@@ -23,9 +23,13 @@ void PixelCollisionComponent::Update()
 	m_isBottomCheck = false;
 	m_isTopCheck = false;
 
-	LeftCollision();
-	RightCollision();
-	TopCollision();
+	//if (m_isGold == false)
+	//{
+	//	LeftCollision();
+	//	RightCollision();
+	//	TopCollision();
+	//}
+
 	BottomCollision();
 }
 
@@ -66,7 +70,7 @@ void PixelCollisionComponent::BottomCollision()
 {
 
 	int y1 = 0;
-	for (int i = *y + rtB.top; i < *y + rtB.bottom; i++)
+	for (int i = *y + rtB.top; i < *y + rtB.bottom; i += 2)
 	{
 		if (m_isBottomCheck == true)
 		{
@@ -75,7 +79,7 @@ void PixelCollisionComponent::BottomCollision()
 		int h = i / (m_image->GetHight() - 1);
 		if (h < m_tiles.size())
 		{
-			for (int j = *x + rtB.left; j < *x + rtB.right; j++)
+			for (int j = *x + rtB.left; j < *x + rtB.right; j += 2)
 			{
 				int w = j / (m_image->GetWidth() - 1);
 				if (i == (int)*y + rtB.top || i == (int)*y + rtB.bottom || j == (int)*x + rtB.left || j == (int)*x + rtB.right)
@@ -88,7 +92,7 @@ void PixelCollisionComponent::BottomCollision()
 							float _y = int(*y) % int(m_image->GetHight() - 1);
 							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								COLORREF color = m_image->pixel[(int)_x][(int)_y];
 								int r = GetRValue(color);
 								int g = GetGValue(color);
 								int b = GetBValue(color);
@@ -111,7 +115,7 @@ void PixelCollisionComponent::TopCollision()
 {
 
 	int y1 = 0;
-	for (int i = *y + rtT.bottom; i > *y + rtT.top; i--)
+	for (int i = *y + rtT.bottom; i > *y + rtT.top; i -= 2)
 	{
 		if (m_isTopCheck == true)
 		{
@@ -120,7 +124,7 @@ void PixelCollisionComponent::TopCollision()
 		int h = i / (m_image->GetHight() - 1);
 		if (h < m_tiles.size())
 		{
-			for (int j = *x + rtT.left; j < *x + rtT.right; j++)
+			for (int j = *x + rtT.left; j < *x + rtT.right; j += 2)
 			{
 				if (i == (int)*y + rtT.bottom - 1 || i == (int)*y + rtT.top || j == (int)*x + rtT.left || j == (int)*x + rtT.right - 1)
 				{
@@ -133,7 +137,7 @@ void PixelCollisionComponent::TopCollision()
 							float _y = int(*y) % int(m_image->GetHight() - 1);
 							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								COLORREF color = m_image->pixel[(int)_x][(int)_y];
 								int r = GetRValue(color);
 								int g = GetGValue(color);
 								int b = GetBValue(color);
@@ -155,7 +159,7 @@ void PixelCollisionComponent::TopCollision()
 void PixelCollisionComponent::LeftCollision()
 {
 	int y1 = 0;
-	for (int i = *y + rtL.top; i < *y + rtL.bottom; i++)
+	for (int i = *y + rtL.top; i < *y + rtL.bottom; i += 2)
 	{
 		if (m_isLeftCheck == true)
 		{
@@ -164,7 +168,7 @@ void PixelCollisionComponent::LeftCollision()
 		int h = i / (m_image->GetHight() - 1);
 		if (h < m_tiles.size())
 		{
-			for (int j = *x + rtL.right; j > *x + rtL.left; j--)
+			for (int j = *x + rtL.right; j > *x + rtL.left; j -= 2)
 			{
 				int w = j / (m_image->GetWidth() - 1);
 				if (w < m_tiles[0].size())
@@ -177,7 +181,7 @@ void PixelCollisionComponent::LeftCollision()
 							float _y = int(*y) % int(m_image->GetHight() - 1);
 							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								COLORREF color = m_image->pixel[(int)_x][(int)_y];
 								int r = GetRValue(color);
 								int g = GetGValue(color);
 								int b = GetBValue(color);
@@ -200,7 +204,7 @@ void PixelCollisionComponent::RightCollision()
 {
 
 	int y1 = 0;
-	for (int i = *y + rtR.top; i < *y + rtR.bottom; i++)
+	for (int i = *y + rtR.top; i < *y + rtR.bottom; i += 2)
 	{
 		if (m_isRightCheck == true)
 		{
@@ -209,7 +213,7 @@ void PixelCollisionComponent::RightCollision()
 		int h = i / (m_image->GetHight() - 1);
 		if (h < m_tiles.size())
 		{
-			for (int j = *x + rtR.left; j < *x + rtR.right; j++)
+			for (int j = *x + rtR.left; j < *x + rtR.right; j += 2)
 			{
 				int w = j / (m_image->GetWidth() - 1);
 				if (w < m_tiles[0].size())
@@ -222,7 +226,7 @@ void PixelCollisionComponent::RightCollision()
 							float _y = int(*y) % int(m_image->GetHight() - 1);
 							if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
 							{
-								COLORREF color = GetPixel(m_image->GetMemDC(), _x, _y);
+								COLORREF color = m_image->pixel[(int)_x][(int)_y];
 								int r = GetRValue(color);
 								int g = GetGValue(color);
 								int b = GetBValue(color);
