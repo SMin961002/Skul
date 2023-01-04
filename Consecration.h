@@ -1,20 +1,18 @@
 #pragma once
-#include "Scene.h"
+#include "Component.h"
 
-class BossScene : public Scene
+class Consecration : public Component
 {
 private:
-	CImage* _imgMoon;
-	CImage* _imgBuilding;
-	CImage* _imgLion;
-	CImage* _imgFence;
+	vImage* _imgPhase1BossConsecrationLoop;
+	float _deltaTime;
 public:
-	BossScene() {}
-	~BossScene() {}
-
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+
+	Consecration() {}
+	~Consecration() {}
 };
 
