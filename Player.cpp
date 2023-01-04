@@ -40,8 +40,8 @@ void Player::Update()
 {
 	Vector2 v;
 	//m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
-	
-	m_nowHead->Update();
+
+	m_nowHead->SetImageChange(false);
 
 	Move();
 	InputArtifactKey();
@@ -58,11 +58,11 @@ void Player::Update()
 	}
 
 	CoolDown();	
+	m_nowHead->Update();
 }
 
 void Player::Release()
 {
-	//SAFE_DELETE(*m_headList);
 	m_nowHead->Release();
 	SAFE_DELETE(m_nowHead);
 }
@@ -89,7 +89,7 @@ void Player::Move()
 {
 	if (m_nowHead->GetAction() == Head::eWalk)
 	{
-		m_nowHead->SetAction(Head::eIdle);
+		m_nowHead->SetAction(Head::eIdle,true);
 	}
 
 	InputDashKey();
@@ -97,9 +97,9 @@ void Player::Move()
 	//대시중일 때
 	if (m_dashing)
 	{		//##dash 이동식 수정 필요
-		cout << "dashing" << endl;
 		if (m_isLeft) { m_obj->x -= m_dashSpeed * DELTA_TIME; }
 		else { m_obj->x += m_dashSpeed * DELTA_TIME; }
+		m_obj->y -= 1;
 	}
 	else if (!m_nowHead->GetIsAttack())
 	{
@@ -135,6 +135,7 @@ void Player::InputJumpKey()
 	{
 		if (m_jumpCount < m_jumpMax)
 		{
+			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
 			if (m_isDown)	//아래점프
 			{
 				m_obj->y += 11;

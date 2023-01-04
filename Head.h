@@ -82,6 +82,7 @@ public:
 	virtual void Release();
 
 	inline void SetPlayerXY(float* x, float* y, bool* left, bool* down) { m_x = x, m_y = y, m_isLeft = left; }
+	inline void SetImageChange(bool tf) { m_imageChange = tf; }
 	inline void SetImage(ActionTag image, bool isImageEqualAction = true, ActionTag action = eIdle)
 	{
 		nowImg->Reset();
@@ -92,7 +93,7 @@ public:
 	inline void SetAction(ActionTag action, bool doWantToChangeImage=true)
 	{
 		m_action = action;
-		if (doWantToChangeImage) m_imageChange = true;
+		if (doWantToChangeImage) { m_imageChange = true; }
 	}
 	inline eSkulSpecies GetSpecies() { return m_species; }
 	inline bool GetIsAttack() { if (m_attackCount > 0) return true; else return false; }
@@ -105,7 +106,6 @@ public:
 	virtual void CollisionSetting() {};
 
 	//Update 안에 들어가는 함수
-	virtual void Move();
 	virtual void Act();
 
 	virtual void CoolDown() {};

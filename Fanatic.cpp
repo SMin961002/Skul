@@ -217,9 +217,6 @@ void Fanatic::Render()
 			}
 			
 		}
-		cout << m_currenthp << endl;
-	
-
 }
 
 void Fanatic::Release()

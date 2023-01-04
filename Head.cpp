@@ -12,12 +12,9 @@ void Head::Init()
 
 void Head::Update()
 {
-	m_imageChange = false;
-
 	CoolDown();
 	if (!m_skillUsing)	//스킬 끝날 때까지 다른 동작이 들어가지 못하게 하기 위함
 	{
-		Move();
 		Act();
 	}
 	ActionArrangement();
@@ -30,10 +27,6 @@ void Head::Render()
 }
 
 void Head::Release()
-{
-}
-
-void Head::Move()
 {
 }
 

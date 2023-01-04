@@ -180,7 +180,6 @@ void LeoniaSoldier::Render()
 			m_obj->ObjectDestroyed();
 		}
 	}
-	cout << m_currenthp << endl;
 }
 
 void LeoniaSoldier::Release()

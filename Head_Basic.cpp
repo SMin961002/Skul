@@ -139,6 +139,17 @@ void Head_Basic::CoolDown()
 
 void Head_Basic::ActionArrangement()
 {
+	string action;
+	switch (m_action) {
+	case eIdle: action = "idle";
+		break;
+	case eWalk: action = "walk";
+	break;
+	case eDash: action = "dash";
+	break;
+	case eJump: action = "jump";
+		break;
+	}
 	if (!m_headThrow)
 	{
 		if (nowImg->GetIsImageEnded())
@@ -163,6 +174,7 @@ void Head_Basic::ActionArrangement()
 		}
 		if (m_imageChange)
 		{
+			cout << "이미지 바꾸기 " << action << endl;
 			m_attackCast = false;
 			if (nowImg != img[m_action])
 			{
@@ -237,17 +249,14 @@ void Head_Basic::CollisionUpdate()
 	case eAutoAttack_1:
 		if (nowImg->GetFrame() > 1 && nowImg->GetFrame() < 3)
 			m_BasicHeadAttack->SetIsActive(true);
-		cout << "플레이어 어택1" << endl;
 		break;
 	case eAutoAttack_2:
 		if (nowImg->GetFrame() > 0 && nowImg->GetFrame() < 2)
 			m_BasicHeadAttack->SetIsActive(true);
-		cout << "플레이어 어택2" << endl;
 		break;
 	case eJumpAttack:
 		if (nowImg->GetFrame() > 0 && nowImg->GetFrame() < 3)
 			m_BasicHeadAttack->SetIsActive(true);
-		cout << "플레이어 점프어택" << endl;
 		break;
 	case eTagAction:
 		m_TagAttack->SetIsActive(true);

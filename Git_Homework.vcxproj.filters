@@ -58,6 +58,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
+    <ClCompile Include="Gambler.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClCompile>
     <ClCompile Include="RigidBodyComponent.cpp">
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClCompile>
@@ -98,6 +101,12 @@
     <ClCompile Include="AngelStatue.cpp">
       <Filter>Game\Object\Enemy\AngelStatue</Filter>
     </ClCompile>
+    <ClCompile Include="Head.cpp">
+      <Filter>Game\Object\Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="Head_Basic.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClCompile>
     <ClCompile Include="Baptism.cpp">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
     </ClCompile>
@@ -134,12 +143,6 @@
     <ClCompile Include="BossEffect.cpp">
       <Filter>Game\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Idle.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
-    </ClCompile>
-    <ClCompile Include="BossEffect.cpp">
-      <Filter>Game\Effect</Filter>
-    </ClCompile>
     <ClCompile Include="PixelCollisionComponent.cpp" />
     <ClCompile Include="BossEffect.cpp">
       <Filter>Game\Object\Effect</Filter>
@@ -151,32 +154,15 @@
       <Filter>Game\Object\Effect</Filter>
     </ClCompile>
     <ClCompile Include="PlayerEffect.cpp">
-      <Filter>Game\Object</Filter>
+      <Filter>Game\Object\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Head_Basic.cpp">
-      <Filter>Game\Object\Charactor\Head\Basic</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectileHeadSkull.cpp">
-      <Filter>Game\Object\Charactor\Head\Basic</Filter>
-    </ClCompile>
-    <ClCompile Include="Idle.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+    <ClCompile Include="Enemy.cpp">
       <Filter>Game\Object\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Idle.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
-    </ClCompile>
     <ClCompile Include="MenuUI.cpp" />
-    <ClCompile Include="EnemyTestScene.cpp" />
-    <ClCompile Include="Gambler.cpp">
-      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
-    </ClCompile>
-    <ClCompile Include="Head.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClCompile>
-    <ClCompile Include="HeadManager.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClCompile>
+    <ClCompile Include="DoorObject.cpp" />
+    <ClCompile Include="ShopScene.cpp" />
+    <ClCompile Include="NpcObject.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="GoldResult.cpp" />
     <ClCompile Include="HeadResult.cpp" />
@@ -185,17 +171,16 @@
       <Filter>Game\Scene\TestScene</Filter>
     </ClCompile>
     <ClCompile Include="HeadItem.cpp" />
-    <ClCompile Include="Item.cpp">
-      <Filter>Game\Object\Item</Filter>
+    <ClCompile Include="Hporb.cpp" />
+    <ClCompile Include="ProjectileHeadSkull.cpp" />
+    <ClCompile Include="HeadManager.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
-    <ClCompile Include="Hporb.cpp">
+    <ClCompile Include="Item.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="Gold.cpp">
       <Filter>Game\Object\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="HeadManager.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +244,9 @@
     <ClInclude Include="Player.h">
       <Filter>Game\Object\Charactor</Filter>
     </ClInclude>
+    <ClInclude Include="Gambler.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClInclude>
@@ -295,6 +283,12 @@
     <ClInclude Include="AngelStatue.h">
       <Filter>Game\Object\Enemy\AngelStatue</Filter>
     </ClInclude>
+    <ClInclude Include="Head.h">
+      <Filter>Game\Object\Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="Head_Basic.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
     <ClInclude Include="Baptism.h">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
     </ClInclude>
@@ -310,75 +304,54 @@
     <ClInclude Include="Nervousness.h">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
     </ClInclude>
-    <ClInclude Include="PixelCollisionComponent.h" />
-    <ClInclude Include="BossEffect.h">
-      <Filter>Game\Object\Effect</Filter>
+    <ClInclude Include="EffectManager.h">
+      <Filter>Core\Manager\Effectmanager</Filter>
     </ClInclude>
-    <ClInclude Include="Effect.h">
-      <Filter>Game\Object\Effect</Filter>
     <ClInclude Include="PixelCollisionComponent.h">
       <Filter>Game\Component\PixelCollisionComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="Effect.h">
-      <Filter>Game\Object\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyEffect.h">
-      <Filter>Game\Object\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerEffect.h">
-      <Filter>Game\Object\Effect</Filter>
     </ClInclude>
     <ClInclude Include="EffectManager.h">
       <Filter>Core\Manager\EffectManager</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Game\Object</Filter>
+    <ClInclude Include="Effect.h">
+      <Filter>Core\Manager\EffectManager</Filter>
     </ClInclude>
-    <ClInclude Include="Head_Basic.h">
-      <Filter>Game\Object\Charactor\Head\Basic</Filter>
+    <ClInclude Include="EnemyEffect.h">
+      <Filter>Game\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Idle.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+    <ClInclude Include="PlayerEffect.h">
+      <Filter>Game\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Game\Object\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Idle.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
-    </ClInclude>
     <ClInclude Include="MenuUI.h" />
     <ClInclude Include="DoorObject.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="ShopScene.h" />
+    <ClInclude Include="NpcObject.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="GoldResult.h" />
-    <ClInclude Include="BossEffect.h" />
     <ClInclude Include="HeadResult.h" />
     <ClInclude Include="ResultValue.h" />
     <ClInclude Include="EnemyTestScene.h">
       <Filter>Game\Scene\TestScene</Filter>
     </ClInclude>
     <ClInclude Include="HeadItem.h" />
-    <ClInclude Include="Item.h">
-      <Filter>Game\Object\Item</Filter>
+    <ClInclude Include="Hporb.h" />
+    <ClInclude Include="ProjectileHeadSkull.h" />
+    <ClInclude Include="BossEffect.h">
+      <Filter>Game\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Hporb.h">
+    <ClInclude Include="HeadManager.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="Gold.h">
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyTestScene.h" />
-    <ClInclude Include="Gambler.h">
-      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
-    </ClInclude>
-    <ClInclude Include="HeadManager.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClInclude>
-    <ClInclude Include="Head.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="ShopScene.h" />
-    <ClInclude Include="NpcObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -498,20 +471,20 @@
     <Filter Include="Game\Object\Boss\Pattern%28do nothing%29\Casting">
       <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Effect">
-      <UniqueIdentifier>{64f8c5c1-2fef-442a-b017-9408cf2e8ecd}</UniqueIdentifier>
+    <Filter Include="Game\Scene\TestScene">
+      <UniqueIdentifier>{640150ea-85d8-4b69-aac1-335f330d07a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component\PixelCollisionComponent">
+      <UniqueIdentifier>{265e459c-3bd6-472e-9af0-be3438464184}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Manager\EffectManager">
-      <UniqueIdentifier>{9bb1974b-ca7c-43b6-9956-2433050c748c}</UniqueIdentifier>
+      <UniqueIdentifier>{a4a2d6e1-6a9b-4762-88c5-d513b5104231}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Charactor\Head\Basic">
-      <UniqueIdentifier>{32f4dcb1-efdf-4ff4-b25d-b649700220c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Charactor\Head\Gambler">
-      <UniqueIdentifier>{ada1de88-9493-4c56-9d72-3c0c964f42bd}</UniqueIdentifier>
+    <Filter Include="Game\Effect">
+      <UniqueIdentifier>{0f9b9c36-9701-4df1-a2a6-2e13754d6b99}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Object\Item">
-      <UniqueIdentifier>{1f13099f-003d-4e7c-b325-4c41ab12c689}</UniqueIdentifier>
+      <UniqueIdentifier>{6527fbcc-7795-49bb-8880-efc966795820}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
