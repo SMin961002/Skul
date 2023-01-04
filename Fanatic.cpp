@@ -6,6 +6,7 @@
 #include"EnemyEffect.h"
 #include"TentaclesOfLight.h"
 #include"Gold.h"
+#include"Hporb.h"
 void Fanatic::Init()
 {
 	m_hpbartimer = 0;
@@ -180,43 +181,44 @@ void Fanatic::Render()
 	{
 		m_vimage[m_state]->CenterRender(m_obj->x, m_obj->y - 55, 2, 2, 0, m_isReverse);
 
-		if (m_hpbartimer <= 2 && !m_die2 && (m_hit == true || m_sercrifice == true))
-		{
-			m_vimage[eHPbarEmpty]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
-			m_vimage[eHpbarDown]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
-			m_vimage[eHpbarUp]->Render(m_obj->x - 35, m_obj->y + 15, (m_currenthp * m_hpbar), 1, 0);
+			if (m_hpbartimer <= 2 && !m_die2 && (m_hit == true || m_sercrifice == true))
+			{
+				m_vimage[eHPbarEmpty]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
+				m_vimage[eHpbarDown]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
+				m_vimage[eHpbarUp]->Render(m_obj->x - 35, m_obj->y + 15, (m_currenthp * m_hpbar), 1, 0);
+			}
+			else
+			{
+				m_hit = false;
+				m_hpbartimer = 0;
+			}
 		}
 		else
 		{
-			m_hit = false;
-			m_hpbartimer = 0;
-		}
-	}
-	else
-	{
-		if (!m_die && m_dietimer >= 1 && !m_die2)
-		{
-			EFFECTMANAGER->AddEffect<DeadEffect>(m_obj->x, m_obj->y, 1, 1.5);
-			m_dietimer = 0;
-			for (int i = 0; i < 4; i++)
+			if (!m_die && m_dietimer >= 1&&!m_die2)
 			{
-				OBJECTMANAGER->AddObject("Gold", m_obj->x, m_obj->y - 50, ObjectTag::eItem)->AddComponent<Gold>();
+				EFFECTMANAGER->AddEffect<DeadEffect>(m_obj->x, m_obj->y, 1, 1.5);
+				m_dietimer = 0;
+				for (int i = 0; i < 4; i++)
+				{
+					OBJECTMANAGER->AddObject("Gold", m_obj->x, m_obj->y - 50, ObjectTag::eItem)->AddComponent<Gold>();
+				}
+					OBJECTMANAGER->AddObject("Hporb", m_obj->x, m_obj->y, ObjectTag::eItem)->AddComponent<Hporb>();
 			}
+			m_die = true;
+			if (m_dietimer >= 0.5f&&!m_die2)
+			{
+				
+				m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
+				m_obj->GetComponent< PixelCollisionComponent>()->SetIsActive(false);
+				m_hitpointCollision->SetIsActive(false);
+				m_hitCollision->SetIsActive(false);
+				m_obj->ObjectDestroyed();
+			}
+			
 		}
-		m_die = true;
-		if (m_dietimer >= 0.5f && !m_die2)
-		{
-
-			m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
-			m_obj->GetComponent< PixelCollisionComponent>()->SetIsActive(false);
-			m_hitpointCollision->SetIsActive(false);
-			m_hitCollision->SetIsActive(false);
-			m_obj->ObjectDestroyed();
-		}
-
-	}
-	cout << m_currenthp << endl;
-
+		cout << m_currenthp << endl;
+	
 
 }
 

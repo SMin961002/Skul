@@ -162,6 +162,7 @@
     <ClCompile Include="HeadResult.cpp" />
     <ClCompile Include="Head_Basic.cpp" />
     <ClCompile Include="HollyFountain.cpp" />
+    <ClCompile Include="Hporb.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
@@ -227,6 +228,7 @@
     <ClInclude Include="HeadResult.h" />
     <ClInclude Include="Head_Basic.h" />
     <ClInclude Include="HollyFountain.h" />
+    <ClInclude Include="Hporb.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="IOFillManager.h" />

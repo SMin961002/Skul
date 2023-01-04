@@ -396,6 +396,7 @@ void ImageManager::LoadImages()
 	AddImageVector("GetGold", L"Resources/Item/Gold/GetGold/", 1, 29);
 	AddImageVector("HeadResult", L"./Resources/HeadResult/Idle/", 1, 1);
 	AddImageVector("HeadResultActive", L"./Resources/HeadResult/Active/", 1, 7);
+	AddImageVector("Hporb", L"Resources/Item/Hporb/", 1, 72);
 
 	//∏  ø¿∫Í¡ß∆Æ
 	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
