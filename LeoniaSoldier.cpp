@@ -5,6 +5,7 @@
 #include"PixelCollisionComponent.h"
 #include"RigidBodyComponent.h"
 #include"EnemyEffect.h"
+#include"Gold.h"
 
 
 void LeoniaSoldier::Init()
@@ -157,6 +158,10 @@ void LeoniaSoldier::Render()
 		if (m_dietimer >= 0.5f)
 		{
 			m_hitpointcollision->SetIsActive(false);
+			for (int i = 0; i < 4; i++)
+			{
+				OBJECTMANAGER->AddObject("Gold", m_obj->x, m_obj->y - 50, ObjectTag::eItem)->AddComponent<Gold>();
+			}
 			m_obj->ObjectDestroyed();
 		}
 	}

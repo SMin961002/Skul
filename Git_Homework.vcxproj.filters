@@ -156,13 +156,25 @@
     <ClCompile Include="PlayerEffect.cpp">
       <Filter>Game\Object\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Object\Enemy</Filter>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Core\Manager\EffectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Idle.cpp">
+      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
     </ClCompile>
     <ClCompile Include="MenuUI.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="NpcObject.cpp" />
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Game\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Gold.cpp">
+      <Filter>Game\Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -308,9 +320,17 @@
     </ClInclude>
     <ClInclude Include="MenuUI.h" />
     <ClInclude Include="DoorObject.h" />
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="ShopScene.h" />
     <ClInclude Include="NpcObject.h" />
+    <ClInclude Include="Enemy.h">
+      <Filter>Game\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Game\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Gold.h">
+      <Filter>Game\Object\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -441,6 +461,9 @@
     </Filter>
     <Filter Include="Game\Effect">
       <UniqueIdentifier>{0f9b9c36-9701-4df1-a2a6-2e13754d6b99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Item">
+      <UniqueIdentifier>{9e37d4a4-68f5-405f-a997-029adce4a445}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

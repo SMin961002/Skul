@@ -2,6 +2,7 @@
 #include "ObjectManager.h"
 #include "CollisionComponent.h"
 #include"Player.h"
+#include"Item.h"
 ObjectManager::ObjectManager()
 {
 }

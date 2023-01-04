@@ -352,7 +352,9 @@ void ImageManager::LoadImages()
 	AddImageVector("SkulAttack", L"Resources/Monster/Effect/SkulAttack/", 1, 10);
 	AddImageVector("DeadEffect", L"Resources/Monster/Effect/Dead/", 1, 6);
 
-
+	//아이템
+	AddImageVector("Gold", L"Resources/Item/Gold/GoldUnit/", 1, 9);
+	AddImageVector("GetGold", L"Resources/Item/Gold/GetGold/", 1, 29);
 
 	//맵 오브젝트
 	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
