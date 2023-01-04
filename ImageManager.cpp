@@ -243,6 +243,7 @@ void ImageManager::LoadImages()
 	AddImage("Light", L"./Resources/Light.png");
 
 	AddPixelmage("CollisionBox", "./Resources/Tile/4Stage/CollisionBox.bmp", 32, 32);
+	AddPixelmage("CollisionPlatform", "./Resources/Tile/4Stage/CollisionPlatform.bmp", 32, 32);
 
 	// 보스 ====================================================================================
 	// 1페이즈_대화

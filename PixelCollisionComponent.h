@@ -17,6 +17,8 @@ private:
 	RECT rtL, rtT, rtB, rtR;
 
 	GImage* m_image;
+	GImage* m_imagePlatform;
+
 	vector<vector<int>> m_tiles;
 public:
 	bool m_isGold;

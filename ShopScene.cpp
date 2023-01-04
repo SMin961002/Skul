@@ -77,6 +77,7 @@ void ShopScene::Render()
 	IMAGEMANAGER->DrawMapTile(m_tiles);
 	IMAGEMANAGER->DrawMapStructureFoward(m_struectures);
 
+	IMAGEMANAGER->DrawMapTilePixel(m_tiles);
 }
 
 void ShopScene::Release()
