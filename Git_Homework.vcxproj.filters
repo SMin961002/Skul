@@ -156,24 +156,28 @@
     <ClCompile Include="PlayerEffect.cpp">
       <Filter>Game\Object\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="EffectManager.cpp">
-      <Filter>Core\Manager\EffectManager</Filter>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="MenuUI.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="NpcObject.cpp" />
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Object\Enemy</Filter>
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="GoldResult.cpp" />
+    <ClCompile Include="HeadResult.cpp" />
+    <ClCompile Include="ResultValue.cpp" />
+    <ClCompile Include="EnemyTestScene.cpp">
+      <Filter>Game\Scene\TestScene</Filter>
     </ClCompile>
+    <ClCompile Include="HeadItem.cpp" />
     <ClCompile Include="Item.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
-    <ClCompile Include="Gold.cpp">
+    <ClCompile Include="Hporb.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyTestScene.cpp" />
-    <ClCompile Include="Hporb.cpp">
+    <ClCompile Include="Gold.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
@@ -321,20 +325,25 @@
     </ClInclude>
     <ClInclude Include="MenuUI.h" />
     <ClInclude Include="DoorObject.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="ShopScene.h" />
     <ClInclude Include="NpcObject.h" />
-    <ClInclude Include="Enemy.h">
-      <Filter>Game\Object\Enemy</Filter>
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="GoldResult.h" />
+    <ClInclude Include="BossEffect.h" />
+    <ClInclude Include="HeadResult.h" />
+    <ClInclude Include="ResultValue.h" />
+    <ClInclude Include="EnemyTestScene.h">
+      <Filter>Game\Scene\TestScene</Filter>
     </ClInclude>
+    <ClInclude Include="HeadItem.h" />
     <ClInclude Include="Item.h">
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
-    <ClInclude Include="Gold.h">
+    <ClInclude Include="Hporb.h">
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
-    <ClInclude Include="BossEffect.h" />
-    <ClInclude Include="EnemyTestScene.h" />
-    <ClInclude Include="Hporb.h">
+    <ClInclude Include="Gold.h">
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
@@ -469,7 +478,7 @@
       <UniqueIdentifier>{0f9b9c36-9701-4df1-a2a6-2e13754d6b99}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Object\Item">
-      <UniqueIdentifier>{9e37d4a4-68f5-405f-a997-029adce4a445}</UniqueIdentifier>
+      <UniqueIdentifier>{1f13099f-003d-4e7c-b325-4c41ab12c689}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

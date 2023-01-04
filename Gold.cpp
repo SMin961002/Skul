@@ -18,6 +18,7 @@ void Gold::Init()
 	m_vimage[eGetgold]->Setting(0.05f, false);
 
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
+	m_obj->GetComponent<PixelCollisionComponent>()->m_isGold = true;
 
 	//m_obj->AddComponent<CollisionComponent>();
 	//m_hitpointcollision = m_obj->AddComponent<CollisionComponent>();
@@ -27,7 +28,7 @@ void Gold::Init()
 	
 	m_obj->AddComponent<RigidBodyComponent>();
 	m_goldy =MY_UTILITY::getFromFloatTo(2, 5);
-	m_goldx = MY_UTILITY::getFromFloatTo(-2, 3);
+	m_goldx = MY_UTILITY::getFromFloatTo(-200, 300)/100.f;
 	m_goldy2 = MY_UTILITY::getFromFloatTo(15, 25);
 	m_obj->AddComponent<RigidBodyComponent>()->SetGravityPower(m_goldy);
 	//m_obj->GetComponent<RigidBodyComponent>()->SetGravityOngetFromIntToOff(true);
@@ -46,6 +47,9 @@ void Gold::Update()
 		}
 		if (m_drop == true)
 		{
+			m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(false);
+			m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
+
 			state = eGetgold;
 		}
 		if (m_obj->GetComponent<RigidBodyComponent>()->GetGravityPower() < 0)

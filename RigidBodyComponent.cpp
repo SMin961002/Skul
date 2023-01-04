@@ -13,7 +13,6 @@ void RigidBodyComponent::Init()
 	pixelCollisionComponent->LSettingRect({ -30 , -30, -25 , -15 });
 	pixelCollisionComponent->TSettingRect({ -10 , -60, 10 , -55 });
 	pixelCollisionComponent->BSettingRect({ -10 , -10, 10 , 10 });
-
 }
 
 void RigidBodyComponent::Update()

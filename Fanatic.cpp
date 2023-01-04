@@ -22,7 +22,8 @@ void Fanatic::Init()
 	m_sercrieffect = false;
 	m_state = eIdle;
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
-
+	m_lastX = m_obj->x;
+	m_lastY = m_obj->y;
 	m_vimage[eIdle] = IMAGEMANAGER->AddImageVectorCopy("Fanatic_Idle");
 	m_vimage[eIdle]->Setting(0.1f, true);
 	m_vimage[eAttackIdle] = IMAGEMANAGER->AddImageVectorCopy("Fanatic_AttackIdle");
@@ -62,6 +63,20 @@ void Fanatic::Init()
 void Fanatic::Update()
 {
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+
+	if (m_lastX != m_obj->x || m_lastY != m_obj->y)
+	{
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+		m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(true);
+
+		m_lastX = m_obj->x;
+		m_lastY = m_obj->y;
+	}
+	else
+	{
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
+		m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(false);
+	}
 	m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "HitCollision");
 	if (m_hit)
 	{
@@ -115,7 +130,7 @@ void Fanatic::Update()
 			m_state = eIdle;
 		}
 	}
-	if (m_currenthp <= 30&& !m_die2)
+	if (m_currenthp <= 30 && !m_die2)
 	{
 
 		m_sercrifice = true;
@@ -162,9 +177,9 @@ void Fanatic::Update()
 void Fanatic::Render()
 {
 
-		if (m_currenthp >= 0)
-		{
-			m_vimage[m_state]->CenterRender(m_obj->x, m_obj->y - 55, 2, 2, 0, m_isReverse);
+	if (m_currenthp >= 0)
+	{
+		m_vimage[m_state]->CenterRender(m_obj->x, m_obj->y - 55, 2, 2, 0, m_isReverse);
 
 			if (m_hpbartimer <= 2 && !m_die2 && (m_hit == true || m_sercrifice == true))
 			{
@@ -220,38 +235,38 @@ void Fanatic::HitEnemy(float dmg)
 	m_hitpointCollision->SetIsActive(false);
 	if (!m_die2)
 	{
-			if (m_currenthp >= 50)
+		if (m_currenthp >= 50)
 			m_isAttack = false;
-			m_isHit = true;
-			m_state = eHit;
-			m_vimage[eHit]->Reset();
-			if (m_obj->x >= OBJECTMANAGER->m_player->GetplayerX())
-			{
-				m_obj->x += DELTA_TIME * 500;
-			}
-			else
-			{
-				m_obj->x -= DELTA_TIME * 500;
-			}
-			m_obj->y -= 30;
-			m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
-	}
-		if (m_hiteffecttimer >= 0.7f)
+		m_isHit = true;
+		m_state = eHit;
+		m_vimage[eHit]->Reset();
+		if (m_obj->x >= OBJECTMANAGER->m_player->GetplayerX())
 		{
-			if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
-			{
-				EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 0, 1.5);
-			}
-			else
-			{
-				EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 1, 1.5);
-			}
-			m_hit = true;
-			m_hiteffecttimer = 0;
+			m_obj->x += DELTA_TIME * 500;
+		}
+		else
+		{
+			m_obj->x -= DELTA_TIME * 500;
+		}
+		m_obj->y -= 30;
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
+	}
+	if (m_hiteffecttimer >= 0.7f)
+	{
+		if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
+		{
+			EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 0, 1.5);
+		}
+		else
+		{
+			EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 1, 1.5);
+		}
+		m_hit = true;
+		m_hiteffecttimer = 0;
 		dmg = 40; //-= 플레이어 어택 데미지 상의
 		m_currenthp -= dmg;
-		}
-	
+	}
+
 }
 
 void Fanatic::ImageResetCheck()

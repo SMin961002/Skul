@@ -10,6 +10,7 @@ public:
 	int flag;
 	std::map<std::string, Scene*> m_sceneList;
 	vector<vector<int>> m_tiles;
+	bool m_isMenuActive;
 
 	SceneManager();
 	~SceneManager();
@@ -25,6 +26,10 @@ public:
 
 	bool FadeIn(float t, function<void()> func, int flag);
 	bool FadeOut(float t, function<void()> func, int flag);
+
+	void SetMenuActive(bool active) { m_isMenuActive = active; }
+	bool GetMenuActive() { return m_isMenuActive; }
+	CImage* GetPadeImage() { return fadeImage; }
 };
 
 #define SCENEMANAGER SceneManager::GetInstance()

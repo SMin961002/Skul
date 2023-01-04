@@ -32,13 +32,13 @@ void TimerManager::Render()
 	if (_timer != nullptr)
 	{
 		wstr = L"FramePerSec: " + to_wstring(_timer->getFrameRate());
-		IMAGEMANAGER->D2dTextOut(wstr, 0, 0);
+		IMAGEMANAGER->D2dTextOut(wstr, 0, 0, { 255,255,255,1 });
 
 		wstr = L"ElapsedTime: " + to_wstring(DELTA_TIME);
-		IMAGEMANAGER->D2dTextOut(wstr, 0, 20);
+		IMAGEMANAGER->D2dTextOut(wstr, 0, 20, { 255,255,255,1 });
 
 		wstr = L"WorldTime: " + to_wstring(_timer->getWorldTime());
-		IMAGEMANAGER->D2dTextOut(wstr, 0, 40);
+		IMAGEMANAGER->D2dTextOut(wstr, 0, 40, { 255,255,255,1 });
 	}
 #else
 	sprintf_s(str, "FramePerSec: %d", _timer->gerFrameRate());
