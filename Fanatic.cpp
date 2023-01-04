@@ -204,9 +204,6 @@ void Fanatic::Render()
 			}
 			
 		}
-		cout << m_currenthp << endl;
-	
-
 }
 
 void Fanatic::Release()
@@ -215,6 +212,17 @@ void Fanatic::Release()
 
 void Fanatic::OnCollision(string collisionName, Object* other)
 {
+	if (collisionName == m_hitpointCollision->GetName())
+	{
+		cout << "파나틱 공격" << endl;
+		if (other->GetName() == "player")
+		{
+			Player* ply = other->GetComponent<Player>();
+			ply->HitPlayerMagicAttack(10);
+			ply->HitPlayerKnockBack(5, 5);
+			cout << "파나틱이 플레이어를 때렸다(마법공격)" << endl;
+		}
+	}
 }
 
 void Fanatic::HitEnemy(float dmg)
@@ -253,7 +261,6 @@ void Fanatic::HitEnemy(float dmg)
 		dmg = 40; //-= 플레이어 어택 데미지 상의
 		m_currenthp -= dmg;
 	}
-
 }
 
 void Fanatic::ImageResetCheck()

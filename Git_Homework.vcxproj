@@ -160,6 +160,9 @@
     <ClCompile Include="Head.cpp" />
     <ClCompile Include="HeadItem.cpp" />
     <ClCompile Include="HeadResult.cpp" />
+    <ClCompile Include="HeadManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Head_Basic.cpp" />
     <ClCompile Include="HollyFountain.cpp" />
     <ClCompile Include="Hporb.cpp" />
@@ -183,6 +186,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerEffect.cpp" />
     <ClCompile Include="ResultValue.cpp" />
+    <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -226,6 +230,9 @@
     <ClInclude Include="Head.h" />
     <ClInclude Include="HeadItem.h" />
     <ClInclude Include="HeadResult.h" />
+    <ClInclude Include="HeadManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Head_Basic.h" />
     <ClInclude Include="HollyFountain.h" />
     <ClInclude Include="Hporb.h" />
@@ -249,6 +256,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerEffect.h" />
     <ClInclude Include="ResultValue.h" />
+    <ClInclude Include="ProjectileHeadSkull.h" />
     <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />

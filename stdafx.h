@@ -49,6 +49,7 @@ enum ObjectTag
 	eEnemy,
 	eItem,
 	ePlayer,
+	ePlayerHead,
 	eEndTag
 };
 
@@ -59,6 +60,15 @@ struct StructureData
 	float y = 0;
 	bool isBack = false;
 	int page = 0;
+};
+
+enum class eSkulSpecies
+{
+	eBasic,
+	ePredator,
+	eDestroyer,
+	eGambler,
+	Empty
 };
 
 #define WIN_NAME "금강상태"

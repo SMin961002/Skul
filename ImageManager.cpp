@@ -132,9 +132,12 @@ void ImageManager::LoadImages()
 	// 예시 이미지
 	AddImage("Frame_1SKill", L"./Resources/Frame_1SKill.png");
 
-	//캐릭터 대시, 점프 이펙트
-	AddImageVector("DashSmoke", L"./Resources/Png/Skul/Effect_DashSmoke/", 1, 13);
-	AddImageVector("JumpSmoke", L"./Resources/Png/Skul/Effect_DoubleJumpSmoke/", 1, 10);
+	//캐릭터 이펙트
+	AddImageVector("DashSmoke", L"./Resources/Png/Skul/Effect/DashSmoke/", 1, 13);
+	AddImageVector("JumpSmoke", L"./Resources/Png/Skul/Effect/DoubleJumpSmoke/", 1, 10);
+	AddImageVector("PlayerHit", L"./Resources/Png/Skul/Effect/Hit/", 1, 12);
+	//AddImageVector("PlayerCHit", L"./Resources/Png/Skul/Effect/Hit/", 1, 8);
+	//AddImageVector("PlayerCPublicHit", L"./Resources/Png/Skul/Effect/CriticalHit/", 1, 11);
 
 	//일반스컬 모션 이미지
 	AddImageVector("Basic_Idle", L"./Resources/Png/Skul/Basic/Motion/Idle/", 1, 4);
@@ -148,6 +151,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Basic_JumpAttack", L"./Resources/Png/Skul/Basic/Motion/JumpAttack/", 1, 4);
 	AddImageVector("Basic_Reborn", L"./Resources/Png/Skul/Basic/Motion/Reborn/", 1, 27);
 	AddImageVector("Basic_Skill", L"./Resources/Png/Skul/Basic/Motion/Skill/", 1, 4);
+	AddImageVector("Basic_TagAction", L"./Resources/Png/Skul/Basic/Motion/TagAction/", 1, 14);
 	//일반스컬 - 머리 없는 모션 이미지
 	AddImageVector("Basic_Headless_Idle", L"./Resources/Png/Skul/Basic/Headless/HeadlessIdle/", 1, 4);
 	AddImageVector("Basic_Headless_Walk", L"./Resources/Png/Skul/Basic/Headless/HeadlessWalk/", 1, 8);

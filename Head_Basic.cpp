@@ -16,16 +16,17 @@ void Head_Basic::ImageSetting()
 	img[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Basic_Attack2");
 	img[eAutoAttack_2]->Setting(0.15f, false);
 	img[eJump] = IMAGEMANAGER->FindImageVector("Basic_JumpStart");
-	img[eJump]->Setting(0.1, true);
+	img[eJump]->Setting(0.05, true);
 	img[eJumpAttack] = IMAGEMANAGER->FindImageVector("Basic_JumpAttack");
-	img[eJumpAttack]->Setting(0.1, false);
-	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize()-1,0.2);
+	img[eJumpAttack]->Setting(0.07, false);
 	img[eJumpDown] = IMAGEMANAGER->FindImageVector("Basic_JumpRepeat");
 	img[eJumpDown]->Setting(0.1, true);
 	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Basic_JumpFall");
 	img[eJumpLand]->Setting(0.1, false);
 	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Basic_Skill");
 	img[eSkill_1]->Setting(0.1, false);
+	img[eTagAction] = IMAGEMANAGER->FindImageVector("Basic_TagAction");
+	img[eAutoAttack_2]->Setting(0.15f, false);
 
 	img_headless[eIdle] = IMAGEMANAGER->FindImageVector("Basic_Headless_Idle");
 	img_headless[eIdle]->Setting(0.15f, true);
@@ -34,9 +35,17 @@ void Head_Basic::ImageSetting()
 	img_headless[eDash] = IMAGEMANAGER->FindImageVector("Basic_Headless_Dash");
 	img_headless[eDash]->Setting(0.4f, false);
 	img_headless[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Basic_Headless_Attack1");
-	img_headless[eAutoAttack_1]->Setting(0.11f, false);
+	img_headless[eAutoAttack_1]->Setting(0.05f, false);
 	img_headless[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Basic_Headless_Attack2");
-	img_headless[eAutoAttack_2]->Setting(0.15f, false);
+	img_headless[eAutoAttack_2]->Setting(0.05f, false);
+	img_headless[eJump] = IMAGEMANAGER->FindImageVector("Basic_Headless_JumpStart");
+	img_headless[eJump]->Setting(0.1, true);
+	img_headless[eJumpAttack] = IMAGEMANAGER->FindImageVector("Basic_Headless_JumpAttack");
+	img_headless[eJumpAttack]->Setting(0.07, false);
+	img_headless[eJumpDown] = IMAGEMANAGER->FindImageVector("Basic_Headless_JumpRepeat");
+	img_headless[eJumpDown]->Setting(0.1, true);
+	img_headless[eJumpLand] = IMAGEMANAGER->FindImageVector("Basic_Headless_JumpFall");
+	img_headless[eJumpLand]->Setting(0.1, false);
 
 	img_reborn = IMAGEMANAGER->FindImageVector("Basic_Reborn");
 	img_reborn->Setting(0.1f, true);
@@ -48,13 +57,11 @@ void Head_Basic::ParameterSetting()
 {
 	m_species = eSkulSpecies::eBasic;
 
-	//m_projectileHead = new ProjectileHeadSkull;
-	//m_projectileHead->Init();
-
+	m_projectileHead = OBJECTMANAGER->AddObject("Head", *m_x, *m_y, ePlayerHead)->AddComponent<ProjectileHeadSkull>();
+	m_projectileHead->Off();
 	m_action = eIdle;
 
 	m_moveSpeed = 180;
-	m_isLeft = false;
 	m_isDown = false;
 
 	m_dashSpeed = 240;		//##dash 이동식 수정 필요
@@ -64,17 +71,17 @@ void Head_Basic::ParameterSetting()
 	m_dashNowCool = 0;
 	m_dashCount = 0;
 	m_dashMax = 2;			//대시 최대 횟수
-	m_dashing = false;
 
 	m_jumpSpeed = 8;
 	m_jumpCount = 0;
 	m_jumpMax = 2;
-	m_jumpping = false;
 
 	m_attackCount = 0;
 	m_attackMax = 2;
 	m_attackCast = false;
 
+	m_skillNowCoolA = 0;
+	m_skillNowCoolS = 0;
 	m_skillCoolA = 6;
 	m_skillCoolS = 3;
 	m_skillUsing = false;
@@ -83,11 +90,24 @@ void Head_Basic::ParameterSetting()
 }
 
 void Head_Basic::CollisionSetting()
+{	
+	m_BasicHeadAttack = new CollisionComponent;
+	m_BasicHeadAttack->Setting(50, *m_x + 6 + 40, *m_y - 24 + 72, "BasicAttack_BasicSkul");
+	m_BasicHeadAttack->SetIsActive(false);
+	m_collAutoAttack = m_BasicHeadAttack;
+
+	m_TagAttack = new CollisionComponent;
+	m_TagAttack->Setting(100, *m_x, *m_y, "TagAttack_BasicSkul");
+	m_TagAttack->SetIsActive(false);
+	m_collSkill = m_TagAttack;
+
+	cout << m_BasicHeadAttack << "기본공격 콜리전 주소" << endl;
+}
+
+void Head_Basic::Release()
 {
-	CollisionComponent* attack1 = m_obj->AddComponent<CollisionComponent>();
-	attack1->Setting(50, m_obj->x + 6 + 40, m_obj->y - 24 + 72, "BasicAttack_BasicSkul");
-	attack1->SetIsActive(false);
-	m_obj->AddCollisionComponent(attack1);
+	SAFE_DELETE(m_BasicHeadAttack);
+	SAFE_DELETE(m_TagAttack);
 }
 
 void Head_Basic::CoolDown()
@@ -98,115 +118,64 @@ void Head_Basic::CoolDown()
 		m_dashNowCool -= deltaTime;
 		if (m_dashNowCool < 0) m_dashNowCool = 0;
 	}
-	if (m_dashNowTime > 0)
-	{
-		m_dashNowTime -= deltaTime;
-		if (m_dashNowTime < 0)
-		{
-			m_dashNowTime = 0;
-			m_dashCount = 0;
-			m_dashing = false;
-			m_dashNowCool = m_dashCool;
-			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
-		}
-	}
 
 	if (m_skillNowCoolA > 0)
 	{
 		m_skillNowCoolA -= deltaTime;
-		if (m_skillNowCoolA < 0)m_skillNowCoolA = 0;
+		if (m_skillNowCoolA < 0)
+		{
+			PutOnHead();
+		}
 	}
 	if (m_skillNowCoolS > 0)
 	{
 		m_skillNowCoolS -= deltaTime;
-		if (m_skillNowCoolS < 0) m_skillNowCoolS = 0;
-	}
-}
-
-void Head_Basic::InputSkillKey()
-{
-	if (KEYMANAGER->GetOnceKeyDown('A'))
-	{
-		m_skillNowCoolS = m_skillCoolA;
-		m_action = eSkill_1;
-		m_skillUsing = true;
-		m_headThrow = true;
-		m_imageChange = true;
-	}
-	if (m_headThrow) {
-		if (KEYMANAGER->GetOnceKeyDown('S'))
+		if (m_skillNowCoolS < 0)
 		{
-			m_action = eIdle;
-			m_headThrow = false;
-			//##m_obj->x = 머리obj.x ; m_obj->y = 머리obj->y;
-			m_skillNowCoolS = m_skillCoolS;
+			m_skillNowCoolS = 0;
 		}
-	}//end if headThrow
+	}
 }
 
 void Head_Basic::ActionArrangement()
 {
-	if (nowImg->GetIsImageEnded())
-	{
-		vImage* tempActionImage = new vImage;
-		tempActionImage = m_headThrow ? img_headless[m_action] : img[m_action];
-		if(nowImg!=tempActionImage)
-			nowImg->Reset();
-		if (m_attackCast)
-		{
-			m_action = eAutoAttack_2;
-			nowImg = m_headThrow ? img_headless[eAutoAttack_2] : img[eAutoAttack_2];
-			nowImg->Reset();
-			m_attackCount = 2;
-			m_attackCast = false;
-			if (m_isLeft)
-			{
-				m_obj->x -= m_moveSpeed/10;
-			}
-			else m_obj->x += m_moveSpeed/10;
-		}
-		else
-		{
-			nowImg = m_headThrow ? img_headless[eIdle] : img[eIdle];
-			m_action = eIdle;
-			m_attackCount = 0;
-		}
-		m_skillUsing = false;
+	string action;
+	switch (m_action) {
+	case eIdle: action = "idle";
+		break;
+	case eWalk: action = "walk";
+	break;
+	case eDash: action = "dash";
+	break;
+	case eJump: action = "jump";
+		break;
 	}
-	if (m_imageChange)
+	if (!m_headThrow)
 	{
-		m_attackCast = false;
-		if (m_headThrow)	//머리 없을때
+		if (nowImg->GetIsImageEnded())
 		{
-			switch (m_action)
+			if (nowImg != img[m_action])
+				nowImg->Reset();
+			if (m_attackCast)
 			{
-			case eIdle:
-			case eDash:
-			case eAutoAttack_1:
-			case eAutoAttack_2:
-			case eJump:
-			case eJumpDown:
-			case eJumpAttack:
-				if (nowImg != img_headless[m_action])
-				{
-					nowImg->Reset();
-					nowImg = img_headless[m_action];
-					if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
-					{
-						m_action = eIdle;
-					}
-				}
-				//m_attackCount = 0;
-				break;
-			case eSkill_1:
-				nowImg = img[eSkill_1];
-			default:
-				NULL;
-				break;
-			}//end switch
-		}//end if headTrow
-		else	//머리 있을때
+				m_action = eAutoAttack_2;
+				nowImg = img[eAutoAttack_2];
+				nowImg->Reset();
+				m_attackCount = 2;
+				m_attackCast = false;
+			}
+			else
+			{
+				nowImg = img[eIdle];
+				m_action = eIdle;
+				m_attackCount = 0;
+			}
+			m_skillUsing = false;
+		}
+		if (m_imageChange)
 		{
+			cout << "이미지 바꾸기 " << action << endl;
+			m_attackCast = false;
 			if (nowImg != img[m_action])
 			{
 				nowImg->Reset();
@@ -218,70 +187,131 @@ void Head_Basic::ActionArrangement()
 				}
 			}
 			//m_attackCount = 0;
-		}//end else headThrow
+		}
+		else if (m_action != eIdle && nowImg == img[eIdle])
+		{
+			SetImage(m_action);
+		}
+	}//end if !headThrow
+	else
+	{
+		if (nowImg->GetIsImageEnded())
+		{
+			if (nowImg != img_headless[m_action])
+				nowImg->Reset();
+			if (m_attackCast)
+			{
+				m_action = eAutoAttack_2;
+				nowImg = img_headless[eAutoAttack_2];
+				nowImg->Reset();
+				m_attackCount = 2;
+				m_attackCast = false;
+			}
+			else
+			{
+				nowImg = img_headless[eIdle];
+				m_action = eIdle;
+				m_attackCount = 0;
+			}
+			m_skillUsing = false;
+		}
+		if (m_imageChange)
+		{
+			m_attackCast = false;
+			if (m_action == eSkill_1)
+			{
+				nowImg->Reset();
+				nowImg = img[m_action];
+				nowImg->Reset();
+			}
+			else if (nowImg != img_headless[m_action])
+			{
+				nowImg->Reset();
+				nowImg = img_headless[m_action];
+				nowImg->Reset();
+				if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
+				{
+					m_action = eIdle;
+				}
+			}
+			//m_attackCount = 0;
+		}
 	}
 }
 
 void Head_Basic::CollisionUpdate()
 {
-	for (auto iter : (m_obj->GetCollisionComponent()))
+	m_BasicHeadAttack->SetIsActive(false);
+	m_BasicHeadAttack->SetIsActive(false);
+	
+	switch (m_action)
 	{
-		if (iter->GetName() == "BasicAttack_BasicSkul")
-		{
-			if (m_action == eAutoAttack_1)
-			{
-				if (img[eAutoAttack_1]->GetFrame() > 1 && img[eAutoAttack_1]->GetFrame() < 3)
-				{
-					iter->SetIsActive(true);
-				}
-				else
-				{
-					iter->SetIsActive(false);
-				}
-			}
-			else if (m_action == eAutoAttack_2)
-			{
-				if (img[eAutoAttack_2]->GetFrame() > 0 && img[eAutoAttack_2]->GetFrame() < 2)
-				{
-					iter->SetIsActive(true);
-				}
-				else
-				{
-					iter->SetIsActive(false);
-				}
-			}
-			else if (m_action == eJumpAttack)
-			{
-				if (img[eJumpAttack]->GetFrame() > 0 && img[eJumpAttack]->GetFrame() < 3)
-				{
-					iter->SetIsActive(true);
-				}
-				else
-				{
-					iter->SetIsActive(false);
-				}
-			}
-			else iter->SetIsActive(false);
-
-			if (m_isLeft)
-				iter->Setting(m_obj->x, m_obj->y-10);
-			else iter->Setting(m_obj->x + 50, m_obj->y-10);
-
-			break;
-		}
+	case eAutoAttack_1:
+		if (nowImg->GetFrame() > 1 && nowImg->GetFrame() < 3)
+			m_BasicHeadAttack->SetIsActive(true);
+		break;
+	case eAutoAttack_2:
+		if (nowImg->GetFrame() > 0 && nowImg->GetFrame() < 2)
+			m_BasicHeadAttack->SetIsActive(true);
+		break;
+	case eJumpAttack:
+		if (nowImg->GetFrame() > 0 && nowImg->GetFrame() < 3)
+			m_BasicHeadAttack->SetIsActive(true);
+		break;
+	case eTagAction:
+		m_TagAttack->SetIsActive(true);
+		m_TagAttack->Setting(*m_x, *m_y);
+		break;
+	default: break;
 	}
+
+	if (m_BasicHeadAttack->GetIsActive() == true)
+	{
+		if (*m_isLeft)
+			m_BasicHeadAttack->Setting(*m_x, *m_y - 10);
+		else
+			m_BasicHeadAttack->Setting(*m_x + 50, *m_y - 10);
+	}
+}
+
+void Head_Basic::InputSkillKey()
+{
+	if (KEYMANAGER->GetOnceKeyDown('A'))
+	{
+		if (m_skillNowCoolA == 0)
+			if (!m_headThrow)
+			{
+				m_headThrow = true;
+				m_projectileHead->On();
+				m_projectileHead->SetSkullThrow(*m_x, *m_y, *m_isLeft);
+				m_skillNowCoolA = m_skillCoolA;
+				m_action = eSkill_1;
+				m_imageChange = true;
+			}
+	}//end headThrow
+	if (KEYMANAGER->GetOnceKeyDown('S') && m_headThrow)
+	{
+		if (m_skillNowCoolS == 0) {
+			m_action = eIdle;
+			EFFECTMANAGER->AddEffect<TeleportationToHead>(*m_x, *m_y, *m_isLeft, 2);
+			*m_x = m_projectileHead->GetX();
+			*m_y = m_projectileHead->GetY();
+			EFFECTMANAGER->AddEffect<TeleportationToHead>(*m_x, *m_y, *m_isLeft, 2);
+			m_skillNowCoolS = m_skillCoolS;
+			PutOnHead();
+		}
+	}//end if headThrow
 }
 
 void Head_Basic::InputAttackKey()
 {
 	if (KEYMANAGER->GetOnceKeyDown('X'))
 	{
-		if (m_jumpping)
+		if (*m_jumpping)
 		{
-			if (m_attackCount < 1)
+			if (m_action != eJumpAttack)
 			{
 				m_action = eJumpAttack;
-				m_attackCount = m_attackMax;
 				m_imageChange = true;
 			}
 		}//end if jumpping
@@ -301,45 +331,13 @@ void Head_Basic::InputAttackKey()
 	}//end 'X'
 }
 
+void Head_Basic::TagAction()
+{
+	m_imageChange = true;
+	m_action = eTagAction;
+}
+
 void Head_Basic::DrawCharactor()
 {
-	nowImg->CenterRender(m_obj->x, m_obj->y - 56, 2, 2, 0, m_isLeft);
-}
-
-void ProjectileHeadSkull::Init()
-{
-	m_img = IMAGEMANAGER->FindImage("Basic_Skull");
-	m_isThrowed = false;
-	m_isReverse = false;
-	m_hit = false;
-	m_speed = 60;
-	m_rot = 0;
-	m_obj->AddComponent<RigidBodyComponent>();
-	m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
-	m_colHeadSkull = m_obj->AddComponent<CollisionComponent>();
-	m_colHeadSkull->Setting(14, m_obj->x, m_obj->y - 24, "ThrowHeadSkull");
-	m_colHeadSkull->SetIsActive(false);
-}
-
-void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
-{
-	if (collisionName == m_colHeadSkull->GetName())
-	{
-		if (other->GetName() == "Enemy")
-		{
-			m_hit = true;
-			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
-			other->GetComponent<Enemy>()->HitEnemy(20);
-		}
-		else if (other->GetName() == "PlayerHitRange")
-		{
-			m_isThrowed = false;
-		}
-	}
-	if (collisionName == "BasicAttack_BasicSkul")
-	{
-		if (other->GetName() == "Enemy")
-		{
-		}
-	}
+	nowImg->CenterRender(*m_x, *m_y - 56, 2, 2, 0, *m_isLeft);
 }
