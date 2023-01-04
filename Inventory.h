@@ -1,12 +1,12 @@
 #pragma once
-class MenuUI
+class Inventory
 {
-private:
-	int m_keyState;
 public:
-	CImage* img;
-	MenuUI();
-	~MenuUI();
+	CImage* image;
+
+	Inventory();
+	~Inventory();
+public:
 	void Init();
 	void Update();
 	void Render();

@@ -9,7 +9,7 @@
 #include "DoorObject.h"
 #include"BallFanatic.h"
 #include"AngelStatue.h"
-
+#include "GoldResult.h"
 EnemyTestScene::EnemyTestScene()
 {
 }
@@ -57,11 +57,16 @@ void EnemyTestScene::Init()
 		}
 		else if (iter->key == "NormalRoom")
 		{
-			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(0);
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(0);
 		}
 		else if (iter->key == "SkulRoom")
 		{
-			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(1);
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(1);
+		}
+		else if (iter->key == "GoldResoult")
+		{
+			OBJECTMANAGER->AddObject("GoldResult", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<GoldResult>();
+
 		}
 	}
 	//BJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<TentaclesOfLight>();

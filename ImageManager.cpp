@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ImageManager.h"
+#include <wrl.h>
 
 ImageManager::ImageManager()
 {
@@ -67,7 +68,7 @@ void ImageManager::Init()
 	CoInitialize(0);
 	CoCreateInstance(CLSID_WICImagingFactory, 0, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&factory));
 
-	IDWriteFactory* m_pDWriteFactory = nullptr;
+	IDWriteFactory3* m_pDWriteFactory = nullptr;
 
 	DWriteCreateFactory(
 		DWRITE_FACTORY_TYPE_SHARED,
@@ -75,8 +76,25 @@ void ImageManager::Init()
 		reinterpret_cast<IUnknown**>(&m_pDWriteFactory)
 	);
 
+	IDWriteFontFile* fontFileReference;
+
+	m_pDWriteFactory->CreateFontFileReference(L"./Resources/Font/NotoSansKR-Black.otf", nullptr, &fontFileReference);
+
+	IDWriteFontSetBuilder1* fontSetBuilder;
+	m_pDWriteFactory->CreateFontSetBuilder(reinterpret_cast<IDWriteFontSetBuilder**>(&fontSetBuilder));
+
+	fontSetBuilder->AddFontFile(fontFileReference);
+
+	IDWriteFontSet* customFontSet;
+	fontSetBuilder->CreateFontSet(&customFontSet);
+	IDWriteFontCollection1* col;
+	m_pDWriteFactory->CreateFontCollectionFromFontSet(
+		customFontSet
+		, &col
+	);
+
 	m_pDWriteFactory->CreateTextFormat(
-		L"NotoSansKR-Black.otf",                  // 폰트 패밀리 이름의 문자열
+		L"Noto Sans KR",                  // 폰트 패밀리 이름의 문자열
 		NULL,                        // 폰트 컬렉션 객체, NULL=시스템 폰트 컬렉션
 		DWRITE_FONT_WEIGHT_NORMAL,   // 폰트 굵기. LIGHT, NORMAL, BOLD 등.
 		DWRITE_FONT_STYLE_NORMAL,    // 폰트 스타일. NORMAL, OBLIQUE, ITALIC.
@@ -85,13 +103,20 @@ void ImageManager::Init()
 		L"ko",                         // 로케일을 문자열로 명시.  영어-미국=L"en-us", 한국어-한국=L"ko-kr"
 		&tf
 	);
-
 	D2D1_COLOR_F color;
 	color.a = 1;
 	color.r = 1;
 	color.g = 1;
 	color.b = 1;
 	pRT->CreateSolidColorBrush(color, &m_brush);
+
+	IDWriteFontFamily* fontFamily;
+	IDWriteLocalizedStrings* localizedFontName;
+	WCHAR* c_styleFontName = new WCHAR[70];
+
+	col->GetFontFamily(0, &fontFamily);
+	fontFamily->GetFamilyNames(&localizedFontName);
+	localizedFontName->GetString(0, c_styleFontName, 65);
 
 	m_pDWriteFactory->Release();
 }
@@ -351,6 +376,8 @@ void ImageManager::LoadImages()
 	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/", 1, 40);
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
+	AddImageVector("GoldResoult", L"Resources/Gold/", 1, 19);
+
 
 	// 몬스터 이펙트
 	AddImageVector("Secrifice", L"Resources/Monster/Effect/Secrifice/", 1, 11);
@@ -397,8 +424,13 @@ void ImageManager::LoadImages()
 	AddObjectImage("Blacksmith", L"./Resources/Shop/Blacksmith/Deactivate_0 #80166.png");
 	AddObjectImage("ItemView", L"./Resources/Shop/ItemView/01.png");
 	AddObjectImage("Head", L"./Resources/Shop/Head/01.png");
+	AddObjectImage("GoldResoult", L"./Resources/Gold/01.png");
 
+
+	// 인게임 UI이미지
+	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");
 	AddImage("PlayerStatusUI", L"./Resources/UI/PlayerStatusUI.png");
+
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
@@ -675,17 +707,21 @@ void ImageManager::DrawColorRender(CImage* img, float x, float y, float sizeX, f
 
 }
 
-void ImageManager::D2dTextOut(wstring str, float x, float y)
+void ImageManager::D2dTextOut(wstring str, float x, float y, D2D1_COLOR_F color, float scale)
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 	matT = D2D1::Matrix3x2F::Translation(x, y);
+	matS = D2D1::Matrix3x2F::Scale(scale, scale);
 
-	pRT->SetTransform((matT));
 	D2D1_RECT_F fRect;
-	fRect.left = x;
-	fRect.top = y;
-	fRect.right = x + 1080;
-	fRect.bottom = y + 1920;
+	fRect.left = 0;
+	fRect.top = 0;
+	fRect.right = 1080;
+	fRect.bottom = 1920;
+
+	pRT->SetTransform((matS * matT));
+
+	m_brush->SetColor({ 1.f / 255 * color.r,1.f / 255 * color.g,1.f / 255 * color.b,1 });
 	pRT->DrawTextA(str.c_str(), str.size(), tf, fRect, m_brush);
 }
 
@@ -696,6 +732,7 @@ void ImageManager::Render(CImage* img, float x, float y, float sizeX, float size
 	matR = D2D1::Matrix3x2F::Rotation(rot, { x + img->GetWidth() / 2,y + img->GetHeight() / 2 });
 	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
 	pRT->SetTransform((matS * matT * matR));
+
 	pRT->DrawBitmap(img->GetBitMap(), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), 1, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 }
 

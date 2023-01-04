@@ -155,10 +155,12 @@
     <ClCompile Include="ExObject.cpp" />
     <ClCompile Include="Fanatic.cpp" />
     <ClCompile Include="Gambler.cpp" />
+    <ClCompile Include="GoldResult.cpp" />
     <ClCompile Include="Head.cpp" />
     <ClCompile Include="Head_Basic.cpp" />
     <ClCompile Include="HollyFountain.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LampFanatic.cpp" />
@@ -213,10 +215,12 @@
     <ClInclude Include="ExObject.h" />
     <ClInclude Include="Fanatic.h" />
     <ClInclude Include="Gambler.h" />
+    <ClInclude Include="GoldResult.h" />
     <ClInclude Include="Head.h" />
     <ClInclude Include="Head_Basic.h" />
     <ClInclude Include="HollyFountain.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="IOFillManager.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LampFanatic.h" />

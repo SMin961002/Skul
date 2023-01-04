@@ -163,6 +163,8 @@
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="NpcObject.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="GoldResult.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -311,6 +313,8 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ShopScene.h" />
     <ClInclude Include="NpcObject.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="GoldResult.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

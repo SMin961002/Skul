@@ -138,7 +138,7 @@ public:
 	void Begin() { pRT->BeginDraw(); }
 	void End() { pRT->EndDraw(); }
 
-	void DrawCircle(float x, float y, float width);
+	void DrawCircle(float x, float y, float width );
 	void DrawRect(RECT rt);
 	void DrawRectCenter(RECT rt, CImage* img);
 	void DrawMapTile(vector<vector<int>> vec);
@@ -158,7 +158,7 @@ public:
 		camera.y = y;
 	}
 
-	void D2dTextOut(wstring str, float x, float y);
+	void D2dTextOut(wstring str, float x, float y, D2D1_COLOR_F color, float scale = 1);
 
 	vector<CImage*> GetTileImages()
 	{

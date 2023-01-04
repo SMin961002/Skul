@@ -19,6 +19,8 @@ SceneManager::~SceneManager()
 
 void SceneManager::Init()
 {
+	m_isMenuActive = false;
+
 	AddScene("BossScene", new BossScene);
 	AddScene("LobbyScene", new LobbyScene);
 	AddScene("MapToolMapSelectScene", new MapToolMapSelectScene);
