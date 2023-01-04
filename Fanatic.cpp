@@ -6,6 +6,7 @@
 #include"EnemyEffect.h"
 #include"TentaclesOfLight.h"
 #include"Gold.h"
+#include"Hporb.h"
 void Fanatic::Init()
 {
 	m_hpbartimer = 0;
@@ -187,6 +188,7 @@ void Fanatic::Render()
 				{
 					OBJECTMANAGER->AddObject("Gold", m_obj->x, m_obj->y - 50, ObjectTag::eItem)->AddComponent<Gold>();
 				}
+					OBJECTMANAGER->AddObject("Hporb", m_obj->x, m_obj->y, ObjectTag::eItem)->AddComponent<Hporb>();
 			}
 			m_die = true;
 			if (m_dietimer >= 0.5f&&!m_die2)

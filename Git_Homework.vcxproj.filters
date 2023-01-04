@@ -159,9 +159,6 @@
     <ClCompile Include="EffectManager.cpp">
       <Filter>Core\Manager\EffectManager</Filter>
     </ClCompile>
-    <ClCompile Include="Idle.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
-    </ClCompile>
     <ClCompile Include="MenuUI.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="ShopScene.cpp" />
@@ -173,6 +170,10 @@
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="Gold.cpp">
+      <Filter>Game\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTestScene.cpp" />
+    <ClCompile Include="Hporb.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
@@ -329,6 +330,11 @@
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="Gold.h">
+      <Filter>Game\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BossEffect.h" />
+    <ClInclude Include="EnemyTestScene.h" />
+    <ClInclude Include="Hporb.h">
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>

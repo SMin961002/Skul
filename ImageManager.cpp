@@ -355,6 +355,7 @@ void ImageManager::LoadImages()
 	//아이템
 	AddImageVector("Gold", L"Resources/Item/Gold/GoldUnit/", 1, 9);
 	AddImageVector("GetGold", L"Resources/Item/Gold/GetGold/", 1, 29);
+	AddImageVector("Hporb", L"Resources/Item/Hporb/", 1, 72);
 
 	//맵 오브젝트
 	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
