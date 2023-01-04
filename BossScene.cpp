@@ -11,7 +11,7 @@ void BossScene::Init()
 	_imgFence = IMAGEMANAGER->FindImage("Fence");
 
 	OBJECTMANAGER->AddObject("Joanna", WINSIZE_X / 2, 400, 0)->AddComponent<BossObject>();
-	OBJECTMANAGER->AddObject("Fountain", 300, 400, 0)->AddComponent<HollyFountain>();
+	//OBJECTMANAGER->AddObject("Fountain", 300, 400, 0)->AddComponent<HollyFountain>();
 }
 
 void BossScene::Update()

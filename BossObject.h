@@ -1,24 +1,10 @@
 #pragma once
 #include "Component.h"
 
-class HollyFountain;
-
-struct tagBaptism
-{
-	vImage* _imgPhase1BossBaptismProjectile;
-	vImage* _imgPhase1BossBaptismProjectileDespawn;
-	float angle;
-	float speed;
-	bool fire;
-};
-
 class BossObject : public Component
 {
 private:
-	RECT _rcCenter;
-
-	float _castingTime;
-
+	CImage* _imgBossChair;
 	// 보스 1페이즈 대화
 	vImage* _imgBossTalk;
 
@@ -33,8 +19,6 @@ private:
 	vImage* _imgPhase1BossNervousEnd;
 	vImage* _imgPhase1NervousEffectShine;
 	vImage* _imgPhase1NervousEffectImpact;
-	RECT _rcPhase1NervousEffectLeft;
-	RECT _rcPhase1NervousEffectRight;
 
 	// 보스 1페이즈 캐스팅
 	vImage* _imgPhase1BossCastingReady;
@@ -45,63 +29,60 @@ private:
 	vImage* _imgPhase1BossBaptismAttack;
 	// 레이저
 	vImage* _imgPhase1BossConsecrationSign;
-	vImage* _imgPhase1BossConsercrationStart;
-	vImage* _imgPhase1BossConsercrationLoop;
-	vImage* _imgPhase1BossConsercrationEnd;
+	vImage* _imgPhase1BossConsecrationStart;
+	vImage* _imgPhase1BossConsecrationLoop;
+	vImage* _imgPhase1BossConsecrationEnd;
 	// 좌우로 오는 구슬
 	vImage* _imgPhase1BossWorship;
 
 	// 보스 1페이즈 초이스
-	vImage* _imgPhase1ChoiceReady;
-	vImage* _imgPhase1ChoiceReadyLoop;
-	vImage* _imgPhase1ChoiceAttack;
-	vImage* _imgPhase1ChoiceEnd;
-	vImage* _imgPhase1ChoiceSpark;
+	vImage* _imgPhase1BossChoiceReady;
+	vImage* _imgPhase1BossChoiceReadyLoop;
+	vImage* _imgPhase1BossChoiceAttack;
+	vImage* _imgPhase1BossChoiceEnd;
+	vImage* _imgPhase1BossChoiceSpark;
 
 	// 보스 1페이즈 배리어
-	vImage* _imgPhase1BarrierIntroFront;
-	vImage* _imgPhase1BarrierIntroBehind;
-	vImage* _imgPhase1BarrierLoopFront;
-	vImage* _imgPhase1BarrierLoopBehind;
-	vImage* _imgPhase1BarrierImpact;
-	vImage* _imgPhase1BarrierSpark;
-	CImage* _imgPhase1BarrierCrack;
-	vImage* _imgPhase1BarrierCrackImpact;
+	vImage* _imgPhase1BossBarrierIntroFront;
+	vImage* _imgPhase1BossBarrierIntroBehind;
+	vImage* _imgPhase1BossBarrierLoopFront;
+	vImage* _imgPhase1BossBarrierLoopBehind;
+	vImage* _imgPhase1BossBarrierImpact;
+	vImage* _imgPhase1BossBarrierSpark;
+	CImage* _imgPhase1BossBarrierCrack;
+	vImage* _imgPhase1BossBarrierCrackImpact;
 
-private:
-	bool _isIdle;
-	bool _isIntro;
+protected:
+	bool _isIdleOn;
 
-	bool _isBarrierLoop;
-	bool _isBarrierCrack;
+protected:
+	bool _isNervousnessOn;
+	bool _isNervousnessLoopOn;
+	bool _isNervousnessAttackLoopOn;
+	bool _isNervousnessMotionEnd;
 
-	bool _isCasting;
-	bool _isCastingReady;
+	float _nervousnessMotionDeltaTime;
+	float _nervousnessEffectDeltaTime;
 
-	bool _isNervousness;
-	bool _isNervousnessEffectOn;
-	bool _isChoice;
+protected:
+	bool _isChoiceOn;
+	bool _isChoiceReadyLoopOn;
+	bool _isChoiceAttackEnd;
 
-	int _leftFountainHP;
-	int _rightFountainHP;
+	float _choiceMotionDeltaTime;
 
-	int _rndCasting;
+protected:
+	bool _isCastingOn;
+	bool _isCastingAttackOn;
+	bool _isConsecrationLoopOn;
 
-	vector<tagBaptism> _vBaptism;
-	vector<tagBaptism>::iterator _viBaptism;
+	float _castingMotionDeltaTime;
+	float _consecrationDeltaTime;
 public:
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
-
-	void Baptism();
-	void Consercration();
-	void Worship();
-	void Casting();
-	void Nervousness();
-	void Barrier();
-	void Choice();
 
 	BossObject() {}
 	~BossObject() {}

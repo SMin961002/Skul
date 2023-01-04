@@ -110,25 +110,16 @@
     <ClCompile Include="Baptism.cpp">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
     </ClCompile>
-    <ClCompile Include="Casting.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
-    </ClCompile>
     <ClCompile Include="HollyFountain.cpp">
       <Filter>Game\Object\Boss\HolyFountain</Filter>
     </ClCompile>
     <ClCompile Include="Worship.cpp">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
     </ClCompile>
-    <ClCompile Include="Consercration.cpp">
+    <ClCompile Include="Consecration.cpp">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
     </ClCompile>
-    <ClCompile Include="Choice.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
-    </ClCompile>
     <ClCompile Include="Nervousness.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
-    </ClCompile>
-    <ClCompile Include="Idle.cpp">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
     </ClCompile>
     <ClCompile Include="EffectManager.cpp">
@@ -151,9 +142,6 @@
     </ClCompile>
     <ClCompile Include="PlayerEffect.cpp">
       <Filter>Game\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="Idle.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Object\Enemy</Filter>
@@ -268,25 +256,16 @@
     <ClInclude Include="Baptism.h">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
     </ClInclude>
-    <ClInclude Include="Casting.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
-    </ClInclude>
     <ClInclude Include="HollyFountain.h">
       <Filter>Game\Object\Boss\HolyFountain</Filter>
     </ClInclude>
     <ClInclude Include="Worship.h">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
     </ClInclude>
-    <ClInclude Include="Consercration.h">
+    <ClInclude Include="Consecration.h">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
     </ClInclude>
-    <ClInclude Include="Choice.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
-    </ClInclude>
     <ClInclude Include="Nervousness.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
-    </ClInclude>
-    <ClInclude Include="Idle.h">
       <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
     </ClInclude>
     <ClInclude Include="EffectManager.h">
@@ -309,9 +288,6 @@
     </ClInclude>
     <ClInclude Include="PlayerEffect.h">
       <Filter>Game\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="Idle.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Game\Object\Enemy</Filter>

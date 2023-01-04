@@ -210,6 +210,7 @@ void ImageManager::LoadImages()
 	// 1페이즈_대화
 	AddImageVector("Boss_Intro_Talk", L"./Resources/Saint_Joanna/Phase1_Intro_2/Idle_Talk_Loop_", 1, 7);
 
+	AddImage("Boss_Chair", L"./Resources/Saint_Joanna/Phase_1/Chair/Boss_Chair.png");
 	// 1페이즈_대기
 	AddImageVector("Boss_Idle", L"./Resources/Saint_Joanna/Phase1_Intro_1/Idle_", 1, 7);
 	// 1페이즈_지팡이 들기
