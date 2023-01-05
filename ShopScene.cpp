@@ -63,7 +63,6 @@ void ShopScene::Update()
 	{
 		IMAGEMANAGER->SetCameraPosition(WINSIZE_X / 2, IMAGEMANAGER->GetCameraPosition().y);
 	}
-	//cout << IMAGEMANAGER->GetCameraPosition().x << endl;
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
 }
 

@@ -9,7 +9,7 @@ class AngelStatue : public Enemy
 		eEndAttack,
 		eEnd
 	};
-
+	int m_state;
 	vImage* m_vimage[eEnd];
 	bool m_attack;
 

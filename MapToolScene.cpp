@@ -47,7 +47,6 @@ void MapToolScene::Init()
 	MY_UTILITY::ConvertStructureString2Vec(&m_sturctDatas, strData);
 	MY_UTILITY::ConvertStructureString2Vec(&m_objectDatas, objData);
 
-	cout << "";
 }
 
 void MapToolScene::Update()
@@ -100,13 +99,8 @@ void MapToolScene::Render()
 
 	IMAGEMANAGER->DrawMapTile(m_tiles);
 
-
 	IMAGEMANAGER->DrawMapStructureFoward(m_sturctDatas);
-	for (auto iter : m_sturctDatas)
-	{
-		if (iter->isBack == false)
-			IMAGEMANAGER->Render(m_structureImages[iter->key], iter->x, iter->y, 2, 2);
-	}
+
 	for (auto iter : m_objectDatas)
 	{
 		IMAGEMANAGER->CenterRender(m_objectImages[iter->key], iter->x, iter->y, 2, 2);

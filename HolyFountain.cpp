@@ -32,20 +32,20 @@ void HolyFountainLeft::Render()
 {
 	if (_isLeftPlayOn == false)
 	{
-		IMAGEMANAGER->CenterRender(_imgLeftFountainDeActivate, 100, WINSIZE_Y / 2 + 120, 2, 2, 0, false);
+		IMAGEMANAGER->CenterRender(_imgLeftFountainDeActivate, m_obj->x, m_obj->y, 2, 2, 0, false);
 	}
 	if (_isLeftPlayOn == true)
 	{
 		if (_isLeftOrbActing == false)
 		{
-			_imgLeftOrbStart->CenterRender(100, WINSIZE_Y / 2 - 30, 2, 2, 0, false);
+			_imgLeftOrbStart->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, false);
 		}
 
-		_imgLeftFountainActivate->CenterRender(100, WINSIZE_Y / 2 + 120, 2, 2, 0, false);
+		_imgLeftFountainActivate->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, false);
 	}
 	if (_imgLeftOrbStart->GetIsImageEnded() == true)
 	{
-		_imgLeftOrbActing->CenterRender(98, WINSIZE_Y / 2 - 28, 2, 2, 0, false);
+		_imgLeftOrbActing->CenterRender(m_obj->x, m_obj->y - 120, 2, 2, 0, false);
 
 		_isLeftOrbActing = true;
 	}
@@ -87,20 +87,20 @@ void HolyFountainRight::Render()
 {
 	if (_isRightPlayOn == false)
 	{
-		IMAGEMANAGER->CenterRender(_imgRightFountainDeActivate, WINSIZE_X - 100, WINSIZE_Y / 2 + 120, 2, 2, 0, false);
+		IMAGEMANAGER->CenterRender(_imgRightFountainDeActivate, m_obj->x, m_obj->y, 2, 2, 0, false);
 	}
 	if (_isRightPlayOn == true)
 	{
 		if (_isRightOrbActing == false)
 		{
-			_imgRightOrbStart->CenterRender(WINSIZE_X - 100, WINSIZE_Y / 2 - 30, 2, 2, 0, false);
+			_imgRightOrbStart->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, false);
 		}
 
-		_imgRightFountainActivate->CenterRender(WINSIZE_X - 100, WINSIZE_Y / 2 + 120, 2, 2, 0, false);
+		_imgRightFountainActivate->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, false);
 	}
 	if (_imgRightOrbStart->GetIsImageEnded() == true)
 	{
-		_imgRightOrbActing->CenterRender(WINSIZE_X - 102, WINSIZE_Y / 2 - 28, 2, 2, 0, false);
+		_imgRightOrbActing->CenterRender(m_obj->x, m_obj->y - 120, 2, 2, 0, false);
 
 		_isRightOrbActing = true;
 	}
