@@ -29,10 +29,6 @@ void TentaclesOfLight::Init()
 	m_collision = m_obj->AddComponent<CollisionComponent>();
 	m_hitpointcollision = m_obj->AddComponent<CollisionComponent>();
 
-	m_obj->GetCollisionComponent().push_back(m_collision);
-	m_obj->GetCollisionComponent().push_back(m_hitpointcollision);
-
-
 	m_obj->AddComponent<RigidBodyComponent>();
 	m_obj->AddCollisionComponent(m_collision);
 	m_obj->AddCollisionComponent(m_hitpointcollision);
