@@ -16,7 +16,7 @@ private:
 	Head* m_headList[1];
 	eSkulSpecies m_headSlot;
 	Head* m_nowHead;
-
+	
 	int m_life;
 	float m_attack;
 	float m_deffendence;

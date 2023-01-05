@@ -36,6 +36,7 @@ private:
 	float m_hpbartimer;
 	float m_motiontimer;
 	float m_hiteffecttimer;
+	float m_effecttimer;
 	float m_dietimer;
 
 	CollisionComponent* m_hitCollision;
