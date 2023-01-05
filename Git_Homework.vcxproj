@@ -166,7 +166,6 @@
     </ClCompile>
     <ClCompile Include="Head_Basic.cpp" />
     <ClCompile Include="HolyFountain.cpp" />
-    <ClCompile Include="HollyFountain.cpp" />
     <ClCompile Include="Hporb.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -238,7 +237,6 @@
     </ClInclude>
     <ClInclude Include="Head_Basic.h" />
     <ClInclude Include="HolyFountain.h" />
-    <ClInclude Include="HollyFountain.h" />
     <ClInclude Include="Hporb.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Inventory.h" />
