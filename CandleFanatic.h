@@ -3,6 +3,8 @@
 class CandleFanatic :public Enemy
 {
 private:
+	int m_state;
+	bool m_isL;
 	enum ImageState
 	{
 		eIdle,
