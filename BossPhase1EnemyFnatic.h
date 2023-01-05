@@ -14,7 +14,7 @@ private:
 		eWalk,
 		eEnd
 	};
-
+	bool m_isL;
 	vImage* img[State::eEnd];
 public:
 

@@ -157,6 +157,7 @@
     <ClCompile Include="EnemyTestScene.cpp" />
     <ClCompile Include="ExObject.cpp" />
     <ClCompile Include="Fanatic.cpp" />
+    <ClCompile Include="FireKnife.cpp" />
     <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="Gold.cpp" />
     <ClCompile Include="GoldResult.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="EnemyTestScene.h" />
     <ClInclude Include="ExObject.h" />
     <ClInclude Include="Fanatic.h" />
+    <ClInclude Include="FireKnife.h" />
     <ClInclude Include="Gambler.h" />
     <ClInclude Include="Gold.h" />
     <ClInclude Include="GoldResult.h" />
