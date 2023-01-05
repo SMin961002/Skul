@@ -152,6 +152,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Basic_Reborn", L"./Resources/Png/Skul/Basic/Motion/Reborn/", 1, 27);
 	AddImageVector("Basic_Skill", L"./Resources/Png/Skul/Basic/Motion/Skill/", 1, 4);
 	AddImageVector("Basic_TagAction", L"./Resources/Png/Skul/Basic/Motion/TagAction/", 1, 14);
+
 	//일반스컬 - 머리 없는 모션 이미지
 	AddImageVector("Basic_Headless_Idle", L"./Resources/Png/Skul/Basic/Headless/HeadlessIdle/", 1, 4);
 	AddImageVector("Basic_Headless_Walk", L"./Resources/Png/Skul/Basic/Headless/HeadlessWalk/", 1, 8);
@@ -175,17 +176,18 @@ void ImageManager::LoadImages()
 	//갬블러스컬 모션 이미지 경로수정중
 	AddImageVector("Gambler_Idle", L"./Resources/Png/Skul/Gambler/Motion/Idle/", 1, 7);
 	AddImageVector("Gambler_Walk", L"./Resources/Png/Skul/Gambler/Motion/Walk/", 1, 6);
-	//AddImageVector("Gambler_Dash", L"./Resources/Png/Skul/Gambler/Motion/Dash/", 1, 5);
-	//AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 5);
-	//AddImageVector("Gambler_AttackA2", L"./Resources/Png/Skul/Gambler/Motion/AttackA2/", 1, 6);
-	//AddImageVector("Gambler_AttackB1", L"./Resources/Png/Skul/Gambler/Motion/AttackB1/", 1, 6);
-	//AddImageVector("Gambler_AttackB2", L"./Resources/Png/Skul/Gambler/Motion/AttackB2/", 1, 6);
-	//AddImageVector("Gambler_AttackB3", L"./Resources/Png/Skul/Gambler/Motion/AttackB3/", 1, 8);
-	//AddImageVector("Gambler_JumpStart", L"./Resources/Png/Skul/Gambler/Motion/JumpStart/", 1, 3);
-	//AddImageVector("Gambler_JumpRepeat", L"./Resources/Png/Skul/Gambler/Motion/JumpRepeat/", 1, 2);
-	//AddImageVector("Gambler_JumpFall", L"./Resources/Png/Skul/Gambler/Motion/JumpFall/", 1, 3);
-	//AddImageVector("Gambler_JumpAttack", L"./Resources/Png/Skul/Gambler/Motion/JumpAttack/", 1, 5);
-	//AddImageVector("Gambler_RussianRoulette", L"./Resources/Png/Skul/Gambler/Motion/RussianRoulette/", 1, 8);
+	AddImageVector("Gambler_Dash", L"./Resources/Png/Skul/Gambler/Motion/Dash/", 1, 5);
+	AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 5);
+	AddImageVector("Gambler_AttackA2", L"./Resources/Png/Skul/Gambler/Motion/AttackA2/", 1, 6);
+	AddImageVector("Gambler_AttackB1", L"./Resources/Png/Skul/Gambler/Motion/AttackB1/", 1, 6);
+	AddImageVector("Gambler_AttackB2", L"./Resources/Png/Skul/Gambler/Motion/AttackB2/", 1, 6);
+	AddImageVector("Gambler_AttackB3", L"./Resources/Png/Skul/Gambler/Motion/AttackB3/", 1, 8);
+	AddImageVector("Gambler_JumpStart", L"./Resources/Png/Skul/Gambler/Motion/JumpStart/", 1, 3);
+	AddImageVector("Gambler_JumpRepeat", L"./Resources/Png/Skul/Gambler/Motion/JumpRepeat/", 1, 2);
+	AddImageVector("Gambler_JumpFall", L"./Resources/Png/Skul/Gambler/Motion/JumpFall/", 1, 3);
+	AddImageVector("Gambler_JumpAttack", L"./Resources/Png/Skul/Gambler/Motion/JumpAttack/", 1, 5);
+	AddImageVector("Gambler_RussianRoulette", L"./Resources/Png/Skul/Gambler/Motion/RussianRoulette/", 1, 8);
+	AddImageVector("Gambler_TagAction", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 11);
 
 	// 타일 이미지
 	AddTileImage(L"./Resources/Tile/4Stage/01.png");

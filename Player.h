@@ -1,8 +1,10 @@
 #pragma once
 #include "Head_Basic.h"
+#include "Gambler.h"
 
 //↓/↓/Comment at End of Page/↓/↓/
-//head가 컴포넌트를 갖고, 머리교체할 때 init에서 m_obj연결?
+//.......!...
+//m_nowHead의 OnCollision갖다쓰기
 class Player : public Component
 {
 private:
@@ -13,10 +15,12 @@ private:
 	};
 	CImage* m_UIImage[UITag::eEnd];
 
-	Head* m_headList[1];
+	Head* m_headList[static_cast<int>(eSkulSpecies::Empty) +1];
 	eSkulSpecies m_headSlot;
 	Head* m_nowHead;
+	float m_headTagCool;
 
+	int m_HpMax;
 	int m_life;
 	float m_attack;
 	float m_deffendence;
@@ -54,6 +58,8 @@ public:
 	CollisionComponent* m_collAutoAttack;
 	CollisionComponent* m_collSkill;
 
+	bool  m_haveArtifact;
+
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -61,12 +67,16 @@ public:
 	virtual void Render() override;
 	virtual void UIRender() override;
 
+	virtual void OnCollision(string collisionName, Object* other) override;
+	void InputArtifactKey();
+
+	//↓====PlayerMove.cpp에 있습니다====↓//
 	void Move();
 	//	in move
 	void InputJumpKey();
 	void InputDashKey();
 	void InputArrowKey();
-
+	//↑====PlayerMove.cpp에 있습니다====↑//
 	void ResetJump() {
 		m_jumpCount = 0;
 		m_jumpping = false;
@@ -91,6 +101,10 @@ public:
 			Head* tmp = m_nowHead;
 		}
 	}
+
+public:
+	float GetplayerX(void) { return m_obj->x; }
+	float GetplayerY(void) { return m_obj->y; }
 	Head* GetNowHead() { return m_nowHead; }
 
 	//물리공격 데미지를 입력해주세요
@@ -118,13 +132,6 @@ public:
 		m_obj->y += moveY;
 	}
 
-	void InputArtifactKey();
-	bool  m_haveArtifact;
-
-	virtual void OnCollision(string collisionName, Object* other) override;
-	float GetplayerX(void) { return m_obj->x; }
-	float GetplayerY(void) { return m_obj->y; }
-
 	Player() : m_life(100) {};
 };
 
@@ -144,7 +151,8 @@ public:
 
  # 아티펙트 어떻게 소지시킬것인지
 
-
+ on collision함수 발동시
+ head의 OnCollision함수를 가져와서 실행시킨다.
 
 bool canWalk, canDash, canJump, canSkillA, B, canAttack등등의 변수 만들어서
 update에서 해당 변수 on off 함수실행 조절하는 방식 고려해보기

@@ -30,6 +30,7 @@ public:
 	void TagAction() override;
 
 	void DrawCharactor() override;
+	void OnCollisionAutoAttack(Enemy* obj, float dmg) override;
 
 	void PutOnHead()
 	{

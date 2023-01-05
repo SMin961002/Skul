@@ -182,6 +182,9 @@
     <ClCompile Include="Gold.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerMove.cpp">
+      <Filter>Game\Object\Charactor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
