@@ -21,7 +21,6 @@ HRESULT IOFillManager::TileFileRead(vector<vector<int>>* tiles)
 	vector<int> lists;
 	while (inputFile >> str)
 	{
-		cout << str << endl;
 		MY_UTILITY::ConvertString2Vec(&lists, str);
 		tiles->push_back(lists);
 	}
@@ -56,7 +55,6 @@ HRESULT IOFillManager::MapFileRead(string section, string key, vector<string>* m
 	}
 	while (inputFile >> str)
 	{
-		cout << str << endl;
 		mapList->push_back(str);
 	}
 	inputFile.close();

@@ -11,6 +11,7 @@ private:
 		eRun,
 		eEnd
 	};
+	int m_state;
 
 	vImage* m_vimage[eEnd];
 

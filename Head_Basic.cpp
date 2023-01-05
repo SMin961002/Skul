@@ -101,7 +101,6 @@ void Head_Basic::CollisionSetting()
 	m_TagAttack->SetIsActive(false);
 	m_collSkill = m_TagAttack;
 
-	cout << m_BasicHeadAttack << "기본공격 콜리전 주소" << endl;
 }
 
 void Head_Basic::Release()
@@ -174,7 +173,6 @@ void Head_Basic::ActionArrangement()
 		}
 		if (m_imageChange)
 		{
-			cout << "이미지 바꾸기 " << action << endl;
 			m_attackCast = false;
 			if (nowImg != img[m_action])
 			{

@@ -25,7 +25,6 @@ void Player::Init()
 	m_obj->AddCollisionComponent(m_collSkill);
 	m_collAutoAttack->SetObject(m_obj);
 	m_collSkill->SetObject(m_obj);
-	cout << m_collAutoAttack << "플레이어 m_collAuto 주소" << endl;
 
 	m_life = 100;
 	m_artifactCoolD = 0;
@@ -270,7 +269,6 @@ void Player::OnCollision(string collisionName, Object* other)
 	{
 		if (other->GetName() == "Enemy")
 		{
-			cout << "적에게공격" << endl;
 			other->GetComponent<Enemy>()->HitEnemy(10);
 			//EFFECTMANAGER->AddEffect<PlayerHit>(m_obj->x, m_obj->y, m_isLeft);
 		}
