@@ -392,6 +392,8 @@ void ImageManager::LoadImages()
 	AddImageVector("AStatue_Attack", L"Resources/Monster/Angel_Statue/Attack/", 1, 40);
 	AddImageVector("AStatue_End", L"Resources/Monster/Angel_Statue/End/", 1, 10);
 	AddImageVector("AStatue_Idle", L"Resources/Monster/Angel_Statue/Idle/", 1, 1);
+	AddImageVector("AStatue_AttackRedadyEffect", L"Resources/Monster/Angel_Statue/AttackEffectReady/", 1, 18);
+	AddImageVector("AStatue_AttackEffect", L"Resources/Monster/Angel_Statue/AttackEffect/", 1, 22);
 	AddImageVector("GoldResoult", L"Resources/GoldResult/Idle/", 1, 19);
 	AddImageVector("GoldResoultActive", L"Resources/GoldResult/Idle/", 1, 1);
 

@@ -49,10 +49,6 @@ void LeoniaSoldier::Init()
 	m_collision = m_obj->AddComponent<CollisionComponent>();
 	m_hitpointcollision = m_obj->AddComponent<CollisionComponent>();
 
-	m_obj->GetCollisionComponent().push_back(m_collision);
-	m_obj->GetCollisionComponent().push_back(m_hitpointcollision);
-
-
 	m_obj->AddComponent<RigidBodyComponent>();
 	m_obj->AddCollisionComponent(m_collision);
 	m_obj->AddCollisionComponent(m_hitpointcollision);
@@ -220,6 +216,9 @@ void LeoniaSoldier::OnCollision(string collisionName, Object* other)
 		if (other->GetName() == "player")
 		{
 			m_hitpoint = true;
+			Player* ply = other->GetComponent<Player>();
+			ply->HitPlayerMagicAttack(10);
+			ply->HitPlayerKnockBack(5, 5);
 		}
 	}
 }
