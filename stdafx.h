@@ -53,6 +53,12 @@ enum ObjectTag
 	eEndTag
 };
 
+enum ItemTag
+{
+	eCaerleonSword,
+	eEnd
+};
+
 struct StructureData
 {
 	string key = "";

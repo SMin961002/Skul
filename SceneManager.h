@@ -11,6 +11,7 @@ public:
 	std::map<std::string, Scene*> m_sceneList;
 	vector<vector<int>> m_tiles;
 	bool m_isMenuActive;
+	bool m_isInvenActive;
 
 	SceneManager();
 	~SceneManager();
@@ -29,6 +30,9 @@ public:
 
 	void SetMenuActive(bool active) { m_isMenuActive = active; }
 	bool GetMenuActive() { return m_isMenuActive; }
+	void SetInvenActive(bool active) { m_isInvenActive = active; }
+	bool GetInvenActive() { return m_isInvenActive; }
+
 	CImage* GetPadeImage() { return fadeImage; }
 };
 

@@ -123,6 +123,10 @@ void ImageManager::Init()
 
 void ImageManager::LoadImages()
 {
+	// 아이템 이미지
+	AddImage("CaerleonSword", L"./Resources/Item/CaerleonSword.png");
+
+
 	// UI 이미지
 	AddImage("Pause_Frame", L"./Resources/UI/Pause_Frame.png");
 
@@ -469,12 +473,9 @@ void ImageManager::LoadImages()
 	AddObjectImage("GoldResoult", L"./Resources/GoldResult/Idle/01.png");
 	AddObjectImage("HeadResult", L"./Resources/HeadResult/Idle/01.png");
 
-
-
 	// 인게임 UI이미지
 	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");
 	AddImage("PlayerStatusUI", L"./Resources/UI/PlayerStatusUI.png");
-
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
@@ -765,7 +766,7 @@ void ImageManager::D2dTextOut(wstring str, float x, float y, D2D1_COLOR_F color,
 
 	pRT->SetTransform((matS * matT));
 
-	m_brush->SetColor({ 1.f / 255 * color.r,1.f / 255 * color.g,1.f / 255 * color.b,1 });
+	m_brush->SetColor({ 1.f / 255 * color.r,1.f / 255 * color.g,1.f / 255 * color.b,255 });
 	pRT->DrawTextA(str.c_str(), str.size(), tf, fRect, m_brush);
 }
 

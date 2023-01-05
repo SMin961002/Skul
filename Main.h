@@ -1,11 +1,12 @@
 #pragma once
 #include "MenuUI.h"
+#include "Inventory.h"
 //#include  ""
 class Main
 {
 private:
 	MenuUI* menu = nullptr;
-	//MenuUI* menu = nullptr;
+	Inventory* inven = nullptr;
 public:
 	Main() {}
 	~Main() {}
