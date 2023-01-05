@@ -108,16 +108,16 @@
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
     <ClCompile Include="Baptism.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
     </ClCompile>
     <ClCompile Include="HolyFountain.cpp">
       <Filter>Game\Object\Boss\HolyFountain</Filter>
     </ClCompile>
     <ClCompile Include="Worship.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
     </ClCompile>
     <ClCompile Include="Nervousness.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+      <Filter>Game\Object\Boss\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="EnemyTestScene.cpp">
       <Filter>Game\Scene\TestScene</Filter>
@@ -157,7 +157,7 @@
       <Filter>Core\Manager\EffectManager</Filter>
     </ClCompile>
     <ClCompile Include="Consecration.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Object\Enemy</Filter>
@@ -282,16 +282,16 @@
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
     <ClInclude Include="Baptism.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
     </ClInclude>
     <ClInclude Include="HolyFountain.h">
       <Filter>Game\Object\Boss\HolyFountain</Filter>
     </ClInclude>
     <ClInclude Include="Worship.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
     </ClInclude>
     <ClInclude Include="Nervousness.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
+      <Filter>Game\Object\Boss\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="EnemyTestScene.h">
       <Filter>Game\Scene\TestScene</Filter>
@@ -315,7 +315,7 @@
       <Filter>Game\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Consecration.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
+      <Filter>Game\Object\Boss\Pattern\Casting</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Game\Object\Enemy</Filter>
@@ -445,12 +445,6 @@
     <Filter Include="Game\Object\Boss\HolyFountain">
       <UniqueIdentifier>{e3708110-68e5-4ccd-9104-715376429e00}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Boss\Pattern%28do nothing%29">
-      <UniqueIdentifier>{45cef852-d6b6-445e-9704-ad24137bf8f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Boss\Pattern%28do nothing%29\Casting">
-      <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Scene\TestScene">
       <UniqueIdentifier>{640150ea-85d8-4b69-aac1-335f330d07a4}</UniqueIdentifier>
     </Filter>
@@ -474,6 +468,12 @@
     </Filter>
     <Filter Include="Game\Scene\Shop">
       <UniqueIdentifier>{634fd514-f221-4956-9ee2-ed6d146eaec9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Pattern">
+      <UniqueIdentifier>{45cef852-d6b6-445e-9704-ad24137bf8f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Pattern\Casting">
+      <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
