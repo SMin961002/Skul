@@ -313,7 +313,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Phase2_Boss_CreateBall_End", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/End/Sacrament_End_", 1, 7);
 	// 2페이즈_상단 텔포, 직선 레이저
 
-	AddImageVector("Phase1_Boss_Enemy_Fnatic_Candle_G", L"./Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/", 1, 58);
+	AddImage("FireKnife", L"./Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/FireKnife.png");
 
 
 	//==========================================================================================================
@@ -427,6 +427,11 @@ void ImageManager::LoadImages()
 	AddImageVector("Normal_Monster2_Move", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Move/", 8, 14);
 	AddImageVector("Normal_Monster2_Up", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Up/", 27, 83);
 
+	AddImageVector("Normal_Monster1_Up", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/Up/", 9, 58);
+	AddImageVector("Normal_Monster1_Idle", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/Idle/", 87, 91);
+	AddImageVector("Normal_Monster1_Move", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/Move/", 92, 99);
+	AddImageVector("Normal_Monster1_FireReady", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/FireReady/", 69, 85);
+	AddImageVector("Normal_Monster1_Fire", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/Fire/", 59, 68);
 
 	//맵 오브젝트
 	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");

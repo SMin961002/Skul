@@ -6,7 +6,19 @@ class BossPhase1EnemyCandle : public Component
 private:
 	float m_ratherY;
 	CImage* m_ratherImg;
-	vImage * img;
+	int m_state = 0;
+	enum State
+	{
+		eUp,
+		eIdle,
+		eAttack,
+		eAttackReady,
+		eWalk,
+		eEnd
+	};
+	bool m_isL;
+
+	vImage* img[State::eEnd];
 public:
 	BossPhase1EnemyCandle() {}
 	~BossPhase1EnemyCandle() {}
