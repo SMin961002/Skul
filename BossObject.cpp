@@ -361,13 +361,12 @@ void BossObject::Render()
 		case 2:
 			for (int i = 0; i < 2; i++)
 			{
-				_vWorshipLeft[i]->SetIsActive(true);
-				_vWorshipRight[i]->SetIsActive(true);
+				_vWorshipLeft[MY_UTILITY::getFromIntTo(0,10)]->SetIsActive(true);
+				_vWorshipRight[MY_UTILITY::getFromIntTo(0,10)]->SetIsActive(true);
 			}
 			break;
 		}
 	}
-
 }
 
 void BossObject::Release()
