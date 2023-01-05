@@ -157,7 +157,7 @@
     <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="Head.cpp" />
     <ClCompile Include="Head_Basic.cpp" />
-    <ClCompile Include="HollyFountain.cpp" />
+    <ClCompile Include="HolyFountain.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
@@ -215,7 +215,7 @@
     <ClInclude Include="Gambler.h" />
     <ClInclude Include="Head.h" />
     <ClInclude Include="Head_Basic.h" />
-    <ClInclude Include="HollyFountain.h" />
+    <ClInclude Include="HolyFountain.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="IOFillManager.h" />
     <ClInclude Include="KeyManager.h" />
