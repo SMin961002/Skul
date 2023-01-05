@@ -37,7 +37,7 @@ void BlackRock::Init()
 
 void BlackRock::Update()
 {
-	if (m_vimage[eBlackRock]->GetIsImageEnded())
+	if (m_vimage[eGetBlackRock]->GetIsImageEnded())
 	{
 		m_obj->ObjectDestroyed();
 	}

@@ -20,13 +20,15 @@ public:
 
 	//예외처리 안되어있으니 클래스 넣을때 주의해주세요~
 	template <class T>
-	void AddEffect(float startX, float startY, bool isReversed, float scale = 1)
+	T* AddEffect(float startX, float startY, bool isReversed, float scale = 1)
 	{
 		Effect* effect = new T;
 		effect->Init();
 		effect->SetEffectStart(startX, startY, isReversed, scale);
 		m_vectorEffectList.push_back(effect);
+		return dynamic_cast<T*> (effect);
 	}
+
 };
 
 #define EFFECTMANAGER EffectManager::GetInstance()
@@ -35,11 +37,11 @@ public:
 < 사용 방법 >
 준비 : 넣고자 하는 Effect에 해당하는 클래스를 만들어주세요!
 	1. 솔루션탐색기→Game→Object→Effect 필터에
-	    해당 이펙트를 사용하는 주체에 해당하는 .h, .cpp를 들어가주세요
+		해당 이펙트를 사용하는 주체에 해당하는 .h, .cpp를 들어가주세요
 
 	2. public Effect 클래스를 상속받는 이펙트 클래스를 만들어주세요
 		ex ) class NomalHit : public Effect {}
-	
+
 	3. 초기값 세팅받을 Init함수를 만들어주세요.
 		Effect에 있는 Init을 오버라이드 하는 형식입니다.
 		Effect::Init()을 한번 실행하고,
