@@ -138,6 +138,7 @@
     <ClCompile Include="BallFanatic.cpp" />
     <ClCompile Include="Baptism.cpp" />
     <ClCompile Include="BlackFanatic.cpp" />
+    <ClCompile Include="BlackRock.cpp" />
     <ClCompile Include="BossEffect.cpp" />
     <ClCompile Include="BossObject.cpp" />
     <ClCompile Include="BossScene.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="BallFanatic.h" />
     <ClInclude Include="Baptism.h" />
     <ClInclude Include="BlackFanatic.h" />
+    <ClInclude Include="BlackRock.h" />
     <ClInclude Include="BossEffect.h" />
     <ClInclude Include="BossObject.h" />
     <ClInclude Include="BossScene.h" />

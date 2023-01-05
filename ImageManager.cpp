@@ -389,6 +389,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Secrifice", L"Resources/Monster/Effect/Secrifice/", 1, 11);
 	AddImageVector("SkulAttack", L"Resources/Monster/Effect/SkulAttack/", 1, 10);
 	AddImageVector("DeadEffect", L"Resources/Monster/Effect/Dead/", 1, 6);
+	AddImageVector("AppearEffect", L"Resources/Monster/Effect/Appear/", 1, 11);
 
 	// 상점 오브젝트 
 	AddImageVector("Atifact", L"Resources/Shop/Atifact/", 1, 24);
@@ -402,6 +403,9 @@ void ImageManager::LoadImages()
 	AddImageVector("HeadResult", L"./Resources/HeadResult/Idle/", 1, 1);
 	AddImageVector("HeadResultActive", L"./Resources/HeadResult/Active/", 1, 7);
 	AddImageVector("Hporb", L"Resources/Item/Hporb/", 1, 72);
+	AddImageVector("BlackRock", L"Resources/Item/BlackRock/Rock/", 1, 1);
+	AddImageVector("GetBlackRock", L"Resources/Item/BlackRock/GetRock/", 1, 28);
+
 
 	//맵 오브젝트
 	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");

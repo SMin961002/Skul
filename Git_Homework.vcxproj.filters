@@ -171,7 +171,6 @@
       <Filter>Game\Scene\TestScene</Filter>
     </ClCompile>
     <ClCompile Include="HeadItem.cpp" />
-    <ClCompile Include="Hporb.cpp" />
     <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="HeadManager.cpp">
       <Filter>Game\Object\Charactor\Head</Filter>
@@ -180,6 +179,12 @@
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="Gold.cpp">
+      <Filter>Game\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Hporb.cpp">
+      <Filter>Game\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackRock.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
@@ -338,7 +343,6 @@
       <Filter>Game\Scene\TestScene</Filter>
     </ClInclude>
     <ClInclude Include="HeadItem.h" />
-    <ClInclude Include="Hporb.h" />
     <ClInclude Include="ProjectileHeadSkull.h" />
     <ClInclude Include="BossEffect.h">
       <Filter>Game\Effect</Filter>
@@ -350,6 +354,12 @@
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="Gold.h">
+      <Filter>Game\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Hporb.h">
+      <Filter>Game\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackRock.h">
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
