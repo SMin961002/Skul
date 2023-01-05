@@ -165,7 +165,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Head_Basic.cpp" />
-    <ClCompile Include="HollyFountain.cpp" />
+    <ClCompile Include="HolyFountain.cpp" />
     <ClCompile Include="Hporb.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -236,7 +236,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Head_Basic.h" />
-    <ClInclude Include="HollyFountain.h" />
+    <ClInclude Include="HolyFountain.h" />
     <ClInclude Include="Hporb.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Inventory.h" />

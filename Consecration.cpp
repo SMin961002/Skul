@@ -17,7 +17,6 @@ void Consecration::Update()
 	{
 		m_obj->x += 3;
 	}
-	_deltaTime += DELTA_TIME;
 
 	if (_deltaTime > 2)
 	{
@@ -28,6 +27,7 @@ void Consecration::Update()
 void Consecration::Render()
 {
 	_imgPhase1BossConsecrationLoop->CenterRender(m_obj->x, WINSIZE_Y / 2, 1.8, 1.8, 0, false);
+	_deltaTime += DELTA_TIME;
 }
 
 void Consecration::Release()

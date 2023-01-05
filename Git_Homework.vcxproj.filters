@@ -107,23 +107,11 @@
     <ClCompile Include="Head_Basic.cpp">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
-    <ClCompile Include="Baptism.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
-    </ClCompile>
-    <ClCompile Include="HollyFountain.cpp">
+    <ClCompile Include="HolyFountain.cpp">
       <Filter>Game\Object\Boss\HolyFountain</Filter>
     </ClCompile>
-    <ClCompile Include="Worship.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
-    </ClCompile>
-    <ClCompile Include="Consecration.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
-    </ClCompile>
-    <ClCompile Include="Nervousness.cpp">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectManager.cpp">
-      <Filter>Core\Manager\Effectmanager</Filter>
+    <ClCompile Include="EnemyTestScene.cpp">
+      <Filter>Game\Scene\TestScene</Filter>
     </ClCompile>
     <ClCompile Include="PixelCollisionComponent.cpp">
       <Filter>Game\Component\PixelCollisionComponent</Filter>
@@ -156,22 +144,15 @@
     <ClCompile Include="PlayerEffect.cpp">
       <Filter>Game\Object\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Core\Manager\EffectManager</Filter>
+    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Object\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="MenuUI.cpp" />
-    <ClCompile Include="DoorObject.cpp" />
-    <ClCompile Include="ShopScene.cpp" />
-    <ClCompile Include="NpcObject.cpp" />
-    <ClCompile Include="Inventory.cpp" />
-    <ClCompile Include="GoldResult.cpp" />
-    <ClCompile Include="HeadResult.cpp" />
-    <ClCompile Include="ResultValue.cpp" />
     <ClCompile Include="EnemyTestScene.cpp">
       <Filter>Game\Scene\TestScene</Filter>
     </ClCompile>
-    <ClCompile Include="HeadItem.cpp" />
-    <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="HeadManager.cpp">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
@@ -186,6 +167,48 @@
     </ClCompile>
     <ClCompile Include="BlackRock.cpp">
       <Filter>Game\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Baptism.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Consecration.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopScene.cpp">
+      <Filter>Game\Scene\ShopScene</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcObject.cpp">
+      <Filter>Game\Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorObject.cpp">
+      <Filter>Game\Object\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="GoldResult.cpp">
+      <Filter>Game\Reward\Gold</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Game\Object\Charactor\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadItem.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadResult.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClCompile>
+    <ClCompile Include="Worship.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Nervousness.cpp">
+      <Filter>Game\Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileHeadSkull.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuUI.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultValue.cpp">
+      <Filter>Game\Reward</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -294,23 +317,11 @@
     <ClInclude Include="Head_Basic.h">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
-    <ClInclude Include="Baptism.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
-    </ClInclude>
-    <ClInclude Include="HollyFountain.h">
+    <ClInclude Include="HolyFountain.h">
       <Filter>Game\Object\Boss\HolyFountain</Filter>
     </ClInclude>
-    <ClInclude Include="Worship.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
-    </ClInclude>
-    <ClInclude Include="Consecration.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29\Casting</Filter>
-    </ClInclude>
-    <ClInclude Include="Nervousness.h">
-      <Filter>Game\Object\Boss\Pattern%28do nothing%29</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectManager.h">
-      <Filter>Core\Manager\Effectmanager</Filter>
+    <ClInclude Include="EnemyTestScene.h">
+      <Filter>Game\Scene\TestScene</Filter>
     </ClInclude>
     <ClInclude Include="PixelCollisionComponent.h">
       <Filter>Game\Component\PixelCollisionComponent</Filter>
@@ -327,23 +338,16 @@
     <ClInclude Include="PlayerEffect.h">
       <Filter>Game\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="BossEffect.h">
+      <Filter>Game\Effect</Filter>
+    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Game\Object\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="MenuUI.h" />
-    <ClInclude Include="DoorObject.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="ShopScene.h" />
-    <ClInclude Include="NpcObject.h" />
-    <ClInclude Include="Inventory.h" />
-    <ClInclude Include="GoldResult.h" />
-    <ClInclude Include="HeadResult.h" />
-    <ClInclude Include="ResultValue.h" />
     <ClInclude Include="EnemyTestScene.h">
       <Filter>Game\Scene\TestScene</Filter>
     </ClInclude>
-    <ClInclude Include="HeadItem.h" />
-    <ClInclude Include="ProjectileHeadSkull.h" />
     <ClInclude Include="BossEffect.h">
       <Filter>Game\Effect</Filter>
     </ClInclude>
@@ -361,6 +365,48 @@
     </ClInclude>
     <ClInclude Include="BlackRock.h">
       <Filter>Game\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Baptism.h">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Consecration.h">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopScene.h">
+      <Filter>Game\Scene\ShopScene</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcObject.h">
+      <Filter>Game\Object\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorObject.h">
+      <Filter>Game\Object\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldResult.h">
+      <Filter>Game\Reward\Gold</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Game\Object\Charactor\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadItem.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadResult.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
+    <ClInclude Include="Worship.h">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Nervousness.h">
+      <Filter>Game\Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileHeadSkull.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuUI.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultValue.h">
+      <Filter>Game\Reward</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -475,12 +521,6 @@
     <Filter Include="Game\Object\Boss\HolyFountain">
       <UniqueIdentifier>{e3708110-68e5-4ccd-9104-715376429e00}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Boss\Pattern%28do nothing%29">
-      <UniqueIdentifier>{45cef852-d6b6-445e-9704-ad24137bf8f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Boss\Pattern%28do nothing%29\Casting">
-      <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Scene\TestScene">
       <UniqueIdentifier>{640150ea-85d8-4b69-aac1-335f330d07a4}</UniqueIdentifier>
     </Filter>
@@ -495,6 +535,30 @@
     </Filter>
     <Filter Include="Game\Object\Item">
       <UniqueIdentifier>{6527fbcc-7795-49bb-8880-efc966795820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\ShopScene">
+      <UniqueIdentifier>{0e621ba9-566d-4faa-92e9-a00d3c1f294f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\NPC">
+      <UniqueIdentifier>{90125cd2-760f-48d3-bd7b-092c3a491e1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Door">
+      <UniqueIdentifier>{15dc87a9-9025-40e5-8f1e-7a1ab32862e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Inventory">
+      <UniqueIdentifier>{c84c77fd-48d6-45c2-a0d5-2357772714a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Boss\Casting Pattern">
+      <UniqueIdentifier>{9500bb92-e3e6-4f17-b274-0844524e6fbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI">
+      <UniqueIdentifier>{f24bbc4b-2ccf-412e-b1b0-8c584b6a3dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Reward">
+      <UniqueIdentifier>{c3238731-3b6c-4004-9ed2-254a681ef001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Reward\Gold">
+      <UniqueIdentifier>{bdfa397b-c7de-44ee-a9a8-d67c671fa42c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
