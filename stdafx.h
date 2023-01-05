@@ -28,7 +28,7 @@
 #include <d2d1.h>
 #include <d2d1helper.h>
 #include <dwrite.h>
-
+#include <dwrite_3.h>
 #pragma comment(lib , "Dwrite.lib")
 #pragma comment( lib, "dxerr.lib" )
 #pragma comment( lib, "dxguid.lib" )
@@ -44,9 +44,12 @@ using namespace std;
 enum ObjectTag
 {
 	eObject,
+	eNPC,
 	eSummons,
 	eEnemy,
+	eItem,
 	ePlayer,
+	ePlayerHead,
 	eEndTag
 };
 
@@ -57,6 +60,15 @@ struct StructureData
 	float y = 0;
 	bool isBack = false;
 	int page = 0;
+};
+
+enum class eSkulSpecies
+{
+	eBasic,
+	ePredator,
+	eDestroyer,
+	eGambler,
+	Empty
 };
 
 #define WIN_NAME "금강상태"

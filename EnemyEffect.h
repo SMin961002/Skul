@@ -30,3 +30,13 @@ public:
 	~DeadEffect() {}
 
 };
+
+class Appear : public Effect
+{
+public:
+	void Init() override;
+
+
+	Appear() {};
+	~Appear() {};
+};

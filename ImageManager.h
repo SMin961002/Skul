@@ -5,6 +5,7 @@ class GImage
 {
 private:
 public:
+	COLORREF pixel[32][32];
 	enum IMAGE_LOAD_KIND
 	{
 		LOAD_RESOURCE = 0, LOAD_FILE,	//리소스로 로딩, 파일로 로딩
@@ -40,9 +41,9 @@ private:
 	BLENDFUNCTION _blendFunc;		//알파 블렌드 기능
 	LPIMAGE_INFO _blendImage;		//알파 블렌드 이미지
 
-	LPIMAGE_INFO	_imageInfo;		//이미지 정보
 
 public:
+	LPIMAGE_INFO	_imageInfo;		//이미지 정보
 	HRESULT init(const char* fileName, float width, float height);
 	HDC GetMemDC() { return _imageInfo->hMemDC; }
 	float GetWidth() { return _imageInfo->width; }
@@ -138,7 +139,7 @@ public:
 	void Begin() { pRT->BeginDraw(); }
 	void End() { pRT->EndDraw(); }
 
-	void DrawCircle(float x, float y, float width);
+	void DrawCircle(float x, float y, float width );
 	void DrawRect(RECT rt);
 	void DrawRectCenter(RECT rt, CImage* img);
 	void DrawMapTile(vector<vector<int>> vec);
@@ -158,7 +159,7 @@ public:
 		camera.y = y;
 	}
 
-	void D2dTextOut(wstring str, float x, float y);
+	void D2dTextOut(wstring str, float x, float y, D2D1_COLOR_F color, float scale = 1);
 
 	vector<CImage*> GetTileImages()
 	{

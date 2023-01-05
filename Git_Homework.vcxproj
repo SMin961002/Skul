@@ -138,6 +138,7 @@
     <ClCompile Include="BallFanatic.cpp" />
     <ClCompile Include="Baptism.cpp" />
     <ClCompile Include="BlackFanatic.cpp" />
+    <ClCompile Include="BlackRock.cpp" />
     <ClCompile Include="BossEffect.cpp" />
     <ClCompile Include="BossObject.cpp" />
     <ClCompile Include="BossScene.cpp" />
@@ -155,11 +156,22 @@
     <ClCompile Include="ExObject.cpp" />
     <ClCompile Include="Fanatic.cpp" />
     <ClCompile Include="Gambler.cpp" />
+    <ClCompile Include="Gold.cpp" />
+    <ClCompile Include="GoldResult.cpp" />
     <ClCompile Include="Head.cpp" />
+    <ClCompile Include="HeadItem.cpp" />
+    <ClCompile Include="HeadResult.cpp" />
+    <ClCompile Include="HeadManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Head_Basic.cpp" />
     <ClCompile Include="HolyFountain.cpp" />
+    <ClCompile Include="HollyFountain.cpp" />
+    <ClCompile Include="Hporb.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LampFanatic.cpp" />
     <ClCompile Include="LeoniaSoldier.cpp" />
@@ -175,6 +187,8 @@
     <ClCompile Include="PixelCollisionComponent.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerEffect.cpp" />
+    <ClCompile Include="ResultValue.cpp" />
+    <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -196,6 +210,7 @@
     <ClInclude Include="BallFanatic.h" />
     <ClInclude Include="Baptism.h" />
     <ClInclude Include="BlackFanatic.h" />
+    <ClInclude Include="BlackRock.h" />
     <ClInclude Include="BossEffect.h" />
     <ClInclude Include="BossObject.h" />
     <ClInclude Include="BossScene.h" />
@@ -213,11 +228,22 @@
     <ClInclude Include="ExObject.h" />
     <ClInclude Include="Fanatic.h" />
     <ClInclude Include="Gambler.h" />
+    <ClInclude Include="Gold.h" />
+    <ClInclude Include="GoldResult.h" />
     <ClInclude Include="Head.h" />
+    <ClInclude Include="HeadItem.h" />
+    <ClInclude Include="HeadResult.h" />
+    <ClInclude Include="HeadManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Head_Basic.h" />
     <ClInclude Include="HolyFountain.h" />
+    <ClInclude Include="HollyFountain.h" />
+    <ClInclude Include="Hporb.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="IOFillManager.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LampFanatic.h" />
     <ClInclude Include="LeoniaSoldier.h" />
@@ -233,6 +259,8 @@
     <ClInclude Include="PixelCollisionComponent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerEffect.h" />
+    <ClInclude Include="ResultValue.h" />
+    <ClInclude Include="ProjectileHeadSkull.h" />
     <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />

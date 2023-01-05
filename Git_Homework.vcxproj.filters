@@ -162,17 +162,33 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Object\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="DoorObject.cpp">
-      <Filter>Game\Object\Door</Filter>
+    <ClCompile Include="MenuUI.cpp" />
+    <ClCompile Include="DoorObject.cpp" />
+    <ClCompile Include="ShopScene.cpp" />
+    <ClCompile Include="NpcObject.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="GoldResult.cpp" />
+    <ClCompile Include="HeadResult.cpp" />
+    <ClCompile Include="ResultValue.cpp" />
+    <ClCompile Include="EnemyTestScene.cpp">
+      <Filter>Game\Scene\TestScene</Filter>
     </ClCompile>
-    <ClCompile Include="MenuUI.cpp">
-      <Filter>Game\UI</Filter>
+    <ClCompile Include="HeadItem.cpp" />
+    <ClCompile Include="ProjectileHeadSkull.cpp" />
+    <ClCompile Include="HeadManager.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
-    <ClCompile Include="NpcObject.cpp">
-      <Filter>Game\Object\NPC</Filter>
+    <ClCompile Include="Item.cpp">
+      <Filter>Game\Object\Item</Filter>
     </ClCompile>
-    <ClCompile Include="ShopScene.cpp">
-      <Filter>Game\Scene\Shop</Filter>
+    <ClCompile Include="Gold.cpp">
+      <Filter>Game\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Hporb.cpp">
+      <Filter>Game\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackRock.cpp">
+      <Filter>Game\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -320,17 +336,37 @@
     <ClInclude Include="Enemy.h">
       <Filter>Game\Object\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="DoorObject.h">
-      <Filter>Game\Object\Door</Filter>
+    <ClInclude Include="MenuUI.h" />
+    <ClInclude Include="DoorObject.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="ShopScene.h" />
+    <ClInclude Include="NpcObject.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="GoldResult.h" />
+    <ClInclude Include="HeadResult.h" />
+    <ClInclude Include="ResultValue.h" />
+    <ClInclude Include="EnemyTestScene.h">
+      <Filter>Game\Scene\TestScene</Filter>
     </ClInclude>
-    <ClInclude Include="MenuUI.h">
-      <Filter>Game\UI</Filter>
+    <ClInclude Include="HeadItem.h" />
+    <ClInclude Include="ProjectileHeadSkull.h" />
+    <ClInclude Include="BossEffect.h">
+      <Filter>Game\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="NpcObject.h">
-      <Filter>Game\Object\NPC</Filter>
+    <ClInclude Include="HeadManager.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
-    <ClInclude Include="ShopScene.h">
-      <Filter>Game\Scene\Shop</Filter>
+    <ClInclude Include="Item.h">
+      <Filter>Game\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Gold.h">
+      <Filter>Game\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Hporb.h">
+      <Filter>Game\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackRock.h">
+      <Filter>Game\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -457,23 +493,8 @@
     <Filter Include="Game\Effect">
       <UniqueIdentifier>{0f9b9c36-9701-4df1-a2a6-2e13754d6b99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Door">
-      <UniqueIdentifier>{e25f72a7-20cd-411a-818b-ee237118b0a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\UI">
-      <UniqueIdentifier>{5aff3b33-9e5a-4f0b-83c7-38d1c481228c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\NPC">
-      <UniqueIdentifier>{c30d904c-c284-4369-83ed-72aa2fc6510f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene\Shop">
-      <UniqueIdentifier>{634fd514-f221-4956-9ee2-ed6d146eaec9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Boss\Pattern">
-      <UniqueIdentifier>{45cef852-d6b6-445e-9704-ad24137bf8f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Boss\Pattern\Casting">
-      <UniqueIdentifier>{4a1fb724-0a79-4455-bbd8-f979253ae247}</UniqueIdentifier>
+    <Filter Include="Game\Object\Item">
+      <UniqueIdentifier>{6527fbcc-7795-49bb-8880-efc966795820}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

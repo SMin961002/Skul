@@ -5,6 +5,8 @@
 #include"PixelCollisionComponent.h"
 #include"RigidBodyComponent.h"
 #include"EnemyEffect.h"
+#include"Gold.h"
+#include"BlackRock.h"
 
 
 void LeoniaSoldier::Init()
@@ -42,7 +44,8 @@ void LeoniaSoldier::Init()
 	m_vimage[eHpbarUp] = IMAGEMANAGER->AddImageVectorCopy("Hpbar_Up");
 	m_vimage[eHpbarUp]->Setting(0.4f, false);
 
-
+	m_lastX = m_obj->x;
+	m_lastY = m_obj->y;
 	m_collision = m_obj->AddComponent<CollisionComponent>();
 	m_hitpointcollision = m_obj->AddComponent<CollisionComponent>();
 
@@ -57,110 +60,143 @@ void LeoniaSoldier::Init()
 
 void LeoniaSoldier::Update()
 {
-	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
-	m_collision->Setting(30, m_obj->x + 17, m_obj->y - 20, "Attack");
-	if (m_hit)
+	if (m_effecttimer <= 1.0f)
 	{
-		m_hpbartimer += DELTA_TIME;
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 	}
-	if (m_vimage[eAttack]->GetFrame() >= 1)
+	m_effecttimer += DELTA_TIME;
+	if (m_effecttimer <= 0.1f)
 	{
-		m_hitpointcollision->SetIsActive(true);
-		if (m_attackleft)
+		EFFECTMANAGER->AddEffect<Appear>(m_obj->x, m_obj->y, 1, 1.5);
+	}
+	if (m_effecttimer >= 1.1f)
+	{
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+		if (m_lastX != m_obj->x || m_lastY != m_obj->y)
 		{
-			m_obj->x -= DELTA_TIME * 50.0f;
-			m_hitpointcollision->Setting(40, m_obj->x - 17, m_obj->y - 20, "AttackPoint");
+			m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+			m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(true);
+
+			m_lastX = m_obj->x;
+			m_lastY = m_obj->y;
 		}
 		else
 		{
-			m_obj->x += DELTA_TIME * 50.0f;
-			m_hitpointcollision->Setting(40, m_obj->x + 40, m_obj->y - 20, "AttackPoint");
+			m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
+			m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(false);
 		}
-	}
+
+		m_collision->Setting(30, m_obj->x + 17, m_obj->y - 20, "Attack");
+		if (m_hit)
+		{
+			m_hpbartimer += DELTA_TIME;
+		}
+		if (m_vimage[eAttack]->GetFrame() >= 1)
+		{
+			m_hitpointcollision->SetIsActive(true);
+			if (m_attackleft)
+			{
+				m_obj->x -= DELTA_TIME * 50.0f;
+				m_hitpointcollision->Setting(40, m_obj->x - 17, m_obj->y - 20, "AttackPoint");
+			}
+			else
+			{
+				m_obj->x += DELTA_TIME * 50.0f;
+				m_hitpointcollision->Setting(40, m_obj->x + 40, m_obj->y - 20, "AttackPoint");
+			}
+		}
 
 
-	if (OBJECTMANAGER->m_player->GetplayerX() >= m_obj->x - 400 && OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x + 400)
-	{
-		if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x && m_attack == false)
+		if (OBJECTMANAGER->m_player->GetplayerX() >= m_obj->x - 400 && OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x + 400)
 		{
-			m_obj->x -= DELTA_TIME * 150.0f;
-			m_move = true;
+			if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x && m_attack == false)
+			{
+				m_obj->x -= DELTA_TIME * 150.0f;
+				m_move = true;
+			}
+			if (OBJECTMANAGER->m_player->GetplayerX() >= m_obj->x && m_attack == false)
+			{
+				m_obj->x += DELTA_TIME * 150.0f;
+				m_move = true;
+			}
 		}
-		if (OBJECTMANAGER->m_player->GetplayerX() >= m_obj->x && m_attack == false)
+		else
 		{
-			m_obj->x += DELTA_TIME * 150.0f;
-			m_move = true;
+			m_move = false;
 		}
+		if (m_vimage[eAttack]->GetIsImageEnded())
+		{
+			m_vimage[eAttack]->Reset();
+			m_attack = false;
+		}
+		if (m_attack == false)
+		{
+			m_hitpointcollision->SetIsActive(false);
+		}
+		m_hpbar = (1 / m_maxhp);
+		m_hiteffecttimer += DELTA_TIME;
+		m_dietimer += DELTA_TIME;
 	}
-	else
-	{
-		m_move = false;
-	}
-	if (m_vimage[eAttack]->GetIsImageEnded())
-	{
-		m_vimage[eAttack]->Reset();
-		m_attack = false;
-	}
-	if (m_attack == false)
-	{
-		m_hitpointcollision->SetIsActive(false);
-	}
-	m_hpbar = (1 / m_maxhp);
-	m_hiteffecttimer += DELTA_TIME;
-	m_dietimer += DELTA_TIME;
 }
 
 void LeoniaSoldier::Render()
 {
-	if (m_currenthp >= 0)
+	if (m_effecttimer >= 1.1f)
 	{
-		if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x && m_attack == false && m_move == true)
+		if (m_currenthp >= 0)
 		{
-			m_attackleft = true;
-			m_vimage[eRun]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, 1);
-		}
-		else if (OBJECTMANAGER->m_player->GetplayerX() >= m_obj->x && m_attack == false && m_move == true)
-		{
-			m_vimage[eRun]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, 0);
-			m_attackleft = false;
-		}
-		if (!m_attack && m_move == false)m_vimage[eIdle]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0);
-		if (m_attack && m_move == false)
-		{
-			m_vimage[eAttack]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, m_attackleft);
-		}
-		if (KEYMANAGER->GetOnceKeyDown('p'))
-		{
-			m_vimage[eHit]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, m_attackleft);
-		}
-		if (m_hpbartimer <= 2 && m_hit == true)
-		{
-			m_vimage[eHPbarEmpty]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
-			m_vimage[eHpbarDown]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
-			m_vimage[eHpbarUp]->Render(m_obj->x - 35, m_obj->y + 15, (m_currenthp * m_hpbar), 1, 0);
+			if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x && m_attack == false && m_move == true)
+			{
+				m_attackleft = true;
+				m_vimage[eRun]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, 1);
+			}
+			else if (OBJECTMANAGER->m_player->GetplayerX() >= m_obj->x && m_attack == false && m_move == true)
+			{
+				m_vimage[eRun]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, 0);
+				m_attackleft = false;
+			}
+			if (!m_attack && m_move == false)m_vimage[eIdle]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0);
+			if (m_attack && m_move == false)
+			{
+				m_vimage[eAttack]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, m_attackleft);
+			}
+			if (KEYMANAGER->GetOnceKeyDown('p'))
+			{
+				m_vimage[eHit]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, m_attackleft);
+			}
+			if (m_hpbartimer <= 2 && m_hit == true)
+			{
+				m_vimage[eHPbarEmpty]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
+				m_vimage[eHpbarDown]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
+				m_vimage[eHpbarUp]->Render(m_obj->x - 35, m_obj->y + 15, (m_currenthp * m_hpbar), 1, 0);
+			}
+			else
+			{
+				m_hit = false;
+				m_hpbartimer = 0;
+			}
 		}
 		else
 		{
-			m_hit = false;
-			m_hpbartimer = 0;
-		}
-	}
-	else
-	{
 
-		if (!m_die && m_dietimer >= 1)
-		{
-			EFFECTMANAGER->AddEffect<DeadEffect>(m_obj->x, m_obj->y, 1, 1.5);
-			m_dietimer = 0;
-		}
-		m_die = true;
-		if (m_dietimer >= 0.5f)
-		{
-			m_hitpointcollision->SetIsActive(false);
-			m_obj->ObjectDestroyed();
+			if (!m_die && m_dietimer >= 1)
+			{
+				EFFECTMANAGER->AddEffect<DeadEffect>(m_obj->x, m_obj->y, 1, 1.5);
+				m_dietimer = 0;
+			}
+			m_die = true;
+			if (m_dietimer >= 0.5f)
+			{
+				m_hitpointcollision->SetIsActive(false);
+				for (int i = 0; i < 4; i++)
+				{
+					OBJECTMANAGER->AddObject("BlackRock", m_obj->x, m_obj->y - 50, ObjectTag::eItem)->AddComponent<BlackRock>();
+					OBJECTMANAGER->AddObject("Gold", m_obj->x, m_obj->y - 50, ObjectTag::eItem)->AddComponent<Gold>();
+				}
+				m_obj->ObjectDestroyed();
+			}
 		}
 	}
-	cout << m_currenthp << endl;
 }
 
 void LeoniaSoldier::Release()

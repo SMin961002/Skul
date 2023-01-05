@@ -5,14 +5,18 @@
 #include "Player.h"
 #include"EnemyEffect.h"
 #include"TentaclesOfLight.h"
+#include"Gold.h"
+#include"Hporb.h"
+#include"BlackRock.h"
 void Fanatic::Init()
 {
 	m_hpbartimer = 0;
-	m_maxhp = 70.0f;
-	m_currenthp = 70.0f;
+	m_maxhp = 35.0f;
+	m_currenthp = 35.0f;
 	m_hpbar = 0;
 	m_hitTimer = 0;
 	m_motiontimer = 0;
+	m_effecttimer = 0;
 	m_isHit = false;
 	m_hit = false;
 	m_die = false;
@@ -20,7 +24,8 @@ void Fanatic::Init()
 	m_sercrieffect = false;
 	m_state = eIdle;
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
-
+	m_lastX = m_obj->x;
+	m_lastY = m_obj->y;
 	m_vimage[eIdle] = IMAGEMANAGER->AddImageVectorCopy("Fanatic_Idle");
 	m_vimage[eIdle]->Setting(0.1f, true);
 	m_vimage[eAttackIdle] = IMAGEMANAGER->AddImageVectorCopy("Fanatic_AttackIdle");
@@ -49,7 +54,7 @@ void Fanatic::Init()
 
 	m_isReverse = false;
 	m_isAttack = false;
-
+	
 	m_hitCollision = m_obj->AddComponent<CollisionComponent>();
 	m_hitpointCollision = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddComponent<RigidBodyComponent>();
@@ -59,140 +64,162 @@ void Fanatic::Init()
 
 void Fanatic::Update()
 {
-	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
-	m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "HitCollision");
-	if (m_hit)
+	if (m_effecttimer <= 1.0f)
 	{
-		m_hpbartimer += DELTA_TIME;
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 	}
-	if (m_isHit == true)
+	m_effecttimer += DELTA_TIME;
+	if (m_effecttimer<= 0.1f)
 	{
-		m_hitTimer += DELTA_TIME;
+		EFFECTMANAGER->AddEffect<Appear>(m_obj->x, m_obj->y, 1, 1.5);
 	}
-	else
+	if (m_effecttimer >= 1.1f)
 	{
-	}
-	float xDest = m_obj->x - OBJECTMANAGER->m_player->GetplayerX();
-	if (m_vimage[eAttack]->GetFrame() >= 9 && m_vimage[eAttack]->GetFrame() <= 10)
-	{
-		m_hitpointCollision->SetIsActive(true);
-	}
-	else
-	{
-		m_hitpointCollision->SetIsActive(false);
-	}
-	if (m_isAttack == false && m_isHit == false)
-	{
-
-		if (xDest < 300 && xDest > -300)
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+		m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "HitCollision");
+		if (m_hit)
 		{
-			if (xDest < 100 && xDest > -100)
-			{
-				m_state = eAttack;
-				if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
-				{
-					m_hitpointCollision->Setting(40, m_obj->x - 17, m_obj->y - 20, "AttackPoint");
-				}
-				else
-				{
-					m_hitpointCollision->Setting(40, m_obj->x + 65, m_obj->y - 20, "AttackPoint");
-				}
-				m_vimage[eAttack]->Reset();
-
-				m_isAttack = true;
-			}
-			else
-			{
-				m_state = eRun;
-				m_obj->x += m_isReverse ? -DELTA_TIME * 50 : DELTA_TIME * 50;
-			}
-			m_isReverse = xDest > 0;
+			m_hpbartimer += DELTA_TIME;
+		}
+		if (m_isHit == true)
+		{
+			m_hitTimer += DELTA_TIME;
 		}
 		else
 		{
-			m_state = eIdle;
 		}
-	}
-	if (m_currenthp <= 30 && !m_die2)
-	{
-
-		m_sercrifice = true;
-		m_state = SetcrificeReady;
-		if (m_vimage[SetcrificeReady]->GetIsImageEnded())
+		float xDest = m_obj->x - OBJECTMANAGER->m_player->GetplayerX();
+		if (m_vimage[eAttack]->GetFrame() >= 9 && m_vimage[eAttack]->GetFrame() <= 10)
 		{
-			m_state = SetcrificeLoop;
-			if (m_vimage[SetcrificeLoop]->GetIsImageEnded())
-			{
+			m_hitpointCollision->SetIsActive(true);
+		}
+		else
+		{
+			m_hitpointCollision->SetIsActive(false);
+		}
+		if (m_isAttack == false && m_isHit == false)
+		{
 
-				if (!m_sercrieffect && 0 == m_isReverse)
+			if (xDest < 300 && xDest > -300)
+			{
+				if (xDest < 100 && xDest > -100)
 				{
-					EFFECTMANAGER->AddEffect<Secrifice>(m_obj->x + 50, m_obj->y - 20, 0, 1.5);
+					m_state = eAttack;
+					if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
+					{
+						m_hitpointCollision->Setting(40, m_obj->x - 17, m_obj->y - 20, "AttackPoint");
+					}
+					else
+					{
+						m_hitpointCollision->Setting(40, m_obj->x + 65, m_obj->y - 20, "AttackPoint");
+					}
+					m_vimage[eAttack]->Reset();
+
+					m_isAttack = true;
 				}
-				if (!m_sercrieffect && 1 == m_isReverse)
+				else
 				{
-					EFFECTMANAGER->AddEffect<Secrifice>(m_obj->x - 50, m_obj->y - 20, 1, 1.5);
+					m_state = eRun;
+					m_obj->x += m_isReverse ? -DELTA_TIME * 50 : DELTA_TIME * 50;
 				}
-				m_sercrieffect = true;
-				m_motiontimer += 0.1f;
-				m_state = Setcrifice;
-				if (m_vimage[Setcrifice]->GetIsImageEnded())
+				m_isReverse = xDest > 0;
+			}
+			else
+			{
+				m_state = eIdle;
+			}
+		}
+		if (m_currenthp <= 30 && !m_die2)
+		{
+
+			m_sercrifice = true;
+			m_state = SetcrificeReady;
+			if (m_vimage[SetcrificeReady]->GetIsImageEnded())
+			{
+				m_state = SetcrificeLoop;
+				if (m_vimage[SetcrificeLoop]->GetIsImageEnded())
 				{
-					m_hitpointCollision->SetIsActive(false);
-					m_hitCollision->SetIsActive(false);
-					OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, ObjectTag::eSummons)->AddComponent<TentaclesOfLight>();
-					m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
-					m_obj->GetComponent< PixelCollisionComponent>()->SetIsActive(false);
-					m_die2 = true;
+
+					if (!m_sercrieffect && 0 == m_isReverse)
+					{
+						EFFECTMANAGER->AddEffect<Secrifice>(m_obj->x + 50, m_obj->y - 20, 0, 1.5);
+					}
+					if (!m_sercrieffect && 1 == m_isReverse)
+					{
+						EFFECTMANAGER->AddEffect<Secrifice>(m_obj->x - 50, m_obj->y - 20, 1, 1.5);
+					}
+					m_sercrieffect = true;
+					m_motiontimer += 0.1f;
+					m_state = Setcrifice;
+					if (m_vimage[Setcrifice]->GetIsImageEnded())
+					{
+						m_hitpointCollision->SetIsActive(false);
+						m_hitCollision->SetIsActive(false);
+						OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, ObjectTag::eSummons)->AddComponent<TentaclesOfLight>();
+						m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
+						m_obj->GetComponent< PixelCollisionComponent>()->SetIsActive(false);
+						m_die2 = true;
+					}
 				}
 			}
 		}
+		if (m_isAttack == false)
+		{
+			m_hitpointCollision->SetIsActive(false);
+		}
+		m_hpbar = (1 / m_maxhp);
+		ImageResetCheck();
+		m_hiteffecttimer += DELTA_TIME;
+		m_dietimer += DELTA_TIME;
 	}
-	if (m_isAttack == false)
-	{
-		m_hitpointCollision->SetIsActive(false);
-	}
-	m_hpbar = (1 / m_maxhp);
-	ImageResetCheck();
-	m_hiteffecttimer += DELTA_TIME;
-	m_dietimer += DELTA_TIME;
 }
 
 void Fanatic::Render()
 {
-	if (m_currenthp >= 0)
+	if (m_effecttimer >= 1.1f)
 	{
-		m_vimage[m_state]->CenterRender(m_obj->x, m_obj->y - 55, 2, 2, 0, m_isReverse);
-
-		if (m_hpbartimer <= 2 && !m_die2 && (m_hit == true || m_sercrifice == true))
+		if (m_currenthp >= 0)
 		{
-			m_vimage[eHPbarEmpty]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
-			m_vimage[eHpbarDown]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
-			m_vimage[eHpbarUp]->Render(m_obj->x - 35, m_obj->y + 15, (m_currenthp * m_hpbar), 1, 0);
+			m_vimage[m_state]->CenterRender(m_obj->x, m_obj->y - 55, 2, 2, 0, m_isReverse);
+
+			if (m_hpbartimer <= 2 && !m_die2 && (m_hit == true || m_sercrifice == true))
+			{
+				m_vimage[eHPbarEmpty]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
+				m_vimage[eHpbarDown]->Render(m_obj->x - 35, m_obj->y + 15, 1, 1, 0);
+				m_vimage[eHpbarUp]->Render(m_obj->x - 35, m_obj->y + 15, (m_currenthp * m_hpbar), 1, 0);
+			}
+			else
+			{
+				m_hit = false;
+				m_hpbartimer = 0;
+			}
 		}
 		else
 		{
-			m_hit = false;
-			m_hpbartimer = 0;
+			if (!m_die && m_dietimer >= 1 && !m_die2)
+			{
+				EFFECTMANAGER->AddEffect<DeadEffect>(m_obj->x, m_obj->y, 1, 1.5);
+				m_dietimer = 0;
+				for (int i = 0; i < 4; i++)
+				{
+					OBJECTMANAGER->AddObject("Gold", m_obj->x, m_obj->y - 50, ObjectTag::eItem)->AddComponent<Gold>();
+					OBJECTMANAGER->AddObject("BlackRock", m_obj->x, m_obj->y - 50, ObjectTag::eItem)->AddComponent<BlackRock>();
+				}
+				OBJECTMANAGER->AddObject("Hporb", m_obj->x, m_obj->y, ObjectTag::eItem)->AddComponent<Hporb>();
+			}
+			m_die = true;
+			if (m_dietimer >= 0.5f && !m_die2)
+			{
+
+				m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
+				m_obj->GetComponent< PixelCollisionComponent>()->SetIsActive(false);
+				m_hitpointCollision->SetIsActive(false);
+				m_hitCollision->SetIsActive(false);
+				m_obj->ObjectDestroyed();
+			}
+
 		}
 	}
-	else
-	{
-		if (!m_die && m_dietimer >= 1 && !m_die2)
-		{
-			EFFECTMANAGER->AddEffect<DeadEffect>(m_obj->x, m_obj->y, 1, 1.5);
-			m_dietimer = 0;
-		}
-		m_die = true;
-		if (m_dietimer >= 0.5f && !m_die2)
-		{
-			m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
-			m_obj->GetComponent< PixelCollisionComponent>()->SetIsActive(false);
-			m_hitpointCollision->SetIsActive(false);
-			m_hitCollision->SetIsActive(false);
-			m_obj->ObjectDestroyed();
-		}
-	}
-	cout << m_currenthp << endl;
 }
 
 void Fanatic::Release()
@@ -201,6 +228,17 @@ void Fanatic::Release()
 
 void Fanatic::OnCollision(string collisionName, Object* other)
 {
+	if (collisionName == m_hitpointCollision->GetName())
+	{
+		cout << "파나틱 공격" << endl;
+		if (other->GetName() == "player")
+		{
+			Player* ply = other->GetComponent<Player>();
+			ply->HitPlayerMagicAttack(10);
+			ply->HitPlayerKnockBack(5, 5);
+			cout << "파나틱이 플레이어를 때렸다(마법공격)" << endl;
+		}
+	}
 }
 
 void Fanatic::HitEnemy(float dmg)
@@ -236,7 +274,7 @@ void Fanatic::HitEnemy(float dmg)
 		}
 		m_hit = true;
 		m_hiteffecttimer = 0;
-		dmg = 10; //-= 플레이어 어택 데미지 상의
+		dmg = 40; //-= 플레이어 어택 데미지 상의
 		m_currenthp -= dmg;
 	}
 }
