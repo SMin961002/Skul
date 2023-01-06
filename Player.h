@@ -1,8 +1,10 @@
 #pragma once
 #include "Head_Basic.h"
+#include "Gambler.h"
 
 //↓/↓/Comment at End of Page/↓/↓/
-//head가 컴포넌트를 갖고, 머리교체할 때 init에서 m_obj연결?
+//.......!...
+//m_nowHead의 OnCollision갖다쓰기
 class Player : public Component
 {
 private:
@@ -13,10 +15,12 @@ private:
 	};
 	CImage* m_UIImage[UITag::eEnd];
 
-	Head* m_headList[1];
+	Head* m_headList[static_cast<int>(eSkulSpecies::Empty) +1];
 	eSkulSpecies m_headSlot;
 	Head* m_nowHead;
-	
+	float m_headTagCool;
+
+	int m_HpMax;
 	int m_life;
 	float m_attack;
 	float m_deffendence;
@@ -48,11 +52,16 @@ private:
 	float m_supperArmarTime;
 	float m_supperArmarNowTime;
 	//============이동에 필요한 변수end==========
+	TeleportationToHead* effect = new TeleportationToHead;
 
 public:
 	CollisionComponent* m_playerHitBox;
 	CollisionComponent* m_collAutoAttack;
-	CollisionComponent* m_collSkill;
+	CollisionComponent* m_collSkillA;
+	CollisionComponent* m_collSkillS;
+	CollisionComponent* m_collSkillTag;
+
+	bool  m_haveArtifact;
 
 public:
 	virtual void Init() override;
@@ -61,12 +70,16 @@ public:
 	virtual void Render() override;
 	virtual void UIRender() override;
 
+	virtual void OnCollision(string collisionName, Object* other) override;
+	void InputArtifactKey();
+
+	//↓====PlayerMove.cpp에 있습니다====↓//
 	void Move();
 	//	in move
 	void InputJumpKey();
 	void InputDashKey();
 	void InputArrowKey();
-
+	//↑====PlayerMove.cpp에 있습니다====↑//
 	void ResetJump() {
 		m_jumpCount = 0;
 		m_jumpping = false;
@@ -91,6 +104,10 @@ public:
 			Head* tmp = m_nowHead;
 		}
 	}
+
+public:
+	float GetplayerX(void) { return m_obj->x; }
+	float GetplayerY(void) { return m_obj->y; }
 	Head* GetNowHead() { return m_nowHead; }
 
 	//물리공격 데미지를 입력해주세요
@@ -99,8 +116,6 @@ public:
 		m_supperArmarNowTime = m_supperArmarTime;
 		m_playerHitBox->SetIsActive(false);
 		m_life -= dmg;
-		EFFECTMANAGER->AddEffect<PlayerHit>((m_obj->GetComponent<CollisionComponent>()->GetCollisionPosX())
-			, m_obj->GetComponent<CollisionComponent>()->GetCollisionPosY(), m_isLeft);
 	}
 	//마법공격 데미지를 입력해주세요
 	void HitPlayerMagicAttack(float dmg)
@@ -108,22 +123,26 @@ public:
 		m_supperArmarNowTime = m_supperArmarTime;
 		m_playerHitBox->SetIsActive(false);
 		m_life -= dmg;
-		EFFECTMANAGER->AddEffect<PlayerHit>((m_obj->GetComponent<CollisionComponent>()->GetCollisionPosX())
-			, m_obj->GetComponent<CollisionComponent>()->GetCollisionPosY(), m_isLeft);
 	}
-	//피격시 플레이어 밀림(플레이어가 x+moveX, y+moveY포인트로 옮겨집니다)
+	//플레이어 피격시 밀림(플레이어가 x+moveX, y+moveY포인트로 옮겨집니다)
 	void HitPlayerKnockBack(float moveX, float moveY)
 	{
-		m_obj->x += (m_isLeft ? moveX : -moveX);
+		m_obj->x += moveX;
 		m_obj->y += moveY;
 	}
 
-	void InputArtifactKey();
-	bool  m_haveArtifact;
+	//플레이어 피격시 이펙트(일반타)
+	void HitPlayerEffect()
+	{
+		EFFECTMANAGER->AddEffect<PlayerHit>((m_obj->GetComponent<CollisionComponent>()->GetCollisionPosX())
+			, m_obj->GetComponent<CollisionComponent>()->GetCollisionPosY(), m_isLeft);
+	}
 
-	virtual void OnCollision(string collisionName, Object* other) override;
-	float GetplayerX(void) { return m_obj->x; }
-	float GetplayerY(void) { return m_obj->y; }
+	//플레이어 피격시 이펙트(크리티컬)(내용 안채워서 지금은 안뜹니다)
+	void CritialHitPlayerEffect()
+	{
+
+	}
 
 	Player() : m_life(100) {};
 };
@@ -134,17 +153,17 @@ public:
 
 # 추가작업 필요한 부분은 코드 중간에 ##로 표시해두었음.
 
-# jump, dash부분 보강 필요
- - jump 전체 구현해야함
- - 공격모션 출력
- - 스킬 출력
+# dash부분 보강 필요
+
+#
 
  - effect 출력
  - 추상화(진행중!)
 
  # 아티펙트 어떻게 소지시킬것인지
 
-
+ on collision함수 발동시
+ head의 OnCollision함수를 가져와서 실행시킨다.
 
 bool canWalk, canDash, canJump, canSkillA, B, canAttack등등의 변수 만들어서
 update에서 해당 변수 on off 함수실행 조절하는 방식 고려해보기
