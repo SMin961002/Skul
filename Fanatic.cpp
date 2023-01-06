@@ -16,7 +16,7 @@ void Fanatic::Init()
 	m_hpbar = 0;
 	m_hitTimer = 0;
 	m_motiontimer = 0;
-	m_effecttimer = 0;
+	m_effect = false;
 	m_isHit = false;
 	m_hit = false;
 	m_die = false;
@@ -55,6 +55,11 @@ void Fanatic::Init()
 	m_isReverse = false;
 	m_isAttack = false;
 	
+	effect = new Appear;
+	effect->Init();
+	effect->SetObject(m_obj);
+	effect->SetEffectStart(m_obj->x, m_obj->y, false, 1.5);
+
 	m_hitCollision = m_obj->AddComponent<CollisionComponent>();
 	m_hitpointCollision = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddComponent<RigidBodyComponent>();
@@ -64,16 +69,15 @@ void Fanatic::Init()
 
 void Fanatic::Update()
 {
-	if (m_effecttimer <= 1.0f)
+	if (m_effect == false)
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 	}
-	m_effecttimer += DELTA_TIME;
-	if (m_effecttimer<= 0.1f)
+	if (effect->GetIsEffectEnded())
 	{
-		EFFECTMANAGER->AddEffect<Appear>(m_obj->x, m_obj->y, 1, 1.5);
+		m_effect = true;
 	}
-	if (m_effecttimer >= 1.1f)
+	if (m_effect == true)
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 		m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "HitCollision");
@@ -176,7 +180,8 @@ void Fanatic::Update()
 
 void Fanatic::Render()
 {
-	if (m_effecttimer >= 1.1f)
+	effect->Render();
+	if (m_effect == true)
 	{
 		if (m_currenthp >= 0)
 		{
