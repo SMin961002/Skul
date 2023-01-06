@@ -12,8 +12,11 @@ void BossScene::Init()
 
 	OBJECTMANAGER->AddObject("Joanna", WINSIZE_X / 2, 400, 0)->AddComponent<BossObject>();
 
-	OBJECTMANAGER->AddObject("FountainLeft", 300, 400, 0)->AddComponent<HolyFountainLeft>();
-	OBJECTMANAGER->AddObject("FountainRight", 300, 400, 0)->AddComponent<HolyFountainRight>();
+	OBJECTMANAGER->AddObject("FountainLeft", 100, 400, 0)->AddComponent<HolyFountainLeft>();
+	OBJECTMANAGER->AddObject("FountainRight", 1000, 400, 0)->AddComponent<HolyFountainRight>();
+	OBJECTMANAGER->AddObject("OrbLeft", 100, 250, 0)->AddComponent<HolyOrbLeft>();
+	OBJECTMANAGER->AddObject("OrbRight", 1000, 250, 0)->AddComponent<HolyOrbRight>();
+
 }
 
 void BossScene::Update()

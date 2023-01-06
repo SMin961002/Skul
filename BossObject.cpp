@@ -170,6 +170,11 @@ void BossObject::Update()
 	{
 		_castingMotionDeltaTime += DELTA_TIME;
 	}
+	if (_patternSelect == 2)
+	{
+		_isWorshipCheck = true;
+		_worshipDeltaTime += DELTA_TIME;
+	}
 }
 
 void BossObject::Render()
@@ -287,14 +292,20 @@ void BossObject::Render()
 	// 캐스팅 On
 	if (_isCastingOn == true)
 	{
-		if (_isConsecrationLoopOn == false) _imgPhase1BossCastingReady->CenterRender(WINSIZE_X / 2, WINSIZE_Y / 2 - 25, 1.8, 1.8, 0, false);
+		if (_imgPhase1BossCastingReady->GetIsImageEnded() == false)
+		{
+			_imgPhase1BossCastingReady->CenterRender(WINSIZE_X / 2, WINSIZE_Y / 2 - 25, 1.8, 1.8, 0, false);
+		}
 	}
 	// 캐스팅_공격모션
 	if (_imgPhase1BossCastingReady->GetIsImageEnded() == true)
 	{
 		if (_consecrationDeltaTime < 2)
 		{
-			_imgPhase1BossCastingAttack->CenterRender(WINSIZE_X / 2, WINSIZE_Y / 2 - 26, 1.8, 1.8, 0, false);
+			if (_imgPhase1BossCastingAttack->GetIsImageEnded() == false)
+			{
+				_imgPhase1BossCastingAttack->CenterRender(WINSIZE_X / 2, WINSIZE_Y / 2 - 26, 1.8, 1.8, 0, false);
+			}
 		}
 
 		_isCastingAttackOn = true;
@@ -359,11 +370,37 @@ void BossObject::Render()
 			//}
 			break;
 		case 2:
-			for (int i = 0; i < 2; i++)
+			_patternLock = true;
+			if (_worshipDeltaTime > 1 && _isWorshipFirstWaveOn == false)
 			{
-				_vWorshipLeft[MY_UTILITY::getFromIntTo(0,10)]->SetIsActive(true);
-				_vWorshipRight[MY_UTILITY::getFromIntTo(0,10)]->SetIsActive(true);
+				for (int i = 0; i <= 2; i++)
+				{
+					_vWorshipLeft[MY_UTILITY::getFromIntTo(0, 10)]->SetIsActive(true);
+					_vWorshipRight[MY_UTILITY::getFromIntTo(0, 10)]->SetIsActive(true);
+				}
+				_isWorshipFirstWaveOn = true;
 			}
+			if (_worshipDeltaTime > 4 && _isWorshipSecondWaveOn == false)
+			{
+				for (int i = 0; i <= 2; i++)
+				{
+					_vWorshipLeft[MY_UTILITY::getFromIntTo(0, 10)]->SetIsActive(true);
+					_vWorshipRight[MY_UTILITY::getFromIntTo(0, 10)]->SetIsActive(true);
+				}
+				_isWorshipSecondWaveOn = true;
+			}
+			if (_worshipDeltaTime > 7)
+			{
+				_imgPhase1BossCastingEnd->CenterRender(WINSIZE_X / 2, WINSIZE_Y / 2 - 26, 1.8, 1.8, 0, false);
+			}
+			if (_imgPhase1BossCastingEnd->GetIsImageEnded() == true)
+			{
+				_isCastingOn = false;
+				_isCastingAttackOn = false;
+
+				_worshipDeltaTime = 0;
+			}
+			cout << _worshipDeltaTime << endl;
 			break;
 		}
 	}

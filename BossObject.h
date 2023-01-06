@@ -88,6 +88,13 @@ protected:
 	vector<Baptism*> _vBaptism;
 	vector<Baptism*>::iterator _viBaptism;
 	
+protected:
+	bool _isWorshipCheck;
+	bool _isWorshipFirstWaveOn;
+	bool _isWorshipSecondWaveOn;
+
+	float _worshipDeltaTime;
+
 	vector<WorshipLeft*> _vWorshipLeft;
 	vector<WorshipLeft*>::iterator _viWorshipLeft;
 

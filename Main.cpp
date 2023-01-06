@@ -10,6 +10,9 @@ void Main::Init()
 
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
+
+	srand(GetTickCount64());
+
 	//SCENEMANAGER->ChangeScene("EnemyTestScene");
 	menu = new MenuUI;
 	menu->Init();
