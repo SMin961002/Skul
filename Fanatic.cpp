@@ -10,9 +10,10 @@
 #include"BlackRock.h"
 void Fanatic::Init()
 {
+	m_attackcount = 0;
 	m_hpbartimer = 0;
-	m_maxhp = 35.0f;
-	m_currenthp = 35.0f;
+	m_maxhp = 100.0f;
+	m_currenthp = 100.0f;
 	m_hpbar = 0;
 	m_hitTimer = 0;
 	m_motiontimer = 0;
@@ -111,6 +112,7 @@ void Fanatic::Update()
 		else
 		{
 			m_hitpointCollision->SetIsActive(false);
+			m_attackcount = 0;
 		}
 		if (m_isAttack == false && m_isHit == false)
 		{
@@ -247,14 +249,28 @@ void Fanatic::OnCollision(string collisionName, Object* other)
 	{
 		if (other->GetName() == "player")
 		{
-			Player* ply = other->GetComponent<Player>();
-			ply->HitPlayerMagicAttack(10);
-			ply->HitPlayerKnockBack(5, 5);
+			if (m_attackcount < 1)
+			{
+				Player* ply = other->GetComponent<Player>();
+				ply->HitPlayerMagicAttack(10);
+				ply->HitPlayerEffect();
+				if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+				{
+					ply->HitPlayerKnockBack(-15, -5);
+				}
+				else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+				{
+
+					ply->HitPlayerKnockBack(15, -5);
+
+				}
+				m_attackcount = 1;
+			}
 		}
 	}
 }
 
-void Fanatic::HitEnemy(float dmg)
+void Fanatic::HitEnemy(float dmg,float time)
 {
 	m_hitpointCollision->SetIsActive(false);
 	if (!m_die2)
@@ -275,7 +291,7 @@ void Fanatic::HitEnemy(float dmg)
 		m_obj->y -= 30;
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 	}
-	if (m_hiteffecttimer >= 0.7f)
+	if (m_hiteffecttimer >= time)
 	{
 		if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
 		{
@@ -287,7 +303,6 @@ void Fanatic::HitEnemy(float dmg)
 		}
 		m_hit = true;
 		m_hiteffecttimer = 0;
-		dmg = 40; //-= 플레이어 어택 데미지 상의
 		m_currenthp -= dmg;
 	}
 }

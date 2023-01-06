@@ -23,7 +23,7 @@ void MapToolScene::Init()
 	HRESULT hr = FILEMANAGER->TileFileRead(&m_tiles);
 	if (hr != S_OK)
 	{
-		m_tiles.resize(30, vector<int>(100));
+		m_tiles.resize(100, vector<int>(100)); // 맵크기 변경 100x100 // 다찍엇는데 모자라다 하면 태웅이한테 쉬프트 엔터, 스페이스바 레프트 쉬프트로 저정
 		for (auto iter : m_tiles)
 		{
 			iter.resize(100, -1);

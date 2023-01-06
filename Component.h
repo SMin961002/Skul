@@ -17,6 +17,7 @@ public:
 	virtual void Render() PURE;
 	virtual void Release() PURE;
 	virtual void OnCollision(string collisionName, Object* other);
+	virtual void HitEnemy(float dmg, float time) {}
 	virtual void UIRender() {}
 	bool GetIsActive()
 	{
