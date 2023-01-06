@@ -18,7 +18,7 @@ void MapToolScene::Init()
 	m_tileImages = IMAGEMANAGER->GetTileImages();
 	m_structureImages = IMAGEMANAGER->GetStructureImages();
 	m_objectImages = IMAGEMANAGER->GetObjectImages();
-	m_width = m_tileImages[0]->GetWidth();
+	m_width = m_tileImages[0]->GetWidth() - 1;
 	m_kind = -1;
 	HRESULT hr = FILEMANAGER->TileFileRead(&m_tiles);
 	if (hr != S_OK)
@@ -362,6 +362,8 @@ void MapToolScene::Render()
 			}
 		}
 	}
+
+
 	if (KEYMANAGER->GetStayKeyDown(VK_RBUTTON))
 	{
 		if (m_state == eTileBatch)
@@ -402,6 +404,28 @@ void MapToolScene::Render()
 		else if (m_state == eObjectBatch)
 		{
 			IMAGEMANAGER->UICenterRender(m_objectImages[m_streuctureKey], _ptMouse.x, _ptMouse.y, 2, 2);
+		}
+	}
+
+	if (m_state == eTileBatch)
+	{
+		int y2 = 0;
+		for (auto& iter : m_tiles)
+		{
+			int x2 = 0;
+			for (auto& _iter = iter.begin(); _iter != iter.end(); _iter++)
+			{
+				RECT rt = { x2 * m_width, y2 * m_width , x2 * m_width + m_width , y2 * m_width + m_width };
+				if (x2 * m_width - IMAGEMANAGER->GetCameraPosition().x < 800)
+				{
+					if (rt.left < _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.right > _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.top < _ptMouse.y + IMAGEMANAGER->GetCameraPosition().y && rt.bottom>_ptMouse.y + IMAGEMANAGER->GetCameraPosition().y)
+					{
+						IMAGEMANAGER->DrawRect(rt);
+					}
+					x2++;
+				}
+			}
+			y2++;
 		}
 	}
 

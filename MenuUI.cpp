@@ -17,13 +17,20 @@ void MenuUI::Init()
 
 void MenuUI::Update()
 {
-	if (KEYMANAGER->GetOnceKeyDown(VK_DOWN) && m_keyState != 5)
+	if (KEYMANAGER->GetOnceKeyDown(VK_DOWN))
 	{
-		m_keyState++;
+		if (m_keyState == 5)
+			m_keyState = 0;
+		else
+			m_keyState++;
 	}
-	else if (KEYMANAGER->GetOnceKeyDown(VK_UP) && m_keyState != 0)
+	else if (KEYMANAGER->GetOnceKeyDown(VK_UP))
 	{
-		m_keyState--;
+		if (m_keyState == 0)
+			m_keyState = 5;
+		else
+			m_keyState--;
+
 	}
 
 	if (KEYMANAGER->GetOnceKeyDown(VK_RETURN))
