@@ -242,6 +242,22 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/46.png");
 	AddTileImage(L"./Resources/Tile/4Stage/47.png");
 	AddTileImage(L"./Resources/Tile/4Stage/48.png");
+	AddTileImage(L"./Resources/Tile/Lobby/49.png");
+	AddTileImage(L"./Resources/Tile/Lobby/50.png");
+	AddTileImage(L"./Resources/Tile/Lobby/51.png");
+	AddTileImage(L"./Resources/Tile/Lobby/52.png");
+	AddTileImage(L"./Resources/Tile/Lobby/53.png");
+	AddTileImage(L"./Resources/Tile/Lobby/54.png");
+	AddTileImage(L"./Resources/Tile/Lobby/55.png");
+	AddTileImage(L"./Resources/Tile/Lobby/56.png");
+	AddTileImage(L"./Resources/Tile/Lobby/57.png");
+	AddTileImage(L"./Resources/Tile/Lobby/58.png");
+	AddTileImage(L"./Resources/Tile/Lobby/59.png");
+	AddTileImage(L"./Resources/Tile/Lobby/60.png");
+	AddTileImage(L"./Resources/Tile/Lobby/61.png");
+	AddTileImage(L"./Resources/Tile/Lobby/62.png");
+	AddTileImage(L"./Resources/Tile/Lobby/63.png");
+
 
 	// 배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
