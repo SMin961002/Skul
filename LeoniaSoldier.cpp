@@ -17,6 +17,7 @@ void LeoniaSoldier::Init()
 	m_hpbartimer = 0;
 	m_hpbar = 0;
 	m_die = false;
+	m_effect = false;
 	m_attackleft = false;
 	m_attack = false;
 	m_move = false;
@@ -44,14 +45,15 @@ void LeoniaSoldier::Init()
 	m_vimage[eHpbarUp] = IMAGEMANAGER->AddImageVectorCopy("Hpbar_Up");
 	m_vimage[eHpbarUp]->Setting(0.4f, false);
 
+	effect = new Appear;
+	effect->Init();
+	effect->SetObject(m_obj);
+	effect->SetEffectStart(m_obj->x, m_obj->y, false, 1.5);
+
 	m_lastX = m_obj->x;
 	m_lastY = m_obj->y;
 	m_collision = m_obj->AddComponent<CollisionComponent>();
 	m_hitpointcollision = m_obj->AddComponent<CollisionComponent>();
-
-	m_obj->GetCollisionComponent().push_back(m_collision);
-	m_obj->GetCollisionComponent().push_back(m_hitpointcollision);
-
 
 	m_obj->AddComponent<RigidBodyComponent>();
 	m_obj->AddCollisionComponent(m_collision);
@@ -60,16 +62,15 @@ void LeoniaSoldier::Init()
 
 void LeoniaSoldier::Update()
 {
-	if (m_effecttimer <= 1.0f)
+	if (m_effect == false)
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 	}
-	m_effecttimer += DELTA_TIME;
-	if (m_effecttimer <= 0.1f)
+	if (effect->GetIsEffectEnded())
 	{
-		EFFECTMANAGER->AddEffect<Appear>(m_obj->x, m_obj->y, 1, 1.5);
+		m_effect = true;
 	}
-	if (m_effecttimer >= 1.1f)
+	if (m_effect == true)
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 		if (m_lastX != m_obj->x || m_lastY != m_obj->y)
@@ -141,7 +142,8 @@ void LeoniaSoldier::Update()
 
 void LeoniaSoldier::Render()
 {
-	if (m_effecttimer >= 1.1f)
+	effect->Render();
+	if (m_effect == true)
 	{
 		if (m_currenthp >= 0)
 		{
@@ -220,6 +222,9 @@ void LeoniaSoldier::OnCollision(string collisionName, Object* other)
 		if (other->GetName() == "player")
 		{
 			m_hitpoint = true;
+			Player* ply = other->GetComponent<Player>();
+			ply->HitPlayerMagicAttack(10);
+			ply->HitPlayerKnockBack(5, 5);
 		}
 	}
 }

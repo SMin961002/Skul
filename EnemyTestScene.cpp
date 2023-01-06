@@ -12,6 +12,7 @@
 #include "AngelStatue.h"
 #include "GoldResult.h"
 #include "HeadResult.h"
+#include "CandleFanatic.h"
 
 EnemyTestScene::EnemyTestScene()
 {
@@ -74,13 +75,17 @@ void EnemyTestScene::Init()
 		{
 			OBJECTMANAGER->AddObject("HeadResult", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<HeadResult>();
 		}
+		else if (iter->key == "AStatue")
+		{
+			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<AngelStatue>();
+		}
 	}
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<TentaclesOfLight>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+250, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 350, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+250, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 - 270, 120, ObjectTag::eEnemy)->AddComponent<AngelStatue>();
+	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 400, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 500, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();

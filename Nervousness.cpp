@@ -11,7 +11,7 @@ void LeftImpact::Update()
 {
 	m_obj->x += 3;
 
-	if (m_obj->x > WINSIZE_X)
+	if (m_obj->x > WINSIZE_X + WINSIZE_X/2 - 50)
 	{
 		m_obj->ObjectDestroyed();
 	}

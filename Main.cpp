@@ -2,6 +2,8 @@
 #include "Main.h"
 void Main::Init()
 {
+	srand(time(NULL));
+
 	SetTimer(_hWnd, 1, 1, NULL);
 	TIMERMANAGER->Init();
 	IMAGEMANAGER->Init();
@@ -14,18 +16,29 @@ void Main::Init()
 	srand(GetTickCount64());
 
 	//SCENEMANAGER->ChangeScene("EnemyTestScene");
+	inven = new Inventory;
+	inven->Init();
 	menu = new MenuUI;
 	menu->Init();
 }
 
 void Main::Update()
 {
-	if (KEYMANAGER->GetOnceKeyDown(VK_ESCAPE))
+	if (KEYMANAGER->GetOnceKeyDown(VK_ESCAPE) && SCENEMANAGER->GetInvenActive() == false)
 	{
 		SCENEMANAGER->SetMenuActive(!SCENEMANAGER->GetMenuActive());
 	}
-
-	if (SCENEMANAGER->GetMenuActive() == true)
+	if (KEYMANAGER->GetOnceKeyDown(VK_TAB) && SCENEMANAGER->GetMenuActive() == false)
+	{
+		SCENEMANAGER->SetInvenActive(!SCENEMANAGER->GetInvenActive());
+	}
+	if (SCENEMANAGER->GetInvenActive() == true)
+	{
+		if (inven)
+			inven->Update();
+		g_TimeScale = 0;
+	}
+	else if (SCENEMANAGER->GetMenuActive() == true)
 	{
 		if (menu)
 			menu->Update();
@@ -53,23 +66,17 @@ void Main::Update()
 	{
 		SCENEMANAGER->ChangeScene("BossScene");
 	}
-	if (KEYMANAGER->GetToggleKey(VK_F12))
+	if (KEYMANAGER->GetOnceKeyDown(VK_F12))
 	{
-		IMAGEMANAGER->SetViewCollision(true);
+		IMAGEMANAGER->SetViewCollision(!IMAGEMANAGER->GetViewCollision());
 	}
-	else
-	{
-		IMAGEMANAGER->SetViewCollision(false);
-	}
+
 
 	SCENEMANAGER->Update();
 
-	if (!KEYMANAGER->GetToggleKey(VK_TAB))
+	if (KEYMANAGER->GetOnceKeyDown(VK_TAB))
 	{
 
-	}
-	else
-	{
 	}
 
 }
@@ -79,15 +86,21 @@ void Main::Render()
 	IMAGEMANAGER->Begin();
 	SCENEMANAGER->Render();
 	OBJECTMANAGER->Render();
-	TIMERMANAGER->Render();
+	//TIMERMANAGER->Render();
 	EFFECTMANAGER->Render();
 	OBJECTMANAGER->UIRender();
 	SCENEMANAGER->UIRender();
 	if (SCENEMANAGER->GetMenuActive() == true)
 	{
-		IMAGEMANAGER->UIRender(SCENEMANAGER->GetPadeImage(), 0, 0, 2, 2,0,0.5f);
+		IMAGEMANAGER->UIRender(SCENEMANAGER->GetPadeImage(), 0, 0, 2, 2, 0, 0.5f);
 		if (menu)
 			menu->Render();
+	}
+	else if (SCENEMANAGER->GetInvenActive() == true)
+	{
+		IMAGEMANAGER->UIRender(SCENEMANAGER->GetPadeImage(), 0, 0, 2, 2, 0, 0.5f);
+		if (inven)
+			inven->Render();
 	}
 	IMAGEMANAGER->End();
 }

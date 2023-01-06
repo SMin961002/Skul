@@ -15,7 +15,6 @@ void ProjectileHeadSkull::SetSkullThrow(float x, float y, bool reversed)
 	m_obj->y = m_startY = y-50;
 	
 	m_rot = 0;
-	cout << "¶Ò¹è±â¾îÅÃ" << endl;
 }
 
 void ProjectileHeadSkull::Init()

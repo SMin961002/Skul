@@ -148,7 +148,6 @@ namespace MY_UTILITY // utility
 	}
 	inline float getFromFloatTo(float fromNum, float toNum)
 	{
-
 		float rnd = (float)rand() / (float)RAND_MAX;
 		return (rnd * (toNum - fromNum)) + fromNum;
 	}

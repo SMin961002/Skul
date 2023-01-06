@@ -210,6 +210,9 @@
     <ClCompile Include="ResultValue.cpp">
       <Filter>Game\Reward</Filter>
     </ClCompile>
+    <ClCompile Include="BossPhase1EnemyCandle.cpp" />
+    <ClCompile Include="BossPhase1EnemyFnatic.cpp" />
+    <ClCompile Include="FireKnife.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -408,6 +411,9 @@
     <ClInclude Include="ResultValue.h">
       <Filter>Game\Reward</Filter>
     </ClInclude>
+    <ClInclude Include="BossPhase1EnemyCandle.h" />
+    <ClInclude Include="BossPhase1EnemyFnatic.h" />
+    <ClInclude Include="FireKnife.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
