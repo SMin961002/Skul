@@ -257,6 +257,22 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/Lobby/61.png");
 	AddTileImage(L"./Resources/Tile/Lobby/62.png");
 	AddTileImage(L"./Resources/Tile/Lobby/63.png");
+	AddTileImage(L"./Resources/Tile/Lobby/64.png");
+	AddTileImage(L"./Resources/Tile/Lobby/65.png");
+	AddTileImage(L"./Resources/Tile/Lobby/66.png");
+	AddTileImage(L"./Resources/Tile/Lobby/67.png");
+	AddTileImage(L"./Resources/Tile/Lobby/68.png");
+	AddTileImage(L"./Resources/Tile/Lobby/69.png");
+	AddTileImage(L"./Resources/Tile/Lobby/70.png");
+	AddTileImage(L"./Resources/Tile/Lobby/71.png");
+	AddTileImage(L"./Resources/Tile/Lobby/72.png");
+	AddTileImage(L"./Resources/Tile/Lobby/73.png");
+	AddTileImage(L"./Resources/Tile/Lobby/74.png");
+	AddTileImage(L"./Resources/Tile/Lobby/75.png");
+	AddTileImage(L"./Resources/Tile/Lobby/76.png");
+	AddTileImage(L"./Resources/Tile/Lobby/77.png");
+	AddTileImage(L"./Resources/Tile/Lobby/78.png");
+	AddTileImage(L"./Resources/Tile/Lobby/79.png");
 
 
 	// 배경 이미지
