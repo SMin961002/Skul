@@ -127,7 +127,7 @@ public:
 	//플레이어 피격시 밀림(플레이어가 x+moveX, y+moveY포인트로 옮겨집니다)
 	void HitPlayerKnockBack(float moveX, float moveY)
 	{
-		m_obj->x += (m_isLeft ? moveX : -moveX);
+		m_obj->x += moveX;
 		m_obj->y += moveY;
 	}
 
