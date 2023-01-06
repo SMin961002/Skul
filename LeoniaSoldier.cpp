@@ -75,8 +75,9 @@ void LeoniaSoldier::Update()
 				m_effect = true;
 			}
 		}
-		catch (const std::exception&)
+		catch (const std::exception& eex)
 		{
+			cout << eex.what();
 			effect = nullptr;
 		}
 	}
