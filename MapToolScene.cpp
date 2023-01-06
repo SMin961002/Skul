@@ -15,7 +15,6 @@ void MapToolScene::Init()
 	m_streuctureKey = "";
 	m_state = eTileBatch;
 
-
 	m_tileImages = IMAGEMANAGER->GetTileImages();
 	m_structureImages = IMAGEMANAGER->GetStructureImages();
 	m_objectImages = IMAGEMANAGER->GetObjectImages();
@@ -88,6 +87,31 @@ void MapToolScene::Update()
 		m_kind = -1;
 		m_state = eObjectBatch;
 		m_streuctureKey = "";
+	}
+
+	if (KEYMANAGER->GetOnceKeyDown(VK_RSHIFT))
+	{
+		vector<int> v;
+		v.resize(100, -1);
+		m_tiles.push_back(v);
+	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_RETURN))
+	{
+		m_tiles.pop_back();
+	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_LSHIFT))
+	{
+		for (auto& iter : m_tiles)
+		{
+			iter.pop_back();
+		}
+	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
+	{
+		for (auto& iter : m_tiles)
+		{
+			iter.push_back(-1);
+		}
 	}
 }
 
