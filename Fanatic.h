@@ -3,6 +3,8 @@
 class Fanatic :public Enemy
 {
 private:
+	Effect* effect;
+
 	float m_lastX, m_lastY;
 	enum ImageState
 	{
