@@ -45,9 +45,8 @@ void LeoniaSoldier::Init()
 	m_vimage[eHpbarUp] = IMAGEMANAGER->AddImageVectorCopy("Hpbar_Up");
 	m_vimage[eHpbarUp]->Setting(0.4f, false);
 
-	effect = new Appear;
+	effect = EFFECTMANAGER->AddEffect<Appear>(m_obj->x, m_obj->y, false, 1.5f);
 	effect->Init();
-	effect->SetObject(m_obj);
 	effect->SetEffectStart(m_obj->x, m_obj->y, false, 1.5);
 
 	m_lastX = m_obj->x;
@@ -66,10 +65,22 @@ void LeoniaSoldier::Update()
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 	}
-	if (effect->GetIsEffectEnded())
+
+	if (m_effect == false)
 	{
-		m_effect = true;
+		try
+		{
+			if (effect->GetIsEffectEnded())
+			{
+				m_effect = true;
+			}
+		}
+		catch (const std::exception&)
+		{
+			effect = nullptr;
+		}
 	}
+
 	if (m_effect == true)
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
@@ -142,7 +153,6 @@ void LeoniaSoldier::Update()
 
 void LeoniaSoldier::Render()
 {
-	effect->Render();
 	if (m_effect == true)
 	{
 		if (m_currenthp >= 0)
@@ -211,9 +221,11 @@ void LeoniaSoldier::OnCollision(string collisionName, Object* other)
 	{
 		if (other->GetName() == "player")
 		{
-			//other->GetComponent<Player>()-플레이어 상태쉉
+
 			m_attack = true;
 			m_move = false;
+
+			//other->GetComponent<Player>()-플레이어 상태쉉
 		}
 	}
 
@@ -222,10 +234,16 @@ void LeoniaSoldier::OnCollision(string collisionName, Object* other)
 		cout << "<<" << endl;
 		if (other->GetName() == "player")
 		{
-			m_hitpoint = true;
-			Player* ply = other->GetComponent<Player>();
-			ply->HitPlayerMagicAttack(10);
-			ply->HitPlayerKnockBack(5, 5);
+			for (auto iter : other->GetCollisionComponent())
+			{
+				if (iter->GetName() == "PlayerHitRange")
+				{
+					m_hitpoint = true;
+					Player* ply = other->GetComponent<Player>();
+					ply->HitPlayerMagicAttack(10);
+					ply->HitPlayerKnockBack(5, 5);
+				}
+			}
 		}
 	}
 }
@@ -243,7 +261,7 @@ void LeoniaSoldier::HitEnemy(float dmg)
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 		dmg = 10; //-= 플레이어 어택 데미지 상의
 		m_currenthp -= dmg;
-		
+
 		if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
 		{
 			EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 0, 2);
@@ -254,6 +272,6 @@ void LeoniaSoldier::HitEnemy(float dmg)
 		}
 		m_hit = true;
 		m_hiteffecttimer = 0;
-		
+
 	}
 }
