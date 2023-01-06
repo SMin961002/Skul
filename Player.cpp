@@ -8,14 +8,13 @@ void Player::Init()
 	m_UIImage[ePlayerStatus] = IMAGEMANAGER->FindImage("PlayerStatusUI");
 	OBJECTMANAGER->m_player = this;
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)] = new Head_Basic;
+	m_headList[static_cast<int>(eSkulSpecies::eBasic)]->SetPlayerXY(&m_obj->x, &m_obj->y, &m_isLeft, &m_isDown);
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)]->Init();
 	m_headList[static_cast<int>(eSkulSpecies::eGambler)] = new Gambler;
 	m_headList[static_cast<int>(eSkulSpecies::eGambler)]->Init();
 
 	m_headSlot = eSkulSpecies::eGambler;
 	m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eBasic)];
-	m_nowHead->SetPlayerXY(&m_obj->x, &m_obj->y, &m_isLeft, &m_isDown);
-	m_nowHead->Init();
 	m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
 
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
@@ -25,12 +24,16 @@ void Player::Init()
 	m_obj->AddComponent<RigidBodyComponent>();
 
 	//m_collAutoAttack = m_nowHead->GetCollAutoAttack();
-	//m_collSkill = m_nowHead->GetCollSkill();
+	//m_collSkillA = m_nowHead->GetCollSkill();
 	//m_obj->AddCollisionComponent(m_collAutoAttack);
-	//m_obj->AddCollisionComponent(m_collSkill);
+	//m_obj->AddCollisionComponent(m_collSkillA);
 	//m_collAutoAttack->SetObject(m_obj);
-	//m_collSkill->SetObject(m_obj);
-	////cout << m_collAutoAttack << "플레이어 m_collAuto 주소" << endl;
+	//m_collSkillA->SetObject(m_obj);
+	m_collAutoAttack = nullptr;
+	m_collSkillA = nullptr;
+	m_collSkillS = nullptr;
+	m_collSkillTag = nullptr;
+	m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
 
 	m_HpMax = 100;
 	m_life = 100;
@@ -38,23 +41,13 @@ void Player::Init()
 	m_haveArtifact = false;
 	m_supperArmarTime = 0.5f;
 
-	//m_hitBox = { (int)(m_obj->x) - 7, (int)(m_obj->y) - 15, (int)(m_obj->x) + 7, (int)(m_obj->y) + 15 };
-
 	OBJECTMANAGER->m_player = this;
-	//m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
-	//coll = m_obj->AddComponent<CollisionComponent>();
-	//coll->Setting(25, m_obj->x + 14, m_obj->y - 15, "PlayerHitRange");
-	//m_obj->AddCollisionComponent(coll);
-	//m_obj->AddComponent<RigidBodyComponent>();
-	//m_obj->GetComponent<PixelCollisionComponent>()->BSettingRect({ -10 , -10, 10 , 0 });
-
 	m_supperArmarNowTime = 0;
 }
 
 void Player::Update()
 {
 	Vector2 v;
-	//m_obj->GetCollisionComponent()->Setting(20, m_obj->x, m_obj->y);
 
 	m_nowHead->SetImageChange(false);
 
@@ -143,18 +136,12 @@ void Player::ChangeHead()
 		m_headTagCool = m_nowHead->GetTagCoolTime();
 		m_nowHead->ResetAll();
 
+		//coll tag에 문제있어
 		switch (m_headSlot)
 		{
 		case eSkulSpecies::eBasic:
 			m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eBasic)];
-
-			m_collAutoAttack = m_nowHead->GetCollAutoAttack();
-			m_collSkill = m_nowHead->GetCollSkill();
-			//m_obj->AddCollisionComponent(m_collAutoAttack);
-			//m_obj->AddCollisionComponent(m_collSkill);
-			//m_collAutoAttack->SetObject(m_obj);
-			//m_collSkill->SetObject(m_obj);
-
+			m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
 			cout << "스컬 변경 : 리틀본" << endl;
 			break;
 		case eSkulSpecies::eGambler:
@@ -168,15 +155,7 @@ void Player::ChangeHead()
 		}
 		m_headSlot = tmp;
 		m_nowHead->SetPlayerXY(&m_obj->x, &m_obj->y, &m_isLeft, &m_isDown);
-		m_nowHead->Init();
 		m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
-
-		//m_collAutoAttack = m_nowHead->GetCollAutoAttack();
-		//m_collSkill = m_nowHead->GetCollSkill();
-		//m_obj->AddCollisionComponent(m_collAutoAttack);
-		//m_obj->AddCollisionComponent(m_collSkill);
-		//m_collAutoAttack->SetObject(m_obj);
-		//m_collSkill->SetObject(m_obj);
 	}
 }
 

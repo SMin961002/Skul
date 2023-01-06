@@ -21,3 +21,10 @@ void DeadEffect::Init()
 	m_img = IMAGEMANAGER->AddImageVectorCopy("DeadEffect");
 	m_img->Setting(0.05, false);
 }
+
+void Appear::Init()
+{
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("AppearEffect");
+	m_img->Setting(0.08, false);
+}

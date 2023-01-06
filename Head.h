@@ -35,7 +35,9 @@ protected:
 	vImage* img_reborn;
 	vImage* nowImg;
 	CollisionComponent* m_collAutoAttack;	//##공격 발동하면 여기에 어택collision을 대입한다.
-	CollisionComponent* m_collSkill;	//##스킬 발동하면 여기에 스킬 collision을 대입한다.
+	CollisionComponent* m_collSkillA;	//##스킬 발동하면 여기에 스킬 collision을 대입한다.
+	CollisionComponent* m_collSkillS = nullptr;	//##스킬 발동하면 여기에 스킬 collision을 대입한다.
+	CollisionComponent* m_collSkillTag;	//##스킬 발동하면 여기에 스킬 collision을 대입한다.
 	float m_tagCoolTime;
 
 	//이미지, 시간으로 제어
@@ -120,11 +122,33 @@ public:
 	inline int GetAction() { return m_action; }
 	inline float GetTagCoolTime() { return m_tagCoolTime; }
 	inline CollisionComponent* GetCollAutoAttack() { return m_collAutoAttack; }
-	inline CollisionComponent* GetCollSkill() { return m_collSkill; }
+	inline CollisionComponent* GetCollSkill() { return m_collSkillA; }
 	
 	virtual void ImageSetting() {};
 	virtual void ParameterSetting() {};
 	virtual void CollisionSetting() {};
+	virtual void CollisionResetting(Object* obj, CollisionComponent* autoAttack, CollisionComponent* skill1,CollisionComponent* skill2, CollisionComponent* tag)
+	{
+		CollisionSetting();
+		//autoAttack->SetObject(nullptr);
+		//skill1->SetObject(nullptr);
+		//skill2->SetObject(nullptr);
+		//tag->SetObject(nullptr);
+
+		autoAttack = m_collAutoAttack;
+		skill1 = m_collSkillA;
+		skill2 = m_collSkillS;
+		tag = m_collSkillTag;
+
+		autoAttack->SetObject(obj);
+
+		if (skill2 != nullptr)
+			skill1->SetObject(obj);
+		if (skill2 != nullptr)
+			skill2->SetObject(obj);
+		if (tag != nullptr)
+			tag->SetObject(obj);
+	};
 
 	//Update 안에 들어가는 함수
 	virtual void Act();

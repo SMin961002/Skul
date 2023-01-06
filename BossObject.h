@@ -1,6 +1,10 @@
 #pragma once
 #include "Component.h"
 
+class Baptism;
+class WorshipLeft;
+class WorshipRight;
+
 class BossObject : public Component
 {
 private:
@@ -33,7 +37,6 @@ private:
 	vImage* _imgPhase1BossConsecrationLoop;
 	vImage* _imgPhase1BossConsecrationEnd;
 	// 좌우로 오는 구슬
-	vImage* _imgPhase1BossWorship;
 
 	// 보스 1페이즈 초이스
 	vImage* _imgPhase1BossChoiceReady;
@@ -54,7 +57,10 @@ private:
 
 protected:
 	bool _isIdleOn;
+	bool _patternLock;
 
+	int _patternSelect;
+	float _patternDelay;
 protected:
 	bool _isNervousnessOn;
 	bool _isNervousnessLoopOn;
@@ -78,6 +84,15 @@ protected:
 
 	float _castingMotionDeltaTime;
 	float _consecrationDeltaTime;
+
+	vector<Baptism*> _vBaptism;
+	vector<Baptism*>::iterator _viBaptism;
+	
+	vector<WorshipLeft*> _vWorshipLeft;
+	vector<WorshipLeft*>::iterator _viWorshipLeft;
+
+	vector<WorshipRight*> _vWorshipRight;
+	vector<WorshipRight*>::iterator _viWorshipRight;
 public:
 	virtual void Init() override;
 	virtual void Update() override;

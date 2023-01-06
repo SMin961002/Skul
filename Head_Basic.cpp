@@ -91,25 +91,26 @@ void Head_Basic::ParameterSetting()
 	m_skillUsing = false;
 	m_headThrow = false;
 	m_imageChange = false;
+	m_BasicHeadAttack = new CollisionComponent;
+	m_TagAttack = new CollisionComponent;
 }
 
 void Head_Basic::CollisionSetting()
 {	
-	m_BasicHeadAttack = new CollisionComponent;
 	m_BasicHeadAttack->Setting(50, *m_x + 6 + 40, *m_y - 24 + 72, "BasicAttack_BasicSkul");
 	m_BasicHeadAttack->SetIsActive(false);
 	m_collAutoAttack = m_BasicHeadAttack;
 
-	m_TagAttack = new CollisionComponent;
 	m_TagAttack->Setting(100, *m_x, *m_y, "TagAttack_BasicSkul");
 	m_TagAttack->SetIsActive(false);
-	m_collSkill = m_TagAttack;
+	m_collSkillTag = m_TagAttack;
 
 	cout << m_BasicHeadAttack << "기본공격 콜리전 주소" << endl;
 }
 
 void Head_Basic::Release()
 {
+	m_projectileHead->DestroyProjectileHead();
 	SAFE_DELETE(m_BasicHeadAttack);
 	SAFE_DELETE(m_TagAttack);
 }

@@ -52,11 +52,14 @@ private:
 	float m_supperArmarTime;
 	float m_supperArmarNowTime;
 	//============이동에 필요한 변수end==========
+	TeleportationToHead* effect = new TeleportationToHead;
 
 public:
 	CollisionComponent* m_playerHitBox;
 	CollisionComponent* m_collAutoAttack;
-	CollisionComponent* m_collSkill;
+	CollisionComponent* m_collSkillA;
+	CollisionComponent* m_collSkillS;
+	CollisionComponent* m_collSkillTag;
 
 	bool  m_haveArtifact;
 
@@ -113,8 +116,6 @@ public:
 		m_supperArmarNowTime = m_supperArmarTime;
 		m_playerHitBox->SetIsActive(false);
 		m_life -= dmg;
-		EFFECTMANAGER->AddEffect<PlayerHit>((m_obj->GetComponent<CollisionComponent>()->GetCollisionPosX())
-			, m_obj->GetComponent<CollisionComponent>()->GetCollisionPosY(), m_isLeft);
 	}
 	//마법공격 데미지를 입력해주세요
 	void HitPlayerMagicAttack(float dmg)
@@ -122,14 +123,25 @@ public:
 		m_supperArmarNowTime = m_supperArmarTime;
 		m_playerHitBox->SetIsActive(false);
 		m_life -= dmg;
-		EFFECTMANAGER->AddEffect<PlayerHit>((m_obj->GetComponent<CollisionComponent>()->GetCollisionPosX())
-			, m_obj->GetComponent<CollisionComponent>()->GetCollisionPosY(), m_isLeft);
 	}
-	//피격시 플레이어 밀림(플레이어가 x+moveX, y+moveY포인트로 옮겨집니다)
+	//플레이어 피격시 밀림(플레이어가 x+moveX, y+moveY포인트로 옮겨집니다)
 	void HitPlayerKnockBack(float moveX, float moveY)
 	{
 		m_obj->x += (m_isLeft ? moveX : -moveX);
 		m_obj->y += moveY;
+	}
+
+	//플레이어 피격시 이펙트(일반타)
+	void HitPlayerEffect()
+	{
+		EFFECTMANAGER->AddEffect<PlayerHit>((m_obj->GetComponent<CollisionComponent>()->GetCollisionPosX())
+			, m_obj->GetComponent<CollisionComponent>()->GetCollisionPosY(), m_isLeft);
+	}
+
+	//플레이어 피격시 이펙트(크리티컬)(내용 안채워서 지금은 안뜹니다)
+	void CritialHitPlayerEffect()
+	{
+
 	}
 
 	Player() : m_life(100) {};
@@ -141,10 +153,9 @@ public:
 
 # 추가작업 필요한 부분은 코드 중간에 ##로 표시해두었음.
 
-# jump, dash부분 보강 필요
- - jump 전체 구현해야함
- - 공격모션 출력
- - 스킬 출력
+# dash부분 보강 필요
+
+#
 
  - effect 출력
  - 추상화(진행중!)
