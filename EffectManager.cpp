@@ -5,17 +5,18 @@ void EffectManager::Update()
 {
 	if (!m_vectorEffectList.empty())
 	{
-		vector<Effect*>::iterator iter;
-		for (iter = m_vectorEffectList.begin(); iter != m_vectorEffectList.end();)
+		for (auto& iter = m_vectorEffectList.begin(); iter != m_vectorEffectList.end();)
 		{
-			if ((*iter)->GetIsActive() == true)
+			(*iter)->Update();
+			if ((*iter)->GetIsEnded() == true)
 			{
-				(*iter)->Update();
-				iter++;
+				(*iter)->Release();
+				SAFE_DELETE(*iter);
+				*iter = nullptr;
+				iter = m_vectorEffectList.erase(iter);
 			}
 			else {
-				(*iter)->Release();
-				iter = m_vectorEffectList.erase(iter);
+				iter++;
 			}
 		}//end for
 	}//end exist Effect
