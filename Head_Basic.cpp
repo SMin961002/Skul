@@ -353,5 +353,11 @@ void Head_Basic::DrawCharactor()
 
 void Head_Basic::OnCollisionAutoAttack(Enemy* obj, float dmg)
 {
-	obj->HitEnemy(dmg);
+	obj->HitEnemy(dmg,1);// 임의로 넣은것 추후 유진님 수정후 병합시제외
 }
+void Head_Basic::OnCollisionAutoAttackBossEnemy(Component* obj, float dmg)
+{
+	obj->HitEnemy(dmg, 1);
+}
+
+

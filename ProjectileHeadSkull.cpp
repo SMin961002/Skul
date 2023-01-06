@@ -93,7 +93,7 @@ void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
 			{
 				m_hit = true;
 				m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
-				other->GetComponent<Enemy>()->HitEnemy(20);
+				other->GetComponent<Enemy>()->HitEnemy(20,1);//임의로 넣은것 추후제외
 			}
 		}//end nonhit
 		if(other->GetName() == "player")

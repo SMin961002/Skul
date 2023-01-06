@@ -183,6 +183,7 @@ void AngelStatue::Render()
 	}
 }
 
+
 void AngelStatue::Release()
 {
 }
@@ -214,10 +215,10 @@ void AngelStatue::OnCollision(string collisionName, Object* other)
 		}
 	}
 }
-void AngelStatue::HitEnemy(float dmg)
+void AngelStatue::HitEnemy(float dmg, float time)
 {
 
-	if (m_hiteffecttimer >= 0.7f)
+	if (m_hiteffecttimer >= time)
 	{
 		dmg = 10;
 		m_currenthp -= dmg;

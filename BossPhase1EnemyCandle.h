@@ -4,6 +4,12 @@
 class BossPhase1EnemyCandle : public Component
 {
 private:
+	float m_maxhp;
+	float m_currenthp;
+	float m_hpbartimer;
+	float m_hpbar;
+	float m_dietimer;
+	float m_hiteffecttimer;
 	float m_ratherY;
 	CImage* m_ratherImg;
 	int m_state = 0;
@@ -14,11 +20,18 @@ private:
 		eAttack,
 		eAttackReady,
 		eWalk,
+		eHPbarEmpty,
+		eHpbarDown,
+		eHpbarUp,
 		eEnd
 	};
 	bool m_isL;
-
+	bool m_die2;
+	bool m_hit;
+	bool m_die;
 	vImage* img[State::eEnd];
+	CollisionComponent* m_hitCollision;
+
 public:
 	BossPhase1EnemyCandle() {}
 	~BossPhase1EnemyCandle() {}
@@ -28,5 +41,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	virtual void OnCollision(string collisionName, Object* other) override {};
+	void HitEnemy(float dmg, float time) override;
 };
 
