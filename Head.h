@@ -1,14 +1,14 @@
 #pragma once
 #include "PlayerEffect.h"
 
-class Player;
+class Enemy;
 //머리들이 계승받는 상위클래스
 class Head
 {
 public:
 	virtual enum ActionTag
 	{
-		eIdle = 0,
+		eIdle,
 		eWalk,
 		eDash,
 		eJump,
@@ -30,15 +30,18 @@ public:
 
 protected:
 	eSkulSpecies m_species;
-
-	vImage* img[eActionTagNumber];
+	Object* m_obj;
+	vImage* img[20];
 	vImage* img_reborn;
 	vImage* nowImg;
 	CollisionComponent* m_collAutoAttack;	//##공격 발동하면 여기에 어택collision을 대입한다.
-	CollisionComponent* m_collSkill;	//##스킬 발동하면 여기에 스킬 collision을 대입한다.
+	CollisionComponent* m_collSkillA;	//##스킬 발동하면 여기에 스킬 collision을 대입한다.
+	CollisionComponent* m_collSkillS = nullptr;	//##스킬 발동하면 여기에 스킬 collision을 대입한다.
+	CollisionComponent* m_collSkillTag;	//##스킬 발동하면 여기에 스킬 collision을 대입한다.
+	float m_tagCoolTime;
 
 	//이미지, 시간으로 제어
-	ActionTag m_action;
+	int m_action;
 
 	float* m_x = nullptr, * m_y = nullptr;
 	bool* m_isLeft = nullptr;
@@ -64,7 +67,7 @@ protected:
 
 	short m_attackCount;
 	short m_attackMax;
-	bool  m_attackCast;		//1타중 아무때나 공격키 1회 누르면 액션 끝나고 2타가 이어서 발동된다.
+	bool  m_attackCast[2];		//1타중 아무때나 공격키 1회 누르면 액션 끝나고 2타가 이어서 발동된다.
 
 	float m_skillCoolA;
 	float m_skillNowCoolA;
@@ -80,30 +83,59 @@ public:
 	virtual void Update();
 	virtual void Render();
 	virtual void Release();
-
+	void SetObject(Object* obj) { m_obj = obj; }
 	inline void SetPlayerXY(float* x, float* y, bool* left, bool* down) { m_x = x, m_y = y, m_isLeft = left; }
 	inline void SetImageChange(bool tf) { m_imageChange = tf; }
-	inline void SetImage(ActionTag image, bool isImageEqualAction = true, ActionTag action = eIdle)
+	inline void SetImage(int image, bool isImageEqualAction = true, int action = eIdle)
 	{
 		nowImg->Reset();
 		img[image]->Reset();
 		nowImg = img[image];
 		m_action = isImageEqualAction ? image : action;
 	}
-	inline void SetAction(ActionTag action, bool doWantToChangeImage=true)
+	inline void SetAction(int action, bool doWantToChangeImage=true)
 	{
 		m_action = action;
 		if (doWantToChangeImage) { m_imageChange = true; }
 	}
 	inline eSkulSpecies GetSpecies() { return m_species; }
-	inline bool GetIsAttack() { if (m_attackCount > 0) return true; else return false; }
-	inline ActionTag GetAction() { return m_action; }
+	inline bool GetIsAttack() 
+	{
+		switch (m_attackCount)
+		{
+		case 0:
+			return false;
+			break;
+		case 1:
+			if (m_attackCast[1] == true)
+				return false;
+			else return true;
+			break;
+		case 2:
+			return true;
+			break;
+		default:
+			cout << "공격횟수가 이상하다. attackcount = " << m_attackCount << endl;
+			return false;
+		}
+	}
+	inline int GetAction() { return m_action; }
+	inline float GetTagCoolTime() { return m_tagCoolTime; }
 	inline CollisionComponent* GetCollAutoAttack() { return m_collAutoAttack; }
-	inline CollisionComponent* GetCollSkill() { return m_collSkill; }
+	inline CollisionComponent* GetCollSkill() { return m_collSkillA; }
 	
 	virtual void ImageSetting() {};
 	virtual void ParameterSetting() {};
 	virtual void CollisionSetting() {};
+	virtual void CollisionResetting(Object* obj, CollisionComponent* autoAttack, CollisionComponent* skill1,CollisionComponent* skill2, CollisionComponent* tag)
+	{
+		m_collAutoAttack = autoAttack;
+		m_collSkillA = skill1;
+		m_collSkillS = skill2;
+		m_collSkillTag = tag;
+		
+		CollisionSetting();
+	};
 
 	//Update 안에 들어가는 함수
 	virtual void Act();
@@ -119,6 +151,7 @@ public:
 
 	//Render 안에 들어가는 함수
 	virtual void DrawCharactor();
+	virtual void OnCollisionAutoAttack(Enemy* obj, float dmg) {};
 
 	void SetPlayerMoveParameter(float* moveSpeed, float* dashSpeed, float* dashtime, short* dashMax, bool* dashing,float* jumpSpeed, short* jumpMax, bool* jumpping)
 	{
@@ -140,7 +173,8 @@ public:
 		m_action = eIdle;
 	}
 	void ResetAttack() {
-		m_attackCast = false;
+		m_attackCast[0] = false;
+		m_attackCast[1] = false;
 		m_attackCount = 0;
 	}
 	void ResetSkill() {

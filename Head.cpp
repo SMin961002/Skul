@@ -1,13 +1,12 @@
 #include "stdafx.h"
 #include "Head.h"
 #include "RigidBodyComponent.h"
-//#include "Player.h"
+#include "Enemy.h"
 
 void Head::Init()
 {
 	ImageSetting();
 	ParameterSetting();
-	CollisionSetting();
 }
 
 void Head::Update()

@@ -151,4 +151,10 @@ namespace MY_UTILITY // utility
 		float rnd = (float)rand() / (float)RAND_MAX;
 		return (rnd * (toNum - fromNum)) + fromNum;
 	}
+	inline float GetDistance(float startX, float startY, float endX, float endY)
+	{
+		float x = endX - startX;
+		float y = endY - startY;
+		return sqrt(x * x + y * y);
+	}
 };
