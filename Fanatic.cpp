@@ -54,11 +54,11 @@ void Fanatic::Init()
 
 	m_isReverse = false;
 	m_isAttack = false;
-	
-	effect = new Appear;
-	effect->Init();
-	effect->SetObject(m_obj);
-	effect->SetEffectStart(m_obj->x, m_obj->y, false, 1.5);
+
+	effect = EFFECTMANAGER->AddEffect<Appear>(m_obj->x, m_obj->y, false, 1.4f);
+	//effect = new Appear;
+	//effect->Init();
+	//effect->SetEffectStart(m_obj->x, m_obj->y, false, 1.5);
 
 	m_hitCollision = m_obj->AddComponent<CollisionComponent>();
 	m_hitpointCollision = m_obj->AddComponent<CollisionComponent>();
@@ -73,10 +73,21 @@ void Fanatic::Update()
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 	}
-	if (effect->GetIsEffectEnded())
+	if (m_effect == false)
 	{
-		m_effect = true;
+		try
+		{
+			if (effect->GetIsEffectEnded())
+			{
+				m_effect = true;
+			}
+		}
+		catch (const std::exception&)
+		{
+			effect = nullptr;
+		}
 	}
+
 	if (m_effect == true)
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
@@ -180,7 +191,6 @@ void Fanatic::Update()
 
 void Fanatic::Render()
 {
-	effect->Render();
 	if (m_effect == true)
 	{
 		if (m_currenthp >= 0)
