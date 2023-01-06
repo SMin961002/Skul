@@ -2,6 +2,14 @@
 class NpcObject : public Component
 {
 public:
+	struct sItem
+	{
+		int m_account;
+		string key;
+	};
+
+	vector<sItem*> m_itemList;
+	float rot;
 	NpcObject();
 	~NpcObject();
 	vImage* m_npcImage;

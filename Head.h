@@ -30,7 +30,7 @@ public:
 
 protected:
 	eSkulSpecies m_species;
-
+	Object* m_obj;
 	vImage* img[20];
 	vImage* img_reborn;
 	vImage* nowImg;
@@ -83,7 +83,7 @@ public:
 	virtual void Update();
 	virtual void Render();
 	virtual void Release();
-
+	void SetObject(Object* obj) { m_obj = obj; }
 	inline void SetPlayerXY(float* x, float* y, bool* left, bool* down) { m_x = x, m_y = y, m_isLeft = left; }
 	inline void SetImageChange(bool tf) { m_imageChange = tf; }
 	inline void SetImage(int image, bool isImageEqualAction = true, int action = eIdle)
@@ -129,25 +129,12 @@ public:
 	virtual void CollisionSetting() {};
 	virtual void CollisionResetting(Object* obj, CollisionComponent* autoAttack, CollisionComponent* skill1,CollisionComponent* skill2, CollisionComponent* tag)
 	{
+		m_collAutoAttack = autoAttack;
+		m_collSkillA = skill1;
+		m_collSkillS = skill2;
+		m_collSkillTag = tag;
+		
 		CollisionSetting();
-		//autoAttack->SetObject(nullptr);
-		//skill1->SetObject(nullptr);
-		//skill2->SetObject(nullptr);
-		//tag->SetObject(nullptr);
-
-		autoAttack = m_collAutoAttack;
-		skill1 = m_collSkillA;
-		skill2 = m_collSkillS;
-		tag = m_collSkillTag;
-
-		autoAttack->SetObject(obj);
-
-		if (skill2 != nullptr)
-			skill1->SetObject(obj);
-		if (skill2 != nullptr)
-			skill2->SetObject(obj);
-		if (tag != nullptr)
-			tag->SetObject(obj);
 	};
 
 	//Update 안에 들어가는 함수

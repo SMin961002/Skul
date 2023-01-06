@@ -91,28 +91,20 @@ void Head_Basic::ParameterSetting()
 	m_skillUsing = false;
 	m_headThrow = false;
 	m_imageChange = false;
-	m_BasicHeadAttack = new CollisionComponent;
-	m_TagAttack = new CollisionComponent;
 }
 
 void Head_Basic::CollisionSetting()
 {	
-	m_BasicHeadAttack->Setting(50, *m_x + 6 + 40, *m_y - 24 + 72, "BasicAttack_BasicSkul");
-	m_BasicHeadAttack->SetIsActive(false);
-	m_collAutoAttack = m_BasicHeadAttack;
+	m_collAutoAttack->Setting(50, *m_x + 6 + 40, *m_y - 24 + 72, "BasicAttack_BasicSkul");
+	m_collAutoAttack->SetIsActive(false);
 
-	m_TagAttack->Setting(100, *m_x, *m_y, "TagAttack_BasicSkul");
-	m_TagAttack->SetIsActive(false);
-	m_collSkillTag = m_TagAttack;
-
-	cout << m_BasicHeadAttack << "기본공격 콜리전 주소" << endl;
+	m_collSkillTag->Setting(100, *m_x, *m_y, "TagAttack_BasicSkul");
+	m_collSkillTag->SetIsActive(false);
 }
 
 void Head_Basic::Release()
 {
 	m_projectileHead->DestroyProjectileHead();
-	SAFE_DELETE(m_BasicHeadAttack);
-	SAFE_DELETE(m_TagAttack);
 }
 
 void Head_Basic::CoolDown()
@@ -258,36 +250,36 @@ void Head_Basic::ActionArrangement()
 
 void Head_Basic::CollisionUpdate()
 {
-	m_BasicHeadAttack->SetIsActive(false);
-	m_BasicHeadAttack->SetIsActive(false);
+	m_collAutoAttack->SetIsActive(false);
+	m_collSkillTag->SetIsActive(false);
 	
 	switch (m_action)
 	{
 	case eAutoAttack_1:
 		if (nowImg->GetFrame() > 1 && nowImg->GetFrame() < 3)
-			m_BasicHeadAttack->SetIsActive(true);
+			m_collAutoAttack->SetIsActive(true);
 		break;
 	case eAutoAttack_2:
 		if (nowImg->GetFrame() > 0 && nowImg->GetFrame() < 2)
-			m_BasicHeadAttack->SetIsActive(true);
+			m_collAutoAttack->SetIsActive(true);
 		break;
 	case eJumpAttack:
 		if (nowImg->GetFrame() > 0 && nowImg->GetFrame() < 3)
-			m_BasicHeadAttack->SetIsActive(true);
+			m_collAutoAttack->SetIsActive(true);
 		break;
 	case eTagAction:
-		m_TagAttack->SetIsActive(true);
-		m_TagAttack->Setting(*m_x, *m_y);
+		m_collSkillTag->SetIsActive(true);
+		m_collSkillTag->Setting(*m_x, *m_y);
 		break;
 	default: break;
 	}
 
-	if (m_BasicHeadAttack->GetIsActive() == true)
+	if (m_collAutoAttack->GetIsActive() == true)
 	{
 		if (*m_isLeft)
-			m_BasicHeadAttack->Setting(*m_x, *m_y - 10);
+			m_collAutoAttack->Setting(*m_x, *m_y - 10);
 		else
-			m_BasicHeadAttack->Setting(*m_x + 50, *m_y - 10);
+			m_collAutoAttack->Setting(*m_x + 50, *m_y - 10);
 	}
 }
 

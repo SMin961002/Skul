@@ -15,7 +15,6 @@ void ProjectileHeadSkull::SetSkullThrow(float x, float y, bool reversed)
 	m_obj->y = m_startY = y-50;
 	
 	m_rot = 0;
-	cout << "¶Ò¹è±â¾îÅÃ" << endl;
 }
 
 void ProjectileHeadSkull::Init()
@@ -73,6 +72,7 @@ void ProjectileHeadSkull::Off()
 	m_obj->GetComponent<CollisionComponent>()->SetIsActive(false);
 	m_obj->GetComponent<ProjectileHeadSkull>()->SetIsActive(false);
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
+	m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(false);
 }
 
 void ProjectileHeadSkull::On()
@@ -80,6 +80,7 @@ void ProjectileHeadSkull::On()
 	m_obj->GetComponent<CollisionComponent>()->SetIsActive(true);
 	m_obj->GetComponent<ProjectileHeadSkull>()->SetIsActive(true);
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+	m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(true);
 }
 
 void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)

@@ -14,11 +14,95 @@ public:
 
 	//T종류 이펙트중, 지정한 x, y좌표에 가장 가까운 곳에 있는 Effect를 켜거나 끕니다. (3번째인자 true : on, false : off)
 	template<class T>
-	void SetEffectOff(float x, float y, bool OnOff);
+	void SetEffectOff(float x, float y, bool OnOff)
+	{
+		const char* effect;
+		effect = typeid<T>.name();
 
-	//<이펙트종류> 중에서 x, y값에 가장 가까이 있는 이펙트가 끝났는지 여부를 true false로 반환합니다.
+		int index = -1;
+		float distance = 0;
+		for (int i = 0; i < m_vectorEffectList.size(); i++)
+		{
+			if (strcmp(effect, typeid(m_vectorEffectList.[i]).name()) != 0)
+				continue;
+			else
+			{
+				if (index == -1)
+				{
+					index = i;
+					distance = MY_UTILITY::GetDistance(x, y, m_vectorEffectList[i]->GetEffectX(), m_vectorEffectList[i]->GetEffectY());
+					if (distance < 0) distance = -distance;
+				}
+				else
+				{
+					float tmpD =
+						MY_UTILITY::GetDistance(x, y, m_vectorEffectList[i]->GetEffectX(), m_vectorEffectList[i]->GetEffectY());
+					if (tmpD < 0) tmpD = -tmpD;
+					if (distance < tmpD)
+					{
+						distance = tmpD;
+						index = i;
+					}
+				}
+			}//end classname
+		}//end for
+
+		if (index == -1)
+		{
+			cout << "해당 이펙트가 지금 없습니다." << endl;
+		}
+		else
+		{
+			m_vectorEffectList[index]->SetIsActive(OnOff);
+		}
+	}
+
+
+	//<이펙트종류> 중에서 x,y값에 가장 가까이 있는 이펙트가 끝났는지 여부를 true false로 반환합니다.
 	template<class T>
-	bool GetEffectEnded(float x, float y);
+	bool GetEffectEnded(float x, float y)
+	{
+		const char* effect;
+		effect = typeid<T>.name();
+
+		int index = -1;
+		float distance = 0;
+		for (int i = 0; i < m_vectorEffectList.size(); i++)
+		{
+			if (strcmp(effect, typeid(m_vectorEffectList.[i]).name()) != 0)
+				continue;
+			else
+			{
+				if (index == -1)
+				{
+					index = i;
+					distance = MY_UTILITY::GetDistance(x, y, m_vectorEffectList[i]->GetEffectX(), m_vectorEffectList[i]->GetEffectY());
+					if (distance < 0) distance = -distance;
+				}
+				else
+				{
+					float tmpD =
+						MY_UTILITY::GetDistance(x, y, m_vectorEffectList[i]->GetEffectX(), m_vectorEffectList[i]->GetEffectY());
+					if (tmpD < 0) tmpD = -tmpD;
+					if (distance < tmpD)
+					{
+						distance = tmpD;
+						index = i;
+					}
+				}
+			}//end classname
+		}//end for
+
+		if (index == -1)
+		{
+			cout << "끝났는지 알고싶은 이펙트가 지금 없습니다. false 반환" << endl;
+			return false;
+		}
+		else
+		{
+			return m_vectorEffectList[index]->GetIsEffectEnded();
+		}
+	}
 
 	//예외처리 안되어있으니 클래스 넣을때 주의해주세요~
 	template <class T>

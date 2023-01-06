@@ -123,6 +123,10 @@ void ImageManager::Init()
 
 void ImageManager::LoadImages()
 {
+	// 아이템 이미지
+	AddImage("CaerleonSword", L"./Resources/Item/CaerleonSword.png");
+
+
 	// UI 이미지
 	AddImage("Pause_Frame", L"./Resources/UI/Pause_Frame.png");
 
@@ -233,6 +237,11 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/41.png");
 	AddTileImage(L"./Resources/Tile/4Stage/42.png");
 	AddTileImage(L"./Resources/Tile/4Stage/43.png");
+	AddTileImage(L"./Resources/Tile/4Stage/44.png");
+	AddTileImage(L"./Resources/Tile/4Stage/45.png");
+	AddTileImage(L"./Resources/Tile/4Stage/46.png");
+	AddTileImage(L"./Resources/Tile/4Stage/47.png");
+	AddTileImage(L"./Resources/Tile/4Stage/48.png");
 
 	// 배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
@@ -243,6 +252,7 @@ void ImageManager::LoadImages()
 	AddImage("CollisionPlatform", L"./Resources/Tile/4Stage/CollisionPlatform.png");
 	AddImage("CollisionBox", L"./Resources/Tile/4Stage/CollisionBox.png");
 	AddImage("Light", L"./Resources/Light.png");
+	AddImage("Rather", L"./Resources/Saint_Joanna/Phase_1/Normal_Monster/Rather/05.png");
 
 	AddPixelmage("CollisionBox", "./Resources/Tile/4Stage/CollisionBox.bmp", 32, 32);
 	AddPixelmage("CollisionPlatform", "./Resources/Tile/4Stage/CollisionPlatform.bmp", 32, 32);
@@ -309,6 +319,8 @@ void ImageManager::LoadImages()
 	AddImageVector("Phase2_Boss_CreateBall_End", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/End/Sacrament_End_", 1, 7);
 	// 2페이즈_상단 텔포, 직선 레이저
 
+	AddImage("FireKnife", L"./Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/FireKnife.png");
+
 
 	//==========================================================================================================
 	// 맵 구조물 이미지
@@ -323,6 +335,9 @@ void ImageManager::LoadImages()
 	AddStructureImage("banch", L"./Resources/Tile/4Stage/Structure/banch.png");
 	AddStructureImage("shop", L"./Resources/Tile/4Stage/Structure/shop.png");
 	AddStructureImage("factory", L"./Resources/Tile/4Stage/Structure/factory.png");
+	AddStructureImage("bossPlatFormL", L"./Resources/Tile/4Stage/Structure/bossPlatFormL.png");
+	AddStructureImage("bossPlatFormS", L"./Resources/Tile/4Stage/Structure/bossPlatFormS.png");
+	AddStructureImage("Terrain", L"./Resources/Tile/4Stage/Structure/Terrain.png");
 
 
 	// 몬스터 체력바 이미지
@@ -411,6 +426,19 @@ void ImageManager::LoadImages()
 	AddImageVector("GetBlackRock", L"Resources/Item/BlackRock/GetRock/", 1, 28);
 
 
+	// 보스 1페이지 잡몹
+
+	AddImageVector("Normal_Monster2_Attack", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Attack/", 15, 26);
+	AddImageVector("Normal_Monster2_Idle", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Idle/", 2, 6);
+	AddImageVector("Normal_Monster2_Move", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Move/", 8, 14);
+	AddImageVector("Normal_Monster2_Up", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Up/", 27, 83);
+
+	AddImageVector("Normal_Monster1_Up", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/Up/", 9, 58);
+	AddImageVector("Normal_Monster1_Idle", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/Idle/", 87, 91);
+	AddImageVector("Normal_Monster1_Move", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/Move/", 92, 99);
+	AddImageVector("Normal_Monster1_FireReady", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/FireReady/", 69, 85);
+	AddImageVector("Normal_Monster1_Fire", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/Fire/", 59, 68);
+
 	//맵 오브젝트
 	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
 	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
@@ -447,12 +475,9 @@ void ImageManager::LoadImages()
 	AddObjectImage("GoldResoult", L"./Resources/GoldResult/Idle/01.png");
 	AddObjectImage("HeadResult", L"./Resources/HeadResult/Idle/01.png");
 
-
-
 	// 인게임 UI이미지
 	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");
 	AddImage("PlayerStatusUI", L"./Resources/UI/PlayerStatusUI.png");
-
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
@@ -743,7 +768,7 @@ void ImageManager::D2dTextOut(wstring str, float x, float y, D2D1_COLOR_F color,
 
 	pRT->SetTransform((matS * matT));
 
-	m_brush->SetColor({ 1.f / 255 * color.r,1.f / 255 * color.g,1.f / 255 * color.b,1 });
+	m_brush->SetColor({ 1.f / 255 * color.r,1.f / 255 * color.g,1.f / 255 * color.b,255 });
 	pRT->DrawTextA(str.c_str(), str.size(), tf, fRect, m_brush);
 }
 

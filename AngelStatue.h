@@ -1,5 +1,6 @@
 #pragma once
 #include"Enemy.h"
+
 class AngelStatue : public Enemy
 {
 	enum ImageState
@@ -9,15 +10,28 @@ class AngelStatue : public Enemy
 		eAttackReadyEffect,
 		eAttackEffect,
 		eEndAttack,
+		eHpbarUp,
+		eHpbarDown,
+		eHPbarEmpty,
 		eEnd
 	};
+	vImage* m_vimage[eEnd];
+	
+
+	bool m_attack;
+	bool m_hit;
+	bool m_die;
+	bool m_effect;
 
 	int m_state2;
 	int m_state;
-	float m_effecttimer;
-	vImage* m_vimage[eEnd];
-	bool m_attack;
+	int cheack;
+	int m_attackcount;
+
 	float m_hitpoint;
+	float m_dietimer;
+	float m_hiteffecttimer;
+	float m_hpbartimer;
 	CollisionComponent* m_collision;
 	CollisionComponent* m_hitpointcollision;
 
@@ -26,6 +40,8 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	virtual void HitEnemy(float dmg) override;
+
 	virtual void OnCollision(string collisionName, Object* other) override;
 
 

@@ -20,7 +20,7 @@ void Inventory::Update()
 
 void Inventory::Render()
 {
-	IMAGEMANAGER->Render(image, 100, 100, 2, 2);
+	IMAGEMANAGER->UICenterRender(image, WINSIZE_X/2, WINSIZE_Y/2, 1.4, 1.4);
 }
 
 void Inventory::Release()

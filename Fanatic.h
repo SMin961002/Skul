@@ -30,13 +30,13 @@ private:
 	bool m_sercrieffect;
 	bool m_die;
 	bool m_die2;
-	
+	bool m_effect;
+
 	int m_state;
 	float m_hitTimer;
 	float m_hpbartimer;
 	float m_motiontimer;
 	float m_hiteffecttimer;
-	float m_effecttimer;
 	float m_dietimer;
 
 	CollisionComponent* m_hitCollision;

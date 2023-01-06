@@ -7,7 +7,6 @@ void Head::Init()
 {
 	ImageSetting();
 	ParameterSetting();
-	CollisionSetting();
 }
 
 void Head::Update()

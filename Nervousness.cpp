@@ -11,7 +11,7 @@ void LeftImpact::Update()
 {
 	m_obj->x += 3;
 
-	if (m_obj->x > WINSIZE_X)
+	if (m_obj->x > WINSIZE_X + WINSIZE_X/2 - 50)
 	{
 		m_obj->ObjectDestroyed();
 	}
@@ -19,7 +19,7 @@ void LeftImpact::Update()
 
 void LeftImpact::Render()
 {
-	_imgPhase1NervousEffectImpactRight->CenterRender(m_obj->x, WINSIZE_Y /2 + 120, 1.8, 1.8, 0, false);
+	_imgPhase1NervousEffectImpactRight->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
 }
 
 void LeftImpact::Release()
@@ -45,7 +45,7 @@ void RightImpact::Update()
 
 void RightImpact::Render()
 {
-	_imgPhase1NervousEffectImpactLeft->CenterRender(m_obj->x, WINSIZE_Y / 2 + 120, 1.8, 1.8, 0, true);
+	_imgPhase1NervousEffectImpactLeft->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, true);
 }
 
 void RightImpact::Release()

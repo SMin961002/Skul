@@ -2,17 +2,22 @@
 #include "Player.h"
 #include "RigidBodyComponent.h"
 #include "Enemy.h"
-
+/*
+플레이어가 가진
+collision컴포넌트를
+head에 전달해서 가공하기
+*/
 void Player::Init()
 {
 	m_UIImage[ePlayerStatus] = IMAGEMANAGER->FindImage("PlayerStatusUI");
 	OBJECTMANAGER->m_player = this;
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)] = new Head_Basic;
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)]->SetPlayerXY(&m_obj->x, &m_obj->y, &m_isLeft, &m_isDown);
+	m_headList[static_cast<int>(eSkulSpecies::eBasic)]->SetObject(m_obj);
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)]->Init();
 	m_headList[static_cast<int>(eSkulSpecies::eGambler)] = new Gambler;
+	m_headList[static_cast<int>(eSkulSpecies::eGambler)]->SetObject(m_obj);
 	m_headList[static_cast<int>(eSkulSpecies::eGambler)]->Init();
-
 	m_headSlot = eSkulSpecies::eGambler;
 	m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eBasic)];
 	m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
@@ -29,10 +34,14 @@ void Player::Init()
 	//m_obj->AddCollisionComponent(m_collSkillA);
 	//m_collAutoAttack->SetObject(m_obj);
 	//m_collSkillA->SetObject(m_obj);
-	m_collAutoAttack = nullptr;
-	m_collSkillA = nullptr;
-	m_collSkillS = nullptr;
-	m_collSkillTag = nullptr;
+	m_collAutoAttack = m_obj->AddComponent<CollisionComponent>();
+	m_collSkillA = m_obj->AddComponent<CollisionComponent>();
+	m_collSkillS = m_obj->AddComponent<CollisionComponent>();
+	m_collSkillTag = m_obj->AddComponent<CollisionComponent>();
+	m_obj->AddCollisionComponent(m_collAutoAttack);
+	m_obj->AddCollisionComponent(m_collSkillA);
+	m_obj->AddCollisionComponent(m_collSkillS);
+	m_obj->AddCollisionComponent(m_collSkillTag);
 	m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
 
 	m_HpMax = 100;
@@ -167,9 +176,7 @@ void Player::OnCollision(string collisionName, Object* other)
 		{
 			cout << "적에게공격" << endl;
 
-			//Enemy* a = dynamic_cast<Enemy*>(other);
 			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Enemy>(), 10);
-			//EFFECTMANAGER->AddEffect<PlayerHit>(m_obj->x, m_obj->y, m_isLeft);
 		}
 	}//end collision Name BasicAttack
 }

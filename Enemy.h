@@ -12,6 +12,7 @@ protected:
 	float m_hpbar;
 	float m_attack; 
 	float m_power;
+	Effect* effect;
 
 
 public:
