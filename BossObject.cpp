@@ -40,14 +40,14 @@ void BossObject::Init()
 	_imgPhase1BossCastingAttack->Setting(0.1, true);
 	_imgPhase1BossCastingEnd = IMAGEMANAGER->FindImageVector("Boss_Casting_End");
 	_imgPhase1BossCastingEnd->Setting(0.1, false);
-	
+
 	_imgPhase1BossConsecrationStart = IMAGEMANAGER->FindImageVector("Boss_Consecration_Start");
 	_imgPhase1BossConsecrationStart->Setting(0.1, false);
 	_imgPhase1BossConsecrationLoop = IMAGEMANAGER->FindImageVector("Boss_Consecration_Loop");
 	_imgPhase1BossConsecrationLoop->Setting(0.1, true);
 	_imgPhase1BossConsecrationEnd = IMAGEMANAGER->FindImageVector("Boss_Consecration_End");
 	_imgPhase1BossConsecrationLoop->Setting(0.1, false);
-	
+
 	_imgPhase1BossBaptismAttack = IMAGEMANAGER->FindImageVector("Boss_Baptism_Attack");
 	_imgPhase1BossBaptismAttack->Setting(0.1, false);
 
@@ -77,7 +77,7 @@ void BossObject::Init()
 		//OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
 		Baptism* tmp = OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
 		tmp->SetIsActive(false);
-		
+
 		_vBaptism.push_back(tmp);
 	}
 
@@ -138,7 +138,7 @@ void BossObject::Update()
 		_isNervousnessOn = true;
 		_isIdleOn = false;
 	}
-	
+
 	if (KEYMANAGER->GetToggleKey('W'))
 	{
 		_isChoiceOn = true;
@@ -186,7 +186,7 @@ void BossObject::Render()
 	// 땅찍기 On
 	if (_isNervousnessOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
 	{
-		if (_isNervousnessLoopOn == false) _imgPhase1BossNervousReady->CenterRender(m_obj->x, m_obj->y-32, 1.8, 1.8, 0, false);
+		if (_isNervousnessLoopOn == false) _imgPhase1BossNervousReady->CenterRender(m_obj->x, m_obj->y - 32, 1.8, 1.8, 0, false);
 
 		if (_imgPhase1BossNervousReady->GetIsImageEnded() == true)
 		{
@@ -196,19 +196,19 @@ void BossObject::Render()
 	// 땅찍기_공격 대기
 	if (_isNervousnessLoopOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
 	{
-		if (_nervousnessMotionDeltaTime <= 1) _imgPhase1BossNervousReadyLoop->CenterRender(m_obj->x, m_obj->y-32, 1.8, 1.8, 0, false);
+		if (_nervousnessMotionDeltaTime <= 1) _imgPhase1BossNervousReadyLoop->CenterRender(m_obj->x, m_obj->y - 32, 1.8, 1.8, 0, false);
 	}
 	// 땅찍기_공격대기 1초 후
 	if (_nervousnessMotionDeltaTime > 1)
 	{
-		if(_nervousnessEffectDeltaTime < 2) _imgPhase1BossNervousAttack->CenterRender(m_obj->x, m_obj->y-6, 1.8, 1.8, 0, false);
-		_imgPhase1NervousEffectShine->CenterRender(m_obj->x, m_obj->y-40, 1.5, 1.5, 0, false);
+		if (_nervousnessEffectDeltaTime < 2) _imgPhase1BossNervousAttack->CenterRender(m_obj->x, m_obj->y - 6, 1.8, 1.8, 0, false);
+		_imgPhase1NervousEffectShine->CenterRender(m_obj->x, m_obj->y - 40, 1.5, 1.5, 0, false);
 
 		if (_isNervousnessAttackLoopOn == false)
 		{
 
-			OBJECTMANAGER->AddObject("NervousImpactLeft", m_obj->x, WINSIZE_Y , 1)->AddComponent<LeftImpact>();
-			OBJECTMANAGER->AddObject("NervousImpactRight", m_obj->x, WINSIZE_Y , 1)->AddComponent<RightImpact>();
+			OBJECTMANAGER->AddObject("NervousImpactLeft", m_obj->x, WINSIZE_Y + 50, 1)->AddComponent<LeftImpact>();
+			OBJECTMANAGER->AddObject("NervousImpactRight", m_obj->x, WINSIZE_Y + 50, 1)->AddComponent<RightImpact>();
 		}
 		_isNervousnessAttackLoopOn = true;
 	}
@@ -236,13 +236,13 @@ void BossObject::Render()
 		_imgPhase1NervousEffectShine->Reset();
 		_imgPhase1BossNervousEnd->Reset();
 	}
-	
+
 	// 초이스 On
 	if (_isChoiceOn == true)
 	{
 		if (_isChoiceReadyLoopOn == false)
 		{
-			_imgPhase1BossChoiceReady->CenterRender(m_obj->x,m_obj->y, 1.8, 1.8, 0, false);
+			_imgPhase1BossChoiceReady->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
 		}
 	}
 	// 초이스_손들기
@@ -267,7 +267,7 @@ void BossObject::Render()
 	if (_imgPhase1BossChoiceSpark->GetIsImageEnded() == true)
 	{
 		_isChoiceAttackEnd = true;
-		if(_isChoiceOn == true)_imgPhase1BossChoiceEnd->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+		if (_isChoiceOn == true)_imgPhase1BossChoiceEnd->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
 	}
 	// 초이스_초기화
 	if (_imgPhase1BossChoiceEnd->GetIsImageEnded() == true)

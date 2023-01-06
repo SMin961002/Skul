@@ -19,6 +19,7 @@ SceneManager::~SceneManager()
 
 void SceneManager::Init()
 {
+	m_isInvenActive = false;
 	m_isMenuActive = false;
 
 	AddScene("BossScene", new BossScene);
