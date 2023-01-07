@@ -52,3 +52,28 @@ void RightImpact::Release()
 {
 	m_obj->ObjectDestroyed();
 }
+
+void ImpactShine::Init()
+{
+	_imgPhase1NervousEffectShine = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Effect_Attack");
+	_imgPhase1NervousEffectShine->Setting(0.1, false);
+}
+
+void ImpactShine::Update()
+{
+	if (_imgPhase1NervousEffectShine->GetIsImageEnded() == true)
+	{
+		m_obj->ObjectDestroyed();
+		_imgPhase1NervousEffectShine->Reset();
+	}
+}
+
+void ImpactShine::Render()
+{
+	_imgPhase1NervousEffectShine->CenterRender(m_obj->x, m_obj->y, 1.5, 1.5, 0, false);
+}
+
+void ImpactShine::Release()
+{
+	m_obj->ObjectDestroyed();
+}

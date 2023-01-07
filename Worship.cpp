@@ -11,9 +11,9 @@ void WorshipLeft::Update()
 {
 	m_obj->x += 3;
 
-	if (m_obj->x > WINSIZE_X)
+	if (m_obj->x > 1800)
 	{
-		m_obj->ObjectDestroyed();
+		m_obj->x = 0;
 	}
 }
 
@@ -39,7 +39,7 @@ void WorshipRight::Update()
 
 	if (m_obj->x < 0)
 	{
-		m_obj->ObjectDestroyed();
+		m_obj->x = 1800;
 	}
 }
 

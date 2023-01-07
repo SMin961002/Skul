@@ -26,7 +26,7 @@ void Consecration::Update()
 
 void Consecration::Render()
 {
-	_imgPhase1BossConsecrationLoop->CenterRender(m_obj->x, WINSIZE_Y / 2, 1.8, 1.8, 0, false);
+	_imgPhase1BossConsecrationLoop->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
 	_deltaTime += DELTA_TIME;
 }
 

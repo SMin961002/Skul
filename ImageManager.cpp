@@ -126,7 +126,6 @@ void ImageManager::LoadImages()
 	// 아이템 이미지
 	AddImage("CaerleonSword", L"./Resources/Item/CaerleonSword.png");
 
-
 	// UI 이미지
 	AddImage("Pause_Frame", L"./Resources/UI/Pause_Frame.png");
 
@@ -402,7 +401,6 @@ void ImageManager::LoadImages()
 	AddImageVector("GoldResoult", L"Resources/GoldResult/Idle/", 1, 19);
 	AddImageVector("GoldResoultActive", L"Resources/GoldResult/Idle/", 1, 1);
 
-
 	// 몬스터 이펙트
 	AddImageVector("Secrifice", L"Resources/Monster/Effect/Secrifice/", 1, 11);
 	AddImageVector("SkulAttack", L"Resources/Monster/Effect/SkulAttack/", 1, 10);
@@ -424,9 +422,7 @@ void ImageManager::LoadImages()
 	AddImageVector("BlackRock", L"Resources/Item/BlackRock/Rock/", 1, 1);
 	AddImageVector("GetBlackRock", L"Resources/Item/BlackRock/GetRock/", 1, 28);
 
-
 	// 보스 1페이지 잡몹
-
 	AddImageVector("Normal_Monster2_Attack", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Attack/", 15, 26);
 	AddImageVector("Normal_Monster2_Idle", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Idle/", 2, 6);
 	AddImageVector("Normal_Monster2_Move", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Move/", 8, 14);
@@ -448,7 +444,6 @@ void ImageManager::LoadImages()
 	AddImage("ShopBackGround", L"Resources/Shop/backGround.png");
 	AddImage("ShopCloud", L"Resources/Shop/Cloud.png");
 	AddImage("ShopStruecture", L"Resources/Shop/Struecture.png");
-
 
 	//맵 오브젝트 애니메이션
 	AddImageVector("NormalRoom", L"Resources/Door/NormalRoom/", 1, 8);

@@ -21,8 +21,6 @@ private:
 	vImage* _imgPhase1BossNervousAttack;
 	vImage* _imgPhase1BossNervousAttackLoop;
 	vImage* _imgPhase1BossNervousEnd;
-	vImage* _imgPhase1NervousEffectShine;
-	vImage* _imgPhase1NervousEffectImpact;
 
 	// 보스 1페이즈 캐스팅
 	vImage* _imgPhase1BossCastingReady;
@@ -92,6 +90,7 @@ protected:
 	bool _isWorshipCheck;
 	bool _isWorshipFirstWaveOn;
 	bool _isWorshipSecondWaveOn;
+	bool _updateCheck;
 
 	float _worshipDeltaTime;
 

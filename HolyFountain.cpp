@@ -145,8 +145,6 @@ void HolyOrbRight::Render()
 		{
 			_imgRightOrbStart->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, false);
 		}
-
-		_imgRightFountainActivate->CenterRender(WINSIZE_X - 100, WINSIZE_Y / 2 + 120, 2, 2, 0, false);
 	}
 	if (_imgRightOrbStart->GetIsImageEnded() == true)
 	{
