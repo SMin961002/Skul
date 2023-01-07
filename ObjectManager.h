@@ -18,6 +18,7 @@ public:
 	void Render();
 	void UIRender();
 	void Release();
+	int GetEnemyCount() { return m_objects[eEnemy].size(); }
 };
 
 #define OBJECTMANAGER ObjectManager::GetInstance()

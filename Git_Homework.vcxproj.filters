@@ -168,51 +168,28 @@
     <ClCompile Include="BlackRock.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
-    <ClCompile Include="Baptism.cpp">
-      <Filter>Game\Object\Boss\Casting Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="Consecration.cpp">
-      <Filter>Game\Object\Boss\Casting Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="ShopScene.cpp">
-      <Filter>Game\Scene\ShopScene</Filter>
-    </ClCompile>
-    <ClCompile Include="NpcObject.cpp">
-      <Filter>Game\Object\NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="DoorObject.cpp">
-      <Filter>Game\Object\Door</Filter>
-    </ClCompile>
-    <ClCompile Include="GoldResult.cpp">
-      <Filter>Game\Reward\Gold</Filter>
-    </ClCompile>
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Game\Object\Charactor\Inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="HeadItem.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClCompile>
-    <ClCompile Include="HeadResult.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClCompile>
-    <ClCompile Include="Worship.cpp">
-      <Filter>Game\Object\Boss\Casting Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="Nervousness.cpp">
-      <Filter>Game\Object\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectileHeadSkull.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuUI.cpp">
-      <Filter>Game\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="ResultValue.cpp">
-      <Filter>Game\Reward</Filter>
+    <ClCompile Include="PlayerMove.cpp">
+      <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="BossPhase1EnemyCandle.cpp" />
     <ClCompile Include="BossPhase1EnemyFnatic.cpp" />
     <ClCompile Include="FireKnife.cpp" />
+    <ClCompile Include="Baptism.cpp" />
+    <ClCompile Include="Consecration.cpp" />
+    <ClCompile Include="DoorObject.cpp" />
+    <ClCompile Include="GoldResult.cpp" />
+    <ClCompile Include="HeadItem.cpp" />
+    <ClCompile Include="HeadResult.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="MenuUI.cpp" />
+    <ClCompile Include="Nervousness.cpp" />
+    <ClCompile Include="NpcObject.cpp" />
+    <ClCompile Include="ResultValue.cpp" />
+    <ClCompile Include="ProjectileHeadSkull.cpp" />
+    <ClCompile Include="ShopScene.cpp" />
+    <ClCompile Include="Worship.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="IllusionEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -283,9 +260,6 @@
     </ClInclude>
     <ClInclude Include="LeoniaSoldier.h">
       <Filter>Game\Object\Enemy\LeoniaSoldier</Filter>
-    </ClInclude>
-    <ClInclude Include="Fanatic.h">
-      <Filter>Game\Object\Enemy\Fanatic</Filter>
     </ClInclude>
     <ClInclude Include="BlackFanatic.h">
       <Filter>Game\Object\Enemy\BlackFanatic</Filter>

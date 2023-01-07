@@ -14,10 +14,13 @@ private:
 
 	vImage* m_vimage[eEnd];
 	int m_state;
+	int m_attackcount;
 	bool m_attack;
 	bool m_memergeend;
 	bool m_isleft;
 	bool m_recovery;
+
+	float m_hiteffecttimer;
 
 	CollisionComponent* m_collision;
 	CollisionComponent* m_hitpointcollision;
@@ -26,7 +29,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
-	virtual void HitEnemy(float dmg) override;
+	virtual void HitEnemy(float dmg, float time) override;
 
 	virtual void OnCollision(string collisionName, Object* other) override;
 

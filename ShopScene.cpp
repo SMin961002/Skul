@@ -31,13 +31,13 @@ void ShopScene::Init()
 	}
 	for (auto iter : m_objects)
 	{
-		if (iter->key == "Atifact" ||iter->key == "Blacksmith" || iter->key == "FoodShop" || iter->key == "Head" || iter->key == "ItemView")
+		if (iter->key == "Atifact" || iter->key == "Blacksmith" || iter->key == "FoodShop" || iter->key == "Head" || iter->key == "ItemView")
 		{
 			OBJECTMANAGER->AddObject("NPC", iter->x, iter->y, eNPC)->AddComponent<NpcObject>()->Setting(iter->key);
 		}
 		if (iter->key == "NormalRoom")
 		{
-			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(1);
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(1);
 		}
 	}
 }

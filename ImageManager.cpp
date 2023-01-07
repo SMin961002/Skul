@@ -156,6 +156,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Basic_Reborn", L"./Resources/Png/Skul/Basic/Motion/Reborn/", 1, 27);
 	AddImageVector("Basic_Skill", L"./Resources/Png/Skul/Basic/Motion/Skill/", 1, 4);
 	AddImageVector("Basic_TagAction", L"./Resources/Png/Skul/Basic/Motion/TagAction/", 1, 14);
+
 	//일반스컬 - 머리 없는 모션 이미지
 	AddImageVector("Basic_Headless_Idle", L"./Resources/Png/Skul/Basic/Headless/HeadlessIdle/", 1, 4);
 	AddImageVector("Basic_Headless_Walk", L"./Resources/Png/Skul/Basic/Headless/HeadlessWalk/", 1, 8);
@@ -179,17 +180,18 @@ void ImageManager::LoadImages()
 	//갬블러스컬 모션 이미지 경로수정중
 	AddImageVector("Gambler_Idle", L"./Resources/Png/Skul/Gambler/Motion/Idle/", 1, 7);
 	AddImageVector("Gambler_Walk", L"./Resources/Png/Skul/Gambler/Motion/Walk/", 1, 6);
-	//AddImageVector("Gambler_Dash", L"./Resources/Png/Skul/Gambler/Motion/Dash/", 1, 5);
-	//AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 5);
-	//AddImageVector("Gambler_AttackA2", L"./Resources/Png/Skul/Gambler/Motion/AttackA2/", 1, 6);
-	//AddImageVector("Gambler_AttackB1", L"./Resources/Png/Skul/Gambler/Motion/AttackB1/", 1, 6);
-	//AddImageVector("Gambler_AttackB2", L"./Resources/Png/Skul/Gambler/Motion/AttackB2/", 1, 6);
-	//AddImageVector("Gambler_AttackB3", L"./Resources/Png/Skul/Gambler/Motion/AttackB3/", 1, 8);
-	//AddImageVector("Gambler_JumpStart", L"./Resources/Png/Skul/Gambler/Motion/JumpStart/", 1, 3);
-	//AddImageVector("Gambler_JumpRepeat", L"./Resources/Png/Skul/Gambler/Motion/JumpRepeat/", 1, 2);
-	//AddImageVector("Gambler_JumpFall", L"./Resources/Png/Skul/Gambler/Motion/JumpFall/", 1, 3);
-	//AddImageVector("Gambler_JumpAttack", L"./Resources/Png/Skul/Gambler/Motion/JumpAttack/", 1, 5);
-	//AddImageVector("Gambler_RussianRoulette", L"./Resources/Png/Skul/Gambler/Motion/RussianRoulette/", 1, 8);
+	AddImageVector("Gambler_Dash", L"./Resources/Png/Skul/Gambler/Motion/Dash/", 1, 5);
+	AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 5);
+	AddImageVector("Gambler_AttackA2", L"./Resources/Png/Skul/Gambler/Motion/AttackA2/", 1, 6);
+	AddImageVector("Gambler_AttackB1", L"./Resources/Png/Skul/Gambler/Motion/AttackB1/", 1, 6);
+	AddImageVector("Gambler_AttackB2", L"./Resources/Png/Skul/Gambler/Motion/AttackB2/", 1, 6);
+	AddImageVector("Gambler_AttackB3", L"./Resources/Png/Skul/Gambler/Motion/AttackB3/", 1, 8);
+	AddImageVector("Gambler_JumpStart", L"./Resources/Png/Skul/Gambler/Motion/JumpStart/", 1, 3);
+	AddImageVector("Gambler_JumpRepeat", L"./Resources/Png/Skul/Gambler/Motion/JumpRepeat/", 1, 2);
+	AddImageVector("Gambler_JumpFall", L"./Resources/Png/Skul/Gambler/Motion/JumpFall/", 1, 3);
+	AddImageVector("Gambler_JumpAttack", L"./Resources/Png/Skul/Gambler/Motion/JumpAttack/", 1, 5);
+	AddImageVector("Gambler_RussianRoulette", L"./Resources/Png/Skul/Gambler/Motion/RussianRoulette/", 1, 8);
+	AddImageVector("Gambler_TagAction", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 11);
 
 	// 타일 이미지
 	AddTileImage(L"./Resources/Tile/4Stage/01.png");
@@ -240,6 +242,38 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/46.png");
 	AddTileImage(L"./Resources/Tile/4Stage/47.png");
 	AddTileImage(L"./Resources/Tile/4Stage/48.png");
+	AddTileImage(L"./Resources/Tile/Lobby/49.png");
+	AddTileImage(L"./Resources/Tile/Lobby/50.png");
+	AddTileImage(L"./Resources/Tile/Lobby/51.png");
+	AddTileImage(L"./Resources/Tile/Lobby/52.png");
+	AddTileImage(L"./Resources/Tile/Lobby/53.png");
+	AddTileImage(L"./Resources/Tile/Lobby/54.png");
+	AddTileImage(L"./Resources/Tile/Lobby/55.png");
+	AddTileImage(L"./Resources/Tile/Lobby/56.png");
+	AddTileImage(L"./Resources/Tile/Lobby/57.png");
+	AddTileImage(L"./Resources/Tile/Lobby/58.png");
+	AddTileImage(L"./Resources/Tile/Lobby/59.png");
+	AddTileImage(L"./Resources/Tile/Lobby/60.png");
+	AddTileImage(L"./Resources/Tile/Lobby/61.png");
+	AddTileImage(L"./Resources/Tile/Lobby/62.png");
+	AddTileImage(L"./Resources/Tile/Lobby/63.png");
+	AddTileImage(L"./Resources/Tile/Lobby/64.png");
+	AddTileImage(L"./Resources/Tile/Lobby/65.png");
+	AddTileImage(L"./Resources/Tile/Lobby/66.png");
+	AddTileImage(L"./Resources/Tile/Lobby/67.png");
+	AddTileImage(L"./Resources/Tile/Lobby/68.png");
+	AddTileImage(L"./Resources/Tile/Lobby/69.png");
+	AddTileImage(L"./Resources/Tile/Lobby/70.png");
+	AddTileImage(L"./Resources/Tile/Lobby/71.png");
+	AddTileImage(L"./Resources/Tile/Lobby/72.png");
+	AddTileImage(L"./Resources/Tile/Lobby/73.png");
+	AddTileImage(L"./Resources/Tile/Lobby/74.png");
+	AddTileImage(L"./Resources/Tile/Lobby/75.png");
+	AddTileImage(L"./Resources/Tile/Lobby/76.png");
+	AddTileImage(L"./Resources/Tile/Lobby/77.png");
+	AddTileImage(L"./Resources/Tile/Lobby/78.png");
+	AddTileImage(L"./Resources/Tile/Lobby/79.png");
+
 
 	// 배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
@@ -336,7 +370,8 @@ void ImageManager::LoadImages()
 	AddStructureImage("bossPlatFormL", L"./Resources/Tile/4Stage/Structure/bossPlatFormL.png");
 	AddStructureImage("bossPlatFormS", L"./Resources/Tile/4Stage/Structure/bossPlatFormS.png");
 	AddStructureImage("Terrain", L"./Resources/Tile/4Stage/Structure/Terrain.png");
-
+	// 저장은 백스페이스 숫자키와 번호키로 오브젝트교체 ,f7 <- 신규씬 , 좌클릭은 뒤에 그려지고 우클릭은 앞에
+	// 타일 지우는거 컨트롤 <- 맨마지막에 그린것만 지워짐, 맵크기는 영상 참조
 
 	// 몬스터 체력바 이미지
 	AddImageVector("Hpbar_Empty", L"./Resources/Monster/Hpbar/Empty/", 1, 1);

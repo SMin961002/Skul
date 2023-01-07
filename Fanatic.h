@@ -3,6 +3,8 @@
 class Fanatic :public Enemy
 {
 private:
+	Effect* effect;
+
 	float m_lastX, m_lastY;
 	enum ImageState
 	{
@@ -30,13 +32,14 @@ private:
 	bool m_sercrieffect;
 	bool m_die;
 	bool m_die2;
-	
+	bool m_effect;
+
+	int m_attackcount;
 	int m_state;
 	float m_hitTimer;
 	float m_hpbartimer;
 	float m_motiontimer;
 	float m_hiteffecttimer;
-	float m_effecttimer;
 	float m_dietimer;
 
 	CollisionComponent* m_hitCollision;
@@ -49,7 +52,7 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 	virtual void OnCollision(string collisionName, Object* other) override;
-	void HitEnemy(float dmg) override;
+	void HitEnemy(float dmg, float time) override;
 	void ImageResetCheck();
 	Fanatic() {}
 	~Fanatic() {}

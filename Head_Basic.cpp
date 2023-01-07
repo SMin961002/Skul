@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Head_Basic.h"
 #include "RigidBodyComponent.h"
+#include "Enemy.h"
 
 void Head_Basic::ImageSetting()
 {
@@ -18,7 +19,8 @@ void Head_Basic::ImageSetting()
 	img[eJump] = IMAGEMANAGER->FindImageVector("Basic_JumpStart");
 	img[eJump]->Setting(0.05, true);
 	img[eJumpAttack] = IMAGEMANAGER->FindImageVector("Basic_JumpAttack");
-	img[eJumpAttack]->Setting(0.07, false);
+	img[eJumpAttack]->Setting(0.08, false);
+	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize()-1, 0.1);
 	img[eJumpDown] = IMAGEMANAGER->FindImageVector("Basic_JumpRepeat");
 	img[eJumpDown]->Setting(0.1, true);
 	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Basic_JumpFall");
@@ -56,6 +58,7 @@ void Head_Basic::ImageSetting()
 void Head_Basic::ParameterSetting()
 {
 	m_species = eSkulSpecies::eBasic;
+	m_tagCoolTime = 10.0f;
 
 	m_projectileHead = OBJECTMANAGER->AddObject("Head", *m_x, *m_y, ePlayerHead)->AddComponent<ProjectileHeadSkull>();
 	m_projectileHead->Off();
@@ -67,7 +70,7 @@ void Head_Basic::ParameterSetting()
 	m_dashSpeed = 240;		//##dash 이동식 수정 필요
 	m_dashTime = 2 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
-	m_dashCool = 0.5;
+	m_dashCool = 0.95;
 	m_dashNowCool = 0;
 	m_dashCount = 0;
 	m_dashMax = 2;			//대시 최대 횟수
@@ -78,7 +81,8 @@ void Head_Basic::ParameterSetting()
 
 	m_attackCount = 0;
 	m_attackMax = 2;
-	m_attackCast = false;
+	m_attackCast[0] = false;
+	m_attackCast[1] = false;
 
 	m_skillNowCoolA = 0;
 	m_skillNowCoolS = 0;
@@ -91,22 +95,16 @@ void Head_Basic::ParameterSetting()
 
 void Head_Basic::CollisionSetting()
 {	
-	m_BasicHeadAttack = new CollisionComponent;
-	m_BasicHeadAttack->Setting(50, *m_x + 6 + 40, *m_y - 24 + 72, "BasicAttack_BasicSkul");
-	m_BasicHeadAttack->SetIsActive(false);
-	m_collAutoAttack = m_BasicHeadAttack;
+	m_collAutoAttack->Setting(50, *m_x + 6 + 40, *m_y - 24 + 72, "BasicAttack_BasicSkul");
+	m_collAutoAttack->SetIsActive(false);
 
-	m_TagAttack = new CollisionComponent;
-	m_TagAttack->Setting(100, *m_x, *m_y, "TagAttack_BasicSkul");
-	m_TagAttack->SetIsActive(false);
-	m_collSkill = m_TagAttack;
-
+	m_collSkillTag->Setting(100, *m_x, *m_y, "TagAttack_BasicSkul");
+	m_collSkillTag->SetIsActive(false);
 }
 
 void Head_Basic::Release()
 {
-	SAFE_DELETE(m_BasicHeadAttack);
-	SAFE_DELETE(m_TagAttack);
+	m_projectileHead->DestroyProjectileHead();
 }
 
 void Head_Basic::CoolDown()
@@ -155,13 +153,18 @@ void Head_Basic::ActionArrangement()
 		{
 			if (nowImg != img[m_action])
 				nowImg->Reset();
-			if (m_attackCast)
+			if (m_attackCast[0])
+			{
+				m_attackCast[0] = false;
+				m_attackCast[1] = true;
+			}
+			else if (m_attackCast[1])
 			{
 				m_action = eAutoAttack_2;
 				nowImg = img[eAutoAttack_2];
 				nowImg->Reset();
 				m_attackCount = 2;
-				m_attackCast = false;
+				m_attackCast[1] = false;
 			}
 			else
 			{
@@ -173,7 +176,9 @@ void Head_Basic::ActionArrangement()
 		}
 		if (m_imageChange)
 		{
-			m_attackCast = false;
+			cout << "이미지 바꾸기 " << action << endl;
+			m_attackCast[0] = false;
+			m_attackCast[1] = false;
 			if (nowImg != img[m_action])
 			{
 				nowImg->Reset();
@@ -197,13 +202,18 @@ void Head_Basic::ActionArrangement()
 		{
 			if (nowImg != img_headless[m_action])
 				nowImg->Reset();
-			if (m_attackCast)
+			if (m_attackCast[0])
+			{
+				m_attackCast[0] = false;
+				m_attackCast[1] = true;
+			}
+			else if (m_attackCast[1])
 			{
 				m_action = eAutoAttack_2;
 				nowImg = img_headless[eAutoAttack_2];
 				nowImg->Reset();
 				m_attackCount = 2;
-				m_attackCast = false;
+				m_attackCast[1] = false;
 			}
 			else
 			{
@@ -215,7 +225,8 @@ void Head_Basic::ActionArrangement()
 		}
 		if (m_imageChange)
 		{
-			m_attackCast = false;
+			m_attackCast[0] = false;
+			m_attackCast[1] = false;
 			if (m_action == eSkill_1)
 			{
 				nowImg->Reset();
@@ -239,36 +250,36 @@ void Head_Basic::ActionArrangement()
 
 void Head_Basic::CollisionUpdate()
 {
-	m_BasicHeadAttack->SetIsActive(false);
-	m_BasicHeadAttack->SetIsActive(false);
+	m_collAutoAttack->SetIsActive(false);
+	m_collSkillTag->SetIsActive(false);
 	
 	switch (m_action)
 	{
 	case eAutoAttack_1:
 		if (nowImg->GetFrame() > 1 && nowImg->GetFrame() < 3)
-			m_BasicHeadAttack->SetIsActive(true);
+			m_collAutoAttack->SetIsActive(true);
 		break;
 	case eAutoAttack_2:
 		if (nowImg->GetFrame() > 0 && nowImg->GetFrame() < 2)
-			m_BasicHeadAttack->SetIsActive(true);
+			m_collAutoAttack->SetIsActive(true);
 		break;
 	case eJumpAttack:
 		if (nowImg->GetFrame() > 0 && nowImg->GetFrame() < 3)
-			m_BasicHeadAttack->SetIsActive(true);
+			m_collAutoAttack->SetIsActive(true);
 		break;
 	case eTagAction:
-		m_TagAttack->SetIsActive(true);
-		m_TagAttack->Setting(*m_x, *m_y);
+		m_collSkillTag->SetIsActive(true);
+		m_collSkillTag->Setting(*m_x, *m_y);
 		break;
 	default: break;
 	}
 
-	if (m_BasicHeadAttack->GetIsActive() == true)
+	if (m_collAutoAttack->GetIsActive() == true)
 	{
 		if (*m_isLeft)
-			m_BasicHeadAttack->Setting(*m_x, *m_y - 10);
+			m_collAutoAttack->Setting(*m_x, *m_y - 10);
 		else
-			m_BasicHeadAttack->Setting(*m_x + 50, *m_y - 10);
+			m_collAutoAttack->Setting(*m_x + 50, *m_y - 10);
 	}
 }
 
@@ -323,7 +334,7 @@ void Head_Basic::InputAttackKey()
 			}
 			else
 			{
-				m_attackCast = true;
+				m_attackCast[0] = true;
 			}
 		}//end else jumpping
 	}//end 'X'
@@ -339,3 +350,14 @@ void Head_Basic::DrawCharactor()
 {
 	nowImg->CenterRender(*m_x, *m_y - 56, 2, 2, 0, *m_isLeft);
 }
+
+void Head_Basic::OnCollisionAutoAttack(Enemy* obj, float dmg)
+{
+	obj->HitEnemy(dmg,1);// 임의로 넣은것 추후 유진님 수정후 병합시제외
+}
+void Head_Basic::OnCollisionAutoAttackBossEnemy(Component* obj, float dmg)
+{
+	obj->HitEnemy(dmg, 1);
+}
+
+

@@ -15,16 +15,15 @@ void MapToolScene::Init()
 	m_streuctureKey = "";
 	m_state = eTileBatch;
 
-
 	m_tileImages = IMAGEMANAGER->GetTileImages();
 	m_structureImages = IMAGEMANAGER->GetStructureImages();
 	m_objectImages = IMAGEMANAGER->GetObjectImages();
-	m_width = m_tileImages[0]->GetWidth();
+	m_width = m_tileImages[0]->GetWidth() - 1;
 	m_kind = -1;
 	HRESULT hr = FILEMANAGER->TileFileRead(&m_tiles);
 	if (hr != S_OK)
 	{
-		m_tiles.resize(30, vector<int>(100));
+		m_tiles.resize(100, vector<int>(100)); // 맵크기 변경 100x100 // 다찍엇는데 모자라다 하면 태웅이한테 쉬프트 엔터, 스페이스바 레프트 쉬프트로 저정
 		for (auto iter : m_tiles)
 		{
 			iter.resize(100, -1);
@@ -88,6 +87,31 @@ void MapToolScene::Update()
 		m_kind = -1;
 		m_state = eObjectBatch;
 		m_streuctureKey = "";
+	}
+
+	if (KEYMANAGER->GetOnceKeyDown(VK_RSHIFT))
+	{
+		vector<int> v;
+		v.resize(100, -1);
+		m_tiles.push_back(v);
+	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_RETURN))
+	{
+		m_tiles.pop_back();
+	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_LSHIFT))
+	{
+		for (auto& iter : m_tiles)
+		{
+			iter.pop_back();
+		}
+	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
+	{
+		for (auto& iter : m_tiles)
+		{
+			iter.push_back(-1);
+		}
 	}
 }
 
@@ -338,6 +362,8 @@ void MapToolScene::Render()
 			}
 		}
 	}
+
+
 	if (KEYMANAGER->GetStayKeyDown(VK_RBUTTON))
 	{
 		if (m_state == eTileBatch)
@@ -378,6 +404,28 @@ void MapToolScene::Render()
 		else if (m_state == eObjectBatch)
 		{
 			IMAGEMANAGER->UICenterRender(m_objectImages[m_streuctureKey], _ptMouse.x, _ptMouse.y, 2, 2);
+		}
+	}
+
+	if (m_state == eTileBatch)
+	{
+		int y2 = 0;
+		for (auto& iter : m_tiles)
+		{
+			int x2 = 0;
+			for (auto& _iter = iter.begin(); _iter != iter.end(); _iter++)
+			{
+				RECT rt = { x2 * m_width, y2 * m_width , x2 * m_width + m_width , y2 * m_width + m_width };
+				if (x2 * m_width - IMAGEMANAGER->GetCameraPosition().x < 800)
+				{
+					if (rt.left < _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.right > _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x && rt.top < _ptMouse.y + IMAGEMANAGER->GetCameraPosition().y && rt.bottom>_ptMouse.y + IMAGEMANAGER->GetCameraPosition().y)
+					{
+						IMAGEMANAGER->DrawRect(rt);
+					}
+					x2++;
+				}
+			}
+			y2++;
 		}
 	}
 

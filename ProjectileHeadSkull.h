@@ -20,6 +20,7 @@ public:
 	float GetX() { return m_obj->x; }
 	float GetY() { return m_obj->y; }
 	void SetIsntActive() { m_obj->SetIsActive(false); }
+	void DestroyProjectileHead() { m_obj->ObjectDestroyed(); }
 
 	void SetSkullThrow(float x, float y, bool reversed);
 

@@ -36,7 +36,7 @@ void DoorObject::Init()
 void DoorObject::Update()
 {
 	m_coll->Setting(50, m_obj->x + 20, m_obj->y + 100, "enter");
-	if (KEYMANAGER->GetToggleKey(VK_F11))
+	if (OBJECTMANAGER->GetEnemyCount() == 0)
 	{
 		m_isClear = true;
 	}

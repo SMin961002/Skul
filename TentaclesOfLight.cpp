@@ -8,10 +8,12 @@
 
 void TentaclesOfLight::Init()
 {
+	m_attackcount = 0;
 	m_maxhp = 1;
 	m_memergeend = false;
 	m_attack = false;
 	m_recovery = false;
+	m_hiteffecttimer = 0;
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 
 	m_vimage[eIdle] = IMAGEMANAGER->AddImageVectorCopy("Tentacles_Idle");
@@ -39,7 +41,7 @@ void TentaclesOfLight::Update()
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 	m_collision->Setting(40, m_obj->x + 17, m_obj->y - 20, "Attack");
 	
-	if (m_vimage[eAttack]->GetFrame() >= 2&& m_vimage[eAttack]->GetFrame()<= 7 )
+	if (m_vimage[eAttack]->GetFrame() >= 4&& m_vimage[eAttack]->GetFrame()<= 7 )
 	{
 		m_hitpointcollision->SetIsActive(true);
 		if (m_isleft)
@@ -53,6 +55,7 @@ void TentaclesOfLight::Update()
 	}
 	if (m_vimage[eAttack]->GetFrame() >= 7)
 	{
+		m_attackcount = 0;
 		m_hitpointcollision->SetIsActive(false);
 	}
 	if (m_memergeend == false)
@@ -81,6 +84,7 @@ void TentaclesOfLight::Update()
 			m_recovery = false;
 		}
 	}
+	m_hiteffecttimer += DELTA_TIME;
 	if (m_maxhp <= 0)
 	{
 		m_obj->ObjectDestroyed();
@@ -129,13 +133,29 @@ void TentaclesOfLight::OnCollision(string collisionName, Object* other)
 	{
 		if (other->GetName() == "player")
 		{
-			//m_hitpoint = true;
+			if (m_attackcount < 1)
+			{
+				Player* ply = other->GetComponent<Player>();
+				ply->HitPlayerMagicAttack(10);
+				ply->HitPlayerEffect();
+				if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+				{
+					ply->HitPlayerKnockBack(-15, -5);
+				}
+				else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+				{
+					ply->HitPlayerKnockBack(15, -5);
+				}
+				m_attackcount = 1;
+			}
 		}
 	}
 }
 
-void TentaclesOfLight::HitEnemy(float dmg)
+void TentaclesOfLight::HitEnemy(float dmg,float time)
 {
-	dmg = 1;
-	m_maxhp -= dmg;
+	if (m_hiteffecttimer >= time)
+	{
+		m_maxhp -= dmg;
+	}
 }

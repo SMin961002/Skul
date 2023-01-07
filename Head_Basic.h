@@ -9,9 +9,6 @@ private:
 	ProjectileHeadSkull* m_projectileHead;	//머리던지기 투사체 구조체
 	bool m_headThrow;
 
-	CollisionComponent* m_BasicHeadAttack;
-	CollisionComponent* m_TagAttack;
-
 public:
 	void ImageSetting() override;
 	void ParameterSetting() override;
@@ -30,6 +27,8 @@ public:
 	void TagAction() override;
 
 	void DrawCharactor() override;
+	void OnCollisionAutoAttack(Enemy* obj, float dmg) override;
+	void OnCollisionAutoAttackBossEnemy(Component* obj, float dmg) override;
 
 	void PutOnHead()
 	{
