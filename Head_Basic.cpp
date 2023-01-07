@@ -61,7 +61,7 @@ void Head_Basic::ParameterSetting()
 	m_species = eSkulSpecies::eBasic;
 	m_tagCoolTime = 10.0f;
 
-	m_projectileHead = OBJECTMANAGER->AddObject("Head", *m_x, *m_y, ePlayerHead)->AddComponent<ProjectileHeadSkull>();
+	m_projectileHead = OBJECTMANAGER->AddObject("Head", *m_x, *m_y, ePlayerProjectile)->AddComponent<ProjectileHeadSkull>();
 	m_projectileHead->Off();
 	m_action = eIdle;
 
@@ -247,6 +247,7 @@ void Head_Basic::ActionArrangement()
 			//m_attackCount = 0;
 		}
 	}
+	if (nowImg == img[eIdle]) m_action = eIdle;
 }
 
 void Head_Basic::CollisionUpdate()
@@ -281,6 +282,11 @@ void Head_Basic::CollisionUpdate()
 			m_collAutoAttack->Setting(*m_x, *m_y - 10);
 		else
 			m_collAutoAttack->Setting(*m_x + 50, *m_y - 10);
+	}
+	else
+	{
+		m_CollObjList.clear();
+		listObj().swap(m_CollObjList);
 	}
 }
 
@@ -382,13 +388,16 @@ void Head_Basic::DrawCharactor()
 	nowImg->CenterRender(drawPX, drawPY, 2, 2, 0, *m_isLeft);
 }
 
-void Head_Basic::OnCollisionAutoAttack(Enemy* obj, float dmg)
+void Head_Basic::OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg, float delay)
 {
-	obj->HitEnemy(dmg,1);// 임의로 넣은것 추후 유진님 수정후 병합시제외
+	bool isEnemyHit = false;
+	for (auto iter : m_CollObjList)
+	{
+		if (iter == obj) isEnemyHit = true;
+	}
+	if (!isEnemyHit)
+	{
+		enemy->HitEnemy(dmg, delay);
+		m_CollObjList.push_back(obj);
+	}
 }
-void Head_Basic::OnCollisionAutoAttackBossEnemy(Component* obj, float dmg)
-{
-	obj->HitEnemy(dmg, 1);
-}
-
-

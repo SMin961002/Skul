@@ -5,6 +5,7 @@ public:
 	string m_collisionName;
 	float m_range;
 	float m_collisionX, m_collisionY;
+	bool m_multiHit;
 	CollisionComponent();
 	~CollisionComponent();
 public:

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Gambler.h"
+#include "Card.h"
 
 void Gambler::ImageSetting()
 {
@@ -116,6 +117,9 @@ void Gambler::ActionArrangement()
 				}
 				break;
 			case 3:
+			{
+				OBJECTMANAGER->AddObject("Card", *m_x, *m_y-36, ePlayerProjectile)->AddComponent<Card>();
+			}
 				break;
 			default: break;
 			}
@@ -133,7 +137,7 @@ void Gambler::ActionArrangement()
 	{
 		m_attackCast[0] = false;
 		m_attackCast[1] = false;
-		if (m_action<eAutoAttack_B1 || m_action>eAutoAttack_B3)
+		if (m_action<eAutoAttack_B1 || m_action>eJumpAttack)
 			m_attackCount = 0;
 		if (nowImg != img[m_action])
 		{
@@ -178,6 +182,20 @@ void Gambler::CollisionUpdate()
 			m_collAutoAttack->SetIsActive(true);
 		}
 		break;
+	case eJumpAttack:
+		if (nowImg->GetFrame() == 2)
+		{
+			if (*m_isLeft)
+				m_collAutoAttack->Setting(80, m_obj->x, m_obj->y);
+			else
+				m_collAutoAttack->Setting(80, m_obj->x + 20, m_obj->y);
+			m_collAutoAttack->SetIsActive(true);
+		}
+	}
+	if (!m_collAutoAttack->GetIsActive())
+	{
+		m_CollObjList.clear();
+		listObj().swap(m_CollObjList);
 	}
 }
 
@@ -199,6 +217,8 @@ void Gambler::InputAttackKey()
 		if (*m_jumpping)
 		{
 			m_action = eJumpAttack;
+			m_imageChange = true;
+			m_attackCount++;
 		}
 		else if (!m_attackCast[1] && !m_attackCast[0])
 			switch (m_attackCount)

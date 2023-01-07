@@ -144,6 +144,9 @@ void ImageManager::LoadImages()
 	//AddImageVector("PlayerCPublicHit", L"./Resources/Png/Skul/Effect/CriticalHit/", 1, 11);
 	AddImageVector("Gambler_Attack1", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_1/", 1, 21);
 	AddImageVector("Gambler_Attack2", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_2/", 1, 22);
+	AddImageVector("Gambler_JockerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BasicAttack_Joker_Explosion/", 1, 17);
+	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
+	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
 
 	//일반스컬 모션 이미지
 	AddImageVector("Basic_Idle", L"./Resources/Png/Skul/Basic/Motion/Idle/", 1, 4);

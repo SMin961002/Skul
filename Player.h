@@ -45,12 +45,14 @@ private:
 	short m_jumpCount;		//현재 점프 몇회인지
 	short m_jumpMax;		//최대 점프 가능 횟수		
 	bool  m_jumpping;
+
+	int m_knockBackY;
 	//============이동에 필요한 변수end==========
 	
-	//=============이동에 필요한 변수===========
+	//========================
 	float m_supperArmarTime;
 	float m_supperArmarNowTime;
-	//============이동에 필요한 변수end==========
+	//============end==========
 	TeleportationToHead* effect = new TeleportationToHead;
 
 public:
@@ -107,13 +109,13 @@ public:
 	{
 		if (collDelete)
 		{
-			//벡터가 터져요
 		}
 	}
 
 public:
 	float GetplayerX(void) { return m_obj->x; }
 	float GetplayerY(void) { return m_obj->y; }
+	bool GetplayerIsLeft(void) { return m_isLeft; }
 	Head* GetNowHead() { return m_nowHead; }
 
 	//물리공격 데미지를 입력해주세요
@@ -133,6 +135,10 @@ public:
 	//플레이어 피격시 밀림(플레이어가 x+moveX, y+moveY포인트로 옮겨집니다)
 	void HitPlayerKnockBack(float moveX, float moveY)
 	{
+		//##위로밀림시 점프하강모션뜨는거 idle로 바꾸기
+		m_knockBackY = moveY - m_obj->y;
+		if (m_knockBackY < 0)
+			m_knockBackY = 0;
 		m_obj->x += moveX;
 		m_obj->y += moveY;
 	}

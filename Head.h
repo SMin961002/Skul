@@ -28,12 +28,14 @@ public:
 		eActionTagNumber
 	};
 
+	typedef list<Object*> listObj;
 protected:
 	eSkulSpecies m_species;
 	Object* m_obj;
 	vImage* img[20];
 	vImage* img_reborn;
 	vImage* nowImg;
+	listObj m_CollObjList;
 	CollisionComponent* m_collAutoAttack;	//##공격 발동하면 여기에 어택collision을 대입한다.
 	CollisionComponent* m_collSkillA;	//##스킬 발동하면 여기에 스킬 collision을 대입한다.
 	CollisionComponent* m_collSkillS = nullptr;	//##스킬 발동하면 여기에 스킬 collision을 대입한다.
@@ -103,8 +105,8 @@ public:
 	virtual bool GetIsAttack() PURE;
 	inline int GetAction() { return m_action; }
 	inline float GetTagCoolTime() { return m_tagCoolTime; }
-	inline float GetActionTime(int action) { img[action]->GetTotalDelay(); }
-	inline float GetNowActionTime() { img[m_action]->GetTotalDelay(); }
+	inline float GetActionTime(int action) { return img[action]->GetTotalDelay(); }
+	inline float GetNowActionTime() { return img[m_action]->GetTotalDelay(); }
 	inline CollisionComponent* GetCollAutoAttack() { return m_collAutoAttack; }
 	inline CollisionComponent* GetCollSkill() { return m_collSkillA; }
 	
@@ -135,8 +137,19 @@ public:
 
 	//Render 안에 들어가는 함수
 	virtual void DrawCharactor();
-	virtual void OnCollisionAutoAttack(Enemy* obj, float dmg) {};
-	virtual void OnCollisionAutoAttackBossEnemy(Component* obj, float dmg) {};
+	virtual void OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg, float delay)
+	{
+		bool isEnemyHit = false;
+		for (auto iter : m_CollObjList)
+		{
+			if (iter == obj) isEnemyHit = true;
+		}
+		if (!isEnemyHit)
+		{
+			enemy->HitEnemy(dmg, delay);
+			m_CollObjList.push_back(obj);
+		}
+	};
 
 	void SetPlayerMoveParameter(float* moveSpeed, float* dashSpeed, float* dashtime, short* dashMax, bool* dashing,float* jumpSpeed, short* jumpMax, bool* jumpping)
 	{

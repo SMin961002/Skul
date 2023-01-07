@@ -37,3 +37,9 @@ class GamblerAttack_2 : public Effect
 public:
 	void Init() override;
 };
+
+class JokerExplosion : public Effect
+{
+public:
+	void Init() override;
+};

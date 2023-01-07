@@ -28,8 +28,7 @@ public:
 	virtual bool GetIsAttack()override;
 
 	void DrawCharactor() override;
-	void OnCollisionAutoAttack(Enemy* obj, float dmg) override;
-	void OnCollisionAutoAttackBossEnemy(Component* obj, float dmg) override;
+	void OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg, float delay) override;
 
 	void PutOnHead()
 	{
