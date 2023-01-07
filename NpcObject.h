@@ -7,7 +7,13 @@ public:
 		int m_account;
 		string key;
 	};
+	CollisionComponent* coll1;
+	CollisionComponent* coll2;
+	CollisionComponent* coll3;
+	CollisionComponent* coll4;
+	int kind;
 
+	bool m_isState;
 	vector<sItem*> m_itemList;
 	float rot;
 	NpcObject();
@@ -21,5 +27,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	virtual void UIRender() override;
+	virtual void OnCollision(string collisionName, Object* other) override;
 };
 
