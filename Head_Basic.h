@@ -8,7 +8,7 @@ private:
 	vImage* img_headless[eActionTagNumber];
 	ProjectileHeadSkull* m_projectileHead;	//머리던지기 투사체 구조체
 	bool m_headThrow;
-
+	int count = 0;
 public:
 	void ImageSetting() override;
 	void ParameterSetting() override;
