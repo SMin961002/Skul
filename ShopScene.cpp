@@ -58,12 +58,17 @@ void ShopScene::Update()
 	{
 		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	}
-
-	if (IMAGEMANAGER->GetCameraPosition().x < 0)
-	{
-		IMAGEMANAGER->SetCameraPosition(WINSIZE_X / 2, IMAGEMANAGER->GetCameraPosition().y);
-	}
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
+
+	if (IMAGEMANAGER->GetCameraPosition().x <= 50)
+	{
+		IMAGEMANAGER->SetCameraPosition(50, IMAGEMANAGER->GetCameraPosition().y);
+	}
+
+	if (IMAGEMANAGER->GetCameraPosition().x >= WINSIZE_X +200)
+	{
+		IMAGEMANAGER->SetCameraPosition(WINSIZE_X +200, IMAGEMANAGER->GetCameraPosition().y);
+	}
 }
 
 void ShopScene::Render()

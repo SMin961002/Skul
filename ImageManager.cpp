@@ -511,6 +511,7 @@ void ImageManager::LoadImages()
 	// 인게임 UI이미지
 	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");
 	AddImage("PlayerStatusUI", L"./Resources/UI/PlayerStatusUI.png");
+	AddImage("ItemUI", L"./Resources/UI/itemUI.png");
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)
