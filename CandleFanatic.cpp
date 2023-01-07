@@ -247,6 +247,7 @@ void CandleFanatic::HitEnemy(float dmg, float time)
 		m_isAttack = false;
 		m_isHit = true;
 		m_state = eHit;
+		m_vimage[eAttackReady]->Reset();
 		m_vimage[eHit]->Reset();
 		m_obj->x += m_obj->x > OBJECTMANAGER->m_player->GetplayerX() ? DELTA_TIME * 500 : -DELTA_TIME * 500;
 		m_obj->y -= 10;

@@ -259,11 +259,34 @@ void Head_Basic::CollisionUpdate()
 	{
 	case eAutoAttack_1:
 		if (nowImg->GetFrame() > 1 && nowImg->GetFrame() < 3)
+		{
+			if (count == 0)
+			{
+				count = 1;
+				*m_x += !*m_isLeft ? 20 : -20;
+
+			}
 			m_collAutoAttack->SetIsActive(true);
+		}
+		else
+		{
+			count = 0;
+		}
 		break;
 	case eAutoAttack_2:
 		if (nowImg->GetFrame() > 0 && nowImg->GetFrame() < 2)
+		{
+			if (count == 0)
+			{
+				count = 1;
+				*m_x += !*m_isLeft ? 20 : -20;
+			}
 			m_collAutoAttack->SetIsActive(true);
+		}
+		else
+		{
+			count = 0;
+		}
 		break;
 	case eJumpAttack:
 		if (nowImg->GetFrame() > 0 && nowImg->GetFrame() < 3)
