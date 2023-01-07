@@ -25,6 +25,7 @@ public:
 	void InputSkillKey() override;
 
 	void TagAction() override;
+	virtual bool GetIsAttack()override;
 
 	void DrawCharactor() override;
 	void OnCollisionAutoAttack(Enemy* obj, float dmg) override;

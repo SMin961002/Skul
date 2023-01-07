@@ -11,16 +11,17 @@ void Head_Basic::ImageSetting()
 	img[eWalk] = IMAGEMANAGER->FindImageVector("Basic_Walk");
 	img[eWalk]->Setting(0.1f, true);
 	img[eDash] = IMAGEMANAGER->FindImageVector("Basic_Dash");
-	img[eDash]->Setting(0.4f, false);
+	img[eDash]->Setting(0.8f, false);
 	img[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Basic_Attack1");
-	img[eAutoAttack_1]->Setting(0.11f, false);
+	img[eAutoAttack_1]->Setting(0.08f, false);
+	img[eAutoAttack_1]->Setting(img[eAutoAttack_1]->GetImageSize() - 1, 0.1);
 	img[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Basic_Attack2");
-	img[eAutoAttack_2]->Setting(0.15f, false);
+	img[eAutoAttack_2]->Setting(0.08f, false);
 	img[eJump] = IMAGEMANAGER->FindImageVector("Basic_JumpStart");
 	img[eJump]->Setting(0.05, true);
 	img[eJumpAttack] = IMAGEMANAGER->FindImageVector("Basic_JumpAttack");
 	img[eJumpAttack]->Setting(0.08, false);
-	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize()-1, 0.1);
+	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize() - 1, 0.1);
 	img[eJumpDown] = IMAGEMANAGER->FindImageVector("Basic_JumpRepeat");
 	img[eJumpDown]->Setting(0.1, true);
 	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Basic_JumpFall");
@@ -28,18 +29,18 @@ void Head_Basic::ImageSetting()
 	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Basic_Skill");
 	img[eSkill_1]->Setting(0.1, false);
 	img[eTagAction] = IMAGEMANAGER->FindImageVector("Basic_TagAction");
-	img[eAutoAttack_2]->Setting(0.15f, false);
+	img[eTagAction]->Setting(0.1, false);
 
 	img_headless[eIdle] = IMAGEMANAGER->FindImageVector("Basic_Headless_Idle");
 	img_headless[eIdle]->Setting(0.15f, true);
 	img_headless[eWalk] = IMAGEMANAGER->FindImageVector("Basic_Headless_Walk");
 	img_headless[eWalk]->Setting(0.1f, true);
 	img_headless[eDash] = IMAGEMANAGER->FindImageVector("Basic_Headless_Dash");
-	img_headless[eDash]->Setting(0.4f, false);
+	img_headless[eDash]->Setting(0.8f, false);
 	img_headless[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Basic_Headless_Attack1");
-	img_headless[eAutoAttack_1]->Setting(0.05f, false);
+	img_headless[eAutoAttack_1]->Setting(0.08f, false);
 	img_headless[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Basic_Headless_Attack2");
-	img_headless[eAutoAttack_2]->Setting(0.05f, false);
+	img_headless[eAutoAttack_2]->Setting(0.08f, false);
 	img_headless[eJump] = IMAGEMANAGER->FindImageVector("Basic_Headless_JumpStart");
 	img_headless[eJump]->Setting(0.1, true);
 	img_headless[eJumpAttack] = IMAGEMANAGER->FindImageVector("Basic_Headless_JumpAttack");
@@ -68,9 +69,9 @@ void Head_Basic::ParameterSetting()
 	m_isDown = false;
 
 	m_dashSpeed = 240;		//##dash 이동식 수정 필요
-	m_dashTime = 2 * img[eDash]->GetTotalDelay();
+	m_dashTime = 0.85 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
-	m_dashCool = 0.95;
+	m_dashCool = 1;
 	m_dashNowCool = 0;
 	m_dashCount = 0;
 	m_dashMax = 2;			//대시 최대 횟수
@@ -94,8 +95,8 @@ void Head_Basic::ParameterSetting()
 }
 
 void Head_Basic::CollisionSetting()
-{	
-	m_collAutoAttack->Setting(50, *m_x + 6 + 40, *m_y - 24 + 72, "BasicAttack_BasicSkul");
+{
+	m_collAutoAttack->Setting(50, *m_x + 46, *m_y - 24 + 72, "BasicAttack_BasicSkul");
 	m_collAutoAttack->SetIsActive(false);
 
 	m_collSkillTag->Setting(100, *m_x, *m_y, "TagAttack_BasicSkul");
@@ -141,9 +142,9 @@ void Head_Basic::ActionArrangement()
 	case eIdle: action = "idle";
 		break;
 	case eWalk: action = "walk";
-	break;
+		break;
 	case eDash: action = "dash";
-	break;
+		break;
 	case eJump: action = "jump";
 		break;
 	}
@@ -252,7 +253,7 @@ void Head_Basic::CollisionUpdate()
 {
 	m_collAutoAttack->SetIsActive(false);
 	m_collSkillTag->SetIsActive(false);
-	
+
 	switch (m_action)
 	{
 	case eAutoAttack_1:
@@ -346,9 +347,39 @@ void Head_Basic::TagAction()
 	m_action = eTagAction;
 }
 
+bool Head_Basic::GetIsAttack()
+{
+	switch (m_attackCount)
+	{
+	case 0:
+		return false;
+		break;
+	case 1:
+		if (m_attackCast[1] == true)
+			return false;
+		else return true;
+		break;
+	case 2:
+		return true;
+		break;
+	default:
+		cout << "공격횟수가 이상하다. attackcount = " << m_attackCount << endl;
+		return false;
+	}
+}
+
 void Head_Basic::DrawCharactor()
 {
-	nowImg->CenterRender(*m_x, *m_y - 56, 2, 2, 0, *m_isLeft);
+	//float drawPX = m_headThrow ? *m_x - 2 : *m_x;
+	float drawPX = *m_x;
+	if (m_headThrow)
+	{
+		if (*m_isLeft)
+			drawPX -= 2;
+		else drawPX += 2;
+	}
+	float drawPY = m_headThrow ? *m_y - 54 : *m_y - 56;
+	nowImg->CenterRender(drawPX, drawPY, 2, 2, 0, *m_isLeft);
 }
 
 void Head_Basic::OnCollisionAutoAttack(Enemy* obj, float dmg)

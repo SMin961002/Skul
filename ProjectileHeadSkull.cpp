@@ -11,9 +11,9 @@ void ProjectileHeadSkull::SetSkullThrow(float x, float y, bool reversed)
 	m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
 	m_colHeadSkull->SetIsActive(true);
 	m_isReverse = reversed;
-	m_obj->x = m_startX = reversed ? x-54:x+54;
-	m_obj->y = m_startY = y-50;
-	
+	m_obj->x = m_startX = reversed ? x - 54 : x + 54;
+	m_obj->y = m_startY = y - 50;
+
 	m_rot = 0;
 }
 
@@ -29,7 +29,7 @@ void ProjectileHeadSkull::Init()
 	m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
 	m_colHeadSkull = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(m_colHeadSkull);
-	m_colHeadSkull->Setting(20, m_obj->x, m_obj->y, "ThrowHeadSkull");
+	m_colHeadSkull->Setting(15, m_obj->x+2, m_obj->y-10, "ThrowHeadSkull");
 	m_colHeadSkull->SetIsActive(false);
 }
 
@@ -37,12 +37,12 @@ void ProjectileHeadSkull::Update()
 {
 	if (!m_hit)
 	{
-			if (m_isReverse)
+		if (m_isReverse)
 		{
 			m_obj->x -= 600 * DELTA_TIME;
 			m_rot += 20;
 
-			if (m_startX - m_obj->x > 400)
+			if (m_startX - m_obj->x > 400 || m_obj->GetComponent<PixelCollisionComponent>()->GetIsLeftCollision())
 			{
 				m_hit = true;
 				m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
@@ -53,18 +53,19 @@ void ProjectileHeadSkull::Update()
 			m_obj->x += 600 * DELTA_TIME;
 			m_rot -= 20;
 
-			if (m_obj->x - m_startX > 400)
+			if (m_obj->x - m_startX > 400 || m_obj->GetComponent<PixelCollisionComponent>()->GetIsRightCollision())
 			{
 				m_hit = true;
 				m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
 			}
 		}
 	}//end nonhit
-	m_colHeadSkull->Setting(m_obj->x+8, m_obj->y+10);
+	m_colHeadSkull->Setting(m_obj->x + 8, m_obj->y);
 }//end update
+
 void ProjectileHeadSkull::Render()
 {
-	IMAGEMANAGER->CenterRender(m_img, m_obj->x, m_obj->y, 2, 2,m_rot, m_isReverse);
+	IMAGEMANAGER->CenterRender(m_img, m_obj->x, m_obj->y - 10, 2, 2, m_rot, m_isReverse);
 }
 
 void ProjectileHeadSkull::Off()
@@ -96,12 +97,12 @@ void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
 				other->GetComponent<Enemy>()->HitEnemy(20);
 			}
 		}//end nonhit
-		if(other->GetName() == "player")
+		if (other->GetName() == "player")
 		{
-		//if (other->GetName() == "player")
-		// {
+			//if (other->GetName() == "player")
+			// {
 			Head_Basic* head;
-			head = dynamic_cast<Head_Basic*>( other->GetComponent<Player>()->GetNowHead());
+			head = dynamic_cast<Head_Basic*>(other->GetComponent<Player>()->GetNowHead());
 			head->PutOnHead();
 			Off();
 			//m_colHeadSkull->SetIsActive(false);

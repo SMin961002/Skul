@@ -15,6 +15,7 @@ public:
 	virtual void Release() override;
 	//세팅(이름,범위, 중심점 설정)
 	void Setting(float range, float x, float y, string name);
+	void Setting(float range, float x, float y);
 	//세팅(충돌중심점 옮기기)
 	void Setting(float x, float y);
 

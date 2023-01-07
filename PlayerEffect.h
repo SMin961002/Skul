@@ -23,3 +23,17 @@ class TeleportationToHead : public Effect
 public:
 	void Init() override;
 };
+
+class GamblerAttack_1 : public Effect
+{
+private :
+	bool m_effectOverap = false;
+public:
+	void Init() override;
+};
+
+class GamblerAttack_2 : public Effect
+{
+public:
+	void Init() override;
+};

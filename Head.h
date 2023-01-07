@@ -93,34 +93,18 @@ public:
 		nowImg = img[image];
 		m_action = isImageEqualAction ? image : action;
 	}
-	inline void SetAction(int action, bool doWantToChangeImage=true)
+	inline void SetAction(int action, bool doWantToChangeImage=true, bool actionImageReset = false)
 	{
 		m_action = action;
 		if (doWantToChangeImage) { m_imageChange = true; }
+		if (actionImageReset) { img[action]->Reset(); }
 	}
 	inline eSkulSpecies GetSpecies() { return m_species; }
-	inline bool GetIsAttack() 
-	{
-		switch (m_attackCount)
-		{
-		case 0:
-			return false;
-			break;
-		case 1:
-			if (m_attackCast[1] == true)
-				return false;
-			else return true;
-			break;
-		case 2:
-			return true;
-			break;
-		default:
-			cout << "공격횟수가 이상하다. attackcount = " << m_attackCount << endl;
-			return false;
-		}
-	}
+	virtual bool GetIsAttack() PURE;
 	inline int GetAction() { return m_action; }
 	inline float GetTagCoolTime() { return m_tagCoolTime; }
+	inline float GetActionTime(int action) { img[action]->GetTotalDelay(); }
+	inline float GetNowActionTime() { img[m_action]->GetTotalDelay(); }
 	inline CollisionComponent* GetCollAutoAttack() { return m_collAutoAttack; }
 	inline CollisionComponent* GetCollSkill() { return m_collSkillA; }
 	

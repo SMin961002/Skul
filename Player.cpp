@@ -28,12 +28,6 @@ void Player::Init()
 	m_obj->AddCollisionComponent(m_playerHitBox);
 	m_obj->AddComponent<RigidBodyComponent>();
 
-	//m_collAutoAttack = m_nowHead->GetCollAutoAttack();
-	//m_collSkillA = m_nowHead->GetCollSkill();
-	//m_obj->AddCollisionComponent(m_collAutoAttack);
-	//m_obj->AddCollisionComponent(m_collSkillA);
-	//m_collAutoAttack->SetObject(m_obj);
-	//m_collSkillA->SetObject(m_obj);
 	m_collAutoAttack = m_obj->AddComponent<CollisionComponent>();
 	m_collSkillA = m_obj->AddComponent<CollisionComponent>();
 	m_collSkillS = m_obj->AddComponent<CollisionComponent>();
@@ -113,9 +107,9 @@ void Player::CoolDown()
 			m_dashNowTime = 0;
 			m_dashCount = 0;
 			m_dashing = false;
-			m_dashNowCool = m_dashCool;
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
 			m_playerHitBox->SetIsActive(true);
+			m_dashNowCool = m_dashCool;
 		}
 	}
 	if (m_supperArmarNowTime > 0)
@@ -155,6 +149,7 @@ void Player::ChangeHead()
 			break;
 		case eSkulSpecies::eGambler:
 			m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eGambler)];
+			m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
 			cout << "스컬 변경 : 갬블러" << endl;
 			break;
 		default:	//##스컬종류 추가후 변경 필요 필수필수필수
@@ -177,6 +172,7 @@ void Player::OnCollision(string collisionName, Object* other)
 			cout << "적에게공격" << endl;
 
 			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Enemy>(), 10);
+			//m_nowHead->OnCollisionAutoAttack(other->GetComponent<Enemy>(), 10, m_nowHead->GetNowActionTime());
 		}
 	}//end collision Name BasicAttack
 }

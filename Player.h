@@ -1,10 +1,9 @@
 #pragma once
 #include "Head_Basic.h"
 #include "Gambler.h"
-
+//!!!!벡터가 터져요!!!!//
 //↓/↓/Comment at End of Page/↓/↓/
 //.......!...
-//m_nowHead의 OnCollision갖다쓰기
 class Player : public Component
 {
 private:
@@ -104,6 +103,13 @@ public:
 			Head* tmp = m_nowHead;
 		}
 	}
+	void HeadChangeCollResetting(bool collDelete)
+	{
+		if (collDelete)
+		{
+			//벡터가 터져요
+		}
+	}
 
 public:
 	float GetplayerX(void) { return m_obj->x; }
@@ -155,8 +161,17 @@ public:
 
 # dash부분 보강 필요
 
-#
+			
+			갬블러 액션
+			샤샤샥
+			데미지(이미지)
+			HPUI
+			해골이미지 슬롯
 
+			다하면 약탈자 (진화 전/후 넣기)
+			
+
+ - 플레이어 1타중 맞으면 2타가 안나가는 문제 수정하기
  - effect 출력
  - 추상화(진행중!)
 

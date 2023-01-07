@@ -198,6 +198,7 @@ public:
 	bool GetIsImageEnded() { return m_isEnd; }	//물어보기
 	vector<CImage*> GetImages() { return m_images; }
 	int GetImageSize() { return m_images.size(); }
+	float GetFrameDelay(int frame) { return m_images[frame]->GetDelay(); }
 	float GetTotalDelay() { return m_totalDelay; }
 	int GetFrame() { return m_frame; }
 	void Setting(float delayTime, bool isLoop)

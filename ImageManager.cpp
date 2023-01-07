@@ -142,6 +142,8 @@ void ImageManager::LoadImages()
 	AddImageVector("PlayerHit", L"./Resources/Png/Skul/Effect/Hit/", 1, 12);
 	//AddImageVector("PlayerCHit", L"./Resources/Png/Skul/Effect/Hit/", 1, 8);
 	//AddImageVector("PlayerCPublicHit", L"./Resources/Png/Skul/Effect/CriticalHit/", 1, 11);
+	AddImageVector("Gambler_Attack1", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_1/", 1, 21);
+	AddImageVector("Gambler_Attack2", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_2/", 1, 22);
 
 	//일반스컬 모션 이미지
 	AddImageVector("Basic_Idle", L"./Resources/Png/Skul/Basic/Motion/Idle/", 1, 4);
@@ -177,7 +179,7 @@ void ImageManager::LoadImages()
 
 	//디스트로이어 모션 이미지
 
-	//갬블러스컬 모션 이미지 경로수정중
+	//갬블러스컬 모션 이미지
 	AddImageVector("Gambler_Idle", L"./Resources/Png/Skul/Gambler/Motion/Idle/", 1, 7);
 	AddImageVector("Gambler_Walk", L"./Resources/Png/Skul/Gambler/Motion/Walk/", 1, 6);
 	AddImageVector("Gambler_Dash", L"./Resources/Png/Skul/Gambler/Motion/Dash/", 1, 5);

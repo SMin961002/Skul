@@ -231,7 +231,6 @@ void LeoniaSoldier::OnCollision(string collisionName, Object* other)
 
 	else if (collisionName == m_hitpointcollision->GetName())
 	{
-		cout << "<<" << endl;
 		if (other->GetName() == "player")
 		{
 			for (auto iter : other->GetCollisionComponent())
