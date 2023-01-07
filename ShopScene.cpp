@@ -31,13 +31,13 @@ void ShopScene::Init()
 	}
 	for (auto iter : m_objects)
 	{
-		if (iter->key == "Atifact" ||iter->key == "Blacksmith" || iter->key == "FoodShop" || iter->key == "Head" || iter->key == "ItemView")
+		if (iter->key == "Atifact" || iter->key == "Blacksmith" || iter->key == "FoodShop" || iter->key == "Head" || iter->key == "ItemView")
 		{
 			OBJECTMANAGER->AddObject("NPC", iter->x, iter->y, eNPC)->AddComponent<NpcObject>()->Setting(iter->key);
 		}
 		if (iter->key == "NormalRoom")
 		{
-			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<DoorObject>()->Setting(1);
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(1);
 		}
 	}
 }
@@ -58,12 +58,17 @@ void ShopScene::Update()
 	{
 		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	}
-
-	if (IMAGEMANAGER->GetCameraPosition().x < 0)
-	{
-		IMAGEMANAGER->SetCameraPosition(WINSIZE_X / 2, IMAGEMANAGER->GetCameraPosition().y);
-	}
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
+
+	if (IMAGEMANAGER->GetCameraPosition().x <= 50)
+	{
+		IMAGEMANAGER->SetCameraPosition(50, IMAGEMANAGER->GetCameraPosition().y);
+	}
+
+	if (IMAGEMANAGER->GetCameraPosition().x >= WINSIZE_X +200)
+	{
+		IMAGEMANAGER->SetCameraPosition(WINSIZE_X +200, IMAGEMANAGER->GetCameraPosition().y);
+	}
 }
 
 void ShopScene::Render()
@@ -75,7 +80,7 @@ void ShopScene::Render()
 	IMAGEMANAGER->DrawMapStructureBack(m_struectures);
 	IMAGEMANAGER->DrawMapTile(m_tiles);
 	IMAGEMANAGER->DrawMapStructureFoward(m_struectures);
-	//IMAGEMANAGER->DrawMapTilePixel(m_tiles);
+	////IMAGEMANAGER->DrawMapTilePixel(m_tiles);
 }
 
 void ShopScene::Release()

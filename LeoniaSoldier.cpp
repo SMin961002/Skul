@@ -12,10 +12,12 @@
 void LeoniaSoldier::Init()
 {
 	m_maxhp = 100.0f;
+	m_attackcount = 0;
 	m_currenthp = 100.0f;
 	m_hiteffecttimer = 0;
 	m_hpbartimer = 0;
 	m_hpbar = 0;
+	m_hitmotion = false;
 	m_die = false;
 	m_effect = false;
 	m_attackleft = false;
@@ -34,7 +36,7 @@ void LeoniaSoldier::Init()
 	m_vimage[eRun]->Setting(0.1f, true);
 
 	m_vimage[eHit] = IMAGEMANAGER->AddImageVectorCopy("Leon_Hit");
-	m_vimage[eHit]->Setting(0.4f, true);
+	m_vimage[eHit]->Setting(0.4f, false);
 
 	m_vimage[eHPbarEmpty] = IMAGEMANAGER->AddImageVectorCopy("Hpbar_Empty");
 	m_vimage[eHPbarEmpty]->Setting(0.4f, false);
@@ -45,9 +47,8 @@ void LeoniaSoldier::Init()
 	m_vimage[eHpbarUp] = IMAGEMANAGER->AddImageVectorCopy("Hpbar_Up");
 	m_vimage[eHpbarUp]->Setting(0.4f, false);
 
-	effect = new Appear;
+	effect = EFFECTMANAGER->AddEffect<Appear>(m_obj->x, m_obj->y, false, 1.5f);
 	effect->Init();
-	effect->SetObject(m_obj);
 	effect->SetEffectStart(m_obj->x, m_obj->y, false, 1.5);
 
 	m_lastX = m_obj->x;
@@ -66,10 +67,23 @@ void LeoniaSoldier::Update()
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 	}
-	if (effect->GetIsEffectEnded())
+
+	if (m_effect == false)
 	{
-		m_effect = true;
+		try
+		{
+			if (effect->GetIsEffectEnded())
+			{
+				m_effect = true;
+			}
+		}
+		catch (const std::exception& eex)
+		{
+			cout << eex.what();
+			effect = nullptr;
+		}
 	}
+
 	if (m_effect == true)
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
@@ -133,6 +147,7 @@ void LeoniaSoldier::Update()
 		if (m_attack == false)
 		{
 			m_hitpointcollision->SetIsActive(false);
+			m_attackcount = 0;
 		}
 		m_hpbar = (1 / m_maxhp);
 		m_hiteffecttimer += DELTA_TIME;
@@ -142,29 +157,30 @@ void LeoniaSoldier::Update()
 
 void LeoniaSoldier::Render()
 {
-	effect->Render();
 	if (m_effect == true)
 	{
 		if (m_currenthp >= 0)
 		{
-			if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x && m_attack == false && m_move == true)
+			if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x && m_attack == false && m_move == true&& m_hitmotion == false)
 			{
 				m_attackleft = true;
 				m_vimage[eRun]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, 1);
 			}
-			else if (OBJECTMANAGER->m_player->GetplayerX() >= m_obj->x && m_attack == false && m_move == true)
+			else if (OBJECTMANAGER->m_player->GetplayerX() >= m_obj->x && m_attack == false && m_move == true && m_hitmotion == false)
 			{
 				m_vimage[eRun]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, 0);
 				m_attackleft = false;
 			}
-			if (!m_attack && m_move == false)m_vimage[eIdle]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0);
-			if (m_attack && m_move == false)
+			if (!m_attack && m_move == false && m_hitmotion == false)
+				m_vimage[eIdle]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0);
+			if (m_attack && m_move == false && m_hitmotion == false)
 			{
 				m_vimage[eAttack]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, m_attackleft);
 			}
-			if (KEYMANAGER->GetOnceKeyDown('p'))
-			{
+			if (m_hitmotion == true)
+			{	
 				m_vimage[eHit]->CenterRender((int)m_obj->x, (int)m_obj->y - 45, 2, 2, 0, m_attackleft);
+				m_hitmotion = false;
 			}
 			if (m_hpbartimer <= 2 && m_hit == true)
 			{
@@ -211,40 +227,51 @@ void LeoniaSoldier::OnCollision(string collisionName, Object* other)
 	{
 		if (other->GetName() == "player")
 		{
-			//other->GetComponent<Player>()-플레이어 상태쉉
+
 			m_attack = true;
 			m_move = false;
 		}
 	}
 
-	if (collisionName == m_hitpointcollision->GetName())
+	else if (collisionName == m_hitpointcollision->GetName())
 	{
 		if (other->GetName() == "player")
 		{
-			m_hitpoint = true;
-			Player* ply = other->GetComponent<Player>();
-			ply->HitPlayerMagicAttack(10);
-			ply->HitPlayerKnockBack(5, 5);
+			if (m_attackcount < 1)
+			{
+				m_hitpoint = true;
+				Player* ply = other->GetComponent<Player>();
+				ply->HitPlayerMagicAttack(10);
+				ply->HitPlayerEffect();
+				if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+				{
+					ply->HitPlayerKnockBack(-15, -5);
+				}
+				else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+				{
+					ply->HitPlayerKnockBack(15, -5);
+				}
+				m_attackcount = 1;
+			}
+			
 		}
 	}
 }
 
-
-
-void LeoniaSoldier::HitEnemy(float dmg)
+void LeoniaSoldier::HitEnemy(float dmg, float time)
 {
 	/*m_isAttack = false;
 	m_isHit = true;
 	m_state = eHit;*/
-	if (m_hiteffecttimer >= 0.7f)
+	m_hitmotion = true;
+	if (m_hiteffecttimer >= time)
 	{
 		m_vimage[eHit]->Reset();
 		m_obj->x += m_obj->x > OBJECTMANAGER->m_player->GetplayerX() ? DELTA_TIME * 500 : -DELTA_TIME * 500;
 		m_obj->y -= 10;
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
-		dmg = 10; //-= 플레이어 어택 데미지 상의
 		m_currenthp -= dmg;
-		
+
 		if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
 		{
 			EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 0, 2);
@@ -255,6 +282,6 @@ void LeoniaSoldier::HitEnemy(float dmg)
 		}
 		m_hit = true;
 		m_hiteffecttimer = 0;
-		
+
 	}
 }

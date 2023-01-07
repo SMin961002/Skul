@@ -168,35 +168,8 @@
     <ClCompile Include="BlackRock.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
-    <ClCompile Include="Baptism.cpp">
-      <Filter>Game\Object\Boss\Casting Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="Consecration.cpp">
-      <Filter>Game\Object\Boss\Casting Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="ShopScene.cpp">
-      <Filter>Game\Scene\ShopScene</Filter>
-    </ClCompile>
-    <ClCompile Include="NpcObject.cpp">
-      <Filter>Game\Object\NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="DoorObject.cpp">
-      <Filter>Game\Object\Door</Filter>
-    </ClCompile>
-    <ClCompile Include="GoldResult.cpp">
-      <Filter>Game\Reward\Gold</Filter>
-    </ClCompile>
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Game\Object\Charactor\Inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="HeadItem.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClCompile>
-    <ClCompile Include="HeadResult.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClCompile>
-    <ClCompile Include="Worship.cpp">
-      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    <ClCompile Include="PlayerMove.cpp">
+      <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="Nervousness.cpp">
       <Filter>Game\Object\Boss</Filter>
@@ -289,9 +262,6 @@
     </ClInclude>
     <ClInclude Include="LeoniaSoldier.h">
       <Filter>Game\Object\Enemy\LeoniaSoldier</Filter>
-    </ClInclude>
-    <ClInclude Include="Fanatic.h">
-      <Filter>Game\Object\Enemy\Fanatic</Filter>
     </ClInclude>
     <ClInclude Include="BlackFanatic.h">
       <Filter>Game\Object\Enemy\BlackFanatic</Filter>

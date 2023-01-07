@@ -62,13 +62,17 @@ void BossScene::Update()
 		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	}
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
+	if (IMAGEMANAGER->GetCameraPosition().x < 0)
+	{
+		IMAGEMANAGER->SetCameraPosition(WINSIZE_X / 2, IMAGEMANAGER->GetCameraPosition().y);
+	}
 	if (IMAGEMANAGER->GetCameraPosition().x <= 0)
 	{
 		IMAGEMANAGER->SetCameraPosition(0, IMAGEMANAGER->GetCameraPosition().y);
 	}
 	if (IMAGEMANAGER->GetCameraPosition().x >= WINSIZE_X / 2 - 50)
 	{
-		IMAGEMANAGER->SetCameraPosition(WINSIZE_X / 2-50, IMAGEMANAGER->GetCameraPosition().y);
+		IMAGEMANAGER->SetCameraPosition(WINSIZE_X / 2 - 50, IMAGEMANAGER->GetCameraPosition().y);
 	}
 	//cout << IMAGEMANAGER->GetCameraPosition().x - WINSIZE_X / 2 << endl;
 }

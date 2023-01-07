@@ -258,7 +258,7 @@ public:
 		IMAGEMANAGER->Render(m_images[m_frame], x, y, sizeX, sizeY, rot);
 	}
 
-	void CenterRender(float x, float y, float sizeX, float sizeY, float rot, bool isReverse = false)
+	void CenterRender(float x, float y, float sizeX, float sizeY, float rot, bool isReverse = false,float alpha = 1)
 	{
 		if (m_isEnd == false)
 			m_nowTimeDelay += DELTA_TIME;
@@ -282,7 +282,7 @@ public:
 			}
 			m_nowTimeDelay = 0;
 		}
-		IMAGEMANAGER->CenterRender(m_images[m_frame], x, y, sizeX, sizeY, rot, isReverse);
+		IMAGEMANAGER->CenterRender(m_images[m_frame], x, y, sizeX, sizeY, rot, isReverse, alpha);
 	}
 
 	void AddImage(CImage* image)

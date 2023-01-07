@@ -48,7 +48,17 @@ void FireKnife::OnCollision(string collisionName, Object* other)
 	{
 		Player* ply = other->GetComponent<Player>();
 		ply->HitPlayerMagicAttack(10);
-		ply->HitPlayerKnockBack(5, 5);
+		ply->HitPlayerEffect();
+		if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+		{
+			ply->HitPlayerKnockBack(-15, -5);
+		}
+		else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+		{
+
+			ply->HitPlayerKnockBack(15, -5);
+
+		}
 		m_obj->ObjectDestroyed();
 	}
 }

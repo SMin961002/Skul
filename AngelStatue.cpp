@@ -42,15 +42,14 @@ void AngelStatue::Init()
 	m_vimage[eHpbarUp] = IMAGEMANAGER->AddImageVectorCopy("Hpbar_Up");
 	m_vimage[eHpbarUp]->Setting(0.4f, false);
 
-	effect = new Appear;
-	effect->Init();
+
 
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 	m_collision = m_obj->AddComponent<CollisionComponent>();
 	m_hitpointcollision = m_obj->AddComponent<CollisionComponent>();
 
-
-	effect->SetObject(m_obj);
+	effect = EFFECTMANAGER->AddEffect<Appear>(m_obj->x, m_obj->y, false, 1.5f);
+	effect->Init();
 	effect->SetEffectStart(m_obj->x, m_obj->y, false, 1.5);
 
 	m_obj->AddComponent<RigidBodyComponent>();
@@ -65,10 +64,22 @@ void AngelStatue::Update()
 
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 	}
-	if (effect->GetIsEffectEnded())
+
+	if (m_effect == false)
 	{
-		m_effect = true;
+		try
+		{
+			if (effect->GetIsEffectEnded())
+			{
+				m_effect = true;
+			}
+		}
+		catch (const std::exception&)
+		{
+			effect = nullptr;
+		}
 	}
+
 	if (m_effect == true)
 	{
 		if (m_hit)
@@ -128,7 +139,6 @@ void AngelStatue::Update()
 
 void AngelStatue::Render()
 {
-	effect->Render();
 	if (m_effect == true)
 	{
 		if (m_currenthp >= 0)
@@ -173,6 +183,7 @@ void AngelStatue::Render()
 	}
 }
 
+
 void AngelStatue::Release()
 {
 }
@@ -204,10 +215,10 @@ void AngelStatue::OnCollision(string collisionName, Object* other)
 		}
 	}
 }
-void AngelStatue::HitEnemy(float dmg)
+void AngelStatue::HitEnemy(float dmg, float time)
 {
 
-	if (m_hiteffecttimer >= 0.7f)
+	if (m_hiteffecttimer >= time)
 	{
 		dmg = 10;
 		m_currenthp -= dmg;
