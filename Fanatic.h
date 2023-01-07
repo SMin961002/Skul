@@ -34,6 +34,7 @@ private:
 	bool m_die2;
 	bool m_effect;
 
+	int m_attackcount;
 	int m_state;
 	float m_hitTimer;
 	float m_hpbartimer;
@@ -51,7 +52,7 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 	virtual void OnCollision(string collisionName, Object* other) override;
-	void HitEnemy(float dmg) override;
+	void HitEnemy(float dmg, float time) override;
 	void ImageResetCheck();
 	Fanatic() {}
 	~Fanatic() {}

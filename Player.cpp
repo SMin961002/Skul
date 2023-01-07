@@ -174,5 +174,12 @@ void Player::OnCollision(string collisionName, Object* other)
 			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Enemy>(), 10);
 			//m_nowHead->OnCollisionAutoAttack(other->GetComponent<Enemy>(), 10, m_nowHead->GetNowActionTime());
 		}
+		if (other->GetName() == "EnemyBoss")
+		{
+			cout << "적에게공격" << endl;
+			
+			m_nowHead->OnCollisionAutoAttackBossEnemy(other->GetComponent<Component>(), 10);
+		}
+
 	}//end collision Name BasicAttack
 }

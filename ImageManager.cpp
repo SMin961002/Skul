@@ -244,6 +244,38 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/46.png");
 	AddTileImage(L"./Resources/Tile/4Stage/47.png");
 	AddTileImage(L"./Resources/Tile/4Stage/48.png");
+	AddTileImage(L"./Resources/Tile/Lobby/49.png");
+	AddTileImage(L"./Resources/Tile/Lobby/50.png");
+	AddTileImage(L"./Resources/Tile/Lobby/51.png");
+	AddTileImage(L"./Resources/Tile/Lobby/52.png");
+	AddTileImage(L"./Resources/Tile/Lobby/53.png");
+	AddTileImage(L"./Resources/Tile/Lobby/54.png");
+	AddTileImage(L"./Resources/Tile/Lobby/55.png");
+	AddTileImage(L"./Resources/Tile/Lobby/56.png");
+	AddTileImage(L"./Resources/Tile/Lobby/57.png");
+	AddTileImage(L"./Resources/Tile/Lobby/58.png");
+	AddTileImage(L"./Resources/Tile/Lobby/59.png");
+	AddTileImage(L"./Resources/Tile/Lobby/60.png");
+	AddTileImage(L"./Resources/Tile/Lobby/61.png");
+	AddTileImage(L"./Resources/Tile/Lobby/62.png");
+	AddTileImage(L"./Resources/Tile/Lobby/63.png");
+	AddTileImage(L"./Resources/Tile/Lobby/64.png");
+	AddTileImage(L"./Resources/Tile/Lobby/65.png");
+	AddTileImage(L"./Resources/Tile/Lobby/66.png");
+	AddTileImage(L"./Resources/Tile/Lobby/67.png");
+	AddTileImage(L"./Resources/Tile/Lobby/68.png");
+	AddTileImage(L"./Resources/Tile/Lobby/69.png");
+	AddTileImage(L"./Resources/Tile/Lobby/70.png");
+	AddTileImage(L"./Resources/Tile/Lobby/71.png");
+	AddTileImage(L"./Resources/Tile/Lobby/72.png");
+	AddTileImage(L"./Resources/Tile/Lobby/73.png");
+	AddTileImage(L"./Resources/Tile/Lobby/74.png");
+	AddTileImage(L"./Resources/Tile/Lobby/75.png");
+	AddTileImage(L"./Resources/Tile/Lobby/76.png");
+	AddTileImage(L"./Resources/Tile/Lobby/77.png");
+	AddTileImage(L"./Resources/Tile/Lobby/78.png");
+	AddTileImage(L"./Resources/Tile/Lobby/79.png");
+
 
 	// 배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
@@ -340,7 +372,8 @@ void ImageManager::LoadImages()
 	AddStructureImage("bossPlatFormL", L"./Resources/Tile/4Stage/Structure/bossPlatFormL.png");
 	AddStructureImage("bossPlatFormS", L"./Resources/Tile/4Stage/Structure/bossPlatFormS.png");
 	AddStructureImage("Terrain", L"./Resources/Tile/4Stage/Structure/Terrain.png");
-
+	// 저장은 백스페이스 숫자키와 번호키로 오브젝트교체 ,f7 <- 신규씬 , 좌클릭은 뒤에 그려지고 우클릭은 앞에
+	// 타일 지우는거 컨트롤 <- 맨마지막에 그린것만 지워짐, 맵크기는 영상 참조
 
 	// 몬스터 체력바 이미지
 	AddImageVector("Hpbar_Empty", L"./Resources/Monster/Hpbar/Empty/", 1, 1);
@@ -480,6 +513,7 @@ void ImageManager::LoadImages()
 	// 인게임 UI이미지
 	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");
 	AddImage("PlayerStatusUI", L"./Resources/UI/PlayerStatusUI.png");
+	AddImage("ItemUI", L"./Resources/UI/itemUI.png");
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)

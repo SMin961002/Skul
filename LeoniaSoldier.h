@@ -28,7 +28,9 @@ private:
 	bool m_hitpoint;
 	bool m_die;
 	bool m_effect; 
+	bool m_hitmotion;
 
+	int m_attackcount;
 	float m_dietimer;
 	float m_hiteffecttimer;
 	float m_hpbartimer;
@@ -40,7 +42,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
-	virtual void HitEnemy(float dmg) override;
+	virtual void HitEnemy(float dmg, float time) override;
 
 	virtual void OnCollision(string collisionName, Object* other) override;
 

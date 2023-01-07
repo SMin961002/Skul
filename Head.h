@@ -136,6 +136,7 @@ public:
 	//Render 안에 들어가는 함수
 	virtual void DrawCharactor();
 	virtual void OnCollisionAutoAttack(Enemy* obj, float dmg) {};
+	virtual void OnCollisionAutoAttackBossEnemy(Component* obj, float dmg) {};
 
 	void SetPlayerMoveParameter(float* moveSpeed, float* dashSpeed, float* dashtime, short* dashMax, bool* dashing,float* jumpSpeed, short* jumpMax, bool* jumpping)
 	{

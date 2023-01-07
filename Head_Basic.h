@@ -29,6 +29,7 @@ public:
 
 	void DrawCharactor() override;
 	void OnCollisionAutoAttack(Enemy* obj, float dmg) override;
+	void OnCollisionAutoAttackBossEnemy(Component* obj, float dmg) override;
 
 	void PutOnHead()
 	{
