@@ -6,14 +6,13 @@
 #include "TentaclesOfLight.h"
 #include "Fanatic.h"
 #include "LampFanatic.h"
-#include "DoorObject.h"
-#include "BallFanatic.h"
-#include "Gold.h"
 #include "AngelStatue.h"
 #include "GoldResult.h"
 #include "HeadResult.h"
 #include "CandleFanatic.h"
-
+#include "DoorObject.h"
+#include "BallFanatic.h"
+#include "Gold.h"
 EnemyTestScene::EnemyTestScene()
 {
 }
@@ -24,6 +23,8 @@ EnemyTestScene::~EnemyTestScene()
 
 void EnemyTestScene::Init()
 {
+	trigger = new Trigger;
+
 	isStart = false;
 	m_speed = 0;
 	m_backGround = IMAGEMANAGER->FindImage("Background");
@@ -41,7 +42,6 @@ void EnemyTestScene::Init()
 	strData2 = FILEMANAGER->GetFileData("Object", "batch");
 	MY_UTILITY::ConvertStructureString2Vec(&m_objectDatas, strData2);
 
-
 	for (auto iter : m_objectDatas)
 	{
 		if (iter->key == "Basic")
@@ -51,13 +51,44 @@ void EnemyTestScene::Init()
 	}
 	for (auto iter : m_objectDatas)
 	{
-		if (iter->key == "Fanatic")
+		if (iter->key == "Trigger1")
 		{
-			//OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<Fanatic>();
+			if (trigger->trigger[0].left == 0)
+			{
+				trigger->trigger[0].left = iter->x;
+				trigger->trigger[0].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[0].right = iter->x;
+				trigger->trigger[0].bottom = iter->y;
+			}
 		}
-		else if (iter->key == "Leon")
+		else if (iter->key == "Trigger2")
 		{
-			//OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
+			if (trigger->trigger[1].left == 0)
+			{
+				trigger->trigger[1].left = iter->x;
+				trigger->trigger[1].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[1].right = iter->x;
+				trigger->trigger[1].bottom = iter->y;
+			}
+		}
+		else if (iter->key == "Trigger3")
+		{
+			if (trigger->trigger[2].left == 0)
+			{
+				trigger->trigger[2].left = iter->x;
+				trigger->trigger[2].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[2].right = iter->x;
+				trigger->trigger[2].bottom = iter->y;
+			}
 		}
 		else if (iter->key == "NormalRoom")
 		{
@@ -75,26 +106,12 @@ void EnemyTestScene::Init()
 		{
 			OBJECTMANAGER->AddObject("HeadResult", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<HeadResult>();
 		}
-		else if (iter->key == "AStatue")
+		else
 		{
-			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<AngelStatue>();
+			trigger->m_structureData[iter->page].push_back(iter);
 		}
 	}
-	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<TentaclesOfLight>();
-	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2+250, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
-	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
-	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 - 270, 120, ObjectTag::eEnemy)->AddComponent<AngelStatue>();
-	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 200, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 300, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 400, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-	//OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2 + 500, 180, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-
-	OBJECTMANAGER->AddObject("Enemy", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<CandleFanatic>();
-	//OBJECTMANAGER->AddObject("Enemy3", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<TentaclesOfLight>();
-	//OBJECTMANAGER->AddObject("Enemy4", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<LampFanatic>();
-	//BJECTMANAGER->AddObject("Enemy5", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<BallFanatic>();
-	//OBJECTMANAGER->AddObject("Enemy6", WINSIZE_X / 2, WINSIZE_Y / 2, ObjectTag::eEnemy)->AddComponent<AngelStatue>();
+	trigger->Init();
 }
 
 void EnemyTestScene::Update()
@@ -113,6 +130,7 @@ void EnemyTestScene::Update()
 		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	}
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
+	trigger->Update();
 }
 
 void EnemyTestScene::Render()
@@ -141,6 +159,8 @@ void EnemyTestScene::Render()
 
 void EnemyTestScene::Release()
 {
+	trigger->Release();
+	SAFE_DELETE(trigger);
 	SCENEMANAGER->m_tiles.clear();
 	for (auto iter : m_sturctDatas)
 	{

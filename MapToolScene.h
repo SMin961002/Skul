@@ -23,6 +23,7 @@ private:
 	int m_state;
 	int m_page;
 
+	int m_triggerPage;
 public:
 	MapToolScene();
 	~MapToolScene();
