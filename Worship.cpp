@@ -13,7 +13,7 @@ void WorshipLeft::Update()
 
 	if (m_obj->x > 1800)
 	{
-		m_obj->x = 0;
+		m_obj->ObjectDestroyed();
 	}
 }
 
@@ -39,7 +39,7 @@ void WorshipRight::Update()
 
 	if (m_obj->x < 0)
 	{
-		m_obj->x = 1800;
+		m_obj->ObjectDestroyed();
 	}
 }
 

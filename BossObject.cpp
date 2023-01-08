@@ -173,7 +173,6 @@ void BossObject::Update()
 		_isWorshipCheck = true;
 		_worshipDeltaTime += DELTA_TIME;
 	}
-	if()
 	//if (_vWorshipLeft.empty() && _vWorshipRight.empty())
 	//{
 	//	for (int i = 0; i < 50; i++)
