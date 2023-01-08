@@ -33,6 +33,8 @@ protected:
 		eActionTagNumber
 	};
 
+	bool m_effectOverap;
+
 public:
 	bool m_can[eActionTagNumber];
 	virtual void ImageSetting() override;
@@ -47,8 +49,8 @@ public:
 	virtual void InputAttackKey() override;
 
 	virtual void TagAction() override;
+	virtual bool GetIsAttack() override;
 
 	virtual void DrawCharactor() override;
-
 
 };

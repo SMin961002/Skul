@@ -35,6 +35,13 @@ void CollisionComponent::Setting(float range, float x, float y, string name)
 	m_range = range;
 }
 
+void CollisionComponent::Setting(float range, float x, float y)
+{
+	m_collisionX = x;
+	m_collisionY = y;
+	m_range = range;
+}
+
 void CollisionComponent::Setting(float x, float y)
 {
 	m_collisionX = x;

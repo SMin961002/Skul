@@ -190,6 +190,9 @@
     <ClCompile Include="Worship.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="IllusionEffect.cpp" />
+    <ClCompile Include="Card.cpp">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -388,6 +391,11 @@
     <ClInclude Include="BossPhase1EnemyCandle.h" />
     <ClInclude Include="BossPhase1EnemyFnatic.h" />
     <ClInclude Include="FireKnife.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="IllusionEffect.h" />
+    <ClInclude Include="Card.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
