@@ -49,3 +49,14 @@ void JokerExplosion::Init()
 	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_JockerExplosion");
 	m_img->Setting(0.04, false);
 }
+
+void GamblerJumpAttack::Init()
+{
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_JumpAttackEffect");
+	m_img->Setting(0.07, false);
+}
+
+void GamblerJumpAttack::Move()
+{
+}

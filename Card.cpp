@@ -53,7 +53,7 @@ void Card::Update()
 			m_obj->ObjectDestroyed();
 		}
 		if (m_isLeft)
-			m_coll->Setting(m_obj->x - 24, m_obj->y+4);
+			m_coll->Setting(m_obj->x - 19, m_obj->y+4);
 		else
 			m_coll->Setting(m_obj->x + 24, m_obj->y+4);
 	}//end else
@@ -99,7 +99,7 @@ void Card::OnCollision(string collisionName, Object* other)
 					m_jokerExplosion = EFFECTMANAGER->AddEffect<JokerExplosion>(m_obj->x, m_obj->y, m_isLeft, 2);
 					m_jokerExplosion->Init();
 					if (m_isLeft)
-						m_coll->Setting(120, m_obj->x - 60, m_obj->y+60);
+						m_coll->Setting(120, m_obj->x+60, m_obj->y+60);
 					else
 						m_coll->Setting(120, m_obj->x + 60, m_obj->y+60);
 					m_isJokerHit = true;

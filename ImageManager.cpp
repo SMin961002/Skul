@@ -144,6 +144,7 @@ void ImageManager::LoadImages()
 	//AddImageVector("PlayerCPublicHit", L"./Resources/Png/Skul/Effect/CriticalHit/", 1, 11);
 	AddImageVector("Gambler_Attack1", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_1/", 1, 21);
 	AddImageVector("Gambler_Attack2", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_2/", 1, 22);
+	AddImageVector("Gambler_JumpAttackEffect", L"./Resources/Png/Skul/Gambler/Effect/JumpAttack/", 1, 24);
 	AddImageVector("Gambler_JockerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BasicAttack_Joker_Explosion/", 1, 17);
 	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
 	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
@@ -160,7 +161,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Basic_JumpAttack", L"./Resources/Png/Skul/Basic/Motion/JumpAttack/", 1, 4);
 	AddImageVector("Basic_Reborn", L"./Resources/Png/Skul/Basic/Motion/Reborn/", 1, 27);
 	AddImageVector("Basic_Skill", L"./Resources/Png/Skul/Basic/Motion/Skill/", 1, 4);
-	AddImageVector("Basic_TagAction", L"./Resources/Png/Skul/Basic/Motion/TagAction/", 1, 14);
+	AddImageVector("Basic_TagAction", L"./Resources/Png/Skul/Basic/Motion/TagAction/", 1, 28);
 
 	//일반스컬 - 머리 없는 모션 이미지
 	AddImageVector("Basic_Headless_Idle", L"./Resources/Png/Skul/Basic/Headless/HeadlessIdle/", 1, 4);

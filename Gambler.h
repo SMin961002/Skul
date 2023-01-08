@@ -7,32 +7,7 @@ class Gambler : public Head
 	(nowframe이 3번째(0,1,2. 2번이미지)일때부터 자리에 고정)
 	운명의 룰렛, 다트레인 스킬사용시 나오는 동작은 Attack_B1.
 	*/
-protected:
-	enum ActionTag
-	{
-		eIdle,
-		eWalk,
-		eDash,
-		eJump,
-		eJumpDown,
-		eJumpLand,
-		eBasicActionTagNumberCount,
-		//=↑=↑=여기까진 앵간하면 고정행동=↑=↑=//
-		eAutoAttack_A1 = eBasicActionTagNumberCount,
-		eAutoAttack_A2,
-		eAutoAttack_B1,
-		eAutoAttack_B2,
-		eAutoAttack_B3,
-		eJumpAttack,
-		eSkill_1,
-		eSkill_2,
-		eTagAction,
-
-		eReborn,
-
-		eActionTagNumber
-	};
-
+private:
 	bool m_effectOverap;
 
 public:

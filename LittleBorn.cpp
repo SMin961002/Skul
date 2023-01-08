@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "Head_Basic.h"
+#include "LittleBorn.h"
 #include "RigidBodyComponent.h"
 #include "Enemy.h"
 
-void Head_Basic::ImageSetting()
+void LittleBorn::ImageSetting()
 {
 	//이미지 삽입
 	img[eIdle] = IMAGEMANAGER->FindImageVector("Basic_Idle");
@@ -29,7 +29,7 @@ void Head_Basic::ImageSetting()
 	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Basic_Skill");
 	img[eSkill_1]->Setting(0.1, false);
 	img[eTagAction] = IMAGEMANAGER->FindImageVector("Basic_TagAction");
-	img[eTagAction]->Setting(0.1, false);
+	img[eTagAction]->Setting(0.05, false);
 
 	img_headless[eIdle] = IMAGEMANAGER->FindImageVector("Basic_Headless_Idle");
 	img_headless[eIdle]->Setting(0.15f, true);
@@ -56,7 +56,7 @@ void Head_Basic::ImageSetting()
 	nowImg = img[eIdle];
 }
 
-void Head_Basic::ParameterSetting()
+void LittleBorn::ParameterSetting()
 {
 	m_species = eSkulSpecies::eBasic;
 	m_tagCoolTime = 10.0f;
@@ -94,21 +94,21 @@ void Head_Basic::ParameterSetting()
 	m_imageChange = false;
 }
 
-void Head_Basic::CollisionSetting()
+void LittleBorn::CollisionSetting()
 {
 	m_collAutoAttack->Setting(50, *m_x + 46, *m_y - 24 + 72, "BasicAttack_BasicSkul");
 	m_collAutoAttack->SetIsActive(false);
 
-	m_collSkillTag->Setting(100, *m_x, *m_y, "TagAttack_BasicSkul");
+	m_collSkillTag->Setting(70, *m_x, *m_y, "TagAttack_BasicSkul");
 	m_collSkillTag->SetIsActive(false);
 }
 
-void Head_Basic::Release()
+void LittleBorn::Release()
 {
 	m_projectileHead->DestroyProjectileHead();
 }
 
-void Head_Basic::CoolDown()
+void LittleBorn::CoolDown()
 {
 	float deltaTime = DELTA_TIME;
 	if (m_dashNowCool > 0)
@@ -135,7 +135,7 @@ void Head_Basic::CoolDown()
 	}
 }
 
-void Head_Basic::ActionArrangement()
+void LittleBorn::ActionArrangement()
 {
 	string action;
 	switch (m_action) {
@@ -250,7 +250,7 @@ void Head_Basic::ActionArrangement()
 	if (nowImg == img[eIdle]) m_action = eIdle;
 }
 
-void Head_Basic::CollisionUpdate()
+void LittleBorn::CollisionUpdate()
 {
 	m_collAutoAttack->SetIsActive(false);
 	m_collSkillTag->SetIsActive(false);
@@ -294,7 +294,14 @@ void Head_Basic::CollisionUpdate()
 		break;
 	case eTagAction:
 		m_collSkillTag->SetIsActive(true);
-		m_collSkillTag->Setting(*m_x, *m_y);
+		if(*m_isLeft)
+			m_collSkillTag->Setting(*m_x+25, *m_y-20);
+		else
+			m_collSkillTag->Setting(*m_x+35, *m_y-20);
+		m_attackCount++;
+		//태그액션시 이동
+		{float move = 300 * DELTA_TIME;
+		*m_x += ((*m_isLeft) ? -move : move); }
 		break;
 	default: break;
 	}
@@ -313,7 +320,7 @@ void Head_Basic::CollisionUpdate()
 	}
 }
 
-void Head_Basic::InputSkillKey()
+void LittleBorn::InputSkillKey()
 {
 	if (KEYMANAGER->GetOnceKeyDown('A'))
 	{
@@ -342,16 +349,17 @@ void Head_Basic::InputSkillKey()
 	}//end if headThrow
 }
 
-void Head_Basic::InputAttackKey()
+void LittleBorn::InputAttackKey()
 {
 	if (KEYMANAGER->GetOnceKeyDown('X'))
 	{
 		if (*m_jumpping)
 		{
-			if (m_action != eJumpAttack)
+			if (m_attackCount == 0)
 			{
 				m_action = eJumpAttack;
 				m_imageChange = true;
+				m_attackCount++;
 			}
 		}//end if jumpping
 		else
@@ -370,13 +378,13 @@ void Head_Basic::InputAttackKey()
 	}//end 'X'
 }
 
-void Head_Basic::TagAction()
+void LittleBorn::TagAction()
 {
 	m_imageChange = true;
 	m_action = eTagAction;
 }
 
-bool Head_Basic::GetIsAttack()
+bool LittleBorn::GetIsAttack()
 {
 	switch (m_attackCount)
 	{
@@ -397,7 +405,7 @@ bool Head_Basic::GetIsAttack()
 	}
 }
 
-void Head_Basic::DrawCharactor()
+void LittleBorn::DrawCharactor()
 {
 	//float drawPX = m_headThrow ? *m_x - 2 : *m_x;
 	float drawPX = *m_x;
@@ -411,7 +419,7 @@ void Head_Basic::DrawCharactor()
 	nowImg->CenterRender(drawPX, drawPY, 2, 2, 0, *m_isLeft);
 }
 
-void Head_Basic::OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg, float delay)
+void LittleBorn::OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg, float delay)
 {
 	bool isEnemyHit = false;
 	for (auto iter : m_CollObjList)

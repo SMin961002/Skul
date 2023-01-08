@@ -11,10 +11,10 @@ void Gambler::ImageSetting()
 	img[eWalk]->Setting(0.1f, true);
 	img[eDash] = IMAGEMANAGER->FindImageVector("Gambler_Dash");
 	img[eDash]->Setting(0.16f, false);
-	img[eAutoAttack_A1] = IMAGEMANAGER->FindImageVector("Gambler_AttackA1");
-	img[eAutoAttack_A1]->Setting(0.08f, false);
-	img[eAutoAttack_A2] = IMAGEMANAGER->FindImageVector("Gambler_AttackA2");
-	img[eAutoAttack_A2]->Setting(0.15f, false);
+	img[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Gambler_AttackA1");
+	img[eAutoAttack_1]->Setting(0.08f, false);
+	img[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Gambler_AttackA2");
+	img[eAutoAttack_2]->Setting(0.15f, false);
 	img[eAutoAttack_B1] = IMAGEMANAGER->FindImageVector("Gambler_AttackB1");
 	img[eAutoAttack_B1]->Setting(0.04f, false);
 	img[eAutoAttack_B1]->Setting(img[eAutoAttack_B1]->GetImageSize() - 1, 0.034);
@@ -27,7 +27,7 @@ void Gambler::ImageSetting()
 	img[eJump]->Setting(0.05, true);
 	img[eJumpAttack] = IMAGEMANAGER->FindImageVector("Gambler_JumpAttack");
 	img[eJumpAttack]->Setting(0.08, false);
-	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize() - 1, 0.1);
+	img[eJumpAttack]->Setting(img[eJumpAttack]->GetImageSize() - 1, 0.12);
 	img[eJumpDown] = IMAGEMANAGER->FindImageVector("Gambler_JumpRepeat");
 	img[eJumpDown]->Setting(0.1, true);
 	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Gambler_JumpFall");
@@ -37,7 +37,7 @@ void Gambler::ImageSetting()
 	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Gambler_AttackB1");
 	img[eSkill_2]->Setting(0.1, false);
 	img[eTagAction] = IMAGEMANAGER->FindImageVector("Gambler_TagAction");
-	img[eTagAction]->Setting(0.15f, false);
+	img[eTagAction]->Setting(0.07f, false);
 
 	nowImg = img[eIdle];
 }
@@ -118,9 +118,9 @@ void Gambler::ActionArrangement()
 				break;
 			case 3:
 			{
-				OBJECTMANAGER->AddObject("Card", *m_x, *m_y-36, ePlayerProjectile)->AddComponent<Card>();
+				OBJECTMANAGER->AddObject("Card", *m_x, *m_y - 36, ePlayerProjectile)->AddComponent<Card>();
 			}
-				break;
+			break;
 			default: break;
 			}
 		}
@@ -135,6 +135,7 @@ void Gambler::ActionArrangement()
 	}
 	if (m_imageChange)
 	{
+		m_effectOverap = false;
 		m_attackCast[0] = false;
 		m_attackCast[1] = false;
 		if (m_action<eAutoAttack_B1 || m_action>eJumpAttack)
@@ -165,32 +166,33 @@ void Gambler::CollisionUpdate()
 	case eAutoAttack_B1:
 		if (nowImg->GetFrame() < 3)
 		{
-			if(*m_isLeft)
-				m_collAutoAttack->Setting(80, m_obj->x - 35, m_obj->y );
+			if (*m_isLeft)
+				m_collAutoAttack->Setting(80, m_obj->x - 35, m_obj->y);
 			else
-				m_collAutoAttack->Setting(80, m_obj->x +20+ 96, m_obj->y);
+				m_collAutoAttack->Setting(80, m_obj->x + 20 + 96, m_obj->y);
 			m_collAutoAttack->SetIsActive(true);
 		}
 		break;
 	case eAutoAttack_B2:
 		if (nowImg->GetFrame() < 3)
 		{
-			if(*m_isLeft)
-				m_collAutoAttack->Setting(90, m_obj->x+20, m_obj->y - 5);
+			if (*m_isLeft)
+				m_collAutoAttack->Setting(90, m_obj->x + 20, m_obj->y - 5);
 			else
-				m_collAutoAttack->Setting(90, m_obj->x+66, m_obj->y - 5);
+				m_collAutoAttack->Setting(90, m_obj->x + 66, m_obj->y - 5);
 			m_collAutoAttack->SetIsActive(true);
 		}
 		break;
 	case eJumpAttack:
-		if (nowImg->GetFrame() == 2)
+		if (nowImg->GetFrame() > 1 || nowImg->GetFrame() < 4)
 		{
 			if (*m_isLeft)
-				m_collAutoAttack->Setting(80, m_obj->x, m_obj->y);
+				m_collAutoAttack->Setting(80, m_obj->x+10, m_obj->y+20);
 			else
-				m_collAutoAttack->Setting(80, m_obj->x + 20, m_obj->y);
+				m_collAutoAttack->Setting(80, m_obj->x + 60, m_obj->y+20);
 			m_collAutoAttack->SetIsActive(true);
 		}
+		break;
 	}
 	if (!m_collAutoAttack->GetIsActive())
 	{
@@ -216,9 +218,22 @@ void Gambler::InputAttackKey()
 	{
 		if (*m_jumpping)
 		{
-			m_action = eJumpAttack;
-			m_imageChange = true;
-			m_attackCount++;
+			if (m_attackCount == 0)
+			{
+				m_action = eJumpAttack;
+				m_imageChange = true;
+				m_attackCount++;
+				if (*m_isLeft)
+				{
+					EFFECTMANAGER->AddEffect<GamblerJumpAttack>(m_obj->x - 20, m_obj->y, true, 2);
+					m_effectOverap = true;
+				}
+				else
+				{
+					EFFECTMANAGER->AddEffect<GamblerJumpAttack>(m_obj->x + 20, m_obj->y, false, 2);
+					m_effectOverap = true;
+				}
+			}
 		}
 		else if (!m_attackCast[1] && !m_attackCast[0])
 			switch (m_attackCount)
@@ -281,16 +296,14 @@ bool Gambler::GetIsAttack()
 
 void Gambler::DrawCharactor()
 {
-	nowImg->CenterRender(*m_x, *m_y - 35, 2, 2, 0, *m_isLeft);
-
-	if (m_attackCount > 0 && m_attackCount < 3)
+	if (!m_effectOverap)
 	{
-		if (!m_effectOverap)
+		if (m_attackCount > 0 && m_attackCount < 3)
 		{
 			switch (m_attackCount)
 			{
 			case 1:
-				if (nowImg->GetFrame() == 1)
+				if (m_action == eAutoAttack_B1 && nowImg->GetFrame() == 1)
 					if (*m_isLeft)
 					{
 						EFFECTMANAGER->AddEffect<GamblerAttack_1>(m_obj->x - 35, m_obj->y - 32, true, 2);
@@ -299,7 +312,8 @@ void Gambler::DrawCharactor()
 					{
 						EFFECTMANAGER->AddEffect<GamblerAttack_1>(m_obj->x + 35, m_obj->y - 32, false, 2);
 					}
-
+			m_effectOverap = true;
+				break;
 			case 2:
 				if (nowImg->GetFrame() == 1)
 					if (*m_isLeft)
@@ -310,10 +324,14 @@ void Gambler::DrawCharactor()
 					{
 						EFFECTMANAGER->AddEffect<GamblerAttack_2>(m_obj->x + 20, m_obj->y - 40, false, 2);
 					}
+			m_effectOverap = true;
 				break;
 			default: break;
 			}//end switch
-			m_effectOverap = true;
-		}//end if !effectOverap
-	}//end if attack
+		}//end if attack
+	}//end not effect overap
+
+	nowImg->CenterRender(*m_x, *m_y - 35, 2, 2, 0, *m_isLeft);
+
+
 }

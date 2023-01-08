@@ -1,5 +1,5 @@
 #pragma once
-#include "Head_Basic.h"
+#include "LittleBorn.h"
 #include "Gambler.h"
 //!!!!벡터가 터져요!!!!//
 //↓/↓/Comment at End of Page/↓/↓/

@@ -169,7 +169,7 @@
     <ClCompile Include="HeadManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Head_Basic.cpp" />
+    <ClCompile Include="LittleBorn.cpp" />
     <ClCompile Include="HolyFountain.cpp" />
     <ClCompile Include="Hporb.cpp" />
     <ClCompile Include="IllusionEffect.cpp" />
@@ -247,7 +247,7 @@
     <ClInclude Include="HeadManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Head_Basic.h" />
+    <ClInclude Include="LittleBorn.h" />
     <ClInclude Include="HolyFountain.h" />
     <ClInclude Include="Hporb.h" />
     <ClInclude Include="IllusionEffect.h" />
