@@ -49,7 +49,7 @@ enum ObjectTag
 	eEnemy,
 	eItem,
 	ePlayer,
-	ePlayerHead,
+	ePlayerProjectile,
 	eEndTag
 };
 

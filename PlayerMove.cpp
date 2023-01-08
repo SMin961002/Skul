@@ -4,9 +4,9 @@
 
 void Player::Move()
 {
-	if (m_nowHead->GetAction() == Head::eWalk)
+	if (m_nowHead->GetAction() == m_nowHead->eWalk)
 	{
-		m_nowHead->SetAction(Head::eIdle, true);
+		m_nowHead->SetAction(m_nowHead->eIdle, true);
 	}
 
 	InputDashKey();
@@ -35,13 +35,13 @@ void Player::Move()
 		if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision())
 		{
 			ResetJump();
-			m_nowHead->SetImage(Head::eJumpLand, true);
+			m_nowHead->SetAction(m_nowHead->eJumpLand);
 		}
 		else if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsTopCollision())
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(0);
 		if (m_obj->GetComponent<RigidBodyComponent>()->GetGravityPower() < 0)
-			if (!m_dashing && m_nowHead->GetAction() != Head::eJumpAttack)
-				m_nowHead->SetImage(Head::eJumpDown, true);
+			if (!m_dashing && m_nowHead->GetAction() != m_nowHead->eJumpAttack)
+				m_nowHead->SetAction(m_nowHead->eJumpDown, true);
 	}
 	InputJumpKey();
 }
@@ -85,7 +85,7 @@ void Player::InputDashKey()
 
 			m_dashing = true;
 			m_dashCount++;
-			m_nowHead->SetImage(Head::eDash);
+			m_nowHead->SetAction(m_nowHead->eDash,true, true);
 			EFFECTMANAGER->AddEffect<DashSmoke>(m_obj->x, m_obj->y, m_isLeft);
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(0);
@@ -102,7 +102,7 @@ void Player::InputArrowKey()
 	if (KEYMANAGER->GetStayKeyDown(VK_LEFT))
 	{
 		m_isLeft = true;
-		if (!m_nowHead->GetIsAttack() || m_nowHead->GetAction() == Head::eJumpAttack)
+		if (!m_nowHead->GetIsAttack() || m_nowHead->GetAction() == m_nowHead->eJumpAttack)
 			m_obj->x -= m_moveSpeed * DELTA_TIME;
 		if (!m_jumpping) {
 			m_nowHead->SetAction(Head::eWalk);
@@ -112,7 +112,7 @@ void Player::InputArrowKey()
 	if (KEYMANAGER->GetStayKeyDown(VK_RIGHT))
 	{
 		m_isLeft = false;
-		if (!m_nowHead->GetIsAttack() || m_nowHead->GetAction() == Head::eJumpAttack)
+		if (!m_nowHead->GetIsAttack() || m_nowHead->GetAction() == m_nowHead->eJumpAttack)
 			m_obj->x += m_moveSpeed * DELTA_TIME;
 		if (!m_jumpping) {
 			m_nowHead->SetAction(Head::eWalk);

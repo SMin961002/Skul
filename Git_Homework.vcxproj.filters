@@ -171,26 +171,27 @@
     <ClCompile Include="PlayerMove.cpp">
       <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
-    <ClCompile Include="Nervousness.cpp">
-      <Filter>Game\Object\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectileHeadSkull.cpp">
+    <ClCompile Include="BossPhase1EnemyCandle.cpp" />
+    <ClCompile Include="BossPhase1EnemyFnatic.cpp" />
+    <ClCompile Include="FireKnife.cpp" />
+    <ClCompile Include="Baptism.cpp" />
+    <ClCompile Include="Consecration.cpp" />
+    <ClCompile Include="DoorObject.cpp" />
+    <ClCompile Include="GoldResult.cpp" />
+    <ClCompile Include="HeadItem.cpp" />
+    <ClCompile Include="HeadResult.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="MenuUI.cpp" />
+    <ClCompile Include="Nervousness.cpp" />
+    <ClCompile Include="NpcObject.cpp" />
+    <ClCompile Include="ResultValue.cpp" />
+    <ClCompile Include="ProjectileHeadSkull.cpp" />
+    <ClCompile Include="ShopScene.cpp" />
+    <ClCompile Include="Worship.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="IllusionEffect.cpp" />
+    <ClCompile Include="Card.cpp">
       <Filter>Game\Object\Charactor\Head</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuUI.cpp">
-      <Filter>Game\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="ResultValue.cpp">
-      <Filter>Game\Reward</Filter>
-    </ClCompile>
-    <ClCompile Include="BossPhase1EnemyCandle.cpp">
-      <Filter>Game\Object\Boss\Boss_Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="BossPhase1EnemyFnatic.cpp">
-      <Filter>Game\Object\Boss\Boss_Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="FireKnife.cpp">
-      <Filter>Game\Object\Enemy\Missile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -387,14 +388,13 @@
     <ClInclude Include="ResultValue.h">
       <Filter>Game\Reward</Filter>
     </ClInclude>
-    <ClInclude Include="BossPhase1EnemyCandle.h">
-      <Filter>Game\Object\Boss\Boss_Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="BossPhase1EnemyFnatic.h">
-      <Filter>Game\Object\Boss\Boss_Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="FireKnife.h">
-      <Filter>Game\Object\Enemy\Missile</Filter>
+    <ClInclude Include="BossPhase1EnemyCandle.h" />
+    <ClInclude Include="BossPhase1EnemyFnatic.h" />
+    <ClInclude Include="FireKnife.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="IllusionEffect.h" />
+    <ClInclude Include="Card.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

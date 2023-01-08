@@ -145,6 +145,7 @@
     <ClCompile Include="BossScene.cpp" />
     <ClCompile Include="BossPhase1EnemyCandle.cpp" />
     <ClCompile Include="CandleFanatic.cpp" />
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Consecration.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="BossScene.h" />
     <ClInclude Include="BossPhase1EnemyCandle.h" />
     <ClInclude Include="CandleFanatic.h" />
+    <ClInclude Include="Card.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Consecration.h" />

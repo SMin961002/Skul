@@ -1,10 +1,9 @@
 #pragma once
 #include "Head_Basic.h"
 #include "Gambler.h"
-
+//!!!!벡터가 터져요!!!!//
 //↓/↓/Comment at End of Page/↓/↓/
 //.......!...
-//m_nowHead의 OnCollision갖다쓰기
 class Player : public Component
 {
 private:
@@ -46,12 +45,14 @@ private:
 	short m_jumpCount;		//현재 점프 몇회인지
 	short m_jumpMax;		//최대 점프 가능 횟수		
 	bool  m_jumpping;
+
+	int m_knockBackY;
 	//============이동에 필요한 변수end==========
 	
-	//=============이동에 필요한 변수===========
+	//========================
 	float m_supperArmarTime;
 	float m_supperArmarNowTime;
-	//============이동에 필요한 변수end==========
+	//============end==========
 	TeleportationToHead* effect = new TeleportationToHead;
 
 public:
@@ -104,10 +105,17 @@ public:
 			Head* tmp = m_nowHead;
 		}
 	}
+	void HeadChangeCollResetting(bool collDelete)
+	{
+		if (collDelete)
+		{
+		}
+	}
 
 public:
 	float GetplayerX(void) { return m_obj->x; }
 	float GetplayerY(void) { return m_obj->y; }
+	bool GetplayerIsLeft(void) { return m_isLeft; }
 	Head* GetNowHead() { return m_nowHead; }
 
 	//물리공격 데미지를 입력해주세요
@@ -127,6 +135,10 @@ public:
 	//플레이어 피격시 밀림(플레이어가 x+moveX, y+moveY포인트로 옮겨집니다)
 	void HitPlayerKnockBack(float moveX, float moveY)
 	{
+		//##위로밀림시 점프하강모션뜨는거 idle로 바꾸기
+		m_knockBackY = moveY - m_obj->y;
+		if (m_knockBackY < 0)
+			m_knockBackY = 0;
 		m_obj->x += moveX;
 		m_obj->y += moveY;
 	}
@@ -155,8 +167,17 @@ public:
 
 # dash부분 보강 필요
 
-#
+			
+			갬블러 액션
+			샤샤샥
+			데미지(이미지)
+			HPUI
+			해골이미지 슬롯
 
+			다하면 약탈자 (진화 전/후 넣기)
+			
+
+ - 플레이어 1타중 맞으면 2타가 안나가는 문제 수정하기
  - effect 출력
  - 추상화(진행중!)
 
