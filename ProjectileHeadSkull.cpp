@@ -29,7 +29,7 @@ void ProjectileHeadSkull::Init()
 	m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
 	m_colHeadSkull = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(m_colHeadSkull);
-	m_colHeadSkull->Setting(15, m_obj->x+2, m_obj->y-10, "ThrowHeadSkull");
+	m_colHeadSkull->Setting(15, m_obj->x + 2, m_obj->y - 10, "ThrowHeadSkull");
 	m_colHeadSkull->SetIsActive(false);
 }
 
@@ -94,7 +94,7 @@ void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
 			{
 				m_hit = true;
 				m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
-				other->GetComponent<Enemy>()->HitEnemy(20,1);//임의로 넣은것 추후제외
+				other->GetComponent<Enemy>()->HitEnemy(20, 1);//임의로 넣은것 추후제외
 			}
 		}//end nonhit
 		if (other->GetName() == "player")
@@ -103,8 +103,11 @@ void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
 			// {
 			Head_Basic* head;
 			head = dynamic_cast<Head_Basic*>(other->GetComponent<Player>()->GetNowHead());
-			head->PutOnHead();
-			Off();
+			if(head != nullptr)
+			{
+				head->PutOnHead();
+				Off();
+			}
 			//m_colHeadSkull->SetIsActive(false);
 		}
 	}

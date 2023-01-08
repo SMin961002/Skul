@@ -31,6 +31,7 @@ void Head::Release()
 
 void Head::Act()
 {
+	cout << m_attackCount << endl;
 	if (m_attackCount < m_attackMax)
 	{
 		InputAttackKey();
