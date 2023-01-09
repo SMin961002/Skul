@@ -34,7 +34,6 @@ public:
 	{
 		m_headThrow = false;
 		m_imageChange = true;
-		m_skillUsing = false;
 		m_skillNowCoolA = 0;
 		m_projectileHead->Off();
 	};

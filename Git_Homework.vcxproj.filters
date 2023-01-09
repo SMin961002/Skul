@@ -217,7 +217,6 @@
       <Filter>Game\Object\Enemy\LampFanatic</Filter>
     </ClCompile>
     <ClCompile Include="BossBall.cpp" />
-    <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="LoadImage.cpp">
       <Filter>Core\Manager\ImageManager</Filter>
     </ClCompile>
@@ -229,6 +228,9 @@
     </ClCompile>
     <ClCompile Include="LittleBorn.cpp">
       <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
+    </ClCompile>
+    <ClCompile Include="Gambler.cpp">
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

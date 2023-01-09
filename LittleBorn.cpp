@@ -71,7 +71,7 @@ void LittleBorn::ParameterSetting()
 	m_dashSpeed = 240;		//##dash 이동식 수정 필요
 	m_dashTime = 0.85 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
-	m_dashCool = 2;
+	m_dashCool = 1;
 	m_dashNowCool = 0;
 	m_dashCount = 0;
 	m_dashMax = 2;			//대시 최대 횟수
@@ -82,6 +82,7 @@ void LittleBorn::ParameterSetting()
 
 	m_attackCount = 0;
 	m_attackMax = 2;
+	m_attackCool = 0.3;
 	m_attackCast[0] = false;
 	m_attackCast[1] = false;
 
@@ -89,9 +90,10 @@ void LittleBorn::ParameterSetting()
 	m_skillNowCoolS = 0;
 	m_skillCoolA = 6;
 	m_skillCoolS = 3;
-	m_skillUsing = false;
 	m_headThrow = false;
 	m_imageChange = false;
+
+	m_nonCansleAction = false;
 }
 
 void LittleBorn::CollisionSetting()
@@ -133,6 +135,14 @@ void LittleBorn::CoolDown()
 			m_skillNowCoolS = 0;
 		}
 	}
+	if (m_attackNowCool > 0)
+	{
+		m_attackNowCool -= deltaTime;
+		if (m_attackNowCool < 0)
+		{
+			m_attackNowCool = 0;
+		}
+	}
 }
 
 void LittleBorn::ActionArrangement()
@@ -152,6 +162,8 @@ void LittleBorn::ActionArrangement()
 	{
 		if (nowImg->GetIsImageEnded())
 		{
+			m_nonCansleAction = false;
+
 			if (nowImg != img[m_action])
 				nowImg->Reset();
 			if (m_attackCast[0])
@@ -169,11 +181,14 @@ void LittleBorn::ActionArrangement()
 			}
 			else
 			{
+				if (GetIsAttack()&&m_action!=eAutoAttack_2)
+				{
+					m_attackNowCool = m_attackCool;
+				}
 				nowImg = img[eIdle];
 				m_action = eIdle;
 				m_attackCount = 0;
 			}
-			m_skillUsing = false;
 		}
 		if (m_imageChange)
 		{
@@ -201,6 +216,8 @@ void LittleBorn::ActionArrangement()
 	{
 		if (nowImg->GetIsImageEnded())
 		{
+			m_nonCansleAction = false;
+
 			if (nowImg != img_headless[m_action])
 				nowImg->Reset();
 			if (m_attackCast[0])
@@ -222,7 +239,6 @@ void LittleBorn::ActionArrangement()
 				m_action = eIdle;
 				m_attackCount = 0;
 			}
-			m_skillUsing = false;
 		}
 		if (m_imageChange)
 		{
@@ -251,6 +267,7 @@ void LittleBorn::ActionArrangement()
 	{
 		m_action = eIdle;
 		m_attackCount = 0;
+		m_nonCansleAction = false;
 	}
 }
 
@@ -361,18 +378,24 @@ void LittleBorn::InputAttackKey()
 		{
 			if (m_attackCount == 0)
 			{
-				m_action = eJumpAttack;
-				m_imageChange = true;
-				m_attackCount++;
+				if (m_attackNowCool == 0)
+				{
+					m_action = eJumpAttack;
+					m_imageChange = true;
+					m_attackCount++;
+				}
 			}
 		}//end if jumpping
 		else
 		{
 			if (m_attackCount == 0)
 			{
-				m_action = eAutoAttack_1;
-				m_attackCount = 1;
-				m_imageChange = true;
+				if (m_attackNowCool == 0)
+				{
+					m_action = eAutoAttack_1;
+					m_attackCount = 1;
+					m_imageChange = true;
+				}
 			}
 			else
 			{
@@ -384,8 +407,10 @@ void LittleBorn::InputAttackKey()
 
 void LittleBorn::TagAction()
 {
+	m_nonCansleAction = true;
 	m_imageChange = true;
 	m_action = eTagAction;
+	img[eTagAction]->Reset();
 }
 
 bool LittleBorn::GetIsAttack()

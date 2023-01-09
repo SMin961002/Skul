@@ -12,7 +12,7 @@ void Head::Init()
 void Head::Update()
 {
 	CoolDown();
-	if (!m_skillUsing)	//스킬 끝날 때까지 다른 동작이 들어가지 못하게 하기 위함
+	if (!m_nonCansleAction)	//스킬 끝날 때까지 다른 동작이 들어가지 못하게 하기 위함
 	{
 		Act();
 	}

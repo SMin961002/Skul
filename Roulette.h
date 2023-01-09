@@ -11,6 +11,9 @@ private:
 	vImage* m_roulette;
 	CImage* m_imageResult;
 	CollisionComponent* m_coll;
+	
+	int m_rotateCount;
+	bool m_printResult;
 
 public:
 	virtual void Init() override;
