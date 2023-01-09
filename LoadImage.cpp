@@ -232,6 +232,10 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Worship", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Worship/Phase1_Worship_Projectile_", 1, 60);
 
 	// 2페이즈_대기
+	AddImageVector("Phase2_Ball_CreateBall_Start", L"./Resources/Saint_Joanna/Phase_2/CreateBall/HolyBarrierOrb/Start/", 1, 21);
+	AddImageVector("Phase2_Ball_CreateBall_Idle", L"./Resources/Saint_Joanna/Phase_2/CreateBall/HolyBarrierOrb/Orb/Phase1_HolyBarrier_Orb_", 1, 48);
+
+
 
 	// 2페이즈_인트로
 	AddImageVector("Phase2_Boss_Idle", L"./Resources/Saint_Joanna/Phase_2/Idle/Phase2_Idle_", 1, 6);
