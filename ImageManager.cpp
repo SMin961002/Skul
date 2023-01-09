@@ -508,6 +508,9 @@ void ImageManager::LoadImages()
 	AddObjectImage("Head", L"./Resources/Shop/Head/01.png");
 	AddObjectImage("GoldResoult", L"./Resources/GoldResult/Idle/01.png");
 	AddObjectImage("HeadResult", L"./Resources/HeadResult/Idle/01.png");
+	AddObjectImage("Trigger1", L"./Resources/Trigger1.png");
+	AddObjectImage("Trigger2", L"./Resources/Trigger2.png");
+	AddObjectImage("Trigger3", L"./Resources/Trigger3.png");
 
 	// 인게임 UI이미지
 	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");

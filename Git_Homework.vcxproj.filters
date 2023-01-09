@@ -181,6 +181,7 @@
     <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="IllusionEffect.cpp" />
+    <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Baptism.cpp">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
@@ -407,12 +408,9 @@
       <Filter>Game\Reward</Filter>
     </ClInclude>
     <ClInclude Include="IllusionEffect.h" />
-    <ClInclude Include="BossPhase1EnemyCandle.h">
-      <Filter>Game\Object\Boss\BossEnemy</Filter>
-    </ClInclude>
-    <ClInclude Include="BossPhase1EnemyFnatic.h">
-      <Filter>Game\Object\Boss\BossEnemy</Filter>
-    </ClInclude>
+    <ClInclude Include="Trigger.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="IllusionEffect.h" />
     <ClInclude Include="Card.h">
       <Filter>Game\Object\Charactor\Gambler</Filter>
     </ClInclude>

@@ -13,6 +13,7 @@ void MapToolScene::Init()
 {
 	m_page = 0;
 	m_streuctureKey = "";
+	m_triggerPage = 0;
 	m_state = eTileBatch;
 
 	m_tileImages = IMAGEMANAGER->GetTileImages();
@@ -113,6 +114,15 @@ void MapToolScene::Update()
 			iter.push_back(-1);
 		}
 	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_INSERT) && m_triggerPage != 3)
+	{
+		m_triggerPage++;
+	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_HOME) && m_triggerPage != 0)
+	{
+		m_triggerPage--;
+	}
+	cout << m_triggerPage << endl;
 }
 
 void MapToolScene::Render()
@@ -329,6 +339,7 @@ void MapToolScene::Render()
 					sd->x = _ptMouse.x + IMAGEMANAGER->GetCameraPosition().x;
 					sd->y = _ptMouse.y + IMAGEMANAGER->GetCameraPosition().y;
 					sd->isBack = false;
+					sd->page = m_triggerPage;
 					m_objectDatas.push_back(sd);
 				}
 			}
