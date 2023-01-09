@@ -57,9 +57,11 @@ private:
 	vImage* _imgPhase1BossBarrierSpark;
 	CImage* _imgPhase1BossBarrierCrack;
 	vImage* _imgPhase1BossBarrierCrackImpact;
+
 	bool m_isAttack;
 	int m_bossState;
 	float m_patterTimer;
+
 	enum BossPhase2State
 	{
 		eIntro1,
