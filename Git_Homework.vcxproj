@@ -169,7 +169,7 @@
     <ClCompile Include="HeadManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Head_Basic.cpp" />
+    <ClCompile Include="LittleBorn.cpp" />
     <ClCompile Include="HolyFountain.cpp" />
     <ClCompile Include="Hporb.cpp" />
     <ClCompile Include="IllusionEffect.cpp" />
@@ -197,6 +197,7 @@
     <ClCompile Include="ResultValue.cpp" />
     <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
+    <ClCompile Include="Roulette.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ShopScene.cpp" />
@@ -212,6 +213,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Worship.cpp" />
+    <ClCompile Include="LoadImage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AngelStatue.h" />
@@ -249,7 +251,7 @@
     <ClInclude Include="HeadManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Head_Basic.h" />
+    <ClInclude Include="LittleBorn.h" />
     <ClInclude Include="HolyFountain.h" />
     <ClInclude Include="Hporb.h" />
     <ClInclude Include="IllusionEffect.h" />
@@ -276,6 +278,7 @@
     <ClInclude Include="ResultValue.h" />
     <ClInclude Include="ProjectileHeadSkull.h" />
     <ClInclude Include="RigidBodyComponent.h" />
+    <ClInclude Include="Roulette.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ShopScene.h" />

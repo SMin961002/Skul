@@ -2,7 +2,7 @@
 #include "Head.h" //94,64 BasicAttack_BasicSkul범위 x-30~x+42(중심점 x+6, 범위반지름 36). y-56~y+8(중심점 y-24, 범위반지름 32)
 #include "Enemy.h"
 #include "ProjectileHeadSkull.h"
-class Head_Basic : public Head
+class LittleBorn : public Head
 {
 private:
 	vImage* img_headless[eActionTagNumber];
@@ -32,12 +32,15 @@ public:
 
 	void PutOnHead()
 	{
-		m_skillNowCoolA = 0;
 		m_headThrow = false;
 		m_imageChange = true;
 		m_skillUsing = false;
+		m_skillNowCoolA = 0;
 		m_projectileHead->Off();
 	};
-	void OnCollision(string collisionName, Object* other)
-	{}
+	virtual void ResetAll() override
+	{
+		Head::ResetAll();
+		m_projectileHead->Off();
+	}
 };

@@ -6,7 +6,7 @@ class Enemy;
 class Head
 {
 public:
-	virtual enum ActionTag
+	enum ActionTag
 	{
 		eIdle,
 		eWalk,
@@ -18,6 +18,7 @@ public:
 		//=↑=↑=여기까진 앵간하면 고정행동=↑=↑=//
 		eAutoAttack_1 = eBasicActionTagNumberCount,
 		eAutoAttack_2,
+		eAutoAttack_3,
 		eJumpAttack,
 		eSkill_1,
 		eSkill_2,
@@ -163,7 +164,7 @@ public:
 		m_jumpping = jumpping;
 	}
 
-	void ResetAll()
+	virtual void ResetAll()
 	{
 		ResetAttack();
 		ResetSkill();

@@ -1,12 +1,12 @@
 #pragma once
 #include "Component.h"
 
-class Head_Basic;
+class LittleBorn;
 class ProjectileHeadSkull : public Component
 {
 	CollisionComponent* m_colHeadSkull;
 	CImage* m_img;
-	Head_Basic* m_Head;
+	LittleBorn* m_Head;
 
 	bool m_isReverse;
 	bool m_hit;
