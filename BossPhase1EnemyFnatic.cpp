@@ -152,6 +152,8 @@ void BossPhase1EnemyFnatic::Render()
 
 }
 
+
+
 void BossPhase1EnemyFnatic::Release()
 {
 }

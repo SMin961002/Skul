@@ -49,7 +49,10 @@ void ImageManager::LoadImages()
 	AddImage("exBg", L"./Resources/exBg.png");
 	AddImage("Background", L"./MapFile/BackGround/background.png");
 	AddImage("Castle", L"./MapFile/BackGround/castle.png");
+	AddImage("Castle2", L"./MapFile/BackGround/castle2.png");
+	AddImage("Moon2", L"./MapFile/BackGround/Moon2.png");
 	AddImage("Cloud", L"./MapFile/BackGround/cloud.png");
+	AddImage("Cloud2", L"./MapFile/BackGround/cloud2.png");
 	//약탈자 모션 이미지
 
 	//디스트로이어 모션 이미지
@@ -131,6 +134,62 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/46.png");
 	AddTileImage(L"./Resources/Tile/4Stage/47.png");
 	AddTileImage(L"./Resources/Tile/4Stage/48.png");
+	AddTileImage(L"./Resources/Tile/4Stage/49.png");
+	AddTileImage(L"./Resources/Tile/4Stage/50.png");
+	AddTileImage(L"./Resources/Tile/4Stage/51.png");
+	AddTileImage(L"./Resources/Tile/4Stage/52.png");
+	AddTileImage(L"./Resources/Tile/4Stage/53.png");
+	AddTileImage(L"./Resources/Tile/4Stage/54.png");
+	AddTileImage(L"./Resources/Tile/4Stage/55.png");
+	AddTileImage(L"./Resources/Tile/4Stage/56.png");
+	AddTileImage(L"./Resources/Tile/4Stage/57.png");
+	AddTileImage(L"./Resources/Tile/4Stage/58.png");
+	AddTileImage(L"./Resources/Tile/4Stage/59.png");
+	AddTileImage(L"./Resources/Tile/4Stage/60.png");
+	AddTileImage(L"./Resources/Tile/4Stage/61.png");
+	AddTileImage(L"./Resources/Tile/4Stage/62.png");
+	AddTileImage(L"./Resources/Tile/4Stage/63.png");
+	AddTileImage(L"./Resources/Tile/4Stage/64.png");
+	AddTileImage(L"./Resources/Tile/4Stage/65.png");
+	AddTileImage(L"./Resources/Tile/4Stage/66.png");
+	AddTileImage(L"./Resources/Tile/4Stage/67.png");
+	AddTileImage(L"./Resources/Tile/4Stage/68.png");
+	AddTileImage(L"./Resources/Tile/4Stage/69.png");
+	AddTileImage(L"./Resources/Tile/4Stage/70.png");
+	AddTileImage(L"./Resources/Tile/4Stage/71.png");
+	AddTileImage(L"./Resources/Tile/4Stage/72.png");
+	AddTileImage(L"./Resources/Tile/4Stage/73.png");
+	AddTileImage(L"./Resources/Tile/4Stage/74.png");
+	AddTileImage(L"./Resources/Tile/4Stage/75.png");
+	AddTileImage(L"./Resources/Tile/4Stage/76.png");
+	AddTileImage(L"./Resources/Tile/4Stage/77.png");
+	AddTileImage(L"./Resources/Tile/4Stage/78.png");
+	AddTileImage(L"./Resources/Tile/4Stage/79.png");
+	AddTileImage(L"./Resources/Tile/4Stage/80.png");
+	AddTileImage(L"./Resources/Tile/4Stage/81.png");
+	AddTileImage(L"./Resources/Tile/4Stage/82.png");
+	AddTileImage(L"./Resources/Tile/4Stage/83.png");
+	AddTileImage(L"./Resources/Tile/4Stage/84.png");
+	AddTileImage(L"./Resources/Tile/4Stage/85.png");
+	AddTileImage(L"./Resources/Tile/4Stage/86.png");
+	AddTileImage(L"./Resources/Tile/4Stage/87.png");
+	AddTileImage(L"./Resources/Tile/4Stage/88.png");
+	AddTileImage(L"./Resources/Tile/4Stage/89.png");
+	AddTileImage(L"./Resources/Tile/4Stage/90.png");
+	AddTileImage(L"./Resources/Tile/4Stage/91.png");
+	AddTileImage(L"./Resources/Tile/4Stage/92.png");
+	AddTileImage(L"./Resources/Tile/4Stage/93.png");
+	AddTileImage(L"./Resources/Tile/4Stage/94.png");
+	AddTileImage(L"./Resources/Tile/4Stage/95.png");
+	AddTileImage(L"./Resources/Tile/4Stage/96.png");
+	AddTileImage(L"./Resources/Tile/4Stage/97.png");
+	AddTileImage(L"./Resources/Tile/4Stage/98.png");
+	AddTileImage(L"./Resources/Tile/4Stage/99.png");
+	AddTileImage(L"./Resources/Tile/4Stage/100.png");
+	AddTileImage(L"./Resources/Tile/4Stage/101.png");
+	AddTileImage(L"./Resources/Tile/4Stage/102.png");
+	AddTileImage(L"./Resources/Tile/4Stage/103.png");
+	AddTileImage(L"./Resources/Tile/4Stage/104.png");
 	AddTileImage(L"./Resources/Tile/Lobby/49.png");
 	AddTileImage(L"./Resources/Tile/Lobby/50.png");
 	AddTileImage(L"./Resources/Tile/Lobby/51.png");
@@ -260,6 +319,12 @@ void ImageManager::LoadImages()
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
 	AddStructureImage("arch1", L"./Resources/Tile/4Stage/Structure/arch1.png");
 	AddStructureImage("arch2", L"./Resources/Tile/4Stage/Structure/arch2.png");
+	AddStructureImage("arch3", L"./Resources/Tile/4Stage/Structure/arch3.png");
+	AddStructureImage("arch4", L"./Resources/Tile/4Stage/Structure/arch4.png");
+	AddStructureImage("arch5", L"./Resources/Tile/4Stage/Structure/arch5.png");
+	AddStructureImage("arch6", L"./Resources/Tile/4Stage/Structure/arch6.png");
+	AddStructureImage("arch7", L"./Resources/Tile/4Stage/Structure/arch7.png");
+	AddStructureImage("arch8", L"./Resources/Tile/4Stage/Structure/arch8.png");
 	AddStructureImage("Elevator", L"./Resources/Tile/4Stage/Structure/elevator.png");
 	AddStructureImage("DoorBack", L"Resources/Door/DoorBack.png");
 	AddStructureImage("Reword", L"Resources/Door/Reword.png");
@@ -271,6 +336,18 @@ void ImageManager::LoadImages()
 	AddStructureImage("bossPlatFormL", L"./Resources/Tile/4Stage/Structure/bossPlatFormL.png");
 	AddStructureImage("bossPlatFormS", L"./Resources/Tile/4Stage/Structure/bossPlatFormS.png");
 	AddStructureImage("Terrain", L"./Resources/Tile/4Stage/Structure/Terrain.png");
+	AddStructureImage("Table1", L"./Resources/Tile/4Stage/Structure/table1.png");
+	AddStructureImage("Table2", L"./Resources/Tile/4Stage/Structure/table2.png");
+	AddStructureImage("Table3", L"./Resources/Tile/4Stage/Structure/table3.png");
+	AddStructureImage("Lamp1", L"./Resources/Tile/4Stage/Structure/lamp1.png");
+	AddStructureImage("Lamp2", L"./Resources/Tile/4Stage/Structure/lamp2.png");
+	AddStructureImage("Lamp3", L"./Resources/Tile/4Stage/Structure/HangingLamp1.png");
+	AddStructureImage("Lamp4", L"./Resources/Tile/4Stage/Structure/HangingLamp2.png");
+	AddStructureImage("Box1", L"./Resources/Tile/4Stage/Structure/box1.png");
+	AddStructureImage("Brokenbox1", L"./Resources/Tile/4Stage/Structure/Brokenbox1.png");
+	AddStructureImage("Chair1", L"./Resources/Tile/4Stage/Structure/chair1.png");
+	AddStructureImage("Fence1", L"./Resources/Tile/4Stage/Structure/Fence1.png");
+
 	// 저장은 백스페이스 숫자키와 번호키로 오브젝트교체 ,f7 <- 신규씬 , 좌클릭은 뒤에 그려지고 우클릭은 앞에
 	// 타일 지우는거 컨트롤 <- 맨마지막에 그린것만 지워짐, 맵크기는 영상 참조
 
@@ -388,6 +465,7 @@ void ImageManager::LoadImages()
 	//맵 오브젝트 애니메이션
 	AddImageVector("NormalRoom", L"Resources/Door/NormalRoom/", 1, 8);
 	AddImageVector("SkulRoom", L"Resources/Door/SkulRoom/", 1, 7);
+	AddImageVector("Fountain", L"Resources/Tile/4Stage/Structure/fountain/", 1, 6);
 
 	//맵툴 오브젝트 이미지 저장
 	AddObjectImage("Leon", L"Resources/Monster/Leonia Soldier/Idle/01.png");
@@ -411,6 +489,7 @@ void ImageManager::LoadImages()
 	AddObjectImage("Trigger1", L"./Resources/Trigger1.png");
 	AddObjectImage("Trigger2", L"./Resources/Trigger2.png");
 	AddObjectImage("Trigger3", L"./Resources/Trigger3.png");
+	AddObjectImage("Fountain", L"./Resources/Tile/4Stage/Structure/fountain/01.png");
 
 	// 인게임 UI이미지
 	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");
