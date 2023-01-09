@@ -65,6 +65,10 @@ void Main::Update()
 	{
 		SCENEMANAGER->ChangeScene("BossScene");
 	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_F9))
+	{
+		SCENEMANAGER->ChangeScene("Stage");
+	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_F12))
 	{
 		IMAGEMANAGER->SetViewCollision(!IMAGEMANAGER->GetViewCollision());

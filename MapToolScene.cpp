@@ -11,6 +11,7 @@ MapToolScene::~MapToolScene()
 
 void MapToolScene::Init()
 {
+	mdsfa = 0;
 	m_page = 0;
 	m_streuctureKey = "";
 	m_triggerPage = 0;
@@ -204,6 +205,11 @@ void MapToolScene::Render()
 				y++;
 			}
 		}
+	}
+
+	if (KEYMANAGER->GetOnceKeyDown(VK_F4))
+	{
+		m_page += m_page >= 10 ? -10 : 10;
 	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_RBUTTON))
 	{
