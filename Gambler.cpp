@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Gambler.h"
 #include "Card.h"
+#include "Roulette.h"
 
 void Gambler::ImageSetting()
 {
@@ -30,7 +31,7 @@ void Gambler::ImageSetting()
 	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Gambler_Attack1");
 	img[eTagAction] = IMAGEMANAGER->FindImageVector("Gambler_TagAction");
 	img[eTagAction]->Setting(0.07f, false);
-
+	//
 	nowImg = img[eIdle];
 }
 
@@ -46,7 +47,7 @@ void Gambler::ParameterSetting()
 	m_dashSpeed = 300;		//##dash 이동식 수정 필요
 	m_dashTime = 0.95 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
-	m_dashCool = 1.5;
+	m_dashCool = 2;
 	m_dashNowCool = 0;
 	m_dashCount = 0;
 	m_dashMax = 2;			//대시 최대 횟수

@@ -14,7 +14,7 @@ void DashSmoke::Init()
 	m_img = IMAGEMANAGER->AddImageVectorCopy("DashSmoke");
 	m_img->Setting(0.1, false);
 }
-
+ 
 void PlayerHit::Init()
 {
 	Effect::Init();
@@ -33,7 +33,7 @@ void GamblerAttack_1::Init()
 {
 	Effect::Init();
 	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_Attack1Effect");
-	m_img->Setting(0.07, false);
+	m_img->Setting(0.07, false);//
 }
 
 void GamblerAttack_2::Init()

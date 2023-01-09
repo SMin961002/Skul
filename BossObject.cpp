@@ -10,6 +10,10 @@ void BossObject::Init()
 {
 	m_bossState = eIntro1;
 	m_talkCount = 0;
+	bossBall[0] = nullptr;
+	bossBall[1] = nullptr;
+	bossBall[2] = nullptr;
+
 	/*
 	"Phase2_Boss_Idle",
 	"Phase2_Boss_Intro_1
@@ -461,6 +465,82 @@ void BossObject::Render()
 				//}
 				break;
 			case 2:
+				for (int i = 0; i < 2; i++)
+				{
+					_vWorshipLeft[i]->SetIsActive(true);
+					_vWorshipRight[i]->SetIsActive(true);
+				}
+				break;
+			}
+		}
+	}
+	else
+	{
+		if (m_isAttack == true)
+		{
+			if (m_bossState == eCreateBallR)
+			{
+				if (m_phase2Img[eCreateBallR]->GetIsImageEnded() == true)
+				{
+					m_bossState = eCreateBallA;
+					bossBall[0] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+					bossBall[1] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+					bossBall[2] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+					bossBall[0]->Setting((2 * 3.141592) / 3 * 1);
+					bossBall[1]->Setting((2 * 3.141592) / 3 * 2);
+					bossBall[2]->Setting((2 * 3.141592) / 3 * 3);
+				}
+			}
+			else if (m_bossState == eCreateBallA)
+			{
+				if (m_phase2Img[eCreateBallA]->GetIsImageEnded() == true)
+				{
+					m_bossState = eCreateBallE;
+				}
+			}
+			else if (m_bossState == eCreateBallE)
+			{
+				if (m_phase2Img[eCreateBallE]->GetIsImageEnded() == true)
+				{
+					m_bossState = eIdle;
+					m_phase2Patter++;
+					m_isAttack = false;
+				}
+			}
+		}
+		else if (m_bossState == eIntro1)
+		{
+			if (m_talkCount > 3)
+			{
+				m_bossState = eIntro2;
+			}
+			else if (m_phase2Img[eIntro1]->GetIsImageEnded() == true)
+			{
+				m_talkCount++;
+				m_phase2Img[eIntro1]->Reset();
+			}
+		}
+		else if (m_bossState == eIntro2)
+		{
+			if (m_phase2Img[eIntro2]->GetIsImageEnded() == true)
+			{
+				m_bossState = eIdle;
+				m_phase2Patter++;
+			}
+		}
+		if (m_bossState == eIntro1 || m_bossState == eIntro2)
+		{
+			m_phase2Img[m_bossState]->CenterRender(m_obj->x + 20, m_obj->y - 20, 1.8, 1.8, 0);
+		}
+		else
+		{
+			m_phase2Img[m_bossState]->CenterRender(m_obj->x - 3, m_obj->y + 25, 1.8, 1.8, 0);
+		}
+	}
+}
+
+void BossObject::Release()
+{
 				_patternLock = true;
 				if (_worshipDeltaTime > 1 && _isWorshipFirstWaveOn == false)
 				{
