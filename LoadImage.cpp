@@ -19,14 +19,6 @@ void ImageManager::LoadImages()
 	AddImageVector("PlayerHit", L"./Resources/Png/Skul/Effect/Hit/", 1, 12);
 	//AddImageVector("PlayerCHit", L"./Resources/Png/Skul/Effect/Hit/", 1, 8);
 	//AddImageVector("PlayerCPublicHit", L"./Resources/Png/Skul/Effect/CriticalHit/", 1, 11);
-	AddImageVector("Gambler_Attack1", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_1/", 1, 21);
-	AddImageVector("Gambler_Attack2", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_2/", 1, 22);
-	AddImageVector("Gambler_JumpAttackEffect", L"./Resources/Png/Skul/Gambler/Effect/JumpAttack/", 1, 24);
-	AddImageVector("Gambler_JockerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BasicAttack_Joker_Explosion/", 1, 17);
-	AddImageVector("Gambler_BlackJackSpark", L"./Resources/Png/Skul/Gambler/Effect/BlackJackSpark/", 1, 11);
-	AddImageVector("Gambler_BlackJackJokerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BlackJack_BigHit_Explosion/", 1, 15);
-	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
-	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
 
 	//일반스컬 모션 이미지
 	AddImageVector("Basic_Idle", L"./Resources/Png/Skul/Basic/Motion/Idle/", 1, 4);
@@ -77,6 +69,18 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_JumpAttack", L"./Resources/Png/Skul/Gambler/Motion/JumpAttack/", 1, 5);
 	AddImageVector("Gambler_RussianRoulette", L"./Resources/Png/Skul/Gambler/Motion/RussianRoulette/", 1, 8);
 	AddImageVector("Gambler_TagAction", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 11);
+	//갬블러이펙트
+	AddImageVector("Gambler_Attack1Effect", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_1/", 1, 21);
+	AddImageVector("Gambler_Attack2Effect", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_2/", 1, 22);
+	AddImageVector("Gambler_JumpAttackEffect", L"./Resources/Png/Skul/Gambler/Effect/JumpAttack/", 1, 24);
+	AddImageVector("Gambler_JockerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BasicAttack_Joker_Explosion/", 1, 17);
+	AddImageVector("Gambler_BlackJackSpark", L"./Resources/Png/Skul/Gambler/Effect/BlackJackSpark/", 1, 11);
+	AddImageVector("Gambler_BlackJackJokerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BlackJack_BigHit_Explosion/", 1, 15);
+	AddImageVector("Gambler_Roullet", L"./Resources/Png/Skul/Gambler/Effect/Roulette/", 1, 18);
+	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
+	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
+	AddImage("GamblerRoulletBlack", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Black.png");
+	AddImage("GamblerRoulletRed", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Red.png");
 
 	// 타일 이미지
 	AddTileImage(L"./Resources/Tile/4Stage/01.png");

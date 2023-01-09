@@ -86,8 +86,12 @@ void Player::InputDashKey()
 			m_jumpping = false;
 			m_nowHead->ResetAttack();
 
+			if (m_dashing)
+			{
+				m_dashCount = 2;
+				m_dashNowCool = m_dashTime + m_dashCool;
+			}
 			m_dashing = true;
-			m_dashCount++;
 			m_nowHead->SetAction(m_nowHead->eDash, true, true);
 			EFFECTMANAGER->AddEffect<DashSmoke>(m_obj->x, m_obj->y, m_isLeft);
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);

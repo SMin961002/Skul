@@ -71,7 +71,7 @@ void LittleBorn::ParameterSetting()
 	m_dashSpeed = 240;		//##dash 이동식 수정 필요
 	m_dashTime = 0.85 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
-	m_dashCool = 1.5;
+	m_dashCool = 2;
 	m_dashNowCool = 0;
 	m_dashCount = 0;
 	m_dashMax = 2;			//대시 최대 횟수
