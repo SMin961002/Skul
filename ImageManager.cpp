@@ -356,7 +356,7 @@ void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
 		int x = 0;
 		for (auto _iter : iter)
 		{
-			if (_iter == 0 || _iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7 || _iter == 8 || _iter == 9 || _iter == 10 || _iter == 11 || _iter == 12 || _iter == 13 || _iter == 14 || _iter == 36 || _iter == 37 || _iter == 38 || _iter == 39 || _iter == 40 || _iter == 41)
+			if (_iter == 0 || _iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7 || _iter == 8 || _iter == 9 || _iter == 10 || _iter == 11 || _iter == 12 || _iter == 13 || _iter == 14 || _iter == 36 || _iter == 37 || _iter == 38 || _iter == 39 || _iter == 40 || _iter == 41 || _iter == 109 || _iter == 107 || _iter == 108 || _iter == 106 || _iter == 105 || _iter == 104 || _iter==48 || _iter == 49|| _iter == 50 || _iter == 51 || _iter == 52 || _iter == 53|| _iter == 54||_iter == 55 || _iter == 56)
 			{
 				IMAGEMANAGER->Render(FindImage("CollisionBox"), x * m_width, y1 * m_width);
 			}
