@@ -14,7 +14,7 @@ void BossScene::Init()
 	_imgFence = IMAGEMANAGER->FindImage("Fence");
 
 	
-	OBJECTMANAGER->AddObject("Joanna", 850, 475, 0)->AddComponent<BossObject>();
+	OBJECTMANAGER->AddObject("Joanna", 850, 475, eBoss)->AddComponent<BossObject>();
 
 	FILEMANAGER->SetNowStageFile("map_1");
 	FILEMANAGER->TileFileRead(&SCENEMANAGER->m_tiles);

@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "BossCircle.h"
+#include "Player.h"
 
 void BossCircle::Init()
 {
+	cicle = 0;
 	img[eCreate] = IMAGEMANAGER->AddImageVectorCopy("Circle");
 	img[eIdle] = IMAGEMANAGER->AddImageVectorCopy("CircleIdle");
 	img[eDis] = IMAGEMANAGER->AddImageVectorCopy("CircleDis");
@@ -11,13 +13,37 @@ void BossCircle::Init()
 	img[eIdle]->Setting(0.1, false);
 	img[eDis]->Setting(0.1f, false);
 	m_state = eCreate;
+	coll = m_obj->AddComponent<CollisionComponent>();
+	m_obj->AddCollisionComponent(coll);
 }
 
 void BossCircle::Update()
 {
+	coll->Setting(50, m_obj->x, m_obj->y);
 	if (img[eCreate]->GetIsImageEnded() == true)
 	{
 		m_state = eIdle;
+
+	}
+	if (m_state == eIdle)
+	{
+		float rot = atan2(OBJECTMANAGER->m_player->GetplayerY() - m_obj->y, OBJECTMANAGER->m_player->GetplayerX() - m_obj->x);
+		m_obj->x += cos(rot) * 50 * DELTA_TIME;
+		m_obj->y += sin(rot) * 50 * DELTA_TIME;
+	}
+	if (cicle > 2)
+	{
+		m_state = eDis;
+		if (img[eDis]->GetIsImageEnded() == true)
+		{
+			m_obj->ObjectDestroyed();
+		}
+	}
+	else if (img[eIdle]->GetIsImageEnded() == true)
+	{
+		cicle++;
+		img[eIdle]->Reset();
+
 	}
 }
 
@@ -28,4 +54,12 @@ void BossCircle::Render()
 
 void BossCircle::Release()
 {
+}
+
+void BossCircle::OnCollision(string collisionName, Object* other)
+{
+	if (other->GetName() == "player")
+	{
+		//other->GetComponent<Player>()->HitPlayerKnockBack(25, -25);
+	}
 }

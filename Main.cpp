@@ -108,9 +108,9 @@ void Main::Render()
 	{
 		SCENEMANAGER->FadeOut(0.03, [&]() {
 			FILEMANAGER->SetNowStageFile("map_5");
-		SCENEMANAGER->ChangeScene("Stage");
-		menu->isResetScene = false;
-			}, 51);
+			SCENEMANAGER->ChangeScene("Stage");
+			menu->isResetScene = false;		
+		}, 51);
 	}
 	IMAGEMANAGER->End();
 }

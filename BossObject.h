@@ -19,10 +19,19 @@ private:
 	float teleprotTimer;
 	bool isTeleport = false;
 	float chairX = 0;
+	bool isLazer;
+	float tpX;
+	float tpY;
 private:
 	CImage* _imgBossChair;
 	// 보스 1페이즈 대화
+	vImage* divineLightEf1;
+	vImage* divineLightEf2;
+	vImage* lazerImg;
+
+
 	vImage* _imgBossTalk;
+
 
 	// 보스 1페이즈 대기 상태
 	vImage* magicCircleImage;
@@ -69,7 +78,7 @@ private:
 	bool m_isAttack;
 	int m_bossState;
 	float m_patterTimer;
-
+	int lazerCount = 0;
 	enum BossPhase2State
 	{
 		eIntro1,
@@ -78,6 +87,10 @@ private:
 		eCreateBallR,
 		eCreateBallA,
 		eCreateBallE,
+		eDivineLightR,
+		eDivineLightAR,
+		eDivineLightA,
+		eDivineLightE,
 		eSoulChaseA,
 		eSoulChaseR,
 		eSoulChaseE,
