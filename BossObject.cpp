@@ -14,6 +14,7 @@ void BossObject::Init()
 	bossBall[1] = nullptr;
 	bossBall[2] = nullptr;
 
+	OBJECTMANAGER->m_boss = this;
 	/*
 	"Phase2_Boss_Idle",
 	"Phase2_Boss_Intro_1
@@ -43,8 +44,11 @@ void BossObject::Init()
 	m_phase2Img[eCreateBallE] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_CreateBall_End");
 	m_phase2Img[eCreateBallE]->Setting(0.15, false);
 
-	m_page = 1;
+	m_page = 0;
 	_imgBossChair = IMAGEMANAGER->FindImage("Boss_Chair");
+	
+	_imgBossTalk = IMAGEMANAGER->FindImageVector("Boss_Intro_Talk");
+	_imgBossTalk->Setting(0.1, true);
 
 	_imgBossIdle = IMAGEMANAGER->FindImageVector("Boss_Idle");
 	_imgBossIdle->Setting(0.1, true);
@@ -86,7 +90,9 @@ void BossObject::Init()
 	_imgPhase1BossBaptismAttack = IMAGEMANAGER->FindImageVector("Boss_Baptism_Attack");
 	_imgPhase1BossBaptismAttack->Setting(0.1, false);
 
-	_isIdleOn = true;
+	_isIntroOn = true;
+
+	_isIdleOn = false;
 
 	_isNervousnessOn = false;
 	_isNervousnessLoopOn = false;
@@ -278,10 +284,25 @@ void BossObject::Render()
 	// º¸½º ´ë±â
 	if (m_page == 0)
 	{
+		if (_isIntroOn == true)
+		{
+			if (_isIdleOn == false)
+			{
+				_imgBossTalk->CenterRender(m_obj->x+28, m_obj->y, 1.8, 1.8, 0, false);
+			}
+
+			_introTimeCheck += DELTA_TIME;
+			if (_introTimeCheck > 2)
+			{
+				_isIdleOn = true;
+			}
+		}
 		if (_isIdleOn == true)
 		{
 			// Idle on
 			_imgBossIdle->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+			_isIntroOn = false;
+			_introTimeCheck = 0;
 		}
 
 		// ¶¥Âï±â On

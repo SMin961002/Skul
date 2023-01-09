@@ -2,12 +2,14 @@
 #include "singleton.h"
 #include "Object.h"
 
+class BossObject;
 class Item;
 class Player;
 class ObjectManager : public Singleton<ObjectManager>
 {
 public:
 	Player* m_player;
+	BossObject* m_boss;
 	Item* m_item;
 	ObjectManager();
 	~ObjectManager();

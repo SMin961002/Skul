@@ -1,11 +1,17 @@
 #pragma once
 #include "Component.h"
 
+class BossObject;
+
 class HolyFountainLeft : public Component
 {
 private:
 	vImage* _imgLeftFountainActivate;
 	CImage* _imgLeftFountainDeActivate;
+
+	CollisionComponent* _collisionLeft;
+
+	BossObject* _boss;
 
 	bool _isLeftPlayOn;
 public:
@@ -14,8 +20,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
-
-	//virtual void OnCollision(string collisionName, Object* other) override;
+	
 	HolyFountainLeft() {}
 	~HolyFountainLeft() {}
 };
@@ -26,6 +31,8 @@ private:
 	vImage* _imgRightFountainActivate;
 	CImage* _imgRightFountainDeActivate;
 
+	CollisionComponent* _collisionRight;
+
 	bool _isRightPlayOn;
 public:
 	// Component을(를) 통해 상속됨
@@ -34,7 +41,6 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 
-	//virtual void OnCollision(string collisionName, Object* other) override;
 	HolyFountainRight() {}
 	~HolyFountainRight() {}
 };

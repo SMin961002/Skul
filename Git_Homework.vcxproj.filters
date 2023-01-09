@@ -172,8 +172,6 @@
     <ClCompile Include="MenuUI.cpp" />
     <ClCompile Include="NpcObject.cpp" />
     <ClCompile Include="ResultValue.cpp" />
-    <ClCompile Include="Baptism.cpp" />
-    <ClCompile Include="Consecration.cpp" />
     <ClCompile Include="Nervousness.cpp" />
     <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="ShopScene.cpp" />
@@ -182,15 +180,10 @@
     <ClCompile Include="Baptism.cpp">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="BossPhase1EnemyCandle.cpp">
-      <Filter>Game\Object\Boss\BossEnemy</Filter>
-    </ClCompile>
-    <ClCompile Include="BossPhase1EnemyFnatic.cpp">
-      <Filter>Game\Object\Boss\BossEnemy</Filter>
-    </ClCompile>
     <ClCompile Include="Card.cpp">
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClCompile>
+    <ClCompile Include="Roulette.cpp" />
     <ClCompile Include="BossPhase1EnemyCandle.cpp">
       <Filter>Game\Object\Enemy\BossPhase1EnemyCandle</Filter>
     </ClCompile>
@@ -230,18 +223,11 @@
     <ClCompile Include="HeadItem.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
-    <ClCompile Include="FireKnife.cpp">
-      <Filter>Game\Object\Enemy\LampFanatic</Filter>
-      <Filter>Game\Object\Charactor\Gambler</Filter>
-    </ClCompile>
     <ClCompile Include="DoorObject.cpp">
       <Filter>Game\Object\Door</Filter>
     </ClCompile>
     <ClCompile Include="FireKnife.cpp">
       <Filter>Game\Object\NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Core\Manager\GameManager</Filter>
     </ClCompile>
     <ClCompile Include="Nervousness.cpp">
       <Filter>Game\Object\Boss</Filter>
@@ -253,18 +239,18 @@
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
     <ClCompile Include="BossBall.cpp" />
+    <ClCompile Include="BossPhase1EnemyFnatic.cpp" />
+    <ClCompile Include="BossPhase1EnemyCandle.cpp" />
+    <ClCompile Include="FireKnife.cpp" />
     <ClCompile Include="Gambler.cpp" />
-    <ClCompile Include="LoadImage.cpp">
-      <Filter>Core\Manager\ImageManager</Filter>
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="LittleBorn.cpp" />
+    <ClCompile Include="LoadImage.cpp" />
+    <ClCompile Include="Consecration.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Roulette.cpp">
-      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectileHeadSkull.cpp">
-      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
-    </ClCompile>
-    <ClCompile Include="LittleBorn.cpp">
-      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
+    <ClCompile Include="Baptism.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -443,6 +429,9 @@
     <ClInclude Include="MenuUI.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
+    <ClInclude Include="ProjectileHeadSkull.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
     <ClInclude Include="ResultValue.h">
       <Filter>Game\Reward</Filter>
     </ClInclude>
@@ -463,6 +452,7 @@
     <ClInclude Include="Card.h">
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClInclude>
+    <ClInclude Include="Roulette.h" />
     <ClInclude Include="BossPhase1EnemyCandle.h">
       <Filter>Game\Object\Enemy\BossPhase1EnemyCandle</Filter>
     </ClInclude>
@@ -485,11 +475,8 @@
       <Filter>Game\Object\Enemy\LampFanatic</Filter>
     </ClInclude>
     <ClInclude Include="BossBall.h" />
-    <ClInclude Include="ProjectileHeadSkull.h">
-      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
-    </ClInclude>
-    <ClInclude Include="Roulette.h">
-      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+    <ClInclude Include="Consecration.h">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClInclude>
     <ClInclude Include="BossPhase1EnemyCandle.h" />
     <ClInclude Include="BossPhase1EnemyFnatic.h" />
