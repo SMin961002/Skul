@@ -39,6 +39,10 @@ void ShopScene::Init()
 		{
 			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(1);
 		}
+		else if (iter->key == "SpirderRoom")
+		{
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(3);
+		}
 	}
 }
 

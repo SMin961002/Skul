@@ -268,7 +268,7 @@ void BossObject::Update()
 	{
 		Page_2();
 	}
-	
+
 }
 
 void BossObject::Render()
@@ -541,50 +541,9 @@ void BossObject::Render()
 
 void BossObject::Release()
 {
-				_patternLock = true;
-				if (_worshipDeltaTime > 1 && _isWorshipFirstWaveOn == false)
-				{
-					for (int i = 0; i <= 2; i++)
-					{
-						_vWorshipLeft[MY_UTILITY::getFromIntTo(0, 4)]->SetIsActive(true);
-						_vWorshipRight[MY_UTILITY::getFromIntTo(0, 4)]->SetIsActive(true);
-					}
-					_isWorshipFirstWaveOn = true;
-				}
-				if (_worshipDeltaTime > 4 && _isWorshipSecondWaveOn == false)
-				{
-					for (int i = 0; i <= 2; i++)
-					{
-						_vWorshipLeft[MY_UTILITY::getFromIntTo(0, 4)]->SetIsActive(true);
-						_vWorshipRight[MY_UTILITY::getFromIntTo(0, 4)]->SetIsActive(true);
-					}
-					_isWorshipSecondWaveOn = true;
-				}
-				if (_worshipDeltaTime > 7)
-				{
-					if (_imgPhase1BossCastingEnd->GetIsImageEnded() == false)
-					{
-						_imgPhase1BossCastingEnd->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
-					}
-				}
-				if (_imgPhase1BossCastingEnd->GetIsImageEnded() == true)
-				{
-					_isCastingOn = false;
-					_isCastingAttackOn = false;
-					_patternLock = false;
-
-					_worshipDeltaTime = 0;
-					_isIdleOn = true;
-					_updateCheck = true;
-
-					_imgPhase1BossCastingReady->Reset();
-					_imgPhase1BossCastingEnd->Reset();
-				}
-				break;
-			}
-		}
-	}
 }
+
+
 
 void BossObject::Page_2()
 {
@@ -613,8 +572,4 @@ void BossObject::Page_2()
 			m_isAttack = true;
 		}
 	}
-}
-
-void BossObject::Release()
-{
 }

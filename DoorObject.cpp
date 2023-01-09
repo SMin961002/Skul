@@ -23,6 +23,18 @@ void DoorObject::Setting(int state)
 		img = IMAGEMANAGER->FindImage("SkulRoom");
 		vimg = IMAGEMANAGER->FindImageVector("SkulRoom");
 		break;
+	case eShop:
+		img = IMAGEMANAGER->FindImage("ShopRoom");
+		vimg = IMAGEMANAGER->FindImageVector("ShopRoom");
+		break;
+	case eSpdir:
+		img = IMAGEMANAGER->FindImage("SpirderRoom");
+		vimg = IMAGEMANAGER->FindImageVector("SpirderRoom");
+		break;
+	case eBoss:
+		img = IMAGEMANAGER->FindImage("BossRoom");
+		vimg = IMAGEMANAGER->FindImageVector("BossRoom");
+		break;
 	}
 	vimg->Setting(0.1, true);
 }
@@ -50,24 +62,58 @@ void DoorObject::Render()
 {
 	if (m_isClear == false)
 	{
+		if(m_kind != eSpdir)
 		IMAGEMANAGER->CenterRender(img, m_obj->x, m_obj->y, 2, 2);
+		else
+		{
+			IMAGEMANAGER->CenterRender(img, m_obj->x, m_obj->y, 1, 1);
+
+		}
 	}
 	else
 	{
+		if (m_kind != eSpdir)
 		vimg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+		else
+			vimg->CenterRender(m_obj->x, m_obj->y, 1.75, 1.75, 0, 0);
+
 	}
 
 }
 
 void DoorObject::Release()
 {
+
 }
 
 void DoorObject::UIRender()
 {
 	if (m_isChange == true)
 	{
-		SCENEMANAGER->FadeOut(0.02, []() {SCENEMANAGER->ChangeScene("EnemyTestScene"); }, 2);
+		switch (m_kind)
+		{
+		case eNormal:
+			FILEMANAGER->SetNowStageFile("map_2");
+			SCENEMANAGER->FadeOut(0.02, []() {SCENEMANAGER->ChangeScene("Stage"); }, 2);
+			break;
+		case eSkul:
+			FILEMANAGER->SetNowStageFile("map_3");
+			SCENEMANAGER->FadeOut(0.02, []() {SCENEMANAGER->ChangeScene("Stage"); }, 2);
+			break;
+		case eShop:
+			FILEMANAGER->SetNowStageFile("Shop");
+			SCENEMANAGER->FadeOut(0.02, []() {SCENEMANAGER->ChangeScene("ShopScene"); }, 2);
+			break;
+		case eSpdir:
+			FILEMANAGER->SetNowStageFile("map_4");
+			SCENEMANAGER->FadeOut(0.02, []() {SCENEMANAGER->ChangeScene("Stage"); }, 2);
+			break;
+		case eBoss:
+			FILEMANAGER->SetNowStageFile("map_1");
+			SCENEMANAGER->FadeOut(0.02, []() {SCENEMANAGER->ChangeScene("BossScene"); }, 2);
+			break;
+		}
+
 	}
 }
 

@@ -19,6 +19,7 @@
 
 void Stage::Init()
 {
+	trigger = new Trigger;
 
 	isStart = false;
 	m_speed = 0;
@@ -27,7 +28,6 @@ void Stage::Init()
 	m_cloude = IMAGEMANAGER->FindImage("Cloud");
 	m_moon = IMAGEMANAGER->FindImage("Moon2");
 	m_cloude2 = IMAGEMANAGER->FindImage("Cloud2");
-	FILEMANAGER->SetNowStageFile("map_2");
 	FILEMANAGER->TileFileRead(&SCENEMANAGER->m_tiles);
 
 	string strData;
@@ -48,7 +48,46 @@ void Stage::Init()
 	}
 	for (auto iter : m_objectDatas)
 	{
-		if (iter->key == "Fanatic")
+		if (iter->key == "Trigger1")
+		{
+			if (trigger->trigger[0].left == 0)
+			{
+				trigger->trigger[0].left = iter->x;
+				trigger->trigger[0].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[0].right = iter->x;
+				trigger->trigger[0].bottom = iter->y;
+			}
+		}
+		else if (iter->key == "Trigger2")
+		{
+			if (trigger->trigger[1].left == 0)
+			{
+				trigger->trigger[1].left = iter->x;
+				trigger->trigger[1].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[1].right = iter->x;
+				trigger->trigger[1].bottom = iter->y;
+			}
+		}
+		else if (iter->key == "Trigger3")
+		{
+			if (trigger->trigger[2].left == 0)
+			{
+				trigger->trigger[2].left = iter->x;
+				trigger->trigger[2].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[2].right = iter->x;
+				trigger->trigger[2].bottom = iter->y;
+			}
+		}
+		else if (iter->key == "Fanatic")
 		{
 			//OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<Fanatic>();
 		}
@@ -63,6 +102,18 @@ void Stage::Init()
 		else if (iter->key == "SkulRoom")
 		{
 			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(1);
+		}
+		else if (iter->key == "ShopRoom")
+		{
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(2);
+		}
+		else if (iter->key == "SpirderRoom")
+		{
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(3);
+		}
+		else if (iter->key == "BossRoom")
+		{
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(4);
 		}
 		else if (iter->key == "GoldResoult")
 		{
@@ -80,7 +131,12 @@ void Stage::Init()
 		{
 			OBJECTMANAGER->AddObject("Fountain", iter->x, iter->y, ObjectTag::eItem)->AddComponent<Fountain>();
 		}
+		else
+		{
+			trigger->m_structureData[iter->page].push_back(iter);
+		}
 	}
+	trigger->Init();
 }
 
 void Stage::Update()
@@ -130,6 +186,8 @@ void Stage::Render()
 
 void Stage::Release()
 {
+	trigger->Release();
+	SAFE_DELETE(trigger);
 	SCENEMANAGER->m_tiles.clear();
 	for (auto iter : m_sturctDatas)
 	{
