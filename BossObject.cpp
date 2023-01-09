@@ -173,58 +173,58 @@ void BossObject::Update()
 		_isWorshipCheck = true;
 		_worshipDeltaTime += DELTA_TIME;
 	}
-	//if (_vWorshipLeft.empty() && _vWorshipRight.empty())
-	//{
-	//	for (int i = 0; i < 50; i++)
-	//	{
-	//		int j = MY_UTILITY::getFromIntTo(0, 3);
-	//		int k = 0;
-	//		switch (j)
-	//		{
-	//		case 0:
-	//			k = 150;
-	//			break;
-	//		case 1:
-	//			k = 300;
-	//			break;
-	//		case 2:
-	//			k = 450;
-	//			break;
-	//		case 3:
-	//			k = 600;
-	//			break;
-	//		}
-	//		WorshipLeft* tmp = OBJECTMANAGER->AddObject("Worship", 0, k, eEnemy)->AddComponent<WorshipLeft>();
-	//		tmp->SetIsActive(false);
-	//
-	//		_vWorshipLeft.push_back(tmp);
-	//	}
-	//	for (int i = 0; i < 50; i++)
-	//	{
-	//		int j = MY_UTILITY::getFromIntTo(0, 3);
-	//		int k = 0;
-	//		switch (j)
-	//		{
-	//		case 0:
-	//			k = 150;
-	//			break;
-	//		case 1:
-	//			k = 300;
-	//			break;
-	//		case 2:
-	//			k = 450;
-	//			break;
-	//		case 3:
-	//			k = 600;
-	//			break;
-	//		}
-	//		WorshipRight* tmp = OBJECTMANAGER->AddObject("Worship", 1800, k, eEnemy)->AddComponent<WorshipRight>();
-	//		tmp->SetIsActive(false);
-	//
-	//		_vWorshipRight.push_back(tmp);
-	//	}
-	//	_updateCheck = true;
-	//}
+	if (_updateCheck == true)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			int j = MY_UTILITY::getFromIntTo(0, 3);
+			int k = 0;
+			switch (j)
+			{
+			case 0:
+				k = 150;
+				break;
+			case 1:
+				k = 300;
+				break;
+			case 2:
+				k = 450;
+				break;
+			case 3:
+				k = 600;
+				break;
+			}
+			WorshipLeft* tmp = OBJECTMANAGER->AddObject("Worship", 0, k, eEnemy)->AddComponent<WorshipLeft>();
+			tmp->SetIsActive(false);
+	
+			_vWorshipLeft.push_back(tmp);
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			int j = MY_UTILITY::getFromIntTo(0, 3);
+			int k = 0;
+			switch (j)
+			{
+			case 0:
+				k = 150;
+				break;
+			case 1:
+				k = 300;
+				break;
+			case 2:
+				k = 450;
+				break;
+			case 3:
+				k = 600;
+				break;
+			}
+			WorshipRight* tmp = OBJECTMANAGER->AddObject("Worship", 1800, k, eEnemy)->AddComponent<WorshipRight>();
+			tmp->SetIsActive(false);
+	
+			_vWorshipRight.push_back(tmp);
+		}
+		_updateCheck = false;
+	}
 }
 
 void BossObject::Render()
@@ -364,7 +364,6 @@ void BossObject::Render()
 		if (_patternLock == false)
 		{
 			_patternSelect = MY_UTILITY::getFromIntTo(0, 2);
-			_updateCheck = false;
 		}
 
 		switch (_patternSelect)
@@ -453,9 +452,10 @@ void BossObject::Render()
 
 				_worshipDeltaTime = 0;
 				_isIdleOn = true;
+				_updateCheck = true;
 
-				_imgPhase1BossCastingEnd->Reset();
 				_imgPhase1BossCastingReady->Reset();
+				_imgPhase1BossCastingEnd->Reset();
 			}
 			break;
 		}

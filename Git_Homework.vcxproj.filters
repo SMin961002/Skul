@@ -171,27 +171,45 @@
     <ClCompile Include="PlayerMove.cpp">
       <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
-    <ClCompile Include="BossPhase1EnemyCandle.cpp" />
-    <ClCompile Include="BossPhase1EnemyFnatic.cpp" />
-    <ClCompile Include="FireKnife.cpp" />
-    <ClCompile Include="Baptism.cpp" />
-    <ClCompile Include="Consecration.cpp" />
-    <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="GoldResult.cpp" />
     <ClCompile Include="HeadItem.cpp" />
     <ClCompile Include="HeadResult.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="MenuUI.cpp" />
-    <ClCompile Include="Nervousness.cpp" />
     <ClCompile Include="NpcObject.cpp" />
     <ClCompile Include="ResultValue.cpp" />
     <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="ShopScene.cpp" />
-    <ClCompile Include="Worship.cpp" />
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="IllusionEffect.cpp" />
+    <ClCompile Include="Baptism.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="BossPhase1EnemyCandle.cpp">
+      <Filter>Game\Object\Boss\BossEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BossPhase1EnemyFnatic.cpp">
+      <Filter>Game\Object\Boss\BossEnemy</Filter>
+    </ClCompile>
     <ClCompile Include="Card.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
+      <Filter>Game\Object\Charactor\Gambler</Filter>
+    </ClCompile>
+    <ClCompile Include="Consecration.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorObject.cpp">
+      <Filter>Game\Object\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="FireKnife.cpp">
+      <Filter>Game\Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Core\Manager\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Nervousness.cpp">
+      <Filter>Game\Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Worship.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -388,13 +406,21 @@
     <ClInclude Include="ResultValue.h">
       <Filter>Game\Reward</Filter>
     </ClInclude>
-    <ClInclude Include="BossPhase1EnemyCandle.h" />
-    <ClInclude Include="BossPhase1EnemyFnatic.h" />
-    <ClInclude Include="FireKnife.h" />
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="IllusionEffect.h" />
+    <ClInclude Include="BossPhase1EnemyCandle.h">
+      <Filter>Game\Object\Boss\BossEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BossPhase1EnemyFnatic.h">
+      <Filter>Game\Object\Boss\BossEnemy</Filter>
+    </ClInclude>
     <ClInclude Include="Card.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
+      <Filter>Game\Object\Charactor\Gambler</Filter>
+    </ClInclude>
+    <ClInclude Include="FireKnife.h">
+      <Filter>Game\Object\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Core\Manager\GameManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -548,11 +574,14 @@
     <Filter Include="Game\Reward\Gold">
       <UniqueIdentifier>{bdfa397b-c7de-44ee-a9a8-d67c671fa42c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Boss\Boss_Enemy">
-      <UniqueIdentifier>{f7abe02a-e002-4f40-9dd2-d3f0d813d08f}</UniqueIdentifier>
+    <Filter Include="Game\Object\Boss\BossEnemy">
+      <UniqueIdentifier>{da7420b9-fc50-45ed-9c63-d56d03be882c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Enemy\Missile">
-      <UniqueIdentifier>{2ac55d24-61cf-462f-9f65-3fb3f0dda1e6}</UniqueIdentifier>
+    <Filter Include="Game\Object\Charactor\Gambler">
+      <UniqueIdentifier>{a0148898-4544-45cb-9e3a-71b1137eca75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\GameManager">
+      <UniqueIdentifier>{a086a413-1887-4585-905b-e7ed77472908}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
