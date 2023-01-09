@@ -71,27 +71,29 @@ void LittleBorn::ParameterSetting()
 	m_dashSpeed = 240;		//##dash 이동식 수정 필요
     m_dashTime = 0.85 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
-    m_dashCool = 2;
-    m_dashNowCool = 0;
-    m_dashCount = 0;
+	m_dashCool = 1;
+	m_dashNowCool = 0;
+	m_dashCount = 0;
 	m_dashMax = 2;			//대시 최대 횟수
 
     m_jumpSpeed = 8;
     m_jumpCount = 0;
     m_jumpMax = 2;
 
-    m_attackCount = 0;
-    m_attackMax = 2;
-    m_attackCast[0] = false;
-    m_attackCast[1] = false;
+	m_attackCount = 0;
+	m_attackMax = 2;
+	m_attackCool = 0.3;
+	m_attackCast[0] = false;
+	m_attackCast[1] = false;
 
-    m_skillNowCoolA = 0;
-    m_skillNowCoolS = 0;
-    m_skillCoolA = 6;
-    m_skillCoolS = 3;
-    m_skillUsing = false;
-    m_headThrow = false;
-    m_imageChange = false;
+	m_skillNowCoolA = 0;
+	m_skillNowCoolS = 0;
+	m_skillCoolA = 6;
+	m_skillCoolS = 3;
+	m_headThrow = false;
+	m_imageChange = false;
+
+	m_nonCansleAction = false;
 }
 
 void LittleBorn::CollisionSetting()
@@ -117,141 +119,156 @@ void LittleBorn::CoolDown()
         if (m_dashNowCool < 0) m_dashNowCool = 0;
     }
 
-    if (m_skillNowCoolA > 0)
-    {
-        m_skillNowCoolA -= deltaTime;
-        if (m_skillNowCoolA < 0)
-        {
-            PutOnHead();
-        }
-    }
-    if (m_skillNowCoolS > 0)
-    {
-        m_skillNowCoolS -= deltaTime;
-        if (m_skillNowCoolS < 0)
-        {
-            m_skillNowCoolS = 0;
-        }
-    }
+	if (m_skillNowCoolA > 0)
+	{
+		m_skillNowCoolA -= deltaTime;
+		if (m_skillNowCoolA < 0)
+		{
+			PutOnHead();
+		}
+	}
+	if (m_skillNowCoolS > 0)
+	{
+		m_skillNowCoolS -= deltaTime;
+		if (m_skillNowCoolS < 0)
+		{
+			m_skillNowCoolS = 0;
+		}
+	}
+	if (m_attackNowCool > 0)
+	{
+		m_attackNowCool -= deltaTime;
+		if (m_attackNowCool < 0)
+		{
+			m_attackNowCool = 0;
+		}
+	}
 }
 
 void LittleBorn::ActionArrangement()
 {
-    string action;
-    switch (m_action) {
-    case eIdle: action = "idle";
-        break;
-    case eWalk: action = "walk";
-        break;
-    case eDash: action = "dash";
-        break;
-    case eJump: action = "jump";
-        break;
-    }
-    if (!m_headThrow)
-    {
-        if (nowImg->GetIsImageEnded())
-        {
-            if (nowImg != img[m_action])
-                nowImg->Reset();
-            if (m_attackCast[0])
-            {
-                m_attackCast[0] = false;
-                m_attackCast[1] = true;
-            }
-            else if (m_attackCast[1])
-            {
-                m_action = eAutoAttack_2;
-                nowImg = img[eAutoAttack_2];
-                nowImg->Reset();
-                m_attackCount = 2;
-                m_attackCast[1] = false;
-            }
-            else
-            {
-                nowImg = img[eIdle];
-                m_action = eIdle;
-                m_attackCount = 0;
-            }
-            m_skillUsing = false;
-        }
-        if (m_imageChange)
-        {
-            cout << "이미지 바꾸기 " << action << endl;
-            m_attackCast[0] = false;
-            m_attackCast[1] = false;
-            if (nowImg != img[m_action])
-            {
-                nowImg->Reset();
-                nowImg = img[m_action];
-                nowImg->Reset();
-                if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
-                {
-                    m_action = eIdle;
-                }
-            }
-            //m_attackCount = 0;
-        }
-        else if (m_action != eIdle && nowImg == img[eIdle])
-        {
-            SetImage(m_action);
-        }
-    }//end if !headThrow
-    else
-    {
-        if (nowImg->GetIsImageEnded())
-        {
-            if (nowImg != img_headless[m_action])
-                nowImg->Reset();
-            if (m_attackCast[0])
-            {
-                m_attackCast[0] = false;
-                m_attackCast[1] = true;
-            }
-            else if (m_attackCast[1])
-            {
-                m_action = eAutoAttack_2;
-                nowImg = img_headless[eAutoAttack_2];
-                nowImg->Reset();
-                m_attackCount = 2;
-                m_attackCast[1] = false;
-            }
-            else
-            {
-                nowImg = img_headless[eIdle];
-                m_action = eIdle;
-                m_attackCount = 0;
-            }
-            m_skillUsing = false;
-        }
-        if (m_imageChange)
-        {
-            m_attackCast[0] = false;
-            m_attackCast[1] = false;
-            if (m_action == eSkill_1)
-            {
-                nowImg->Reset();
-                nowImg = img[m_action];
-                nowImg->Reset();
-            }
-            else if (nowImg != img_headless[m_action])
-            {
-                nowImg->Reset();
-                nowImg = img_headless[m_action];
-                nowImg->Reset();
-                if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
-                {
-                    m_action = eIdle;
-                }
-            }
-            //m_attackCount = 0;
-        }
-    }
-    if (nowImg == img[eIdle])
-    {
-        m_action = eIdle;
-        m_attackCount = 0;
-    }
+	string action;
+	switch (m_action) {
+	case eIdle: action = "idle";
+		break;
+	case eWalk: action = "walk";
+		break;
+	case eDash: action = "dash";
+		break;
+	case eJump: action = "jump";
+		break;
+	}
+	if (!m_headThrow)
+	{
+		if (nowImg->GetIsImageEnded())
+		{
+			m_nonCansleAction = false;
+
+			if (nowImg != img[m_action])
+				nowImg->Reset();
+			if (m_attackCast[0])
+			{
+				m_attackCast[0] = false;
+				m_attackCast[1] = true;
+			}
+			else if (m_attackCast[1])
+			{
+				m_action = eAutoAttack_2;
+				nowImg = img[eAutoAttack_2];
+				nowImg->Reset();
+				m_attackCount = 2;
+				m_attackCast[1] = false;
+			}
+			else
+			{
+				if (GetIsAttack()&&m_action!=eAutoAttack_2)
+				{
+					m_attackNowCool = m_attackCool;
+				}
+				nowImg = img[eIdle];
+				m_action = eIdle;
+				m_attackCount = 0;
+			}
+		}
+		if (m_imageChange)
+		{
+			cout << "이미지 바꾸기 " << action << endl;
+			m_attackCast[0] = false;
+			m_attackCast[1] = false;
+			if (nowImg != img[m_action])
+			{
+				nowImg->Reset();
+				nowImg = img[m_action];
+				nowImg->Reset();
+				if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
+				{
+					m_action = eIdle;
+				}
+			}
+			//m_attackCount = 0;
+		}
+		else if (m_action != eIdle && nowImg == img[eIdle])
+		{
+			SetImage(m_action);
+		}
+	}//end if !headThrow
+	else
+	{
+		if (nowImg->GetIsImageEnded())
+		{
+			m_nonCansleAction = false;
+
+			if (nowImg != img_headless[m_action])
+				nowImg->Reset();
+			if (m_attackCast[0])
+			{
+				m_attackCast[0] = false;
+				m_attackCast[1] = true;
+			}
+			else if (m_attackCast[1])
+			{
+				m_action = eAutoAttack_2;
+				nowImg = img_headless[eAutoAttack_2];
+				nowImg->Reset();
+				m_attackCount = 2;
+				m_attackCast[1] = false;
+			}
+			else
+			{
+				nowImg = img_headless[eIdle];
+				m_action = eIdle;
+				m_attackCount = 0;
+			}
+		}
+		if (m_imageChange)
+		{
+			m_attackCast[0] = false;
+			m_attackCast[1] = false;
+			if (m_action == eSkill_1)
+			{
+				nowImg->Reset();
+				nowImg = img[m_action];
+				nowImg->Reset();
+			}
+			else if (nowImg != img_headless[m_action])
+			{
+				nowImg->Reset();
+				nowImg = img_headless[m_action];
+				nowImg->Reset();
+				if (m_action == eJumpLand) // 점프착지상태는 이미지만 바꾸고 상태는 idle로 취급
+				{
+					m_action = eIdle;
+				}
+			}
+			//m_attackCount = 0;
+		}
+	}
+	if (nowImg == img[eIdle])
+	{
+		m_action = eIdle;
+		m_attackCount = 0;
+		m_nonCansleAction = false;
+	}
 }
 
 void LittleBorn::CollisionUpdate()
@@ -355,37 +372,46 @@ void LittleBorn::InputSkillKey()
 
 void LittleBorn::InputAttackKey()
 {
-    if (KEYMANAGER->GetOnceKeyDown('X'))
-    {
-        if (*m_jumpping)
-        {
-            if (m_attackCount == 0)
-            {
-                m_action = eJumpAttack;
-                m_imageChange = true;
-                m_attackCount++;
-            }
-        }//end if jumpping
-        else
-        {
-            if (m_attackCount == 0)
-            {
-                m_action = eAutoAttack_1;
-                m_attackCount = 1;
-                m_imageChange = true;
-            }
-            else
-            {
-                m_attackCast[0] = true;
-            }
-        }//end else jumpping
-    }//end 'X'
+	if (KEYMANAGER->GetOnceKeyDown('X'))
+	{
+		if (*m_jumpping)
+		{
+			if (m_attackCount == 0)
+			{
+				if (m_attackNowCool == 0)
+				{
+					m_action = eJumpAttack;
+					m_imageChange = true;
+					m_attackCount++;
+				}
+			}
+		}//end if jumpping
+		else
+		{
+			if (m_attackCount == 0)
+			{
+				if (m_attackNowCool == 0)
+				{
+					m_action = eAutoAttack_1;
+					m_attackCount = 1;
+					m_imageChange = true;
+				}
+			}
+			else
+			{
+				m_attackCast[0] = true;
+			}
+		}//end else jumpping
+	}//end 'X'
 }
 
 void LittleBorn::TagAction()
 {
-    m_imageChange = true;
-    m_action = eTagAction;
+	m_headThrow = false;
+	m_nonCansleAction = true;
+	m_imageChange = true;
+	m_action = eTagAction;
+	img[eTagAction]->Reset();
 }
 
 bool LittleBorn::GetIsAttack()

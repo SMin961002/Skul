@@ -71,12 +71,15 @@ protected:
 	short m_attackCount;
 	short m_attackMax;
 	bool  m_attackCast[2];		//1타중 아무때나 공격키 1회 누르면 액션 끝나고 2타가 이어서 발동된다.
+	float m_attackCool;
+	float m_attackNowCool;
 
 	float m_skillCoolA;
 	float m_skillNowCoolA;
 	float m_skillCoolS;
 	float m_skillNowCoolS;
-	bool  m_skillUsing;
+	
+	bool m_nonCansleAction;
 
 	bool  m_imageChange;	//무언가 동작을 입력하면 true가 된다.
 	bool m_canAction[eActionTagNumber];
@@ -102,15 +105,17 @@ public:
 		if (doWantToChangeImage) { m_imageChange = true; }
 		if (actionImageReset) { img[action]->Reset(); }
 	}
-	inline eSkulSpecies GetSpecies() { return m_species; }
 	virtual bool GetIsAttack() PURE;
+	inline eSkulSpecies GetSpecies() { return m_species; }
 	inline int GetAction() { return m_action; }
-	inline float GetTagCoolTime() { return m_tagCoolTime; }
 	inline float GetActionTime(int action) { return img[action]->GetTotalDelay(); }
 	inline float GetNowActionTime() { return img[m_action]->GetTotalDelay(); }
+	inline float GetTagCoolTime() { return m_tagCoolTime; }
+	inline bool GetNonActionCansle() { return m_nonCansleAction; }
 	inline CollisionComponent* GetCollAutoAttack() { return m_collAutoAttack; }
 	inline CollisionComponent* GetCollSkill() { return m_collSkillA; }
-	
+	inline void SetAttackCool(float delay) { m_attackNowCool = delay; }
+
 	virtual void ImageSetting() {};
 	virtual void ParameterSetting() {};
 	virtual void CollisionSetting() {};
@@ -152,12 +157,13 @@ public:
 		}
 	};
 
-	void SetPlayerMoveParameter(float* moveSpeed, float* dashSpeed, float* dashtime, short* dashMax, bool* dashing,float* jumpSpeed, short* jumpMax, bool* jumpping)
+	void SetPlayerMoveParameter(float* moveSpeed, float* dashSpeed, float* dashtime, float* dashCool, short* dashMax, bool* dashing,float* jumpSpeed, short* jumpMax, bool* jumpping)
 	{
 		*moveSpeed = m_moveSpeed;
 		*dashSpeed = m_dashSpeed;
 		*dashtime = m_dashTime;
 		*dashMax = m_dashMax;
+		*dashCool = m_dashCool;
 		m_dashing = dashing;
 		*jumpSpeed = m_jumpSpeed;
 		*jumpMax = m_jumpMax;
@@ -179,6 +185,5 @@ public:
 	void ResetSkill() {
 		m_skillNowCoolA = 0;
 		m_skillNowCoolS = 0;
-		m_skillUsing = false;
 	}
 };

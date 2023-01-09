@@ -63,6 +63,23 @@ public:
 	CollisionComponent* m_collSkillTag;
 
 	bool  m_haveArtifact;
+public:
+	float GetplayerX(void) { return m_obj->x; }
+	float GetplayerY(void) { return m_obj->y; }
+	bool GetplayerIsLeft(void) { return m_isLeft; }
+	Head* GetNowHead() { return m_nowHead; }
+
+	//물리공격 데미지를 입력해주세요
+	void HitPlayerPhysicAttack(float dmg);
+	//마법공격 데미지를 입력해주세요
+	void HitPlayerMagicAttack(float dmg);
+	//플레이어 피격시 밀림(플레이어가 x+moveX, y+moveY포인트로 옮겨집니다)
+	void HitPlayerKnockBack(float moveX, float moveY);
+
+	//플레이어 피격시 이펙트(일반타)
+	void HitPlayerEffect();
+	//플레이어 피격시 이펙트(크리티컬)(내용 안채워서 지금은 안뜹니다)
+	void CritialHitPlayerEffect();
 
 public:
 	virtual void Init() override;
@@ -111,51 +128,6 @@ public:
 		{
 		}
 	}
-
-public:
-	float GetplayerX(void) { return m_obj->x; }
-	float GetplayerY(void) { return m_obj->y; }
-	bool GetplayerIsLeft(void) { return m_isLeft; }
-	Head* GetNowHead() { return m_nowHead; }
-
-	//물리공격 데미지를 입력해주세요
-	void HitPlayerPhysicAttack(float dmg)
-	{
-		m_supperArmarNowTime = m_supperArmarTime;
-		m_playerHitBox->SetIsActive(false);
-		m_life -= dmg;
-	}
-	//마법공격 데미지를 입력해주세요
-	void HitPlayerMagicAttack(float dmg)
-	{
-		m_supperArmarNowTime = m_supperArmarTime;
-		m_playerHitBox->SetIsActive(false);
-		m_life -= dmg;
-	}
-	//플레이어 피격시 밀림(플레이어가 x+moveX, y+moveY포인트로 옮겨집니다)
-	void HitPlayerKnockBack(float moveX, float moveY)
-	{
-		//##위로밀림시 점프하강모션뜨는거 idle로 바꾸기
-		m_knockBackY = moveY - m_obj->y;
-		if (m_knockBackY < 0)
-			m_knockBackY = 0;
-		m_obj->x += moveX;
-		m_obj->y += moveY;
-	}
-
-	//플레이어 피격시 이펙트(일반타)
-	void HitPlayerEffect()
-	{
-		EFFECTMANAGER->AddEffect<PlayerHit>((m_obj->GetComponent<CollisionComponent>()->GetCollisionPosX())
-			, m_obj->GetComponent<CollisionComponent>()->GetCollisionPosY(), m_isLeft);
-	}
-
-	//플레이어 피격시 이펙트(크리티컬)(내용 안채워서 지금은 안뜹니다)
-	void CritialHitPlayerEffect()
-	{
-
-	}
-
 	Player() : m_life(100) {};
 };
 
