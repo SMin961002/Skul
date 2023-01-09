@@ -194,6 +194,7 @@
     <ClCompile Include="Card.cpp">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
+    <ClCompile Include="IntroTitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -400,6 +401,7 @@
     <ClInclude Include="Card.h">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
+    <ClInclude Include="IntroTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
