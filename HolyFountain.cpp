@@ -1,5 +1,9 @@
 #include "stdafx.h"
 #include "HolyFountain.h"
+#include "PixelCollisionComponent.h"
+#include "RigidBodyComponent.h"
+#include "Player.h"
+#include "BossObject.h"
 
 void HolyFountainLeft::Init()
 {
@@ -8,16 +12,28 @@ void HolyFountainLeft::Init()
 	_imgLeftFountainActivate = IMAGEMANAGER->FindImageVector("Boss_HolyFountain_Activate");
 	_imgLeftFountainActivate->Setting(0.1, true);
 
-
 	_isLeftPlayOn = false;
+
+	_collisionLeft = m_obj->AddComponent<CollisionComponent>();
+	m_obj->AddCollisionComponent(_collisionLeft);
+
+	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
+	m_obj->AddComponent<RigidBodyComponent>()->SetGravityOnOff(false);
+
 }
 
 void HolyFountainLeft::Update()
 {
-	if (KEYMANAGER->GetToggleKey('Z'))
+
+	if (OBJECTMANAGER->m_boss->getIdleOn() == true)
 	{
 		_isLeftPlayOn = true;
 	}
+
+	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+	m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(true);
+	_collisionLeft->Setting(50, m_obj->x+30, m_obj->y+50, "Attack");
+
 }
 
 void HolyFountainLeft::Render()
@@ -37,6 +53,7 @@ void HolyFountainLeft::Release()
 
 }
 
+
 void HolyFountainRight::Init()
 {
 	_imgRightFountainDeActivate = IMAGEMANAGER->FindImage("Fountain_Deactivate");
@@ -44,15 +61,25 @@ void HolyFountainRight::Init()
 	_imgRightFountainActivate = IMAGEMANAGER->FindImageVector("Boss_HolyFountain_Activate");
 	_imgRightFountainActivate->Setting(0.1, true);
 
+	_collisionRight = m_obj->AddComponent<CollisionComponent>();
+	m_obj->AddCollisionComponent(_collisionRight);
+
+	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
+	m_obj->AddComponent<RigidBodyComponent>()->SetGravityOnOff(false);
+
 	_isRightPlayOn = false;
 }
 
 void HolyFountainRight::Update()
 {
-	if (KEYMANAGER->GetToggleKey('X'))
+	if (OBJECTMANAGER->m_boss->getIdleOn() == true)
 	{
 		_isRightPlayOn = true;
 	}
+
+	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+	m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(true);
+	_collisionRight->Setting(50, m_obj->x + 30, m_obj->y + 50, "Attack");
 }
 
 void HolyFountainRight::Render()
@@ -87,7 +114,7 @@ void HolyOrbLeft::Init()
 
 void HolyOrbLeft::Update()
 {
-	if (KEYMANAGER->GetToggleKey('Z'))
+	if (OBJECTMANAGER->m_boss->getIdleOn() == true)
 	{
 		_isLeftPlayOn = true;
 	}
@@ -131,7 +158,7 @@ void HolyOrbRight::Init()
 
 void HolyOrbRight::Update()
 {
-	if (KEYMANAGER->GetToggleKey('X'))
+	if (OBJECTMANAGER->m_boss->getIdleOn() == true)
 	{
 		_isRightPlayOn = true;
 	}
