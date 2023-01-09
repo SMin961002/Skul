@@ -76,6 +76,7 @@ void Roulette::Init()
 
 	EFFECTMANAGER->AddEffect<RouletteReady>(m_obj->x, m_obj->y, false, 2);
 }
+
 void Roulette::Update()
 {
 	if (m_roulette->GetIsImageEnded())
