@@ -77,7 +77,7 @@ void BossObject::Init()
 	_imgPhase1BossConsecrationLoop = IMAGEMANAGER->FindImageVector("Boss_Consecration_Loop");
 	_imgPhase1BossConsecrationLoop->Setting(0.1, true);
 	_imgPhase1BossConsecrationEnd = IMAGEMANAGER->FindImageVector("Boss_Consecration_End");
-	_imgPhase1BossConsecrationLoop->Setting(0.1, false);
+	_imgPhase1BossConsecrationEnd->Setting(0.1, false);
 
 	_imgPhase1BossBaptismAttack = IMAGEMANAGER->FindImageVector("Boss_Baptism_Attack");
 	_imgPhase1BossBaptismAttack->Setting(0.1, false);
