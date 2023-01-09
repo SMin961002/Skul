@@ -190,9 +190,11 @@
     <ClCompile Include="Worship.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="IllusionEffect.cpp" />
+    <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Card.cpp">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
+    <ClCompile Include="IntroTitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -393,9 +395,13 @@
     <ClInclude Include="FireKnife.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="IllusionEffect.h" />
+    <ClInclude Include="Trigger.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="IllusionEffect.h" />
     <ClInclude Include="Card.h">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
+    <ClInclude Include="IntroTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

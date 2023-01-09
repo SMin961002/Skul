@@ -38,8 +38,8 @@ void BossScene::Init()
 		}
 	}
 
-	OBJECTMANAGER->AddObject("EnemyBoss", 500, 670, eEnemy)->AddComponent<BossPhase1EnemyCandle>();
-	OBJECTMANAGER->AddObject("EnemyBoss", 600, 670, eEnemy)->AddComponent<BossPhase1EnemyFnatic>();
+	OBJECTMANAGER->AddObject("Enemy", 500, 670, eEnemy)->AddComponent<BossPhase1EnemyCandle>();
+	OBJECTMANAGER->AddObject("Enemy", 600, 670, eEnemy)->AddComponent<BossPhase1EnemyFnatic>();
 
 
 }

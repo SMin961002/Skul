@@ -1,4 +1,5 @@
 #pragma once
+#include "Trigger.h"
 class EnemyTestScene : public Scene
 {
 private:
@@ -6,6 +7,7 @@ private:
 	CImage* m_backGround;
 	CImage* m_cloude;
 	float m_speed;
+	Trigger* trigger;
 	CImage* m_castle;
 	vector<StructureData*> m_sturctDatas;
 	vector<StructureData*> m_objectDatas;
