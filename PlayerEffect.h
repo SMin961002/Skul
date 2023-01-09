@@ -38,8 +38,29 @@ public:
 	void Init() override;
 };
 
+class GamblerJumpAttack : public Effect
+{
+private:
+	bool m_effectOverap = false;
+public:
+	void Init() override;
+};
+
 class JokerExplosion : public Effect
 {
 public:
 	void Init() override;
+};
+
+class BlackJackJokerExplosion : public Effect
+{
+public:
+	void Init() override;
+};
+
+class BlackJackSpark : public Effect
+{
+public:
+	void Init() override;
+	void Move() override;
 };

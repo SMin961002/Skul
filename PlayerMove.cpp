@@ -18,7 +18,7 @@ void Player::Move()
 		else { m_obj->x += m_dashSpeed * DELTA_TIME; }
 		m_obj->y -= 1;
 	}
-	else if (!m_nowHead->GetIsAttack())
+	else
 	{
 		InputArrowKey();	//대시, 공격중에 걷기 불가하므로
 	}
@@ -40,8 +40,11 @@ void Player::Move()
 		else if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsTopCollision())
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(0);
 		if (m_obj->GetComponent<RigidBodyComponent>()->GetGravityPower() < 0)
-			if (!m_dashing && m_nowHead->GetAction() != m_nowHead->eJumpAttack)
+		{
+			//##점프액션조건수정필요
+			if (!m_dashing && !m_nowHead->GetIsAttack())
 				m_nowHead->SetAction(m_nowHead->eJumpDown, true);
+		}
 	}
 	InputJumpKey();
 }
@@ -85,7 +88,7 @@ void Player::InputDashKey()
 
 			m_dashing = true;
 			m_dashCount++;
-			m_nowHead->SetAction(m_nowHead->eDash,true, true);
+			m_nowHead->SetAction(m_nowHead->eDash, true, true);
 			EFFECTMANAGER->AddEffect<DashSmoke>(m_obj->x, m_obj->y, m_isLeft);
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(0);
@@ -103,9 +106,10 @@ void Player::InputArrowKey()
 	{
 		m_isLeft = true;
 		if (!m_nowHead->GetIsAttack() || m_nowHead->GetAction() == m_nowHead->eJumpAttack)
+		{
 			m_obj->x -= m_moveSpeed * DELTA_TIME;
-		if (!m_jumpping) {
-			m_nowHead->SetAction(Head::eWalk);
+			if (!m_jumpping)
+				m_nowHead->SetAction(Head::eWalk);
 		}
 	}
 	//방향키 오른쪽 입력시
@@ -113,9 +117,10 @@ void Player::InputArrowKey()
 	{
 		m_isLeft = false;
 		if (!m_nowHead->GetIsAttack() || m_nowHead->GetAction() == m_nowHead->eJumpAttack)
+		{
 			m_obj->x += m_moveSpeed * DELTA_TIME;
-		if (!m_jumpping) {
-			m_nowHead->SetAction(Head::eWalk);
+			if (!m_jumpping)
+				m_nowHead->SetAction(Head::eWalk);
 		}
 	}
 	//아래 방향키 입력시

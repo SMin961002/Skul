@@ -8,6 +8,38 @@
 
 void BossObject::Init()
 {
+	m_bossState = eIntro1;
+	m_talkCount = 0;
+	/*
+	"Phase2_Boss_Idle",
+	"Phase2_Boss_Intro_1
+
+	("""
+	("", L
+	("",
+
+	*/
+	m_patterTimer = 0;
+
+	chairY = m_obj->y;
+	chairX = m_obj->x;
+	m_isAttack = false;
+	m_phase2Patter = 0;
+	m_phase2Img[eIntro1] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_Intro_1");
+	m_phase2Img[eIntro1]->Setting(0.1, false);
+	m_phase2Img[eIntro2] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_Intro_2");
+	m_phase2Img[eIntro2]->Setting(0.15, false);
+	m_phase2Img[eIdle] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_Idle");
+	m_phase2Img[eIdle]->Setting(0.15, true);
+
+	m_phase2Img[eCreateBallA] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_CreateBall_Attack");
+	m_phase2Img[eCreateBallA]->Setting(0.1, false);
+	m_phase2Img[eCreateBallR] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_CreateBall_Ready");
+	m_phase2Img[eCreateBallR]->Setting(0.15, false);
+	m_phase2Img[eCreateBallE] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_CreateBall_End");
+	m_phase2Img[eCreateBallE]->Setting(0.15, false);
+
+	m_page = 1;
 	_imgBossChair = IMAGEMANAGER->FindImage("Boss_Chair");
 
 	_imgBossIdle = IMAGEMANAGER->FindImageVector("Boss_Idle");
@@ -19,6 +51,8 @@ void BossObject::Init()
 	_imgPhase1BossNervousReadyLoop->Setting(0.1, true);
 	_imgPhase1BossNervousAttack = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Attack");
 	_imgPhase1BossNervousAttack->Setting(0.1, false);
+	_imgPhase1NervousEffectShine = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Effect_Attack");
+	_imgPhase1NervousEffectShine->Setting(0.1, false);
 	_imgPhase1BossNervousEnd = IMAGEMANAGER->FindImageVector("Boss_Nervousness_End");
 	_imgPhase1BossNervousEnd->Setting(0.1, false);
 
@@ -132,6 +166,46 @@ void BossObject::Init()
 
 void BossObject::Update()
 {
+	if (m_page == 0)
+	{
+		if (KEYMANAGER->GetToggleKey('Q'))
+		{
+			_isNervousnessOn = true;
+			_isIdleOn = false;
+		}
+		if (KEYMANAGER->GetToggleKey('W'))
+		{
+			_isChoiceOn = true;
+			_isIdleOn = false;
+		}
+		if (KEYMANAGER->GetToggleKey('E'))
+		{
+			_isCastingOn = true;
+			_isIdleOn = false;
+		}
+		if (_isNervousnessLoopOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
+		{
+			_nervousnessMotionDeltaTime += DELTA_TIME;
+		}
+		if (_isNervousnessAttackLoopOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
+		{
+			_nervousnessEffectDeltaTime += DELTA_TIME;
+		}
+		if (_isChoiceReadyLoopOn == true)
+		{
+			_choiceMotionDeltaTime += DELTA_TIME;
+		}
+		if (_imgPhase1BossCastingReady->GetIsImageEnded() == true)
+		{
+			_castingMotionDeltaTime += DELTA_TIME;
+		}
+	}
+	else if (m_page == 1)
+	{
+		Page_2();
+	}
+}
+
 	
 	if (_isIdleOn == true)
 	{
@@ -248,19 +322,21 @@ void BossObject::Update()
 
 void BossObject::Render()
 {
-	IMAGEMANAGER->CenterRender(_imgBossChair, m_obj->x, m_obj->y + 80, 1.8, 1.8, 0);
+	IMAGEMANAGER->CenterRender(_imgBossChair, chairX, chairY + 80, 1.8, 1.8, 0);
 
 	// 보스 대기
-	if (_isIdleOn == true)
+	if (m_page == 0)
 	{
-		// Idle on
-		_imgBossIdle->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
-	}
+		if (_isIdleOn == true)
+		{
+			// Idle on
+			_imgBossIdle->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+		}
 
-	// 땅찍기 On
-	if (_isNervousnessOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
-	{
-		if (_isNervousnessLoopOn == false) _imgPhase1BossNervousReady->CenterRender(m_obj->x, m_obj->y - 32, 1.8, 1.8, 0, false);
+		// 땅찍기 On
+		if (_isNervousnessOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
+		{
+			if (_isNervousnessLoopOn == false) _imgPhase1BossNervousReady->CenterRender(m_obj->x, m_obj->y - 32, 1.8, 1.8, 0, false);
 
 		if (_imgPhase1BossNervousReady->GetIsImageEnded() == true)
 		{
@@ -309,52 +385,52 @@ void BossObject::Render()
 		_imgPhase1BossNervousEnd->Reset();
 	}
 
-	// 초이스 On
-	if (_isChoiceOn == true)
-	{
-		if (_isChoiceReadyLoopOn == false)
+		// 초이스 On
+		if (_isChoiceOn == true)
 		{
-			_imgPhase1BossChoiceReady->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+			if (_isChoiceReadyLoopOn == false)
+			{
+				_imgPhase1BossChoiceReady->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+			}
 		}
-	}
-	// 초이스_손들기
-	if (_imgPhase1BossChoiceReady->GetIsImageEnded() == true && _imgPhase1BossChoiceEnd->GetIsImageEnded() == false)
-	{
-		if (_choiceMotionDeltaTime < 0.5)
+		// 초이스_손들기
+		if (_imgPhase1BossChoiceReady->GetIsImageEnded() == true && _imgPhase1BossChoiceEnd->GetIsImageEnded() == false)
 		{
-			_imgPhase1BossChoiceReadyLoop->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+			if (_choiceMotionDeltaTime < 0.5)
+			{
+				_imgPhase1BossChoiceReadyLoop->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+			}
+			_isChoiceReadyLoopOn = true;
 		}
-		_isChoiceReadyLoopOn = true;
-	}
-	// 초이스_손가락튕기기
-	if (_choiceMotionDeltaTime > 0.5)
-	{
-		if (_isChoiceAttackEnd == false)
+		// 초이스_손가락튕기기
+		if (_choiceMotionDeltaTime > 0.5)
 		{
-			_imgPhase1BossChoiceAttack->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
-			_imgPhase1BossChoiceSpark->CenterRender(m_obj->x - 150, m_obj->y - 50, 1.8, 1.8, 0, false);
+			if (_isChoiceAttackEnd == false)
+			{
+				_imgPhase1BossChoiceAttack->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+				_imgPhase1BossChoiceSpark->CenterRender(m_obj->x - 150, m_obj->y - 50, 1.8, 1.8, 0, false);
+			}
 		}
-	}
-	// 초이스_동작완료
-	if (_imgPhase1BossChoiceSpark->GetIsImageEnded() == true)
-	{
-		_isChoiceAttackEnd = true;
-		if (_isChoiceOn == true)_imgPhase1BossChoiceEnd->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
-	}
-	// 초이스_초기화
-	if (_imgPhase1BossChoiceEnd->GetIsImageEnded() == true)
-	{
-		_isChoiceAttackEnd = false;
-		_isChoiceReadyLoopOn = false;
-		_isChoiceOn = false;
-		_isIdleOn = true;
-		_choiceMotionDeltaTime = 0;
+		// 초이스_동작완료
+		if (_imgPhase1BossChoiceSpark->GetIsImageEnded() == true)
+		{
+			_isChoiceAttackEnd = true;
+			if (_isChoiceOn == true)_imgPhase1BossChoiceEnd->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+		}
+		// 초이스_초기화
+		if (_imgPhase1BossChoiceEnd->GetIsImageEnded() == true)
+		{
+			_isChoiceAttackEnd = false;
+			_isChoiceReadyLoopOn = false;
+			_isChoiceOn = false;
+			_isIdleOn = true;
+			_choiceMotionDeltaTime = 0;
 
-		_imgPhase1BossChoiceReady->Reset();
-		_imgPhase1BossChoiceAttack->Reset();
-		_imgPhase1BossChoiceSpark->Reset();
-		_imgPhase1BossChoiceEnd->Reset();
-	}
+			_imgPhase1BossChoiceReady->Reset();
+			_imgPhase1BossChoiceAttack->Reset();
+			_imgPhase1BossChoiceSpark->Reset();
+			_imgPhase1BossChoiceEnd->Reset();
+		}
 
 	// 캐스팅 On
 	if (_isCastingOn == true)
@@ -401,22 +477,22 @@ void BossObject::Render()
 					OBJECTMANAGER->AddObject("Consecration", _locate, m_obj->y - 130, 1)->AddComponent<Consecration>();
 				}
 
-				_consecrationDeltaTime += DELTA_TIME;
-				_isConsecrationLoopOn = true;
-			}
-			if (_consecrationDeltaTime > 2)
-			{
-				_imgPhase1BossCastingEnd->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
-				_imgPhase1BossConsecrationEnd->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
-			}
-			if (_imgPhase1BossConsecrationEnd->GetIsImageEnded() == true)
-			{
-				_isCastingOn = false;
-				_isCastingAttackOn = false;
-				_isConsecrationLoopOn = false;
+					_consecrationDeltaTime += DELTA_TIME;
+					_isConsecrationLoopOn = true;
+				}
+				if (_consecrationDeltaTime > 2)
+				{
+					_imgPhase1BossCastingEnd->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
+					_imgPhase1BossConsecrationEnd->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+				}
+				if (_imgPhase1BossConsecrationEnd->GetIsImageEnded() == true)
+				{
+					_isCastingOn = false;
+					_isCastingAttackOn = false;
+					_isConsecrationLoopOn = false;
 
-				_castingMotionDeltaTime = 0;
-				_consecrationDeltaTime = 0;
+					_castingMotionDeltaTime = 0;
+					_consecrationDeltaTime = 0;
 
 				_imgPhase1BossCastingReady->Reset();
 				_imgPhase1BossCastingEnd->Reset();
@@ -478,6 +554,35 @@ void BossObject::Render()
 				_imgPhase1BossCastingEnd->Reset();
 			}
 			break;
+		}
+	}
+}
+
+void BossObject::Page_2()
+{
+	if (m_phase2Patter == 1)
+	{
+		if (m_obj->y < 200)
+		{
+			m_phase2Patter = 2;
+		}
+		m_obj->y -= 50 * DELTA_TIME;
+	}
+	else if (m_phase2Patter == 2)
+	{
+		m_patterTimer += DELTA_TIME;
+		if (m_patterTimer > 1)
+		{
+			m_phase2Patter = 3;
+			m_patterTimer = 0;
+		}
+	}
+	else if (m_phase2Patter == 3)
+	{
+		if (m_isAttack == false)
+		{
+			m_bossState = eCreateBallR;
+			m_isAttack = true;
 		}
 	}
 }

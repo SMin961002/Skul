@@ -139,6 +139,7 @@
     <ClCompile Include="Baptism.cpp" />
     <ClCompile Include="BlackFanatic.cpp" />
     <ClCompile Include="BlackRock.cpp" />
+    <ClCompile Include="BossBall.cpp" />
     <ClCompile Include="BossEffect.cpp" />
     <ClCompile Include="BossObject.cpp" />
     <ClCompile Include="BossPhase1EnemyFnatic.cpp" />
@@ -169,11 +170,12 @@
     <ClCompile Include="HeadManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Head_Basic.cpp" />
+    <ClCompile Include="LittleBorn.cpp" />
     <ClCompile Include="HolyFountain.cpp" />
     <ClCompile Include="Hporb.cpp" />
     <ClCompile Include="IllusionEffect.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="IntroTitleScene.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="IOFillManager.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -196,6 +198,7 @@
     <ClCompile Include="ResultValue.cpp" />
     <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
+    <ClCompile Include="Roulette.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ShopScene.cpp" />
@@ -211,6 +214,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Worship.cpp" />
+    <ClCompile Include="LoadImage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AngelStatue.h" />
@@ -218,6 +222,7 @@
     <ClInclude Include="Baptism.h" />
     <ClInclude Include="BlackFanatic.h" />
     <ClInclude Include="BlackRock.h" />
+    <ClInclude Include="BossBall.h" />
     <ClInclude Include="BossEffect.h" />
     <ClInclude Include="BossObject.h" />
     <ClInclude Include="BossPhase1EnemyFnatic.h" />
@@ -248,11 +253,12 @@
     <ClInclude Include="HeadManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Head_Basic.h" />
+    <ClInclude Include="LittleBorn.h" />
     <ClInclude Include="HolyFountain.h" />
     <ClInclude Include="Hporb.h" />
     <ClInclude Include="IllusionEffect.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="IntroTitleScene.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="IOFillManager.h" />
     <ClInclude Include="Item.h" />
@@ -274,6 +280,7 @@
     <ClInclude Include="ResultValue.h" />
     <ClInclude Include="ProjectileHeadSkull.h" />
     <ClInclude Include="RigidBodyComponent.h" />
+    <ClInclude Include="Roulette.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ShopScene.h" />

@@ -3,7 +3,7 @@
 #include "CollisionComponent.h"
 #include "RigidBodyComponent.h"
 #include "Enemy.h"
-#include "Head_Basic.h"
+#include "LittleBorn.h"
 #include "Player.h"
 void ProjectileHeadSkull::SetSkullThrow(float x, float y, bool reversed)
 {
@@ -101,8 +101,8 @@ void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
 		{
 			//if (other->GetName() == "player")
 			// {
-			Head_Basic* head;
-			head = dynamic_cast<Head_Basic*>(other->GetComponent<Player>()->GetNowHead());
+			LittleBorn* head;
+			head = dynamic_cast<LittleBorn*>(other->GetComponent<Player>()->GetNowHead());
 			if(head != nullptr)
 			{
 				head->PutOnHead();

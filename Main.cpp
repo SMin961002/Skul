@@ -20,6 +20,8 @@ void Main::Init()
 	inven->Init();
 	menu = new MenuUI;
 	menu->Init();
+
+	SCENEMANAGER->ChangeScene("IntroTitleScene");
 }
 
 void Main::Update()
@@ -54,10 +56,7 @@ void Main::Update()
 	{
 		SCENEMANAGER->ChangeScene("ShopScene");
 	}
-	if (KEYMANAGER->GetOnceKeyDown(VK_F6))
-	{
-		SCENEMANAGER->ChangeScene("EnemyTestScene");
-	}
+	
 	if (KEYMANAGER->GetOnceKeyDown(VK_F7))
 	{
 		SCENEMANAGER->ChangeScene("MapToolMapSelectScene");
