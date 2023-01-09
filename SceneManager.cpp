@@ -7,6 +7,7 @@
 #include "ShopScene.h"
 #include "BossScene.h"
 #include "IntroTitleScene.h"
+#include "Stage.h"
 
 SceneManager::SceneManager()
 {
@@ -29,6 +30,9 @@ void SceneManager::Init()
 	AddScene("MapToolScene", new MapToolScene);
 	AddScene("EnemyTestScene", new EnemyTestScene);
 	AddScene("ShopScene", new ShopScene);
+	AddScene("IntroTitleScene", new IntroTitleScene);
+	AddScene("Stage", new Stage);
+
 	AddScene("IntroTitleScene", new IntroTitleScene);
 	flag = 0;
 	// 페이드인아웃 할때 다른플레그이면 알파값을 초기화해줌

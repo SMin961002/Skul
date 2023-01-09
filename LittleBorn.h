@@ -5,30 +5,30 @@
 class LittleBorn : public Head
 {
 private:
-	vImage* img_headless[eActionTagNumber];
+    vImage* img_headless[eActionTagNumber];
 	ProjectileHeadSkull* m_projectileHead;	//머리던지기 투사체 구조체
-	bool m_headThrow;
-	int count = 0;
+    bool m_headThrow;
+    int count = 0;
 public:
-	void ImageSetting() override;
-	void ParameterSetting() override;
-	void CollisionSetting() override;
+    void ImageSetting() override;
+    void ParameterSetting() override;
+    void CollisionSetting() override;
 
-	void Release() override;
+    void Release() override;
 
-	void CoolDown() override;
+    void CoolDown() override;
 
-	void ActionArrangement() override;
-	void CollisionUpdate() override;
+    void ActionArrangement() override;
+    void CollisionUpdate() override;
 
-	void InputAttackKey() override;
-	void InputSkillKey() override;
+    void InputAttackKey() override;
+    void InputSkillKey() override;
 
-	void TagAction() override;
-	virtual bool GetIsAttack()override;
+    void TagAction() override;
+    virtual bool GetIsAttack()override;
 
-	void DrawCharactor() override;
-	void OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg, float delay) override;
+    void DrawCharactor() override;
+    void OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg, float delay) override;
 
 	void PutOnHead()
 	{

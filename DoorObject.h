@@ -6,6 +6,9 @@ private:
 	{
 		eNormal,
 		eSkul,
+		eShop,
+		eSpdir,
+		eBoss
 	};
 	CollisionComponent* m_coll;
 	CImage* img;

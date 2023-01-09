@@ -62,14 +62,14 @@
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClCompile>
     <ClCompile Include="LeoniaSoldier.cpp">
-      <Filter>Game\Object\Enemy\LeoniaSoldier</Filter>
+      <Filter>Game\Object\Door\Enemy\LeoniaSoldier</Filter>
     </ClCompile>
     <ClCompile Include="Fanatic.cpp">
-      <Filter>Game\Object\Enemy\Fanatic</Filter>
+      <Filter>Game\Object\Door\Enemy\Fanatic</Filter>
     </ClCompile>
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="BlackFanatic.cpp">
-      <Filter>Game\Object\Enemy\BlackFanatic</Filter>
+      <Filter>Game\Object\Door\Enemy\BlackFanatic</Filter>
     </ClCompile>
     <ClCompile Include="Fanatic.cpp">
       <Filter>Game\Object\Enemy</Filter>
@@ -84,19 +84,19 @@
       <Filter>Game\Object\Boss\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="CandleFanatic.cpp">
-      <Filter>Game\Object\Enemy\CandleFanatic</Filter>
+      <Filter>Game\Object\Door\Enemy\CandleFanatic</Filter>
     </ClCompile>
     <ClCompile Include="TentaclesOfLight.cpp">
-      <Filter>Game\Object\Enemy\TentaclesOfLight</Filter>
+      <Filter>Game\Object\Door\Enemy\TentaclesOfLight</Filter>
     </ClCompile>
     <ClCompile Include="LampFanatic.cpp">
-      <Filter>Game\Object\Enemy\LampFanatic</Filter>
+      <Filter>Game\Object\Door\Enemy\LampFanatic</Filter>
     </ClCompile>
     <ClCompile Include="BallFanatic.cpp">
-      <Filter>Game\Object\Enemy\BellFanatic</Filter>
+      <Filter>Game\Object\Door\Enemy\BellFanatic</Filter>
     </ClCompile>
     <ClCompile Include="AngelStatue.cpp">
-      <Filter>Game\Object\Enemy\AngelStatue</Filter>
+      <Filter>Game\Object\Door\Enemy\AngelStatue</Filter>
     </ClCompile>
     <ClCompile Include="Head.cpp">
       <Filter>Game\Object\Charactor</Filter>
@@ -142,7 +142,7 @@
       <Filter>Core\Manager\EffectManager</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Object\Enemy</Filter>
+      <Filter>Game\Object\Door\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyTestScene.cpp">
       <Filter>Game\Scene\TestScene</Filter>
@@ -165,15 +165,25 @@
     <ClCompile Include="PlayerMove.cpp">
       <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
-    <ClCompile Include="Baptism.cpp" />
-    <ClCompile Include="Consecration.cpp" />
+    <ClCompile Include="GoldResult.cpp" />
+    <ClCompile Include="HeadItem.cpp" />
+    <ClCompile Include="HeadResult.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="MenuUI.cpp" />
+    <ClCompile Include="NpcObject.cpp" />
+    <ClCompile Include="ResultValue.cpp" />
     <ClCompile Include="Nervousness.cpp" />
-    <ClCompile Include="Worship.cpp" />
-    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="ProjectileHeadSkull.cpp" />
+    <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="IllusionEffect.cpp" />
+    <ClCompile Include="Trigger.cpp" />
+    <ClCompile Include="Baptism.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClCompile>
     <ClCompile Include="Card.cpp">
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClCompile>
+    <ClCompile Include="Roulette.cpp" />
     <ClCompile Include="BossPhase1EnemyCandle.cpp">
       <Filter>Game\Object\Enemy\BossPhase1EnemyCandle</Filter>
     </ClCompile>
@@ -213,24 +223,34 @@
     <ClCompile Include="HeadItem.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="DoorObject.cpp">
+      <Filter>Game\Object\Door</Filter>
+    </ClCompile>
     <ClCompile Include="FireKnife.cpp">
-      <Filter>Game\Object\Enemy\LampFanatic</Filter>
+      <Filter>Game\Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Nervousness.cpp">
+      <Filter>Game\Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Worship.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Consecration.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
     <ClCompile Include="BossBall.cpp" />
-    <ClCompile Include="LoadImage.cpp">
-      <Filter>Core\Manager\ImageManager</Filter>
+    <ClCompile Include="BossPhase1EnemyFnatic.cpp" />
+    <ClCompile Include="BossPhase1EnemyCandle.cpp" />
+    <ClCompile Include="FireKnife.cpp" />
+    <ClCompile Include="Gambler.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="LittleBorn.cpp" />
+    <ClCompile Include="LoadImage.cpp" />
+    <ClCompile Include="Consecration.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Roulette.cpp">
-      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectileHeadSkull.cpp">
-      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
-    </ClCompile>
-    <ClCompile Include="LittleBorn.cpp">
-      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
-    </ClCompile>
-    <ClCompile Include="Gambler.cpp">
-      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+    <ClCompile Include="Baptism.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,7 +321,7 @@
       <Filter>Game\Object\Enemy\LeoniaSoldier</Filter>
     </ClInclude>
     <ClInclude Include="BlackFanatic.h">
-      <Filter>Game\Object\Enemy\BlackFanatic</Filter>
+      <Filter>Game\Object\Door\Enemy\BlackFanatic</Filter>
     </ClInclude>
     <ClInclude Include="BossObject.h">
       <Filter>Game\Object\Boss</Filter>
@@ -310,19 +330,19 @@
       <Filter>Game\Scene\BossScene</Filter>
     </ClInclude>
     <ClInclude Include="CandleFanatic.h">
-      <Filter>Game\Object\Enemy\CandleFanatic</Filter>
+      <Filter>Game\Object\Door\Enemy\CandleFanatic</Filter>
     </ClInclude>
     <ClInclude Include="TentaclesOfLight.h">
-      <Filter>Game\Object\Enemy\TentaclesOfLight</Filter>
+      <Filter>Game\Object\Door\Enemy\TentaclesOfLight</Filter>
     </ClInclude>
     <ClInclude Include="LampFanatic.h">
-      <Filter>Game\Object\Enemy\LampFanatic</Filter>
+      <Filter>Game\Object\Door\Enemy\LampFanatic</Filter>
     </ClInclude>
     <ClInclude Include="BallFanatic.h">
-      <Filter>Game\Object\Enemy\BellFanatic</Filter>
+      <Filter>Game\Object\Door\Enemy\BellFanatic</Filter>
     </ClInclude>
     <ClInclude Include="AngelStatue.h">
-      <Filter>Game\Object\Enemy\AngelStatue</Filter>
+      <Filter>Game\Object\Door\Enemy\AngelStatue</Filter>
     </ClInclude>
     <ClInclude Include="Head.h">
       <Filter>Game\Object\Charactor</Filter>
@@ -352,7 +372,7 @@
       <Filter>Game\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Game\Object\Enemy</Filter>
+      <Filter>Game\Object\Door\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyTestScene.h">
@@ -377,9 +397,6 @@
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="Baptism.h">
-      <Filter>Game\Object\Boss\Casting Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="Consecration.h">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClInclude>
     <ClInclude Include="ShopScene.h">
@@ -412,6 +429,9 @@
     <ClInclude Include="MenuUI.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
+    <ClInclude Include="ProjectileHeadSkull.h">
+      <Filter>Game\Object\Charactor\Head</Filter>
+    </ClInclude>
     <ClInclude Include="ResultValue.h">
       <Filter>Game\Reward</Filter>
     </ClInclude>
@@ -432,6 +452,7 @@
     <ClInclude Include="Card.h">
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClInclude>
+    <ClInclude Include="Roulette.h" />
     <ClInclude Include="BossPhase1EnemyCandle.h">
       <Filter>Game\Object\Enemy\BossPhase1EnemyCandle</Filter>
     </ClInclude>
@@ -454,12 +475,12 @@
       <Filter>Game\Object\Enemy\LampFanatic</Filter>
     </ClInclude>
     <ClInclude Include="BossBall.h" />
-    <ClInclude Include="ProjectileHeadSkull.h">
-      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
+    <ClInclude Include="Consecration.h">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="Roulette.h">
-      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
-    </ClInclude>
+    <ClInclude Include="BossPhase1EnemyCandle.h" />
+    <ClInclude Include="BossPhase1EnemyFnatic.h" />
+    <ClInclude Include="FireKnife.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -537,38 +558,11 @@
     <Filter Include="Game\Component\RigidBodyComponent">
       <UniqueIdentifier>{05dcc7ba-e1b5-4631-9c2a-fb10ff3f4449}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Enemy">
-      <UniqueIdentifier>{5fe81d37-64a5-425f-b474-a46d7ebd14a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Enemy\LeoniaSoldier">
-      <UniqueIdentifier>{2201dd90-e9cd-4469-a856-8b5402cb1f54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Enemy\Fanatic">
-      <UniqueIdentifier>{270f9556-f392-4669-aba5-e8af84a5e510}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Enemy\BlackFanatic">
-      <UniqueIdentifier>{282b02a6-ad05-4536-a455-cc8ce1269cb2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Object\Boss">
       <UniqueIdentifier>{093cbf89-f776-45e4-a7fa-bddcb2e57c34}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Scene\BossScene">
       <UniqueIdentifier>{82ae5685-45dc-434f-99b6-443444280934}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Enemy\TentaclesOfLight">
-      <UniqueIdentifier>{605e43c2-86d5-48b0-a786-c02efd8906fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Enemy\LampFanatic">
-      <UniqueIdentifier>{5a90643a-1cd3-4b6a-a531-16c6076c156e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Enemy\CandleFanatic">
-      <UniqueIdentifier>{20c2d25e-70d1-49f6-b46e-1a83b3ebdaa7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Enemy\BellFanatic">
-      <UniqueIdentifier>{b66a0c3b-8884-4271-9f5d-f2cb2324c7fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Enemy\AngelStatue">
-      <UniqueIdentifier>{69a7fdb2-de1f-4adc-922c-ad186893eab6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Object\Boss\HolyFountain">
       <UniqueIdentifier>{e3708110-68e5-4ccd-9104-715376429e00}</UniqueIdentifier>
@@ -614,6 +608,36 @@
     </Filter>
     <Filter Include="Game\Object\Charactor\Head\Gambler">
       <UniqueIdentifier>{fb52118e-3419-431d-b739-5b69209f4304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Head\LittleBorn">
+      <UniqueIdentifier>{91645030-351c-460b-8995-e860b4c731cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\BossPhase1EnemyCandle">
+      <UniqueIdentifier>{f47e079b-40b1-457f-a875-7d45e6bffc10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\BossPhase1EnemyFnatic">
+      <UniqueIdentifier>{e3c9c31e-e073-4daa-bd7d-c85d530041ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\IntroScene">
+      <UniqueIdentifier>{8eb525a0-455e-46e9-9433-671f3251628b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI\Menu">
+      <UniqueIdentifier>{44166cac-469d-4841-8616-bca754304e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI\Inventory">
+      <UniqueIdentifier>{ea59bed1-2979-4405-9463-3f264b3fb990}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Trigger">
+      <UniqueIdentifier>{eed8242e-381a-444d-8b8f-bb5efddd2291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Reward\HeadResult">
+      <UniqueIdentifier>{06ff99bc-2f80-4cc9-989d-01a265f7ef0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Door\Enemy">
+      <UniqueIdentifier>{5fe81d37-64a5-425f-b474-a46d7ebd14a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Door\Enemy\LeoniaSoldier">
+      <UniqueIdentifier>{2201dd90-e9cd-4469-a856-8b5402cb1f54}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Object\Charactor\Head\LittleBorn">
       <UniqueIdentifier>{91645030-351c-460b-8995-e860b4c731cd}</UniqueIdentifier>

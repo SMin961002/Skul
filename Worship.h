@@ -5,6 +5,8 @@ class WorshipLeft : public Component
 {
 private:
 	vImage* _imgPhase1BossWorshipLeft;
+
+	CollisionComponent* _collision;
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -19,6 +21,8 @@ class WorshipRight : public Component
 {
 private:
 	vImage* _imgPhase1BossWorshipRight;
+
+	CollisionComponent* _collision;
 public:
 	virtual void Init() override;
 	virtual void Update() override;

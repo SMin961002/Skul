@@ -12,11 +12,15 @@ void Main::Init()
 
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
+
+	srand(GetTickCount64());
+
 	//SCENEMANAGER->ChangeScene("EnemyTestScene");
 	inven = new Inventory;
 	inven->Init();
 	menu = new MenuUI;
 	menu->Init();
+	FILEMANAGER->SetNowStageFile("map_0");
 
 	SCENEMANAGER->ChangeScene("IntroTitleScene");
 }
@@ -53,7 +57,7 @@ void Main::Update()
 	{
 		SCENEMANAGER->ChangeScene("ShopScene");
 	}
-	
+
 	if (KEYMANAGER->GetOnceKeyDown(VK_F7))
 	{
 		SCENEMANAGER->ChangeScene("MapToolMapSelectScene");
@@ -61,6 +65,10 @@ void Main::Update()
 	if (KEYMANAGER->GetOnceKeyDown(VK_F8))
 	{
 		SCENEMANAGER->ChangeScene("BossScene");
+	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_F9))
+	{
+		SCENEMANAGER->ChangeScene("Stage");
 	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_F12))
 	{

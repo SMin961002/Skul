@@ -142,7 +142,7 @@ void BossPhase1EnemyFnatic::Render()
 		{
 
 			m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
-			m_obj->GetComponent< PixelCollisionComponent>()->SetIsActive(false);
+			m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(false);
 			m_hitpointCollision->SetIsActive(false);
 			m_hitCollision->SetIsActive(false);
 			m_obj->ObjectDestroyed();
@@ -186,9 +186,6 @@ void BossPhase1EnemyFnatic::OnCollision(string collisionName, Object* other)
 
 void BossPhase1EnemyFnatic::HitEnemy(float dmg, float time)
 {
-	img[eIdle]->Reset();
-	img[eAttack]->Reset();
-	m_state = eIdle;
 	m_hitpointCollision->SetIsActive(false);
 	if (!m_die2)
 	{

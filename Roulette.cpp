@@ -5,8 +5,7 @@
 void Roulette::Init()
 {
 	string boombImage = "Gambler_Roulette_";
-	//##m_resultColor = MY_UTILITY::getInt(2);
-	m_resultColor = eBlack;
+	m_resultColor = MY_UTILITY::getInt(2);
 	if (m_resultColor == eRed) boombImage.append("Red");
 	else boombImage.append("Black");
 

@@ -160,6 +160,7 @@
     <ClCompile Include="ExObject.cpp" />
     <ClCompile Include="Fanatic.cpp" />
     <ClCompile Include="FireKnife.cpp" />
+    <ClCompile Include="Fountain.cpp" />
     <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Gold.cpp" />
@@ -202,6 +203,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ShopScene.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stdafx.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -243,6 +245,7 @@
     <ClInclude Include="ExObject.h" />
     <ClInclude Include="Fanatic.h" />
     <ClInclude Include="FireKnife.h" />
+    <ClInclude Include="Fountain.h" />
     <ClInclude Include="Gambler.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Gold.h" />
@@ -285,6 +288,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ShopScene.h" />
     <ClInclude Include="singleton.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TentaclesOfLight.h" />
     <ClInclude Include="TimerManager.h" />

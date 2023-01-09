@@ -16,9 +16,6 @@ void BossScene::Init()
 	
 	OBJECTMANAGER->AddObject("Joanna", 850, 475, 0)->AddComponent<BossObject>();
 
-	OBJECTMANAGER->AddObject("FountainLeft", 100, 580, 0)->AddComponent<HolyFountainLeft>();
-	OBJECTMANAGER->AddObject("FountainRight", 1500, 580, 0)->AddComponent<HolyFountainRight>();
-
 	FILEMANAGER->SetNowStageFile("map_1");
 	FILEMANAGER->TileFileRead(&SCENEMANAGER->m_tiles);
 
@@ -37,6 +34,10 @@ void BossScene::Init()
 			OBJECTMANAGER->AddObject("player", iter->x, iter->y, ePlayer)->AddComponent<Player>();
 		}
 	}
+
+	OBJECTMANAGER->AddObject("FountainLeft", 100, 590, 0)->AddComponent<HolyFountainLeft>();
+	OBJECTMANAGER->AddObject("FountainRight", 1500, 590, 0)->AddComponent<HolyFountainRight>();
+	
 
 	OBJECTMANAGER->AddObject("Enemy", 500, 670, eEnemy)->AddComponent<BossPhase1EnemyCandle>();
 	OBJECTMANAGER->AddObject("Enemy", 600, 670, eEnemy)->AddComponent<BossPhase1EnemyFnatic>();
@@ -69,7 +70,7 @@ void BossScene::Update()
 	{
 		IMAGEMANAGER->SetCameraPosition(WINSIZE_X / 2 - 50, IMAGEMANAGER->GetCameraPosition().y);
 	}
-	cout << IMAGEMANAGER->GetCameraPosition().x - WINSIZE_X / 2 << endl;
+	//cout << IMAGEMANAGER->GetCameraPosition().x - WINSIZE_X / 2 << endl;
 }
 
 void BossScene::Render()

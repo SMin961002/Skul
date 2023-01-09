@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "BossBall.h"
 
 class Baptism;
 class WorshipLeft;
@@ -19,15 +20,13 @@ private:
 
 	// 보스 1페이즈 대기 상태
 	vImage* _imgBossIdle;
-
+	BossBall* bossBall[3];
 	// 보스 1페이즈 땅찍기
 	vImage* _imgPhase1BossNervousReady;
 	vImage* _imgPhase1BossNervousReadyLoop;
 	vImage* _imgPhase1BossNervousAttack;
 	vImage* _imgPhase1BossNervousAttackLoop;
 	vImage* _imgPhase1BossNervousEnd;
-	vImage* _imgPhase1NervousEffectShine;
-	vImage* _imgPhase1NervousEffectImpact;
 
 	// 보스 1페이즈 캐스팅
 	vImage* _imgPhase1BossCastingReady;
@@ -59,9 +58,11 @@ private:
 	vImage* _imgPhase1BossBarrierSpark;
 	CImage* _imgPhase1BossBarrierCrack;
 	vImage* _imgPhase1BossBarrierCrackImpact;
+
 	bool m_isAttack;
 	int m_bossState;
 	float m_patterTimer;
+
 	enum BossPhase2State
 	{
 		eIntro1,
@@ -75,6 +76,9 @@ private:
 	vImage* m_phase2Img[eEnd];
 	int m_phase2Patter;
 protected:
+	bool _isIntroOn;
+	float _introTimeCheck;
+
 	bool _isIdleOn;
 	bool _patternLock;
 
@@ -103,16 +107,29 @@ protected:
 
 	float _castingMotionDeltaTime;
 	float _consecrationDeltaTime;
+	float _locate;
 
 	vector<Baptism*> _vBaptism;
 	vector<Baptism*>::iterator _viBaptism;
+	
+protected:
+	bool _isWorshipCheck;
+	bool _isWorshipFirstWaveOn;
+	bool _isWorshipSecondWaveOn;
+	bool _updateCheck;
+
+	float _worshipDeltaTime;
 
 	vector<WorshipLeft*> _vWorshipLeft;
 	vector<WorshipLeft*>::iterator _viWorshipLeft;
 
 	vector<WorshipRight*> _vWorshipRight;
 	vector<WorshipRight*>::iterator _viWorshipRight;
+
+	int rand;
 public:
+	bool getIdleOn() { return _isIdleOn; }
+
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;

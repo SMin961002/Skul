@@ -4,11 +4,17 @@
 #include "Consecration.h"
 #include "Baptism.h"
 #include "Worship.h"
+#include "Player.h"
 
 void BossObject::Init()
 {
 	m_bossState = eIntro1;
 	m_talkCount = 0;
+	bossBall[0] = nullptr;
+	bossBall[1] = nullptr;
+	bossBall[2] = nullptr;
+
+	OBJECTMANAGER->m_boss = this;
 	/*
 	"Phase2_Boss_Idle",
 	"Phase2_Boss_Intro_1
@@ -38,8 +44,11 @@ void BossObject::Init()
 	m_phase2Img[eCreateBallE] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_CreateBall_End");
 	m_phase2Img[eCreateBallE]->Setting(0.15, false);
 
-	m_page = 1;
+	m_page = 0;
 	_imgBossChair = IMAGEMANAGER->FindImage("Boss_Chair");
+	
+	_imgBossTalk = IMAGEMANAGER->FindImageVector("Boss_Intro_Talk");
+	_imgBossTalk->Setting(0.1, true);
 
 	_imgBossIdle = IMAGEMANAGER->FindImageVector("Boss_Idle");
 	_imgBossIdle->Setting(0.1, true);
@@ -50,8 +59,6 @@ void BossObject::Init()
 	_imgPhase1BossNervousReadyLoop->Setting(0.1, true);
 	_imgPhase1BossNervousAttack = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Attack");
 	_imgPhase1BossNervousAttack->Setting(0.1, false);
-	_imgPhase1NervousEffectShine = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Effect_Attack");
-	_imgPhase1NervousEffectShine->Setting(0.1, false);
 	_imgPhase1BossNervousEnd = IMAGEMANAGER->FindImageVector("Boss_Nervousness_End");
 	_imgPhase1BossNervousEnd->Setting(0.1, false);
 
@@ -78,12 +85,14 @@ void BossObject::Init()
 	_imgPhase1BossConsecrationLoop = IMAGEMANAGER->FindImageVector("Boss_Consecration_Loop");
 	_imgPhase1BossConsecrationLoop->Setting(0.1, true);
 	_imgPhase1BossConsecrationEnd = IMAGEMANAGER->FindImageVector("Boss_Consecration_End");
-	_imgPhase1BossConsecrationLoop->Setting(0.1, false);
+	_imgPhase1BossConsecrationEnd->Setting(0.1, false);
 
 	_imgPhase1BossBaptismAttack = IMAGEMANAGER->FindImageVector("Boss_Baptism_Attack");
 	_imgPhase1BossBaptismAttack->Setting(0.1, false);
 
-	_isIdleOn = true;
+	_isIntroOn = true;
+
+	_isIdleOn = false;
 
 	_isNervousnessOn = false;
 	_isNervousnessLoopOn = false;
@@ -104,32 +113,32 @@ void BossObject::Init()
 	_castingMotionDeltaTime = 0;
 	_consecrationDeltaTime = 0;
 
-	for (int i = 0; i < 30; i++)
-	{
-		//OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
-		Baptism* tmp = OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
-		tmp->SetIsActive(false);
+	//for (int i = 0; i < 30; i++)
+	//{
+	//	//OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
+	//	Baptism* tmp = OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
+	//	tmp->SetIsActive(false);
+	//
+	//	_vBaptism.push_back(tmp);
+	//}
 
-		_vBaptism.push_back(tmp);
-	}
-
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		int j = MY_UTILITY::getFromIntTo(0, 3);
 		int k = 0;
 		switch (j)
 		{
 		case 0:
-			k = 0;
-			break;
-		case 1:
 			k = 150;
 			break;
-		case 2:
+		case 1:
 			k = 300;
 			break;
-		case 3:
+		case 2:
 			k = 450;
+			break;
+		case 3:
+			k = 600;
 			break;
 		}
 		WorshipLeft* tmp = OBJECTMANAGER->AddObject("Worship", 0, k, eEnemy)->AddComponent<WorshipLeft>();
@@ -137,26 +146,26 @@ void BossObject::Init()
 
 		_vWorshipLeft.push_back(tmp);
 	}
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		int j = MY_UTILITY::getFromIntTo(0, 3);
 		int k = 0;
 		switch (j)
 		{
 		case 0:
-			k = 0;
-			break;
-		case 1:
 			k = 150;
 			break;
-		case 2:
+		case 1:
 			k = 300;
 			break;
-		case 3:
+		case 2:
 			k = 450;
 			break;
+		case 3:
+			k = 600;
+			break;
 		}
-		WorshipRight* tmp = OBJECTMANAGER->AddObject("Worship", WINSIZE_X, k, eEnemy)->AddComponent<WorshipRight>();
+		WorshipRight* tmp = OBJECTMANAGER->AddObject("Worship", 1800, k, eEnemy)->AddComponent<WorshipRight>();
 		tmp->SetIsActive(false);
 
 		_vWorshipRight.push_back(tmp);
@@ -190,19 +199,82 @@ void BossObject::Update()
 		{
 			_nervousnessEffectDeltaTime += DELTA_TIME;
 		}
+
+		// 초이스_대기
 		if (_isChoiceReadyLoopOn == true)
 		{
 			_choiceMotionDeltaTime += DELTA_TIME;
 		}
+		// 캐스팅_공격모션
 		if (_imgPhase1BossCastingReady->GetIsImageEnded() == true)
 		{
 			_castingMotionDeltaTime += DELTA_TIME;
 		}
+		if (_patternSelect == 2)
+		{
+			_isWorshipCheck = true;
+			_worshipDeltaTime += DELTA_TIME;
+		}
+
+		if (_updateCheck == true)
+		{
+			for (int i = 0; i < 5; i++)
+			{
+				int j = MY_UTILITY::getFromIntTo(0, 3);
+				int k = 0;
+				switch (j)
+				{
+				case 0:
+					k = 150;
+					break;
+				case 1:
+					k = 300;
+					break;
+				case 2:
+					k = 450;
+					break;
+				case 3:
+					k = 600;
+					break;
+				}
+				WorshipLeft* tmp = OBJECTMANAGER->AddObject("Worship", 0, k, eEnemy)->AddComponent<WorshipLeft>();
+				tmp->SetIsActive(false);
+
+				_vWorshipLeft.push_back(tmp);
+			}
+			for (int i = 0; i < 5; i++)
+			{
+				int j = MY_UTILITY::getFromIntTo(0, 3);
+				int k = 0;
+				switch (j)
+				{
+				case 0:
+					k = 150;
+					break;
+				case 1:
+					k = 300;
+					break;
+				case 2:
+					k = 450;
+					break;
+				case 3:
+					k = 600;
+					break;
+				}
+				WorshipRight* tmp = OBJECTMANAGER->AddObject("Worship", 1800, k, eEnemy)->AddComponent<WorshipRight>();
+				tmp->SetIsActive(false);
+
+				_vWorshipRight.push_back(tmp);
+			}
+			_updateCheck = false;
+		}
+
 	}
 	else if (m_page == 1)
 	{
 		Page_2();
 	}
+
 }
 
 void BossObject::Render()
@@ -212,10 +284,25 @@ void BossObject::Render()
 	// 보스 대기
 	if (m_page == 0)
 	{
+		if (_isIntroOn == true)
+		{
+			if (_isIdleOn == false)
+			{
+				_imgBossTalk->CenterRender(m_obj->x+28, m_obj->y, 1.8, 1.8, 0, false);
+			}
+
+			_introTimeCheck += DELTA_TIME;
+			if (_introTimeCheck > 2)
+			{
+				_isIdleOn = true;
+			}
+		}
 		if (_isIdleOn == true)
 		{
 			// Idle on
 			_imgBossIdle->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+			_isIntroOn = false;
+			_introTimeCheck = 0;
 		}
 
 		// 땅찍기 On
@@ -237,13 +324,12 @@ void BossObject::Render()
 		if (_nervousnessMotionDeltaTime > 1)
 		{
 			if (_nervousnessEffectDeltaTime < 2) _imgPhase1BossNervousAttack->CenterRender(m_obj->x, m_obj->y - 6, 1.8, 1.8, 0, false);
-			_imgPhase1NervousEffectShine->CenterRender(m_obj->x, m_obj->y - 40, 1.5, 1.5, 0, false);
 
 			if (_isNervousnessAttackLoopOn == false)
 			{
-
-				OBJECTMANAGER->AddObject("NervousImpactLeft", m_obj->x, WINSIZE_Y + 50, 1)->AddComponent<LeftImpact>();
-				OBJECTMANAGER->AddObject("NervousImpactRight", m_obj->x, WINSIZE_Y + 50, 1)->AddComponent<RightImpact>();
+				OBJECTMANAGER->AddObject("NervousImpactShine", m_obj->x, m_obj->y - 20, 1)->AddComponent<ImpactShine>();
+				OBJECTMANAGER->AddObject("NervousImpactLeft", m_obj->x, m_obj->y + 120, 1)->AddComponent<LeftImpact>();
+				OBJECTMANAGER->AddObject("NervousImpactRight", m_obj->x, m_obj->y + 120, 1)->AddComponent<RightImpact>();
 			}
 			_isNervousnessAttackLoopOn = true;
 		}
@@ -268,7 +354,6 @@ void BossObject::Render()
 
 			_imgPhase1BossNervousReady->Reset();
 			_imgPhase1BossNervousAttack->Reset();
-			_imgPhase1NervousEffectShine->Reset();
 			_imgPhase1BossNervousEnd->Reset();
 		}
 
@@ -322,14 +407,20 @@ void BossObject::Render()
 		// 캐스팅 On
 		if (_isCastingOn == true)
 		{
-			if (_isConsecrationLoopOn == false) _imgPhase1BossCastingReady->CenterRender(m_obj->x, m_obj->y - 25, 1.8, 1.8, 0, false);
+			if (_imgPhase1BossCastingReady->GetIsImageEnded() == false)
+			{
+				_imgPhase1BossCastingReady->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
+			}
 		}
 		// 캐스팅_공격모션
 		if (_imgPhase1BossCastingReady->GetIsImageEnded() == true)
 		{
-			if (_consecrationDeltaTime < 2)
+			if (_consecrationDeltaTime < 2 && _worshipDeltaTime < 7)
 			{
-				_imgPhase1BossCastingAttack->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
+				if (_imgPhase1BossCastingAttack->GetIsImageEnded() == false)
+				{
+					_imgPhase1BossCastingAttack->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
+				}
 			}
 
 			_isCastingAttackOn = true;
@@ -340,6 +431,7 @@ void BossObject::Render()
 			if (_patternLock == false)
 			{
 				_patternSelect = MY_UTILITY::getFromIntTo(0, 2);
+				_locate = OBJECTMANAGER->m_player->GetplayerX();
 			}
 
 			switch (_patternSelect)
@@ -348,13 +440,13 @@ void BossObject::Render()
 				_patternLock = true;
 				if (_isConsecrationLoopOn == false)
 				{
-					_imgPhase1BossConsecrationStart->CenterRender(m_obj->x + 200, m_obj->y, 1.8, 1.8, 0, false);
+					_imgPhase1BossConsecrationStart->CenterRender(_locate, m_obj->y - 130, 1.8, 1.8, 0, false);
 				}
 				if (_imgPhase1BossConsecrationStart->GetIsImageEnded() == true)
 				{
 					if (_isConsecrationLoopOn == false)
 					{
-						OBJECTMANAGER->AddObject("Consecration", m_obj->x + 200, WINSIZE_Y, 1)->AddComponent<Consecration>();
+						OBJECTMANAGER->AddObject("Consecration", _locate, m_obj->y - 130, 1)->AddComponent<Consecration>();
 					}
 
 					_consecrationDeltaTime += DELTA_TIME;
@@ -378,7 +470,7 @@ void BossObject::Render()
 					_imgPhase1BossCastingEnd->Reset();
 					_imgPhase1BossConsecrationStart->Reset();
 					_imgPhase1BossConsecrationEnd->Reset();
-					_patternDelay = 0;
+
 					_patternLock = false;
 				}
 				break;
@@ -412,6 +504,12 @@ void BossObject::Render()
 				if (m_phase2Img[eCreateBallR]->GetIsImageEnded() == true)
 				{
 					m_bossState = eCreateBallA;
+					bossBall[0] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+					bossBall[1] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+					bossBall[2] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+					bossBall[0]->Setting((2 * 3.141592) / 3 * 1);
+					bossBall[1]->Setting((2 * 3.141592) / 3 * 2);
+					bossBall[2]->Setting((2 * 3.141592) / 3 * 3);
 				}
 			}
 			else if (m_bossState == eCreateBallA)
@@ -466,6 +564,8 @@ void BossObject::Release()
 {
 }
 
+
+
 void BossObject::Page_2()
 {
 	if (m_phase2Patter == 1)
@@ -494,4 +594,3 @@ void BossObject::Page_2()
 		}
 	}
 }
-

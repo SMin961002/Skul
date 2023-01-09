@@ -96,47 +96,43 @@ void CandleFanatic::Update()
 	{
 		m_hitTimer += DELTA_TIME;
 	}
-	if (m_effect == true && m_die2 == false)
+	if (m_effect == true&& m_die2 == false&&m_hit == false)
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 		m_collision->Setting(40, m_obj->x + 17, m_obj->y - 20, "Attack");
-		if (m_isHit == false)
+		if ((abs(m_obj->x - OBJECTMANAGER->m_player->GetplayerX()) < 400) || m_state == eAttackReady || m_state == eAttack)
 		{
-
-			if ((abs(m_obj->x - OBJECTMANAGER->m_player->GetplayerX()) < 400) || m_state == eAttackReady || m_state == eAttack)
+			if (m_vimage[eAttackReady]->GetIsImageEnded() == true)
 			{
-				if (m_vimage[eAttackReady]->GetIsImageEnded() == true)
+				if (m_state == eAttackReady)
 				{
-					if (m_state == eAttackReady)
-					{
-						OBJECTMANAGER->AddObject("Knife", m_obj->x, m_obj->y - 100, eObject)->AddComponent<FireKnife>();
-						m_isAttack = true;
-					}
-					m_state = eAttack;
-					if (m_vimage[m_state]->GetIsImageEnded() == true)
-					{
-						m_vimage[eAttackReady]->Reset();
-						m_vimage[eAttack]->Reset();
-						m_vimage[eIdle]->Reset();
-						m_state = eIdle;
-					}
+					OBJECTMANAGER->AddObject("Knife", m_obj->x, m_obj->y - 100, eObject)->AddComponent<FireKnife>();
+					m_isAttack = true;
 				}
-				else
+				m_state = eAttack;
+				if (m_vimage[m_state]->GetIsImageEnded() == true)
 				{
-					m_state = eAttackReady;
-					m_isL = OBJECTMANAGER->m_player->GetplayerX() < m_obj->x;
+					m_vimage[eAttackReady]->Reset();
+					m_vimage[eAttack]->Reset();
+					m_vimage[eIdle]->Reset();
+					m_state = eIdle;
 				}
-			}
-			else if (abs(m_obj->x - OBJECTMANAGER->m_player->GetplayerX()) < 600)
-			{
-				m_state = eRun;
-				m_obj->x += DELTA_TIME * (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x ? 30 : -30);
-				m_isL = OBJECTMANAGER->m_player->GetplayerX() < m_obj->x;
 			}
 			else
 			{
-				m_state = eIdle;
+				m_state = eAttackReady;
+				m_isL = OBJECTMANAGER->m_player->GetplayerX() < m_obj->x;
 			}
+		}
+		else if (abs(m_obj->x - OBJECTMANAGER->m_player->GetplayerX()) < 600)
+		{
+			m_state = eRun;
+			m_obj->x += DELTA_TIME * (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x ? 30 : -30);
+			m_isL = OBJECTMANAGER->m_player->GetplayerX() < m_obj->x;
+		}
+		else
+		{
+			m_state = eIdle;
 		}
 		if (m_currenthp <= 30 && !m_die2)
 		{
@@ -159,7 +155,7 @@ void CandleFanatic::Update()
 					m_sercrieffect = true;
 					m_motiontimer += 0.1f;
 					m_state = eSatcrifice;
-					if (m_vimage[eSatcrifice]->GetIsImageEnded() == true)
+					if (m_vimage[eSatcrifice]->GetIsImageEnded()== true)
 					{
 						m_collision->SetIsActive(false);
 						OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, ObjectTag::eSummons)->AddComponent<TentaclesOfLight>();
@@ -174,6 +170,7 @@ void CandleFanatic::Update()
 		m_hiteffecttimer += DELTA_TIME;
 		m_dietimer += DELTA_TIME;
 	}
+
 }
 
 void CandleFanatic::Render()
@@ -191,14 +188,14 @@ void CandleFanatic::Render()
 				m_vimage[eHpbarUp]->Render(m_obj->x - 35, m_obj->y + 15, (m_currenthp * m_hpbar), 1, 0);
 			}
 			else
-			{
+			{ 
 				m_hit = false;
 				m_hpbartimer = 0;
 			}
 		}
 		else
 		{
-			if (!m_die && m_dietimer >= 1 && m_die2 == false)
+			if (!m_die && m_dietimer >= 1 && m_die2== false)
 			{
 				EFFECTMANAGER->AddEffect<DeadEffect>(m_obj->x, m_obj->y, 1, 1.5);
 				m_dietimer = 0;
@@ -268,13 +265,13 @@ void CandleFanatic::HitEnemy(float dmg, float time)
 }
 void CandleFanatic::ImageResetCheck()
 {
-	if (m_isAttack == true && m_vimage[eAttack]->GetIsImageEnded() == true)
+	if(m_isAttack == true && m_vimage[eAttack]->GetIsImageEnded() == true)
 	{
 		m_isAttack = false;
 	}
-	if (m_hitTimer >= 0.3f)
+	else if (m_hitTimer >= 0.3f)
 	{
-		m_isHit = false;
-		m_hitTimer = 0;
+	m_isHit = false;
+	m_hitTimer = 0;
 	}
 }

@@ -4,6 +4,7 @@
 #include"Player.h"
 #include"Item.h"
 #include "PixelCollisionComponent.h"
+#include "BossObject.h"
 #include "RigidBodyComponent.h"
 ObjectManager::ObjectManager()
 {
