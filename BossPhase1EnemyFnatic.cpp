@@ -210,19 +210,17 @@ void BossPhase1EnemyFnatic::HitEnemy(float dmg, float time)
 		m_obj->y -= 30;
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 	}
-	if (m_hiteffecttimer >= time)
+
+	if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
 	{
-		if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
-		{
-			EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 0, 1.5);
-		}
-		else
-		{
-			EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 1, 1.5);
-		}
-		m_hit = true;
-		m_hiteffecttimer = 0;
-		m_currenthp -= dmg;
+		EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 0, 1.5);
 	}
+	else
+	{
+		EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 1, 1.5);
+	}
+	m_hit = true;
+	m_hiteffecttimer = 0;
+	m_currenthp -= dmg;
 }
 

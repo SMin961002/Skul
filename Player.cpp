@@ -11,7 +11,7 @@ void Player::Init()
 {
 	m_UIImage[ePlayerStatus] = IMAGEMANAGER->FindImage("PlayerStatusUI");
 	OBJECTMANAGER->m_player = this;
-	m_headList[static_cast<int>(eSkulSpecies::eBasic)] = new Head_Basic;
+	m_headList[static_cast<int>(eSkulSpecies::eBasic)] = new LittleBorn;
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)]->SetPlayerXY(&m_obj->x, &m_obj->y, &m_isLeft, &m_isDown);
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)]->SetObject(m_obj);
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)]->Init();
@@ -28,12 +28,6 @@ void Player::Init()
 	m_obj->AddCollisionComponent(m_playerHitBox);
 	m_obj->AddComponent<RigidBodyComponent>();
 
-	//m_collAutoAttack = m_nowHead->GetCollAutoAttack();
-	//m_collSkillA = m_nowHead->GetCollSkill();
-	//m_obj->AddCollisionComponent(m_collAutoAttack);
-	//m_obj->AddCollisionComponent(m_collSkillA);
-	//m_collAutoAttack->SetObject(m_obj);
-	//m_collSkillA->SetObject(m_obj);
 	m_collAutoAttack = m_obj->AddComponent<CollisionComponent>();
 	m_collSkillA = m_obj->AddComponent<CollisionComponent>();
 	m_collSkillS = m_obj->AddComponent<CollisionComponent>();
@@ -113,9 +107,9 @@ void Player::CoolDown()
 			m_dashNowTime = 0;
 			m_dashCount = 0;
 			m_dashing = false;
-			m_dashNowCool = m_dashCool;
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
 			m_playerHitBox->SetIsActive(true);
+			m_dashNowCool = m_dashCool;
 		}
 	}
 	if (m_supperArmarNowTime > 0)
@@ -151,14 +145,18 @@ void Player::ChangeHead()
 		case eSkulSpecies::eBasic:
 			m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eBasic)];
 			m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
+			m_nowHead->SetAction(m_nowHead->eTagAction, true, true);
 			cout << "스컬 변경 : 리틀본" << endl;
 			break;
 		case eSkulSpecies::eGambler:
 			m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eGambler)];
+			m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
+			m_nowHead->SetImage(m_nowHead->eIdle, true, m_nowHead->eIdle);
+			m_nowHead->SetAction(m_nowHead->eTagAction, true, true);
 			cout << "스컬 변경 : 갬블러" << endl;
 			break;
 		default:	//##스컬종류 추가후 변경 필요 필수필수필수
-			m_nowHead = new Head_Basic;
+			m_nowHead = new LittleBorn;
 			cout << "스컬 슬롯에 잘못된게 들어갔다." << endl;
 			break;
 		}
@@ -176,14 +174,13 @@ void Player::OnCollision(string collisionName, Object* other)
 		{
 			cout << "적에게공격" << endl;
 
-			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Enemy>(), 10);
+			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other,10,0.01);
 		}
 		if (other->GetName() == "EnemyBoss")
 		{
 			cout << "적에게공격" << endl;
 			
-			m_nowHead->OnCollisionAutoAttackBossEnemy(other->GetComponent<Component>(), 10);
+			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other,10, 0.01);
 		}
-
 	}//end collision Name BasicAttack
 }

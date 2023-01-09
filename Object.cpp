@@ -7,10 +7,19 @@ void Object::Init()
 
 void Object::Update()
 {
-	for (auto iter : m_components)
+	for (auto iter =m_components.begin(); iter !=m_components.end();)
 	{
-		if (iter->GetIsActive() == true)
-			iter->Update();
+		if ((*iter)->GetIsDelete() == true)
+		{
+			(*iter)->Release();
+			SAFE_DELETE(*iter);
+			iter = m_components.erase(iter);
+		}
+		else
+		{
+			(*iter)->Update();
+			iter++;
+		}
 	}
 }
 
