@@ -8,6 +8,11 @@ class WorshipRight;
 class BossObject : public Component
 {
 private:
+	int m_talkCount;
+	int m_page;
+	float chairY = 0;
+	float chairX = 0;
+private:
 	CImage* _imgBossChair;
 	// 보스 1페이즈 대화
 	vImage* _imgBossTalk;
@@ -54,7 +59,21 @@ private:
 	vImage* _imgPhase1BossBarrierSpark;
 	CImage* _imgPhase1BossBarrierCrack;
 	vImage* _imgPhase1BossBarrierCrackImpact;
-
+	bool m_isAttack;
+	int m_bossState;
+	float m_patterTimer;
+	enum BossPhase2State
+	{
+		eIntro1,
+		eIntro2,
+		eIdle,
+		eCreateBallR,
+		eCreateBallA,
+		eCreateBallE,
+		eEnd
+	};
+	vImage* m_phase2Img[eEnd];
+	int m_phase2Patter;
 protected:
 	bool _isIdleOn;
 	bool _patternLock;
@@ -87,7 +106,7 @@ protected:
 
 	vector<Baptism*> _vBaptism;
 	vector<Baptism*>::iterator _viBaptism;
-	
+
 	vector<WorshipLeft*> _vWorshipLeft;
 	vector<WorshipLeft*>::iterator _viWorshipLeft;
 
@@ -101,5 +120,7 @@ public:
 
 	BossObject() {}
 	~BossObject() {}
+
+	void Page_2();
 };
 
