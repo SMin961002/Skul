@@ -279,6 +279,7 @@ void ImageManager::LoadImages()
 	// 1페이즈_분수
 	AddImage("Fountain_Deactivate", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/Fountain/Deactive/Deactivate_01.png");
 	AddImageVector("Boss_HolyFountain_Activate", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/Fountain/Active/Activate_", 1, 8);
+	AddImageVector("TeleportEffect", L"./Resources/Saint_Joanna/Phase_2/Teleport/in/", 1, 38);
 	// 1페이즈_방어막
 	AddImageVector("Boss_Barrier_Intro_Front", L"./Resources/Saint_Joanna/Phase_1/Barrier/Intro_Front/Phase1_Barrier_Intro_Front_", 1, 30);
 	AddImageVector("Boss_Barrier_Intro_Behind", L"./Resources/Saint_Joanna/Phase_1/Barrier/Intro_Behind/Phase1_Barrier_Intro_Behind_", 1, 30);
@@ -304,7 +305,17 @@ void ImageManager::LoadImages()
 	AddImageVector("Phase2_Ball_CreateBall_Start", L"./Resources/Saint_Joanna/Phase_2/CreateBall/HolyBarrierOrb/Start/", 1, 21);
 	AddImageVector("Phase2_Ball_CreateBall_Idle", L"./Resources/Saint_Joanna/Phase_2/CreateBall/HolyBarrierOrb/Orb/Phase1_HolyBarrier_Orb_", 1, 48);
 
+	AddImageVector("Phase2_Ball_SoulChase_Attack", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/Attack/", 1, 7);
+	AddImageVector("Phase2_Ball_SoulChase_Ready", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/Ready/", 1, 7);
+	AddImageVector("Phase2_Ball_SoulChase_End", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/End/", 1, 7);
+	AddImageVector("Trail", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Effect/Trail/", 1, 51);
 
+
+	AddImageVector("Circle", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/Circle/", 1, 40);
+	AddImageVector("CircleIdle", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/CircleIdle/", 1, 39);
+	AddImageVector("CircleDis", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/CircleDis/", 1, 8);
+
+	AddImageVector("MagicCircle", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Effect/MagicCircle/", 1, 42);
 
 	// 2페이즈_인트로
 	AddImageVector("Phase2_Boss_Idle", L"./Resources/Saint_Joanna/Phase_2/Idle/Phase2_Idle_", 1, 6);

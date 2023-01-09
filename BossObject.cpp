@@ -5,26 +5,36 @@
 #include "Baptism.h"
 #include "Worship.h"
 #include "Player.h"
+#include "BossCircle.h"
 
 void BossObject::Init()
 {
+	trailImg = IMAGEMANAGER->AddImageVectorCopy("Trail");
+	m_isMagicCircleImage = false;
+	magicCircleImage = IMAGEMANAGER->FindImageVector("MagicCircle");
+	magicCircleImage->Setting(0.1, false);
+	trailImg->Setting(0.1, false);
 	m_bossState = eIntro1;
 	m_talkCount = 0;
 	bossBall[0] = nullptr;
 	bossBall[1] = nullptr;
+	teleprotTimer = 0;
 	bossBall[2] = nullptr;
 
 	OBJECTMANAGER->m_boss = this;
+	m_teleportEffect = IMAGEMANAGER->FindImageVector("TeleportEffect");
+	m_teleportEffect->Setting(0.07f, false);
 	/*
-	"Phase2_Boss_Idle",
-	"Phase2_Boss_Intro_1
+	"Phase2_Ball_SoulChase_Attack",
+	"Phase2_Ball_SoulChase_Ready",
+	"Phase2_Ball_SoulChase_End", L"
 
-	("""
-	("", L
-	("",
-
+	"Circle", L"./Resources/Saint_J
+	"CircleIdle", L"./Resources/Sai
+	"CircleDis", L"./Resources/Sain
 	*/
 	m_patterTimer = 0;
+
 
 	chairY = m_obj->y;
 	chairX = m_obj->x;
@@ -45,8 +55,16 @@ void BossObject::Init()
 	m_phase2Img[eCreateBallE]->Setting(0.15, false);
 
 	m_page = 0;
+	m_phase2Img[eSoulChaseR] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_Ready");
+	m_phase2Img[eSoulChaseR]->Setting(0.1, false);
+	m_phase2Img[eSoulChaseA] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_Attack");
+	m_phase2Img[eSoulChaseA]->Setting(0.1, false);
+	m_phase2Img[eSoulChaseE] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_End");
+	m_phase2Img[eSoulChaseE]->Setting(0.1, false);
+
+	m_page = 3;
 	_imgBossChair = IMAGEMANAGER->FindImage("Boss_Chair");
-	
+
 	_imgBossTalk = IMAGEMANAGER->FindImageVector("Boss_Intro_Talk");
 	_imgBossTalk->Setting(0.1, true);
 
@@ -58,7 +76,7 @@ void BossObject::Init()
 	_imgPhase1BossNervousReadyLoop = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Ready_Loop");
 	_imgPhase1BossNervousReadyLoop->Setting(0.1, true);
 	_imgPhase1BossNervousAttack = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Attack");
-	_imgPhase1BossNervousAttack->Setting(0.1, false);
+	_imgPhase1BossNervousAttack->Setting(0.1, true);
 	_imgPhase1BossNervousEnd = IMAGEMANAGER->FindImageVector("Boss_Nervousness_End");
 	_imgPhase1BossNervousEnd->Setting(0.1, false);
 
@@ -106,6 +124,7 @@ void BossObject::Init()
 	_isChoiceAttackEnd = false;
 	_choiceMotionDeltaTime = 0;
 
+	isActive = false;
 	_isCastingOn = false;
 	_isCastingAttackOn = false;
 	_isConsecrationLoopOn = false;
@@ -174,6 +193,26 @@ void BossObject::Init()
 
 void BossObject::Update()
 {
+	if (KEYMANAGER->GetOnceKeyDown(VK_SHIFT))
+	{
+		m_isMagicCircleImage = true;
+		trailImg->Reset();
+		magicCircleImage->Reset();
+		circleCount = 0;
+		m_bossState = eSoulChaseR;
+
+		m_phase2Img[eSoulChaseR]->Reset();
+		m_phase2Img[eSoulChaseA]->Reset();
+		m_phase2Img[eSoulChaseE]->Reset();
+
+	}
+
+	if (KEYMANAGER->GetOnceKeyDown(VK_RETURN))
+	{
+		isTeleport = true;
+	}
+	if (isTeleport)
+		Teleport();
 	if (m_page == 0)
 	{
 		if (KEYMANAGER->GetToggleKey('Q'))
@@ -279,6 +318,11 @@ void BossObject::Update()
 
 void BossObject::Render()
 {
+	if (isTeleport == true)
+	{
+		m_teleportEffect->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+	}
+
 	IMAGEMANAGER->CenterRender(_imgBossChair, chairX, chairY + 80, 1.8, 1.8, 0);
 
 	// 보스 대기
@@ -288,7 +332,7 @@ void BossObject::Render()
 		{
 			if (_isIdleOn == false)
 			{
-				_imgBossTalk->CenterRender(m_obj->x+28, m_obj->y, 1.8, 1.8, 0, false);
+				_imgBossTalk->CenterRender(m_obj->x + 28, m_obj->y, 1.8, 1.8, 0, false);
 			}
 
 			_introTimeCheck += DELTA_TIME;
@@ -497,6 +541,30 @@ void BossObject::Render()
 	}
 	else
 	{
+		if (m_isMagicCircleImage)
+		{
+			if (m_bossState == eSoulChaseR)
+			{
+				if (m_phase2Img[eSoulChaseR]->GetIsImageEnded() == true)
+				{
+					m_bossState = eSoulChaseA;
+				}
+			}
+			if (m_bossState == eSoulChaseA)
+			{
+				if (magicCircleImage->GetIsImageEnded() == true)
+				{
+					m_bossState = eSoulChaseE;
+				}
+			}
+			if (m_bossState == eSoulChaseE)
+			{
+				if (m_phase2Img[eSoulChaseE]->GetIsImageEnded() == true)
+				{
+					m_phase2Patter++;
+				}
+			}
+		}
 		if (m_isAttack == true)
 		{
 			if (m_bossState == eCreateBallR)
@@ -504,12 +572,21 @@ void BossObject::Render()
 				if (m_phase2Img[eCreateBallR]->GetIsImageEnded() == true)
 				{
 					m_bossState = eCreateBallA;
-					bossBall[0] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
-					bossBall[1] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
-					bossBall[2] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
-					bossBall[0]->Setting((2 * 3.141592) / 3 * 1);
-					bossBall[1]->Setting((2 * 3.141592) / 3 * 2);
-					bossBall[2]->Setting((2 * 3.141592) / 3 * 3);
+					if (m_phase2Patter == 3)
+					{
+						bossBall[0] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+						bossBall[1] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+						bossBall[2] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+						bossBall[0]->Setting((2 * 3.141592) / 3 * 1);
+						bossBall[1]->Setting((2 * 3.141592) / 3 * 2);
+						bossBall[2]->Setting((2 * 3.141592) / 3 * 3);
+					}
+					else
+					{
+						bossBall[0]->ldist = !bossBall[0]->ldist;
+						bossBall[1]->ldist = !bossBall[1]->ldist;
+						bossBall[2]->ldist = !bossBall[2]->ldist;
+					}
 				}
 			}
 			else if (m_bossState == eCreateBallA)
@@ -551,20 +628,32 @@ void BossObject::Render()
 		}
 		if (m_bossState == eIntro1 || m_bossState == eIntro2)
 		{
-			m_phase2Img[m_bossState]->CenterRender(m_obj->x + 20, m_obj->y - 20, 1.8, 1.8, 0);
+			m_phase2Img[m_bossState]->CenterRender(m_obj->x + 20, m_obj->y - 20, 1.8, 1.8, 0, 0, alpha);
 		}
 		else
 		{
-			m_phase2Img[m_bossState]->CenterRender(m_obj->x - 3, m_obj->y + 25, 1.8, 1.8, 0);
+			m_phase2Img[m_bossState]->CenterRender(m_obj->x - 3, m_obj->y + 25, 1.8, 1.8, 0, 0, alpha);
 		}
+	}
+	if (m_isMagicCircleImage == true)
+	{
+		if (magicCircleImage->GetFrame() == 15 && circleCount == 0)
+		{
+			circleCount++;
+			OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossCircle>();
+		}
+		if (magicCircleImage->GetIsImageEnded() == true)
+		{
+			m_isMagicCircleImage = false;
+		}
+		magicCircleImage->CenterRender(m_obj->x - 15, m_obj->y, 1.5, 1.5, 0, 0);
+		trailImg->CenterRender(m_obj->x, m_obj->y, 1.5, 1.5, 0, 0);
 	}
 }
 
 void BossObject::Release()
 {
 }
-
-
 
 void BossObject::Page_2()
 {
@@ -591,6 +680,91 @@ void BossObject::Page_2()
 		{
 			m_bossState = eCreateBallR;
 			m_isAttack = true;
+		}
+		else
+		{
+			if (m_phase2Img[eCreateBallE]->GetIsImageEnded() == true)
+			{
+				m_phase2Patter = 4;
+				m_isAttack = false;
+			}
+		}
+	}
+	else if (m_phase2Patter == 4)
+	{
+		m_patterTimer++;
+		if (m_patterTimer > 1)
+		{
+			m_phase2Img[eCreateBallA]->Reset();
+			m_phase2Img[eCreateBallR]->Reset();
+			m_phase2Img[eCreateBallE]->Reset();
+			m_phase2Patter = 5;
+			m_isAttack = false;
+			m_patterTimer = 0;
+		}
+	}
+	else if (m_phase2Patter == 5)
+	{
+		if (m_isAttack == false)
+		{
+			m_bossState = eCreateBallR;
+			m_isAttack = true;
+		}
+		else
+		{
+			if (m_phase2Img[eCreateBallE]->GetIsImageEnded() == true)
+			{
+				m_phase2Patter = 6;
+				m_isAttack = false;
+				m_bossState = eIdle;
+			}
+		}
+	}
+	else if (m_phase2Patter == 6)
+	{
+
+	}
+}
+
+void BossObject::Teleport()
+{
+	if (m_teleportEffect->GetFrame() > 10)
+	{
+		if (isActive == false)
+		{
+			if (alpha > 0)
+			{
+				alpha -= DELTA_TIME * 0.5f;
+			}
+		}
+		else
+		{
+			if (alpha < 1)
+			{
+				alpha += DELTA_TIME * 0.5f;
+			}
+		}
+	}
+	if (m_teleportEffect->GetIsImageEnded() == true)
+	{
+		if (isActive == true)
+		{
+			m_teleportEffect->Reset();
+			isTeleport = false;
+			isActive = false;
+		}
+		else
+		{
+			teleprotTimer += DELTA_TIME;
+		}
+		if (teleprotTimer > 0.5f)
+		{
+			m_obj->x = (float)MY_UTILITY::getFromFloatTo(100, WINSIZE_X * 1.5f);
+			m_obj->y = (int)MY_UTILITY::getFromFloatTo(100, WINSIZE_Y * 1.5f);
+
+			m_teleportEffect->Reset();
+			teleprotTimer = 0;
+			isActive = true;
 		}
 	}
 }
