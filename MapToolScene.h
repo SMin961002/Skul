@@ -12,6 +12,7 @@ private:
 
 	string m_streuctureKey;
 	int m_width;
+	int mdsfa;
 	int m_kind = 0;
 	const int m_maxIndex = 12;
 	enum eState
