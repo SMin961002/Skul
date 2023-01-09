@@ -11,9 +11,15 @@ class HolyFountainRight;
 class BossObject : public Component
 {
 private:
+	int circleCount = 0;
+	bool m_isMagicCircleImage;
 	int m_talkCount;
 	int m_page;
 	float chairY = 0;
+	bool isActive;
+	float alpha = 1;
+	float teleprotTimer;
+	bool isTeleport = false;
 	float chairX = 0;
 private:
 	HolyFountainLeft* _left;
@@ -24,9 +30,11 @@ private:
 	vImage* _imgBossTalk;
 
 	// 보스 1페이즈 대기 상태
+	vImage* magicCircleImage;
 	vImage* _imgBossIdle;
 	BossBall* bossBall[3];
 	// 보스 1페이즈 땅찍기
+	vImage* trailImg;
 	vImage* _imgPhase1BossNervousReady;
 	vImage* _imgPhase1BossNervousReadyLoop;
 	vImage* _imgPhase1BossNervousAttack;
@@ -63,7 +71,6 @@ private:
 	vImage* _imgPhase1BossBarrierSpark;
 	CImage* _imgPhase1BossBarrierCrack;
 	vImage* _imgPhase1BossBarrierCrackImpact;
-
 	bool m_isAttack;
 	int m_bossState;
 	float m_patterTimer;
@@ -76,9 +83,13 @@ private:
 		eCreateBallR,
 		eCreateBallA,
 		eCreateBallE,
+		eSoulChaseA,
+		eSoulChaseR,
+		eSoulChaseE,
 		eEnd
 	};
 	vImage* m_phase2Img[eEnd];
+	vImage* m_teleportEffect;
 	int m_phase2Patter;
 protected:
 	bool _isIntroOn;
@@ -116,7 +127,7 @@ protected:
 
 	vector<Baptism*> _vBaptism;
 	vector<Baptism*>::iterator _viBaptism;
-	
+
 protected:
 	bool _isWorshipCheck;
 	bool _isWorshipFirstWaveOn;
@@ -144,5 +155,6 @@ public:
 	~BossObject() {}
 
 	void Page_2();
+	void Teleport();
 };
 

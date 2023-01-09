@@ -27,11 +27,11 @@ void Main::Init()
 
 void Main::Update()
 {
-	if (KEYMANAGER->GetOnceKeyDown(VK_ESCAPE) && SCENEMANAGER->GetInvenActive() == false)
+	if (KEYMANAGER->GetOnceKeyDown(VK_ESCAPE) && SCENEMANAGER->GetInvenActive() == false && menu->isResetScene == false)
 	{
 		SCENEMANAGER->SetMenuActive(!SCENEMANAGER->GetMenuActive());
 	}
-	if (KEYMANAGER->GetOnceKeyDown(VK_TAB) && SCENEMANAGER->GetMenuActive() == false)
+	if (KEYMANAGER->GetOnceKeyDown(VK_TAB) && SCENEMANAGER->GetMenuActive() == false && menu->isResetScene == false)
 	{
 		SCENEMANAGER->SetInvenActive(!SCENEMANAGER->GetInvenActive());
 	}
@@ -74,15 +74,12 @@ void Main::Update()
 	{
 		IMAGEMANAGER->SetViewCollision(!IMAGEMANAGER->GetViewCollision());
 	}
-
-
 	SCENEMANAGER->Update();
 
 	if (KEYMANAGER->GetOnceKeyDown(VK_TAB))
 	{
 
 	}
-
 }
 
 void Main::Render()
@@ -105,6 +102,15 @@ void Main::Render()
 		IMAGEMANAGER->UIRender(SCENEMANAGER->GetPadeImage(), 0, 0, 2, 2, 0, 0.5f);
 		if (inven)
 			inven->Render();
+	}
+
+	if (menu->isResetScene == true)
+	{
+		SCENEMANAGER->FadeOut(0.03, [&]() {
+			FILEMANAGER->SetNowStageFile("map_5");
+		SCENEMANAGER->ChangeScene("Stage");
+		menu->isResetScene = false;
+			}, 51);
 	}
 	IMAGEMANAGER->End();
 }

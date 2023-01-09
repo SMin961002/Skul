@@ -8,6 +8,7 @@ public:
 	float alpha;
 	float alpha2;
 	bool m_isTitleStart;
+	bool isFade;
 	float r = 0;
 	IntroTitleScene() {}
 	~IntroTitleScene() {}

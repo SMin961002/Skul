@@ -20,7 +20,7 @@
 void Stage::Init()
 {
 	trigger = new Trigger;
-
+	isFade = false;
 	isStart = false;
 	m_speed = 0;
 	m_backGround = IMAGEMANAGER->FindImage("Background");
@@ -87,14 +87,6 @@ void Stage::Init()
 				trigger->trigger[2].bottom = iter->y;
 			}
 		}
-		else if (iter->key == "Fanatic")
-		{
-			//OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<Fanatic>();
-		}
-		else if (iter->key == "Leon")
-		{
-			//OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<LeoniaSoldier>();
-		}
 		else if (iter->key == "NormalRoom")
 		{
 			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(0);
@@ -122,10 +114,6 @@ void Stage::Init()
 		else if (iter->key == "HeadResult")
 		{
 			OBJECTMANAGER->AddObject("HeadResult", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<HeadResult>();
-		}
-		else if (iter->key == "AStatue")
-		{
-			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<AngelStatue>();
 		}
 		else if (iter->key == "Fountain")
 		{
@@ -155,6 +143,7 @@ void Stage::Update()
 		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	}
 	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
+	trigger->Update();
 }
 
 void Stage::Render()

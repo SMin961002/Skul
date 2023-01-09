@@ -35,7 +35,7 @@ void IntroTitleScene::Update()
 		{
 		}
 	}
-	
+
 }
 
 void IntroTitleScene::Render()
@@ -44,7 +44,8 @@ void IntroTitleScene::Render()
 	IMAGEMANAGER->UIRender(imgTitle, 0, 0, 1, 1, 0, alpha);
 	if (alpha >= 1)
 		IMAGEMANAGER->UIRender(imgtxt, 0, 0, 1, 1, 0, alpha2);
-	SCENEMANAGER->FadeIn(0.01, [&]() { m_isTitleStart = true; }, 5);
+	if (m_isTitleStart == false)
+		SCENEMANAGER->FadeIn(0.01, [&]() { m_isTitleStart = true; }, 5);
 }
 
 void IntroTitleScene::Release()

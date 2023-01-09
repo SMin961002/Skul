@@ -20,14 +20,15 @@ Trigger::Trigger()
 }
 void Trigger::Init()
 {
-	
+
 	nowTriggerIndex = 0;
 	SpawnEnemy();
 }
 
 void Trigger::Update()
 {
-	if (nowTriggerIndex < 3 && OBJECTMANAGER->GetEnemyCount() == 0)
+	int size = OBJECTMANAGER->GetEnemyCount();
+	if (nowTriggerIndex < 3 && size <= 0)
 	{
 		OnTrigger();
 	}
@@ -39,7 +40,8 @@ void Trigger::Render()
 
 void Trigger::Release()
 {
-	m_structureData->clear();
+	if (m_structureData->size() > 0)
+		m_structureData->clear();
 }
 
 void Trigger::OnTrigger()
@@ -59,9 +61,9 @@ void Trigger::SpawnEnemy()
 		{
 			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<AngelStatue>();
 		}
-		if (iter->key == "Lfanatic")
+		if (iter->key == "Cfanatic")
 		{
-			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<LampFanatic>();
+			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<CandleFanatic>();
 		}
 		if (iter->key == "Fanatic")
 		{
