@@ -20,7 +20,7 @@ Trigger::Trigger()
 }
 void Trigger::Init()
 {
-	
+
 	nowTriggerIndex = 0;
 	SpawnEnemy();
 }
@@ -28,7 +28,7 @@ void Trigger::Init()
 void Trigger::Update()
 {
 	int size = OBJECTMANAGER->GetEnemyCount();
-	if (nowTriggerIndex < 3 &&  size <= 0)
+	if (nowTriggerIndex < 3 && size <= 0)
 	{
 		OnTrigger();
 	}
@@ -40,7 +40,8 @@ void Trigger::Render()
 
 void Trigger::Release()
 {
-	m_structureData->clear();
+	if (m_structureData->size() > 0)
+		m_structureData->clear();
 }
 
 void Trigger::OnTrigger()

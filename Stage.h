@@ -4,6 +4,7 @@
 class Stage : public Scene
 {
 	private:
+		bool isFade;
 		Trigger* trigger;
 		bool isStart = false;
 		CImage* m_backGround;

@@ -107,7 +107,6 @@ void LittleBorn::CollisionSetting()
 
 void LittleBorn::Release()
 {
-	m_projectileHead->DestroyProjectileHead();
 }
 
 void LittleBorn::CoolDown()

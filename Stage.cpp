@@ -20,7 +20,7 @@
 void Stage::Init()
 {
 	trigger = new Trigger;
-
+	isFade = false;
 	isStart = false;
 	m_speed = 0;
 	m_backGround = IMAGEMANAGER->FindImage("Background");
