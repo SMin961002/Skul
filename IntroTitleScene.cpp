@@ -19,15 +19,23 @@ void IntroTitleScene::Update()
 	{
 		r += 0.01;
 		alpha2 = cos(r) / 2 + 0.5;
-	}
 
-	for (int i = 0; i < 256; i++)
-	{
-		if (KEYMANAGER->GetOnceKeyDown(i))
+		for (int i = 1; i < 256; i++)
 		{
-			SCENEMANAGER->ChangeScene("EnemyTestScene");
+			if (KEYMANAGER->GetStayKeyDown(i))
+			{
+				SCENEMANAGER->ChangeScene("EnemyTestScene");
+				cout << i << endl;
+			}
 		}
 	}
+	for (int i = 1; i < 256; i++)
+	{
+		if (KEYMANAGER->GetStayKeyDown(i))
+		{
+		}
+	}
+	
 }
 
 void IntroTitleScene::Render()
