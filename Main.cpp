@@ -12,6 +12,9 @@ void Main::Init()
 
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
+
+	srand(GetTickCount64());
+
 	//SCENEMANAGER->ChangeScene("EnemyTestScene");
 	inven = new Inventory;
 	inven->Init();

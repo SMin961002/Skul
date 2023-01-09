@@ -27,8 +27,6 @@ private:
 	vImage* _imgPhase1BossNervousAttack;
 	vImage* _imgPhase1BossNervousAttackLoop;
 	vImage* _imgPhase1BossNervousEnd;
-	vImage* _imgPhase1NervousEffectShine;
-	vImage* _imgPhase1NervousEffectImpact;
 
 	// 보스 1페이즈 캐스팅
 	vImage* _imgPhase1BossCastingReady;
@@ -60,9 +58,11 @@ private:
 	vImage* _imgPhase1BossBarrierSpark;
 	CImage* _imgPhase1BossBarrierCrack;
 	vImage* _imgPhase1BossBarrierCrackImpact;
+
 	bool m_isAttack;
 	int m_bossState;
 	float m_patterTimer;
+
 	enum BossPhase2State
 	{
 		eIntro1,
@@ -104,16 +104,29 @@ protected:
 
 	float _castingMotionDeltaTime;
 	float _consecrationDeltaTime;
+	float _locate;
 
 	vector<Baptism*> _vBaptism;
 	vector<Baptism*>::iterator _viBaptism;
+	
+protected:
+	bool _isWorshipCheck;
+	bool _isWorshipFirstWaveOn;
+	bool _isWorshipSecondWaveOn;
+	bool _updateCheck;
+
+	float _worshipDeltaTime;
 
 	vector<WorshipLeft*> _vWorshipLeft;
 	vector<WorshipLeft*>::iterator _viWorshipLeft;
 
 	vector<WorshipRight*> _vWorshipRight;
 	vector<WorshipRight*>::iterator _viWorshipRight;
+
+	int rand;
 public:
+	float getLocate() { return _locate; }
+
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;

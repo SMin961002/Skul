@@ -165,12 +165,29 @@
     <ClCompile Include="PlayerMove.cpp">
       <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
+    <ClCompile Include="GoldResult.cpp" />
+    <ClCompile Include="HeadItem.cpp" />
+    <ClCompile Include="HeadResult.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="MenuUI.cpp" />
+    <ClCompile Include="NpcObject.cpp" />
+    <ClCompile Include="ResultValue.cpp" />
     <ClCompile Include="Baptism.cpp" />
     <ClCompile Include="Consecration.cpp" />
     <ClCompile Include="Nervousness.cpp" />
-    <ClCompile Include="Worship.cpp" />
-    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="ProjectileHeadSkull.cpp" />
+    <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="IllusionEffect.cpp" />
+    <ClCompile Include="Trigger.cpp" />
+    <ClCompile Include="Baptism.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="BossPhase1EnemyCandle.cpp">
+      <Filter>Game\Object\Boss\BossEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BossPhase1EnemyFnatic.cpp">
+      <Filter>Game\Object\Boss\BossEnemy</Filter>
+    </ClCompile>
     <ClCompile Include="Card.cpp">
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClCompile>
@@ -215,6 +232,25 @@
     </ClCompile>
     <ClCompile Include="FireKnife.cpp">
       <Filter>Game\Object\Enemy\LampFanatic</Filter>
+      <Filter>Game\Object\Charactor\Gambler</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorObject.cpp">
+      <Filter>Game\Object\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="FireKnife.cpp">
+      <Filter>Game\Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Core\Manager\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Nervousness.cpp">
+      <Filter>Game\Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Worship.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Consecration.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
     <ClCompile Include="BossBall.cpp" />
     <ClCompile Include="Gambler.cpp" />
@@ -375,9 +411,6 @@
       <Filter>Game\Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="Baptism.h">
-      <Filter>Game\Object\Boss\Casting Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="Consecration.h">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClInclude>
     <ClInclude Include="ShopScene.h">
