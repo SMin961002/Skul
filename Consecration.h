@@ -1,12 +1,16 @@
 #pragma once
 #include "Component.h"
 
+class BossObject;
+
 class Consecration : public Component
 {
 private:
 	vImage* _imgPhase1BossConsecrationLoop;
 
 	float _deltaTime;
+
+	BossObject* _boss;
 
 	CollisionComponent* _collision;
 	CollisionComponent* _collision2;

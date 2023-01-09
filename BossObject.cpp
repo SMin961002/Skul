@@ -4,6 +4,7 @@
 #include "Consecration.h"
 #include "Baptism.h"
 #include "Worship.h"
+#include "Player.h"
 
 void BossObject::Init()
 {
@@ -70,14 +71,14 @@ void BossObject::Init()
 	_castingMotionDeltaTime = 0;
 	_consecrationDeltaTime = 0;
 
-	for (int i = 0; i < 30; i++)
-	{
-		//OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
-		Baptism* tmp = OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
-		tmp->SetIsActive(false);
-
-		_vBaptism.push_back(tmp);
-	}
+	//for (int i = 0; i < 30; i++)
+	//{
+	//	//OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
+	//	Baptism* tmp = OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
+	//	tmp->SetIsActive(false);
+	//
+	//	_vBaptism.push_back(tmp);
+	//}
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -131,23 +132,41 @@ void BossObject::Init()
 
 void BossObject::Update()
 {
-	if (KEYMANAGER->GetToggleKey('Q'))
+	
+	if (_isIdleOn == true)
 	{
-		_isNervousnessOn = true;
-		_isIdleOn = false;
+		rand = MY_UTILITY::getFromIntTo(0, 3);
 	}
-
-	if (KEYMANAGER->GetToggleKey('W'))
-	{
-		_isChoiceOn = true;
-		_isIdleOn = false;
-	}
-
-	if (KEYMANAGER->GetToggleKey('E'))
-	{
-		_isCastingOn = true;
-		_isIdleOn = false;
-	}
+		switch (rand)
+		{
+		case 0:
+			_isNervousnessOn = true;
+			_isIdleOn = false;
+			break;
+		case 1:
+			_isChoiceOn = true;
+			_isIdleOn = false;
+			break;
+		case 2:
+			_isCastingOn = true;
+			_isIdleOn = false;
+			break;
+		}
+	//if (KEYMANAGER->GetToggleKey('Q'))
+	//{
+	//	_isNervousnessOn = true;
+	//	_isIdleOn = false;
+	//}
+	//if (KEYMANAGER->GetToggleKey('W'))
+	//{
+	//	_isChoiceOn = true;
+	//	_isIdleOn = false;
+	//}
+	//if (KEYMANAGER->GetToggleKey('E'))
+	//{
+	//	_isCastingOn = true;
+	//	_isIdleOn = false;
+	//}
 
 	if (_isNervousnessLoopOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
 	{
@@ -364,6 +383,7 @@ void BossObject::Render()
 		if (_patternLock == false)
 		{
 			_patternSelect = MY_UTILITY::getFromIntTo(0, 2);
+			_locate = OBJECTMANAGER->m_player->GetplayerX();
 		}
 
 		switch (_patternSelect)
@@ -372,13 +392,13 @@ void BossObject::Render()
 			_patternLock = true;
 			if (_isConsecrationLoopOn == false)
 			{
-				_imgPhase1BossConsecrationStart->CenterRender(m_obj->x + 200, m_obj->y - 130, 1.8, 1.8, 0, false);
+				_imgPhase1BossConsecrationStart->CenterRender(_locate, m_obj->y - 130, 1.8, 1.8, 0, false);
 			}
 			if (_imgPhase1BossConsecrationStart->GetIsImageEnded() == true)
 			{
 				if (_isConsecrationLoopOn == false)
 				{
-					OBJECTMANAGER->AddObject("Consecration", m_obj->x + 200, m_obj->y - 130, 1)->AddComponent<Consecration>();
+					OBJECTMANAGER->AddObject("Consecration", _locate, m_obj->y - 130, 1)->AddComponent<Consecration>();
 				}
 
 				_consecrationDeltaTime += DELTA_TIME;
@@ -465,4 +485,3 @@ void BossObject::Render()
 void BossObject::Release()
 {
 }
-

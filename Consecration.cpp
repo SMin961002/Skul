@@ -3,6 +3,7 @@
 #include "PixelCollisionComponent.h"
 #include "RigidBodyComponent.h"
 #include "Player.h"
+#include "BossObject.h"
 
 void Consecration::Init()
 {
@@ -26,6 +27,16 @@ void Consecration::Init()
 
 void Consecration::Update()
 {
+
+	if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+	{
+		m_obj->x += 2;
+	}
+	else if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+	{
+		m_obj->x -= 2;
+	}
+
 	if (_deltaTime > 2)
 	{
 		m_obj->ObjectDestroyed();

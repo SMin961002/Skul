@@ -82,6 +82,7 @@ protected:
 
 	float _castingMotionDeltaTime;
 	float _consecrationDeltaTime;
+	float _locate;
 
 	vector<Baptism*> _vBaptism;
 	vector<Baptism*>::iterator _viBaptism;
@@ -99,7 +100,11 @@ protected:
 
 	vector<WorshipRight*> _vWorshipRight;
 	vector<WorshipRight*>::iterator _viWorshipRight;
+
+	int rand;
 public:
+	float getLocate() { return _locate; }
+
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;

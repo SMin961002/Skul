@@ -194,9 +194,6 @@
     <ClCompile Include="Card.cpp">
       <Filter>Game\Object\Charactor\Gambler</Filter>
     </ClCompile>
-    <ClCompile Include="Consecration.cpp">
-      <Filter>Game\Object\Boss\Casting Pattern</Filter>
-    </ClCompile>
     <ClCompile Include="DoorObject.cpp">
       <Filter>Game\Object\Door</Filter>
     </ClCompile>
@@ -210,6 +207,9 @@
       <Filter>Game\Object\Boss</Filter>
     </ClCompile>
     <ClCompile Include="Worship.cpp">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Consecration.cpp">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
   </ItemGroup>
@@ -368,9 +368,6 @@
     <ClInclude Include="Baptism.h">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="Consecration.h">
-      <Filter>Game\Object\Boss\Casting Pattern</Filter>
-    </ClInclude>
     <ClInclude Include="ShopScene.h">
       <Filter>Game\Scene\ShopScene</Filter>
     </ClInclude>
@@ -419,6 +416,11 @@
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Core\Manager\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BossPhase1EnemyFnatic.h" />
+    <ClInclude Include="BossPhase1EnemyCandle.h" />
+    <ClInclude Include="Consecration.h">
+      <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

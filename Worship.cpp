@@ -1,10 +1,17 @@
 #include "stdafx.h"
 #include "Worship.h"
+#include "PixelCollisionComponent.h"
+#include "RigidBodyComponent.h"
+#include "Player.h"
 
 void WorshipLeft::Init()
 {
 	_imgPhase1BossWorshipLeft = IMAGEMANAGER->FindImageVector("Boss_Worship");
 	_imgPhase1BossWorshipLeft->Setting(0.1, true);
+
+	_collision = m_obj->AddComponent<CollisionComponent>();
+	m_obj->AddCollisionComponent(_collision);
+
 }
 
 void WorshipLeft::Update()
@@ -15,6 +22,8 @@ void WorshipLeft::Update()
 	{
 		m_obj->ObjectDestroyed();
 	}
+
+	_collision->Setting(100, m_obj->x, m_obj->y, "Attack");
 }
 
 void WorshipLeft::Render()
@@ -30,7 +39,9 @@ void WorshipRight::Init()
 {
 	_imgPhase1BossWorshipRight = IMAGEMANAGER->FindImageVector("Boss_Worship");
 	_imgPhase1BossWorshipRight->Setting(0.1, true);
-
+	
+	_collision = m_obj->AddComponent<CollisionComponent>();
+	m_obj->AddCollisionComponent(_collision);
 }
 
 void WorshipRight::Update()
@@ -41,6 +52,8 @@ void WorshipRight::Update()
 	{
 		m_obj->ObjectDestroyed();
 	}
+	_collision->Setting(100, m_obj->x, m_obj->y, "Attack");
+
 }
 
 void WorshipRight::Render()
