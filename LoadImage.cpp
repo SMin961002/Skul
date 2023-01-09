@@ -204,7 +204,8 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Nervousness_Effect_Attack", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Effect/Attack/Phase1_Nervousness_Attack_", 1, 33);
 	AddImageVector("Boss_Nervousness_Effect_Projectile", L"./Resources/Saint_Joanna/Phase_1/Nervousness/Effect/Projectile/Phase1_Nervousness_Projectile_", 1, 12);
 	// 1페이즈_분수 구슬
-	AddImageVector("Boss_HolyFountain_Start", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/HolyBarrierOrb/Start/Phase1_HolyBarrier_Orb_Start_", 1, 22);
+	AddImageVector("Boss_HolyFountain_Start_Left", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/HolyBarrierOrb/Start/Phase1_HolyBarrier_Orb_Start_", 1, 22);
+	AddImageVector("Boss_HolyFountain_Start_Right", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/HolyBarrierOrb/Start/Phase1_HolyBarrier_Orb_Start_", 1, 22);
 	AddImageVector("Boss_HolyFountain_Orb", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/HolyBarrierOrb/Orb/Phase1_HolyBarrier_Orb_", 1, 47);
 	AddImageVector("Boss_HolyFountain_End", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/HolyBarrierOrb/End/Phase1_HolyBarrier_Orb_End_", 1, 24);
 	// 1페이즈_분수
