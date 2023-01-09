@@ -22,18 +22,18 @@ void BossBall::Init()
 
 void BossBall::Update()
 {
-	if (dist < 50)
+	if (dist < 250)
 	{
-		dist += 0.1;
+		dist += 0.3;
 	}
 
 	m_obj->x = startX + cos(rot) * dist;
-	m_obj->y = startX + cos(rot) * dist;
+	m_obj->y = startY + sin(rot) * dist;
 }
 
 void BossBall::Render()
 {
-	img[m_state]->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
+	img[m_state]->CenterRender(m_obj->x, m_obj->y, 1.5, 1.5, 0);
 }
 
 void BossBall::Release()

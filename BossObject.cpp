@@ -9,6 +9,10 @@ void BossObject::Init()
 {
 	m_bossState = eIntro1;
 	m_talkCount = 0;
+	bossBall[0] = nullptr;
+	bossBall[1] = nullptr;
+	bossBall[2] = nullptr;
+
 	/*
 	"Phase2_Boss_Idle",
 	"Phase2_Boss_Intro_1
@@ -412,6 +416,12 @@ void BossObject::Render()
 				if (m_phase2Img[eCreateBallR]->GetIsImageEnded() == true)
 				{
 					m_bossState = eCreateBallA;
+					bossBall[0] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+					bossBall[1] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+					bossBall[2] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eEnemy)->AddComponent<BossBall>();
+					bossBall[0]->Setting((2 * 3.141592) / 3 * 1);
+					bossBall[1]->Setting((2 * 3.141592) / 3 * 2);
+					bossBall[2]->Setting((2 * 3.141592) / 3 * 3);
 				}
 			}
 			else if (m_bossState == eCreateBallA)

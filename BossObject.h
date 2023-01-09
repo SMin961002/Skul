@@ -20,7 +20,7 @@ private:
 
 	// 보스 1페이즈 대기 상태
 	vImage* _imgBossIdle;
-	//BossBall * 
+	BossBall* bossBall[3];
 	// 보스 1페이즈 땅찍기
 	vImage* _imgPhase1BossNervousReady;
 	vImage* _imgPhase1BossNervousReadyLoop;
