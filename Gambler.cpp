@@ -31,7 +31,7 @@ void Gambler::ImageSetting()
 	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Gambler_Attack1");
 	img[eTagAction] = IMAGEMANAGER->FindImageVector("Gambler_TagAction");
 	img[eTagAction]->Setting(0.07f, false);
-
+	//
 	nowImg = img[eIdle];
 }
 
