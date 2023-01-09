@@ -102,7 +102,7 @@ void BossPhase1EnemyCandle::Update()
 		m_hpbar = (1 / m_maxhp);
 
 	}
-
+	
 }
 
 void BossPhase1EnemyCandle::Render()
@@ -142,6 +142,7 @@ void BossPhase1EnemyCandle::Render()
 
 	}
 }
+
 
 void BossPhase1EnemyCandle::Release()
 {
