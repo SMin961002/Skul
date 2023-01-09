@@ -407,6 +407,7 @@ void LittleBorn::InputAttackKey()
 
 void LittleBorn::TagAction()
 {
+	m_headThrow = false;
 	m_nonCansleAction = true;
 	m_imageChange = true;
 	m_action = eTagAction;

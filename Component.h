@@ -1,5 +1,4 @@
 #pragma once
-#include "Object.h"
 
 class Object;
 class Component
@@ -38,5 +37,7 @@ public:
 		m_isDel = del;
 	}
 	void SetObject(Object* obj) { m_obj = obj; }
+
+	void SetPosition(float x, float y);
 };
 

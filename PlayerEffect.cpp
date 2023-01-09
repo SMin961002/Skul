@@ -33,7 +33,7 @@ void GamblerAttack_1::Init()
 {
 	Effect::Init();
 	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_Attack1Effect");
-	m_img->Setting(0.07, false);//
+	m_img->Setting(0.07, false);
 }
 
 void GamblerAttack_2::Init()
@@ -76,3 +76,31 @@ void BlackJackSpark::Move()
 	x = m_isReversed ? x - 500 * DELTA_TIME : x + 500 * DELTA_TIME;
 }
 
+void RouletteReady::Init()
+{
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteEmerge");
+}
+
+void RouletteShot::Init()
+{
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteCircle");
+}
+
+void RouletteBigShot::Init()
+{
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteBigShotCircle");
+}
+void RouletteBrokenEffect::Init()
+{
+	Effect::Init();
+	//m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteBigShotBroken");
+}
+void RouletteBrokenEffectBigShot::Init()
+{
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteBigShotBroken");
+	m_img->Setting(0.03, false);
+}

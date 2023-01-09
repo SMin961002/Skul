@@ -147,7 +147,6 @@ void Player::ChangeHead()
 		eSkulSpecies tmp = m_nowHead->GetSpecies();
 		m_headTagCool = m_nowHead->GetTagCoolTime();
 		m_nowHead->ResetAll();
-		m_headList[static_cast<int>(m_headSlot)]->ParameterSetting();
 
 		switch (m_headSlot)
 		{

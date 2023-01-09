@@ -74,13 +74,21 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_Attack2Effect", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_2/", 1, 22);
 	AddImageVector("Gambler_JumpAttackEffect", L"./Resources/Png/Skul/Gambler/Effect/JumpAttack/", 1, 24);
 	AddImageVector("Gambler_JockerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BasicAttack_Joker_Explosion/", 1, 17);
+	//갬블러스킬
 	AddImageVector("Gambler_BlackJackSpark", L"./Resources/Png/Skul/Gambler/Effect/BlackJackSpark/", 1, 11);
 	AddImageVector("Gambler_BlackJackJokerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BlackJack_BigHit_Explosion/", 1, 15);
-	AddImageVector("Gambler_Roullet", L"./Resources/Png/Skul/Gambler/Effect/Roulette/", 1, 18);
+	AddImageVector("Gambler_Roulette", L"./Resources/Png/Skul/Gambler/Effect/Roulette/", 1, 18);
+	AddImageVector("Gambler_RouletteCircle", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Circle/", 1,14);
+	AddImageVector("Gambler_RouletteBigShot", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShot/", 1, 8);
+	AddImageVector("Gambler_RouletteBigShotBroken", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShotEffect/", 1, 23);
+	AddImageVector("Gambler_RouletteBigShotCircle", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShotCircle/", 1, 8);
+	AddImageVector("Gambler_RouletteEmerge", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Emerge/", 1, 24);
+	AddImageVector("Gambler_Roulette_BlackBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Black_BigHit/", 1, 91);
+	AddImageVector("Gambler_Roulette_RedBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Red_BigHit/", 1, 49);
 	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
 	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
-	AddImage("GamblerRoulletBlack", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Black.png");
-	AddImage("GamblerRoulletRed", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Red.png");
+	AddImage("GamblerRouletteBlack", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Black.png");
+	AddImage("GamblerRouletteRed", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Red.png");
 
 	// 타일 이미지
 	AddTileImage(L"./Resources/Tile/4Stage/01.png");
