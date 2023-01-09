@@ -76,6 +76,9 @@ private:
 	vImage* m_phase2Img[eEnd];
 	int m_phase2Patter;
 protected:
+	bool _isIntroOn;
+	float _introTimeCheck;
+
 	bool _isIdleOn;
 	bool _patternLock;
 
@@ -125,7 +128,7 @@ protected:
 
 	int rand;
 public:
-	float getLocate() { return _locate; }
+	bool getIdleOn() { return _isIdleOn; }
 
 	virtual void Init() override;
 	virtual void Update() override;

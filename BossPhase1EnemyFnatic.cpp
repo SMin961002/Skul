@@ -142,7 +142,7 @@ void BossPhase1EnemyFnatic::Render()
 		{
 
 			m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
-			m_obj->GetComponent< PixelCollisionComponent>()->SetIsActive(false);
+			m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(false);
 			m_hitpointCollision->SetIsActive(false);
 			m_hitCollision->SetIsActive(false);
 			m_obj->ObjectDestroyed();
