@@ -520,6 +520,12 @@ void ImageManager::LoadImages()
 	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");
 	AddImage("PlayerStatusUI", L"./Resources/UI/PlayerStatusUI.png");
 	AddImage("ItemUI", L"./Resources/UI/itemUI.png");
+
+	AddImage("IntroTitle", L"./Resources/IntroTitle.png");
+	AddImage("IntroClick", L"./Resources/IntroClick.png");
+	AddImage("IntroBg", L"./Resources/IntroBg.png");
+
+
 }
 
 ID2D1Bitmap* ImageManager::AddBitmap(std::wstring path, UINT* Width, UINT* Height)

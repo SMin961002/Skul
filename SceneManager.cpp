@@ -6,6 +6,7 @@
 #include "EnemyTestScene.h"
 #include "ShopScene.h"
 #include "BossScene.h"
+#include "IntroTitleScene.h"
 
 SceneManager::SceneManager()
 {
@@ -28,7 +29,7 @@ void SceneManager::Init()
 	AddScene("MapToolScene", new MapToolScene);
 	AddScene("EnemyTestScene", new EnemyTestScene);
 	AddScene("ShopScene", new ShopScene);
-
+	AddScene("IntroTitleScene", new IntroTitleScene);
 	flag = 0;
 	// 페이드인아웃 할때 다른플레그이면 알파값을 초기화해줌
 	// 초기화를해줘야하는데 어떻게 해야할지 몰라서 해둠

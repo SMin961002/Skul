@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
-class BossPhase1EnemyFnatic : public Component
+#include "Enemy.h"
+
+class BossPhase1EnemyFnatic : public Enemy
 {
 private:
 	float m_maxhp; 
