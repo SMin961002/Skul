@@ -62,10 +62,15 @@ void Gambler::ParameterSetting()
 
 	m_skillNowCoolA = 0;
 	m_skillNowCoolS = 0;
-	m_skillCoolA = 15;
-	m_skillCoolS = 11;
+	m_skillCoolA = 12;	//∫Ì∑¢¿Ë
+	m_skillCoolS = 15;	//∑Í∑ø
 	m_skillUsing = false;
 	m_imageChange = false;
+	m_blackJackOn = false;
+	m_blackJackShotCount = 0;
+	m_blackJackDelay = 0.15;
+	m_blackJackNowDelay = 0.0f;
+	m_blackJack = 0;
 
 	m_effectOverap = false;
 }
@@ -78,6 +83,42 @@ void Gambler::CollisionSetting()
 
 void Gambler::CoolDown()
 {
+	float deltaT = DELTA_TIME;
+	if (m_skillNowCoolA != 0)
+	{
+		m_skillNowCoolA - deltaT;
+		if (m_skillNowCoolA < 0)
+			m_skillNowCoolA = 0;
+	}
+	if (m_skillNowCoolS != 0)
+	{
+		m_skillNowCoolS - deltaT;
+		if (m_skillNowCoolS < 0)
+			m_skillNowCoolS = 0;
+	}
+
+	if (m_blackJackOn)
+	{
+		m_blackJackNowDelay -= deltaT;
+		if (m_blackJackNowDelay <= 0)
+		{
+			m_blackJackNowDelay = m_blackJackDelay;
+			if (m_blackJackShotCount < 21)
+			{
+				if(m_isLeft)
+					OBJECTMANAGER->AddObject("BlackJackCard", *m_x+30, *m_y - 48 + MY_UTILITY::getInt(24), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+				else
+					OBJECTMANAGER->AddObject("BlackJackCard", *m_x-30, *m_y - 48 + MY_UTILITY::getInt(24), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+
+				if (++m_blackJackShotCount >= 21)
+				{
+					m_blackJackOn = false;
+					m_blackJackShotCount = 0;
+					m_blackJackNowDelay = 0;
+				}
+			}//end under21 shot
+		}//end  0 delay blackJack
+	}//end blackjack on
 }
 
 void Gambler::ActionArrangement()
@@ -197,6 +238,21 @@ void Gambler::InputSkillKey()
 {
 	if (KEYMANAGER->GetOnceKeyDown('A'))
 	{
+		int tmp = MY_UTILITY::getInt(10);
+		if (tmp == 9)
+			m_blackJack = 1;
+		else if (tmp <= 1)
+			m_blackJack = -1;
+		else m_blackJack = 0;
+
+		if(m_isLeft)
+			OBJECTMANAGER->AddObject("BlackJackCard", *m_x+30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+		else
+			OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+
+		m_blackJackOn = true;
+		m_blackJackShotCount = 1;
+		m_blackJackNowDelay = m_blackJackDelay;
 	}
 
 	if (KEYMANAGER->GetOnceKeyDown('S'))

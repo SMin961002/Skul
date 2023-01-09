@@ -212,6 +212,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Worship.cpp" />
+    <ClCompile Include="LoadImage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AngelStatue.h" />

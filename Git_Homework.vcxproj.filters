@@ -195,6 +195,9 @@
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
     <ClCompile Include="IntroTitleScene.cpp" />
+    <ClCompile Include="LoadImage.cpp">
+      <Filter>Core\Manager\ImageManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">

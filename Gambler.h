@@ -9,8 +9,11 @@ class Gambler : public Head
 	*/
 private:
 	bool m_effectOverap;
-
-
+	bool m_blackJackOn;
+	int m_blackJackShotCount;
+	int m_blackJack;
+	float m_blackJackDelay;
+	float m_blackJackNowDelay;
 
 public:
 	bool m_can[eActionTagNumber];

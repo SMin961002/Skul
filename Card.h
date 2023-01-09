@@ -4,8 +4,8 @@ class Card : public Component
 {
 	//블랙잭 노말 / 조커 카드 자식클래스로 하나 만든 뒤 Init 재정의하기 - joker Explosion
 	//실패시 일반카드 24개 발사
-	//노말성공시 관통카드, spark effect
-	//대성공시 펑펑카드(bighit small), 마지막카드 big explosion
+	//노말성공시 관통카드, spark effect, 15뎀
+	//대성공시 펑펑카드(bighit small), 마지막카드 big explosion, 뎀 30
 	//보스에너미 타격판정 바꾸기
 protected:
 	const float m_speed = 500;
@@ -38,24 +38,7 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 	//성공0, 실패 -1, 대성공 1
-	void Setting(int success)
-	{
-		switch (success)
-		{
-		case -1:
+	void Setting(int success);
 
-			break;
-		case 1:
-			break;
-
-		default:
-			if (m_isJoker)
-				m_img = IMAGEMANAGER->FindImage("GamblerCardJoker");
-			else
-				m_img = IMAGEMANAGER->FindImage("GamblerCardNormal");
-
-			break;
-		}
-	}
 	virtual void OnCollision(string collisionName, Object* other)override;
 };

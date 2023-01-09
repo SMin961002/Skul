@@ -52,6 +52,12 @@ public:
 	void Init() override;
 };
 
+class BlackJackJokerExplosion : public Effect
+{
+public:
+	void Init() override;
+};
+
 class BlackJackSpark : public Effect
 {
 public:

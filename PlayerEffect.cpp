@@ -43,13 +43,6 @@ void GamblerAttack_2::Init()
 	m_img->Setting(0.07, false);							
 }
 
-void JokerExplosion::Init()
-{
-	Effect::Init();
-	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_JockerExplosion");
-	m_img->Setting(0.04, false);
-}
-
 void GamblerJumpAttack::Init()
 {
 	Effect::Init();
@@ -57,10 +50,29 @@ void GamblerJumpAttack::Init()
 	m_img->Setting(0.07, false);
 }
 
+void JokerExplosion::Init()
+{
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_JockerExplosion");
+	m_img->Setting(0.04, false);
+}
+
+void BlackJackJokerExplosion::Init()
+{
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_BlackJackJokerExplosion");
+	m_img->Setting(0.04, false);
+}
+
 void BlackJackSpark::Init()
 {
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_BlackJackSpark");
+	m_img->Setting(0.1, false);
 }
 
 void BlackJackSpark::Move()
 {
+	x = m_isReversed ? x - 500 * DELTA_TIME : x + 500 * DELTA_TIME;
 }
+
