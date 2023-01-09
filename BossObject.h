@@ -5,6 +5,8 @@
 class Baptism;
 class WorshipLeft;
 class WorshipRight;
+class HolyFountainLeft;
+class HolyFountainRight;
 
 class BossObject : public Component
 {
@@ -14,6 +16,9 @@ private:
 	float chairY = 0;
 	float chairX = 0;
 private:
+	HolyFountainLeft* _left;
+	HolyFountainRight* _right;
+
 	CImage* _imgBossChair;
 	// 보스 1페이즈 대화
 	vImage* _imgBossTalk;

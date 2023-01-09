@@ -5,6 +5,7 @@
 #include "Baptism.h"
 #include "Worship.h"
 #include "Player.h"
+#include "HolyFountain.h"
 
 void BossObject::Init()
 {
@@ -274,7 +275,10 @@ void BossObject::Update()
 	{
 		Page_2();
 	}
-
+	//if (_left->GetIsDelete() == true)
+	//{
+	//	m_page = 1;
+	//}
 }
 
 void BossObject::Render()
