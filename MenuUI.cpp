@@ -41,6 +41,10 @@ void MenuUI::Update()
 			SCENEMANAGER->SetMenuActive(false);
 			m_keyState = 0;
 			break;
+		case 1:
+			isResetScene = true;
+			SCENEMANAGER->SetMenuActive(false);
+			break;
 		case 5:
 			PostMessage(_hWnd, WM_DESTROY, 0, 0);
 			break;
@@ -80,6 +84,7 @@ void MenuUI::Render()
 		IMAGEMANAGER->D2dTextOut(L"게임종료", WINSIZE_X / 2 - 47, 388, { 176,153,137,1 }, 0.8f);
 	else
 		IMAGEMANAGER->D2dTextOut(L"게임종료", WINSIZE_X / 2 - 47, 388, { 97,75,59,1 }, 0.8f);
+
 
 }
 
