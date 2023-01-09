@@ -21,9 +21,10 @@ void ImageManager::LoadImages()
 	//AddImageVector("PlayerCPublicHit", L"./Resources/Png/Skul/Effect/CriticalHit/", 1, 11);
 	AddImageVector("Gambler_Attack1", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_1/", 1, 21);
 	AddImageVector("Gambler_Attack2", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_2/", 1, 22);
+	AddImageVector("Gambler_JumpAttackEffect", L"./Resources/Png/Skul/Gambler/Effect/JumpAttack/", 1, 24);
 	AddImageVector("Gambler_JockerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BasicAttack_Joker_Explosion/", 1, 17);
-	AddImageVector("Gambler_BlackJackJokerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BlackJackSpark/", 1, 11);
-	AddImageVector("Gambler_BlackJackSpark", L"./Resources/Png/Skul/Gambler/Effect/BlackJack_BigHit_Explosion/", 1, 15);
+	AddImageVector("Gambler_BlackJackSpark", L"./Resources/Png/Skul/Gambler/Effect/BlackJackSpark/", 1, 11);
+	AddImageVector("Gambler_BlackJackJokerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BlackJack_BigHit_Explosion/", 1, 15);
 	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
 	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
 
