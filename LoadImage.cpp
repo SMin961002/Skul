@@ -86,7 +86,7 @@ void ImageManager::LoadImages()
 	AddImage("GamblerRoulletRed", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Red.png");
 
 	// 타일 이미지
-	AddTileImage(L"./Resources/Tile/4Stage/01.png");
+	AddTileImage(L"./Resources/Tile/4Stage/01.png"); // 0
 	AddTileImage(L"./Resources/Tile/4Stage/02.png");
 	AddTileImage(L"./Resources/Tile/4Stage/03.png");
 	AddTileImage(L"./Resources/Tile/4Stage/04.png");
@@ -96,7 +96,7 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/08.png");
 	AddTileImage(L"./Resources/Tile/4Stage/09.png");
 	AddTileImage(L"./Resources/Tile/4Stage/10.png");
-	AddTileImage(L"./Resources/Tile/4Stage/11.png");
+	AddTileImage(L"./Resources/Tile/4Stage/11.png");// 10
 	AddTileImage(L"./Resources/Tile/4Stage/12.png");
 	AddTileImage(L"./Resources/Tile/4Stage/13.png");
 	AddTileImage(L"./Resources/Tile/4Stage/14.png");
@@ -106,7 +106,7 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/18.png");
 	AddTileImage(L"./Resources/Tile/4Stage/19.png");
 	AddTileImage(L"./Resources/Tile/4Stage/20.png");
-	AddTileImage(L"./Resources/Tile/4Stage/21.png");
+	AddTileImage(L"./Resources/Tile/4Stage/21.png");// 20
 	AddTileImage(L"./Resources/Tile/4Stage/22.png");
 	AddTileImage(L"./Resources/Tile/4Stage/23.png");
 	AddTileImage(L"./Resources/Tile/4Stage/24.png");
@@ -116,7 +116,7 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/28.png");
 	AddTileImage(L"./Resources/Tile/4Stage/29.png");
 	AddTileImage(L"./Resources/Tile/4Stage/30.png");
-	AddTileImage(L"./Resources/Tile/4Stage/31.png");
+	AddTileImage(L"./Resources/Tile/4Stage/31.png");// 30
 	AddTileImage(L"./Resources/Tile/4Stage/32.png");
 	AddTileImage(L"./Resources/Tile/4Stage/33.png");
 	AddTileImage(L"./Resources/Tile/4Stage/34.png");
@@ -126,7 +126,7 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/38.png");
 	AddTileImage(L"./Resources/Tile/4Stage/39.png");
 	AddTileImage(L"./Resources/Tile/4Stage/40.png");
-	AddTileImage(L"./Resources/Tile/4Stage/41.png");
+	AddTileImage(L"./Resources/Tile/4Stage/41.png");// 40
 	AddTileImage(L"./Resources/Tile/4Stage/42.png");
 	AddTileImage(L"./Resources/Tile/4Stage/43.png");
 	AddTileImage(L"./Resources/Tile/4Stage/44.png");
@@ -136,7 +136,7 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/48.png");
 	AddTileImage(L"./Resources/Tile/4Stage/49.png");
 	AddTileImage(L"./Resources/Tile/4Stage/50.png");
-	AddTileImage(L"./Resources/Tile/4Stage/51.png");
+	AddTileImage(L"./Resources/Tile/4Stage/51.png");// 50
 	AddTileImage(L"./Resources/Tile/4Stage/52.png");
 	AddTileImage(L"./Resources/Tile/4Stage/53.png");
 	AddTileImage(L"./Resources/Tile/4Stage/54.png");
@@ -146,7 +146,7 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/58.png");
 	AddTileImage(L"./Resources/Tile/4Stage/59.png");
 	AddTileImage(L"./Resources/Tile/4Stage/60.png");
-	AddTileImage(L"./Resources/Tile/4Stage/61.png");
+	AddTileImage(L"./Resources/Tile/4Stage/61.png");// 60
 	AddTileImage(L"./Resources/Tile/4Stage/62.png");
 	AddTileImage(L"./Resources/Tile/4Stage/63.png");
 	AddTileImage(L"./Resources/Tile/4Stage/64.png");
@@ -156,7 +156,7 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/68.png");
 	AddTileImage(L"./Resources/Tile/4Stage/69.png");
 	AddTileImage(L"./Resources/Tile/4Stage/70.png");
-	AddTileImage(L"./Resources/Tile/4Stage/71.png");
+	AddTileImage(L"./Resources/Tile/4Stage/71.png");// 70
 	AddTileImage(L"./Resources/Tile/4Stage/72.png");
 	AddTileImage(L"./Resources/Tile/4Stage/73.png");
 	AddTileImage(L"./Resources/Tile/4Stage/74.png");
@@ -166,7 +166,7 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/78.png");
 	AddTileImage(L"./Resources/Tile/4Stage/79.png");
 	AddTileImage(L"./Resources/Tile/4Stage/80.png");
-	AddTileImage(L"./Resources/Tile/4Stage/81.png");
+	AddTileImage(L"./Resources/Tile/4Stage/81.png"); // 80
 	AddTileImage(L"./Resources/Tile/4Stage/82.png");
 	AddTileImage(L"./Resources/Tile/4Stage/83.png");
 	AddTileImage(L"./Resources/Tile/4Stage/84.png");
@@ -175,7 +175,7 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/87.png");
 	AddTileImage(L"./Resources/Tile/4Stage/88.png");
 	AddTileImage(L"./Resources/Tile/4Stage/89.png");
-	AddTileImage(L"./Resources/Tile/4Stage/90.png");
+	AddTileImage(L"./Resources/Tile/4Stage/90.png");// 90
 	AddTileImage(L"./Resources/Tile/4Stage/91.png");
 	AddTileImage(L"./Resources/Tile/4Stage/92.png");
 	AddTileImage(L"./Resources/Tile/4Stage/93.png");
@@ -186,17 +186,17 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/4Stage/98.png");
 	AddTileImage(L"./Resources/Tile/4Stage/99.png");
 	AddTileImage(L"./Resources/Tile/4Stage/100.png");
-	AddTileImage(L"./Resources/Tile/4Stage/101.png");
+	AddTileImage(L"./Resources/Tile/4Stage/101.png");// 100
 	AddTileImage(L"./Resources/Tile/4Stage/102.png");
 	AddTileImage(L"./Resources/Tile/4Stage/103.png");
 	AddTileImage(L"./Resources/Tile/4Stage/104.png");
-	AddTileImage(L"./Resources/Tile/Lobby/49.png");
+	AddTileImage(L"./Resources/Tile/Lobby/49.png"); // 104
 	AddTileImage(L"./Resources/Tile/Lobby/50.png");
 	AddTileImage(L"./Resources/Tile/Lobby/51.png");
 	AddTileImage(L"./Resources/Tile/Lobby/52.png");
 	AddTileImage(L"./Resources/Tile/Lobby/53.png");
 	AddTileImage(L"./Resources/Tile/Lobby/54.png");
-	AddTileImage(L"./Resources/Tile/Lobby/55.png");
+	AddTileImage(L"./Resources/Tile/Lobby/55.png");// 10
 	AddTileImage(L"./Resources/Tile/Lobby/56.png");
 	AddTileImage(L"./Resources/Tile/Lobby/57.png");
 	AddTileImage(L"./Resources/Tile/Lobby/58.png");
@@ -348,6 +348,23 @@ void ImageManager::LoadImages()
 	AddStructureImage("Brokenbox1", L"./Resources/Tile/4Stage/Structure/Brokenbox1.png");
 	AddStructureImage("Chair1", L"./Resources/Tile/4Stage/Structure/chair1.png");
 	AddStructureImage("Fence1", L"./Resources/Tile/4Stage/Structure/Fence1.png");
+	AddStructureImage("Throne", L"./Resources/Tile/4Stage/Structure/Throne.png");
+	AddStructureImage("Flag", L"./Resources/Tile/4Stage/Structure/Flag.png");
+	AddStructureImage("Flag2", L"./Resources/Tile/4Stage/Structure/Flag2.png");
+	AddStructureImage("ThroneWall", L"./Resources/Tile/4Stage/Structure/ThroneCurtain1.png");
+	AddStructureImage("Thronecurtain", L"./Resources/Tile/4Stage/Structure/ThroneCurtain2.png");
+	AddStructureImage("Thronetain2", L"./Resources/Tile/4Stage/Structure/ThroneWall.png");
+	AddStructureImage("Demoncurtain", L"./Resources/Tile/4Stage/Structure/demoncurtain.png");
+	AddStructureImage("Demoncurtain2", L"./Resources/Tile/4Stage/Structure/demoncurtain2.png");
+	AddStructureImage("Demoncurtain3", L"./Resources/Tile/4Stage/Structure/demoncurtain3.png");
+	AddStructureImage("Demonwall", L"./Resources/Tile/4Stage/Structure/demonwall.png");
+	AddStructureImage("Demonwall2", L"./Resources/Tile/4Stage/Structure/demonwall2.png");
+	AddStructureImage("Demonwall3", L"./Resources/Tile/4Stage/Structure/demonwall3.png");
+	AddStructureImage("Demonwall4", L"./Resources/Tile/4Stage/Structure/demonwall4.png");
+	AddStructureImage("robbymap", L"./Resources/Tile/4Stage/Structure/robbymap.png");
+	AddStructureImage("Picture", L"./Resources/Tile/4Stage/Structure/picture.png");
+	AddStructureImage("Picture2", L"./Resources/Tile/4Stage/Structure/picture2.png");
+	AddStructureImage("Chandelier", L"./Resources/Tile/4Stage/Structure/Chandelier.png");
 
 	// 저장은 백스페이스 숫자키와 번호키로 오브젝트교체 ,f7 <- 신규씬 , 좌클릭은 뒤에 그려지고 우클릭은 앞에
 	// 타일 지우는거 컨트롤 <- 맨마지막에 그린것만 지워짐, 맵크기는 영상 참조
@@ -455,8 +472,9 @@ void ImageManager::LoadImages()
 	AddImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
 	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
 
-	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
-	AddImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
+	AddImage("BossRoom", L"Resources/Door/BossRoom/08.png");
+	AddImage("SpirderRoom", L"Resources/Door/SpirderRoom/Deactivate_0 #80165.png");
+	AddImage("ShopRoom", L"Resources/Door/ShopRoom/Deactivate_0 #80139.png");
 
 	AddImage("ShopBackGround", L"Resources/Shop/backGround.png");
 	AddImage("ShopCloud", L"Resources/Shop/Cloud.png");
@@ -466,6 +484,10 @@ void ImageManager::LoadImages()
 	//맵 오브젝트 애니메이션
 	AddImageVector("NormalRoom", L"Resources/Door/NormalRoom/", 1, 8);
 	AddImageVector("SkulRoom", L"Resources/Door/SkulRoom/", 1, 7);
+	AddImageVector("BossRoom", L"Resources/Door/BossRoom/", 1, 7);
+	AddImageVector("ShopRoom", L"Resources/Door/ShopRoom/", 1, 8);
+	AddImageVector("SpirderRoom", L"Resources/Door/SpirderRoom/", 1, 8);
+
 	AddImageVector("Fountain", L"Resources/Tile/4Stage/Structure/fountain/", 1, 6);
 
 	//맵툴 오브젝트 이미지 저장
@@ -479,6 +501,10 @@ void ImageManager::LoadImages()
 	AddObjectImage("AStatue", L"Resources/Monster/Angel_Statue/Idle/01.png");
 	AddObjectImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
 	AddObjectImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
+	AddObjectImage("BossRoom", L"Resources/Door/BossRoom/08.png");
+	AddObjectImage("ShopRoom", L"Resources/Door/ShopRoom/Deactivate_0 #80139.png");
+	AddObjectImage("SpirderRoom", L"Resources/Door/SpirderRoom/Deactivate_0 #80165.png");
+
 	AddObjectImage("Basic", L"./Resources/Png/Skul/Basic/Motion/Idle/01.png");
 	AddObjectImage("Atifact", L"./Resources/Shop/Atifact/Deactivate_0 #80153.png");
 	AddObjectImage("FoodShop", L"./Resources/Shop/FoodShop/Deactivate_0 #80158.png");

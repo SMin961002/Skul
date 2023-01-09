@@ -150,13 +150,8 @@ void BossPhase1EnemyCandle::Release()
 
 void BossPhase1EnemyCandle::HitEnemy(float dmg, float time)
 {
-	img[eAttack]->Reset();
-	img[eIdle]->Reset();
-	img[eAttackReady]->Reset();
-	m_state = eIdle;
 	if (!m_die2)
 	{
-
 		//if (m_currenthp >= 50) 희생 이미지 없음
 		//m_state = eHit; 히트이미지 없음
 		//img[eHit]->Reset();

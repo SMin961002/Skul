@@ -30,6 +30,7 @@ void SceneManager::Init()
 	AddScene("MapToolScene", new MapToolScene);
 	AddScene("EnemyTestScene", new EnemyTestScene);
 	AddScene("ShopScene", new ShopScene);
+	AddScene("IntroTitleScene", new IntroTitleScene);
 	AddScene("Stage", new Stage);
 
 	AddScene("IntroTitleScene", new IntroTitleScene);

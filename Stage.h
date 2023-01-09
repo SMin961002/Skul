@@ -1,8 +1,10 @@
 #pragma once
 #include "Scene.h"
+#include "Trigger.h"
 class Stage : public Scene
 {
 	private:
+		Trigger* trigger;
 		bool isStart = false;
 		CImage* m_backGround;
 		CImage* m_cloude;

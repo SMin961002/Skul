@@ -274,7 +274,7 @@ void BossObject::Update()
 	{
 		Page_2();
 	}
-	
+
 }
 
 void BossObject::Render()
@@ -560,6 +560,12 @@ void BossObject::Render()
 	}
 }
 
+void BossObject::Release()
+{
+}
+
+
+
 void BossObject::Page_2()
 {
 	if (m_phase2Patter == 1)
@@ -587,8 +593,4 @@ void BossObject::Page_2()
 			m_isAttack = true;
 		}
 	}
-}
-
-void BossObject::Release()
-{
 }
