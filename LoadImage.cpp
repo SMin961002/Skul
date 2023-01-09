@@ -3,11 +3,8 @@
 
 void ImageManager::LoadImages()
 {
-	// 아이템 이미지
 	AddImage("CaerleonSword", L"./Resources/Item/CaerleonSword.png");
 
-
-	// UI 이미지
 	AddImage("Pause_Frame", L"./Resources/UI/Pause_Frame.png");
 
 	// 맵툴 UI 이미지
@@ -22,13 +19,9 @@ void ImageManager::LoadImages()
 	AddImageVector("PlayerHit", L"./Resources/Png/Skul/Effect/Hit/", 1, 12);
 	//AddImageVector("PlayerCHit", L"./Resources/Png/Skul/Effect/Hit/", 1, 8);
 	//AddImageVector("PlayerCPublicHit", L"./Resources/Png/Skul/Effect/CriticalHit/", 1, 11);
-	AddImageVector("Gambler_Attack1Effect", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_1/", 1, 21);
-	AddImageVector("Gambler_Attack2Effect", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_2/", 1, 22);
-	AddImageVector("Gambler_JumpAttackEffect", L"./Resources/Png/Skul/Gambler/Effect/JumpAttack/", 1, 24);
+	AddImageVector("Gambler_Attack1", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_1/", 1, 21);
+	AddImageVector("Gambler_Attack2", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_2/", 1, 22);
 	AddImageVector("Gambler_JockerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BasicAttack_Joker_Explosion/", 1, 17);
-	AddImageVector("Gambler_BlackJackSpark", L"./Resources/Png/Skul/Gambler/Effect/BlackJackSpark/", 1, 11);
-	AddImageVector("Gambler_BlackJackJokerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BlackJack_BigHit_Explosion/", 1, 15);
-	AddImageVector("Gambler_Roulette", L"./Resources/Png/Skul/Gambler/Effect/Roulette/", 1, 18);
 	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
 	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
 
@@ -44,7 +37,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Basic_JumpAttack", L"./Resources/Png/Skul/Basic/Motion/JumpAttack/", 1, 4);
 	AddImageVector("Basic_Reborn", L"./Resources/Png/Skul/Basic/Motion/Reborn/", 1, 27);
 	AddImageVector("Basic_Skill", L"./Resources/Png/Skul/Basic/Motion/Skill/", 1, 4);
-	AddImageVector("Basic_TagAction", L"./Resources/Png/Skul/Basic/Motion/TagAction/", 1, 28);
+	AddImageVector("Basic_TagAction", L"./Resources/Png/Skul/Basic/Motion/TagAction/", 1, 14);
 
 	//일반스컬 - 머리 없는 모션 이미지
 	AddImageVector("Basic_Headless_Idle", L"./Resources/Png/Skul/Basic/Headless/HeadlessIdle/", 1, 4);
@@ -70,9 +63,11 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_Idle", L"./Resources/Png/Skul/Gambler/Motion/Idle/", 1, 7);
 	AddImageVector("Gambler_Walk", L"./Resources/Png/Skul/Gambler/Motion/Walk/", 1, 6);
 	AddImageVector("Gambler_Dash", L"./Resources/Png/Skul/Gambler/Motion/Dash/", 1, 5);
-	AddImageVector("Gambler_Attack1", L"./Resources/Png/Skul/Gambler/Motion/AttackB1/", 1, 6);
-	AddImageVector("Gambler_Attack2", L"./Resources/Png/Skul/Gambler/Motion/AttackB2/", 1, 6);
-	AddImageVector("Gambler_Attack3", L"./Resources/Png/Skul/Gambler/Motion/AttackB3/", 1, 8);
+	AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 5);
+	AddImageVector("Gambler_AttackA2", L"./Resources/Png/Skul/Gambler/Motion/AttackA2/", 1, 6);
+	AddImageVector("Gambler_AttackB1", L"./Resources/Png/Skul/Gambler/Motion/AttackB1/", 1, 6);
+	AddImageVector("Gambler_AttackB2", L"./Resources/Png/Skul/Gambler/Motion/AttackB2/", 1, 6);
+	AddImageVector("Gambler_AttackB3", L"./Resources/Png/Skul/Gambler/Motion/AttackB3/", 1, 8);
 	AddImageVector("Gambler_JumpStart", L"./Resources/Png/Skul/Gambler/Motion/JumpStart/", 1, 3);
 	AddImageVector("Gambler_JumpRepeat", L"./Resources/Png/Skul/Gambler/Motion/JumpRepeat/", 1, 2);
 	AddImageVector("Gambler_JumpFall", L"./Resources/Png/Skul/Gambler/Motion/JumpFall/", 1, 3);
@@ -161,7 +156,6 @@ void ImageManager::LoadImages()
 	AddTileImage(L"./Resources/Tile/Lobby/78.png");
 	AddTileImage(L"./Resources/Tile/Lobby/79.png");
 
-
 	// 배경 이미지
 	AddImage("Moon", L"./Resources/BackGround/Boss_Stage_Moon.png");
 	AddImage("Building", L"./Resources/BackGround/Boss_Stage_Building.png");
@@ -231,7 +225,16 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Worship", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Worship/Phase1_Worship_Projectile_", 1, 60);
 
 	// 2페이즈_대기
+
+	// 2페이즈_인트로
 	AddImageVector("Phase2_Boss_Idle", L"./Resources/Saint_Joanna/Phase_2/Idle/Phase2_Idle_", 1, 6);
+	AddImageVector("Phase2_Boss_Intro_1", L"./Resources/Saint_Joanna/Phase2_Intro_3/", 29, 35);
+	AddImageVector("Phase2_Boss_Intro_2", L"./Resources/Saint_Joanna/Phase2_Intro_4/", 1, 28);
+
+	AddImageVector("Phase2_Boss_CreateBall_Attack", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/Attack/Sacrament_Attack_Loop_", 1, 7);
+	AddImageVector("Phase2_Boss_CreateBall_End", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/End/Sacrament_End_", 1, 7);
+	AddImageVector("Phase2_Boss_CreateBall_Ready", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/Ready/Sacrament_Ready_", 1, 6);
+
 	// 2페이즈_구체 생성
 	AddImageVector("Phase2_Boss_CreateBall_Ready", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/Ready/Sacrament_Ready_", 1, 6);
 	AddImageVector("Phase2_Boss_CreateBall_Attack", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/Attack/Sacrament_Attack_Loop_", 1, 7);
@@ -323,6 +326,7 @@ void ImageManager::LoadImages()
 	AddImageVector("GoldResoult", L"Resources/GoldResult/Idle/", 1, 19);
 	AddImageVector("GoldResoultActive", L"Resources/GoldResult/Idle/", 1, 1);
 
+
 	// 몬스터 이펙트
 	AddImageVector("Secrifice", L"Resources/Monster/Effect/Secrifice/", 1, 11);
 	AddImageVector("SkulAttack", L"Resources/Monster/Effect/SkulAttack/", 1, 10);
@@ -344,7 +348,9 @@ void ImageManager::LoadImages()
 	AddImageVector("BlackRock", L"Resources/Item/BlackRock/Rock/", 1, 1);
 	AddImageVector("GetBlackRock", L"Resources/Item/BlackRock/GetRock/", 1, 28);
 
+
 	// 보스 1페이지 잡몹
+
 	AddImageVector("Normal_Monster2_Attack", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Attack/", 15, 26);
 	AddImageVector("Normal_Monster2_Idle", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Idle/", 2, 6);
 	AddImageVector("Normal_Monster2_Move", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Move/", 8, 14);
