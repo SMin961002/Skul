@@ -10,8 +10,6 @@ private:
 
 	float _deltaTime;
 
-	BossObject* _boss;
-
 	CollisionComponent* _collision;
 	CollisionComponent* _collision2;
 	CollisionComponent* _collision3;

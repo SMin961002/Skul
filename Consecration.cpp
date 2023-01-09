@@ -27,7 +27,6 @@ void Consecration::Init()
 
 void Consecration::Update()
 {
-
 	if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
 	{
 		m_obj->x += 2;
@@ -48,7 +47,6 @@ void Consecration::Update()
 	_collision2->Setting(100, m_obj->x + 30, m_obj->y , "Attack");
 	_collision3->Setting(100, m_obj->x + 30, m_obj->y + 200, "Attack");
 	_collision4->Setting(100, m_obj->x + 30, m_obj->y + 300, "Attack");
-
 }
 
 void Consecration::Render()
