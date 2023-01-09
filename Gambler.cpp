@@ -252,6 +252,7 @@ void Gambler::InputSkillKey()
 			else
 				OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
 
+			m_skillNowCoolA = m_skillCoolA;
 			m_blackJackOn = true;
 			m_blackJackShotCount = 1;
 			m_blackJackNowDelay = m_blackJackDelay;
