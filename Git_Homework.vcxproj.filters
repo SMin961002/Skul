@@ -58,9 +58,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
-    <ClCompile Include="Gambler.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClCompile>
     <ClCompile Include="RigidBodyComponent.cpp">
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClCompile>
@@ -103,9 +100,6 @@
     </ClCompile>
     <ClCompile Include="Head.cpp">
       <Filter>Game\Object\Charactor</Filter>
-    </ClCompile>
-    <ClCompile Include="LittleBorn.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
     <ClCompile Include="HolyFountain.cpp">
       <Filter>Game\Object\Boss\HolyFountain</Filter>
@@ -191,13 +185,20 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="IllusionEffect.cpp" />
     <ClCompile Include="Trigger.cpp" />
-    <ClCompile Include="Card.cpp">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClCompile>
     <ClCompile Include="IntroTitleScene.cpp" />
     <ClCompile Include="LoadImage.cpp">
       <Filter>Core\Manager\ImageManager</Filter>
     </ClCompile>
+    <ClCompile Include="Gambler.cpp">
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+    </ClCompile>
+    <ClCompile Include="LittleBorn.cpp">
+      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
+    </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+    </ClCompile>
+    <ClCompile Include="Roulette.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -260,9 +261,6 @@
     <ClInclude Include="Player.h">
       <Filter>Game\Object\Charactor</Filter>
     </ClInclude>
-    <ClInclude Include="Gambler.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClInclude>
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClInclude>
@@ -298,9 +296,6 @@
     </ClInclude>
     <ClInclude Include="Head.h">
       <Filter>Game\Object\Charactor</Filter>
-    </ClInclude>
-    <ClInclude Include="LittleBorn.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
     <ClInclude Include="HolyFountain.h">
       <Filter>Game\Object\Boss\HolyFountain</Filter>
@@ -384,9 +379,6 @@
     <ClInclude Include="Nervousness.h">
       <Filter>Game\Object\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectileHeadSkull.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClInclude>
     <ClInclude Include="MenuUI.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
@@ -401,10 +393,20 @@
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="IllusionEffect.h" />
-    <ClInclude Include="Card.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClInclude>
     <ClInclude Include="IntroTitleScene.h" />
+    <ClInclude Include="Gambler.h">
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+    </ClInclude>
+    <ClInclude Include="LittleBorn.h">
+      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileHeadSkull.h">
+      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+    </ClInclude>
+    <ClInclude Include="Roulette.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -556,6 +558,12 @@
     </Filter>
     <Filter Include="Game\Reward\Gold">
       <UniqueIdentifier>{bdfa397b-c7de-44ee-a9a8-d67c671fa42c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Head\Gambler">
+      <UniqueIdentifier>{fb52118e-3419-431d-b739-5b69209f4304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Head\LittleBorn">
+      <UniqueIdentifier>{91645030-351c-460b-8995-e860b4c731cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

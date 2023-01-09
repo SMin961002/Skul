@@ -1,5 +1,5 @@
 #pragma once
-#include "Component.h"
+//#include "Component.h"
 class Card : public Component
 {
 	//블랙잭 노말 / 조커 카드 자식클래스로 하나 만든 뒤 Init 재정의하기 - joker Explosion

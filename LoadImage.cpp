@@ -28,6 +28,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_JockerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BasicAttack_Joker_Explosion/", 1, 17);
 	AddImageVector("Gambler_BlackJackSpark", L"./Resources/Png/Skul/Gambler/Effect/BlackJackSpark/", 1, 11);
 	AddImageVector("Gambler_BlackJackJokerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BlackJack_BigHit_Explosion/", 1, 15);
+	AddImageVector("Gambler_Roulette", L"./Resources/Png/Skul/Gambler/Effect/Roulette/", 1, 18);
 	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
 	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
 

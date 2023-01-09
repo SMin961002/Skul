@@ -106,9 +106,9 @@ void Gambler::CoolDown()
 			if (m_blackJackShotCount < 21)
 			{
 				if(m_isLeft)
-					OBJECTMANAGER->AddObject("BlackJackCard", *m_x+30, *m_y - 48 + MY_UTILITY::getInt(24), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+					OBJECTMANAGER->AddObject("BlackJackCard", *m_x+30, *m_y - 60 + MY_UTILITY::getInt(48), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
 				else
-					OBJECTMANAGER->AddObject("BlackJackCard", *m_x-30, *m_y - 48 + MY_UTILITY::getInt(24), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+					OBJECTMANAGER->AddObject("BlackJackCard", *m_x-30, *m_y - 60 + MY_UTILITY::getInt(48), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
 
 				if (++m_blackJackShotCount >= 21)
 				{
@@ -238,22 +238,25 @@ void Gambler::InputSkillKey()
 {
 	if (KEYMANAGER->GetOnceKeyDown('A'))
 	{
-		int tmp = MY_UTILITY::getInt(10);
-		if (tmp == 9)
-			m_blackJack = 1;
-		else if (tmp <= 1)
-			m_blackJack = -1;
-		else m_blackJack = 0;
+		if (m_skillNowCoolA == 0)
+		{
+			int tmp = MY_UTILITY::getInt(10);
+			if (tmp == 9)
+				m_blackJack = 1;
+			else if (tmp <= 1)
+				m_blackJack = -1;
+			else m_blackJack = 0;
 
-		if(m_isLeft)
-			OBJECTMANAGER->AddObject("BlackJackCard", *m_x+30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
-		else
-			OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+			if (m_isLeft)
+				OBJECTMANAGER->AddObject("BlackJackCard", *m_x + 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+			else
+				OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
 
-		m_blackJackOn = true;
-		m_blackJackShotCount = 1;
-		m_blackJackNowDelay = m_blackJackDelay;
-	}
+			m_blackJackOn = true;
+			m_blackJackShotCount = 1;
+			m_blackJackNowDelay = m_blackJackDelay;
+		}
+	}//end 'A'input
 
 	if (KEYMANAGER->GetOnceKeyDown('S'))
 	{

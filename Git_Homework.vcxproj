@@ -197,6 +197,7 @@
     <ClCompile Include="ResultValue.cpp" />
     <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
+    <ClCompile Include="Roulette.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ShopScene.cpp" />
@@ -277,6 +278,7 @@
     <ClInclude Include="ResultValue.h" />
     <ClInclude Include="ProjectileHeadSkull.h" />
     <ClInclude Include="RigidBodyComponent.h" />
+    <ClInclude Include="Roulette.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ShopScene.h" />
