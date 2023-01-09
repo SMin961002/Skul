@@ -168,14 +168,12 @@
     <ClCompile Include="Baptism.cpp" />
     <ClCompile Include="Consecration.cpp" />
     <ClCompile Include="Nervousness.cpp" />
-    <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="Worship.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="IllusionEffect.cpp" />
     <ClCompile Include="Card.cpp">
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClCompile>
-    <ClCompile Include="Roulette.cpp" />
     <ClCompile Include="BossPhase1EnemyCandle.cpp">
       <Filter>Game\Object\Enemy\BossPhase1EnemyCandle</Filter>
     </ClCompile>
@@ -219,6 +217,19 @@
       <Filter>Game\Object\Enemy\LampFanatic</Filter>
     </ClCompile>
     <ClCompile Include="BossBall.cpp" />
+    <ClCompile Include="Gambler.cpp" />
+    <ClCompile Include="LoadImage.cpp">
+      <Filter>Core\Manager\ImageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Roulette.cpp">
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileHeadSkull.cpp">
+      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
+    </ClCompile>
+    <ClCompile Include="LittleBorn.cpp">
+      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -399,9 +410,6 @@
     <ClInclude Include="MenuUI.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectileHeadSkull.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClInclude>
     <ClInclude Include="ResultValue.h">
       <Filter>Game\Reward</Filter>
     </ClInclude>
@@ -422,7 +430,6 @@
     <ClInclude Include="Card.h">
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClInclude>
-    <ClInclude Include="Roulette.h" />
     <ClInclude Include="BossPhase1EnemyCandle.h">
       <Filter>Game\Object\Enemy\BossPhase1EnemyCandle</Filter>
     </ClInclude>
@@ -445,6 +452,12 @@
       <Filter>Game\Object\Enemy\LampFanatic</Filter>
     </ClInclude>
     <ClInclude Include="BossBall.h" />
+    <ClInclude Include="ProjectileHeadSkull.h">
+      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
+    </ClInclude>
+    <ClInclude Include="Roulette.h">
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
