@@ -22,8 +22,7 @@ void RigidBodyComponent::Update()
 	{
 		if (m_isGravity == true)
 		{
-			m_speed -= m_speed< -9.5 ? 0 : m_gravity ;
-		//	m_speed -= m_gravity ;
+			m_speed -= (m_speed< -9.0 ? 0 : m_gravity);
 			m_obj->y -= m_speed ;
 		}
 	}

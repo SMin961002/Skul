@@ -18,9 +18,7 @@ public:
 		//=↑=↑=여기까진 앵간하면 고정행동=↑=↑=//
 		eAutoAttack_1 = eBasicActionTagNumberCount,
 		eAutoAttack_2,
-		eAutoAttack_B1,
-		eAutoAttack_B2,
-		eAutoAttack_B3,
+		eAutoAttack_3,
 		eJumpAttack,
 		eSkill_1,
 		eSkill_2,

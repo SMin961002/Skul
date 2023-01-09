@@ -10,6 +10,8 @@ class Gambler : public Head
 private:
 	bool m_effectOverap;
 
+
+
 public:
 	bool m_can[eActionTagNumber];
 	virtual void ImageSetting() override;

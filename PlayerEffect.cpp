@@ -32,15 +32,15 @@ void TeleportationToHead::Init()
 void GamblerAttack_1::Init()
 {
 	Effect::Init();
-	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_Attack1");
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_Attack1Effect");
 	m_img->Setting(0.07, false);
 }
 
 void GamblerAttack_2::Init()
 {
 	Effect::Init();
-	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_Attack2");
-	m_img->Setting(0.07, false);
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_Attack2Effect");
+	m_img->Setting(0.07, false);							
 }
 
 void JokerExplosion::Init()
@@ -57,6 +57,10 @@ void GamblerJumpAttack::Init()
 	m_img->Setting(0.07, false);
 }
 
-void GamblerJumpAttack::Move()
+void BlackJackSpark::Init()
+{
+}
+
+void BlackJackSpark::Move()
 {
 }

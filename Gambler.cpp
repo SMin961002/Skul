@@ -11,18 +11,12 @@ void Gambler::ImageSetting()
 	img[eWalk]->Setting(0.1f, true);
 	img[eDash] = IMAGEMANAGER->FindImageVector("Gambler_Dash");
 	img[eDash]->Setting(0.16f, false);
-	img[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Gambler_AttackA1");
-	img[eAutoAttack_1]->Setting(0.08f, false);
-	img[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Gambler_AttackA2");
-	img[eAutoAttack_2]->Setting(0.15f, false);
-	img[eAutoAttack_B1] = IMAGEMANAGER->FindImageVector("Gambler_AttackB1");
-	img[eAutoAttack_B1]->Setting(0.04f, false);
-	img[eAutoAttack_B1]->Setting(img[eAutoAttack_B1]->GetImageSize() - 1, 0.034);
-	img[eAutoAttack_B2] = IMAGEMANAGER->FindImageVector("Gambler_AttackB2");
-	img[eAutoAttack_B2]->Setting(0.05f, false);
-	img[eAutoAttack_B2]->Setting(img[eAutoAttack_B2]->GetImageSize() - 1, 0.034);
-	img[eAutoAttack_B3] = IMAGEMANAGER->FindImageVector("Gambler_AttackB3");
-	img[eAutoAttack_B3]->Setting(0.06f, false);
+	img[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Gambler_Attack1");
+	img[eAutoAttack_1]->Setting(0.03f, false);
+	img[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Gambler_Attack2");
+	img[eAutoAttack_2]->Setting(0.03f, false);
+	img[eAutoAttack_3] = IMAGEMANAGER->FindImageVector("Gambler_Attack3");
+	img[eAutoAttack_3]->Setting(0.06f, false);
 	img[eJump] = IMAGEMANAGER->FindImageVector("Gambler_JumpStart");
 	img[eJump]->Setting(0.05, true);
 	img[eJumpAttack] = IMAGEMANAGER->FindImageVector("Gambler_JumpAttack");
@@ -32,10 +26,8 @@ void Gambler::ImageSetting()
 	img[eJumpDown]->Setting(0.1, true);
 	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Gambler_JumpFall");
 	img[eJumpLand]->Setting(0.1, false);
-	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Gambler_AttackB1");
-	img[eSkill_1]->Setting(0.1, false);
-	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Gambler_AttackB1");
-	img[eSkill_2]->Setting(0.1, false);
+	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Gambler_Attack1");
+	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Gambler_Attack1");
 	img[eTagAction] = IMAGEMANAGER->FindImageVector("Gambler_TagAction");
 	img[eTagAction]->Setting(0.07f, false);
 
@@ -54,7 +46,7 @@ void Gambler::ParameterSetting()
 	m_dashSpeed = 300;		//##dash 이동식 수정 필요
 	m_dashTime = 0.95 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
-	m_dashCool = 0.9;
+	m_dashCool = 1.5;
 	m_dashNowCool = 0;
 	m_dashCount = 0;
 	m_dashMax = 2;			//대시 최대 횟수
@@ -103,7 +95,7 @@ void Gambler::ActionArrangement()
 			m_attackCast[0] = false;
 			m_attackCast[1] = false;
 			if (++m_attackCount > 3) m_attackCount--;
-			SetImage(eAutoAttack_B1 + m_attackCount - 1, true);
+			SetImage(eAutoAttack_1 + m_attackCount - 1, true);
 			switch (m_attackCount)
 			{
 			case 2:
@@ -138,7 +130,7 @@ void Gambler::ActionArrangement()
 		m_effectOverap = false;
 		m_attackCast[0] = false;
 		m_attackCast[1] = false;
-		if (m_action<eAutoAttack_B1 || m_action>eJumpAttack)
+		if (m_action<eAutoAttack_1 || m_action>eJumpAttack)
 			m_attackCount = 0;
 		if (nowImg != img[m_action])
 		{
@@ -147,7 +139,7 @@ void Gambler::ActionArrangement()
 		}
 	}
 
-	if (m_action == eAutoAttack_B3)
+	if (m_action == eAutoAttack_3)
 	{
 		if (nowImg->GetFrame() == 2)
 		{
@@ -163,7 +155,7 @@ void Gambler::CollisionUpdate()
 
 	switch (m_action)
 	{
-	case eAutoAttack_B1:
+	case eAutoAttack_1:
 		if (nowImg->GetFrame() < 3)
 		{
 			if (*m_isLeft)
@@ -173,7 +165,7 @@ void Gambler::CollisionUpdate()
 			m_collAutoAttack->SetIsActive(true);
 		}
 		break;
-	case eAutoAttack_B2:
+	case eAutoAttack_2:
 		if (nowImg->GetFrame() < 3)
 		{
 			if (*m_isLeft)
@@ -240,7 +232,7 @@ void Gambler::InputAttackKey()
 			{
 			case 0:
 				m_attackCount++;
-				SetAction(eAutoAttack_B1, true);
+				SetAction(eAutoAttack_1, true);
 				if (*m_isLeft)
 				{
 					EFFECTMANAGER->AddEffect<GamblerAttack_1>(m_obj->x - 35, m_obj->y - 32, true, 2);
@@ -303,7 +295,7 @@ void Gambler::DrawCharactor()
 			switch (m_attackCount)
 			{
 			case 1:
-				if (m_action == eAutoAttack_B1 && nowImg->GetFrame() == 1)
+				if (m_action == eAutoAttack_1 && nowImg->GetFrame() == 1)
 					if (*m_isLeft)
 					{
 						EFFECTMANAGER->AddEffect<GamblerAttack_1>(m_obj->x - 35, m_obj->y - 32, true, 2);

@@ -44,11 +44,17 @@ private:
 	bool m_effectOverap = false;
 public:
 	void Init() override;
-	void Move() override;
 };
 
 class JokerExplosion : public Effect
 {
 public:
 	void Init() override;
+};
+
+class BlackJackSpark : public Effect
+{
+public:
+	void Init() override;
+	void Move() override;
 };
