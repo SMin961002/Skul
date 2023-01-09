@@ -20,7 +20,7 @@ void Player::Init()
 	m_headList[static_cast<int>(eSkulSpecies::eGambler)]->Init();
 	m_headSlot = eSkulSpecies::eGambler;
 	m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eBasic)];
-	m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
+	m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashCool,&m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
 
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 	m_playerHitBox = m_obj->AddComponent<CollisionComponent>();
@@ -53,14 +53,15 @@ void Player::Update()
 	Vector2 v;
 
 	m_nowHead->SetImageChange(false);
-
-	Move();
-	InputArtifactKey();
-
-	if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
+	if (!m_nowHead->GetNonActionCansle())
 	{
-		ChangeHead();
+		Move();
+		if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
+		{
+			ChangeHead();
+		}
 	}
+	InputArtifactKey();
 
 	m_playerHitBox->Setting(m_obj->x + 14, m_obj->y - 15);
 	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
@@ -112,6 +113,14 @@ void Player::CoolDown()
 			m_dashNowCool = m_dashCool;
 		}
 	}
+	if (m_dashNowCool > 0)
+	{
+		m_dashNowCool -= deltaT;
+		if (m_dashNowCool < 0)
+		{
+			m_dashNowCool = 0;
+		}
+	}
 	if (m_supperArmarNowTime > 0)
 	{
 		m_supperArmarNowTime -= deltaT;
@@ -139,20 +148,18 @@ void Player::ChangeHead()
 		m_headTagCool = m_nowHead->GetTagCoolTime();
 		m_nowHead->ResetAll();
 
-		//coll tag에 문제있어
 		switch (m_headSlot)
 		{
 		case eSkulSpecies::eBasic:
 			m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eBasic)];
 			m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
-			m_nowHead->SetAction(m_nowHead->eTagAction, true, true);
+			m_nowHead->TagAction();
 			cout << "스컬 변경 : 리틀본" << endl;
 			break;
 		case eSkulSpecies::eGambler:
 			m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eGambler)];
 			m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
-			m_nowHead->SetImage(m_nowHead->eIdle, true, m_nowHead->eIdle);
-			m_nowHead->SetAction(m_nowHead->eTagAction, true, true);
+			m_nowHead->TagAction();
 			cout << "스컬 변경 : 갬블러" << endl;
 			break;
 		default:	//##스컬종류 추가후 변경 필요 필수필수필수
@@ -162,7 +169,7 @@ void Player::ChangeHead()
 		}
 		m_headSlot = tmp;
 		m_nowHead->SetPlayerXY(&m_obj->x, &m_obj->y, &m_isLeft, &m_isDown);
-		m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
+		m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashCool,&m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
 	}
 }
 
@@ -174,13 +181,13 @@ void Player::OnCollision(string collisionName, Object* other)
 		{
 			cout << "적에게공격" << endl;
 
-			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other,10,0.01);
+			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
 		}
 		if (other->GetName() == "EnemyBoss")
 		{
 			cout << "적에게공격" << endl;
-			
-			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other,10, 0.01);
+
+			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
 		}
 		if (other->GetName() == "EnemyBoss")
 		{
@@ -189,4 +196,35 @@ void Player::OnCollision(string collisionName, Object* other)
 			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other,10, 0.01);
 		}
 	}//end collision Name BasicAttack
+}
+
+void Player::HitPlayerPhysicAttack(float dmg)
+{
+	m_supperArmarNowTime = m_supperArmarTime;
+	m_playerHitBox->SetIsActive(false);
+	m_life -= dmg;
+}
+void Player::HitPlayerMagicAttack(float dmg)
+{
+	m_supperArmarNowTime = m_supperArmarTime;
+	m_playerHitBox->SetIsActive(false);
+	m_life -= dmg;
+}
+void Player::HitPlayerKnockBack(float moveX, float moveY)
+{
+	//##위로밀림시 점프하강모션뜨는거 idle로 바꾸기
+	m_knockBackY = moveY - m_obj->y;
+	if (m_knockBackY < 0)
+		m_knockBackY = 0;
+	m_obj->x += moveX;
+	m_obj->y += moveY;
+}
+void Player::HitPlayerEffect()
+{
+	EFFECTMANAGER->AddEffect<PlayerHit>((m_obj->GetComponent<CollisionComponent>()->GetCollisionPosX())
+		, m_obj->GetComponent<CollisionComponent>()->GetCollisionPosY(), m_isLeft);
+}
+void Player::CritialHitPlayerEffect()
+{
+
 }

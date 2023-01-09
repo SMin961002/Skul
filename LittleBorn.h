@@ -30,17 +30,16 @@ public:
     void DrawCharactor() override;
     void OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg, float delay) override;
 
-    void PutOnHead()
-    {
-        m_headThrow = false;
-        m_imageChange = true;
-        m_skillUsing = false;
-        m_skillNowCoolA = 0;
-        m_projectileHead->Off();
-    };
-    virtual void ResetAll() override
-    {
-        Head::ResetAll();
-        m_projectileHead->Off();
-    }
+	void PutOnHead()
+	{
+		m_headThrow = false;
+		m_imageChange = true;
+		m_skillNowCoolA = 0;
+		m_projectileHead->Off();
+	};
+	virtual void ResetAll() override
+	{
+		Head::ResetAll();
+		m_projectileHead->Off();
+	}
 };

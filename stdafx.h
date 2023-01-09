@@ -46,10 +46,10 @@ enum ObjectTag
 	eObject,
 	eNPC,
 	eSummons,
+	ePlayerProjectile,
 	eEnemy,
 	eItem,
 	ePlayer,
-	ePlayerProjectile,
 	eEndTag
 };
 

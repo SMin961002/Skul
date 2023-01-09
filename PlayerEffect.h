@@ -64,3 +64,32 @@ public:
 	void Init() override;
 	void Move() override;
 };
+
+class RouletteReady : public Effect
+{
+public:
+	void Init() override;
+};
+
+class RouletteShot : public Effect
+{
+public:
+	void Init() override;
+};
+
+class RouletteBigShot : public Effect
+{
+public:
+	void Init() override;
+};
+
+class RouletteBrokenEffect : public Effect
+{
+public:
+	void Init() override;
+};
+class RouletteBrokenEffectBigShot : public Effect
+{
+public:
+	void Init() override;
+};

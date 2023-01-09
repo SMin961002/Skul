@@ -21,6 +21,8 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	inline float GetX() { return m_obj->x; }
+	inline float GetY() { return m_obj->y; }
 	virtual void HitEnemy(float dmg, float time) {}
 	// 부모 에너미 -> 자식들 만들어서 하나씩 넣어주면됨
 };

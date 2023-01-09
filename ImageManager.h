@@ -195,7 +195,7 @@ private:
 public:
 	vImage() : m_isEnd(false) {}
 	~vImage() {}
-	bool GetIsImageEnded() { return m_isEnd; }	//물어보기
+	bool GetIsImageEnded() { return m_isEnd; }
 	vector<CImage*> GetImages() { return m_images; }
 	int GetImageSize() { return m_images.size(); }
 	float GetFrameDelay(int frame) { return m_images[frame]->GetDelay(); }

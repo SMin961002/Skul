@@ -27,8 +27,8 @@ void Gambler::ImageSetting()
 	img[eJumpDown]->Setting(0.1, true);
 	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Gambler_JumpFall");
 	img[eJumpLand]->Setting(0.1, false);
-	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Gambler_Attack1");
-	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Gambler_Attack1");
+	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Gambler_AttackA1");
+	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Gambler_AttackA1");
 	img[eTagAction] = IMAGEMANAGER->FindImageVector("Gambler_TagAction");
 	img[eTagAction]->Setting(0.07f, false);
 	//
@@ -47,7 +47,7 @@ void Gambler::ParameterSetting()
 	m_dashSpeed = 300;		//##dash 이동식 수정 필요
 	m_dashTime = 0.95 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
-	m_dashCool = 2;
+	m_dashCool = 1;
 	m_dashNowCool = 0;
 	m_dashCount = 0;
 	m_dashMax = 2;			//대시 최대 횟수
@@ -60,12 +60,12 @@ void Gambler::ParameterSetting()
 	m_attackMax = 3;
 	m_attackCast[0] = false;
 	m_attackCast[1] = false;
+	m_attackCool = 0.3;
 
 	m_skillNowCoolA = 0;
 	m_skillNowCoolS = 0;
 	m_skillCoolA = 12;	//블랙잭
 	m_skillCoolS = 15;	//룰렛
-	m_skillUsing = false;
 	m_imageChange = false;
 	m_blackJackOn = false;
 	m_blackJackShotCount = 0;
@@ -74,6 +74,7 @@ void Gambler::ParameterSetting()
 	m_blackJack = 0;
 
 	m_effectOverap = false;
+	m_nonCansleAction = false;
 }
 
 void Gambler::CollisionSetting()
@@ -87,15 +88,21 @@ void Gambler::CoolDown()
 	float deltaT = DELTA_TIME;
 	if (m_skillNowCoolA != 0)
 	{
-		m_skillNowCoolA - deltaT;
+		m_skillNowCoolA -= deltaT;
 		if (m_skillNowCoolA < 0)
 			m_skillNowCoolA = 0;
 	}
 	if (m_skillNowCoolS != 0)
 	{
-		m_skillNowCoolS - deltaT;
+		m_skillNowCoolS -= deltaT;
 		if (m_skillNowCoolS < 0)
 			m_skillNowCoolS = 0;
+	}
+	if (m_attackNowCool > 0)
+	{
+		m_attackNowCool -= deltaT;
+		if (m_attackNowCool < 0)
+			m_attackNowCool = 0;
 	}
 
 	if (m_blackJackOn)
@@ -106,10 +113,10 @@ void Gambler::CoolDown()
 			m_blackJackNowDelay = m_blackJackDelay;
 			if (m_blackJackShotCount < 21)
 			{
-				if(m_isLeft)
-					OBJECTMANAGER->AddObject("BlackJackCard", *m_x+30, *m_y - 60 + MY_UTILITY::getInt(48), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+				if (m_isLeft)
+					OBJECTMANAGER->AddObject("BlackJackCard", *m_x + 30, *m_y - 60 + MY_UTILITY::getInt(48), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
 				else
-					OBJECTMANAGER->AddObject("BlackJackCard", *m_x-30, *m_y - 60 + MY_UTILITY::getInt(48), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+					OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 60 + MY_UTILITY::getInt(48), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
 
 				if (++m_blackJackShotCount >= 21)
 				{
@@ -160,12 +167,16 @@ void Gambler::ActionArrangement()
 		}
 		else
 		{
+			if (GetIsAttack())
+			{
+				if (m_action != eAutoAttack_3)
+					m_attackNowCool = m_attackCool;
+			}
 			nowImg->Reset();
 			nowImg = img[eIdle];
 			m_action = eIdle;
 			m_attackCount = 0;
 		}
-		m_skillUsing = false;
 	}
 	if (m_imageChange)
 	{
@@ -221,9 +232,9 @@ void Gambler::CollisionUpdate()
 		if (nowImg->GetFrame() > 1 || nowImg->GetFrame() < 4)
 		{
 			if (*m_isLeft)
-				m_collAutoAttack->Setting(80, m_obj->x+10, m_obj->y+20);
+				m_collAutoAttack->Setting(80, m_obj->x + 10, m_obj->y + 20);
 			else
-				m_collAutoAttack->Setting(80, m_obj->x + 60, m_obj->y+20);
+				m_collAutoAttack->Setting(80, m_obj->x + 60, m_obj->y + 20);
 			m_collAutoAttack->SetIsActive(true);
 		}
 		break;
@@ -262,6 +273,7 @@ void Gambler::InputSkillKey()
 
 	if (KEYMANAGER->GetOnceKeyDown('S'))
 	{
+		OBJECTMANAGER->AddObject("Roulette", *m_x, *m_y, ePlayerProjectile)->AddComponent<Roulette>();
 	}
 }
 
@@ -273,36 +285,41 @@ void Gambler::InputAttackKey()
 		{
 			if (m_attackCount == 0)
 			{
-				m_action = eJumpAttack;
-				m_imageChange = true;
-				m_attackCount++;
-				if (*m_isLeft)
+				if (m_attackNowCool == 0)
 				{
-					EFFECTMANAGER->AddEffect<GamblerJumpAttack>(m_obj->x - 20, m_obj->y, true, 2);
-					m_effectOverap = true;
-				}
-				else
-				{
-					EFFECTMANAGER->AddEffect<GamblerJumpAttack>(m_obj->x + 20, m_obj->y, false, 2);
-					m_effectOverap = true;
+					m_action = eJumpAttack;
+					m_imageChange = true;
+					m_attackCount++;
+					if (*m_isLeft)
+					{
+						EFFECTMANAGER->AddEffect<GamblerJumpAttack>(m_obj->x - 20, m_obj->y, true, 2);
+						m_effectOverap = true;
+					}
+					else
+					{
+						EFFECTMANAGER->AddEffect<GamblerJumpAttack>(m_obj->x + 20, m_obj->y, false, 2);
+						m_effectOverap = true;
+					}
 				}
 			}
-		}
+		}//end jumpping
 		else if (!m_attackCast[1] && !m_attackCast[0])
 			switch (m_attackCount)
 			{
 			case 0:
-				m_attackCount++;
-				SetAction(eAutoAttack_1, true);
-				if (*m_isLeft)
+				if (m_attackNowCool == 0)
 				{
-					EFFECTMANAGER->AddEffect<GamblerAttack_1>(m_obj->x - 35, m_obj->y - 32, true, 2);
-				}
-				else
-				{
-					EFFECTMANAGER->AddEffect<GamblerAttack_1>(m_obj->x + 35, m_obj->y - 32, false, 2);
-				}
-
+					m_attackCount++;
+					SetAction(eAutoAttack_1, true);
+					if (*m_isLeft)
+					{
+						EFFECTMANAGER->AddEffect<GamblerAttack_1>(m_obj->x - 35, m_obj->y - 32, true, 2);
+					}
+					else
+					{
+						EFFECTMANAGER->AddEffect<GamblerAttack_1>(m_obj->x + 35, m_obj->y - 32, false, 2);
+					}
+				}//end if m_attackNowCool
 				break;
 			case 1:
 				m_attackCast[0] = true;
@@ -365,7 +382,7 @@ void Gambler::DrawCharactor()
 					{
 						EFFECTMANAGER->AddEffect<GamblerAttack_1>(m_obj->x + 35, m_obj->y - 32, false, 2);
 					}
-			m_effectOverap = true;
+				m_effectOverap = true;
 				break;
 			case 2:
 				if (nowImg->GetFrame() == 1)
@@ -377,7 +394,7 @@ void Gambler::DrawCharactor()
 					{
 						EFFECTMANAGER->AddEffect<GamblerAttack_2>(m_obj->x + 20, m_obj->y - 40, false, 2);
 					}
-			m_effectOverap = true;
+				m_effectOverap = true;
 				break;
 			default: break;
 			}//end switch
