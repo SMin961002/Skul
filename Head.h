@@ -49,8 +49,8 @@ protected:
 	float* m_x = nullptr, * m_y = nullptr;
 	bool* m_isLeft = nullptr;
 	bool* m_isDown = nullptr;
-	bool*  m_dashing;
-	bool*  m_jumpping;
+	bool* m_dashing;
+	bool* m_jumpping;
 
 	//=============이동에 필요한 변수===========
 	float m_moveSpeed;
@@ -78,13 +78,15 @@ protected:
 	float m_skillNowCoolA;
 	float m_skillCoolS;
 	float m_skillNowCoolS;
-	
+
 	bool m_nonCansleAction;
 
 	bool  m_imageChange;	//무언가 동작을 입력하면 true가 된다.
 	bool m_canAction[eActionTagNumber];
 
 public:
+
+	CImage* GetNowImage() { return img[m_action]->GetNowImage(); }
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();
@@ -99,7 +101,7 @@ public:
 		nowImg = img[image];
 		m_action = isImageEqualAction ? image : action;
 	}
-	inline void SetAction(int action, bool doWantToChangeImage=true, bool actionImageReset = false)
+	inline void SetAction(int action, bool doWantToChangeImage = true, bool actionImageReset = false)
 	{
 		m_action = action;
 		if (doWantToChangeImage) { m_imageChange = true; }
@@ -119,13 +121,13 @@ public:
 	virtual void ImageSetting() {};
 	virtual void ParameterSetting() {};
 	virtual void CollisionSetting() {};
-	virtual void CollisionResetting(Object* obj, CollisionComponent* autoAttack, CollisionComponent* skill1,CollisionComponent* skill2, CollisionComponent* tag)
+	virtual void CollisionResetting(Object* obj, CollisionComponent* autoAttack, CollisionComponent* skill1, CollisionComponent* skill2, CollisionComponent* tag)
 	{
 		m_collAutoAttack = autoAttack;
 		m_collSkillA = skill1;
 		m_collSkillS = skill2;
 		m_collSkillTag = tag;
-		
+
 		CollisionSetting();
 	};
 
@@ -157,7 +159,7 @@ public:
 		}
 	};
 
-	void SetPlayerMoveParameter(float* moveSpeed, float* dashSpeed, float* dashtime, float* dashCool, short* dashMax, bool* dashing,float* jumpSpeed, short* jumpMax, bool* jumpping)
+	void SetPlayerMoveParameter(float* moveSpeed, float* dashSpeed, float* dashtime, float* dashCool, short* dashMax, bool* dashing, float* jumpSpeed, short* jumpMax, bool* jumpping)
 	{
 		*moveSpeed = m_moveSpeed;
 		*dashSpeed = m_dashSpeed;

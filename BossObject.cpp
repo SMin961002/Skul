@@ -7,9 +7,13 @@
 #include "Player.h"
 #include "BossCircle.h"
 #include "Lazer.h"
+#include "DivineImpact.h"
+#include "Phase3B.h"
 void BossObject::Init()
 {
+	isMove = false;
 	lazerCount = 0;
+	isPhase3 = false;
 	divineLightEf1 = IMAGEMANAGER->FindImageVector("DivineLight_ef1");
 	divineLightEf2 = IMAGEMANAGER->FindImageVector("DivineLight_ef2");
 	divineLightEf1->Setting(0.1, false);
@@ -30,35 +34,42 @@ void BossObject::Init()
 	OBJECTMANAGER->m_boss = this;
 	m_teleportEffect = IMAGEMANAGER->FindImageVector("TeleportEffect");
 	m_teleportEffect->Setting(0.07f, false);
-	/*
-	"Phase2_Ball_SoulChase_Attack",
-	"Phase2_Ball_SoulChase_Ready",
-	"Phase2_Ball_SoulChase_End", L"
 
-	"Circle", L"./Resources/Saint_J
-	"CircleIdle", L"./Resources/Sai
-	"CircleDis", L"./Resources/Sain
-	*/
 	m_patterTimer = 0;
 
 
 	chairY = m_obj->y;
 	chairX = m_obj->x;
 	m_isAttack = false;
-	m_phase2Patter = 7;
-
+	m_phase2Patter = 0;
 	/*
-	"Phase2_Ball_DivineLight_AttackLoop",
-	"Phase2_Ball_DivineLight_AttackReady",
-	"Phase2_Ball_DivineLight_End", L"./Res
-	"Phase2_Ball_DivineLight_Ready", L"./R
+	"Phase2_Phase_3_Loop",
+	"Phase2_Phase_3_End",
+	"Phase2_Phase_3_Ready"
 	*/
+
+	m_phase2Img[ePhase_3A] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Phase_3_Loop");
+	m_phase2Img[ePhase_3A]->Setting(0.1, false);
+	m_phase2Img[ePhase_3E] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Phase_3_End");
+	m_phase2Img[ePhase_3E]->Setting(0.15, false);
+	m_phase2Img[ePhase_3R] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Phase_3_Ready");
+	m_phase2Img[ePhase_3R]->Setting(0.15, false);
+
 	m_phase2Img[eIntro1] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_Intro_1");
 	m_phase2Img[eIntro1]->Setting(0.1, false);
 	m_phase2Img[eIntro2] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_Intro_2");
 	m_phase2Img[eIntro2]->Setting(0.15, false);
 	m_phase2Img[eIdle] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_Idle");
 	m_phase2Img[eIdle]->Setting(0.15, true);
+
+	m_phase2Img[eDivineImpactA] = IMAGEMANAGER->AddImageVectorCopy("Phase2_DivineImpact_Attack_Loop");
+	m_phase2Img[eDivineImpactA]->Setting(0.1, false);
+	m_phase2Img[eDivineImpactE] = IMAGEMANAGER->AddImageVectorCopy("Phase2_DivineImpact_End");
+	m_phase2Img[eDivineImpactE]->Setting(0.15, false);
+	m_phase2Img[eDivineImpactR] = IMAGEMANAGER->AddImageVectorCopy("Phase2_DivineImpact_Ready");
+	m_phase2Img[eDivineImpactR]->Setting(0.15, false);
+	m_phase2Img[eDivineImpactRL] = IMAGEMANAGER->AddImageVectorCopy("Phase2_DivineImpact_Ready_Loop");
+	m_phase2Img[eDivineImpactRL]->Setting(0.15, false);
 
 	m_phase2Img[eDivineLightA] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_DivineLight_AttackLoop");
 	m_phase2Img[eDivineLightA]->Setting(0.1, false);
@@ -215,10 +226,17 @@ void BossObject::Init()
 
 void BossObject::Update()
 {
+	if (KEYMANAGER->GetOnceKeyDown(VK_CONTROL))
+	{
 
+	}
 
 	if (isTeleport)
 		Teleport();
+	if (isMove)
+	{
+		MovePos();
+	}
 	if (m_page == 0)
 	{
 		if (KEYMANAGER->GetToggleKey('Q'))
@@ -317,7 +335,6 @@ void BossObject::Update()
 	else if (m_page == 1)
 	{
 		Page_2();
-		chairY += DELTA_TIME * 40;
 	}
 }
 
@@ -546,30 +563,6 @@ void BossObject::Render()
 	}
 	else
 	{
-		if (m_isMagicCircleImage)
-		{
-			if (m_bossState == eSoulChaseR)
-			{
-				if (m_phase2Img[eSoulChaseR]->GetIsImageEnded() == true)
-				{
-					m_bossState = eSoulChaseA;
-				}
-			}
-			if (m_bossState == eSoulChaseA)
-			{
-				if (magicCircleImage->GetIsImageEnded() == true)
-				{
-					m_bossState = eSoulChaseE;
-				}
-			}
-			if (m_bossState == eSoulChaseE)
-			{
-				if (m_phase2Img[eSoulChaseE]->GetIsImageEnded() == true)
-				{
-					m_phase2Patter++;
-				}
-			}
-		}
 		if (m_isAttack == true)
 		{
 			if (m_bossState == eCreateBallR)
@@ -649,7 +642,7 @@ void BossObject::Render()
 		}
 		if (magicCircleImage->GetIsImageEnded() == true)
 		{
-			m_isMagicCircleImage = false;
+			m_bossState = eSoulChaseE;
 		}
 		magicCircleImage->CenterRender(m_obj->x - 15, m_obj->y + 80, 1.5, 1.5, 0, 0);
 		trailImg->CenterRender(m_obj->x, m_obj->y + 80, 1.5, 1.5, 0, 0);
@@ -673,7 +666,8 @@ void BossObject::Page_2()
 		{
 			m_phase2Patter = 2;
 		}
-		m_obj->y -= 50 * DELTA_TIME;
+		chairY += DELTA_TIME * 80;
+		m_obj->y -= 40 * DELTA_TIME;
 	}
 	else if (m_phase2Patter == 2)
 	{
@@ -732,8 +726,8 @@ void BossObject::Page_2()
 	}
 	else if (m_phase2Patter == 6)
 	{
-		tpX = (float)MY_UTILITY::getFromFloatTo(100, WINSIZE_X * 1.5f);
-		tpY = (int)MY_UTILITY::getFromFloatTo(100, WINSIZE_Y * 1.5f);
+		tpX = (float)MY_UTILITY::getFromFloatTo(200, 1400);
+		tpY = (int)MY_UTILITY::getFromFloatTo(100, 500);
 		isTeleport = true;
 	}
 	else if (m_phase2Patter == 7)
@@ -748,7 +742,7 @@ void BossObject::Page_2()
 			m_phase2Img[eDivineLightR]->Reset();
 			lazerCount = 0;
 			tpX = 200;
-			tpY = (int)MY_UTILITY::getFromFloatTo(100, WINSIZE_Y * 1.5f);
+			tpY = (int)MY_UTILITY::getFromFloatTo(100, 500);
 			isTeleport = true;
 		}
 	}
@@ -757,13 +751,16 @@ void BossObject::Page_2()
 		if (m_phase2Img[eDivineLightE]->GetIsImageEnded() == true)
 		{
 			m_phase2Patter++;
+			isLazer = false;
 			m_bossState = eIdle;
 		}
 		else if (m_phase2Img[eDivineLightA]->GetIsImageEnded() == true)
 		{
 			lazerCount++;
 			if (lazerCount > 3)
+			{
 				m_bossState = eDivineLightE;
+			}
 			else
 				m_phase2Img[eDivineLightA]->Reset();
 		}
@@ -789,9 +786,8 @@ void BossObject::Page_2()
 	{
 		if (isTeleport == false)
 		{
-
-			tpX = (int)MY_UTILITY::getFromFloatTo(100, WINSIZE_X * 1.5f);
-			tpY = (int)MY_UTILITY::getFromFloatTo(100, WINSIZE_Y * 1.5f);
+			tpX = (float)MY_UTILITY::getFromFloatTo(200, 1400);
+			tpY = (int)MY_UTILITY::getFromFloatTo(100, 500);
 			isTeleport = true;
 		}
 	}
@@ -811,9 +807,105 @@ void BossObject::Page_2()
 		if (m_phase2Img[eSoulChaseE]->GetIsImageEnded() == true)
 		{
 			m_phase2Patter++;
+			m_phase2Img[eIdle]->Reset();
+			m_isMagicCircleImage = false;
+			m_bossState = eIdle;
 		}
 	}
-
+	else if (m_phase2Patter == 11)
+	{
+		if (isMove == false)
+		{
+			m_bossState = eIdle;
+			tpX = (int)MY_UTILITY::getFromFloatTo(200, 1400);
+			tpY = (int)MY_UTILITY::getFromFloatTo(100, 600);
+			isMove = true;
+		}
+	}
+	else if (m_phase2Patter == 12)
+	{
+		if (isDivine == false)
+		{
+			m_phase2Img[eDivineImpactR]->Reset();
+			m_phase2Img[eDivineImpactA]->Reset();
+			m_phase2Img[eDivineImpactRL]->Reset();
+			m_phase2Img[eDivineImpactE]->Reset();
+			devineCount = 0;
+			m_bossState = eDivineImpactR;
+			isDivine = true;
+		}
+		if (m_bossState == eDivineImpactR)
+		{
+			if (m_phase2Img[eDivineImpactR]->GetIsImageEnded() == true)
+			{
+				m_bossState = eDivineImpactRL;
+			}
+		}
+		if (m_bossState == eDivineImpactRL)
+		{
+			if (m_phase2Img[eDivineImpactRL]->GetIsImageEnded() == true)
+			{
+				m_bossState = eDivineImpactA;
+			}
+		}
+		if (m_bossState == eDivineImpactA)
+		{
+			if (m_phase2Img[eDivineImpactA]->GetIsImageEnded() == true)
+			{
+				if (devineCount < 10)
+				{
+					m_phase2Img[eDivineImpactA]->Reset();
+					devineCount++;
+					OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eBossObject)->AddComponent<DivineImpact>();
+				}
+				else
+				{
+					m_bossState = eDivineImpactE;
+				}
+			}
+		}
+		if (m_bossState == eDivineImpactE)
+		{
+			if (m_phase2Img[eDivineImpactE]->GetIsImageEnded() == true)
+			{
+				m_phase2Patter++;
+				isDivine = false;
+				devineCount = 0;
+				m_bossState = eIdle;
+			}
+		}
+	}
+	else if (m_phase2Patter == 13)
+	{
+		if (isPhase3 == false)
+		{
+			m_bossState = ePhase_3R;
+			isPhase3 = true;
+		}
+		if (m_bossState == ePhase_3R)
+		{
+			if (m_phase2Img[ePhase_3R]->GetIsImageEnded() == true)
+			{
+				m_bossState = ePhase_3A;
+				for (int i = 0; i < 50; i++)
+					OBJECTMANAGER->AddObject("Enemy", MY_UTILITY::getFromFloatTo(50, 1550), MY_UTILITY::getFromFloatTo(30, 650), eEnemy)->AddComponent<Phase3B>();
+			}
+		}
+		if (m_bossState == ePhase_3A)
+		{
+			if (m_phase2Img[ePhase_3A]->GetIsImageEnded() == true)
+			{
+				m_bossState = ePhase_3E;
+			}
+		}
+		if (m_bossState == ePhase_3E)
+		{
+			if (m_phase2Img[ePhase_3E]->GetIsImageEnded() == true)
+			{
+				m_phase2Patter = 6;
+			}
+		}
+	}
 }
 
 void BossObject::Teleport()
@@ -857,5 +949,19 @@ void BossObject::Teleport()
 			teleprotTimer = 0;
 			isActive = true;
 		}
+	}
+}
+
+void BossObject::MovePos()
+{
+	Vector2 v;
+	MY_UTILITY::GetLerpVec2(&v, { m_obj->x,m_obj->y }, { tpX,tpY }, 0.01);
+	m_obj->x = v.x;
+	m_obj->y = v.y;
+
+	if (abs(m_obj->x - tpX) < 1 && abs(m_obj->y - tpY) < 100)
+	{
+		m_phase2Patter++;
+		isMove = false;
 	}
 }

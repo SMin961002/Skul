@@ -7,6 +7,8 @@
 class Player : public Component
 {
 private:
+	float illusionEffectCount;
+	CImage* hpBar;
 	enum UITag
 	{
 		ePlayerStatus,
