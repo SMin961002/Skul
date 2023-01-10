@@ -96,7 +96,7 @@ void RouletteBigShot::Init()
 void RouletteBrokenEffect::Init()
 {
 	Effect::Init();
-	//m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteBigShotBroken");
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteBroken");
 }
 void RouletteBrokenEffectBigShot::Init()
 {

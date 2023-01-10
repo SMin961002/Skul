@@ -31,7 +31,7 @@ void Gambler::ImageSetting()
 	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Gambler_AttackA1");
 	img[eTagAction] = IMAGEMANAGER->FindImageVector("Gambler_TagAction");
 	img[eTagAction]->Setting(0.07f, false);
-	//
+	
 	nowImg = img[eIdle];
 }
 
@@ -263,8 +263,12 @@ void Gambler::InputSkillKey()
 				OBJECTMANAGER->AddObject("BlackJackCard", *m_x + 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
 			else
 				OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
-
-			m_skillNowCoolA = m_skillCoolA;
+			if (m_blackJack == 1)
+				m_skillNowCoolA = m_skillCoolA;
+			else if (m_blackJack == -1)
+				m_skillNowCoolA = m_skillCoolA / 2;
+			else
+				m_skillNowCoolA = 1.5;
 			m_blackJackOn = true;
 			m_blackJackShotCount = 1;
 			m_blackJackNowDelay = m_blackJackDelay;
@@ -273,7 +277,17 @@ void Gambler::InputSkillKey()
 
 	if (KEYMANAGER->GetOnceKeyDown('S'))
 	{
-		OBJECTMANAGER->AddObject("Roulette", *m_x, *m_y, ePlayerProjectile)->AddComponent<Roulette>();
+		if (m_skillNowCoolS == 0)
+		{
+			m_roulette = OBJECTMANAGER->AddObject("Roulette", *m_x, *m_y, ePlayerProjectile)->AddComponent<Roulette>();
+			float success = m_roulette->GetSuccess();
+			if (success == 1)
+				m_skillNowCoolS = m_skillCoolS;
+			else if (success == -1)
+				m_skillNowCoolS = 0.5 * m_skillCoolS;
+			else
+				m_skillNowCoolS = 1.5;
+		}
 	}
 }
 
