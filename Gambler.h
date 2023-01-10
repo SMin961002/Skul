@@ -16,6 +16,8 @@ private:
 	float m_blackJackDelay;
 	float m_blackJackNowDelay;
 
+	float m_attackInputTime;
+
 	Roulette* m_roulette;
 
 public:

@@ -13,6 +13,7 @@ void Gambler::ImageSetting()
 	img[eDash] = IMAGEMANAGER->FindImageVector("Gambler_Dash");
 	img[eDash]->Setting(0.16f, false);
 	img[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Gambler_Attack1");
+	img[eAutoAttack_1]->Setting(0.03f, false);
 	img[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Gambler_Attack2");
 	img[eAutoAttack_2]->Setting(0.03f, false);
 	img[eAutoAttack_3] = IMAGEMANAGER->FindImageVector("Gambler_Attack3");
@@ -73,6 +74,8 @@ void Gambler::ParameterSetting()
 	m_blackJackDelay = 0.15;
 	m_blackJackNowDelay = 0.0f;
 	m_blackJack = 0;
+
+	m_attackInputTime = 0.1;
 
 	m_effectOverap = false;
 	m_nonCansleAction = false;
@@ -264,7 +267,7 @@ void Gambler::InputSkillKey()
 				OBJECTMANAGER->AddObject("BlackJackCard", *m_x + 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
 			else
 				OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
-			if (m_blackJack == 1)
+			if (m_blackJack == 0)
 				m_skillNowCoolA = m_skillCoolA;
 			else if (m_blackJack == -1)
 				m_skillNowCoolA = 0.5 * m_skillCoolA;
