@@ -17,6 +17,8 @@ private:
 	bool isActive;
 	float alpha = 1;
 	float teleprotTimer;
+	bool isDivine =false;
+	bool isPhase3 = false;
 	bool isTeleport = false;
 	float chairX = 0;
 	bool isLazer;
@@ -79,6 +81,7 @@ private:
 	int m_bossState;
 	float m_patterTimer;
 	int lazerCount = 0;
+
 	enum BossPhase2State
 	{
 		eIntro1,
@@ -91,6 +94,13 @@ private:
 		eDivineLightAR,
 		eDivineLightA,
 		eDivineLightE,
+		eDivineImpactA,
+		eDivineImpactE,
+		eDivineImpactR,
+		eDivineImpactRL,
+		ePhase_3A,
+		ePhase_3E,
+		ePhase_3R,
 		eSoulChaseA,
 		eSoulChaseR,
 		eSoulChaseE,
@@ -102,10 +112,10 @@ private:
 protected:
 	bool _isIntroOn;
 	float _introTimeCheck;
-
+	bool isMove;
 	bool _isIdleOn;
 	bool _patternLock;
-
+	int devineCount = 0;
 	int _patternSelect;
 	float _patternDelay;
 protected:
@@ -164,5 +174,7 @@ public:
 
 	void Page_2();
 	void Teleport();
+	void MovePos();
+
 };
 

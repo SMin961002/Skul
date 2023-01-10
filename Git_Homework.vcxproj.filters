@@ -244,6 +244,9 @@
     <ClCompile Include="LoadImage.cpp">
       <Filter>Core\Manager\ImageManager</Filter>
     </ClCompile>
+    <ClCompile Include="LobbyObject.cpp" />
+    <ClCompile Include="DivineImpact.cpp" />
+    <ClCompile Include="Phase3B.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -455,6 +458,9 @@
     <ClInclude Include="Roulette.h">
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClInclude>
+    <ClInclude Include="LobbyObject.h" />
+    <ClInclude Include="DivineImpact.h" />
+    <ClInclude Include="Phase3B.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

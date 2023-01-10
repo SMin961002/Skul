@@ -116,6 +116,7 @@ public:
 	void LoadImages();
 	void Render(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0, float alpha = 1);
 	void CenterRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0, bool isReverse = false, float alpha = 1);
+	void CenterRender(CImage* img, float x, float y, D2D1_COLOR_F _color, float sizeX = 1, float sizeY = 1, float rot = 0, bool isReverse = false);
 
 	void UIRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0, float alpha = 1);
 	void UICenterRender(CImage* img, float x, float y, float sizeX = 1, float sizeY = 1, float rot = 0);
@@ -139,7 +140,7 @@ public:
 	void Begin() { pRT->BeginDraw(); }
 	void End() { pRT->EndDraw(); }
 
-	void DrawCircle(float x, float y, float width );
+	void DrawCircle(float x, float y, float width);
 	void DrawRect(RECT rt);
 	void DrawRectCenter(RECT rt, CImage* img);
 	void DrawMapTile(vector<vector<int>> vec);
@@ -197,6 +198,7 @@ public:
 	~vImage() {}
 	bool GetIsImageEnded() { return m_isEnd; }
 	vector<CImage*> GetImages() { return m_images; }
+	CImage* GetNowImage() { return m_images[m_frame]; }
 	int GetImageSize() { return m_images.size(); }
 	float GetFrameDelay(int frame) { return m_images[frame]->GetDelay(); }
 	float GetTotalDelay() { return m_totalDelay; }
@@ -259,7 +261,7 @@ public:
 		IMAGEMANAGER->Render(m_images[m_frame], x, y, sizeX, sizeY, rot);
 	}
 
-	void CenterRender(float x, float y, float sizeX, float sizeY, float rot, bool isReverse = false,float alpha = 1)
+	void CenterRender(float x, float y, float sizeX, float sizeY, float rot, bool isReverse = false, float alpha = 1)
 	{
 		if (m_isEnd == false)
 			m_nowTimeDelay += DELTA_TIME;

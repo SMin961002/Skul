@@ -87,6 +87,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_Roulette_Black", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Black/", 1, 32);
 	AddImageVector("Gambler_Roulette_Red", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Red/", 1, 23);
 	AddImageVector("Gambler_RouletteFail", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Failed/", 1, 51);
+	AddImageVector("Gambler_RouletteCircle", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Circle/", 1, 14);
 	AddImageVector("Gambler_RouletteBigShot", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShot/", 1, 8);
 	AddImageVector("Gambler_RouletteBigShotBroken", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShotEffect/", 1, 23);
 	AddImageVector("Gambler_RouletteBigShotCircle", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShotCircle/", 1, 8);
@@ -331,6 +332,21 @@ void ImageManager::LoadImages()
 
 	AddImageVector("MagicCircle", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Effect/MagicCircle/", 1, 42);
 
+	AddImageVector("MagicCircle", L"./Resources/Saint_Joanna/Phase_2/DivineImpact/Effect/MagicCircle/", 1, 42);
+	AddImageVector("MagicCircle", L"./Resources/Saint_Joanna/Phase_2/DivineImpact/Effect/Phase2_DivineImpact_", 1, 27);
+	AddImageVector("Phase2_DivineImpact_Effect", L"./Resources/Saint_Joanna/Phase_2/DivineImpact/Effect/Phase2_DivineImpact_", 1, 27);
+
+	AddImageVector("Phase2_DivineImpact_Attack_Loop", L"./Resources/Saint_Joanna/Phase_2/DivineImpact/Boss/Attack/DivineImpact_Attack_Loop_", 1, 7);
+	AddImageVector("Phase2_DivineImpact_End", L"./Resources/Saint_Joanna/Phase_2/DivineImpact/Boss/End/DivineImpact_End_", 1, 7);
+	AddImageVector("Phase2_DivineImpact_Ready", L"./Resources/Saint_Joanna/Phase_2/DivineImpact/Boss/Ready/DivineImpact_Ready_", 1, 7);
+	AddImageVector("Phase2_DivineImpact_Ready_Loop", L"./Resources/Saint_Joanna/Phase_2/DivineImpact/Boss/ReadyLoop/DivineImpact_Ready_Loop_", 1, 7);
+
+	AddImageVector("Phase2_Phase_3_Loop", L"./Resources/Saint_Joanna/Phase_3/Attack/Sacrament_Attack_Loop_", 1, 7);
+	AddImageVector("Phase2_Phase_3_End", L"./Resources/Saint_Joanna/Phase_3/End/Sacrament_End_", 1, 7);
+	AddImageVector("Phase2_Phase_3_Ready", L"./Resources/Saint_Joanna/Phase_3/Ready/Sacrament_Ready_", 1, 7);
+
+	AddImageVector("Phase2_Phase_3_Effect", L"./Resources/Saint_Joanna/Phase_3/Effect/Phase3_Sacrament_", 1, 66);
+
 	// 2페이즈_인트로
 	AddImageVector("Phase2_Boss_Idle", L"./Resources/Saint_Joanna/Phase_2/Idle/Phase2_Idle_", 1, 6);
 	AddImageVector("Phase2_Boss_Intro_1", L"./Resources/Saint_Joanna/Phase2_Intro_3/", 29, 35);
@@ -347,6 +363,7 @@ void ImageManager::LoadImages()
 	// 2페이즈_상단 텔포, 직선 레이저
 
 	AddImage("FireKnife", L"./Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/FireKnife.png");
+	AddImage("hpBar", L"./Resources/hpBar.png");
 
 
 	//==========================================================================================================

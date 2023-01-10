@@ -44,7 +44,7 @@ void Gambler::ParameterSetting()
 	m_moveSpeed = 200;
 	m_isDown = false;
 
-	m_dashSpeed = 300;		//##dash 이동식 수정 필요
+	m_dashSpeed = 400;		//##dash 이동식 수정 필요
 	m_dashTime = 0.95 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
 	m_dashCool = 1;
