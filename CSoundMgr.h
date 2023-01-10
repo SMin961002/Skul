@@ -17,3 +17,5 @@ public:
 	LPDIRECTSOUND8 GetSoundDevice() { return m_pSound; }
 	void RegisterToBGM(CSound* _pSound);
 };
+
+#define SOUNDMANAGER CSoundMgr::GetInstance()

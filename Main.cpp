@@ -9,7 +9,7 @@ void Main::Init()
 	IMAGEMANAGER->Init();
 	SCENEMANAGER->Init();
 	KEYMANAGER->Init();
-
+	SOUNDMANAGER->init(_hWnd);
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
 
@@ -109,8 +109,8 @@ void Main::Render()
 		SCENEMANAGER->FadeOut(0.03, [&]() {
 			FILEMANAGER->SetNowStageFile("map_5");
 			SCENEMANAGER->ChangeScene("Stage");
-			menu->isResetScene = false;		
-		}, 51);
+			menu->isResetScene = false;
+			}, 51);
 	}
 	IMAGEMANAGER->End();
 }
@@ -125,6 +125,7 @@ void Main::Release()
 	TimerManager::ReleaseInstance();
 	KeyManager::ReleaseInstance();
 	IOFillManager::ReleaseInstance();
+	CSoundMgr::ReleaseInstance();
 }
 
 LRESULT Main::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
