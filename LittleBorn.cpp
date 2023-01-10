@@ -193,7 +193,6 @@ void LittleBorn::ActionArrangement()
 		}
 		if (m_imageChange)
 		{
-			cout << "이미지 바꾸기 " << action << endl;
 			m_attackCast[0] = false;
 			m_attackCast[1] = false;
 			if (nowImg != img[m_action])

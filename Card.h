@@ -30,6 +30,7 @@ public:
 class BlackJackCard : public Card
 {
 private:
+	float m_success;
 	float m_dmg;
 public:
 	virtual void Init() override;

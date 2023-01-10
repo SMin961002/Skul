@@ -165,6 +165,7 @@ void BlackJackCard::Release()
 
 void BlackJackCard::Setting(int success)
 {
+	m_success = success;
 	switch (success)
 	{
 	case -1:
@@ -190,6 +191,13 @@ void BlackJackCard::OnCollision(string collisionName, Object* other)
 {
 	if (other->GetName() == "Enemy" || other->GetName() == "Boss")
 	{
+		if (m_success = -1)
+		{
+			Component* e = other->GetComponent<Component>();
+			e->HitEnemy(12, 0);
+			m_obj->ObjectDestroyed();
+		}
+
 		bool isOtherHit = false;
 		for (auto iter : m_vectorCollisionList)
 		{
