@@ -4,6 +4,7 @@
 #include "Card.h"
 #include "Roulette.h"
 #include "SlotMachine.h"
+#include "BlackJack.h"
 
 void Gambler::ImageSetting()
 {
@@ -47,7 +48,7 @@ void Gambler::ParameterSetting()
 	m_moveSpeed = 200;
 	m_isDown = false;
 
-	m_dashSpeed = 300;		//##dash 이동식 수정 필요
+	m_dashSpeed = 500;		//##dash 이동식 수정 필요
 	m_dashTime = 0.95 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
 	m_dashCool = 1;
@@ -71,12 +72,6 @@ void Gambler::ParameterSetting()
 	m_skillCoolA = 12;	//블랙잭
 	m_skillCoolS = 15;	//룰렛
 	m_imageChange = false;
-	m_blackJackOn = false;
-	m_blackJackShotCount = 0;
-	m_blackJackDelay = 0.15;
-	m_blackJackNowDelay = 0.0f;
-	m_blackJack = 0;
-
 	m_effectOverap = false;
 	m_nonCansleAction = false;
 }
@@ -108,29 +103,6 @@ void Gambler::CoolDown()
 		if (m_attackNowCool < 0)
 			m_attackNowCool = 0;
 	}
-
-	if (m_blackJackOn)
-	{
-		m_blackJackNowDelay -= deltaT;
-		if (m_blackJackNowDelay <= 0)
-		{
-			m_blackJackNowDelay = m_blackJackDelay;
-			if (m_blackJackShotCount < 21)
-			{
-				if (m_isLeft)
-					OBJECTMANAGER->AddObject("BlackJackCard", *m_x + 30, *m_y - 60 + MY_UTILITY::getInt(48), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
-				else
-					OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 60 + MY_UTILITY::getInt(48), ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
-
-				if (++m_blackJackShotCount >= 21)
-				{
-					m_blackJackOn = false;
-					m_blackJackShotCount = 0;
-					m_blackJackNowDelay = 0;
-				}
-			}//end under21 shot
-		}//end  0 delay blackJack
-	}//end blackjack on
 }
 
 void Gambler::ActionArrangement()
@@ -257,25 +229,25 @@ void Gambler::InputSkillKey()
 		if (m_skillNowCoolA == 0)
 		{
 			int tmp = MY_UTILITY::getInt(10);
+			int blackJackSuccess;
 			if (tmp == 9)
-				m_blackJack = 1;
+				blackJackSuccess = 1;
 			else if (tmp <= 1)
-				m_blackJack = -1;
-			else m_blackJack = 0;
+				blackJackSuccess = -1;
+			else blackJackSuccess = 0;
 
-			if (m_isLeft)
-				OBJECTMANAGER->AddObject("BlackJackCard", *m_x + 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
-			else
-				OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
-			if (m_blackJack == 0)
+			//if (m_isLeft)
+			//	OBJECTMANAGER->AddObject("BlackJackCard", *m_x + 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+			//else
+			//	OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
+
+			OBJECTMANAGER->AddObject("BlackJack", *m_x + 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJack>()->Setting(blackJackSuccess);
+			if (blackJackSuccess == 0)
 				m_skillNowCoolA = m_skillCoolA;
-			else if (m_blackJack == -1)
+			else if (blackJackSuccess == -1)
 				m_skillNowCoolA = 0.5 * m_skillCoolA;
 			else
 				m_skillNowCoolA = 1.5;
-			m_blackJackOn = true;
-			m_blackJackShotCount = 1;
-			m_blackJackNowDelay = m_blackJackDelay;
 
 			SetAction(eSkill_1, true, true);
 		}

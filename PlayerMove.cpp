@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "RigidBodyComponent.h"
+#include "IllusionEffect.h"
 
 void Player::Move()
 {
@@ -14,8 +15,22 @@ void Player::Move()
 	//대시중일 때
 	if (m_dashing)
 	{		//##dash 이동식 수정 필요
-		if (m_isLeft) { m_obj->x -= m_dashSpeed * DELTA_TIME; }
-		else { m_obj->x += m_dashSpeed * DELTA_TIME; }
+		illusionEffectCount += DELTA_TIME;
+
+		if (illusionEffectCount > 0.18)
+		{
+			if (typeid(*m_nowHead) == typeid(LittleBorn))
+			{
+				OBJECTMANAGER->AddObject("Effect", m_obj->x, m_obj->y - 54, eObject)->AddComponent<IllusionEffect>()->Setting(m_nowHead->GetNowImage(), m_isLeft);
+			}
+			else
+			{
+				OBJECTMANAGER->AddObject("Effect", m_obj->x, m_obj->y - 40, eObject)->AddComponent<IllusionEffect>()->Setting(m_nowHead->GetNowImage(), m_isLeft);
+			}
+			illusionEffectCount = 0;
+		}
+		if (m_isLeft) { m_obj->x -= m_dashNowSpeed * DELTA_TIME; }
+		else { m_obj->x += m_dashNowSpeed * DELTA_TIME; }
 		m_obj->y -= 1;
 	}
 	else
@@ -97,7 +112,7 @@ void Player::InputDashKey()
 		{
 			m_jumpping = false;
 			m_nowHead->ResetAttack();
-
+			m_dashNowSpeed = m_dashSpeed;
 			if (m_dashing)
 			{
 				m_dashCount = 2;

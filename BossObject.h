@@ -5,6 +5,8 @@
 class Baptism;
 class WorshipLeft;
 class WorshipRight;
+class HolyFountainLeft;
+class HolyFountainRight;
 
 class BossObject : public Component
 {
@@ -17,12 +19,17 @@ private:
 	bool isActive;
 	float alpha = 1;
 	float teleprotTimer;
+	bool isDivine =false;
+	bool isPhase3 = false;
 	bool isTeleport = false;
 	float chairX = 0;
 	bool isLazer;
 	float tpX;
 	float tpY;
 private:
+	HolyFountainLeft* _left;
+	HolyFountainRight* _right;
+
 	CImage* _imgBossChair;
 	// 보스 1페이즈 대화
 	vImage* divineLightEf1;
@@ -79,6 +86,7 @@ private:
 	int m_bossState;
 	float m_patterTimer;
 	int lazerCount = 0;
+
 	enum BossPhase2State
 	{
 		eIntro1,
@@ -91,6 +99,13 @@ private:
 		eDivineLightAR,
 		eDivineLightA,
 		eDivineLightE,
+		eDivineImpactA,
+		eDivineImpactE,
+		eDivineImpactR,
+		eDivineImpactRL,
+		ePhase_3A,
+		ePhase_3E,
+		ePhase_3R,
 		eSoulChaseA,
 		eSoulChaseR,
 		eSoulChaseE,
@@ -102,10 +117,10 @@ private:
 protected:
 	bool _isIntroOn;
 	float _introTimeCheck;
-
+	bool isMove;
 	bool _isIdleOn;
 	bool _patternLock;
-
+	int devineCount = 0;
 	int _patternSelect;
 	float _patternDelay;
 protected:
@@ -151,7 +166,10 @@ protected:
 	vector<WorshipRight*>::iterator _viWorshipRight;
 
 	int rand;
+
 public:
+	int _patternCheck;
+
 	bool getIdleOn() { return _isIdleOn; }
 
 	virtual void Init() override;
@@ -164,5 +182,7 @@ public:
 
 	void Page_2();
 	void Teleport();
+	void MovePos();
+
 };
 

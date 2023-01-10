@@ -160,7 +160,6 @@ void HolyFountainRight::HitEnemy(float dmg, float time)
 
 void HolyOrbLeft::Init()
 {
-
 	_imgLeftOrbStart = IMAGEMANAGER->FindImageVector("Boss_HolyFountain_Start_Left");
 	_imgLeftOrbStart->Setting(0.05, false);
 
@@ -172,7 +171,6 @@ void HolyOrbLeft::Init()
 
 	isLeftDes = false;
 	_isLeftOrbActing = false;
-
 }
 
 void HolyOrbLeft::Update()

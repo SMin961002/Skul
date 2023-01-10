@@ -38,15 +38,15 @@ void Lazer::Render()
 	}
 	if (m_state == eLoop)
 	{
-		img[m_state]->CenterRender(m_obj->x+250, m_obj->y , 1, 2.5, 90);
+		img[m_state]->CenterRender(m_obj->x + 250, m_obj->y, 1.5, 3, 90);
 	}
-	else if(m_state == eStart)
+	else if (m_state == eStart)
 	{
-		img[m_state]->CenterRender(m_obj->x+250, m_obj->y , 1, 2.5, 90);
+		img[m_state]->CenterRender(m_obj->x + 250, m_obj->y, 1.5, 3, 90);
 	}
 	else
 	{
-		img[m_state]->CenterRender(m_obj->x + 250, m_obj->y, 1, 2.5, 90);
+		img[m_state]->CenterRender(m_obj->x + 250, m_obj->y, 1.5, 3, 90);
 	}
 }
 

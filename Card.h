@@ -23,15 +23,19 @@ public:
 	virtual void Release() override;
 	virtual void OnCollision(string collisionName, Object* other)override;
 
-	Card(){}
-	~Card(){}
+	Card() {}
+	~Card() {}
 };
 
 class BlackJackCard : public Card
 {
 private:
-	float m_success;
+	int m_success;
 	float m_dmg;
+	bool m_shoot;
+
+	float m_dx;
+	float m_dy;
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -39,6 +43,12 @@ public:
 	virtual void Release() override;
 	//성공0, 실패 -1, 대성공 1
 	void Setting(int success);
-
+	void SetShoot()
+	{
+		m_shoot = true;
+		m_coll->SetIsActive(true);
+		if (m_success >= 0)
+			EFFECTMANAGER->AddEffect<BlackJackSpark>(m_obj->x, m_obj->y, m_isLeft, 2);
+	}
 	virtual void OnCollision(string collisionName, Object* other)override;
 };

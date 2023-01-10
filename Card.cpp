@@ -2,6 +2,7 @@
 #include "Card.h"
 #include "RigidBodyComponent.h"
 #include "Player.h"
+#include "HitDamageEffect.h"
 #include "Enemy.h"
 void Card::Init()
 {
@@ -89,6 +90,7 @@ void Card::OnCollision(string collisionName, Object* other)
 			if (m_isJoker)
 			{
 				e->HitEnemy(20, IMAGEMANAGER->FindImageVector("Gambler_JockerExplosion")->GetTotalDelay());
+				OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(20);
 
 				if (!m_isJokerHit)
 				{
@@ -115,45 +117,58 @@ void BlackJackCard::Init()
 	m_coll = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(m_coll);
 	m_coll->Setting(15, m_obj->x + 120, m_obj->y - 8, "GamblerCard");
+	m_coll->SetIsActive(false);
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 	m_obj->AddComponent<RigidBodyComponent>()->SetGravityOnOff(false);
 	m_isLeft = OBJECTMANAGER->m_player->GetplayerIsLeft();
 	m_startX = OBJECTMANAGER->m_player->GetplayerX();
+	m_shoot = false;
+
+	m_dx = MY_UTILITY::getFromFloatTo(80, 125);
+	m_dy = -80 + MY_UTILITY::getFromFloatTo(0, 48);
 }
 
 void BlackJackCard::Update()
 {
-	if (m_isJokerHit)
+	if (m_shoot)	//발사시 동작
 	{
-		if (m_jokerExplosion->GetIsEffectEnded())
+		if (m_isJokerHit)
 		{
-			m_coll->SetIsActive(false);
-			m_coll->SetIsDelete(true);
-			m_obj->ObjectDestroyed();
-		}
-	}//end jokerExplosion
-	else {
-		m_obj->x = m_isLeft ? m_obj->x - m_speed * DELTA_TIME : m_obj->x + m_speed * DELTA_TIME;
-		float distance = m_obj->x - m_startX;
-		if (distance < 0) distance = -distance;
-		PixelCollisionComponent* px = m_obj->GetComponent<PixelCollisionComponent>();
-		if (px->GetIsBottomCollision() || px->GetIsTopCollision()
-			|| px->GetIsLeftCollision() || px->GetIsRightCollision()
-			|| distance > WINSIZE_X)
-		{
-			m_obj->ObjectDestroyed();
-		}
-		if (m_isLeft)
-			m_coll->Setting(m_obj->x - 19, m_obj->y + 4);
-		else
-			m_coll->Setting(m_obj->x + 24, m_obj->y + 4);
-	}//end else
-
+			if (m_jokerExplosion->GetIsEffectEnded())
+			{
+				m_coll->SetIsActive(false);
+				m_coll->SetIsDelete(true);
+				m_obj->ObjectDestroyed();
+			}
+		}//end jokerExplosion
+		else {
+			m_obj->x = m_isLeft ? m_obj->x - m_speed * DELTA_TIME : m_obj->x + m_speed * DELTA_TIME;
+			float distance = m_obj->x - m_startX;
+			if (distance < 0) distance = -distance;
+			PixelCollisionComponent* px = m_obj->GetComponent<PixelCollisionComponent>();
+			if (px->GetIsBottomCollision() || px->GetIsTopCollision()
+				|| px->GetIsLeftCollision() || px->GetIsRightCollision()
+				|| distance > WINSIZE_X)
+			{
+				m_obj->ObjectDestroyed();
+			}
+			if (m_isLeft)
+				m_coll->Setting(m_obj->x - 19, m_obj->y + 4);
+			else
+				m_coll->Setting(m_obj->x + 24, m_obj->y + 4);
+		}//end else
+	}//end shot
+	else	//발사 전 동작
+	{
+		m_obj->x = OBJECTMANAGER->m_player->GetplayerX() + (m_isLeft ? m_dx : -m_dx);
+		m_obj->y = OBJECTMANAGER->m_player->GetplayerY() + m_dy;
+		m_isLeft = OBJECTMANAGER->m_player->GetplayerIsLeft();
+	}
 }
 
 void BlackJackCard::Render()
 {
-	if(!m_isJokerHit)
+	if (!m_isJokerHit)
 		IMAGEMANAGER->CenterRender(m_img, m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
 }
 
@@ -174,20 +189,18 @@ void BlackJackCard::Setting(int success)
 		m_isJoker = true;
 		m_isJokerHit = false;
 		m_img = IMAGEMANAGER->FindImage("GamblerCardJoker");
-		EFFECTMANAGER->AddEffect<BlackJackSpark>(m_obj->x, m_obj->y, m_isLeft, 2);
 		break;
 
 	default:
 		m_isJoker = false;
 		m_img = IMAGEMANAGER->FindImage("GamblerCardNormal");
-		EFFECTMANAGER->AddEffect<BlackJackSpark>(m_obj->x, m_obj->y, m_isLeft, 2);
 		break;
 	}
 }
 
 void BlackJackCard::OnCollision(string collisionName, Object* other)
 {
-	if (other->GetName() == "Enemy" ||other->GetName() == "Boss")
+	if (other->GetName() == "Enemy" || other->GetName() == "Boss")
 	{
 		if (m_success = -1)
 		{
@@ -211,6 +224,7 @@ void BlackJackCard::OnCollision(string collisionName, Object* other)
 			if (m_isJoker)
 			{
 				e->HitEnemy(15, 0);
+				OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(15);
 
 				if (!m_isJokerHit)
 				{
@@ -225,6 +239,8 @@ void BlackJackCard::OnCollision(string collisionName, Object* other)
 			}//end joker
 			else
 			{
+				OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(12);
+
 				e->HitEnemy(12, 0);
 			}//end not joker
 			m_vectorCollisionList.push_back(other);

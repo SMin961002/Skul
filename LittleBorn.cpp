@@ -2,6 +2,7 @@
 #include "LittleBorn.h"
 #include "RigidBodyComponent.h"
 #include "Enemy.h"
+#include "HitDamageEffect.h"
 
 void LittleBorn::ImageSetting()
 {
@@ -68,7 +69,7 @@ void LittleBorn::ParameterSetting()
 	m_moveSpeed = 180;
 	m_isDown = false;
 
-	m_dashSpeed = 240;		//##dash 이동식 수정 필요
+	m_dashSpeed = 500;		//##dash 이동식 수정 필요
 	m_dashTime = 0.85 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
 	m_dashCool = 1;
@@ -459,5 +460,7 @@ void LittleBorn::OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg,
 	{
 		enemy->HitEnemy(dmg, delay);
 		m_CollObjList.push_back(obj);
+		OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(10);
+
 	}
 }

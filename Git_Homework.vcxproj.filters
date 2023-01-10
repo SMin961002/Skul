@@ -253,6 +253,15 @@
     <ClCompile Include="Thunder.cpp">
       <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClCompile>
+    <ClCompile Include="LobbyObject.cpp" />
+    <ClCompile Include="DivineImpact.cpp" />
+    <ClCompile Include="Phase3B.cpp" />
+    <ClCompile Include="BossCircle.cpp" />
+    <ClCompile Include="CSound.cpp" />
+    <ClCompile Include="CSoundMgr.cpp" />
+    <ClCompile Include="Fanatic.cpp" />
+    <ClCompile Include="Lazer.cpp" />
+    <ClCompile Include="HitDamageEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -475,6 +484,14 @@
     <ClInclude Include="Thunder.h">
       <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClInclude>
+    <ClInclude Include="LobbyObject.h" />
+    <ClInclude Include="DivineImpact.h" />
+    <ClInclude Include="Phase3B.h" />
+    <ClInclude Include="BossCircle.h" />
+    <ClInclude Include="CSound.h" />
+    <ClInclude Include="CSoundMgr.h" />
+    <ClInclude Include="Lazer.h" />
+    <ClInclude Include="HitDamageEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
