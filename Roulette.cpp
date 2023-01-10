@@ -294,9 +294,10 @@ void Roulette::OnCollision(string collisionName, Object* other)
 		//default:
 		//	dmg = 15;
 		//}
-		OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(18);
 
 		other->GetComponent<Component>()->HitEnemy(18, 0.1);
+		OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(18);
+
 		m_vectorCollisionList.push_back(other);
 	}
 }
