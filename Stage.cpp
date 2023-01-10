@@ -20,6 +20,7 @@
 
 void Stage::Init()
 {
+	GAMEMANAGER->enemyCount = 0;
 	trigger = new Trigger;
 	isFade = false;
 	isStart = false;

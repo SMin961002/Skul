@@ -127,6 +127,7 @@ struct Vector2
 #include "Utility.h"
 #include "EffectManager.h"
 #include "CSoundMgr.h"
+#include "GameManager.h"
 //inline static float GetDeltaTime()
 //{
 //	return;

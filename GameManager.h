@@ -11,3 +11,4 @@ public:
 	int GetEnemyCount() { OBJECTMANAGER->GetEnemyCount(); }
 };
 
+#define GAMEMANAGER GameManager::GetInstance()

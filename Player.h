@@ -16,7 +16,7 @@ private:
 	};
 	CImage* m_UIImage[UITag::eEnd];
 
-	Head* m_headList[static_cast<int>(eSkulSpecies::Empty) +1];
+	Head* m_headList[static_cast<int>(eSkulSpecies::Empty) + 1];
 	eSkulSpecies m_headSlot;
 	Head* m_nowHead;
 	float m_headTagCool;
@@ -51,7 +51,7 @@ private:
 	int m_knockBackY;
 	bool m_knockBack;
 	//============이동에 필요한 변수end==========
-	
+
 	//========================
 	float m_supperArmarTime;
 	float m_supperArmarNowTime;
@@ -100,6 +100,17 @@ public:
 	void InputJumpKey();
 	void InputDashKey();
 	void InputArrowKey();
+	void Heal()
+	{
+		if ((m_life + 10) - m_HpMax > 0)
+		{
+			m_life = m_HpMax;
+		}
+		else
+		{
+			m_life += 10;
+		}
+	}
 	//↑====PlayerMove.cpp에 있습니다====↑//
 	void ResetJump() {
 		m_jumpCount = 0;
@@ -142,7 +153,7 @@ public:
 
 # dash부분 보강 필요
 
-			
+
 			갬블러 액션
 			샤샤샥
 			데미지(이미지)
@@ -150,7 +161,7 @@ public:
 			해골이미지 슬롯
 
 			다하면 약탈자 (진화 전/후 넣기)
-			
+
 
  - 플레이어 1타중 맞으면 2타가 안나가는 문제 수정하기
  - effect 출력

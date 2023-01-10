@@ -8,6 +8,8 @@
 
 void TentaclesOfLight::Init()
 {
+	GAMEMANAGER->enemyCount++;
+
 	m_attackcount = 0;
 	m_maxhp = 1;
 	m_memergeend = false;
@@ -40,8 +42,8 @@ void TentaclesOfLight::Update()
 {
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 	m_collision->Setting(40, m_obj->x + 17, m_obj->y - 20, "Attack");
-	
-	if (m_vimage[eAttack]->GetFrame() >= 4&& m_vimage[eAttack]->GetFrame()<= 7 )
+
+	if (m_vimage[eAttack]->GetFrame() >= 4 && m_vimage[eAttack]->GetFrame() <= 7)
 	{
 		m_hitpointcollision->SetIsActive(true);
 		if (m_isleft)
@@ -99,6 +101,7 @@ void TentaclesOfLight::Render()
 
 void TentaclesOfLight::Release()
 {
+	GAMEMANAGER->enemyCount--;
 }
 
 
@@ -152,7 +155,7 @@ void TentaclesOfLight::OnCollision(string collisionName, Object* other)
 	}
 }
 
-void TentaclesOfLight::HitEnemy(float dmg,float time)
+void TentaclesOfLight::HitEnemy(float dmg, float time)
 {
 	if (m_hiteffecttimer >= time)
 	{
