@@ -14,6 +14,7 @@ class BossBall : public Component
 	float rot;
 	float dist;
 public:
+	bool ldist;
 	BossBall();
 	~BossBall();
 	vImage* img[3];

@@ -20,7 +20,7 @@ Trigger::Trigger()
 }
 void Trigger::Init()
 {
-	
+
 	nowTriggerIndex = 0;
 	SpawnEnemy();
 }
@@ -40,7 +40,8 @@ void Trigger::Render()
 
 void Trigger::Release()
 {
-	m_structureData->clear();
+	if (m_structureData->size() > 0)
+		m_structureData->clear();
 }
 
 void Trigger::OnTrigger()

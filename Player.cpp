@@ -43,7 +43,8 @@ void Player::Init()
 	m_artifactCoolD = 0;
 	m_haveArtifact = false;
 	m_supperArmarTime = 0.5f;
-
+	m_knockBackY = 0;
+	m_knockBack = false;
 	OBJECTMANAGER->m_player = this;
 	m_supperArmarNowTime = 0;
 }
@@ -58,7 +59,8 @@ void Player::Update()
 		Move();
 		if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
 		{
-			ChangeHead();
+			if(m_headTagCool==0)
+				ChangeHead();
 		}
 	}
 	InputArtifactKey();
@@ -203,21 +205,25 @@ void Player::HitPlayerPhysicAttack(float dmg)
 	m_supperArmarNowTime = m_supperArmarTime;
 	m_playerHitBox->SetIsActive(false);
 	m_life -= dmg;
+	cout << "데미지 : " << dmg << ", 플레이어 HP : " << m_life << endl;
 }
 void Player::HitPlayerMagicAttack(float dmg)
 {
 	m_supperArmarNowTime = m_supperArmarTime;
 	m_playerHitBox->SetIsActive(false);
 	m_life -= dmg;
+	cout << "데미지 : " << dmg << ", 플레이어 HP : " << m_life << endl;
 }
 void Player::HitPlayerKnockBack(float moveX, float moveY)
 {
 	//##위로밀림시 점프하강모션뜨는거 idle로 바꾸기
-	m_knockBackY = moveY - m_obj->y;
+	if (moveY > 0)
+		m_knockBack = true;
 	if (m_knockBackY < 0)
 		m_knockBackY = 0;
 	m_obj->x += moveX;
 	m_obj->y += moveY;
+	m_knockBackY =m_obj->y;
 }
 void Player::HitPlayerEffect()
 {

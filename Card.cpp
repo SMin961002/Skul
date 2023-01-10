@@ -202,7 +202,7 @@ void BlackJackCard::OnCollision(string collisionName, Object* other)
 			Component* e = other->GetComponent<Component>();
 			if (m_isJoker)
 			{
-				e->HitEnemy(30, 0);
+				e->HitEnemy(15, 0);
 
 				if (!m_isJokerHit)
 				{
@@ -217,7 +217,7 @@ void BlackJackCard::OnCollision(string collisionName, Object* other)
 			}//end joker
 			else
 			{
-				e->HitEnemy(15, 0);
+				e->HitEnemy(12, 0);
 			}//end not joker
 			m_vectorCollisionList.push_back(other);
 		}//end if nohit

@@ -61,7 +61,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_Idle", L"./Resources/Png/Skul/Gambler/Motion/Idle/", 1, 7);
 	AddImageVector("Gambler_Walk", L"./Resources/Png/Skul/Gambler/Motion/Walk/", 1, 6);
 	AddImageVector("Gambler_Dash", L"./Resources/Png/Skul/Gambler/Motion/Dash/", 1, 5);
-	AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 5);
+	AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 11);
 	AddImageVector("Gambler_AttackA2", L"./Resources/Png/Skul/Gambler/Motion/AttackA2/", 1, 6);
 	AddImageVector("Gambler_Attack1", L"./Resources/Png/Skul/Gambler/Motion/AttackB1/", 1, 6);
 	AddImageVector("Gambler_Attack2", L"./Resources/Png/Skul/Gambler/Motion/AttackB2/", 1, 6);
@@ -92,6 +92,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_RouletteBigShotCircle", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShotCircle/", 1, 8);
 	AddImageVector("Gambler_Roulette_BlackBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Black_BigHit/", 1, 91);
 	AddImageVector("Gambler_Roulette_RedBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Red_BigHit/", 1, 49);
+	AddImageVector("Gambler_SlotMachine", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/", 1, 8);
 	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
 	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
 	AddImage("GamblerRouletteBlack", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Black.png");
@@ -283,6 +284,7 @@ void ImageManager::LoadImages()
 	// 1페이즈_분수
 	AddImage("Fountain_Deactivate", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/Fountain/Deactive/Deactivate_01.png");
 	AddImageVector("Boss_HolyFountain_Activate", L"./Resources/Saint_Joanna/Phase_1/HollyFountain/Fountain/Active/Activate_", 1, 8);
+	AddImageVector("TeleportEffect", L"./Resources/Saint_Joanna/Phase_2/Teleport/in/", 1, 38);
 	// 1페이즈_방어막
 	AddImageVector("Boss_Barrier_Intro_Front", L"./Resources/Saint_Joanna/Phase_1/Barrier/Intro_Front/Phase1_Barrier_Intro_Front_", 1, 30);
 	AddImageVector("Boss_Barrier_Intro_Behind", L"./Resources/Saint_Joanna/Phase_1/Barrier/Intro_Behind/Phase1_Barrier_Intro_Behind_", 1, 30);
@@ -308,7 +310,26 @@ void ImageManager::LoadImages()
 	AddImageVector("Phase2_Ball_CreateBall_Start", L"./Resources/Saint_Joanna/Phase_2/CreateBall/HolyBarrierOrb/Start/", 1, 21);
 	AddImageVector("Phase2_Ball_CreateBall_Idle", L"./Resources/Saint_Joanna/Phase_2/CreateBall/HolyBarrierOrb/Orb/Phase1_HolyBarrier_Orb_", 1, 48);
 
+	AddImageVector("Phase2_Ball_SoulChase_Attack", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/Attack/", 1, 7);
+	AddImageVector("Phase2_Ball_SoulChase_Ready", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/Ready/", 1, 7);
+	AddImageVector("Phase2_Ball_SoulChase_End", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/End/", 1, 7);
+	AddImageVector("Trail", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Effect/Trail/", 1, 51);
 
+	AddImageVector("Phase2_Ball_DivineLight_AttackLoop", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Boss/AttackLoop/", 15, 21);
+	AddImageVector("Phase2_Ball_DivineLight_AttackReady", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Boss/AttackReady/", 8, 14);
+	AddImageVector("Phase2_Ball_DivineLight_End", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Boss/End/", 24, 28);
+	AddImageVector("Phase2_Ball_DivineLight_Ready", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Boss/Ready/", 1, 7);
+
+	AddImageVector("DivineLight_ef1", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Effect/ef/", 2, 38);
+	AddImageVector("DivineLight_ef2", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Effect/ef2/", 2, 40);
+	AddImageVector("MuzzleFlash", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Effect/MuzzleFlash/", 1, 24);
+
+
+	AddImageVector("Circle", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/Circle/", 1, 40);
+	AddImageVector("CircleIdle", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/CircleIdle/", 1, 39);
+	AddImageVector("CircleDis", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/CircleDis/", 1, 8);
+
+	AddImageVector("MagicCircle", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Effect/MagicCircle/", 1, 42);
 
 	// 2페이즈_인트로
 	AddImageVector("Phase2_Boss_Idle", L"./Resources/Saint_Joanna/Phase_2/Idle/Phase2_Idle_", 1, 6);
@@ -502,6 +523,12 @@ void ImageManager::LoadImages()
 	AddImageVector("SpirderRoom", L"Resources/Door/SpirderRoom/", 1, 8);
 
 	AddImageVector("Fountain", L"Resources/Tile/4Stage/Structure/fountain/", 1, 6);
+	AddImageVector("Spider", L"Resources/Tile/4Stage/Structure/spider/", 1, 11);
+	AddImageVector("LobbyNpc", L"Resources/Tile/4Stage/Structure/Npc1/", 1, 7);
+	AddImageVector("LobbyNpc2", L"Resources/Tile/4Stage/Structure/Npc2/", 1, 24);
+	AddImageVector("LobbyNpc3", L"Resources/Tile/4Stage/Structure/Npc3/", 1, 8);
+	AddImageVector("LobbyNpc4", L"Resources/Tile/4Stage/Structure/Npc4/", 1, 8);
+	AddImageVector("LobbyNpc5", L"Resources/Tile/4Stage/Structure/Npc5/", 1, 8);
 
 	//맵툴 오브젝트 이미지 저장
 	AddObjectImage("Leon", L"Resources/Monster/Leonia Soldier/Idle/01.png");
@@ -530,6 +557,12 @@ void ImageManager::LoadImages()
 	AddObjectImage("Trigger2", L"./Resources/Trigger2.png");
 	AddObjectImage("Trigger3", L"./Resources/Trigger3.png");
 	AddObjectImage("Fountain", L"./Resources/Tile/4Stage/Structure/fountain/01.png");
+	AddObjectImage("Spider", L"./Resources/Tile/4Stage/Structure/spider/01.png");
+	AddObjectImage("LobbyNpc", L"./Resources/Tile/4Stage/Structure/Npc1/01.png");
+	AddObjectImage("LobbyNpc2", L"./Resources/Tile/4Stage/Structure/Npc2/01.png");
+	AddObjectImage("LobbyNpc3", L"./Resources/Tile/4Stage/Structure/Npc3/01.png");
+	AddObjectImage("LobbyNpc4", L"./Resources/Tile/4Stage/Structure/Npc4/01.png");
+	AddObjectImage("LobbyNpc5", L"./Resources/Tile/4Stage/Structure/Npc5/01.png");
 
 	// 인게임 UI이미지
 	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");

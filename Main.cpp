@@ -9,7 +9,7 @@ void Main::Init()
 	IMAGEMANAGER->Init();
 	SCENEMANAGER->Init();
 	KEYMANAGER->Init();
-
+	SOUNDMANAGER->init(_hWnd);
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
 
@@ -27,11 +27,11 @@ void Main::Init()
 
 void Main::Update()
 {
-	if (KEYMANAGER->GetOnceKeyDown(VK_ESCAPE) && SCENEMANAGER->GetInvenActive() == false)
+	if (KEYMANAGER->GetOnceKeyDown(VK_ESCAPE) && SCENEMANAGER->GetInvenActive() == false && menu->isResetScene == false)
 	{
 		SCENEMANAGER->SetMenuActive(!SCENEMANAGER->GetMenuActive());
 	}
-	if (KEYMANAGER->GetOnceKeyDown(VK_TAB) && SCENEMANAGER->GetMenuActive() == false)
+	if (KEYMANAGER->GetOnceKeyDown(VK_TAB) && SCENEMANAGER->GetMenuActive() == false && menu->isResetScene == false)
 	{
 		SCENEMANAGER->SetInvenActive(!SCENEMANAGER->GetInvenActive());
 	}
@@ -74,15 +74,12 @@ void Main::Update()
 	{
 		IMAGEMANAGER->SetViewCollision(!IMAGEMANAGER->GetViewCollision());
 	}
-
-
 	SCENEMANAGER->Update();
 
 	if (KEYMANAGER->GetOnceKeyDown(VK_TAB))
 	{
 
 	}
-
 }
 
 void Main::Render()
@@ -106,6 +103,15 @@ void Main::Render()
 		if (inven)
 			inven->Render();
 	}
+
+	if (menu->isResetScene == true)
+	{
+		SCENEMANAGER->FadeOut(0.03, [&]() {
+			FILEMANAGER->SetNowStageFile("map_5");
+			SCENEMANAGER->ChangeScene("Stage");
+			menu->isResetScene = false;
+			}, 51);
+	}
 	IMAGEMANAGER->End();
 }
 
@@ -119,6 +125,7 @@ void Main::Release()
 	TimerManager::ReleaseInstance();
 	KeyManager::ReleaseInstance();
 	IOFillManager::ReleaseInstance();
+	CSoundMgr::ReleaseInstance();
 }
 
 LRESULT Main::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)

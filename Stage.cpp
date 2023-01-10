@@ -16,11 +16,12 @@
 #include "HeadResult.h"
 #include "CandleFanatic.h"
 #include"Fountain.h"
+#include"LobbyObject.h"
 
 void Stage::Init()
 {
 	trigger = new Trigger;
-
+	isFade = false;
 	isStart = false;
 	m_speed = 0;
 	m_backGround = IMAGEMANAGER->FindImage("Background");
@@ -119,6 +120,30 @@ void Stage::Init()
 		{
 			OBJECTMANAGER->AddObject("Fountain", iter->x, iter->y, ObjectTag::eItem)->AddComponent<Fountain>();
 		}
+		else if (iter->key == "Spider")
+		{
+			OBJECTMANAGER->AddObject("Spider", iter->x, iter->y, ObjectTag::eItem)->AddComponent<Spider>();
+		}
+		else if (iter->key == "LobbyNpc")
+		{
+			OBJECTMANAGER->AddObject("LobbyNpc", iter->x, iter->y, ObjectTag::eItem)->AddComponent<LobbyNpc1>();
+		}
+		else if (iter->key == "LobbyNpc2")
+		{
+			OBJECTMANAGER->AddObject("LobbyNpc2", iter->x, iter->y, ObjectTag::eItem)->AddComponent<LobbyNpc2>();
+		}
+		else if (iter->key == "LobbyNpc3")
+		{
+			OBJECTMANAGER->AddObject("LobbyNpc3", iter->x, iter->y, ObjectTag::eItem)->AddComponent<LobbyNpc3>();
+		}
+		else if (iter->key == "LobbyNpc4")
+		{
+			OBJECTMANAGER->AddObject("LobbyNpc4", iter->x, iter->y, ObjectTag::eItem)->AddComponent<LobbyNpc4>();
+		}
+		else if (iter->key == "LobbyNpc5")
+		{
+			OBJECTMANAGER->AddObject("LobbyNpc5", iter->x, iter->y, ObjectTag::eItem)->AddComponent<LobbyNpc5>();
+		}
 		else
 		{
 			trigger->m_structureData[iter->page].push_back(iter);
@@ -150,13 +175,15 @@ void Stage::Render()
 {
 	m_speed += 100 * DELTA_TIME;
 	float RenderPos = (int)m_speed % (m_cloude->GetWidth() * 2);
-	IMAGEMANAGER->Render(m_backGround, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-	IMAGEMANAGER->Render(m_moon, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-	IMAGEMANAGER->Render(m_cloude2, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-	IMAGEMANAGER->Render(m_cloude, IMAGEMANAGER->GetCameraPosition().x - RenderPos, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-	IMAGEMANAGER->Render(m_cloude, IMAGEMANAGER->GetCameraPosition().x - RenderPos + (m_cloude->GetWidth() * 2), IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-	IMAGEMANAGER->Render(m_castle, IMAGEMANAGER->GetCameraPosition().x * 0.9, IMAGEMANAGER->GetCameraPosition().y - 800, 2, 2);
-
+	if (FILEMANAGER->GetFileName() == "map_5")
+	{
+		IMAGEMANAGER->Render(m_backGround, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_moon, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_cloude2, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_cloude, IMAGEMANAGER->GetCameraPosition().x - RenderPos, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_cloude, IMAGEMANAGER->GetCameraPosition().x - RenderPos + (m_cloude->GetWidth() * 2), IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_castle, IMAGEMANAGER->GetCameraPosition().x * 0.9, IMAGEMANAGER->GetCameraPosition().y - 800, 2, 2);
+	}
 
 	IMAGEMANAGER->DrawMapStructureBack(m_sturctDatas);
 

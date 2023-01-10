@@ -102,7 +102,7 @@ void BossPhase1EnemyCandle::Update()
 		m_hpbar = (1 / m_maxhp);
 
 	}
-	
+
 }
 
 void BossPhase1EnemyCandle::Render()
@@ -178,5 +178,4 @@ void BossPhase1EnemyCandle::HitEnemy(float dmg, float time)
 	m_hit = true;
 	m_hiteffecttimer = 0;
 	m_currenthp -= dmg;
-
 }
