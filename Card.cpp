@@ -2,6 +2,7 @@
 #include "Card.h"
 #include "RigidBodyComponent.h"
 #include "Player.h"
+#include "HitDamageEffect.h"
 #include "Enemy.h"
 void Card::Init()
 {
@@ -89,6 +90,7 @@ void Card::OnCollision(string collisionName, Object* other)
 			if (m_isJoker)
 			{
 				e->HitEnemy(20, IMAGEMANAGER->FindImageVector("Gambler_JockerExplosion")->GetTotalDelay());
+				OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(20);
 
 				if (!m_isJokerHit)
 				{
@@ -153,7 +155,7 @@ void BlackJackCard::Update()
 
 void BlackJackCard::Render()
 {
-	if(!m_isJokerHit)
+	if (!m_isJokerHit)
 		IMAGEMANAGER->CenterRender(m_img, m_obj->x, m_obj->y, 2, 2, 0, m_isLeft);
 }
 
@@ -163,6 +165,7 @@ void BlackJackCard::Release()
 
 void BlackJackCard::Setting(int success)
 {
+	m_success = success;
 	switch (success)
 	{
 	case -1:
@@ -186,8 +189,15 @@ void BlackJackCard::Setting(int success)
 
 void BlackJackCard::OnCollision(string collisionName, Object* other)
 {
-	if (other->GetName() == "Enemy" ||other->GetName() == "Boss")
+	if (other->GetName() == "Enemy" || other->GetName() == "Boss")
 	{
+		if (m_success = -1)
+		{
+			Component* e = other->GetComponent<Component>();
+			e->HitEnemy(12, 0);
+			m_obj->ObjectDestroyed();
+		}
+
 		bool isOtherHit = false;
 		for (auto iter : m_vectorCollisionList)
 		{
@@ -202,7 +212,8 @@ void BlackJackCard::OnCollision(string collisionName, Object* other)
 			Component* e = other->GetComponent<Component>();
 			if (m_isJoker)
 			{
-				e->HitEnemy(30, 0);
+				e->HitEnemy(15, 0);
+				OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(15);
 
 				if (!m_isJokerHit)
 				{
@@ -217,7 +228,9 @@ void BlackJackCard::OnCollision(string collisionName, Object* other)
 			}//end joker
 			else
 			{
-				e->HitEnemy(15, 0);
+				OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(12);
+
+				e->HitEnemy(12, 0);
 			}//end not joker
 			m_vectorCollisionList.push_back(other);
 		}//end if nohit

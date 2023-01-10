@@ -7,6 +7,8 @@
 class Player : public Component
 {
 private:
+	float illusionEffectCount;
+	CImage* hpBar;
 	enum UITag
 	{
 		ePlayerStatus,
@@ -47,6 +49,7 @@ private:
 	bool  m_jumpping;
 
 	int m_knockBackY;
+	bool m_knockBack;
 	//============이동에 필요한 변수end==========
 	
 	//========================

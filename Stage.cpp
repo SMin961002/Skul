@@ -16,6 +16,7 @@
 #include "HeadResult.h"
 #include "CandleFanatic.h"
 #include"Fountain.h"
+#include"LobbyObject.h"
 
 void Stage::Init()
 {
@@ -24,10 +25,23 @@ void Stage::Init()
 	isStart = false;
 	m_speed = 0;
 	m_backGround = IMAGEMANAGER->FindImage("Background");
-	m_castle = IMAGEMANAGER->FindImage("Castle2");
-	m_cloude = IMAGEMANAGER->FindImage("Cloud");
+	m_backGround2 = IMAGEMANAGER->FindImage("Background2");
+	m_backGround3 = IMAGEMANAGER->FindImage("Background3");
+	m_backGround4 = IMAGEMANAGER->FindImage("Background4");
+	m_backGround5 = IMAGEMANAGER->FindImage("Background5");
+	m_backGround6 = IMAGEMANAGER->FindImage("Background6");
+	m_backGround7 = IMAGEMANAGER->FindImage("Background7");
+	m_backGround8 = IMAGEMANAGER->FindImage("Background8");
 	m_moon = IMAGEMANAGER->FindImage("Moon2");
+	m_castle = IMAGEMANAGER->FindImage("Castle2");
+	m_castle2 = IMAGEMANAGER->FindImage("Castle3");
+	m_cloude = IMAGEMANAGER->FindImage("Cloud");
 	m_cloude2 = IMAGEMANAGER->FindImage("Cloud2");
+	m_cloude3 = IMAGEMANAGER->FindImage("Cloud3");
+	m_cloude4 = IMAGEMANAGER->FindImage("Cloud4");
+	m_ChandelierBack = IMAGEMANAGER->FindImage("ChandelierBack");
+	m_ChandelierBack2 = IMAGEMANAGER->FindImage("ChandelierBack2");
+	m_Demoncastle = IMAGEMANAGER->FindImage("Demoncastle");
 	FILEMANAGER->TileFileRead(&SCENEMANAGER->m_tiles);
 
 	string strData;
@@ -37,8 +51,7 @@ void Stage::Init()
 	string strData2;
 	strData2 = FILEMANAGER->GetFileData("Object", "batch");
 	MY_UTILITY::ConvertStructureString2Vec(&m_objectDatas, strData2);
-
-
+	
 	for (auto iter : m_objectDatas)
 	{
 		if (iter->key == "Basic")
@@ -119,6 +132,42 @@ void Stage::Init()
 		{
 			OBJECTMANAGER->AddObject("Fountain", iter->x, iter->y, ObjectTag::eItem)->AddComponent<Fountain>();
 		}
+		else if (iter->key == "Spider")
+		{
+			OBJECTMANAGER->AddObject("Spider", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<Spider>();
+		}
+		else if (iter->key == "LobbyNpc")
+		{
+			OBJECTMANAGER->AddObject("LobbyNpc", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<LobbyNpc1>();
+		}
+		else if (iter->key == "LobbyNpc2")
+		{
+			OBJECTMANAGER->AddObject("LobbyNpc2", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<LobbyNpc2>();
+		}
+		else if (iter->key == "LobbyNpc3")
+		{
+			OBJECTMANAGER->AddObject("LobbyNpc3", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<LobbyNpc3>();
+		}
+		else if (iter->key == "LobbyNpc4")
+		{
+			OBJECTMANAGER->AddObject("LobbyNpc4", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<LobbyNpc4>();
+		}
+		else if (iter->key == "LobbyNpc5")
+		{
+			OBJECTMANAGER->AddObject("LobbyNpc5", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<LobbyNpc5>();
+		}
+		else if (iter->key == "CatIdle")
+		{
+			OBJECTMANAGER->AddObject("CatIdle", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<Cat>();
+		}
+		else if (iter->key == "SpaerSkul")
+		{
+			OBJECTMANAGER->AddObject("SpaerSkul", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<SpaerSkul>();
+		}
+		else if (iter->key == "Elevator")
+		{
+			OBJECTMANAGER->AddObject("Elevator", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<Elevator>();
+		}
 		else
 		{
 			trigger->m_structureData[iter->page].push_back(iter);
@@ -142,21 +191,64 @@ void Stage::Update()
 	{
 		MY_UTILITY::GetLerpVec2(&v, { OBJECTMANAGER->m_player->GetplayerX() - WINSIZE_X / 2,IMAGEMANAGER->GetCameraPosition().y }, { IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y }, 0.5);
 	}
-	IMAGEMANAGER->SetCameraPosition(v.x, v.y);
+	if (FILEMANAGER->GetFileName() == "map_5")
+	{
+		IMAGEMANAGER->SetCameraPosition(v.x, 350);
+	}
+	else
+	{
+		IMAGEMANAGER->SetCameraPosition(v.x, v.y);
+	}
+	if (IMAGEMANAGER->GetCameraPosition().x <= 0)
+	{
+		IMAGEMANAGER->SetCameraPosition(0, IMAGEMANAGER->GetCameraPosition().y);
+	}
 	trigger->Update();
 }
 
 void Stage::Render()
-{
+{   
 	m_speed += 100 * DELTA_TIME;
 	float RenderPos = (int)m_speed % (m_cloude->GetWidth() * 2);
-	IMAGEMANAGER->Render(m_backGround, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-	IMAGEMANAGER->Render(m_moon, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-	IMAGEMANAGER->Render(m_cloude2, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-	IMAGEMANAGER->Render(m_cloude, IMAGEMANAGER->GetCameraPosition().x - RenderPos, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-	IMAGEMANAGER->Render(m_cloude, IMAGEMANAGER->GetCameraPosition().x - RenderPos + (m_cloude->GetWidth() * 2), IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-	IMAGEMANAGER->Render(m_castle, IMAGEMANAGER->GetCameraPosition().x * 0.9, IMAGEMANAGER->GetCameraPosition().y - 800, 2, 2);
+	if (FILEMANAGER->GetFileName() == "map_5")
+	{
+		IMAGEMANAGER->Render(m_backGround2, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y-200, 2, 2);
+		IMAGEMANAGER->Render(m_cloude3, IMAGEMANAGER->GetCameraPosition().x + (RenderPos*0.5), IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_cloude4, (IMAGEMANAGER->GetCameraPosition().x*0.7), IMAGEMANAGER->GetCameraPosition().y+200, 3, 3);
+		IMAGEMANAGER->Render(m_Demoncastle, IMAGEMANAGER->GetCameraPosition().x*0.2, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_ChandelierBack2, (IMAGEMANAGER->GetCameraPosition().x*0.2)+450, IMAGEMANAGER->GetCameraPosition().y-200, 2, 2);
+		IMAGEMANAGER->Render(m_ChandelierBack2, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 1800, IMAGEMANAGER->GetCameraPosition().y - 140, 2, 2);
+		IMAGEMANAGER->Render(m_ChandelierBack, (IMAGEMANAGER->GetCameraPosition().x *0.2)+1100, IMAGEMANAGER->GetCameraPosition().y-70, 2, 2);	
+	}
+	if (FILEMANAGER->GetFileName() == "map_3")
+	{
+		IMAGEMANAGER->Render(m_backGround, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_moon, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_cloude2, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_cloude, IMAGEMANAGER->GetCameraPosition().x - RenderPos, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_cloude, IMAGEMANAGER->GetCameraPosition().x - RenderPos + (m_cloude->GetWidth() * 2), IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_castle, IMAGEMANAGER->GetCameraPosition().x * 0.9, IMAGEMANAGER->GetCameraPosition().y - 800, 2, 2);
+	}
+	if (FILEMANAGER->GetFileName() == "map_2")
+	{
+		IMAGEMANAGER->Render(m_backGround, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_moon, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_cloude2, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_cloude, IMAGEMANAGER->GetCameraPosition().x - RenderPos, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_cloude, IMAGEMANAGER->GetCameraPosition().x - RenderPos + (m_cloude->GetWidth() * 2), IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_castle, IMAGEMANAGER->GetCameraPosition().x * 0.9, IMAGEMANAGER->GetCameraPosition().y - 800, 2, 2);
+	}
+	if (FILEMANAGER->GetFileName() == "map_4")
+	{
+		IMAGEMANAGER->Render(m_backGround3, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_castle2, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y-250, 2, 2);
+		IMAGEMANAGER->Render(m_backGround4, (IMAGEMANAGER->GetCameraPosition().x*0.2)-300,-1000, 2, 2);
+		IMAGEMANAGER->Render(m_backGround5, (IMAGEMANAGER->GetCameraPosition().x * 0.2)+150,100, 2, 2);
+		IMAGEMANAGER->Render(m_backGround6,(IMAGEMANAGER->GetCameraPosition().x * 0.2) + 850,100, 3, 3);
+		IMAGEMANAGER->Render(m_backGround7, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 1350,150, 3, 3);
+		IMAGEMANAGER->Render(m_backGround8, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 1350,0, 3, 3);
 
+	}
 
 	IMAGEMANAGER->DrawMapStructureBack(m_sturctDatas);
 
@@ -168,7 +260,7 @@ void Stage::Render()
 	{
 		IMAGEMANAGER->DrawMapTilePixel(SCENEMANAGER->m_tiles);
 	}
-
+	cout << FILEMANAGER->GetFileName() << endl;
 	//IMAGEMANAGER->DrawColorRender(m_backGround, WINSIZE_X / 2, WINSIZE_Y / 2, 2, 2, 0, false, { 255,0,255,0.5 });
 }
 

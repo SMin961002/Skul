@@ -13,9 +13,9 @@ void Gambler::ImageSetting()
 	img[eDash] = IMAGEMANAGER->FindImageVector("Gambler_Dash");
 	img[eDash]->Setting(0.16f, false);
 	img[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Gambler_Attack1");
-	img[eAutoAttack_1]->Setting(0.03f, false);
+	img[eAutoAttack_1]->Setting(0.04f, false);
 	img[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Gambler_Attack2");
-	img[eAutoAttack_2]->Setting(0.03f, false);
+	img[eAutoAttack_2]->Setting(0.04f, false);
 	img[eAutoAttack_3] = IMAGEMANAGER->FindImageVector("Gambler_Attack3");
 	img[eAutoAttack_3]->Setting(0.06f, false);
 	img[eJump] = IMAGEMANAGER->FindImageVector("Gambler_JumpStart");
@@ -28,10 +28,11 @@ void Gambler::ImageSetting()
 	img[eJumpLand] = IMAGEMANAGER->FindImageVector("Gambler_JumpFall");
 	img[eJumpLand]->Setting(0.1, false);
 	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Gambler_AttackA1");
+	img[eSkill_1]->Setting(0.1, false);
 	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Gambler_AttackA1");
 	img[eTagAction] = IMAGEMANAGER->FindImageVector("Gambler_TagAction");
 	img[eTagAction]->Setting(0.07f, false);
-	//
+
 	nowImg = img[eIdle];
 }
 
@@ -44,7 +45,7 @@ void Gambler::ParameterSetting()
 	m_moveSpeed = 200;
 	m_isDown = false;
 
-	m_dashSpeed = 300;		//##dash 이동식 수정 필요
+	m_dashSpeed = 400;		//##dash 이동식 수정 필요
 	m_dashTime = 0.95 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
 	m_dashCool = 1;
@@ -62,6 +63,7 @@ void Gambler::ParameterSetting()
 	m_attackCast[1] = false;
 	m_attackCool = 0.3;
 
+	m_tagCoolTime = 15;
 	m_skillNowCoolA = 0;
 	m_skillNowCoolS = 0;
 	m_skillCoolA = 12;	//블랙잭
@@ -263,17 +265,35 @@ void Gambler::InputSkillKey()
 				OBJECTMANAGER->AddObject("BlackJackCard", *m_x + 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
 			else
 				OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
-
-			m_skillNowCoolA = m_skillCoolA;
+			if (m_blackJack == 0)
+				m_skillNowCoolA = m_skillCoolA;
+			else if (m_blackJack == -1)
+				m_skillNowCoolA = 0.5 * m_skillCoolA;
+			else
+				m_skillNowCoolA = 1.5;
 			m_blackJackOn = true;
 			m_blackJackShotCount = 1;
 			m_blackJackNowDelay = m_blackJackDelay;
+
+			SetAction(eSkill_1, true, true);
 		}
 	}//end 'A'input
 
 	if (KEYMANAGER->GetOnceKeyDown('S'))
 	{
-		OBJECTMANAGER->AddObject("Roulette", *m_x, *m_y, ePlayerProjectile)->AddComponent<Roulette>();
+		if (m_skillNowCoolS == 0)
+		{
+			m_roulette = OBJECTMANAGER->AddObject("Roulette", *m_x, *m_y, ePlayerProjectile)->AddComponent<Roulette>();
+			float success = m_roulette->GetSuccess();
+			if (success == 0)
+				m_skillNowCoolS = m_skillCoolS;
+			else if (success == -1)
+				m_skillNowCoolS = 0.5 * m_skillCoolS;
+			else
+				m_skillNowCoolS = 1.5;
+
+			SetAction(eSkill_1, true, true);
+		}
 	}
 }
 

@@ -13,6 +13,7 @@
 #include "DoorObject.h"
 #include "BallFanatic.h"
 #include "Gold.h"
+#include"LobbyObject.h"
 EnemyTestScene::EnemyTestScene()
 {
 }
@@ -105,6 +106,10 @@ void EnemyTestScene::Init()
 		else if (iter->key == "HeadResult")
 		{
 			OBJECTMANAGER->AddObject("HeadResult", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<HeadResult>();
+		}
+		else if (iter->key == "HeadResult")
+		{
+			OBJECTMANAGER->AddObject("SpaerSkul", iter->x, iter->y, ObjectTag::eNPC)->AddComponent<SpaerSkul>();
 		}
 		else
 		{

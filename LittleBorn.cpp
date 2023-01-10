@@ -2,6 +2,7 @@
 #include "LittleBorn.h"
 #include "RigidBodyComponent.h"
 #include "Enemy.h"
+#include "HitDamageEffect.h"
 
 void LittleBorn::ImageSetting()
 {
@@ -86,6 +87,7 @@ void LittleBorn::ParameterSetting()
 	m_attackCast[0] = false;
 	m_attackCast[1] = false;
 
+	m_tagCoolTime = 10;
 	m_skillNowCoolA = 0;
 	m_skillNowCoolS = 0;
 	m_skillCoolA = 6;
@@ -191,7 +193,6 @@ void LittleBorn::ActionArrangement()
 		}
 		if (m_imageChange)
 		{
-			cout << "이미지 바꾸기 " << action << endl;
 			m_attackCast[0] = false;
 			m_attackCast[1] = false;
 			if (nowImg != img[m_action])
@@ -459,5 +460,7 @@ void LittleBorn::OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg,
 	{
 		enemy->HitEnemy(dmg, delay);
 		m_CollObjList.push_back(obj);
+		OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(10);
+
 	}
 }

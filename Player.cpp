@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "RigidBodyComponent.h"
 #include "Enemy.h"
+#include "HitDamageEffect.h"
 /*
 플레이어가 가진
 collision컴포넌트를
@@ -9,6 +10,7 @@ head에 전달해서 가공하기
 */
 void Player::Init()
 {
+	hpBar = IMAGEMANAGER->FindImage("hpBar");
 	m_UIImage[ePlayerStatus] = IMAGEMANAGER->FindImage("PlayerStatusUI");
 	OBJECTMANAGER->m_player = this;
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)] = new LittleBorn;
@@ -20,7 +22,7 @@ void Player::Init()
 	m_headList[static_cast<int>(eSkulSpecies::eGambler)]->Init();
 	m_headSlot = eSkulSpecies::eGambler;
 	m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eBasic)];
-	m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashCool,&m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
+	m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashCool, &m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
 
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 	m_playerHitBox = m_obj->AddComponent<CollisionComponent>();
@@ -39,11 +41,12 @@ void Player::Init()
 	m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
 
 	m_HpMax = 100;
-	m_life = 100;
+	m_life = m_HpMax;
 	m_artifactCoolD = 0;
 	m_haveArtifact = false;
 	m_supperArmarTime = 0.5f;
-
+	m_knockBackY = 0;
+	m_knockBack = false;
 	OBJECTMANAGER->m_player = this;
 	m_supperArmarNowTime = 0;
 }
@@ -58,7 +61,8 @@ void Player::Update()
 		Move();
 		if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
 		{
-			ChangeHead();
+			if (m_headTagCool == 0)
+				ChangeHead();
 		}
 	}
 	InputArtifactKey();
@@ -87,6 +91,7 @@ void Player::Render()
 void Player::UIRender()
 {
 	IMAGEMANAGER->UIRender(m_UIImage[ePlayerStatus], 0, 430, 2, 2, 0);
+	IMAGEMANAGER->UIRender(hpBar, 89, 518, 231.f / m_HpMax * m_life, 2, 0, 1);
 }
 
 void Player::InputArtifactKey()
@@ -169,7 +174,7 @@ void Player::ChangeHead()
 		}
 		m_headSlot = tmp;
 		m_nowHead->SetPlayerXY(&m_obj->x, &m_obj->y, &m_isLeft, &m_isDown);
-		m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashCool,&m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
+		m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashCool, &m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
 	}
 }
 
@@ -182,6 +187,7 @@ void Player::OnCollision(string collisionName, Object* other)
 			cout << "적에게공격" << endl;
 
 			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
+
 		}
 		if (other->GetName() == "EnemyBoss")
 		{
@@ -192,8 +198,8 @@ void Player::OnCollision(string collisionName, Object* other)
 		if (other->GetName() == "EnemyBoss")
 		{
 			cout << "적에게공격" << endl;
-			
-			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other,10, 0.01);
+
+			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
 		}
 	}//end collision Name BasicAttack
 }
@@ -203,21 +209,25 @@ void Player::HitPlayerPhysicAttack(float dmg)
 	m_supperArmarNowTime = m_supperArmarTime;
 	m_playerHitBox->SetIsActive(false);
 	m_life -= dmg;
+	cout << "데미지 : " << dmg << ", 플레이어 HP : " << m_life << endl;
 }
 void Player::HitPlayerMagicAttack(float dmg)
 {
 	m_supperArmarNowTime = m_supperArmarTime;
 	m_playerHitBox->SetIsActive(false);
 	m_life -= dmg;
+	cout << "데미지 : " << dmg << ", 플레이어 HP : " << m_life << endl;
 }
 void Player::HitPlayerKnockBack(float moveX, float moveY)
 {
 	//##위로밀림시 점프하강모션뜨는거 idle로 바꾸기
-	m_knockBackY = moveY - m_obj->y;
+	if (moveY > 0)
+		m_knockBack = true;
 	if (m_knockBackY < 0)
 		m_knockBackY = 0;
 	m_obj->x += moveX;
 	m_obj->y += moveY;
+	m_knockBackY = m_obj->y;
 }
 void Player::HitPlayerEffect()
 {

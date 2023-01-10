@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "RigidBodyComponent.h"
+#include "IllusionEffect.h"
 
 void Player::Move()
 {
@@ -14,6 +15,20 @@ void Player::Move()
 	//대시중일 때
 	if (m_dashing)
 	{		//##dash 이동식 수정 필요
+		illusionEffectCount += DELTA_TIME;
+
+		if (illusionEffectCount > 0.2)
+		{
+			if (typeid(*m_nowHead) == typeid(LittleBorn))
+			{
+				OBJECTMANAGER->AddObject("Effect", m_obj->x, m_obj->y - 54, eObject)->AddComponent<IllusionEffect>()->Setting(m_nowHead->GetNowImage(), m_isLeft);
+			}
+			else
+			{
+				OBJECTMANAGER->AddObject("Effect", m_obj->x, m_obj->y - 40, eObject)->AddComponent<IllusionEffect>()->Setting(m_nowHead->GetNowImage(), m_isLeft);
+			}
+			illusionEffectCount = 0;
+		}
 		if (m_isLeft) { m_obj->x -= m_dashSpeed * DELTA_TIME; }
 		else { m_obj->x += m_dashSpeed * DELTA_TIME; }
 		m_obj->y -= 1;
@@ -36,14 +51,26 @@ void Player::Move()
 		{
 			ResetJump();
 			m_nowHead->SetAction(m_nowHead->eJumpLand);
+			m_knockBack = false;
+			m_knockBackY = 0;
 		}
 		else if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsTopCollision())
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(0);
 		if (m_obj->GetComponent<RigidBodyComponent>()->GetGravityPower() < 0)
 		{
 			//##점프액션조건수정필요
-			if (!m_dashing && !m_nowHead->GetIsAttack())
+			if (m_knockBack)
+			{
+				if (m_obj->y - m_knockBackY >= 20)
+				{
+					m_knockBack = false;
+					m_knockBackY = 0;
+				}
+			}
+			else if (!m_dashing && !m_nowHead->GetIsAttack())
+			{
 				m_nowHead->SetAction(m_nowHead->eJumpDown, true);
+			}
 		}
 	}
 	InputJumpKey();

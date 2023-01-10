@@ -1,5 +1,6 @@
 #pragma once
 #include "Head.h"
+class Roulette;
 class Gambler : public Head
 {
 	/*
@@ -14,6 +15,10 @@ private:
 	int m_blackJack;
 	float m_blackJackDelay;
 	float m_blackJackNowDelay;
+
+	float m_attackInputTime;
+
+	Roulette* m_roulette;
 
 public:
 	bool m_can[eActionTagNumber];

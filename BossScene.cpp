@@ -12,13 +12,13 @@ void BossScene::Init()
 	_imgBuilding = IMAGEMANAGER->FindImage("Building");
 	_imgLion = IMAGEMANAGER->FindImage("Lion");
 	_imgFence = IMAGEMANAGER->FindImage("Fence");
+	IMAGEMANAGER->SetCameraPosition(0, 0);
 
-	
+	OBJECTMANAGER->AddObject("Joanna", 850, 475, eBoss)->AddComponent<BossObject>();
 
 	FILEMANAGER->SetNowStageFile("map_1");
 	FILEMANAGER->TileFileRead(&SCENEMANAGER->m_tiles);
 
-	OBJECTMANAGER->AddObject("Joanna", 850, 475, 0)->AddComponent<BossObject>();
 	string strData;
 	strData = FILEMANAGER->GetFileData("Structure", "batch");
 	MY_UTILITY::ConvertStructureString2Vec(&m_sturctDatas, strData);
@@ -37,7 +37,7 @@ void BossScene::Init()
 
 	OBJECTMANAGER->AddObject("FountainLeft", 100, 590, 0)->AddComponent<HolyFountainLeft>();
 	OBJECTMANAGER->AddObject("FountainRight", 1500, 590, 0)->AddComponent<HolyFountainRight>();
-	
+
 
 	OBJECTMANAGER->AddObject("Enemy", 500, 670, eEnemy)->AddComponent<BossPhase1EnemyCandle>();
 	OBJECTMANAGER->AddObject("Enemy", 600, 670, eEnemy)->AddComponent<BossPhase1EnemyFnatic>();

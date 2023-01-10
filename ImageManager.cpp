@@ -356,7 +356,7 @@ void ImageManager::DrawMapTilePixel(vector<vector<int>> vec)
 		int x = 0;
 		for (auto _iter : iter)
 		{
-			if (_iter == 0 || _iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7 || _iter == 8 || _iter == 9 || _iter == 10 || _iter == 11 || _iter == 12 || _iter == 13 || _iter == 14 || _iter == 36 || _iter == 37 || _iter == 38 || _iter == 39 || _iter == 40 || _iter == 41 || _iter == 109 || _iter == 107 || _iter == 108 || _iter == 106 || _iter == 105 || _iter == 104 || _iter==48 || _iter == 49|| _iter == 50 || _iter == 51 || _iter == 52 || _iter == 53|| _iter == 54||_iter == 55 || _iter == 56)
+			if (_iter == 0 || _iter == 1 || _iter == 2 || _iter == 3 || _iter == 4 || _iter == 7 || _iter == 8 || _iter == 9 || _iter == 10 || _iter == 11 || _iter == 12 || _iter == 13 || _iter == 14 || _iter == 36 || _iter == 37 || _iter == 38 || _iter == 39 || _iter == 40 || _iter == 41 || _iter == 109 || _iter == 107 || _iter == 108 || _iter == 106 || _iter == 105 || _iter == 104 || _iter == 48 || _iter == 49 || _iter == 50 || _iter == 51 || _iter == 52 || _iter == 53 || _iter == 54 || _iter == 55 || _iter == 56)
 			{
 				IMAGEMANAGER->Render(FindImage("CollisionBox"), x * m_width, y1 * m_width);
 			}
@@ -417,7 +417,8 @@ void ImageManager::Render(CImage* img, float x, float y, float sizeX, float size
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 	matT = D2D1::Matrix3x2F::Translation(x - camera.x, y - camera.y);
-	matR = D2D1::Matrix3x2F::Rotation(rot, { x + img->GetWidth() / 2,y + img->GetHeight() / 2 });
+	matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.x,y - camera.y });
+
 	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
 	pRT->SetTransform((matS * matT * matR));
 
@@ -447,6 +448,33 @@ void ImageManager::CenterRender(CImage* img, float x, float y, float sizeX, floa
 
 	color->SetBitmap(img->GetBitMap());
 	color->SetOpacity(alpha);
+	pRT->FillOpacityMask(img->GetBitMap(), color, D2D1_OPACITY_MASK_CONTENT_GRAPHICS, D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()));
+	color->Release();
+}
+
+void ImageManager::CenterRender(CImage* img, float x, float y, D2D1_COLOR_F _color, float sizeX, float sizeY, float rot, bool isReverse)
+{
+	D2D1_MATRIX_3X2_F matT, matR, matS;
+
+	if (isReverse == false)
+	{
+		matT = D2D1::Matrix3x2F::Translation((x - img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.x,y - camera.y });
+		matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
+	}
+	else
+	{
+		matT = D2D1::Matrix3x2F::Translation((x + img->GetWidth() * sizeX / 2) - camera.x, (y - img->GetHeight() * sizeY / 2) - camera.y);
+		matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.x,y - camera.y });
+		matS = D2D1::Matrix3x2F::Scale(-sizeX, sizeY);
+	}
+	pRT->SetTransform((matS * matT * matR));
+	ID2D1SolidColorBrush* color;
+	pRT->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+	pRT->CreateSolidColorBrush(_color, &color);
+
+	/*color.set
+	color->SetOpacity(alpha);*/
 	pRT->FillOpacityMask(img->GetBitMap(), color, D2D1_OPACITY_MASK_CONTENT_GRAPHICS, D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()), D2D1::RectF(0.0f, 0.0f, img->GetWidth(), img->GetHeight()));
 	color->Release();
 }
