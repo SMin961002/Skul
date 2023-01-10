@@ -77,6 +77,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_Attack2Effect", L"./Resources/Png/Skul/Gambler/Effect/AutoAttack_2/", 1, 22);
 	AddImageVector("Gambler_JumpAttackEffect", L"./Resources/Png/Skul/Gambler/Effect/JumpAttack/", 1, 24);
 	AddImageVector("Gambler_JockerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BasicAttack_Joker_Explosion/", 1, 17);
+	AddImageVector("Gambler_SlotMachineBigHitEffect", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/BigHitPlayerEffect/", 1, 21);
 	//갬블러스킬
 	AddImageVector("Gambler_BlackJackSpark", L"./Resources/Png/Skul/Gambler/Effect/BlackJackSpark/", 1, 11);
 	AddImageVector("Gambler_BlackJackJokerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BlackJack_BigHit_Explosion/", 1, 15);
@@ -93,10 +94,16 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_Roulette_BlackBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Black_BigHit/", 1, 91);
 	AddImageVector("Gambler_Roulette_RedBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Red_BigHit/", 1, 49);
 	AddImageVector("Gambler_SlotMachine", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/", 1, 8);
+	AddImageVector("Gambler_SlotMachine_Explosion", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Explosion/", 1, 17);
+	AddImageVector("Gambler_SlotMachine_ExplosionBigHit", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/BigHitExplosion/", 1, 17);
+	AddImageVector("Gambler_SlotMachine_Thunder", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Explosion/", 1, 17);
+	AddImageVector("Gambler_SlotMachine_ThunderBigHit", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/BigHitThunder/", 1, 20);
 	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
 	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
 	AddImage("GamblerRouletteBlack", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Black.png");
 	AddImage("GamblerRouletteRed", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Red.png");
+	AddImage("GamblerSlotMachineExplosion_Thunder", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Explosion.png");
+	AddImage("GamblerSlotMachineExplosion_BigHit", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/ExplosionBigHit.png");
 
 	// 타일 이미지
 	AddTileImage(L"./Resources/Tile/4Stage/01.png"); // 0

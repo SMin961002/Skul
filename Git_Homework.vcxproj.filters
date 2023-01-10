@@ -65,9 +65,6 @@
       <Filter>Game\Object\Door\Enemy\LeoniaSoldier</Filter>
     </ClCompile>
     <ClCompile Include="WinMain.cpp" />
-    <ClCompile Include="Fanatic.cpp">
-      <Filter>Game\Object\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="BossObject.cpp">
       <Filter>Game\Object\Boss</Filter>
     </ClCompile>
@@ -156,9 +153,6 @@
     <ClCompile Include="Baptism.cpp">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Card.cpp">
-      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
-    </ClCompile>
     <ClCompile Include="IntroTitleScene.cpp">
       <Filter>Game\Scene\IntroScene</Filter>
     </ClCompile>
@@ -238,11 +232,26 @@
     <ClCompile Include="Gambler.cpp">
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClCompile>
-    <ClCompile Include="Roulette.cpp">
-      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
-    </ClCompile>
     <ClCompile Include="LoadImage.cpp">
       <Filter>Core\Manager\ImageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="BossCircle.cpp" />
+    <ClCompile Include="CSound.cpp" />
+    <ClCompile Include="CSoundMgr.cpp" />
+    <ClCompile Include="Fanatic.cpp" />
+    <ClCompile Include="Lazer.cpp" />
+    <ClCompile Include="LobbyObject.cpp" />
+    <ClCompile Include="Card.cpp">
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Roulette.cpp">
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="SlotMachine.cpp">
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Thunder.cpp">
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -420,9 +429,6 @@
     <ClInclude Include="ProjectileHeadSkull.h">
       <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
     </ClInclude>
-    <ClInclude Include="Card.h">
-      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
-    </ClInclude>
     <ClInclude Include="IntroTitleScene.h">
       <Filter>Game\Scene\IntroScene</Filter>
     </ClInclude>
@@ -452,8 +458,22 @@
     <ClInclude Include="LeoniaSoldier.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="TentaclesOfLight.h" />
+    <ClInclude Include="BossCircle.h" />
+    <ClInclude Include="CSound.h" />
+    <ClInclude Include="CSoundMgr.h" />
+    <ClInclude Include="Lazer.h" />
+    <ClInclude Include="LobbyObject.h" />
+    <ClInclude Include="Card.h">
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
+    </ClInclude>
     <ClInclude Include="Roulette.h">
-      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="SlotMachine.h">
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Thunder.h">
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -610,12 +630,6 @@
     <Filter Include="Game\Object\Charactor\Head\LittleBorn">
       <UniqueIdentifier>{91645030-351c-460b-8995-e860b4c731cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Enemy\BossPhase1EnemyCandle">
-      <UniqueIdentifier>{f47e079b-40b1-457f-a875-7d45e6bffc10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Enemy\BossPhase1EnemyFnatic">
-      <UniqueIdentifier>{e3c9c31e-e073-4daa-bd7d-c85d530041ac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Scene\IntroScene">
       <UniqueIdentifier>{8eb525a0-455e-46e9-9433-671f3251628b}</UniqueIdentifier>
     </Filter>
@@ -630,6 +644,9 @@
     </Filter>
     <Filter Include="Game\Reward\HeadResult">
       <UniqueIdentifier>{06ff99bc-2f80-4cc9-989d-01a265f7ef0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Head\Gambler\Skill">
+      <UniqueIdentifier>{6bf30feb-4866-49d7-991f-12a5fd8d8ed5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

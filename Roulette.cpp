@@ -278,22 +278,7 @@ void Roulette::OnCollision(string collisionName, Object* other)
 
 	if (!hited)
 	{
-		//float dmg;
-		//switch (m_resultSuccess)
-		//{
-		//case -1:
-		//	dmg = 12;
-		//	break;
-		//case 0:
-		//	dmg = 15;
-		//	break;
-		//case 1:
-		//	dmg = 18;
-		//	break;
-		//default:
-		//	dmg = 15;
-		//}
-		other->GetComponent<Component>()->HitEnemy(18, 0.1);
+		other->GetComponent<Component>()->HitEnemy(20, 0.1);
 		m_vectorCollisionList.push_back(other);
 	}
 }

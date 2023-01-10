@@ -208,12 +208,14 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ShopScene.cpp" />
+    <ClCompile Include="SlotMachine.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stdafx.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TentaclesOfLight.cpp" />
+    <ClCompile Include="Thunder.cpp" />
     <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Utility.cpp" />
@@ -298,9 +300,11 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ShopScene.h" />
     <ClInclude Include="singleton.h" />
+    <ClInclude Include="SlotMachine.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TentaclesOfLight.h" />
+    <ClInclude Include="Thunder.h" />
     <ClInclude Include="TimerManager.h" />
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="Utility.h" />

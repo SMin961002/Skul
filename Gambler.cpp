@@ -1,7 +1,9 @@
 #include "stdafx.h"
+#include "Player.h"
 #include "Gambler.h"
 #include "Card.h"
 #include "Roulette.h"
+#include "SlotMachine.h"
 
 void Gambler::ImageSetting()
 {
@@ -358,6 +360,11 @@ void Gambler::InputAttackKey()
 
 void Gambler::TagAction()
 {
+	SetAction(eTagAction, true, true);
+	if (m_isLeft)
+		OBJECTMANAGER->AddObject("SlotMachine", OBJECTMANAGER->m_player->GetplayerX() + 30, OBJECTMANAGER->m_player->GetplayerY(), ePlayerProjectile)->AddComponent<SlotMachine>();
+	else
+		OBJECTMANAGER->AddObject("SlotMachine", OBJECTMANAGER->m_player->GetplayerX() - 30, OBJECTMANAGER->m_player->GetplayerY(), ePlayerProjectile)->AddComponent<SlotMachine>();
 }
 
 bool Gambler::GetIsAttack()

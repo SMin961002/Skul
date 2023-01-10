@@ -93,3 +93,15 @@ class RouletteBrokenEffectBigShot : public Effect
 public:
 	void Init() override;
 };
+
+class SlotMachineBigHit : public Effect
+{
+public:
+	void Init() override;
+	void Move() override;
+};
+class SlotMachineThunder :public Effect
+{
+public :
+	void Init() override;
+};
