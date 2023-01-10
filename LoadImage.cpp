@@ -48,11 +48,28 @@ void ImageManager::LoadImages()
 
 	AddImage("exBg", L"./Resources/exBg.png");
 	AddImage("Background", L"./MapFile/BackGround/background.png");
+	AddImage("Background2", L"./MapFile/BackGround/background2.png");
+	AddImage("Background3", L"./MapFile/BackGround/background3.png");
+	AddImage("Background4", L"./MapFile/BackGround/background4.png");
+	AddImage("Background5", L"./MapFile/BackGround/background5.png");
+	AddImage("Background6", L"./MapFile/BackGround/background6.png");
+	AddImage("Background7", L"./MapFile/BackGround/background7.png");
+	AddImage("Background8", L"./MapFile/BackGround/background8.png");
+
+
 	AddImage("Castle", L"./MapFile/BackGround/castle.png");
 	AddImage("Castle2", L"./MapFile/BackGround/castle2.png");
+	AddImage("Castle3", L"./MapFile/BackGround/castle3.png");
 	AddImage("Moon2", L"./MapFile/BackGround/Moon2.png");
 	AddImage("Cloud", L"./MapFile/BackGround/cloud.png");
 	AddImage("Cloud2", L"./MapFile/BackGround/cloud2.png");
+	AddImage("Cloud3", L"./MapFile/BackGround/cloud3.png");
+	AddImage("Cloud4", L"./MapFile/BackGround/cloud4.png");
+	AddImage("ChandelierBack", L"./MapFile/BackGround/ChandelierBack.png");
+	AddImage("ChandelierBack2", L"./MapFile/BackGround/ChandelierBack2.png");
+	AddImage("Demoncastle", L"./MapFile/BackGround/Demoncastle.png");
+
+
 	//약탈자 모션 이미지
 
 	//디스트로이어 모션 이미지
@@ -416,7 +433,7 @@ void ImageManager::LoadImages()
 	AddStructureImage("Picture", L"./Resources/Tile/4Stage/Structure/picture.png");
 	AddStructureImage("Picture2", L"./Resources/Tile/4Stage/Structure/picture2.png");
 	AddStructureImage("Chandelier", L"./Resources/Tile/4Stage/Structure/Chandelier.png");
-
+	AddStructureImage("BrokenHouse", L"./Resources/Tile/4Stage/Structure/BrokenHouse.png");
 	// 저장은 백스페이스 숫자키와 번호키로 오브젝트교체 ,f7 <- 신규씬 , 좌클릭은 뒤에 그려지고 우클릭은 앞에
 	// 타일 지우는거 컨트롤 <- 맨마지막에 그린것만 지워짐, 맵크기는 영상 참조
 
@@ -538,7 +555,7 @@ void ImageManager::LoadImages()
 	AddImageVector("BossRoom", L"Resources/Door/BossRoom/", 1, 7);
 	AddImageVector("ShopRoom", L"Resources/Door/ShopRoom/", 1, 8);
 	AddImageVector("SpirderRoom", L"Resources/Door/SpirderRoom/", 1, 8);
-
+	
 	AddImageVector("Fountain", L"Resources/Tile/4Stage/Structure/fountain/", 1, 6);
 	AddImageVector("Spider", L"Resources/Tile/4Stage/Structure/spider/", 1, 11);
 	AddImageVector("LobbyNpc", L"Resources/Tile/4Stage/Structure/Npc1/", 1, 7);
@@ -546,6 +563,10 @@ void ImageManager::LoadImages()
 	AddImageVector("LobbyNpc3", L"Resources/Tile/4Stage/Structure/Npc3/", 1, 8);
 	AddImageVector("LobbyNpc4", L"Resources/Tile/4Stage/Structure/Npc4/", 1, 8);
 	AddImageVector("LobbyNpc5", L"Resources/Tile/4Stage/Structure/Npc5/", 1, 8);
+	AddImageVector("CatIdle", L"Resources/Tile/4Stage/Structure/Cat/Idle/", 1, 6);
+	AddImageVector("CatWalk", L"Resources/Tile/4Stage/Structure/Cat/Walk/", 1, 6);
+	AddImageVector("SpaerSkul", L"Resources/Tile/4Stage/Structure/Spearskul/", 1, 35);
+	AddImageVector("Elevator", L"Resources/Tile/4Stage/Structure/Elevator/", 1, 6);
 
 	//맵툴 오브젝트 이미지 저장
 	AddObjectImage("Leon", L"Resources/Monster/Leonia Soldier/Idle/01.png");
@@ -580,6 +601,10 @@ void ImageManager::LoadImages()
 	AddObjectImage("LobbyNpc3", L"./Resources/Tile/4Stage/Structure/Npc3/01.png");
 	AddObjectImage("LobbyNpc4", L"./Resources/Tile/4Stage/Structure/Npc4/01.png");
 	AddObjectImage("LobbyNpc5", L"./Resources/Tile/4Stage/Structure/Npc5/01.png");
+	AddObjectImage("CatIdle", L"./Resources/Tile/4Stage/Structure/Cat/Idle/01.png");
+	AddObjectImage("CatWalk", L"./Resources/Tile/4Stage/Structure/Cat/Walk/01.png");
+	AddObjectImage("SpaerSkul", L"./Resources/Tile/4Stage/Structure/Spearskul/01.png");
+	AddObjectImage("Elevator", L"./Resources/Tile/4Stage/Structure/Elevator/01.png");
 
 	// 인게임 UI이미지
 	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");
