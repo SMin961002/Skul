@@ -518,6 +518,12 @@ void ImageManager::LoadImages()
 	AddImageVector("SpirderRoom", L"Resources/Door/SpirderRoom/", 1, 8);
 
 	AddImageVector("Fountain", L"Resources/Tile/4Stage/Structure/fountain/", 1, 6);
+	AddImageVector("Spider", L"Resources/Tile/4Stage/Structure/spider/", 1, 11);
+	AddImageVector("LobbyNpc", L"Resources/Tile/4Stage/Structure/Npc1/", 1, 7);
+	AddImageVector("LobbyNpc2", L"Resources/Tile/4Stage/Structure/Npc2/", 1, 24);
+	AddImageVector("LobbyNpc3", L"Resources/Tile/4Stage/Structure/Npc3/", 1, 8);
+	AddImageVector("LobbyNpc4", L"Resources/Tile/4Stage/Structure/Npc4/", 1, 8);
+	AddImageVector("LobbyNpc5", L"Resources/Tile/4Stage/Structure/Npc5/", 1, 8);
 
 	//맵툴 오브젝트 이미지 저장
 	AddObjectImage("Leon", L"Resources/Monster/Leonia Soldier/Idle/01.png");
@@ -546,6 +552,12 @@ void ImageManager::LoadImages()
 	AddObjectImage("Trigger2", L"./Resources/Trigger2.png");
 	AddObjectImage("Trigger3", L"./Resources/Trigger3.png");
 	AddObjectImage("Fountain", L"./Resources/Tile/4Stage/Structure/fountain/01.png");
+	AddObjectImage("Spider", L"./Resources/Tile/4Stage/Structure/spider/01.png");
+	AddObjectImage("LobbyNpc", L"./Resources/Tile/4Stage/Structure/Npc1/01.png");
+	AddObjectImage("LobbyNpc2", L"./Resources/Tile/4Stage/Structure/Npc2/01.png");
+	AddObjectImage("LobbyNpc3", L"./Resources/Tile/4Stage/Structure/Npc3/01.png");
+	AddObjectImage("LobbyNpc4", L"./Resources/Tile/4Stage/Structure/Npc4/01.png");
+	AddObjectImage("LobbyNpc5", L"./Resources/Tile/4Stage/Structure/Npc5/01.png");
 
 	// 인게임 UI이미지
 	AddImage("Inventory_Frame", L"./Resources/UI/Inventory_Frame.png");

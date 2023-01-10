@@ -1,25 +1,38 @@
 #pragma once
-
-#include <Windows.h>
 #include <SDKDDKVer.h>
+#pragma comment (lib, "msimg32.lib") //마이크로소프트(ms) 이미지(img) 32비트(32) 라이브러리
 
+
+
+#include <wincodecsdk.h>
+#pragma comment(lib,"windowscodecs.lib")
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
+
+#include <windows.h>
+#include <functional>
+#include <locale>
+#include <codecvt>
 #include <stdio.h>
 #include <stdlib.h>
+#include <malloc.h>
 #include <memory.h>
+#include <math.h>
 #include <tchar.h>
-#include <time.h>
-#include <mmsystem.h>
-#include <functional>
-#include <queue>
+#include <fstream>
+#include <sstream>
 #include <iostream>
-#include <chrono>
+#include <chrono> 
 #include <random>
+#include <time.h>
+#include <sstream>
 #include <vector>
 #include <map>
-#include <unordered_map>
-
+#include <list>
+#include <unordered_map> 
+#include <time.h>
 #include <string>
-
+#include <queue>
 #include <bitset>
 
 #pragma region D2d1FactoryHeader
@@ -113,6 +126,7 @@ struct Vector2
 #include "IOFillManager.h"
 #include "Utility.h"
 #include "EffectManager.h"
+#include "CSoundMgr.h"
 //inline static float GetDeltaTime()
 //{
 //	return;

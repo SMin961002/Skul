@@ -138,9 +138,7 @@
     <ClCompile Include="GoldResult.cpp" />
     <ClCompile Include="HeadItem.cpp" />
     <ClCompile Include="HeadResult.cpp" />
-    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="MenuUI.cpp" />
-    <ClCompile Include="NpcObject.cpp" />
     <ClCompile Include="ResultValue.cpp" />
     <ClCompile Include="Nervousness.cpp" />
     <ClCompile Include="ProjectileHeadSkull.cpp" />
@@ -190,9 +188,6 @@
     <ClCompile Include="DoorObject.cpp">
       <Filter>Game\Object\Door</Filter>
     </ClCompile>
-    <ClCompile Include="FireKnife.cpp">
-      <Filter>Game\Object\NPC</Filter>
-    </ClCompile>
     <ClCompile Include="Nervousness.cpp">
       <Filter>Game\Object\Boss</Filter>
     </ClCompile>
@@ -203,34 +198,77 @@
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
     <ClCompile Include="BossBall.cpp" />
-    <ClCompile Include="BossPhase1EnemyFnatic.cpp" />
-    <ClCompile Include="BossPhase1EnemyCandle.cpp" />
     <ClCompile Include="FireKnife.cpp" />
-    <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="LittleBorn.cpp" />
-    <ClCompile Include="LoadImage.cpp" />
     <ClCompile Include="Consecration.cpp">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
     <ClCompile Include="Baptism.cpp">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="AngelStatue.cpp" />
-    <ClCompile Include="BallFanatic.cpp" />
-    <ClCompile Include="BlackFanatic.cpp" />
     <ClCompile Include="BossCircle.cpp" />
     <ClCompile Include="BossPhase1EnemyFnatic.cpp" />
     <ClCompile Include="BossPhase1EnemyCandle.cpp" />
-    <ClCompile Include="CandleFanatic.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Fanatic.cpp" />
-    <ClCompile Include="Fountain.cpp" />
     <ClCompile Include="Lazer.cpp" />
-    <ClCompile Include="LampFanatic.cpp" />
-    <ClCompile Include="LeoniaSoldier.cpp" />
     <ClCompile Include="Stage.cpp" />
-    <ClCompile Include="TentaclesOfLight.cpp" />
+    <ClCompile Include="CSound.cpp">
+      <Filter>Core\Manager\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundMgr.cpp">
+      <Filter>Core\Manager\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="AngelStatue.cpp">
+      <Filter>Game\Object\Enemy\AngelStatue</Filter>
+    </ClCompile>
+    <ClCompile Include="BallFanatic.cpp">
+      <Filter>Game\Object\Enemy\BallFanatic</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackFanatic.cpp">
+      <Filter>Game\Object\Enemy\BlackFanatic</Filter>
+    </ClCompile>
+    <ClCompile Include="BossPhase1EnemyCandle.cpp">
+      <Filter>Game\Object\Enemy\BossPhase1EnemyCandle</Filter>
+    </ClCompile>
+    <ClCompile Include="BossPhase1EnemyFnatic.cpp">
+      <Filter>Game\Object\Enemy\BossPhase1EnemyFanatic</Filter>
+    </ClCompile>
+    <ClCompile Include="CandleFanatic.cpp">
+      <Filter>Game\Object\Enemy\CandleFanatic</Filter>
+    </ClCompile>
+    <ClCompile Include="Fanatic.cpp">
+      <Filter>Game\Object\Enemy\Fanatic</Filter>
+    </ClCompile>
+    <ClCompile Include="Fountain.cpp">
+      <Filter>Game\Object\Enemy\Fountain</Filter>
+    </ClCompile>
+    <ClCompile Include="TentaclesOfLight.cpp">
+      <Filter>Game\Object\Enemy\Tentacles</Filter>
+    </ClCompile>
+    <ClCompile Include="LeoniaSoldier.cpp">
+      <Filter>Game\Object\Enemy\LeoniaSoldier</Filter>
+    </ClCompile>
+    <ClCompile Include="LampFanatic.cpp">
+      <Filter>Game\Object\Enemy\LampFanatic</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadImage.cpp">
+      <Filter>Core\Manager\ImageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Game\UI\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Gambler.cpp">
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcObject.cpp">
+      <Filter>Game\Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="FireKnife.cpp">
+      <Filter>Game\Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -329,7 +367,6 @@
     <ClInclude Include="BossEffect.h">
       <Filter>Game\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyTestScene.h">
       <Filter>Game\Scene\TestScene</Filter>
     </ClInclude>
@@ -381,9 +418,6 @@
     <ClInclude Include="Nervousness.h">
       <Filter>Game\Object\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="MenuUI.h">
-      <Filter>Game\UI</Filter>
-    </ClInclude>
     <ClInclude Include="ProjectileHeadSkull.h">
       <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
@@ -420,25 +454,61 @@
     <ClInclude Include="Consecration.h">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="BossPhase1EnemyCandle.h" />
-    <ClInclude Include="BossPhase1EnemyFnatic.h" />
-    <ClInclude Include="FireKnife.h" />
-    <ClInclude Include="AngelStatue.h" />
-    <ClInclude Include="BallFanatic.h" />
-    <ClInclude Include="BlackFanatic.h" />
     <ClInclude Include="BossCircle.h" />
     <ClInclude Include="BossPhase1EnemyFnatic.h" />
     <ClInclude Include="BossPhase1EnemyCandle.h" />
-    <ClInclude Include="CandleFanatic.h" />
-    <ClInclude Include="Fanatic.h" />
-    <ClInclude Include="Fountain.h" />
     <ClInclude Include="Lazer.h" />
-    <ClInclude Include="LampFanatic.h" />
-    <ClInclude Include="LeoniaSoldier.h" />
     <ClInclude Include="Stage.h" />
-    <ClInclude Include="TentaclesOfLight.h" />
     <ClInclude Include="IntroTitleScene.h">
       <Filter>Game\Scene\IntroScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CSoundMgr.h">
+      <Filter>Core\Manager\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CSound.h">
+      <Filter>Core\Manager\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="FireKnife.h">
+      <Filter>Game\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="AngelStatue.h">
+      <Filter>Game\Object\Enemy\AngelStatue</Filter>
+    </ClInclude>
+    <ClInclude Include="BallFanatic.h">
+      <Filter>Game\Object\Enemy\BallFanatic</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackFanatic.h">
+      <Filter>Game\Object\Enemy\BlackFanatic</Filter>
+    </ClInclude>
+    <ClInclude Include="BossPhase1EnemyCandle.h">
+      <Filter>Game\Object\Enemy\BossPhase1EnemyCandle</Filter>
+    </ClInclude>
+    <ClInclude Include="BossPhase1EnemyFnatic.h">
+      <Filter>Game\Object\Enemy\BossPhase1EnemyFanatic</Filter>
+    </ClInclude>
+    <ClInclude Include="CandleFanatic.h">
+      <Filter>Game\Object\Enemy\CandleFanatic</Filter>
+    </ClInclude>
+    <ClInclude Include="Fanatic.h">
+      <Filter>Game\Object\Enemy\Fanatic</Filter>
+    </ClInclude>
+    <ClInclude Include="Fountain.h">
+      <Filter>Game\Object\Enemy\Fountain</Filter>
+    </ClInclude>
+    <ClInclude Include="TentaclesOfLight.h">
+      <Filter>Game\Object\Enemy\Tentacles</Filter>
+    </ClInclude>
+    <ClInclude Include="LeoniaSoldier.h">
+      <Filter>Game\Object\Enemy\LeoniaSoldier</Filter>
+    </ClInclude>
+    <ClInclude Include="LampFanatic.h">
+      <Filter>Game\Object\Enemy\LampFanatic</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuUI.h">
+      <Filter>Game\UI\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -609,6 +679,45 @@
     </Filter>
     <Filter Include="Game\Reward\HeadResult">
       <UniqueIdentifier>{06ff99bc-2f80-4cc9-989d-01a265f7ef0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\SoundManager">
+      <UniqueIdentifier>{5289e5bd-eefc-469b-825f-9ceddeaaf0eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy">
+      <UniqueIdentifier>{9ac57955-6882-46af-840a-18defe42785c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\AngelStatue">
+      <UniqueIdentifier>{21b3090e-4c5d-43f7-b44c-3ff9b764ebea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\BallFanatic">
+      <UniqueIdentifier>{81f78f21-7ad5-4d3c-991e-fd09326896e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\BlackFanatic">
+      <UniqueIdentifier>{338298b1-9168-4166-93b2-06ba0e0782db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\BossPhase1EnemyCandle">
+      <UniqueIdentifier>{a8520954-99cf-4ce3-b78f-4e5e9a9eb525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\BossPhase1EnemyFanatic">
+      <UniqueIdentifier>{d614aa07-215f-48cc-b1e8-27316f2e5f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\CandleFanatic">
+      <UniqueIdentifier>{62938397-8ca5-40bc-8b7b-b6054df551bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\Fanatic">
+      <UniqueIdentifier>{2952223b-2a31-45ad-8b5a-5a00dc1c85d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\Fountain">
+      <UniqueIdentifier>{ef66de41-35eb-4803-ba25-8a9978ce36c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\Tentacles">
+      <UniqueIdentifier>{a8282641-1dc8-4958-bce2-fb87fbe9869e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\LeoniaSoldier">
+      <UniqueIdentifier>{33fe0706-e5fb-4bdd-b11e-c1e4a0991bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\LampFanatic">
+      <UniqueIdentifier>{91d3858b-5020-449e-b402-8c7f911f5a4a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

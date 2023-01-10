@@ -317,6 +317,7 @@ void BossObject::Update()
 	else if (m_page == 1)
 	{
 		Page_2();
+		chairY += DELTA_TIME * 40;
 	}
 }
 

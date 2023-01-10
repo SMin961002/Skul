@@ -151,6 +151,8 @@
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Consecration.cpp" />
+    <ClCompile Include="CSound.cpp" />
+    <ClCompile Include="CSoundMgr.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -201,6 +203,7 @@
     <ClCompile Include="ResultValue.cpp" />
     <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
+    <ClCompile Include="LobbyObject.cpp" />
     <ClCompile Include="Roulette.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -238,6 +241,8 @@
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Consecration.h" />
+    <ClInclude Include="CSound.h" />
+    <ClInclude Include="CSoundMgr.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="Effect.h" />
@@ -287,6 +292,7 @@
     <ClInclude Include="ResultValue.h" />
     <ClInclude Include="ProjectileHeadSkull.h" />
     <ClInclude Include="RigidBodyComponent.h" />
+    <ClInclude Include="LobbyObject.h" />
     <ClInclude Include="Roulette.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />

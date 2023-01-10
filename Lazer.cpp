@@ -7,7 +7,7 @@ void Lazer::Init()
 	img[eLoop] = IMAGEMANAGER->AddImageVectorCopy("Boss_Consecration_Loop");
 	img[eLast] = IMAGEMANAGER->AddImageVectorCopy("Boss_Consecration_End");
 	img[eStart]->Setting(DELTA_TIME, false);
-	img[eLoop]->Setting(0.07, false);
+	img[eLoop]->Setting(0.06, false);
 	img[eLast]->Setting(0.07, false);
 	/*
 	Boss_Consecration_Start
