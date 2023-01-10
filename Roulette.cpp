@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Roulette.h"
 #include "Player.h"
+#include "HitDamageEffect.h"
 
 void Roulette::Init()
 {
@@ -13,7 +14,7 @@ void Roulette::Init()
 
 	m_coll = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(m_coll);
-	m_coll->Setting(10, m_obj->x + 5, m_obj->y +5, "GamblerRoulette");
+	m_coll->Setting(10, m_obj->x + 5, m_obj->y + 5, "GamblerRoulette");
 	m_coll->SetIsActive(true);
 
 	m_rotateCount = 0;
@@ -153,7 +154,7 @@ void Roulette::CollisionUpdate()
 			{
 				m_coll->Setting(130, m_obj->x + 65, m_obj->y + 65);
 			}
-			else if(m_roulette->GetFrame() == 47)
+			else if (m_roulette->GetFrame() == 47)
 			{
 				m_coll->SetIsActive(false);
 			}
@@ -164,7 +165,7 @@ void Roulette::CollisionUpdate()
 				m_coll->Setting(200, m_obj->x + 100, m_obj->y + 100);
 				m_coll->SetIsActive(true);
 			}
-			else if(m_explosion->GetFrame() == 8)
+			else if (m_explosion->GetFrame() == 8)
 			{
 				m_coll->SetIsActive(false);
 			}
@@ -260,7 +261,7 @@ void Roulette::OnCollision(string collisionName, Object* other)
 				e->SetPosition(e->GetX() - 0.5, e->GetY());
 		}
 	}//end black
-	else if(m_resultColor == eRed)
+	else if (m_resultColor == eRed)
 	{
 		if (m_resultSuccess == 0)
 		{
@@ -269,9 +270,9 @@ void Roulette::OnCollision(string collisionName, Object* other)
 			if (e != nullptr)
 			{
 				if (e->GetX() < m_obj->x)
-					e->SetPosition(e->GetX() + 10, e->GetY()+10);
+					e->SetPosition(e->GetX() + 10, e->GetY() + 10);
 				else if (e->GetX() > m_obj->x)
-					e->SetPosition(e->GetX() - 10, e->GetY()+10);
+					e->SetPosition(e->GetX() - 10, e->GetY() + 10);
 			}
 		}//end success
 	}//end red
@@ -293,7 +294,10 @@ void Roulette::OnCollision(string collisionName, Object* other)
 		//default:
 		//	dmg = 15;
 		//}
+
 		other->GetComponent<Component>()->HitEnemy(18, 0.1);
+		OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(18);
+
 		m_vectorCollisionList.push_back(other);
 	}
 }

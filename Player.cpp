@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "RigidBodyComponent.h"
 #include "Enemy.h"
+#include "HitDamageEffect.h"
 /*
 플레이어가 가진
 collision컴포넌트를
@@ -186,6 +187,7 @@ void Player::OnCollision(string collisionName, Object* other)
 			cout << "적에게공격" << endl;
 
 			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
+
 		}
 		if (other->GetName() == "EnemyBoss")
 		{

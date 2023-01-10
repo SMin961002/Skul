@@ -2,6 +2,7 @@
 #include "LittleBorn.h"
 #include "RigidBodyComponent.h"
 #include "Enemy.h"
+#include "HitDamageEffect.h"
 
 void LittleBorn::ImageSetting()
 {
@@ -459,5 +460,7 @@ void LittleBorn::OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg,
 	{
 		enemy->HitEnemy(dmg, delay);
 		m_CollObjList.push_back(obj);
+		OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(10);
+
 	}
 }

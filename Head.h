@@ -1,6 +1,6 @@
 #pragma once
 #include "PlayerEffect.h"
-
+#include "HitDamageEffect.h"
 class Enemy;
 //머리들이 계승받는 상위클래스
 class Head
@@ -154,6 +154,8 @@ public:
 		}
 		if (!isEnemyHit)
 		{
+			OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(10);
+
 			enemy->HitEnemy(dmg, delay);
 			m_CollObjList.push_back(obj);
 		}
