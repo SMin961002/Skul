@@ -151,6 +151,8 @@
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Consecration.cpp" />
+    <ClCompile Include="CSound.cpp" />
+    <ClCompile Include="CSoundMgr.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -172,6 +174,7 @@
     <ClCompile Include="HeadManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Lazer.cpp" />
     <ClCompile Include="LittleBorn.cpp" />
     <ClCompile Include="HolyFountain.cpp" />
     <ClCompile Include="Hporb.cpp" />
@@ -238,6 +241,8 @@
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Consecration.h" />
+    <ClInclude Include="CSound.h" />
+    <ClInclude Include="CSoundMgr.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="Effect.h" />
@@ -259,6 +264,7 @@
     <ClInclude Include="HeadManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Lazer.h" />
     <ClInclude Include="LittleBorn.h" />
     <ClInclude Include="HolyFountain.h" />
     <ClInclude Include="Hporb.h" />

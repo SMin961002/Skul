@@ -310,6 +310,15 @@ void ImageManager::LoadImages()
 	AddImageVector("Phase2_Ball_SoulChase_End", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/End/", 1, 7);
 	AddImageVector("Trail", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Effect/Trail/", 1, 51);
 
+	AddImageVector("Phase2_Ball_DivineLight_AttackLoop", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Boss/AttackLoop/", 15, 21);
+	AddImageVector("Phase2_Ball_DivineLight_AttackReady", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Boss/AttackReady/", 8, 14);
+	AddImageVector("Phase2_Ball_DivineLight_End", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Boss/End/", 24, 28);
+	AddImageVector("Phase2_Ball_DivineLight_Ready", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Boss/Ready/", 1, 7);
+
+	AddImageVector("DivineLight_ef1", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Effect/ef/", 2, 38);
+	AddImageVector("DivineLight_ef2", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Effect/ef2/", 2, 40);
+	AddImageVector("MuzzleFlash", L"./Resources/Saint_Joanna/Phase_2/DivineLight/Effect/MuzzleFlash/", 1, 24);
+
 
 	AddImageVector("Circle", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/Circle/", 1, 40);
 	AddImageVector("CircleIdle", L"./Resources/Saint_Joanna/Phase_2/SoulChase/Boss/CircleIdle/", 1, 39);
