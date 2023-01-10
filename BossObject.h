@@ -98,7 +98,6 @@ protected:
 	bool _isIdleOn;
 	bool _patternLock;
 
-	int _patternSelect;
 	float _patternDelay;
 protected:
 	bool _isNervousnessOn;
@@ -143,7 +142,10 @@ protected:
 	vector<WorshipRight*>::iterator _viWorshipRight;
 
 	int rand;
+
 public:
+	int _patternSelect;
+
 	bool getIdleOn() { return _isIdleOn; }
 
 	virtual void Init() override;

@@ -14,11 +14,11 @@ void BossScene::Init()
 	_imgFence = IMAGEMANAGER->FindImage("Fence");
 
 	
-	OBJECTMANAGER->AddObject("Joanna", 850, 475, 0)->AddComponent<BossObject>();
 
 	FILEMANAGER->SetNowStageFile("map_1");
 	FILEMANAGER->TileFileRead(&SCENEMANAGER->m_tiles);
 
+	OBJECTMANAGER->AddObject("Joanna", 850, 475, 0)->AddComponent<BossObject>();
 	string strData;
 	strData = FILEMANAGER->GetFileData("Structure", "batch");
 	MY_UTILITY::ConvertStructureString2Vec(&m_sturctDatas, strData);
