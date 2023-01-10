@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include"LobbyObject.h"
 
+
 void Spider::Init()
 {
 	_img = IMAGEMANAGER->AddImageVectorCopy("Spider");
@@ -112,5 +113,121 @@ void LobbyNpc5::Render()
 }
 
 void LobbyNpc5::Release()
+{
+}
+
+void Cat::Init()
+{
+	m_movetimer = 0;
+	m_move = false;
+	m_isleft = false;
+	m_isleftcount = 0;
+	_img = IMAGEMANAGER->AddImageVectorCopy("CatIdle");
+	_img->Setting(0.1f, true);
+	_img2 = IMAGEMANAGER->AddImageVectorCopy("CatWalk");
+	_img2->Setting(0.1f, true);
+}
+
+void Cat::Update()
+{
+	m_movetimer += DELTA_TIME;
+	if (m_movetimer >= MY_UTILITY::getFromFloatTo(6,13))
+	{
+		m_move = true;
+	}
+	if (m_movetimer <= 1.0f)
+	{
+		m_move = false;
+	}
+	if (m_movetimer >= MY_UTILITY::getFromFloatTo(13, 18))
+	{
+		m_move = false;
+		m_isleftcount++;
+		m_movetimer = 0;
+	}
+	if (m_isleftcount >= MY_UTILITY::getFromFloatTo(0, 4) && m_isleft == false)
+	{
+		m_isleft = true; 
+		m_isleftcount = 0;
+	}
+	if (m_isleftcount >= MY_UTILITY::getFromFloatTo(0, 4) && m_isleft ==true)
+	{
+		m_isleft = false;
+		m_isleftcount = 0;
+	}
+	if (m_move == false)
+	{
+	}
+	if (m_move == true && m_isleft == false)
+	{
+		m_obj->x += 1;
+	}
+	if (m_move == true && m_isleft == true)
+	{
+		m_obj->x -= 1;
+	}
+	cout << m_isleftcount << endl;
+
+}
+
+void Cat::Render()
+{
+	if (m_move == false && m_isleft == false)
+	{
+		_img->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
+	}
+	if (m_move == true && m_isleft == false)
+	{
+		_img2->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
+	}
+	if (m_move == false && m_isleft == true)
+	{
+		_img->CenterRender(m_obj->x, m_obj->y, 2, 2, 0,1);
+	}
+	if (m_move == true && m_isleft == true)
+	{
+		_img2->CenterRender(m_obj->x, m_obj->y, 2, 2, 0,1);
+	}
+}
+
+void Cat::Release()
+{
+}
+
+void SpaerSkul::Init()
+{
+	_img = IMAGEMANAGER->AddImageVectorCopy("SpaerSkul");
+	_img->Setting(0.1f, true);
+}
+
+void SpaerSkul::Update()
+{
+}
+
+void SpaerSkul::Render()
+{
+	_img->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
+}
+
+void SpaerSkul::Release()
+{
+}
+
+void Elevator::Init()
+{
+	_img = IMAGEMANAGER->AddImageVectorCopy("Elevator");
+	_img->Setting(0.1f, true);
+}
+
+void Elevator::Update()
+{
+}
+
+void Elevator::Render()
+{
+	_img->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
+}
+
+void Elevator::Release()
 {
 }
