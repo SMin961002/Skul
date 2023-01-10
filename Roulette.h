@@ -29,6 +29,9 @@ public:
 	virtual void Release() override;
 	void CollisionUpdate();
 	virtual void OnCollision(string collisionName, Object* other)override;
+
+	void ResultAndImageSetting();
+	int GetSuccess() { return m_resultSuccess; }
 };
 
 class BlackHole : public Component

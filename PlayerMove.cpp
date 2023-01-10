@@ -36,14 +36,26 @@ void Player::Move()
 		{
 			ResetJump();
 			m_nowHead->SetAction(m_nowHead->eJumpLand);
+			m_knockBack = false;
+			m_knockBackY = 0;
 		}
 		else if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsTopCollision())
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(0);
 		if (m_obj->GetComponent<RigidBodyComponent>()->GetGravityPower() < 0)
 		{
 			//##점프액션조건수정필요
-			if (!m_dashing && !m_nowHead->GetIsAttack())
+			if (m_knockBack)
+			{
+				if (m_obj->y - m_knockBackY >= 20)
+				{
+					m_knockBack = false;
+					m_knockBackY = 0;
+				}
+			}
+			else if (!m_dashing && !m_nowHead->GetIsAttack())
+			{
 				m_nowHead->SetAction(m_nowHead->eJumpDown, true);
+			}
 		}
 	}
 	InputJumpKey();

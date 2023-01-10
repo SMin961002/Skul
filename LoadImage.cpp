@@ -61,7 +61,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_Idle", L"./Resources/Png/Skul/Gambler/Motion/Idle/", 1, 7);
 	AddImageVector("Gambler_Walk", L"./Resources/Png/Skul/Gambler/Motion/Walk/", 1, 6);
 	AddImageVector("Gambler_Dash", L"./Resources/Png/Skul/Gambler/Motion/Dash/", 1, 5);
-	AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 5);
+	AddImageVector("Gambler_AttackA1", L"./Resources/Png/Skul/Gambler/Motion/AttackA1/", 1, 11);
 	AddImageVector("Gambler_AttackA2", L"./Resources/Png/Skul/Gambler/Motion/AttackA2/", 1, 6);
 	AddImageVector("Gambler_Attack1", L"./Resources/Png/Skul/Gambler/Motion/AttackB1/", 1, 6);
 	AddImageVector("Gambler_Attack2", L"./Resources/Png/Skul/Gambler/Motion/AttackB2/", 1, 6);
@@ -80,14 +80,19 @@ void ImageManager::LoadImages()
 	//°·ºí·¯½ºÅ³
 	AddImageVector("Gambler_BlackJackSpark", L"./Resources/Png/Skul/Gambler/Effect/BlackJackSpark/", 1, 11);
 	AddImageVector("Gambler_BlackJackJokerExplosion", L"./Resources/Png/Skul/Gambler/Effect/BlackJack_BigHit_Explosion/", 1, 15);
+	AddImageVector("Gambler_RouletteEmerge", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Emerge/", 1, 24);
 	AddImageVector("Gambler_Roulette", L"./Resources/Png/Skul/Gambler/Effect/Roulette/", 1, 18);
+	AddImageVector("Gambler_RouletteBroken", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Effect/", 1, 15);
 	AddImageVector("Gambler_RouletteCircle", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Circle/", 1,14);
+	AddImageVector("Gambler_Roulette_Black", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Black/", 1, 32);
+	AddImageVector("Gambler_Roulette_Red", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Red/", 1, 23);
+	AddImageVector("Gambler_RouletteFail", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Failed/", 1, 51);
 	AddImageVector("Gambler_RouletteBigShot", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShot/", 1, 8);
 	AddImageVector("Gambler_RouletteBigShotBroken", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShotEffect/", 1, 23);
 	AddImageVector("Gambler_RouletteBigShotCircle", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShotCircle/", 1, 8);
-	AddImageVector("Gambler_RouletteEmerge", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Emerge/", 1, 24);
 	AddImageVector("Gambler_Roulette_BlackBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Black_BigHit/", 1, 91);
 	AddImageVector("Gambler_Roulette_RedBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Red_BigHit/", 1, 49);
+	AddImageVector("Gambler_SlotMachine", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/", 1, 8);
 	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
 	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
 	AddImage("GamblerRouletteBlack", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Black.png");
