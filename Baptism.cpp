@@ -25,7 +25,7 @@ void Baptism::Init()
 
 void Baptism::Update()
 {
-	if (OBJECTMANAGER->m_boss->_patternSelect == 1)
+	if (OBJECTMANAGER->m_boss->_patternCheck == 1)
 	{
 		if (_randX < 25)
 		{

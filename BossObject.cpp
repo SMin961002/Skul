@@ -440,11 +440,11 @@ void BossObject::Render()
 		{
 			if (_patternLock == false)
 			{
-				_patternSelect = MY_UTILITY::getFromIntTo(0, 2);
+				_patternCheck = MY_UTILITY::getFromIntTo(0, 2);
 				_locate = OBJECTMANAGER->m_player->GetplayerX();
 			}
 
-			switch (_patternSelect)
+			switch (_patternCheck)
 			{
 			case 0:
 				_patternLock = true;

@@ -168,7 +168,7 @@ protected:
 	int rand;
 
 public:
-	int _patternSelect;
+	int _patternCheck;
 
 	bool getIdleOn() { return _isIdleOn; }
 

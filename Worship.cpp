@@ -26,10 +26,10 @@ void WorshipLeft::Update()
 
 	_collision->Setting(60, m_obj->x+100, m_obj->y, "Attack");
 
-	if (OBJECTMANAGER->m_boss->_patternSelect == 2)
+	if (OBJECTMANAGER->m_boss->_patternCheck == 2)
 	{
 		_collision->SetIsActive(true);
-		cout << "패턴 : " << OBJECTMANAGER->m_boss->_patternSelect << endl;
+		cout << "패턴 : " << OBJECTMANAGER->m_boss->_patternCheck << endl;
 	}
 
 }
@@ -81,7 +81,7 @@ void WorshipRight::Update()
 	}
 	_collision->Setting(50, m_obj->x, m_obj->y, "Attack");
 
-	if (OBJECTMANAGER->m_boss->_patternSelect == 2)
+	if (OBJECTMANAGER->m_boss->_patternCheck == 2)
 	{
 		_collision->SetIsActive(true);
 	}
