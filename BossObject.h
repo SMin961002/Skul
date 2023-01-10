@@ -5,6 +5,8 @@
 class Baptism;
 class WorshipLeft;
 class WorshipRight;
+class HolyFountainLeft;
+class HolyFountainRight;
 
 class BossObject : public Component
 {
@@ -25,6 +27,9 @@ private:
 	float tpX;
 	float tpY;
 private:
+	HolyFountainLeft* _left;
+	HolyFountainRight* _right;
+
 	CImage* _imgBossChair;
 	// 보스 1페이즈 대화
 	vImage* divineLightEf1;
@@ -161,7 +166,10 @@ protected:
 	vector<WorshipRight*>::iterator _viWorshipRight;
 
 	int rand;
+
 public:
+	int _patternCheck;
+
 	bool getIdleOn() { return _isIdleOn; }
 
 	virtual void Init() override;

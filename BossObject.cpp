@@ -5,6 +5,7 @@
 #include "Baptism.h"
 #include "Worship.h"
 #include "Player.h"
+#include "HolyFountain.h"
 #include "BossCircle.h"
 #include "Lazer.h"
 #include "DivineImpact.h"
@@ -36,7 +37,6 @@ void BossObject::Init()
 	m_teleportEffect->Setting(0.07f, false);
 
 	m_patterTimer = 0;
-
 
 	chairY = m_obj->y;
 	chairX = m_obj->x;
@@ -95,7 +95,6 @@ void BossObject::Init()
 	m_phase2Img[eSoulChaseE] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_End");
 	m_phase2Img[eSoulChaseE]->Setting(0.1, false);
 
-	m_page = 1;
 	_imgBossChair = IMAGEMANAGER->FindImage("Boss_Chair");
 
 	_imgBossTalk = IMAGEMANAGER->FindImageVector("Boss_Intro_Talk");
@@ -165,16 +164,15 @@ void BossObject::Init()
 	_castingMotionDeltaTime = 0;
 	_consecrationDeltaTime = 0;
 
-	//for (int i = 0; i < 30; i++)
-	//{
-	//	//OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
-	//	Baptism* tmp = OBJECTMANAGER->AddObject("Baptism", m_obj->x + 200, 100, eEnemy)->AddComponent<Baptism>();
-	//	tmp->SetIsActive(false);
-	//
-	//	_vBaptism.push_back(tmp);
-	//}
+	for (int i = 0; i < 30; i++)
+	{
+		Baptism* tmp = OBJECTMANAGER->AddObject("Baptism", m_obj->x + 130, m_obj->y - 120, eEnemy)->AddComponent<Baptism>();
+		tmp->SetIsActive(false);
+	
+		_vBaptism.push_back(tmp);
+	}
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		int j = MY_UTILITY::getFromIntTo(0, 3);
 		int k = 0;
@@ -195,10 +193,9 @@ void BossObject::Init()
 		}
 		WorshipLeft* tmp = OBJECTMANAGER->AddObject("Worship", 0, k, eEnemy)->AddComponent<WorshipLeft>();
 		tmp->SetIsActive(false);
-
 		_vWorshipLeft.push_back(tmp);
 	}
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		int j = MY_UTILITY::getFromIntTo(0, 3);
 		int k = 0;
@@ -277,59 +274,6 @@ void BossObject::Update()
 		{
 			_isWorshipCheck = true;
 			_worshipDeltaTime += DELTA_TIME;
-		}
-
-		if (_updateCheck == true)
-		{
-			for (int i = 0; i < 5; i++)
-			{
-				int j = MY_UTILITY::getFromIntTo(0, 3);
-				int k = 0;
-				switch (j)
-				{
-				case 0:
-					k = 150;
-					break;
-				case 1:
-					k = 300;
-					break;
-				case 2:
-					k = 450;
-					break;
-				case 3:
-					k = 600;
-					break;
-				}
-				WorshipLeft* tmp = OBJECTMANAGER->AddObject("Worship", 0, k, eEnemy)->AddComponent<WorshipLeft>();
-				tmp->SetIsActive(false);
-
-				_vWorshipLeft.push_back(tmp);
-			}
-			for (int i = 0; i < 5; i++)
-			{
-				int j = MY_UTILITY::getFromIntTo(0, 3);
-				int k = 0;
-				switch (j)
-				{
-				case 0:
-					k = 150;
-					break;
-				case 1:
-					k = 300;
-					break;
-				case 2:
-					k = 450;
-					break;
-				case 3:
-					k = 600;
-					break;
-				}
-				WorshipRight* tmp = OBJECTMANAGER->AddObject("Worship", 1800, k, eEnemy)->AddComponent<WorshipRight>();
-				tmp->SetIsActive(false);
-
-				_vWorshipRight.push_back(tmp);
-			}
-			_updateCheck = false;
 		}
 	}
 	else if (m_page == 1)
@@ -496,11 +440,11 @@ void BossObject::Render()
 		{
 			if (_patternLock == false)
 			{
-				_patternSelect = MY_UTILITY::getFromIntTo(0, 2);
+				_patternCheck = MY_UTILITY::getFromIntTo(0, 2);
 				_locate = OBJECTMANAGER->m_player->GetplayerX();
 			}
 
-			switch (_patternSelect)
+			switch (_patternCheck)
 			{
 			case 0:
 				_patternLock = true;
@@ -541,22 +485,41 @@ void BossObject::Render()
 				}
 				break;
 			case 1:
-				// 맵 생기고 제작
-				//_patternLock = true;
-				//_imgPhase1BossBaptismAttack->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
-				//
-				//_viBaptism = _vBaptism.begin();
-				//for (; _viBaptism != _vBaptism.end(); ++_viBaptism)
-				//{
-				//	(*_viBaptism)->SetIsActive(true);
-				//}
+				_patternLock = true;
+				
+				_viBaptism = _vBaptism.begin();
+				for (; _viBaptism != _vBaptism.end(); ++_viBaptism)
+				{
+					(*_viBaptism)->SetIsActive(true);
+				}
+
+				_imgPhase1BossBaptismAttack->CenterRender(m_obj->x + 130, m_obj->y - 120, 1.8, 1.8, 0, false);
 				break;
 			case 2:
+				_patternLock = true;
 				for (int i = 0; i < 2; i++)
 				{
 					_vWorshipLeft[i]->SetIsActive(true);
 					_vWorshipRight[i]->SetIsActive(true);
 				}
+				if (_worshipDeltaTime > 5)
+				{
+					_imgPhase1BossCastingEnd->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
+				}
+				if (_imgPhase1BossCastingEnd->GetIsImageEnded() == true)
+				{
+					_isCastingOn = false;
+					_isCastingAttackOn = false;
+					_isConsecrationLoopOn = false;
+
+					_worshipDeltaTime = 0;
+
+					_imgPhase1BossCastingReady->Reset();
+					_imgPhase1BossCastingEnd->Reset();
+
+					_patternLock = false;
+				}
+
 				break;
 			}
 		}
