@@ -154,6 +154,7 @@
     <ClCompile Include="CSound.cpp" />
     <ClCompile Include="CSoundMgr.cpp" />
     <ClCompile Include="CTimer.cpp" />
+    <ClCompile Include="DivineImpact.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="HeadManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="HitDamageEffect.cpp" />
     <ClCompile Include="Lazer.cpp" />
     <ClCompile Include="LittleBorn.cpp" />
     <ClCompile Include="HolyFountain.cpp" />
@@ -196,6 +198,7 @@
     <ClCompile Include="NpcObject.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="Phase3B.cpp" />
     <ClCompile Include="PixelCollisionComponent.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerEffect.cpp" />
@@ -244,6 +247,7 @@
     <ClInclude Include="CSound.h" />
     <ClInclude Include="CSoundMgr.h" />
     <ClInclude Include="CTimer.h" />
+    <ClInclude Include="DivineImpact.h" />
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
@@ -264,6 +268,7 @@
     <ClInclude Include="HeadManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="HitDamageEffect.h" />
     <ClInclude Include="Lazer.h" />
     <ClInclude Include="LittleBorn.h" />
     <ClInclude Include="HolyFountain.h" />
@@ -286,6 +291,7 @@
     <ClInclude Include="NpcObject.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="Phase3B.h" />
     <ClInclude Include="PixelCollisionComponent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerEffect.h" />
