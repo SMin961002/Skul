@@ -3,6 +3,8 @@
 class BossCircle : public Component
 {
 private:
+	int cicle;
+	CollisionComponent* coll;
 	enum BossCircleState
 	{
 		eCreate,
@@ -20,5 +22,6 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	virtual void OnCollision(string collisionName, Object* other) override;
 };
 

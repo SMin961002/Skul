@@ -62,9 +62,6 @@
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClCompile>
     <ClCompile Include="WinMain.cpp" />
-    <ClCompile Include="Fanatic.cpp">
-      <Filter>Game\Object\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="BossObject.cpp">
       <Filter>Game\Object\Boss</Filter>
     </ClCompile>
@@ -157,12 +154,6 @@
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClCompile>
     <ClCompile Include="Roulette.cpp" />
-    <ClCompile Include="BossPhase1EnemyCandle.cpp">
-      <Filter>Game\Object\Enemy\BossPhase1EnemyCandle</Filter>
-    </ClCompile>
-    <ClCompile Include="BossPhase1EnemyFnatic.cpp">
-      <Filter>Game\Object\Enemy\BossPhase1EnemyFnatic</Filter>
-    </ClCompile>
     <ClCompile Include="IntroTitleScene.cpp">
       <Filter>Game\Scene\IntroScene</Filter>
     </ClCompile>
@@ -225,6 +216,21 @@
     <ClCompile Include="Baptism.cpp">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
+    <ClCompile Include="AngelStatue.cpp" />
+    <ClCompile Include="BallFanatic.cpp" />
+    <ClCompile Include="BlackFanatic.cpp" />
+    <ClCompile Include="BossCircle.cpp" />
+    <ClCompile Include="BossPhase1EnemyFnatic.cpp" />
+    <ClCompile Include="BossPhase1EnemyCandle.cpp" />
+    <ClCompile Include="CandleFanatic.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Fanatic.cpp" />
+    <ClCompile Include="Fountain.cpp" />
+    <ClCompile Include="Lazer.cpp" />
+    <ClCompile Include="LampFanatic.cpp" />
+    <ClCompile Include="LeoniaSoldier.cpp" />
+    <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="TentaclesOfLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -289,12 +295,6 @@
     </ClInclude>
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>Game\Component\RigidBodyComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="LeoniaSoldier.h">
-      <Filter>Game\Object\Enemy\LeoniaSoldier</Filter>
-    </ClInclude>
-    <ClInclude Include="BlackFanatic.h">
-      <Filter>Game\Object\Door\Enemy\BlackFanatic</Filter>
     </ClInclude>
     <ClInclude Include="BossObject.h">
       <Filter>Game\Object\Boss</Filter>
@@ -394,7 +394,6 @@
     <ClInclude Include="IllusionEffect.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="IllusionEffect.h" />
-    <ClInclude Include="IntroTitleScene.h" />
     <ClInclude Include="Gambler.h">
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClInclude>
@@ -408,15 +407,6 @@
       <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClInclude>
     <ClInclude Include="Roulette.h" />
-    <ClInclude Include="BossPhase1EnemyCandle.h">
-      <Filter>Game\Object\Enemy\BossPhase1EnemyCandle</Filter>
-    </ClInclude>
-    <ClInclude Include="BossPhase1EnemyFnatic.h">
-      <Filter>Game\Object\Enemy\BossPhase1EnemyFnatic</Filter>
-    </ClInclude>
-    <ClInclude Include="Fanatic.h">
-      <Filter>Game\Object\Enemy\Fanatic</Filter>
-    </ClInclude>
     <ClInclude Include="IntroTitleScene.h">
       <Filter>Game\Scene\IntroScene</Filter>
     </ClInclude>
@@ -433,6 +423,23 @@
     <ClInclude Include="BossPhase1EnemyCandle.h" />
     <ClInclude Include="BossPhase1EnemyFnatic.h" />
     <ClInclude Include="FireKnife.h" />
+    <ClInclude Include="AngelStatue.h" />
+    <ClInclude Include="BallFanatic.h" />
+    <ClInclude Include="BlackFanatic.h" />
+    <ClInclude Include="BossCircle.h" />
+    <ClInclude Include="BossPhase1EnemyFnatic.h" />
+    <ClInclude Include="BossPhase1EnemyCandle.h" />
+    <ClInclude Include="CandleFanatic.h" />
+    <ClInclude Include="Fanatic.h" />
+    <ClInclude Include="Fountain.h" />
+    <ClInclude Include="Lazer.h" />
+    <ClInclude Include="LampFanatic.h" />
+    <ClInclude Include="LeoniaSoldier.h" />
+    <ClInclude Include="Stage.h" />
+    <ClInclude Include="TentaclesOfLight.h" />
+    <ClInclude Include="IntroTitleScene.h">
+      <Filter>Game\Scene\IntroScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -587,12 +594,6 @@
     </Filter>
     <Filter Include="Game\Object\Charactor\Head\LittleBorn">
       <UniqueIdentifier>{91645030-351c-460b-8995-e860b4c731cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Enemy\BossPhase1EnemyCandle">
-      <UniqueIdentifier>{f47e079b-40b1-457f-a875-7d45e6bffc10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Enemy\BossPhase1EnemyFnatic">
-      <UniqueIdentifier>{e3c9c31e-e073-4daa-bd7d-c85d530041ac}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Scene\IntroScene">
       <UniqueIdentifier>{8eb525a0-455e-46e9-9433-671f3251628b}</UniqueIdentifier>

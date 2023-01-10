@@ -417,7 +417,8 @@ void ImageManager::Render(CImage* img, float x, float y, float sizeX, float size
 {
 	D2D1_MATRIX_3X2_F matT, matR, matS;
 	matT = D2D1::Matrix3x2F::Translation(x - camera.x, y - camera.y);
-	matR = D2D1::Matrix3x2F::Rotation(rot, { x + img->GetWidth() / 2,y + img->GetHeight() / 2 });
+	matR = D2D1::Matrix3x2F::Rotation(rot, { x - camera.x,y - camera.y });
+
 	matS = D2D1::Matrix3x2F::Scale(sizeX, sizeY);
 	pRT->SetTransform((matS * matT * matR));
 
