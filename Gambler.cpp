@@ -13,9 +13,9 @@ void Gambler::ImageSetting()
 	img[eDash] = IMAGEMANAGER->FindImageVector("Gambler_Dash");
 	img[eDash]->Setting(0.16f, false);
 	img[eAutoAttack_1] = IMAGEMANAGER->FindImageVector("Gambler_Attack1");
-	img[eAutoAttack_1]->Setting(0.03f, false);
+	img[eAutoAttack_1]->Setting(0.04f, false);
 	img[eAutoAttack_2] = IMAGEMANAGER->FindImageVector("Gambler_Attack2");
-	img[eAutoAttack_2]->Setting(0.03f, false);
+	img[eAutoAttack_2]->Setting(0.04f, false);
 	img[eAutoAttack_3] = IMAGEMANAGER->FindImageVector("Gambler_Attack3");
 	img[eAutoAttack_3]->Setting(0.06f, false);
 	img[eJump] = IMAGEMANAGER->FindImageVector("Gambler_JumpStart");
@@ -74,8 +74,6 @@ void Gambler::ParameterSetting()
 	m_blackJackDelay = 0.15;
 	m_blackJackNowDelay = 0.0f;
 	m_blackJack = 0;
-
-	m_attackInputTime = 0.1;
 
 	m_effectOverap = false;
 	m_nonCansleAction = false;
