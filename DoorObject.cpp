@@ -48,7 +48,7 @@ void DoorObject::Init()
 void DoorObject::Update()
 {
 	m_coll->Setting(50, m_obj->x + 20, m_obj->y + 100, "enter");
-	if (OBJECTMANAGER->GetEnemyCount() == 0)
+	if (GAMEMANAGER->enemyCount == 0)
 	{
 		m_isClear = true;
 	}
@@ -62,8 +62,8 @@ void DoorObject::Render()
 {
 	if (m_isClear == false)
 	{
-		if(m_kind != eSpdir)
-		IMAGEMANAGER->CenterRender(img, m_obj->x, m_obj->y, 2, 2);
+		if (m_kind != eSpdir)
+			IMAGEMANAGER->CenterRender(img, m_obj->x, m_obj->y, 2, 2);
 		else
 		{
 			IMAGEMANAGER->CenterRender(img, m_obj->x, m_obj->y, 1, 1);
@@ -73,7 +73,7 @@ void DoorObject::Render()
 	else
 	{
 		if (m_kind != eSpdir)
-		vimg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+			vimg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
 		else
 			vimg->CenterRender(m_obj->x, m_obj->y, 1.75, 1.75, 0, 0);
 

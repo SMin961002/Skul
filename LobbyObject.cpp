@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include"LobbyObject.h"
-
+#include "RigidBodyComponent.h"
 
 void Spider::Init()
 {
 	_img = IMAGEMANAGER->AddImageVectorCopy("Spider");
 	_img->Setting(0.1f, true);
+	GAMEMANAGER->enemyCount++;
+
 }
 
 void Spider::Update()
@@ -19,6 +21,8 @@ void Spider::Render()
 
 void Spider::Release()
 {
+	GAMEMANAGER->enemyCount--;
+
 }
 
 void LobbyNpc1::Init()
@@ -131,7 +135,7 @@ void Cat::Init()
 void Cat::Update()
 {
 	m_movetimer += DELTA_TIME;
-	if (m_movetimer >= MY_UTILITY::getFromFloatTo(6,13))
+	if (m_movetimer >= MY_UTILITY::getFromFloatTo(6, 13))
 	{
 		m_move = true;
 	}
@@ -147,10 +151,10 @@ void Cat::Update()
 	}
 	if (m_isleftcount >= MY_UTILITY::getFromFloatTo(0, 4) && m_isleft == false)
 	{
-		m_isleft = true; 
+		m_isleft = true;
 		m_isleftcount = 0;
 	}
-	if (m_isleftcount >= MY_UTILITY::getFromFloatTo(0, 4) && m_isleft ==true)
+	if (m_isleftcount >= MY_UTILITY::getFromFloatTo(0, 4) && m_isleft == true)
 	{
 		m_isleft = false;
 		m_isleftcount = 0;
@@ -182,11 +186,11 @@ void Cat::Render()
 	}
 	if (m_move == false && m_isleft == true)
 	{
-		_img->CenterRender(m_obj->x, m_obj->y, 2, 2, 0,1);
+		_img->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 1);
 	}
 	if (m_move == true && m_isleft == true)
 	{
-		_img2->CenterRender(m_obj->x, m_obj->y, 2, 2, 0,1);
+		_img2->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 1);
 	}
 }
 
@@ -217,17 +221,47 @@ void Elevator::Init()
 {
 	_img = IMAGEMANAGER->AddImageVectorCopy("Elevator");
 	_img->Setting(0.1f, true);
+	isUp = false;
+	coll = m_obj->AddComponent<CollisionComponent>();
+	m_obj->AddCollisionComponent(coll);
 }
 
 void Elevator::Update()
 {
+	coll->Setting(20, m_obj->x, m_obj->y + 100, "elevator");
+	if (isUp == true)
+	{
+		m_obj->y -= 1.f;
+	}
 }
 
 void Elevator::Render()
 {
 	_img->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
+	if (m_obj->y <= 300)
+	{
+		SCENEMANAGER->FadeOut(0.005, []() {
+			FILEMANAGER->SetNowStageFile("map_0");
+			SCENEMANAGER->ChangeScene("EnemyTestScene"); }, 61);
+	}
 }
 
 void Elevator::Release()
 {
+}
+
+void Elevator::OnCollision(string collisionName, Object* other)
+{
+	if (collisionName == "elevator")
+	{
+		if (other->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision() == true)
+		{
+			other->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
+			isUp = true;
+		}
+		if (isUp == true)
+		{
+			other->y -= 2.f;
+		}
+	}
 }

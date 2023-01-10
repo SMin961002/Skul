@@ -3,11 +3,7 @@ class Item : public Component
 {
 private:
 
-
-
 protected:
-	
-
 
 public:
 	// Component을(를) 통해 상속됨

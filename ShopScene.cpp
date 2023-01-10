@@ -9,6 +9,7 @@ void ShopScene::Init()
 	m_backGround = IMAGEMANAGER->FindImage("ShopBackGround");
 	m_cloude = IMAGEMANAGER->FindImage("ShopCloud");
 	m_structure = IMAGEMANAGER->FindImage("ShopStruecture");
+	IMAGEMANAGER->SetCameraPosition(0, 0);
 
 	FILEMANAGER->SetNowStageFile("shop");
 
