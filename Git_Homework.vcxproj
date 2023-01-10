@@ -200,6 +200,7 @@
     <ClCompile Include="ResultValue.cpp" />
     <ClCompile Include="ProjectileHeadSkull.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
+    <ClCompile Include="LobbyObject.cpp" />
     <ClCompile Include="Roulette.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -285,6 +286,7 @@
     <ClInclude Include="ResultValue.h" />
     <ClInclude Include="ProjectileHeadSkull.h" />
     <ClInclude Include="RigidBodyComponent.h" />
+    <ClInclude Include="LobbyObject.h" />
     <ClInclude Include="Roulette.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />

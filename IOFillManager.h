@@ -20,6 +20,8 @@ public:
 
 	string GetFileData(string section, string key);
 	void WriteFileData(string section, string key, string inputStr);
+	
+	string GetFileName(void) { return m_nowStageFileName; }
 };
 
 #define FILEMANAGER IOFillManager::GetInstance()
