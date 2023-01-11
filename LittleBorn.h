@@ -9,6 +9,8 @@ private:
 	ProjectileHeadSkull* m_projectileHead;	//머리던지기 투사체 구조체
     bool m_headThrow;
     int count = 0;
+    float m_tagAttackDelay;
+    float m_tagAttackNowDelay;
 public:
     void ImageSetting() override;
     void ParameterSetting() override;
@@ -29,6 +31,7 @@ public:
 
     void DrawCharactor() override;
     void OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg, float delay) override;
+    void OnCollisionTagAttack(Component* enemy, Object* obj, float dmg, float delay) override;
 
 	void PutOnHead()
 	{

@@ -2,7 +2,7 @@
 class Thunder : public Component
 {
 private:
-	vector<Object*> m_vectorCollisionList;
+	vector<Object*> m_CollObjList;
 
 	CollisionComponent* m_coll;
 	Effect* m_thunder;

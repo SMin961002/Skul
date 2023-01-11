@@ -96,6 +96,8 @@ void LittleBorn::ParameterSetting()
 	m_imageChange = false;
 
 	m_nonCansleAction = false;
+	m_tagAttackDelay = 0.38;
+	m_tagAttackNowDelay = 0;
 }
 
 void LittleBorn::CollisionSetting()
@@ -114,12 +116,20 @@ void LittleBorn::Release()
 void LittleBorn::CoolDown()
 {
 	float deltaTime = DELTA_TIME;
-	if (m_dashNowCool > 0)
-	{
-		m_dashNowCool -= deltaTime;
-		if (m_dashNowCool < 0) m_dashNowCool = 0;
-	}
 
+	if (m_action == eTagAction)
+	{
+		if (m_tagAttackNowDelay > 0)
+		{
+			m_tagAttackNowDelay -= deltaTime;
+			if (m_tagAttackNowDelay < 0)
+			{
+				m_tagAttackNowDelay = m_tagAttackDelay;
+				m_CollObjList.clear();
+				listObj().swap(m_CollObjList);
+			}
+		}
+	}
 	if (m_skillNowCoolA > 0)
 	{
 		m_skillNowCoolA -= deltaTime;
@@ -128,22 +138,9 @@ void LittleBorn::CoolDown()
 			PutOnHead();
 		}
 	}
-	if (m_skillNowCoolS > 0)
-	{
-		m_skillNowCoolS -= deltaTime;
-		if (m_skillNowCoolS < 0)
-		{
-			m_skillNowCoolS = 0;
-		}
-	}
-	if (m_attackNowCool > 0)
-	{
-		m_attackNowCool -= deltaTime;
-		if (m_attackNowCool < 0)
-		{
-			m_attackNowCool = 0;
-		}
-	}
+	CoolDownDelay(m_skillNowCoolS, deltaTime);
+	CoolDownDelay(m_dashNowCool, deltaTime);
+	CoolDownDelay(m_attackNowCool, deltaTime);
 }
 
 void LittleBorn::ActionArrangement()
@@ -334,7 +331,7 @@ void LittleBorn::CollisionUpdate()
 		else
 			m_collAutoAttack->Setting(*m_x + 50, *m_y - 10);
 	}
-	else
+	else if(m_collSkillTag->GetIsActive()==false)
 	{
 		m_CollObjList.clear();
 		listObj().swap(m_CollObjList);
@@ -412,6 +409,7 @@ void LittleBorn::TagAction()
 	m_imageChange = true;
 	m_action = eTagAction;
 	img[eTagAction]->Reset();
+	m_tagAttackNowDelay = m_tagAttackDelay;
 }
 
 bool LittleBorn::GetIsAttack()
@@ -461,5 +459,33 @@ void LittleBorn::OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg,
 		enemy->HitEnemy(dmg, delay);
 		m_CollObjList.push_back(obj);
 		OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(10);
+	}
+}
+
+void LittleBorn::OnCollisionTagAttack(Component* enemy, Object* obj, float dmg, float delay)
+{
+	bool isEnemyHit = false;
+	for (auto iter : m_CollObjList)
+	{
+		if (iter == obj) isEnemyHit = true;
+	}
+	if (!isEnemyHit)
+	{
+		enemy->HitEnemy(dmg, delay);
+		m_CollObjList.push_back(obj);
+		OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(10);
+
+		Enemy* e = obj->GetComponent<Enemy>();
+		if (e != nullptr)
+		{
+			if (e->GetX() > *m_x)
+			{
+				e->SetPosition(e->GetX() + 10, e->GetY() + 5);
+			}
+			else if (e->GetX() < *m_x)
+			{
+				e->SetPosition(e->GetX() - 10, e->GetY() + 5);
+			}
+		}
 	}
 }

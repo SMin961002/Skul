@@ -2,13 +2,11 @@
 class SlotMachine :public Component
 {
 private:
-	vector<Object*> m_vectorCollisionList;
-	vector<Object*> m_vectorThunderList;
-	vector<Object*> m_vectorThunderSmallList;
+	typedef list<Object*> listObj;
+
+	listObj m_CollObjList;
 
 	CollisionComponent* m_coll;
-	CollisionComponent* m_collThunderRange;
-	CollisionComponent* m_collThunderSmallRange;
 	vImage* m_imgSlotMachine;	//슬롯머신 돌아가는 애니메이션 이미지
 	vImage* m_imgExplosion;		//폭발 애니메이션 이미지
 	CImage* m_imgResult;		//슬롯머신 결과 이미지
