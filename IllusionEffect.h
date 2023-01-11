@@ -4,6 +4,8 @@ class IllusionEffect : public Component
 public:
 	CImage* img;
 	bool isLeft;
+	bool alphaGo;
+	float preAlphaTime;
 	IllusionEffect() {}
 	~IllusionEffect() {}
 	// Component을(를) 통해 상속됨

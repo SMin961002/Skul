@@ -279,25 +279,8 @@ void Roulette::OnCollision(string collisionName, Object* other)
 
 	if (!hited)
 	{
-		//float dmg;
-		//switch (m_resultSuccess)
-		//{
-		//case -1:
-		//	dmg = 12;
-		//	break;
-		//case 0:
-		//	dmg = 15;
-		//	break;
-		//case 1:
-		//	dmg = 18;
-		//	break;
-		//default:
-		//	dmg = 15;
-		//}
-
 		other->GetComponent<Component>()->HitEnemy(18, 0.1);
 		OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(18);
-
 		m_vectorCollisionList.push_back(other);
 	}
 }

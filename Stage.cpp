@@ -20,6 +20,9 @@
 
 void Stage::Init()
 {
+	IMAGEMANAGER->SetCameraPosition(0, 0);
+
+	GAMEMANAGER->enemyCount = 0;
 	trigger = new Trigger;
 	isFade = false;
 	isStart = false;

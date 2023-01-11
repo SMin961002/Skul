@@ -117,40 +117,53 @@ void BlackJackCard::Init()
 	m_coll = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(m_coll);
 	m_coll->Setting(15, m_obj->x + 120, m_obj->y - 8, "GamblerCard");
+	m_coll->SetIsActive(false);
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 	m_obj->AddComponent<RigidBodyComponent>()->SetGravityOnOff(false);
 	m_isLeft = OBJECTMANAGER->m_player->GetplayerIsLeft();
 	m_startX = OBJECTMANAGER->m_player->GetplayerX();
+	m_shoot = false;
+
+	m_dx = MY_UTILITY::getFromFloatTo(80, 125);
+	m_dy = -80 + MY_UTILITY::getFromFloatTo(0, 48);
 }
 
 void BlackJackCard::Update()
 {
-	if (m_isJokerHit)
+	if (m_shoot)	//발사시 동작
 	{
-		if (m_jokerExplosion->GetIsEffectEnded())
+		if (m_isJokerHit)
 		{
-			m_coll->SetIsActive(false);
-			m_coll->SetIsDelete(true);
-			m_obj->ObjectDestroyed();
-		}
-	}//end jokerExplosion
-	else {
-		m_obj->x = m_isLeft ? m_obj->x - m_speed * DELTA_TIME : m_obj->x + m_speed * DELTA_TIME;
-		float distance = m_obj->x - m_startX;
-		if (distance < 0) distance = -distance;
-		PixelCollisionComponent* px = m_obj->GetComponent<PixelCollisionComponent>();
-		if (px->GetIsBottomCollision() || px->GetIsTopCollision()
-			|| px->GetIsLeftCollision() || px->GetIsRightCollision()
-			|| distance > WINSIZE_X)
-		{
-			m_obj->ObjectDestroyed();
-		}
-		if (m_isLeft)
-			m_coll->Setting(m_obj->x - 19, m_obj->y + 4);
-		else
-			m_coll->Setting(m_obj->x + 24, m_obj->y + 4);
-	}//end else
-
+			if (m_jokerExplosion->GetIsEffectEnded())
+			{
+				m_coll->SetIsActive(false);
+				m_coll->SetIsDelete(true);
+				m_obj->ObjectDestroyed();
+			}
+		}//end jokerExplosion
+		else {
+			m_obj->x = m_isLeft ? m_obj->x - m_speed * DELTA_TIME : m_obj->x + m_speed * DELTA_TIME;
+			float distance = m_obj->x - m_startX;
+			if (distance < 0) distance = -distance;
+			PixelCollisionComponent* px = m_obj->GetComponent<PixelCollisionComponent>();
+			if (px->GetIsBottomCollision() || px->GetIsTopCollision()
+				|| px->GetIsLeftCollision() || px->GetIsRightCollision()
+				|| distance > WINSIZE_X)
+			{
+				m_obj->ObjectDestroyed();
+			}
+			if (m_isLeft)
+				m_coll->Setting(m_obj->x - 19, m_obj->y + 4);
+			else
+				m_coll->Setting(m_obj->x + 24, m_obj->y + 4);
+		}//end else
+	}//end shot
+	else	//발사 전 동작
+	{
+		m_obj->x = OBJECTMANAGER->m_player->GetplayerX() + (m_isLeft ? m_dx : -m_dx);
+		m_obj->y = OBJECTMANAGER->m_player->GetplayerY() + m_dy;
+		m_isLeft = OBJECTMANAGER->m_player->GetplayerIsLeft();
+	}
 }
 
 void BlackJackCard::Render()
@@ -176,13 +189,11 @@ void BlackJackCard::Setting(int success)
 		m_isJoker = true;
 		m_isJokerHit = false;
 		m_img = IMAGEMANAGER->FindImage("GamblerCardJoker");
-		EFFECTMANAGER->AddEffect<BlackJackSpark>(m_obj->x, m_obj->y, m_isLeft, 2);
 		break;
 
 	default:
 		m_isJoker = false;
 		m_img = IMAGEMANAGER->FindImage("GamblerCardNormal");
-		EFFECTMANAGER->AddEffect<BlackJackSpark>(m_obj->x, m_obj->y, m_isLeft, 2);
 		break;
 	}
 }

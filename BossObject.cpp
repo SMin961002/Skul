@@ -88,7 +88,7 @@ void BossObject::Init()
 	m_phase2Img[eCreateBallE] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_CreateBall_End");
 	m_phase2Img[eCreateBallE]->Setting(0.15, false);
 
-	m_page = 0;
+	m_page = 1;
 	m_phase2Img[eSoulChaseR] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_Ready");
 	m_phase2Img[eSoulChaseR]->Setting(0.1, false);
 	m_phase2Img[eSoulChaseA] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_Attack");
@@ -170,7 +170,7 @@ void BossObject::Init()
 	{
 		Baptism* tmp = OBJECTMANAGER->AddObject("Baptism", m_obj->x + 130, m_obj->y - 120, eEnemy)->AddComponent<Baptism>();
 		tmp->SetIsActive(false);
-	
+
 		_vBaptism.push_back(tmp);
 	}
 
@@ -504,7 +504,7 @@ void BossObject::Render()
 				break;
 			case 1:
 				_patternLock = true;
-				
+
 				_viBaptism = _vBaptism.begin();
 				for (; _viBaptism != _vBaptism.end(); ++_viBaptism)
 				{
@@ -883,6 +883,7 @@ void BossObject::Page_2()
 		{
 			if (m_phase2Img[ePhase_3E]->GetIsImageEnded() == true)
 			{
+				isPhase3 = false;
 				m_phase2Patter = 6;
 			}
 		}

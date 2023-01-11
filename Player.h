@@ -1,9 +1,7 @@
 #pragma once
 #include "LittleBorn.h"
 #include "Gambler.h"
-//!!!!벡터가 터져요!!!!//
 //↓/↓/Comment at End of Page/↓/↓/
-//.......!...
 class Player : public Component
 {
 private:
@@ -16,7 +14,7 @@ private:
 	};
 	CImage* m_UIImage[UITag::eEnd];
 
-	Head* m_headList[static_cast<int>(eSkulSpecies::Empty) +1];
+	Head* m_headList[static_cast<int>(eSkulSpecies::Empty) + 1];
 	eSkulSpecies m_headSlot;
 	Head* m_nowHead;
 	float m_headTagCool;
@@ -34,7 +32,8 @@ private:
 	bool  m_isLeft;
 	bool  m_isDown;
 
-	float m_dashSpeed;		//대시 속도 (가속->감속 계산필요)
+	float m_dashSpeed;		//대시 속도
+	float m_dashNowSpeed;		//대시 현재속도
 	float m_dashCool;		//대시 끝나고 다음 대시세트 시작까지 걸리는 쿨타임
 	float m_dashNowCool;	//현재 대시 쿨타임 (0 되면 다음 대시 가능)
 	float m_dashTime;		//대시 발동되는 시간 (이 안에 입력해야 2단대시 가능)
@@ -51,7 +50,7 @@ private:
 	int m_knockBackY;
 	bool m_knockBack;
 	//============이동에 필요한 변수end==========
-	
+
 	//========================
 	float m_supperArmarTime;
 	float m_supperArmarNowTime;
@@ -100,6 +99,17 @@ public:
 	void InputJumpKey();
 	void InputDashKey();
 	void InputArrowKey();
+	void Heal()
+	{
+		if ((m_life + 10) - m_HpMax > 0)
+		{
+			m_life = m_HpMax;
+		}
+		else
+		{
+			m_life += 10;
+		}
+	}
 	//↑====PlayerMove.cpp에 있습니다====↑//
 	void ResetJump() {
 		m_jumpCount = 0;
@@ -142,7 +152,7 @@ public:
 
 # dash부분 보강 필요
 
-			
+
 			갬블러 액션
 			샤샤샥
 			데미지(이미지)
@@ -150,7 +160,7 @@ public:
 			해골이미지 슬롯
 
 			다하면 약탈자 (진화 전/후 넣기)
-			
+
 
  - 플레이어 1타중 맞으면 2타가 안나가는 문제 수정하기
  - effect 출력

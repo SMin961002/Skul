@@ -107,6 +107,8 @@ void Player::CoolDown()
 	float deltaT = DELTA_TIME;
 	if (m_dashNowTime > 0)
 	{
+		m_dashNowSpeed -= deltaT* m_dashSpeed;
+
 		m_dashNowTime -= deltaT;
 		if (m_dashNowTime < 0)
 		{
