@@ -8,7 +8,7 @@
 #include"Effect.h"
 #include"PlayerEffect.h"
 #include"BlackRock.h"
-
+#include"CSound.h"
 void AngelStatue::Init()
 {
 	m_maxhp = 200.0f;
@@ -17,6 +17,9 @@ void AngelStatue::Init()
 	m_hit = false;
 	m_effect = false;
 	m_attackcount = 0;
+	m_attacksound = false;
+	m_attacksound2 = false;
+	m_attacksoundtimer = 0;
 	GAMEMANAGER->enemyCount++;
 	m_vimage[eIdle] = IMAGEMANAGER->AddImageVectorCopy("AStatue_Idle");
 	m_vimage[eIdle]->Setting(0.3f, true);
@@ -59,6 +62,19 @@ void AngelStatue::Init()
 
 void AngelStatue::Update()
 {
+	m_attacksoundtimer += DELTA_TIME;
+	if (m_attacksound == true)
+	{
+		SOUNDMANAGER->FindSound("AngleStatueAttackReady")->Play(false);
+		m_attacksound = false;
+		m_attacksoundtimer = 0;
+		m_attacksound2 = true;
+	}
+	if (m_attacksoundtimer >= 2.9 && m_attacksound2 == true)
+	{
+		SOUNDMANAGER->FindSound("AngleStatueAttack")->Play(false);
+		m_attacksound2 = false;
+	}
 	if (m_effect == false)
 	{
 
@@ -102,6 +118,7 @@ void AngelStatue::Update()
 		}
 		if (m_vimage[eAttackReadyEffect]->GetIsImageEnded())
 		{
+
 			if (m_attack == true)
 			{
 				m_state2 = eAttackEffect;
@@ -120,6 +137,7 @@ void AngelStatue::Update()
 		if (m_vimage[eAttackEffect]->GetIsImageEnded())
 		{
 			m_attack = false;
+			m_collision->SetIsActive(true);
 			m_vimage[eAttack]->Reset();
 			m_vimage[eAttackReadyEffect]->Reset();
 			m_vimage[eEndAttack]->Reset();
@@ -198,10 +216,13 @@ void AngelStatue::OnCollision(string collisionName, Object* other)
 {
 	if (collisionName == m_collision->GetName())
 	{
+
 		if (other->GetName() == "player")
 		{
 			//other->GetComponent<Player>()-플레이어 상태쉉
+			m_attacksound = true;
 			m_attack = true;
+			m_collision->SetIsActive(false);
 		}
 	}
 

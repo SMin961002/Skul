@@ -15,10 +15,12 @@ private:
 	vImage* m_vimage[eEnd];
 	int m_state;
 	int m_attackcount;
+
 	bool m_attack;
 	bool m_memergeend;
 	bool m_isleft;
 	bool m_recovery;
+	bool m_attacksound;
 
 	float m_hiteffecttimer;
 
