@@ -88,7 +88,7 @@ void LittleBorn::ParameterSetting()
 	m_attackCast[0] = false;
 	m_attackCast[1] = false;
 
-	m_tagCoolTime = 10;
+	m_tagCoolTime = 0;
 	m_skillNowCoolA = 0;
 	m_skillNowCoolS = 0;
 	m_skillCoolA = 6;
@@ -136,14 +136,14 @@ void LittleBorn::CoolDown()
 	if (m_skillNowCoolA > 0)
 	{
 		m_skillNowCoolA -= deltaTime;
-		if (m_skillNowCoolA < 0)
+		if(m_projectileHead->GetSkullOnOff() == false || m_skillNowCoolA <= 0)
 		{
 			PutOnHead();
 		}
 	}
-	CoolDownDelay(m_skillNowCoolS, deltaTime);
-	CoolDownDelay(m_dashNowCool, deltaTime);
-	CoolDownDelay(m_attackNowCool, deltaTime);
+	CoolDownDelay(&m_skillNowCoolS, deltaTime);
+	CoolDownDelay(&m_dashNowCool, deltaTime);
+	CoolDownDelay(&m_attackNowCool, deltaTime);
 }
 
 void LittleBorn::ActionArrangement()
@@ -366,6 +366,7 @@ void LittleBorn::InputSkillKey()
 			*m_y = m_projectileHead->GetY();
 			EFFECTMANAGER->AddEffect<TeleportationToHead>(*m_x, *m_y, *m_isLeft, 2);
 			m_skillNowCoolS = m_skillCoolS;
+			m_projectileHead->Off();
 			PutOnHead();
 		}
 	}//end if headThrow

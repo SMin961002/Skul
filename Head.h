@@ -134,14 +134,14 @@ public:
 	virtual void Act();
 
 	virtual void CoolDown() {};
-	void CoolDownDelay(float delay, float deltaTime = DELTA_TIME)
+	void CoolDownDelay(float *delay, float deltaTime = DELTA_TIME)
 	{
-		if (delay > 0)
+		if (*delay > 0)
 		{
-			delay -= deltaTime;
-			if (delay < 0)
+			*delay -= deltaTime;
+			if (*delay < 0)
 			{
-				delay = 0;
+				*delay = 0;
 			}
 		}
 	}

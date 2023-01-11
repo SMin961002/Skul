@@ -8,6 +8,7 @@ private:
 
 	CollisionComponent* m_coll;
 	vImage* m_imgSlotMachine;	//슬롯머신 돌아가는 애니메이션 이미지
+	short m_loopChecker;
 	vImage* m_imgExplosion;		//폭발 애니메이션 이미지
 	CImage* m_imgResult;		//슬롯머신 결과 이미지
 

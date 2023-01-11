@@ -236,8 +236,6 @@
       <Filter>Core\Manager\ImageManager</Filter>
     </ClCompile>
     <ClCompile Include="BossCircle.cpp" />
-    <ClCompile Include="CSound.cpp" />
-    <ClCompile Include="CSoundMgr.cpp" />
     <ClCompile Include="Fanatic.cpp" />
     <ClCompile Include="Lazer.cpp" />
     <ClCompile Include="LobbyObject.cpp" />
@@ -263,6 +261,12 @@
     <ClCompile Include="Lazer.cpp" />
     <ClCompile Include="HitDamageEffect.cpp" />
     <ClCompile Include="BlackJack.cpp" />
+    <ClCompile Include="CSound.cpp">
+      <Filter>Core\Manager\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundMgr.cpp">
+      <Filter>Core\Manager\SoundManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -469,8 +473,6 @@
     <ClInclude Include="Stage.h" />
     <ClInclude Include="TentaclesOfLight.h" />
     <ClInclude Include="BossCircle.h" />
-    <ClInclude Include="CSound.h" />
-    <ClInclude Include="CSoundMgr.h" />
     <ClInclude Include="Lazer.h" />
     <ClInclude Include="LobbyObject.h" />
     <ClInclude Include="Card.h">
@@ -494,6 +496,12 @@
     <ClInclude Include="Lazer.h" />
     <ClInclude Include="HitDamageEffect.h" />
     <ClInclude Include="BlackJack.h" />
+    <ClInclude Include="CSoundMgr.h">
+      <Filter>Core\Manager\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CSound.h">
+      <Filter>Core\Manager\SoundManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -666,6 +674,9 @@
     </Filter>
     <Filter Include="Game\Object\Enemy\LeoniaSoldier">
       <UniqueIdentifier>{2201dd90-e9cd-4469-a856-8b5402cb1f54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\SoundManager">
+      <UniqueIdentifier>{91bb3578-5794-420b-b725-0a442f12b050}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
