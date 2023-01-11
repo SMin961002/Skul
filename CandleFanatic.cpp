@@ -188,6 +188,10 @@ void CandleFanatic::Update()
 
 void CandleFanatic::Render()
 {
+	if (alphaHit >= 0)
+	{
+		alphaHit -= 0.05;
+	}
 	if (m_effect == true)
 	{
 		if (m_currenthp > 0)
@@ -227,6 +231,8 @@ void CandleFanatic::Render()
 
 		}
 	}
+	IMAGEMANAGER->CenterRender(m_vimage[m_state]->GetNowImage(), m_obj->x, m_obj->y - 50, { 255,255,255,alphaHit }, 2, 2, 0, m_isL);
+
 }
 
 void CandleFanatic::Release()
@@ -248,7 +254,7 @@ void CandleFanatic::OnCollision(string collisionName, Object* other)
 
 void CandleFanatic::HitEnemy(float dmg, float time)
 {
-
+	alphaHit = 1;
 	m_isAttack = false;
 	m_isHit = true;
 	m_state = eHit;

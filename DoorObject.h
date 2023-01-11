@@ -13,6 +13,7 @@ private:
 	CollisionComponent* m_coll;
 	CImage* img;
 	vImage* vimg;
+	CSound* BackgroundMusic;
 	bool m_isChange = false;
 	bool m_isClear = false;
 	int m_kind;

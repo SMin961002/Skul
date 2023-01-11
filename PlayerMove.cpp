@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "RigidBodyComponent.h"
 #include "IllusionEffect.h"
+#include"CSound.h"
 
 void Player::Move()
 {
@@ -82,6 +83,9 @@ void Player::InputJumpKey()
 	{
 		if (m_jumpCount < m_jumpMax)
 		{
+			SOUNDMANAGER->AddSound("Jump", "./Resources/Sound/Jump.wav");
+			SOUNDMANAGER->FindSound("Jump")->SetVolume(50);
+			SOUNDMANAGER->FindSound("Jump")->Play(false);
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
 			if (m_isDown)	//아래점프
 			{
@@ -108,6 +112,10 @@ void Player::InputDashKey()
 {
 	if (KEYMANAGER->GetOnceKeyDown('Z'))
 	{
+
+		SOUNDMANAGER->AddSound("Dash", "./Resources/Sound/Dash.wav");
+		SOUNDMANAGER->FindSound("Dash")->SetVolume(50);
+		SOUNDMANAGER->FindSound("Dash")->Play(false);
 		if (m_dashCount < m_dashMax && m_dashNowCool <= 0)
 		{
 			m_jumpping = false;

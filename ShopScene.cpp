@@ -3,6 +3,7 @@
 #include "NpcObject.h"
 #include "Player.h"
 #include "DoorObject.h"
+#include"CSound.h"
 
 void ShopScene::Init()
 {
@@ -10,8 +11,9 @@ void ShopScene::Init()
 	m_cloude = IMAGEMANAGER->FindImage("ShopCloud");
 	m_structure = IMAGEMANAGER->FindImage("ShopStruecture");
 	IMAGEMANAGER->SetCameraPosition(0, 0);
-
 	FILEMANAGER->SetNowStageFile("shop");
+	SOUNDMANAGER->FindSound("Shop")->Play(true);
+	SOUNDMANAGER->FindSound("Chapter4")->Stop();
 
 	FILEMANAGER->TileFileRead(&m_tiles);
 
@@ -90,6 +92,8 @@ void ShopScene::Render()
 
 void ShopScene::Release()
 {
+	SOUNDMANAGER->FindSound("Middle")->Play(true);
+	SOUNDMANAGER->FindSound("Shop")->Stop();
 	for (auto iter : m_objects)
 	{
 		SAFE_DELETE(iter);

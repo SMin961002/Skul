@@ -10,12 +10,14 @@
 #include "Lazer.h"
 #include "DivineImpact.h"
 #include "Phase3B.h"
-
+#include"CSound.h"
 void BossObject::Init()
 {
 	isMove = false;
 	lazerCount = 0;
 	isPhase3 = false;
+	SOUNDMANAGER->FindSound("Middle")->Stop();
+	SOUNDMANAGER->FindSound("Bossphase1")->Play(true);
 	divineLightEf1 = IMAGEMANAGER->FindImageVector("DivineLight_ef1");
 	divineLightEf2 = IMAGEMANAGER->FindImageVector("DivineLight_ef2");
 	divineLightEf1->Setting(0.1, false);
@@ -223,6 +225,7 @@ void BossObject::Init()
 
 		_vWorshipRight.push_back(tmp);
 	}
+
 }
 
 void BossObject::Update()

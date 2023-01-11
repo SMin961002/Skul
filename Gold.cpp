@@ -3,7 +3,7 @@
 #include "CollisionComponent.h"
 #include"PixelCollisionComponent.h"
 #include"RigidBodyComponent.h"
-
+#include "Player.h"
 void Gold::Init()
 {
 	m_goldx = 0;
@@ -82,4 +82,5 @@ void Gold::Render()
 
 void Gold::Release()
 {
+	OBJECTMANAGER->m_player->goldValue += 20;
 }

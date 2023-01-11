@@ -123,7 +123,6 @@ void MapToolScene::Update()
 	{
 		m_triggerPage--;
 	}
-	cout << m_triggerPage << endl;
 }
 
 void MapToolScene::Render()

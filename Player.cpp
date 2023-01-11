@@ -10,18 +10,89 @@ head에 전달해서 가공하기
 */
 void Player::Init()
 {
+	m_HpMax = 100;
+
+	if (GAMEMANAGER->playerHp <= 0)
+	{
+		GAMEMANAGER->playerHp = m_HpMax;
+		m_life = m_HpMax;
+	}
+	else
+	{
+		m_life = GAMEMANAGER->playerHp;
+	}
+	if (GAMEMANAGER->goldValue <= 0)
+	{
+		goldValue = 0;
+	}
+	else
+	{
+		goldValue = GAMEMANAGER->goldValue;
+	}
+
+	if (GAMEMANAGER->isHeadCheck == false)
+	{
+		isHeadCheck = false;
+	}
+	else
+	{
+		isHeadCheck = true;
+	}
+
 	hpBar = IMAGEMANAGER->FindImage("hpBar");
 	m_UIImage[ePlayerStatus] = IMAGEMANAGER->FindImage("PlayerStatusUI");
 	OBJECTMANAGER->m_player = this;
-	m_headList[static_cast<int>(eSkulSpecies::eBasic)] = new LittleBorn;
+	m_headList[static_cast<int>(eSkulSpecies::eBasic)] = nullptr;
+
+	for (auto iter : GAMEMANAGER->m_headList)
+	{
+		if (typeid(*iter) == typeid(LittleBorn))
+		{
+			m_headList[static_cast<int>(eSkulSpecies::eBasic)] = iter;
+			break;
+		}
+	}
+	if (m_headList[static_cast<int>(eSkulSpecies::eBasic)] == nullptr)
+	{
+		m_headList[static_cast<int>(eSkulSpecies::eBasic)] = new LittleBorn;
+		GAMEMANAGER->m_headList.push_back(m_headList[(int)eSkulSpecies::eBasic]);
+	}
+
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)]->SetPlayerXY(&m_obj->x, &m_obj->y, &m_isLeft, &m_isDown);
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)]->SetObject(m_obj);
 	m_headList[static_cast<int>(eSkulSpecies::eBasic)]->Init();
-	m_headList[static_cast<int>(eSkulSpecies::eGambler)] = new Gambler;
+	m_headList[static_cast<int>(eSkulSpecies::eGambler)] = nullptr;
+	for (auto iter : GAMEMANAGER->m_headList)
+	{
+		if (typeid(*iter) == typeid(Gambler))
+		{
+			m_headList[static_cast<int>(eSkulSpecies::eGambler)] = iter;
+			break;
+		}
+	}
+	if (m_headList[static_cast<int>(eSkulSpecies::eGambler)] == nullptr)
+	{
+		m_headList[static_cast<int>(eSkulSpecies::eGambler)] = new Gambler;
+		GAMEMANAGER->m_headList.push_back(m_headList[(int)eSkulSpecies::eGambler]);
+	}
 	m_headList[static_cast<int>(eSkulSpecies::eGambler)]->SetObject(m_obj);
 	m_headList[static_cast<int>(eSkulSpecies::eGambler)]->Init();
-	m_headSlot = eSkulSpecies::eGambler;
-	m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eBasic)];
+	m_headList[static_cast<int>(eSkulSpecies::eGambler)]->SetPlayerXY(&m_obj->x, &m_obj->y, &m_isLeft, &m_isDown);
+
+	if (GAMEMANAGER->tag == -1)
+		m_headSlot = eSkulSpecies::eGambler;
+	else
+	{
+		m_headSlot = (eSkulSpecies)GAMEMANAGER->tag;
+	}
+	if (GAMEMANAGER->m_nowHead == nullptr)
+	{
+		m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eBasic)];
+	}
+	else
+	{
+		m_nowHead = GAMEMANAGER->m_nowHead;
+	}
 	m_nowHead->SetPlayerMoveParameter(&m_moveSpeed, &m_dashSpeed, &m_dashTime, &m_dashCool, &m_dashMax, &m_dashing, &m_jumpSpeed, &m_jumpMax, &m_jumpping);
 
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
@@ -39,9 +110,6 @@ void Player::Init()
 	m_obj->AddCollisionComponent(m_collSkillS);
 	m_obj->AddCollisionComponent(m_collSkillTag);
 	m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
-
-	m_HpMax = 100;
-	m_life = m_HpMax;
 	m_artifactCoolD = 0;
 	m_haveArtifact = false;
 	m_supperArmarTime = 0.5f;
@@ -79,8 +147,13 @@ void Player::Update()
 
 void Player::Release()
 {
-	m_nowHead->Release();
-	SAFE_DELETE(m_nowHead);
+	GAMEMANAGER->playerHp = m_life;
+	GAMEMANAGER->goldValue = goldValue;
+	GAMEMANAGER->isHeadCheck = isHeadCheck;
+	GAMEMANAGER->m_nowHead = m_nowHead;
+	GAMEMANAGER->tag = (int)m_headSlot;
+	if (m_life <= 0)
+		m_life = 0;
 }
 
 void Player::Render()
@@ -92,6 +165,16 @@ void Player::UIRender()
 {
 	IMAGEMANAGER->UIRender(m_UIImage[ePlayerStatus], 0, 430, 2, 2, 0);
 	IMAGEMANAGER->UIRender(hpBar, 89, 518, 231.f / m_HpMax * m_life, 2, 0, 1);
+
+	if (m_life <= 0)
+	{
+		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("deathUI"), 0, 0, 1, 1);
+		if (KEYMANAGER->GetStayKeyDown('X'))
+		{
+			FILEMANAGER->SetNowStageFile("map_5");
+			SCENEMANAGER->ChangeScene("Stage");
+		}
+	}
 }
 
 void Player::InputArtifactKey()
@@ -107,7 +190,7 @@ void Player::CoolDown()
 	float deltaT = DELTA_TIME;
 	if (m_dashNowTime > 0)
 	{
-		m_dashNowSpeed -= deltaT* m_dashSpeed;
+		m_dashNowSpeed -= deltaT * m_dashSpeed;
 
 		m_dashNowTime -= deltaT;
 		if (m_dashNowTime < 0)
@@ -149,6 +232,7 @@ void Player::CoolDown()
 
 void Player::ChangeHead()
 {
+	cout << (int)m_headSlot << endl;
 	if (m_headSlot != eSkulSpecies::Empty)
 	{
 		eSkulSpecies tmp = m_nowHead->GetSpecies();

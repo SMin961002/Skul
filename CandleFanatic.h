@@ -20,7 +20,7 @@ private:
 		eHPbarEmpty,
 		eEnd
 	};
-
+	float alphaHit = 0;
 	vImage* m_vimage[eEnd];
 	bool m_attack;
 	bool m_isAttack;

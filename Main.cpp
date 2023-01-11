@@ -1,15 +1,30 @@
 #include "stdafx.h"
 #include "Main.h"
+#include"CSound.h"
 void Main::Init()
 {
 	srand(time(NULL));
 
+	
 	SetTimer(_hWnd, 1, 1, NULL);
 	TIMERMANAGER->Init();
 	IMAGEMANAGER->Init();
 	SCENEMANAGER->Init();
 	KEYMANAGER->Init();
 	SOUNDMANAGER->init(_hWnd);
+	SOUNDMANAGER->AddSound("Intro", "./Resources/Sound/Intro.wav");
+	SOUNDMANAGER->FindSound("Intro")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Lobby", "./Resources/Sound/Lobby.wav");
+	SOUNDMANAGER->FindSound("Lobby")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Chapter4", "./Resources/Sound/Chapter4.wav");
+	SOUNDMANAGER->FindSound("Chapter4")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Shop", "./Resources/Sound/Shop.wav");
+	SOUNDMANAGER->FindSound("Shop")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Middle", "./Resources/Sound/Middle.wav");
+	SOUNDMANAGER->FindSound("Middle")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Bossphase1", "./Resources/Sound/Bossphase1.wav");
+	SOUNDMANAGER->FindSound("Bossphase1")->SetVolume(60);
+
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
 
