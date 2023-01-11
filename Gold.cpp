@@ -82,5 +82,5 @@ void Gold::Render()
 
 void Gold::Release()
 {
-	OBJECTMANAGER->m_player->goldValue += 20;
+	OBJECTMANAGER->m_player->goldValue += 10;
 }

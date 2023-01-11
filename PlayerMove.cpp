@@ -51,7 +51,10 @@ void Player::Move()
 		if (m_obj->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision())
 		{
 			ResetJump();
-			m_nowHead->SetAction(m_nowHead->eJumpLand);
+			if (m_knockBack == false)
+			{
+				m_nowHead->SetAction(m_nowHead->eJumpLand);
+			}
 			m_knockBack = false;
 			m_knockBackY = 0;
 		}
@@ -83,6 +86,8 @@ void Player::InputJumpKey()
 	{
 		if (m_jumpCount < m_jumpMax)
 		{
+			SOUNDMANAGER->FindSound("Jump")->SetVolume(50);
+			SOUNDMANAGER->FindSound("Jump")->Play(false);
 			m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
 			if (m_isDown)	//아래점프
 			{
@@ -114,6 +119,9 @@ void Player::InputDashKey()
 	{
 		if (m_dashCount < m_dashMax && m_dashNowCool <= 0)
 		{
+			SOUNDMANAGER->FindSound("Dash")->SetVolume(50);
+			SOUNDMANAGER->FindSound("Dash")->Play(false);
+
 			m_jumpping = false;
 			m_nowHead->ResetAttack();
 			m_dashNowSpeed = m_dashSpeed;

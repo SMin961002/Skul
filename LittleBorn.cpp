@@ -95,9 +95,9 @@ void LittleBorn::ParameterSetting()
 	m_skillCoolS = 3;
 	m_headThrow = false;
 	m_imageChange = false;
-	
+
 	m_attacksound = false;
-	
+
 	m_nonCansleAction = false;
 	m_tagAttackDelay = 0.38;
 	m_tagAttackNowDelay = 0;
@@ -136,7 +136,7 @@ void LittleBorn::CoolDown()
 	if (m_skillNowCoolA > 0)
 	{
 		m_skillNowCoolA -= deltaTime;
-		if(m_projectileHead->GetSkullOnOff() == false || m_skillNowCoolA <= 0)
+		if (m_projectileHead->GetSkullOnOff() == false || m_skillNowCoolA <= 0)
 		{
 			PutOnHead();
 		}
@@ -148,17 +148,6 @@ void LittleBorn::CoolDown()
 
 void LittleBorn::ActionArrangement()
 {
-	string action;
-	switch (m_action) {
-	case eIdle: action = "idle";
-		break;
-	case eWalk: action = "walk";
-		break;
-	case eDash: action = "dash";
-		break;
-	case eJump: action = "jump";
-		break;
-	}
 	if (!m_headThrow)
 	{
 		if (nowImg->GetIsImageEnded())
@@ -205,7 +194,10 @@ void LittleBorn::ActionArrangement()
 					m_action = eIdle;
 				}
 			}
-			//m_attackCount = 0;
+			if (m_action <eAutoAttack_1 || m_action >eJumpAttack)
+			{
+				m_attackCount = 0;
+			}
 		}
 		else if (m_action != eIdle && nowImg == img[eIdle])
 		{
@@ -334,7 +326,7 @@ void LittleBorn::CollisionUpdate()
 		else
 			m_collAutoAttack->Setting(*m_x + 50, *m_y - 10);
 	}
-	else if(m_collSkillTag->GetIsActive()==false)
+	else if (m_collSkillTag->GetIsActive() == false)
 	{
 		m_CollObjList.clear();
 		listObj().swap(m_CollObjList);
@@ -382,8 +374,8 @@ void LittleBorn::InputAttackKey()
 			{
 				if (m_attackNowCool == 0)
 				{
-					m_action = eJumpAttack;
 					SOUNDMANAGER->FindSound("SkulAttack2")->Play(false);
+					m_action = eJumpAttack;
 					m_imageChange = true;
 					m_attackCount++;
 				}
@@ -395,8 +387,8 @@ void LittleBorn::InputAttackKey()
 			{
 				if (m_attackNowCool == 0)
 				{
-					m_action = eAutoAttack_1;
 					SOUNDMANAGER->FindSound("SkulAttack1")->Play(false);
+					m_action = eAutoAttack_1;
 					m_attackCount = 1;
 					m_imageChange = true;
 					m_attacksound = true;

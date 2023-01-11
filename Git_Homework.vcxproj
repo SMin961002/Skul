@@ -159,6 +159,7 @@
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="EndingScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyEffect.cpp" />
     <ClCompile Include="EnemyTestScene.cpp" />
@@ -255,6 +256,7 @@
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="EndingScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyEffect.h" />
     <ClInclude Include="EnemyTestScene.h" />

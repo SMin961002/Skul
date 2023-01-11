@@ -19,8 +19,6 @@ void HolyFountainLeft::Init()
 	_collisionLeft = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(_collisionLeft);
 
-	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
-	m_obj->AddComponent<RigidBodyComponent>()->SetGravityOnOff(false);
 
 	m_MaxHP = 300;
 	m_CurrentHP = 300;
@@ -33,14 +31,12 @@ void HolyFountainLeft::Init()
 
 void HolyFountainLeft::Update()
 {
-
 	if (OBJECTMANAGER->m_boss->getIdleOn() == true)
 	{
 		_isLeftPlayOn = true;
 	}
 
-	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
-	m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(true);
+
 	_collisionLeft->Setting(50, m_obj->x + 30, m_obj->y + 50, "Attack");
 
 	left->isLeftDes = m_CurrentHP <= 0;
@@ -48,6 +44,10 @@ void HolyFountainLeft::Update()
 	if (KEYMANAGER->GetOnceKeyDown('O'))
 	{
 		m_CurrentHP = -10;
+	}
+	if (alpha >= 0)
+	{
+		alpha -= 0.05;
 	}
 }
 
@@ -59,7 +59,11 @@ void HolyFountainLeft::Render()
 	}
 	if (_isLeftPlayOn == true)
 	{
-		if (m_CurrentHP >= 0) _imgLeftFountainActivate->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, false);
+		if (m_CurrentHP >= 0)
+		{
+			_imgLeftFountainActivate->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, false);
+			IMAGEMANAGER->CenterRender(_imgLeftFountainActivate->GetNowImage(), m_obj->x, m_obj->y, {1,1,1,alpha},2,2);
+		}
 	}
 }
 
@@ -70,6 +74,8 @@ void HolyFountainLeft::Release()
 
 void HolyFountainLeft::HitEnemy(float dmg, float time)
 {
+	alpha = 1;
+	m_CurrentHP -= dmg;
 	if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
 	{
 		EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 0, 1.5);
@@ -96,8 +102,8 @@ void HolyFountainRight::Init()
 	_collisionRight = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(_collisionRight);
 
-	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
-	m_obj->AddComponent<RigidBodyComponent>()->SetGravityOnOff(false);
+	//m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
+	//m_obj->AddComponent<RigidBodyComponent>()->SetGravityOnOff(false);
 	
 	m_MaxHP = 300;
 	m_CurrentHP = 300;
@@ -115,8 +121,7 @@ void HolyFountainRight::Update()
 		_isRightPlayOn = true;
 	}
 
-	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
-	m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(true);
+
 	_collisionRight->Setting(50, m_obj->x + 30, m_obj->y + 50, "Attack");
 
 	right->isRightDes = m_CurrentHP <= 0;
@@ -124,6 +129,10 @@ void HolyFountainRight::Update()
 	if (KEYMANAGER->GetOnceKeyDown('P'))
 	{
 		m_CurrentHP = -10;
+	}
+	if (alpha >= 0)
+	{
+		alpha -= 0.05;
 	}
 }
 
@@ -135,7 +144,12 @@ void HolyFountainRight::Render()
 	}
 	if (_isRightPlayOn == true)
 	{
-		if(m_CurrentHP >= 0) _imgRightFountainActivate->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, false);
+		if (m_CurrentHP >= 0)
+		{
+			_imgRightFountainActivate->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, false);
+			IMAGEMANAGER->CenterRender(_imgRightFountainActivate->GetNowImage(), m_obj->x, m_obj->y, { 1,1,1,alpha }, 2, 2);
+
+		}
 	}
 }
 
@@ -145,6 +159,8 @@ void HolyFountainRight::Release()
 
 void HolyFountainRight::HitEnemy(float dmg, float time)
 {
+	alpha = 1;
+	m_CurrentHP -= dmg;
 	if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
 	{
 		EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 0, 1.5);

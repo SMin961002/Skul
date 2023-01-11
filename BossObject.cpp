@@ -13,6 +13,7 @@
 #include"CSound.h"
 void BossObject::Init()
 {
+	hpImg = IMAGEMANAGER->FindImage("hpBar");
 	isMove = false;
 	lazerCount = 0;
 	isPhase3 = false;
@@ -46,10 +47,34 @@ void BossObject::Init()
 	m_isAttack = false;
 	m_phase2Patter = 0;
 	/*
-	"Phase2_Phase_3_Loop",
-	"Phase2_Phase_3_End",
-	"Phase2_Phase_3_Ready"
+Vector("",
+Vector(""
+Vector("Boss_Barrier_Loop_Front",
+Vector("Boss_Barrier_Loop_Behind",
+Vector("Boss_Barrier_Impact", L"./
+Vector("Boss_Barrier_Spark", L"./R
+("Boss_Barrier_Crack", L"./Resourc
+Vector("Boss_Barrier_Crack_Impact"
+
 	*/
+	_imgPhase1BossBarrierIntroFront = IMAGEMANAGER->AddImageVectorCopy("Boss_Barrier_Intro_Front");
+	_imgPhase1BossBarrierIntroFront->Setting(0.1, false);
+	_imgPhase1BossBarrierIntroBehind = IMAGEMANAGER->AddImageVectorCopy("Boss_Barrier_Intro_Behind");
+	_imgPhase1BossBarrierIntroBehind->Setting(0.1, false);
+	_imgPhase1BossBarrierLoopFront = IMAGEMANAGER->AddImageVectorCopy("Boss_Barrier_Loop_Front");
+	_imgPhase1BossBarrierLoopFront->Setting(0.1, true);
+	_imgPhase1BossBarrierLoopBehind = IMAGEMANAGER->AddImageVectorCopy("Boss_Barrier_Loop_Behind");
+	_imgPhase1BossBarrierLoopBehind->Setting(0.1, true);
+
+	_imgPhase1BossBarrierImpact = IMAGEMANAGER->AddImageVectorCopy("Boss_Barrier_Impact");
+	_imgPhase1BossBarrierImpact->Setting(0.1, false);
+	_imgPhase1BossBarrierSpark = IMAGEMANAGER->AddImageVectorCopy("Boss_Barrier_Spark");
+	_imgPhase1BossBarrierSpark->Setting(0.1, false);
+	_imgPhase1BossBarrierCrack = IMAGEMANAGER->FindImage("Boss_Barrier_Crack");
+	_imgPhase1BossBarrierCrackImpact = IMAGEMANAGER->AddImageVectorCopy("Boss_Barrier_Crack_Impact");
+	_imgPhase1BossBarrierCrackImpact->Setting(0.1, false);
+	_left = OBJECTMANAGER->AddObject("Enemy", 100, 590, 0)->AddComponent<HolyFountainLeft>();
+	_right = OBJECTMANAGER->AddObject("Enemy", 1500, 590, 0)->AddComponent<HolyFountainRight>();
 
 	m_phase2Img[ePhase_3A] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Phase_3_Loop");
 	m_phase2Img[ePhase_3A]->Setting(0.1, false);
@@ -73,7 +98,7 @@ void BossObject::Init()
 	m_phase2Img[eDivineImpactR]->Setting(0.15, false);
 	m_phase2Img[eDivineImpactRL] = IMAGEMANAGER->AddImageVectorCopy("Phase2_DivineImpact_Ready_Loop");
 	m_phase2Img[eDivineImpactRL]->Setting(0.15, false);
-
+	nowPattern = false;
 	m_phase2Img[eDivineLightA] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_DivineLight_AttackLoop");
 	m_phase2Img[eDivineLightA]->Setting(0.1, false);
 	m_phase2Img[eDivineLightAR] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_DivineLight_AttackReady");
@@ -166,75 +191,35 @@ void BossObject::Init()
 	_isCastingOn = false;
 	_isCastingAttackOn = false;
 	_isConsecrationLoopOn = false;
-
+	_bossHPBarLocate = -30;
 	_castingMotionDeltaTime = 0;
 	_consecrationDeltaTime = 0;
-
-	for (int i = 0; i < 30; i++)
-	{
-		Baptism* tmp = OBJECTMANAGER->AddObject("Baptism", m_obj->x + 130, m_obj->y - 120, eEnemy)->AddComponent<Baptism>();
-		tmp->SetIsActive(false);
-
-		_vBaptism.push_back(tmp);
-	}
-
-	for (int i = 0; i < 2; i++)
-	{
-		int j = MY_UTILITY::getFromIntTo(0, 3);
-		int k = 0;
-		switch (j)
-		{
-		case 0:
-			k = 150;
-			break;
-		case 1:
-			k = 300;
-			break;
-		case 2:
-			k = 450;
-			break;
-		case 3:
-			k = 600;
-			break;
-		}
-		WorshipLeft* tmp = OBJECTMANAGER->AddObject("Worship", 0, k, eEnemy)->AddComponent<WorshipLeft>();
-		tmp->SetIsActive(false);
-		_vWorshipLeft.push_back(tmp);
-	}
-	for (int i = 0; i < 2; i++)
-	{
-		int j = MY_UTILITY::getFromIntTo(0, 3);
-		int k = 0;
-		switch (j)
-		{
-		case 0:
-			k = 150;
-			break;
-		case 1:
-			k = 300;
-			break;
-		case 2:
-			k = 450;
-			break;
-		case 3:
-			k = 600;
-			break;
-		}
-		WorshipRight* tmp = OBJECTMANAGER->AddObject("Worship", 1800, k, eEnemy)->AddComponent<WorshipRight>();
-		tmp->SetIsActive(false);
-
-		_vWorshipRight.push_back(tmp);
-	}
 
 }
 
 void BossObject::Update()
 {
-	if (KEYMANAGER->GetOnceKeyDown(VK_CONTROL))
+	if (_left != nullptr)
 	{
+		if (_left->getLeftCurrentHP() <= 0)
+		{
+			_left->GetObject_()->ObjectDestroyed();
+			_left = nullptr;
+		}
+	}
+	if (_right != nullptr)
+	{
+		if (_right->getRightCurrentHP() <= 0)
+		{
+			_right->GetObject_()->ObjectDestroyed();
+			_right = nullptr;
+		}
+	}
+	if (_left == nullptr && _right == nullptr)
+	{
+		m_page = 1;
 
 	}
-
 	if (isTeleport)
 		Teleport();
 	if (isMove)
@@ -243,54 +228,65 @@ void BossObject::Update()
 	}
 	if (m_page == 0)
 	{
-		if (_isIntroOn == false && _bossHPBarLocate <= 50)
+		if (_isIntroOn == false && _bossHPBarLocate <= 50 && _left != nullptr && _right != nullptr)
 		{
-			_bossHPBarLocate++;
+			_bossHPBarLocate += DELTA_TIME * 50;
+		}
+		else if (_left == nullptr && _right == nullptr)
+		{
+			_bossHPBarLocate -= DELTA_TIME * 50;
 		}
 
-		if (KEYMANAGER->GetToggleKey('Q'))
+		if (_isIntroOn == false && nowPattern == false)
 		{
-			_isNervousnessOn = true;
-			_isIdleOn = false;
+			nowPattern = true;
+			switch (MY_UTILITY::getFromIntTo(0, 2))
+			{
+			case 0:
+				_isNervousnessOn = true;
+				_isIdleOn = false;
+				break;
+			case 1:
+				_isChoiceOn = true;
+				_isIdleOn = false;
+				break;
+			case 2:
+				_isCastingOn = true;
+				_isIdleOn = false;
+				break;
+			}
 		}
-		if (KEYMANAGER->GetToggleKey('W'))
+		else if (nowPattern == true)
 		{
-			_isChoiceOn = true;
-			_isIdleOn = false;
-		}
-		if (KEYMANAGER->GetToggleKey('E'))
-		{
-			_isCastingOn = true;
-			_isIdleOn = false;
-		}
-		if (_isNervousnessLoopOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
-		{
-			_nervousnessMotionDeltaTime += DELTA_TIME;
-		}
-		if (_isNervousnessAttackLoopOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
-		{
-			_nervousnessEffectDeltaTime += DELTA_TIME;
-		}
+			if (_isNervousnessLoopOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
+			{
+				_nervousnessMotionDeltaTime += DELTA_TIME;
+			}
+			if (_isNervousnessAttackLoopOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
+			{
+				_nervousnessEffectDeltaTime += DELTA_TIME;
+			}
 
-		// 초이스_대기
-		if (_isChoiceReadyLoopOn == true)
-		{
-			_choiceMotionDeltaTime += DELTA_TIME;
-		}
-		// 캐스팅_공격모션
-		if (_imgPhase1BossCastingReady->GetIsImageEnded() == true)
-		{
-			_castingMotionDeltaTime += DELTA_TIME;
-		}
-		if (_patternCheck == 1)
-		{
-			_isBaptismCheck = true;
-			_baptismDeltaTime += DELTA_TIME;
-		}
-		if (_patternCheck == 2)
-		{
-			_isWorshipCheck = true;
-			_worshipDeltaTime += DELTA_TIME;
+			// 초이스_대기
+			if (_isChoiceReadyLoopOn == true)
+			{
+				_choiceMotionDeltaTime += DELTA_TIME;
+			}
+			// 캐스팅_공격모션
+			if (_isCastingAttackOn == true && _imgPhase1BossCastingReady->GetIsImageEnded() == true)
+			{
+				_castingMotionDeltaTime += DELTA_TIME;
+			}
+			if (_patternCheck == 1 && _imgPhase1BossCastingReady->GetIsImageEnded() == true)
+			{
+				_isBaptismCheck = true;
+				_baptismDeltaTime += DELTA_TIME;
+			}
+			if (_patternCheck == 2)
+			{
+				_isWorshipCheck = true;
+				_worshipDeltaTime += DELTA_TIME;
+			}
 		}
 	}
 	else if (m_page == 1)
@@ -327,11 +323,6 @@ void BossObject::Render()
 		if (m_page == 0 && _isIntroOn == false)
 		{
 			IMAGEMANAGER->UICenterRender(_imgBossHPBar, WINSIZE_X / 2, _bossHPBarLocate, 2, 2, 0);
-
-			//for (int i = 0; i <=  _left->getLeftCurrentHP(); i++)
-			//{
-			//IMAGEMANAGER->UIRender(_imgBossHP, WINSIZE_X / 2 - 297+i, _bossHPBarLocate + 10, 2, 2, 0);
-			//}
 		}
 
 		if (_isIdleOn == true)
@@ -373,7 +364,7 @@ void BossObject::Render()
 			}
 			_isNervousnessAttackLoopOn = true;
 
-			if (_imgPhase1BossNervousAttack->GetIsImageEnded() == true &&_isNervousnessMotionEnd == false)
+			if (_imgPhase1BossNervousAttack->GetIsImageEnded() == true && _isNervousnessMotionEnd == false)
 			{
 				_imgPhase1BossNervousAttackLoop->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
 			}
@@ -393,7 +384,9 @@ void BossObject::Render()
 		{
 			_nervousnessMotionDeltaTime = 0;
 			_nervousnessEffectDeltaTime = 0;
+
 			_isIdleOn = true;
+			nowPattern = false;
 			_isNervousnessLoopOn = false;
 			_isNervousnessOn = false;
 			_isNervousnessAttackLoopOn = false;
@@ -434,7 +427,11 @@ void BossObject::Render()
 		if (_imgPhase1BossChoiceSpark->GetIsImageEnded() == true)
 		{
 			_isChoiceAttackEnd = true;
-			if (_isChoiceOn == true)_imgPhase1BossChoiceEnd->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+
+		}
+		if (_isChoiceAttackEnd == true)
+		{
+			_imgPhase1BossChoiceEnd->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
 		}
 		// 초이스_초기화
 		if (_imgPhase1BossChoiceEnd->GetIsImageEnded() == true)
@@ -444,7 +441,8 @@ void BossObject::Render()
 			_isChoiceOn = false;
 			_isIdleOn = true;
 			_choiceMotionDeltaTime = 0;
-
+			nowPattern = false;
+			_isChoiceOn = false;
 			_imgPhase1BossChoiceReady->Reset();
 			_imgPhase1BossChoiceAttack->Reset();
 			_imgPhase1BossChoiceSpark->Reset();
@@ -462,7 +460,7 @@ void BossObject::Render()
 		// 캐스팅_공격모션
 		if (_imgPhase1BossCastingReady->GetIsImageEnded() == true)
 		{
-			if (_consecrationDeltaTime < 2 && _worshipDeltaTime < 7)
+			if (_consecrationDeltaTime < 2 && _worshipDeltaTime < 5 && _imgPhase1BossBaptismAttack->GetIsImageEnded() == false)
 			{
 				if (_imgPhase1BossCastingAttack->GetIsImageEnded() == false)
 				{
@@ -473,13 +471,16 @@ void BossObject::Render()
 			_isCastingAttackOn = true;
 		}
 		// 캐스팅_패턴 선택
-		if (_castingMotionDeltaTime > 0.5)
+		if (_castingMotionDeltaTime > 0.5 && _isCastingAttackOn == true)
 		{
 			if (_patternLock == false)
 			{
 				_patternCheck = MY_UTILITY::getFromIntTo(0, 2);
+
+				_consecrationDeltaTime = 0;
+				_castingMotionDeltaTime = 0;
+				_consecrationDeltaTime = 0;
 				_locate = OBJECTMANAGER->m_player->GetplayerX();
-				cout << _patternCheck << endl;
 			}
 
 			switch (_patternCheck)
@@ -504,17 +505,17 @@ void BossObject::Render()
 				if (_consecrationDeltaTime > 2)
 				{
 					_imgPhase1BossCastingEnd->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
-					_imgPhase1BossConsecrationEnd->CenterRender(_locate, m_obj->y, 1.8, 1.8, 0, false);
+					//_imgPhase1BossConsecrationEnd->CenterRender(_locate, m_obj->y, 1.8, 1.8, 0, false);
 				}
-				if (_imgPhase1BossConsecrationEnd->GetIsImageEnded() == true)
+				if (_imgPhase1BossCastingEnd->GetIsImageEnded() == true)
 				{
 					_isCastingOn = false;
 					_isCastingAttackOn = false;
 					_isConsecrationLoopOn = false;
-
+					_consecrationDeltaTime = 0;
 					_castingMotionDeltaTime = 0;
 					_consecrationDeltaTime = 0;
-
+					nowPattern = false;
 					_imgPhase1BossCastingReady->Reset();
 					_imgPhase1BossCastingEnd->Reset();
 					_imgPhase1BossConsecrationStart->Reset();
@@ -527,39 +528,48 @@ void BossObject::Render()
 				// 밥티즘
 				_patternLock = true;
 
-				if (_isBaptismCheck == true)
+
+				if (_imgPhase1BossBaptismAttack->GetIsImageEnded() == false)
+					_imgPhase1BossBaptismAttack->CenterRender(m_obj->x + 130, m_obj->y - 120, 1.8, 1.8, 0, false);
+				else
 				{
-					if (_baptismDeltaTime < 3)
+					if (_imgPhase1BossCastingEnd->GetIsImageEnded() == false)
 					{
-						_imgPhase1BossBaptismAttack->CenterRender(m_obj->x + 130, m_obj->y - 120, 1.8, 1.8, 0, false);
+						_imgPhase1BossCastingEnd->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
+					}
+					if (_imgPhase1BossCastingEnd->GetIsImageEnded() == true)
+					{
+						_isCastingOn = false;
+						_isCastingAttackOn = false;
+						_isConsecrationLoopOn = false;
+						_baptismDeltaTime = 0;
+						_imgPhase1BossCastingReady->Reset();
+						_imgPhase1BossCastingEnd->Reset();
+						_imgPhase1BossBaptismAttack->Reset();
+						nowPattern = false;
+						_patternLock = false;
 					}
 				}
-				if (_baptismDeltaTime > 2)
-				{
-					_viBaptism = _vBaptism.begin();
-					for (; _viBaptism != _vBaptism.end(); ++_viBaptism)
-					{
-						(*_viBaptism)->SetIsActive(true);
-					}
-				}
-				if (_baptismDeltaTime > 3)
-				{
-					_imgPhase1BossCastingEnd->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
-					_patternLock = false;
-					_isBaptismCheck = false;
-					_imgPhase1BossBaptismAttack->Reset();
-					_baptismDeltaTime = 0;
-					break;
-				}
+
+				break;
 			case 2:
 				// 워쉽
+				if (_patternLock == false)
+				{
+					random_device rd;
+					shuffle(suf, &suf[4], rd);
+					OBJECTMANAGER->AddObject("Worship", 0, 50 + suf[0] * 150, eBossObject)->AddComponent<WorshipLeft>();
+					OBJECTMANAGER->AddObject("Worship", 0, 50 + suf[1] * 150, eBossObject)->AddComponent<WorshipLeft>();
+					OBJECTMANAGER->AddObject("Worship", 0, 50 + suf[2] * 150, eBossObject)->AddComponent<WorshipLeft>();
+					shuffle(suf, &suf[4], rd);
+					OBJECTMANAGER->AddObject("Worship", 1600, 50 + suf[0] * 150, eBossObject)->AddComponent<WorshipRight>();
+					OBJECTMANAGER->AddObject("Worship", 1600, 50 + suf[1] * 150, eBossObject)->AddComponent<WorshipRight>();
+					OBJECTMANAGER->AddObject("Worship", 1600, 50 + suf[2] * 150, eBossObject)->AddComponent<WorshipRight>();
+				}
+
 				_patternLock = true;
 
-				for (int i = 0; i < 2; i++)
-				{
-					_vWorshipLeft[i]->SetIsActive(true);
-					_vWorshipRight[i]->SetIsActive(true);
-				}
+				cout << _worshipDeltaTime << endl;
 				if (_worshipDeltaTime > 5)
 				{
 					_imgPhase1BossCastingEnd->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
@@ -569,12 +579,10 @@ void BossObject::Render()
 					_isCastingOn = false;
 					_isCastingAttackOn = false;
 					_isConsecrationLoopOn = false;
-
 					_worshipDeltaTime = 0;
-
 					_imgPhase1BossCastingReady->Reset();
 					_imgPhase1BossCastingEnd->Reset();
-
+					nowPattern = false;
 					_patternLock = false;
 				}
 
@@ -673,6 +681,70 @@ void BossObject::Render()
 		divineLightEf1->CenterRender(m_obj->x + 100, m_obj->y, 1.5, 1.5, 0, 0, 1);
 		divineLightEf2->CenterRender(m_obj->x + 190, m_obj->y, 1.5, 1.5, 0, 0, 1);
 	}
+	if (_left != nullptr)
+		IMAGEMANAGER->UIRender(hpImg, 250, _bossHPBarLocate, 245.f / 300 * _left->getLeftCurrentHP(), 2.7);
+	if (_right != nullptr)
+		IMAGEMANAGER->UIRender(hpImg, 603, _bossHPBarLocate, 245.f / 300 * _right->getRightCurrentHP(), 2.7);
+
+	if (_imgPhase1BossBarrierIntroFront->GetIsImageEnded() == false)
+	{
+		_imgPhase1BossBarrierIntroBehind->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+		_imgPhase1BossBarrierIntroFront->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+	}
+	else
+	{
+		if (_left != nullptr || _right != nullptr)
+		{
+			if (_left != nullptr)
+			{
+				_imgPhase1BossBarrierLoopFront->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+			}
+			else
+			{
+				if (_imgPhase1BossBarrierCrackImpact->GetIsImageEnded() == false)
+				{
+					_imgPhase1BossBarrierCrackImpact->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+					_imgPhase1BossBarrierSpark->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+				}
+				else
+				{
+					IMAGEMANAGER->CenterRender(_imgPhase1BossBarrierCrack, m_obj->x, m_obj->y, 2, 2);
+				}
+			}
+			if (_right != nullptr)
+			{
+				_imgPhase1BossBarrierLoopBehind->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+			}
+			else
+			{
+				if (_imgPhase1BossBarrierCrackImpact->GetIsImageEnded() == false)
+				{
+					_imgPhase1BossBarrierCrackImpact->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+					_imgPhase1BossBarrierSpark->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+				}
+				else
+				{
+					IMAGEMANAGER->CenterRender(_imgPhase1BossBarrierCrack, m_obj->x, m_obj->y, 2, 2);
+				}
+			}
+		}
+		else
+		{
+			if (_imgPhase1BossBarrierSpark->GetIsImageEnded() == false)
+			{
+				IMAGEMANAGER->CenterRender(_imgPhase1BossBarrierCrack, m_obj->x, m_obj->y, 2, 2);
+				_imgPhase1BossBarrierImpact->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+				_imgPhase1BossBarrierSpark->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
+			}
+		}
+	}
+
+	//_imgPhase1BossBarrierIntroBehind;
+	//_imgPhase1BossBarrierLoopFront;
+	//_imgPhase1BossBarrierLoopBehind;
+	//_imgPhase1BossBarrierImpact;
+	//_imgPhase1BossBarrierCrack;
+	//_imgPhase1BossBarrierCrackImpact;
 }
 
 void BossObject::Release()

@@ -86,6 +86,9 @@ void Main::Init()
 	inven->Init();
 	menu = new MenuUI;
 	menu->Init();
+	SOUNDMANAGER->AddSound("Dash", "./Resources/Sound/Dash.wav");
+	SOUNDMANAGER->AddSound("Jump", "./Resources/Sound/Jump.wav");
+
 	FILEMANAGER->SetNowStageFile("map_0");
 
 	SCENEMANAGER->ChangeScene("IntroTitleScene");
@@ -119,11 +122,14 @@ void Main::Update()
 		OBJECTMANAGER->Update();
 		EFFECTMANAGER->Update();
 	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_F1))
+	{
+		SCENEMANAGER->ChangeScene("EndingScene");
+	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_F5))
 	{
 		SCENEMANAGER->ChangeScene("ShopScene");
 	}
-
 	if (KEYMANAGER->GetOnceKeyDown(VK_F7))
 	{
 		SCENEMANAGER->ChangeScene("MapToolMapSelectScene");
