@@ -268,6 +268,11 @@ void ImageManager::LoadImages()
 	AddPixelmage("CollisionPlatform", "./Resources/Tile/4Stage/CollisionPlatform.bmp", 32, 32);
 
 	// 보스 ====================================================================================
+	// 1페이즈_체력바
+	AddImage("Boss_HPBar", L"./Resources/Saint_Joanna/Phase_1/HPBar/Phase1_HPBar.png");
+	AddImage("Boss_HP", L"./Resources/Saint_Joanna/Phase_1/HPBar/Phase1_HP.png");
+	AddImage("Boss_HPDamage", L"./Resources/Saint_Joanna/Phase_1/HPBar/Phase1_Damage.png");
+
 	// 1페이즈_대화
 	AddImageVector("Boss_Intro_Talk", L"./Resources/Saint_Joanna/Phase1_Intro_2/Idle_Talk_Loop_", 1, 7);
 

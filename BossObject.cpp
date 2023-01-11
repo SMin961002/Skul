@@ -10,6 +10,7 @@
 #include "Lazer.h"
 #include "DivineImpact.h"
 #include "Phase3B.h"
+
 void BossObject::Init()
 {
 	isMove = false;
@@ -102,7 +103,8 @@ void BossObject::Init()
 
 	_imgBossIdle = IMAGEMANAGER->FindImageVector("Boss_Idle");
 	_imgBossIdle->Setting(0.1, true);
-
+	_imgBossHPBar = IMAGEMANAGER->FindImage("Boss_HPBar");
+	_imgBossHP = IMAGEMANAGER->FindImage("Boss_HP");
 	_imgPhase1BossNervousReady = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Ready");
 	_imgPhase1BossNervousReady->Setting(0.1, false);
 	_imgPhase1BossNervousReadyLoop = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Ready_Loop");
@@ -236,6 +238,11 @@ void BossObject::Update()
 	}
 	if (m_page == 0)
 	{
+		if (_isIntroOn == false && _bossHPBarLocate <= 50)
+		{
+			_bossHPBarLocate++;
+		}
+
 		if (KEYMANAGER->GetToggleKey('Q'))
 		{
 			_isNervousnessOn = true;
@@ -307,6 +314,17 @@ void BossObject::Render()
 				_isIdleOn = true;
 			}
 		}
+		if (m_page == 0 && _isIntroOn == false)
+		{
+
+			IMAGEMANAGER->UICenterRender(_imgBossHPBar, WINSIZE_X / 2, _bossHPBarLocate, 2, 2, 0);
+
+			for (int i = 0; i <=  _left->getLeftCurrentHP(); i++)
+			{
+			IMAGEMANAGER->UIRender(_imgBossHP, WINSIZE_X / 2 - 297+i, _bossHPBarLocate + 10, 2, 2, 0);
+			}
+		}
+
 		if (_isIdleOn == true)
 		{
 			// Idle on
