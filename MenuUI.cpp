@@ -45,6 +45,10 @@ void MenuUI::Update()
 			isResetScene = true;
 			SCENEMANAGER->SetMenuActive(false);
 			break;
+		case 2:
+			SCENEMANAGER->ChangeScene("IntroTitleScene");
+			SCENEMANAGER->SetMenuActive(false);
+			break;
 		case 5:
 			PostMessage(_hWnd, WM_DESTROY, 0, 0);
 			break;

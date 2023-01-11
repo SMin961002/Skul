@@ -11,6 +11,8 @@
 
 void LeoniaSoldier::Init()
 {
+	GAMEMANAGER->enemyCount++;
+
 	m_maxhp = 100.0f;
 	m_attackcount = 0;
 	m_currenthp = 100.0f;
@@ -227,6 +229,7 @@ void LeoniaSoldier::Render()
 
 void LeoniaSoldier::Release()
 {
+	GAMEMANAGER->enemyCount--;
 }
 
 void LeoniaSoldier::OnCollision(string collisionName, Object* other)

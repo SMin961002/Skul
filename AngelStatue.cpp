@@ -11,13 +11,13 @@
 
 void AngelStatue::Init()
 {
-	m_maxhp = 100.0f;
-	m_currenthp = 100.0f;
+	m_maxhp = 200.0f;
+	m_currenthp = 200.0f;
 	m_die = false;
 	m_hit = false;
 	m_effect = false;
 	m_attackcount = 0;
-
+	GAMEMANAGER->enemyCount++;
 	m_vimage[eIdle] = IMAGEMANAGER->AddImageVectorCopy("AStatue_Idle");
 	m_vimage[eIdle]->Setting(0.3f, true);
 
@@ -181,11 +181,16 @@ void AngelStatue::Render()
 
 		}
 	}
+	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
+	{
+		m_obj->y += 1;
+	}
 }
 
 
 void AngelStatue::Release()
 {
+	GAMEMANAGER->enemyCount--;
 }
 
 

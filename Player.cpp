@@ -101,6 +101,7 @@ void Player::Init()
 	m_playerHitBox->Setting(25, m_obj->x + 14, m_obj->y - 15, "PlayerHitRange");
 	m_obj->AddCollisionComponent(m_playerHitBox);
 	m_obj->AddComponent<RigidBodyComponent>();
+	lastCheck = GAMEMANAGER->isHeadCheck;
 
 	m_collAutoAttack = m_obj->AddComponent<CollisionComponent>();
 	m_collSkillA = m_obj->AddComponent<CollisionComponent>();
@@ -124,9 +125,23 @@ void Player::Update()
 {
 	Vector2 v;
 	m_nowHead->SetImageChange(false);
+	if (lastCheck != isHeadCheck)
+	{
+		lastCheck = isHeadCheck;
+		ChangeHead();
+	}
 	if (!m_nowHead->GetNonActionCansle())
 	{
 		Move();
+		if (isHeadCheck == true)
+		{
+			if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
+			{
+				if (m_headTagCool == 0)
+					ChangeHead();
+			}
+		}
+	}
 		if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
 		{
 			if (m_headTagCool == 0)
@@ -169,6 +184,12 @@ void Player::UIRender()
 	IMAGEMANAGER->UIRender(m_UIImage[ePlayerStatus], 0, 430, 2, 2, 0);
 	IMAGEMANAGER->UIRender(hpBar, 89, 518, 231.f / m_HpMax * m_life, 2, 0, 1);
 
+	IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("goldUI"), 0, 0, 1, 1);
+	IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("enemyUI"), 0, 0, 1, 1);
+
+	IMAGEMANAGER->D2dTextOut(to_wstring(goldValue), 970, 515, { 255,255,255,1 }, 0.8f);
+	IMAGEMANAGER->D2dTextOut(to_wstring(GAMEMANAGER->enemyCount), 970, 481, { 255,255,255,1 }, 0.8f);
+
 	if (m_life <= 0)
 	{
 		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("deathUI"), 0, 0, 1, 1);
@@ -178,6 +199,7 @@ void Player::UIRender()
 			SCENEMANAGER->ChangeScene("Stage");
 		}
 	}
+
 }
 
 void Player::InputArtifactKey()
@@ -235,7 +257,6 @@ void Player::CoolDown()
 
 void Player::ChangeHead()
 {
-	cout << (int)m_headSlot << endl;
 	if (m_headSlot != eSkulSpecies::Empty)
 	{
 		eSkulSpecies tmp = m_nowHead->GetSpecies();
@@ -279,7 +300,6 @@ void Player::OnCollision(string collisionName, Object* other)
 			cout << "적에게공격 - Auto" << endl;
 
 			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
-
 		}
 	}//end collision Name BasicAttack
 	else if (collisionName == m_collSkillTag->GetName())
