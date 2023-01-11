@@ -183,7 +183,10 @@ void CandleFanatic::Update()
 		m_obj->ObjectDestroyed();
 		GAMEMANAGER->enemyCount--;
 	}
-
+	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
+	{
+		m_obj->y += 1;
+	}
 }
 
 void CandleFanatic::Render()

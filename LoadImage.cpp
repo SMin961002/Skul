@@ -394,6 +394,10 @@ void ImageManager::LoadImages()
 	AddImage("FireKnife", L"./Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/FireKnife.png");
 	AddImage("hpBar", L"./Resources/hpBar.png");
 	AddImage("deathUI", L"./Resources/deathUI.png");
+	AddImage("goldUI", L"./Resources/goldUI.png");
+	AddImage("enemyUI", L"./Resources/enemyUI.png");
+	AddImage("GamblerHead", L"./Resources/HeadUI/Gambler #54692.png");
+
 
 
 	//==========================================================================================================

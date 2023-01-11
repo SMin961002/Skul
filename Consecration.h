@@ -7,7 +7,7 @@ class Consecration : public Component
 {
 private:
 	vImage* _imgPhase1BossConsecrationLoop;
-
+	vImage* endImg;
 	float _deltaTime;
 
 	CollisionComponent* _collision;

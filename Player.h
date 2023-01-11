@@ -15,6 +15,7 @@ private:
 	CImage* m_UIImage[UITag::eEnd];
 
 	Head* m_headList[static_cast<int>(eSkulSpecies::Empty) + 1];
+	bool lastCheck;
 	eSkulSpecies m_headSlot;
 	Head* m_nowHead;
 	float m_headTagCool;
