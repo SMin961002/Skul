@@ -2,9 +2,7 @@
 #include"Item.h"
 class Spider : public Item
 {
-
 	vImage* _img;
-
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -14,9 +12,7 @@ public:
 
 class LobbyNpc1 : public Item
 {
-
 	vImage* _img;
-
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -27,9 +23,7 @@ public:
 
 class LobbyNpc2 : public Item
 {
-
 	vImage* _img;
-
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -39,9 +33,7 @@ public:
 
 class LobbyNpc3 : public Item
 {
-
 	vImage* _img;
-
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -51,9 +43,7 @@ public:
 
 class LobbyNpc4 : public Item
 {
-
 	vImage* _img;
-
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -63,9 +53,7 @@ public:
 
 class LobbyNpc5 : public Item
 {
-
 	vImage* _img;
-
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -74,9 +62,7 @@ public:
 };
 class SpaerSkul : public Item
 {
-
 	vImage* _img;
-
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -86,15 +72,12 @@ public:
 
 class Cat : public Item
 {
-
 	vImage* _img;
 	vImage* _img2;
 	float m_movetimer;
 	int m_isleftcount;
 	bool m_move;
 	bool m_isleft;
-	
-
 public:
 	virtual void Init() override;
 	virtual void Update() override;
@@ -104,14 +87,14 @@ public:
 
 class Elevator : public Item
 {
-
+	bool isUp = false;
 	vImage* _img;
 	vImage* _img2;
-
-
+	CollisionComponent* coll;
 public:
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	virtual void OnCollision(string collisionName, Object* other) override;
 };

@@ -24,6 +24,7 @@ EnemyTestScene::~EnemyTestScene()
 
 void EnemyTestScene::Init()
 {
+	IMAGEMANAGER->SetCameraPosition(0,0);
 	trigger = new Trigger;
 
 	isStart = false;

@@ -62,7 +62,7 @@
       <Filter>Game\Component\RigidBodyComponent</Filter>
     </ClCompile>
     <ClCompile Include="LeoniaSoldier.cpp">
-      <Filter>Game\Object\Door\Enemy\LeoniaSoldier</Filter>
+      <Filter>Game\Object\Enemy\LeoniaSoldier</Filter>
     </ClCompile>
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="BossObject.cpp">
@@ -115,7 +115,7 @@
       <Filter>Core\Manager\EffectManager</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Object\Door\Enemy</Filter>
+      <Filter>Game\Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyTestScene.cpp">
       <Filter>Game\Scene\TestScene</Filter>
@@ -262,6 +262,7 @@
     <ClCompile Include="Fanatic.cpp" />
     <ClCompile Include="Lazer.cpp" />
     <ClCompile Include="HitDamageEffect.cpp" />
+    <ClCompile Include="BlackJack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -361,7 +362,7 @@
       <Filter>Game\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Game\Object\Door\Enemy</Filter>
+      <Filter>Game\Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyTestScene.h">
@@ -492,6 +493,7 @@
     <ClInclude Include="CSoundMgr.h" />
     <ClInclude Include="Lazer.h" />
     <ClInclude Include="HitDamageEffect.h" />
+    <ClInclude Include="BlackJack.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -638,12 +640,6 @@
     <Filter Include="Game\Reward\HeadResult">
       <UniqueIdentifier>{06ff99bc-2f80-4cc9-989d-01a265f7ef0a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Door\Enemy">
-      <UniqueIdentifier>{5fe81d37-64a5-425f-b474-a46d7ebd14a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Door\Enemy\LeoniaSoldier">
-      <UniqueIdentifier>{2201dd90-e9cd-4469-a856-8b5402cb1f54}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Object\Charactor\Head\LittleBorn">
       <UniqueIdentifier>{91645030-351c-460b-8995-e860b4c731cd}</UniqueIdentifier>
     </Filter>
@@ -664,6 +660,12 @@
     </Filter>
     <Filter Include="Game\Object\Charactor\Head\Gambler\Skill">
       <UniqueIdentifier>{6bf30feb-4866-49d7-991f-12a5fd8d8ed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy">
+      <UniqueIdentifier>{5fe81d37-64a5-425f-b474-a46d7ebd14a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Enemy\LeoniaSoldier">
+      <UniqueIdentifier>{2201dd90-e9cd-4469-a856-8b5402cb1f54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

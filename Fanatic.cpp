@@ -66,6 +66,8 @@ void Fanatic::Init()
 	m_obj->AddComponent<RigidBodyComponent>();
 	m_obj->AddCollisionComponent(m_hitCollision);
 	m_obj->AddCollisionComponent(m_hitpointCollision);
+
+	GAMEMANAGER->enemyCount++;
 }
 
 void Fanatic::Update()
@@ -172,6 +174,7 @@ void Fanatic::Update()
 					{
 						m_hitpointCollision->SetIsActive(false);
 						m_hitCollision->SetIsActive(false);
+						GAMEMANAGER->enemyCount--;
 						OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, ObjectTag::eSummons)->AddComponent<TentaclesOfLight>();
 						m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
 						m_obj->GetComponent< PixelCollisionComponent>()->SetIsActive(false);
@@ -233,6 +236,7 @@ void Fanatic::Render()
 				m_hitpointCollision->SetIsActive(false);
 				m_hitCollision->SetIsActive(false);
 				m_obj->ObjectDestroyed();
+				GAMEMANAGER->enemyCount--;
 			}
 
 		}

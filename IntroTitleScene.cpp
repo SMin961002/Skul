@@ -24,7 +24,8 @@ void IntroTitleScene::Update()
 		{
 			if (KEYMANAGER->GetStayKeyDown(i))
 			{
-				SCENEMANAGER->ChangeScene("EnemyTestScene");
+				FILEMANAGER->SetNowStageFile("map_5");
+				SCENEMANAGER->ChangeScene("Stage");
 				cout << i << endl;
 			}
 		}

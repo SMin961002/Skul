@@ -27,11 +27,12 @@ void Trigger::Init()
 
 void Trigger::Update()
 {
-	int size = OBJECTMANAGER->GetEnemyCount();
-	if (nowTriggerIndex < 3 &&  size <= 0)
+	int size = GAMEMANAGER->enemyCount;
+	if (nowTriggerIndex < 3 && size <= 0)
 	{
 		OnTrigger();
 	}
+	cout << size<<endl;
 }
 
 void Trigger::Render()

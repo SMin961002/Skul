@@ -21,13 +21,13 @@ void Hporb::Init()
 
 void Hporb::Update()
 {
-	m_collision->Setting(12, m_obj->x+5, m_obj->y, "Hpup");
+	m_collision->Setting(12, m_obj->x + 5, m_obj->y, "Hpup");
 	m_uphightimer += DELTA_TIME;
-	
+
 
 	if (m_uphightimer >= 1.48f)
 	{
-		m_obj->y += sinf(m_rotation)*0.2f;
+		m_obj->y += sinf(m_rotation) * 0.2f;
 		m_rotation += 0.01;
 		m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);
@@ -52,6 +52,7 @@ void Hporb::OnCollision(string collisionName, Object* other)
 	{
 		if (other->GetName() == "player")
 		{
+			other->GetComponent<Player>()->Heal();
 			//other->GetComponent<Player>()-플레이어 상태쉉
 			//other->GetComponent<Player>()->
 			m_obj->ObjectDestroyed();
