@@ -7,6 +7,7 @@
 #include"EnemyEffect.h"
 #include"Gold.h"
 #include"BlackRock.h"
+#include"CSound.h"
 
 
 void LeoniaSoldier::Init()
@@ -114,6 +115,7 @@ void LeoniaSoldier::Update()
 		}
 		if (m_vimage[eAttack]->GetFrame() >= 1)
 		{
+			SOUNDMANAGER->FindSound("LeoniaSolderAttack")->Play(false);
 			m_hitpointcollision->SetIsActive(true);
 			if (m_attackleft)
 			{
@@ -250,6 +252,7 @@ void LeoniaSoldier::OnCollision(string collisionName, Object* other)
 		{
 			if (m_attackcount < 1)
 			{
+				SOUNDMANAGER->FindSound("LeonialSolderAttackHit")->Play(false);
 				m_hitpoint = true;
 				Player* ply = other->GetComponent<Player>();
 				ply->HitPlayerMagicAttack(10);

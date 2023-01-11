@@ -3,8 +3,10 @@
 #include "Player.h"
 #include "RigidBodyComponent.h"
 #include "PixelCollisionComponent.h"
+#include"CSound.h"
 void FireKnife::Init()
 {
+	SOUNDMANAGER->FindSound("CandleFanaticAttack")->Play(false);
 	collision = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(collision);
 	img = IMAGEMANAGER->FindImage("FireKnife");
@@ -46,6 +48,7 @@ void FireKnife::OnCollision(string collisionName, Object* other)
 {
 	if (other->GetName() == "player")
 	{
+		SOUNDMANAGER->FindSound("CandleFanaticAttackHit")->Play(false);
 		Player* ply = other->GetComponent<Player>();
 		ply->HitPlayerMagicAttack(10);
 		ply->HitPlayerEffect();

@@ -261,6 +261,12 @@
     <ClCompile Include="Lazer.cpp" />
     <ClCompile Include="HitDamageEffect.cpp" />
     <ClCompile Include="BlackJack.cpp" />
+    <ClCompile Include="CSound.cpp">
+      <Filter>Core\Manager\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundMgr.cpp">
+      <Filter>Core\Manager\SoundManager</Filter>
+    </ClCompile>
     <ClCompile Include="EndingScene.cpp">
       <Filter>Game\Scene\EndingScene</Filter>
     </ClCompile>
@@ -686,6 +692,9 @@
     </Filter>
     <Filter Include="Game\Object\Enemy\LeoniaSoldier">
       <UniqueIdentifier>{2201dd90-e9cd-4469-a856-8b5402cb1f54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager\SoundManager">
+      <UniqueIdentifier>{91bb3578-5794-420b-b725-0a442f12b050}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
