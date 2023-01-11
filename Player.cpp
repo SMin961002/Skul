@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "RigidBodyComponent.h"
 #include "Enemy.h"
+#include"CSound.h"
 #include "HitDamageEffect.h"
 /*
 플레이어가 가진
@@ -122,7 +123,6 @@ void Player::Init()
 void Player::Update()
 {
 	Vector2 v;
-
 	m_nowHead->SetImageChange(false);
 	if (!m_nowHead->GetNonActionCansle())
 	{
@@ -130,7 +130,10 @@ void Player::Update()
 		if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
 		{
 			if (m_headTagCool == 0)
+			{
+				SOUNDMANAGER->FindSound("Switch")->Play(false);
 				ChangeHead();
+			}
 		}
 	}
 	InputArtifactKey();
@@ -242,12 +245,15 @@ void Player::ChangeHead()
 		switch (m_headSlot)
 		{
 		case eSkulSpecies::eBasic:
+			SOUNDMANAGER->FindSound("SkulSwitch")->Play(false);
 			m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eBasic)];
 			m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
 			m_nowHead->TagAction();
+
 			cout << "스컬 변경 : 리틀본" << endl;
 			break;
 		case eSkulSpecies::eGambler:
+			SOUNDMANAGER->FindSound("GamblerSwitch")->Play(false);
 			m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eGambler)];
 			m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
 			m_nowHead->TagAction();
