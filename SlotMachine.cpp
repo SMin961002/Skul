@@ -56,17 +56,6 @@ void SlotMachine::Init()
 	m_obj->AddCollisionComponent(m_coll);
 	m_coll->Setting(10, m_obj->x + 5, m_obj->y + 5, "GamblerSlotMachine");
 	m_coll->SetIsActive(false);
-	if (m_resultThunder > 0 && m_resultThunder != 3)
-	{
-		m_collThunderRange = m_obj->AddComponent<CollisionComponent>();
-		m_obj->AddCollisionComponent(m_collThunderRange);
-		m_collThunderRange->Setting(500, m_obj->x + 250, m_obj->y + 250, "GamblerSlotMachineThunderRange");
-		m_collThunderRange->SetIsActive(true);
-		m_collThunderSmallRange = m_obj->AddComponent<CollisionComponent>();
-		m_obj->AddCollisionComponent(m_collThunderSmallRange);
-		m_collThunderSmallRange->Setting(80, m_obj->x + 40, m_obj->y + 40, "GamblerSlotMachineThunderSmallRange");
-		m_collThunderSmallRange->SetIsActive(true);
-	}
 }
 
 void SlotMachine::Update()
@@ -176,7 +165,7 @@ void SlotMachine::OnCollision(string collisionName, Object* other)
 	if (collisionName == m_coll->GetName())
 	{
 		bool hited = false;
-		for (auto iter : m_vectorCollisionList)
+		for (auto iter : m_CollObjList)
 		{
 			if (iter == other)
 			{
@@ -186,16 +175,21 @@ void SlotMachine::OnCollision(string collisionName, Object* other)
 		}//end for
 		if (!hited)
 		{
-			Component* e = nullptr;
-			e = other->GetComponent<Component>();
-			if (e != nullptr)
+			if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 			{
-				if (m_resultExplosion == 3)
-					e->HitEnemy(20, 0);
-				else e->HitEnemy(15, 0);
-				m_vectorCollisionList.push_back(other);
+				Component* e = nullptr;
+				e = other->GetComponent<Component>();
+				if (e != nullptr)
+				{
+					if (m_resultExplosion == 3)
+					{
+						e->HitEnemy(20, 0);
+					}
+					else { e->HitEnemy(15, 0); }
+					m_CollObjList.push_back(other);
+				}
 			}
-		}
+		}//end nohit
 
 		Enemy* e = nullptr;
 		e = other->GetComponent<Enemy>();
@@ -217,39 +211,4 @@ void SlotMachine::OnCollision(string collisionName, Object* other)
 			}
 		}
 	}//end m_coll
-	else if (collisionName == m_collThunderSmallRange->GetName())
-	{
-		Component* e = nullptr;
-		e = other->GetComponent<Enemy>();	//##
-		//인 경우에도 벡터에 넣어서 포함시켜야하는데 타격 가능한 보스obj 종류를 모르겠어서 추가 못함 추후 물어보기
-		if (e != nullptr)
-		{
-			m_vectorThunderSmallList.push_back(other);
-		}
-		if (m_vectorThunderSmallList.size() > 4)
-		{
-			m_collThunderRange->SetIsActive(false);
-		}
-	}
-	else if (collisionName == m_collThunderRange->GetName())
-	{
-		bool isInSmall = false;
-		for (int i = 0; i < m_vectorThunderSmallList.size(); i++)
-		{
-			if (m_vectorThunderSmallList[i] == other)
-			{
-				isInSmall = true;
-				break;
-			}
-		}
-		if (!isInSmall)
-		{
-			Component* e = nullptr;
-			e = other->GetComponent<Enemy>();	//##보스인 경우에도 벡터에 넣어서 포함시켜야하는데 타격 가능한 보스obj 종류를 모르겠어서 추가 못함 추후 물어보기
-			if (e != nullptr)
-			{
-				m_vectorThunderList.push_back(other);
-			}
-		}
-	}//end m_collThunderRange
 }

@@ -39,7 +39,7 @@ void Thunder::CollisionUpdate()
 void Thunder::OnCollision(string collisionName, Object* other)
 {
 	bool hited = false;
-	for (auto iter : m_vectorCollisionList)
+	for (auto iter : m_CollObjList)
 	{
 		if (other == iter)
 		{
@@ -53,7 +53,7 @@ void Thunder::OnCollision(string collisionName, Object* other)
 		if (e != nullptr)
 		{
 			e->HitEnemy(15, 0);
-			m_vectorCollisionList.push_back(other);
+			m_CollObjList.push_back(other);
 		}
 	}
 }

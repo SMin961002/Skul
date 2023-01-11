@@ -76,8 +76,8 @@ void Roulette::Update()
 			m_delay = 1;
 			if (m_resultSuccess == 1)
 			{
-				m_vectorCollisionList.clear();
-				vector<Object*>().swap(m_vectorCollisionList);
+				m_CollObjList.clear();
+				listObj().swap(m_CollObjList);
 			}
 		}
 		//##프레임당 collision 영역 세팅하기
@@ -87,7 +87,7 @@ void Roulette::Update()
 	{
 		if (m_resultColor == eBlack)
 		{
-			for (auto iter : m_vectorCollisionList)
+			for (auto iter : m_CollObjList)
 			{
 				Enemy* e = nullptr;
 				e = iter->GetComponent<Enemy>();
@@ -97,7 +97,7 @@ void Roulette::Update()
 		}
 		else
 		{
-			for (auto iter : m_vectorCollisionList)
+			for (auto iter : m_CollObjList)
 			{
 				Enemy* e = nullptr;
 				e = iter->GetComponent<Enemy>();
@@ -240,7 +240,7 @@ void Roulette::CollisionUpdate()
 void Roulette::OnCollision(string collisionName, Object* other)
 {
 	bool hited = false;
-	for (auto iter : m_vectorCollisionList)
+	for (auto iter : m_CollObjList)
 	{
 		if (other == iter)
 		{
@@ -279,9 +279,12 @@ void Roulette::OnCollision(string collisionName, Object* other)
 
 	if (!hited)
 	{
-		other->GetComponent<Component>()->HitEnemy(18, 0.1);
-		OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(18);
-		m_vectorCollisionList.push_back(other);
+		if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
+		{
+			other->GetComponent<Component>()->HitEnemy(18, 0.1);
+			OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(18);
+			m_CollObjList.push_back(other);
+		}
 	}
 }
 

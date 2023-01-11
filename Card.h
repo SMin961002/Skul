@@ -7,9 +7,12 @@ class Card : public Component
 	//대성공시 펑펑카드(bighit small), 마지막카드 big explosion, 뎀 30
 	//에너미 타격판정 바꾸기
 protected:
+	typedef list<Object*> listObj;
+
 	const float m_speed = 500;
 	CollisionComponent* m_coll;
-	vector<Object*> m_vectorCollisionList;
+ 
+	listObj m_CollObjList;
 	CImage* m_img;
 	float m_startX;
 	bool m_isLeft;
