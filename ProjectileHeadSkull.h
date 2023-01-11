@@ -10,6 +10,7 @@ class ProjectileHeadSkull : public Component
 
 	bool m_isReverse;
 	bool m_hit;
+	bool m_on;
 
 	float m_startX;
 	float m_startY;
@@ -23,6 +24,7 @@ public:
 	void DestroyProjectileHead() { m_obj->ObjectDestroyed(); }
 
 	void SetSkullThrow(float x, float y, bool reversed);
+	bool GetSkullOnOff() { return m_on; }
 
 	void Init();
 	void Update();
