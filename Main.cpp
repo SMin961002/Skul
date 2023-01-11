@@ -21,9 +21,11 @@ void Main::Init()
 	SOUNDMANAGER->AddSound("Shop", "./Resources/Sound/Shop.wav");
 	SOUNDMANAGER->FindSound("Shop")->SetVolume(60);
 	SOUNDMANAGER->AddSound("Middle", "./Resources/Sound/Middle.wav");
+	SOUNDMANAGER->AddSound("Dash", "./Resources/Sound/Dash.wav");
 	SOUNDMANAGER->FindSound("Middle")->SetVolume(60);
 	SOUNDMANAGER->AddSound("Bossphase1", "./Resources/Sound/Bossphase1.wav");
 	SOUNDMANAGER->FindSound("Bossphase1")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Jump", "./Resources/Sound/Jump.wav");
 	SOUNDMANAGER->AddSound("SkulAttack1", "./Resources/Sound/Skul_Atk 1.wav");
 	SOUNDMANAGER->FindSound("SkulAttack1")->SetVolume(50);
 	SOUNDMANAGER->AddSound("SkulAttack2", "./Resources/Sound/Skul_Atk 2.wav");
@@ -34,8 +36,16 @@ void Main::Init()
 	SOUNDMANAGER->FindSound("Switch")->SetVolume(50);
 	SOUNDMANAGER->AddSound("SkulSwitch", "./Resources/Sound/SkulSwitch.wav");
 	SOUNDMANAGER->FindSound("SkulSwitch")->SetVolume(50);
-	SOUNDMANAGER->AddSound("GamblerSwitch", "./Resources/Sound/GamblerSwitch.wav");
-	SOUNDMANAGER->FindSound("GamblerSwitch")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SkulAttackSword", "./Resources/Sound/Hit_Sword_Small.wav");
+	SOUNDMANAGER->FindSound("SkulAttackSword")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SkulAttack", "./Resources/Sound/Hit_Sword_Small02.wav");
+	SOUNDMANAGER->FindSound("SkulAttack")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SkulAttackBluntLarge", "./Resources/Sound/Hit_Blunt_Large.wav");
+	SOUNDMANAGER->FindSound("SkulAttackBluntLarge")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SkulAttackBluntSmall", "./Resources/Sound/Hit_Blunt_Small.wav");
+	SOUNDMANAGER->FindSound("SkulAttackBluntSmall")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SkulAttackExplosion", "./Resources/Sound/Legacy_Hit [Unused].wav");
+	SOUNDMANAGER->FindSound("SkulAttackExplosion")->SetVolume(100);
 	SOUNDMANAGER->AddSound("FanaticAttackReady", "./Resources/Sound/FanaticAttack_Ready.wav");
 	SOUNDMANAGER->FindSound("FanaticAttackReady")->SetVolume(30);
 	SOUNDMANAGER->AddSound("FanaticAttack", "./Resources/Sound/FanaricAttack.wav");
@@ -60,42 +70,33 @@ void Main::Init()
 	SOUNDMANAGER->FindSound("LeonialSolderAttackHit")->SetVolume(100);
 
 	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(100);
+	SOUNDMANAGER->AddSound("GamblerSwitch", "./Resources/Sound/GamblerSwitch.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("GamblerAtk1", "./Resources/Sound/Gambler_AtkA.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("GamblerAtk2", "./Resources/Sound/Gambler_AtkB.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("GamblerAtk3", "./Resources/Sound/Gambler_AtkC.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("GamblerBlackJackReady", "./Resources/Sound/Gambler_BlackJack_Ready.wav")->SetVolume(30);
+	SOUNDMANAGER->AddSound("GamblerBlackJack1", "./Resources/Sound/Gambler_BlackJack1.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("GamblerBlackJack2", "./Resources/Sound/Gambler_BlackJack2.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("GamblerBlackJack3", "./Resources/Sound/Gambler_BlackJack3.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("GamblerBlackJackBigHit", "./Resources/Sound/Gambler_BlackJack_BigHit.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("SlotMachineStart", "./Resources/Sound/Gambler_SlotMachine_Start.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("SlotMachineRunning", "./Resources/Sound/Gambler_SlotMachine.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("SlotMachineJackpot", "./Resources/Sound/Gambler_SlotMachine_Jackpot.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("SlotMachineFinish", "./Resources/Sound/Gambler_SlotMachine_Finish.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(80);
-	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(80);
-
-
-
-	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(100);
-	SOUNDMANAGER->AddSound("SlotMachineStart", "./Resources/Sound/Gambler_SlotMachine_Start.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineRunning", "./Resources/Sound/Gambler_SlotMachine.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineJackpot", "./Resources/Sound/Gambler_SlotMachine_Jackpot.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineFinish", "./Resources/Sound/Gambler_SlotMachine_Finish.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(80);
-	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(80);
-
-
-
-	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(100);
-	SOUNDMANAGER->AddSound("SlotMachineStart", "./Resources/Sound/Gambler_SlotMachine_Start.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineRunning", "./Resources/Sound/Gambler_SlotMachine.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineJackpot", "./Resources/Sound/Gambler_SlotMachine_Jackpot.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineFinish", "./Resources/Sound/Gambler_SlotMachine_Finish.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(80);
-	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(80);
-
-
-
-	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(100);
-	SOUNDMANAGER->AddSound("SlotMachineStart", "./Resources/Sound/Gambler_SlotMachine_Start.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineRunning", "./Resources/Sound/Gambler_SlotMachine.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineJackpot", "./Resources/Sound/Gambler_SlotMachine_Jackpot.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineFinish", "./Resources/Sound/Gambler_SlotMachine_Finish.wav")->SetVolume(50);
-	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(80);
-	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(80);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("RouletteSummon", "./Resources/Sound/Gambler_Roulette_Summon.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteSpin", "./Resources/Sound/Gambler_Roulette.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteSpike", "./Resources/Sound/Gambler_Roulette_Spike.wav")->SetVolume(10);
+	SOUNDMANAGER->AddSound("RouletteFail", "./Resources/Sound/Gambler_Roulette_Fail.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteResultBlack", "./Resources/Sound/Gambler_Roulette_Black.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteResultRed", "./Resources/Sound/Gambler_Roulette_Red.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteHitBlack", "./Resources/Sound/Gambler_DestinyRoulette_Success_Black.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteHitRed", "./Resources/Sound/Gambler_DestinyRoulette_Success_Red.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteBigHitBlackCast", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_BlackCast.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteBigHitBlack", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_BlackAtk.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteBigHitRed", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_Red.wav")->SetVolume(50);
 
 
 	IMAGEMANAGER->LoadImages();
@@ -160,10 +161,7 @@ void Main::Update()
 	{
 		SCENEMANAGER->ChangeScene("BossScene");
 	}
-	if (KEYMANAGER->GetOnceKeyDown(VK_F9))
-	{
-		SCENEMANAGER->ChangeScene("Stage");
-	}
+
 	if (KEYMANAGER->GetOnceKeyDown(VK_F12))
 	{
 		IMAGEMANAGER->SetViewCollision(!IMAGEMANAGER->GetViewCollision());

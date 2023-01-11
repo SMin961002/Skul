@@ -26,6 +26,8 @@ public:
 	void ChangeScene(std::string key);
 
 	bool FadeIn(float t, function<void()> func, int flag);
+	bool FadeInColor(float t, function<void()> func, int flag);
+
 	bool FadeOut(float t, function<void()> func, int flag);
 
 	void SetMenuActive(bool active) { m_isMenuActive = active; }

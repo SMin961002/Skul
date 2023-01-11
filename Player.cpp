@@ -4,23 +4,17 @@
 #include "Enemy.h"
 #include"CSound.h"
 #include "HitDamageEffect.h"
-/*
-플레이어가 가진
-collision컴포넌트를
-head에 전달해서 가공하기
-*/
+
 void Player::Init()
 {
-	m_HpMax = 100;
-
 	if (GAMEMANAGER->playerHp <= 0)
 	{
 		GAMEMANAGER->playerHp = m_HpMax;
-		m_life = m_HpMax;
+		m_Hp = m_HpMax;
 	}
 	else
 	{
-		m_life = GAMEMANAGER->playerHp;
+		m_Hp = GAMEMANAGER->playerHp;
 	}
 	if (GAMEMANAGER->goldValue <= 0)
 	{
@@ -123,6 +117,7 @@ void Player::Init()
 
 void Player::Update()
 {
+
 	Vector2 v;
 	m_nowHead->SetImageChange(false);
 	if (lastCheck != isHeadCheck)
@@ -130,39 +125,42 @@ void Player::Update()
 		lastCheck = isHeadCheck;
 		ChangeHead();
 	}
-	if (!m_nowHead->GetNonActionCansle())
+	if (m_isDead == false)
 	{
-		Move();
-		if (isHeadCheck == true)
+		if (!m_nowHead->GetNonActionCansle())
 		{
-			if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
+			Move();
+			if (isHeadCheck == true)
 			{
-				if (m_headTagCool == 0)
-					ChangeHead();
+				if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
+				{
+					if (m_headTagCool == 0)
+						ChangeHead();
+				}
 			}
 		}
-	}
-	InputArtifactKey();
+		InputArtifactKey();
 
-	m_playerHitBox->Setting(m_obj->x + 14, m_obj->y - 15);
-	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
-	{
-		m_obj->y += 1;
-	}
+		m_playerHitBox->Setting(m_obj->x + 14, m_obj->y - 15);
+		if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
+		{
+			m_obj->y += 1;
+		}
 
-	CoolDown();
-	m_nowHead->Update();
+		CoolDown();
+		m_nowHead->Update();
+	}
 }
 
 void Player::Release()
 {
-	GAMEMANAGER->playerHp = m_life;
+	GAMEMANAGER->playerHp = m_Hp;
 	GAMEMANAGER->goldValue = goldValue;
 	GAMEMANAGER->isHeadCheck = isHeadCheck;
 	GAMEMANAGER->m_nowHead = m_nowHead;
 	GAMEMANAGER->tag = (int)m_headSlot;
-	if (m_life <= 0)
-		m_life = 0;
+	if (m_Hp <= 0)
+		m_Hp = 0;
 }
 
 void Player::Render()
@@ -173,7 +171,7 @@ void Player::Render()
 void Player::UIRender()
 {
 	IMAGEMANAGER->UIRender(m_UIImage[ePlayerStatus], 0, 430, 2, 2, 0);
-	IMAGEMANAGER->UIRender(hpBar, 89, 518, 231.f / m_HpMax * m_life, 2, 0, 1);
+	IMAGEMANAGER->UIRender(hpBar, 89, 518, 231.f / m_HpMax * m_Hp, 2, 0, 1);
 
 	IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("goldUI"), 0, 0, 1, 1);
 	IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("enemyUI"), 0, 0, 1, 1);
@@ -181,7 +179,7 @@ void Player::UIRender()
 	IMAGEMANAGER->D2dTextOut(to_wstring(goldValue), 970, 515, { 255,255,255,1 }, 0.8f);
 	IMAGEMANAGER->D2dTextOut(to_wstring(GAMEMANAGER->enemyCount), 970, 481, { 255,255,255,1 }, 0.8f);
 
-	if (m_life <= 0)
+	if (m_Hp <= 0)
 	{
 		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("deathUI"), 0, 0, 1, 1);
 		if (KEYMANAGER->GetStayKeyDown('X'))
@@ -253,7 +251,6 @@ void Player::ChangeHead()
 		eSkulSpecies tmp = m_nowHead->GetSpecies();
 		m_headTagCool = m_nowHead->GetTagCoolTime();
 		m_nowHead->ResetAll();
-
 		switch (m_headSlot)
 		{
 		case eSkulSpecies::eBasic:
@@ -282,19 +279,21 @@ void Player::ChangeHead()
 	}
 }
 
-void Player::OnCollision(string collisionName, Object* other)
+void Player::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_collAutoAttack->GetName())
+	if (coll1->GetName() == m_collAutoAttack->GetName())
 	{
-		if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
+		if (coll2->GetName() == "hitBox")
+			if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 		{
 			cout << "적에게공격 - Auto" << endl;
 
 			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
 		}
 	}//end collision Name BasicAttack
-	else if (collisionName == m_collSkillTag->GetName())
+	else if (coll1->GetName() == m_collSkillTag->GetName())
 	{
+		if(coll2->GetName() == "hitBox")
 		if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 		{
 			cout << "적에게공격 - Tag" << endl;
@@ -307,15 +306,17 @@ void Player::HitPlayerPhysicAttack(float dmg)
 {
 	m_supperArmarNowTime = m_supperArmarTime;
 	m_playerHitBox->SetIsActive(false);
-	m_life -= dmg;
-	cout << "데미지 : " << dmg << ", 플레이어 HP : " << m_life << endl;
+	m_Hp -= dmg;
+	if (m_Hp <= 0) m_isDead = true;
+	cout << "데미지 : " << dmg << ", 플레이어 HP : " << m_Hp << endl;
 }
 void Player::HitPlayerMagicAttack(float dmg)
 {
 	m_supperArmarNowTime = m_supperArmarTime;
 	m_playerHitBox->SetIsActive(false);
-	m_life -= dmg;
-	cout << "데미지 : " << dmg << ", 플레이어 HP : " << m_life << endl;
+	m_Hp -= dmg;
+	if (m_Hp <= 0) m_isDead = true;
+	cout << "데미지 : " << dmg << ", 플레이어 HP : " << m_Hp << endl;
 }
 void Player::HitPlayerKnockBack(float moveX, float moveY)
 {

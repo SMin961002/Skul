@@ -156,11 +156,11 @@ void NpcObject::UIRender()
 	}
 }
 
-void NpcObject::OnCollision(string collisionName, Object* other)
+void NpcObject::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	if (other->GetName() == "player")
 	{
-		if (collisionName == "first")
+		if (coll1->GetName()  == "first")
 		{
 			m_isState = true;
 			kind = 0;
@@ -173,7 +173,7 @@ void NpcObject::OnCollision(string collisionName, Object* other)
 				}
 			}
 		}
-		if (collisionName == "second")
+		if (coll1->GetName() == "second")
 		{
 			m_isState = true;
 			kind = 1;
@@ -186,7 +186,7 @@ void NpcObject::OnCollision(string collisionName, Object* other)
 				}
 			}
 		}
-		if (collisionName == "third")
+		if (coll1->GetName() == "third")
 		{
 			m_isState = true;
 			kind = 2;
@@ -199,7 +199,7 @@ void NpcObject::OnCollision(string collisionName, Object* other)
 				}
 			}
 		}
-		if (collisionName == "forth")
+		if (coll1->GetName() == "forth")
 		{
 			m_isState = true;
 			kind = 3;

@@ -28,7 +28,7 @@ void Gold::Init()
 	//m_obj->GetCollisionComponent().push_back(m_hitpointcollision);
 
 	m_obj->AddComponent<RigidBodyComponent>();
-	m_goldy = MY_UTILITY::getFromFloatTo(2, 5);
+	m_goldy = MY_UTILITY::getFromFloatTo(20, 50) / 10.f;
 	m_goldx = MY_UTILITY::getFromFloatTo(-200, 300) / 100.f;
 	m_goldy2 = MY_UTILITY::getFromFloatTo(15, 25);
 	m_obj->GetComponent<RigidBodyComponent>()->SetGravityPower(m_goldy);

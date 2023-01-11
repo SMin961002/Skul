@@ -57,20 +57,23 @@ void Baptism::Release()
 {
 }
 
-void Baptism::OnCollision(string collisionName, Object* other)
+void Baptism::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	if (other->GetName() == "player")
 	{
-		Player* player = other->GetComponent<Player>();
-		player->HitPlayerMagicAttack(10);
-		player->HitPlayerEffect();
-		if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+		if (coll2->GetName() == "PlayerHitRange")
 		{
-			player->HitPlayerKnockBack(-15, -5);
-		}
-		else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
-		{
-			player->HitPlayerKnockBack(-15, -5);
+			Player* player = other->GetComponent<Player>();
+			player->HitPlayerMagicAttack(10);
+			player->HitPlayerEffect();
+			if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+			{
+				player->HitPlayerKnockBack(-15, -5);
+			}
+			else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+			{
+				player->HitPlayerKnockBack(-15, -5);
+			}
 		}
 	}
 }

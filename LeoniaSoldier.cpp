@@ -108,7 +108,7 @@ void LeoniaSoldier::Update()
 			m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(false);
 		}
 
-		m_collision->Setting(30, m_obj->x + 17, m_obj->y - 20, "Attack");
+		m_collision->Setting(30, m_obj->x + 17, m_obj->y - 20, "hitBox");
 		if (m_hit)
 		{
 			m_hpbartimer += DELTA_TIME;
@@ -234,40 +234,42 @@ void LeoniaSoldier::Release()
 	GAMEMANAGER->enemyCount--;
 }
 
-void LeoniaSoldier::OnCollision(string collisionName, Object* other)
+void LeoniaSoldier::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_collision->GetName())
+	if (coll1->GetName() == m_collision->GetName())
 	{
 		if (other->GetName() == "player")
 		{
-
 			m_attack = true;
 			m_move = false;
 		}
 	}
 
-	else if (collisionName == m_hitpointcollision->GetName())
+	else if (coll1->GetName() == m_hitpointcollision->GetName())
 	{
-		if (other->GetName() == "player")
+		if (coll2->GetName() == "PlayerHitRange")
 		{
-			if (m_attackcount < 1)
+			if (other->GetName() == "player")
 			{
-				SOUNDMANAGER->FindSound("LeonialSolderAttackHit")->Play(false);
-				m_hitpoint = true;
-				Player* ply = other->GetComponent<Player>();
-				ply->HitPlayerMagicAttack(10);
-				ply->HitPlayerEffect();
-				if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+				if (m_attackcount < 1)
 				{
-					ply->HitPlayerKnockBack(-15, -5);
+					SOUNDMANAGER->FindSound("LeonialSolderAttackHit")->Play(false);
+					m_hitpoint = true;
+					Player* ply = other->GetComponent<Player>();
+					ply->HitPlayerMagicAttack(10);
+					ply->HitPlayerEffect();
+					if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+					{
+						ply->HitPlayerKnockBack(-15, -5);
+					}
+					else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+					{
+						ply->HitPlayerKnockBack(15, -5);
+					}
+					m_attackcount = 1;
 				}
-				else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
-				{
-					ply->HitPlayerKnockBack(15, -5);
-				}
-				m_attackcount = 1;
-			}
 
+			}
 		}
 	}
 

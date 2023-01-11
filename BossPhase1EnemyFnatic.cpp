@@ -60,7 +60,7 @@ void BossPhase1EnemyFnatic::Update()
 	else
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
-		m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "HitCollision");
+		m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "hitBox");
 
 		if (img[eIdle]->GetIsImageEnded() == true)
 		{
@@ -158,29 +158,32 @@ void BossPhase1EnemyFnatic::Release()
 {
 }
 
-void BossPhase1EnemyFnatic::OnCollision(string collisionName, Object* other)
+void BossPhase1EnemyFnatic::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_hitpointCollision->GetName())
+	if (coll1->GetName() == m_hitpointCollision->GetName())
 	{
 		if (other->GetName() == "player")
 		{
-			if (m_attackcount < 1)
+			if (coll2->GetName() == "PlayerHitRange")
 			{
-				SOUNDMANAGER->FindSound("FanaticAttack")->Play(false);
-				Player* ply = other->GetComponent<Player>();
-				ply->HitPlayerMagicAttack(10);
-				ply->HitPlayerEffect();
-				if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+				if (m_attackcount < 1)
 				{
-					ply->HitPlayerKnockBack(-15, -5);
-				}
-				else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
-				{
+					SOUNDMANAGER->FindSound("FanaticAttack")->Play(false);
+					Player* ply = other->GetComponent<Player>();
+					ply->HitPlayerMagicAttack(10);
+					ply->HitPlayerEffect();
+					if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+					{
+						ply->HitPlayerKnockBack(-15, -5);
+					}
+					else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+					{
 
-					ply->HitPlayerKnockBack(15, -5);
+						ply->HitPlayerKnockBack(15, -5);
 
+					}
+					m_attackcount = 1;
 				}
-				m_attackcount = 1;
 			}
 		}
 	}

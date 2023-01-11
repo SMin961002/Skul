@@ -181,9 +181,9 @@ void SlotMachine::CollisionUpdate()
 	}
 }
 
-void SlotMachine::OnCollision(string collisionName, Object* other)
+void SlotMachine::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_coll->GetName())
+	if (coll1->GetName()  == m_coll->GetName())
 	{
 		bool hited = false;
 		for (auto iter : m_CollObjList)
@@ -196,6 +196,7 @@ void SlotMachine::OnCollision(string collisionName, Object* other)
 		}//end for
 		if (!hited)
 		{
+			if(coll2->GetName() == "hitBox")
 			if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 			{
 				Component* e = nullptr;
@@ -208,6 +209,7 @@ void SlotMachine::OnCollision(string collisionName, Object* other)
 					}
 					else { e->HitEnemy(15, 0); }
 					m_CollObjList.push_back(other);
+					SOUNDMANAGER->FindSound("SkulAttackExplosion")->Play(false);
 				}
 			}
 		}//end nohit

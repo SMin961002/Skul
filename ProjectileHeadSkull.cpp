@@ -5,15 +5,17 @@
 #include "Enemy.h"
 #include "LittleBorn.h"
 #include "Player.h"
+#include "CSound.h"
 void ProjectileHeadSkull::SetSkullThrow(float x, float y, bool reversed)
 {
 	m_hit = false;
-	m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
-	m_colHeadSkull->SetIsActive(true);
 	m_isReverse = reversed;
-	m_obj->x = m_startX = reversed ? x + 5 : x - 5;
+	m_obj->x = m_startX = x;
 	m_obj->y = m_startY = y - 50;
 	m_on = true;
+	m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
+	m_colHeadSkull->Setting(m_obj->x + 8, m_obj->y);
+	m_colHeadSkull->SetIsActive(true);
 
 	m_rot = 0;
 }
@@ -100,9 +102,9 @@ void ProjectileHeadSkull::On()
 	m_on = true;
 }
 
-void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
+void ProjectileHeadSkull::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_colHeadSkull->GetName())
+	if (coll1->GetName() == m_colHeadSkull->GetName())
 	{
 		if (!m_hit)
 		{
@@ -111,6 +113,7 @@ void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
 				m_hit = true;
 				m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
 				other->GetComponent<Enemy>()->HitEnemy(20, 1);//임의로 넣은것 추후제외
+				SOUNDMANAGER->FindSound("SkulAttackBluntLarge")->Play(false);
 			}
 		}//end nonhit
 	}

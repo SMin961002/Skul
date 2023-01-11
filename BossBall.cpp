@@ -11,6 +11,9 @@ BossBall::~BossBall()
 
 void BossBall::Init()
 {
+	coll = m_obj->AddComponent<CollisionComponent>();
+	coll->SetIsActive(false);
+	m_obj->AddCollisionComponent(coll);
 	startX = m_obj->x;
 	startY = m_obj->y;
 	ldist = false;
@@ -24,6 +27,7 @@ void BossBall::Init()
 
 void BossBall::Update()
 {
+	coll->Setting(20,m_obj->x,m_obj->y,"");
 	if (ldist == false)
 	{
 		if (dist < 200)
@@ -56,6 +60,7 @@ void BossBall::Render()
 {
 	if (img[eStart]->GetIsImageEnded() == true)
 	{
+		coll->SetIsActive(true);
 		m_state = eIdle;
 	}
 	img[m_state]->CenterRender(m_obj->x, m_obj->y, 1.5, 1.5, 0);
@@ -63,6 +68,28 @@ void BossBall::Render()
 
 void BossBall::Release()
 {
+}
+#include"Player.h"
+void BossBall::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
+{
+	if (other->GetName() == "player")
+	{
+
+		Player* ply = other->GetComponent<Player>();
+		if (coll2->GetName() == "PlayerHitRange")
+		{
+
+		ply->HitPlayerMagicAttack(10);
+		if (other->x > m_obj->x)
+		{
+			other->GetComponent<Player>()->HitPlayerKnockBack(25, -25);
+		}
+		else
+		{
+			other->GetComponent<Player>()->HitPlayerKnockBack(-25, -25);
+		}
+		}
+	}
 }
 
 void BossBall::Setting(float rot)

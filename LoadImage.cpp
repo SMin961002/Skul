@@ -376,6 +376,10 @@ void ImageManager::LoadImages()
 
 	AddImageVector("Phase2_Phase_3_Effect", L"./Resources/Saint_Joanna/Phase_3/Effect/Phase3_Sacrament_", 1, 66);
 
+	AddImageVector("Phase2_Death_Ready", L"./Resources/Saint_Joanna/Phase2_Intro_7/", 1, 7);
+	AddImageVector("Phase2_DeathLoop", L"./Resources/Saint_Joanna/Phase2_Intro_8/", 1, 14);
+	AddImageVector("Phase2_Death_Effect", L"./Resources/Saint_Joanna/deathEffect/", 1, 11);
+
 	// 2페이즈_인트로
 	AddImageVector("Phase2_Boss_Idle", L"./Resources/Saint_Joanna/Phase_2/Idle/Phase2_Idle_", 1, 6);
 	AddImageVector("Phase2_Boss_Intro_1", L"./Resources/Saint_Joanna/Phase2_Intro_3/", 29, 35);
@@ -396,6 +400,7 @@ void ImageManager::LoadImages()
 	AddImage("deathUI", L"./Resources/deathUI.png");
 	AddImage("goldUI", L"./Resources/goldUI.png");
 	AddImage("enemyUI", L"./Resources/enemyUI.png");
+	AddImage("bossHp", L"./Resources/bossHp.png");
 	AddImage("GamblerHead", L"./Resources/HeadUI/Gambler #54692.png");
 
 

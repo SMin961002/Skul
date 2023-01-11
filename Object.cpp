@@ -42,11 +42,11 @@ void Object::Release()
 	m_components.clear();
 }
 
-void Object::OnCollision(string collisionName, Object* other)
+void Object::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	for (auto iter : m_components)
 	{
-		iter->OnCollision(collisionName, other);
+		iter->OnCollision(coll1,coll2, other);
 	}
 }
 

@@ -65,7 +65,7 @@ void ObjectManager::Update()
 													(coll1->GetCollisionPosY() - coll2->GetCollisionPosY()) * (coll1->GetCollisionPosY() - coll2->GetCollisionPosY()));
 												if (d < coll1->GetRange() + coll2->GetRange())
 												{
-													(*iter)->OnCollision(coll1->GetName(), other);
+													(*iter)->OnCollision(coll1, coll2, other);
 												}
 											}
 										}

@@ -43,7 +43,7 @@ void WorshipLeft::Release()
 {
 }
 
-void WorshipLeft::OnCollision(string collisionName, Object* other)
+void WorshipLeft::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	if (other->GetName() == "player")
 	{
@@ -96,7 +96,7 @@ void WorshipRight::Release()
 {
 }
 
-void WorshipRight::OnCollision(string collisionName, Object* other)
+void WorshipRight::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	if (other->GetName() == "player")
 	{

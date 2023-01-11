@@ -43,9 +43,9 @@ void ResultValue::Release()
 {
 }
 
-void ResultValue::OnCollision(string collisionName, Object* other)
+void ResultValue::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == "Reword")
+	if (coll1->GetName() == "Reword")
 	{
 		if (KEYMANAGER->GetOnceKeyDown('F'))
 		{

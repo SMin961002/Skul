@@ -102,7 +102,7 @@ void CandleFanatic::Update()
 	if (m_effect == true && m_die2 == false && m_hit == false)
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
-		m_collision->Setting(40, m_obj->x + 17, m_obj->y - 20, "Attack");
+		m_collision->Setting(40, m_obj->x + 17, m_obj->y - 20, "hitBox");
 		if ((abs(m_obj->x - OBJECTMANAGER->m_player->GetplayerX()) < 400) || m_state == eAttackReady || m_state == eAttack)
 		{
 			if (m_vimage[eAttackReady]->GetIsImageEnded() == true)
@@ -246,16 +246,16 @@ void CandleFanatic::Release()
 {
 }
 
-void CandleFanatic::OnCollision(string collisionName, Object* other)
+void CandleFanatic::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_collision->GetName())
-	{
-		if (other->GetName() == "player")
-		{
-			//m_attack = true;
-			//m_move = false;
-		}
-	}
+	//if (collisionName == m_collision->GetName())
+	//{
+	//	if (other->GetName() == "player")
+	//	{
+	//		//m_attack = true;
+	//		//m_move = false;
+	//	}
+	//}
 }
 
 
