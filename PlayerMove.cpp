@@ -17,7 +17,7 @@ void Player::Move()
 	{		//##dash 이동식 수정 필요
 		illusionEffectCount += DELTA_TIME;
 
-		if (illusionEffectCount > 0.2)
+		if (illusionEffectCount > 0.18)
 		{
 			if (typeid(*m_nowHead) == typeid(LittleBorn))
 			{
@@ -29,8 +29,8 @@ void Player::Move()
 			}
 			illusionEffectCount = 0;
 		}
-		if (m_isLeft) { m_obj->x -= m_dashSpeed * DELTA_TIME; }
-		else { m_obj->x += m_dashSpeed * DELTA_TIME; }
+		if (m_isLeft) { m_obj->x -= m_dashNowSpeed * DELTA_TIME; }
+		else { m_obj->x += m_dashNowSpeed * DELTA_TIME; }
 		m_obj->y -= 1;
 	}
 	else
@@ -112,7 +112,7 @@ void Player::InputDashKey()
 		{
 			m_jumpping = false;
 			m_nowHead->ResetAttack();
-
+			m_dashNowSpeed = m_dashSpeed;
 			if (m_dashing)
 			{
 				m_dashCount = 2;
