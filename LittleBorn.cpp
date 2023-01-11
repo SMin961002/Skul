@@ -88,7 +88,7 @@ void LittleBorn::ParameterSetting()
 	m_attackCast[0] = false;
 	m_attackCast[1] = false;
 
-	m_tagCoolTime = 0;
+	m_tagCoolTime = 10;
 	m_skillNowCoolA = 0;
 	m_skillNowCoolS = 0;
 	m_skillCoolA = 6;
