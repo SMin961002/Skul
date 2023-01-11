@@ -142,15 +142,6 @@ void Player::Update()
 			}
 		}
 	}
-		if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
-		{
-			if (m_headTagCool == 0)
-			{
-				SOUNDMANAGER->FindSound("Switch")->Play(false);
-				ChangeHead();
-			}
-		}
-	}
 	InputArtifactKey();
 
 	m_playerHitBox->Setting(m_obj->x + 14, m_obj->y - 15);
@@ -274,7 +265,7 @@ void Player::ChangeHead()
 			cout << "스컬 변경 : 리틀본" << endl;
 			break;
 		case eSkulSpecies::eGambler:
-			SOUNDMANAGER->FindSound("GamblerSwitch")->Play(false);
+			SOUNDMANAGER->FindSound("Switch")->Play(false);
 			m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eGambler)];
 			m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
 			m_nowHead->TagAction();
@@ -295,7 +286,7 @@ void Player::OnCollision(string collisionName, Object* other)
 {
 	if (collisionName == m_collAutoAttack->GetName())
 	{
-		if (other->GetName() == "Enemy"|| other->GetName() == "EnemyBoss")
+		if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 		{
 			cout << "적에게공격 - Auto" << endl;
 
