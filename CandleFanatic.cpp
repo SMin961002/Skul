@@ -11,6 +11,7 @@
 #include"Gold.h"
 #include"Hporb.h"
 #include"Effect.h"
+#include"CSound.h"
 
 void CandleFanatic::Init()
 {
@@ -108,6 +109,7 @@ void CandleFanatic::Update()
 			{
 				if (m_state == eAttackReady)
 				{
+					SOUNDMANAGER->FindSound("CandleFanaticFire")->Play(false);
 					OBJECTMANAGER->AddObject("Knife", m_obj->x, m_obj->y - 100, eObject)->AddComponent<FireKnife>();
 					m_isAttack = true;
 				}
@@ -148,10 +150,12 @@ void CandleFanatic::Update()
 
 					if (!m_sercrieffect && 0 == m_isL)
 					{
+						SOUNDMANAGER->FindSound("Sacrifice")->Play(false);
 						EFFECTMANAGER->AddEffect<Secrifice>(m_obj->x + 50, m_obj->y - 20, 0, 1.5);
 					}
 					if (!m_sercrieffect && 1 == m_isL)
 					{
+						SOUNDMANAGER->FindSound("Sacrifice")->Play(false);
 						EFFECTMANAGER->AddEffect<Secrifice>(m_obj->x - 50, m_obj->y - 20, 1, 1.5);
 					}
 					m_sercrieffect = true;
