@@ -27,6 +27,7 @@ void PlayerHit::Init()
 void TeleportationToHead::Init()
 {
 	Effect::Init();
+	SOUNDMANAGER->FindSound("SkulSkill1")->Play(false);
 	m_img = IMAGEMANAGER->AddImageVectorCopy("DeadEffect");
 	m_img->Setting(0.05, false);
 }

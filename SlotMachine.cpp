@@ -2,9 +2,12 @@
 #include "SlotMachine.h"
 #include "Player.h"
 #include "Thunder.h"
+#include"CSound.h"
 
 void SlotMachine::Init()
 {
+
+	SOUNDMANAGER->FindSound("GamblerSwitch")->Play(false);
 	m_obj->y -= 46;
 
 	m_resultExplosion = 0;

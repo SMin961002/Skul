@@ -24,7 +24,18 @@ void Main::Init()
 	SOUNDMANAGER->FindSound("Middle")->SetVolume(60);
 	SOUNDMANAGER->AddSound("Bossphase1", "./Resources/Sound/Bossphase1.wav");
 	SOUNDMANAGER->FindSound("Bossphase1")->SetVolume(60);
-
+	SOUNDMANAGER->AddSound("SkulAttack1", "./Resources/Sound/Skul_Atk 1.wav");
+	SOUNDMANAGER->FindSound("SkulAttack1")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SkulAttack2", "./Resources/Sound/Skul_Atk 2.wav");
+	SOUNDMANAGER->FindSound("SkulAttack2")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SkulSkill1", "./Resources/Sound/SkulSkill.wav");
+	SOUNDMANAGER->FindSound("SkulSkill1")->SetVolume(50);
+	SOUNDMANAGER->AddSound("Switch", "./Resources/Sound/Switch.wav");
+	SOUNDMANAGER->FindSound("Switch")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SkulSwitch", "./Resources/Sound/SkulSwitch.wav");
+	SOUNDMANAGER->FindSound("SkulSwitch")->SetVolume(50);
+	SOUNDMANAGER->AddSound("GamblerSwitch", "./Resources/Sound/GamblerSwitch.wav");
+	SOUNDMANAGER->FindSound("GamblerSwitch")->SetVolume(100);
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
 
