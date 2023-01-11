@@ -327,7 +327,7 @@ void ImageManager::LoadImages()
 	// 1페이즈_떨어지는 구슬
 	AddImageVector("Boss_Baptism_Attack", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Attack/Phase1_Baptism_Attack_", 1, 36);
 	AddImageVector("Boss_Baptism_Projectile", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile/Phase1_Batism_Projectile_", 1, 21);
-	AddImageVector("Boss_Baptism_Projectile_Dewspawn", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile_Despawn/Phase1_Baptism_Projectile_Despawn_", 1, 24);
+	AddImageVector("Boss_Baptism_Projectile_Despawn", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile_Despawn/Phase1_Baptism_Projectile_Despawn_", 1, 24);
 	// 1페이즈_레이저
 	AddImageVector("Boss_Consecration_Start", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/Start/Phase1_Consecration_Start_", 1, 27);
 	AddImageVector("Boss_Consecration_Sign", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/Sign/Phase1_Consecration_Sign_", 1, 23);
