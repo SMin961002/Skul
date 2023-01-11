@@ -26,19 +26,21 @@ private:
 	bool isLazer;
 	float tpX;
 	float tpY;
+
 private:
 	HolyFountainLeft* _left;
 	HolyFountainRight* _right;
 
 	CImage* _imgBossChair;
+	CImage* _imgBossHPBar;
+	CImage* _imgBossHP;
+	CImage* _imgBossHPDamage;
 	// 보스 1페이즈 대화
 	vImage* divineLightEf1;
 	vImage* divineLightEf2;
 	vImage* lazerImg;
 
-
 	vImage* _imgBossTalk;
-
 
 	// 보스 1페이즈 대기 상태
 	vImage* magicCircleImage;
@@ -82,6 +84,7 @@ private:
 	vImage* _imgPhase1BossBarrierSpark;
 	CImage* _imgPhase1BossBarrierCrack;
 	vImage* _imgPhase1BossBarrierCrackImpact;
+
 	bool m_isAttack;
 	int m_bossState;
 	float m_patterTimer;
@@ -166,6 +169,8 @@ protected:
 	vector<WorshipRight*>::iterator _viWorshipRight;
 
 	int rand;
+
+	float _bossHPBarLocate;
 
 public:
 	int _patternCheck;

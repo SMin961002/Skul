@@ -24,6 +24,7 @@ private:
 
 public:
 	float getLeftCurrentHP() { return m_CurrentHP; }
+	float setLeftCurrentHP(float a) { m_CurrentHP = a; }
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;

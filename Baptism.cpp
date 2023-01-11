@@ -15,8 +15,8 @@ void Baptism::Init()
 
 	_collision = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(_collision);
-	_hitCollision = m_obj->AddComponent<CollisionComponent>();
-	m_obj->AddCollisionComponent(_hitCollision);
+	//_hitCollision = m_obj->AddComponent<CollisionComponent>();
+	//m_obj->AddCollisionComponent(_hitCollision);
 
 	_downCheck = false;
 	_randX = MY_UTILITY::getFromIntTo(0, 50);
