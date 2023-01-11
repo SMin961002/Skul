@@ -1,16 +1,17 @@
 #pragma once
 #include "Component.h"
 #include "BossBall.h"
-
+#include "Enemy.h"
 class Baptism;
 class WorshipLeft;
 class WorshipRight;
 class HolyFountainLeft;
 class HolyFountainRight;
 
-class BossObject : public Component
+class BossObject : public Enemy
 {
 private:
+	const float maxHp = 10000;
 	int circleCount = 0;
 	bool m_isMagicCircleImage;
 	int m_talkCount;
@@ -18,6 +19,7 @@ private:
 	float chairY = 0;
 	bool isActive;
 	float alpha = 1;
+	float hitAlpha = 0;
 	float teleprotTimer;
 	bool isDivine = false;
 	bool isPhase3 = false;
@@ -26,7 +28,9 @@ private:
 	bool isLazer;
 	float tpX;
 	float tpY;
+	CImage* bossHpbar;
 	CImage* hpImg;
+	CollisionComponent* coll;
 private:
 	HolyFountainLeft* _left;
 	HolyFountainRight* _right;
@@ -113,8 +117,11 @@ private:
 		eSoulChaseA,
 		eSoulChaseR,
 		eSoulChaseE,
+		eDeathR,
+		eDeathL,
 		eEnd
 	};
+	bool isEnd;
 	vImage* m_phase2Img[eEnd];
 	vImage* m_teleportEffect;
 	int m_phase2Patter;
@@ -157,7 +164,6 @@ protected:
 	bool _isBaptismCheck;
 	float _baptismDeltaTime;
 
-
 protected:
 	bool _isWorshipCheck;
 	bool _isWorshipFirstWaveOn;
@@ -167,19 +173,22 @@ protected:
 	float _worshipDeltaTime;
 
 
+
 	int rand;
 
 	float _bossHPBarLocate;
 
 public:
 	int _patternCheck;
-
+	vImage* deathImg;
 	bool getIdleOn() { return _isIdleOn; }
 
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	virtual void HitEnemy(float dmg, float time) override;
+
 
 	BossObject() {}
 	~BossObject() {}

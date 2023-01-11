@@ -15,6 +15,20 @@ void Lazer::Init()
 	Boss_Consecration_Loop"
 	Boss_Consecration_End",
 	*/
+	collll1 = m_obj->AddComponent<CollisionComponent>();
+	collll2 = m_obj->AddComponent<CollisionComponent>();
+	collll3 = m_obj->AddComponent<CollisionComponent>();
+	collll4 = m_obj->AddComponent<CollisionComponent>();
+
+	collll1->SetIsActive(false);
+	collll2->SetIsActive(false);
+	collll3->SetIsActive(false);
+	collll4->SetIsActive(false);
+
+	m_obj->AddCollisionComponent(collll1);
+	m_obj->AddCollisionComponent(collll2);
+	m_obj->AddCollisionComponent(collll3);
+	m_obj->AddCollisionComponent(collll4);
 	m_state = eStart;
 }
 

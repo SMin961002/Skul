@@ -46,9 +46,9 @@ void Hporb::Release()
 {
 }
 
-void Hporb::OnCollision(string collisionName, Object* other)
+void Hporb::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_collision->GetName())
+	if (coll1->GetName() == m_collision->GetName())
 	{
 		if (other->GetName() == "player")
 		{

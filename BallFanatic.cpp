@@ -36,6 +36,6 @@ void BallFanatic::Release()
 {
 }
 
-void BallFanatic::OnCollision(string collisionName, Object* other)
+void BallFanatic::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 }

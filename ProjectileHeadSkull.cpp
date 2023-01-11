@@ -102,9 +102,9 @@ void ProjectileHeadSkull::On()
 	m_on = true;
 }
 
-void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
+void ProjectileHeadSkull::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_colHeadSkull->GetName())
+	if (coll1->GetName() == m_colHeadSkull->GetName())
 	{
 		if (!m_hit)
 		{

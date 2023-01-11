@@ -15,10 +15,12 @@ void BossCircle::Init()
 	m_state = eCreate;
 	coll = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(coll);
+	hitcoll = 0;
 }
 
 void BossCircle::Update()
 {
+	hitcoll += DELTA_TIME;
 	coll->Setting(50, m_obj->x, m_obj->y);
 	if (img[eCreate]->GetIsImageEnded() == true)
 	{
@@ -56,10 +58,20 @@ void BossCircle::Release()
 {
 }
 
-void BossCircle::OnCollision(string collisionName, Object* other)
+void BossCircle::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	if (other->GetName() == "player")
 	{
-		//other->GetComponent<Player>()->HitPlayerKnockBack(25, -25);
+
+		Player* ply = other->GetComponent<Player>();
+		ply->HitPlayerMagicAttack(10);
+		if (other->x > m_obj->x)
+		{
+			other->GetComponent<Player>()->HitPlayerKnockBack(25, -25);
+		}
+		else
+		{
+			other->GetComponent<Player>()->HitPlayerKnockBack(-25, -25);
+		}
 	}
 }

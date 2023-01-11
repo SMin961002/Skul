@@ -99,7 +99,7 @@ void Fanatic::Update()
 	if (m_effect == true)
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
-		m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "HitCollision");
+		m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "hitBox");
 		if (m_hit)
 		{
 			m_hpbartimer += DELTA_TIME;
@@ -261,10 +261,11 @@ void Fanatic::Release()
 {
 }
 
-void Fanatic::OnCollision(string collisionName, Object* other)
+void Fanatic::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_hitpointCollision->GetName())
+	if (coll1->GetName()  == m_hitpointCollision->GetName())
 	{
+		if(coll2->GetName() == "PlayerHitRange")
 		if (other->GetName() == "player")
 		{
 			if (m_attackcount < 1)

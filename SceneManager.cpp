@@ -140,6 +140,27 @@ bool SceneManager::FadeIn(float t, function<void()> func, int flag)
 	return false;
 }
 
+bool SceneManager::FadeInColor(float t, function<void()> func, int flag)
+{
+	if (this->flag != flag)
+	{
+		fadeImage->SetAlpha(1.f);
+		this->flag = flag;
+	}
+
+	fadeImage->SetAlpha(fadeImage->GetAlpha() - t);
+
+	if (fadeImage->GetAlpha() <= 0)
+	{
+		func();
+		return true;
+	}
+
+	IMAGEMANAGER->CenterRender(fadeImage, WINSIZE_X / 2 + IMAGEMANAGER->GetCameraPosition().x, WINSIZE_Y / 2 + IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,fadeImage->GetAlpha() }, 2, 2, 0);
+
+	return false;
+}
+
 bool SceneManager::FadeOut(float t, function<void()> func, int flag)
 {
 	if (this->flag != flag)

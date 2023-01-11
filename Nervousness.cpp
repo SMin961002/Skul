@@ -41,7 +41,7 @@ void LeftImpact::Release()
 	m_obj->ObjectDestroyed();
 }
 
-void LeftImpact::OnCollision(string collisionName, Object* other)
+void LeftImpact::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	if (other->GetName() == "player")
 	{
@@ -97,7 +97,7 @@ void RightImpact::Release()
 	m_obj->ObjectDestroyed();
 }
 
-void RightImpact::OnCollision(string collisionName, Object* other)
+void RightImpact::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	if (other->GetName() == "player")
 	{

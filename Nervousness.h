@@ -13,7 +13,7 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 
-	virtual void OnCollision(string collisionName, Object* other) override;
+	virtual void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other) override;
 
 	LeftImpact() {}
 	~LeftImpact() {}
@@ -31,7 +31,7 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 
-	virtual void OnCollision(string collisionName, Object* other) override;
+	virtual void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other) override;
 
 	RightImpact() {}
 	~RightImpact() {}

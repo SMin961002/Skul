@@ -32,7 +32,7 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 	void CollisionUpdate();
-	virtual void OnCollision(string collisionName, Object* other)override;
+	virtual void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)override;
 
 	void ResultAndImageSetting();
 	int GetSuccess() { return m_resultSuccess; }

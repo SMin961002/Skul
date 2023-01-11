@@ -10,5 +10,8 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	bool isHit = false;
+	CollisionComponent* coll;
+	void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)  override;
 };
 

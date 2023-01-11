@@ -24,7 +24,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
-	virtual void OnCollision(string collisionName, Object* other)override;
+	virtual void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other) override;
 
 	Card() {}
 	~Card() {}
@@ -47,5 +47,6 @@ public:
 	//성공0, 실패 -1, 대성공 1
 	void Setting(int success);
 	void SetShoot();
-	virtual void OnCollision(string collisionName, Object* other)override;
+	virtual void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)override;
+
 };

@@ -30,6 +30,6 @@ public:
 	virtual void Render() override;
 
 	void CollisionUpdate();
-	virtual void OnCollision(string collisionName, Object* other)override;
+	virtual void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)override;
 };
 

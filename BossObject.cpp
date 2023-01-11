@@ -7,12 +7,14 @@
 #include "Player.h"
 #include "HolyFountain.h"
 #include "BossCircle.h"
+#include "Gold.h"
 #include "Lazer.h"
 #include "DivineImpact.h"
 #include "Phase3B.h"
 #include"CSound.h"
 void BossObject::Init()
 {
+	bossHpbar = IMAGEMANAGER->FindImage("bossHp");
 	hpImg = IMAGEMANAGER->FindImage("hpBar");
 	isMove = false;
 	lazerCount = 0;
@@ -41,11 +43,16 @@ void BossObject::Init()
 	m_teleportEffect->Setting(0.07f, false);
 
 	m_patterTimer = 0;
-
+	m_currenthp = 10000;
 	chairY = m_obj->y;
 	chairX = m_obj->x;
 	m_isAttack = false;
 	m_phase2Patter = 0;
+
+	coll = m_obj->AddComponent<CollisionComponent>();
+	m_obj->AddCollisionComponent(coll);
+	coll->SetIsActive(false);
+
 	/*
 Vector("",
 Vector(""
@@ -55,8 +62,13 @@ Vector("Boss_Barrier_Impact", L"./
 Vector("Boss_Barrier_Spark", L"./R
 ("Boss_Barrier_Crack", L"./Resourc
 Vector("Boss_Barrier_Crack_Impact"
-
+Phase2_Death_Ready
+Phase2_DeathLoop",
 	*/
+	
+
+	deathImg = IMAGEMANAGER->AddImageVectorCopy("Phase2_Death_Effect");
+	deathImg->Setting(0.1, false);
 	_imgPhase1BossBarrierIntroFront = IMAGEMANAGER->AddImageVectorCopy("Boss_Barrier_Intro_Front");
 	_imgPhase1BossBarrierIntroFront->Setting(0.1, false);
 	_imgPhase1BossBarrierIntroBehind = IMAGEMANAGER->AddImageVectorCopy("Boss_Barrier_Intro_Behind");
@@ -90,6 +102,11 @@ Vector("Boss_Barrier_Crack_Impact"
 	m_phase2Img[eIdle] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_Idle");
 	m_phase2Img[eIdle]->Setting(0.15, true);
 
+	m_phase2Img[eDeathR] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Death_Ready");
+	m_phase2Img[eDeathR]->Setting(0.3, false);
+	m_phase2Img[eDeathL] = IMAGEMANAGER->AddImageVectorCopy("Phase2_DeathLoop");
+	m_phase2Img[eDeathL]->Setting(0.3f, false);
+
 	m_phase2Img[eDivineImpactA] = IMAGEMANAGER->AddImageVectorCopy("Phase2_DivineImpact_Attack_Loop");
 	m_phase2Img[eDivineImpactA]->Setting(0.1, false);
 	m_phase2Img[eDivineImpactE] = IMAGEMANAGER->AddImageVectorCopy("Phase2_DivineImpact_End");
@@ -115,7 +132,7 @@ Vector("Boss_Barrier_Crack_Impact"
 	m_phase2Img[eCreateBallE] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_CreateBall_End");
 	m_phase2Img[eCreateBallE]->Setting(0.15, false);
 
-	m_page = 0;
+	m_page = 1;
 	m_phase2Img[eSoulChaseR] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_Ready");
 	m_phase2Img[eSoulChaseR]->Setting(0.1, false);
 	m_phase2Img[eSoulChaseA] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_Attack");
@@ -154,6 +171,7 @@ Vector("Boss_Barrier_Crack_Impact"
 	_imgPhase1BossChoiceEnd = IMAGEMANAGER->FindImageVector("Boss_Choice_End");
 	_imgPhase1BossChoiceEnd->Setting(0.1, false);
 
+	hitAlpha = 0;
 	_imgPhase1BossCastingReady = IMAGEMANAGER->FindImageVector("Boss_Casting_Ready");
 	_imgPhase1BossCastingReady->Setting(0.1, false);
 	_imgPhase1BossCastingAttack = IMAGEMANAGER->FindImageVector("Boss_Casting_Attack");
@@ -195,10 +213,20 @@ Vector("Boss_Barrier_Crack_Impact"
 	_castingMotionDeltaTime = 0;
 	_consecrationDeltaTime = 0;
 
+	m_currenthp = maxHp;
+
 }
 
 void BossObject::Update()
 {
+	if (KEYMANAGER->GetOnceKeyDown(VK_F1))
+	{
+		m_currenthp -= 10000;
+	}
+	if (hitAlpha >= 0)
+	{
+		hitAlpha -= 0.05;
+	}
 	if (_left != nullptr)
 	{
 		if (_left->getLeftCurrentHP() <= 0)
@@ -590,7 +618,7 @@ void BossObject::Render()
 			}
 		}
 	}
-	else
+	else if (m_page == 1)
 	{
 		if (m_isAttack == true)
 		{
@@ -656,10 +684,21 @@ void BossObject::Render()
 		if (m_bossState == eIntro1 || m_bossState == eIntro2)
 		{
 			m_phase2Img[m_bossState]->CenterRender(m_obj->x + 20, m_obj->y - 20, 1.8, 1.8, 0, 0, alpha);
+			IMAGEMANAGER->CenterRender(m_phase2Img[m_bossState]->GetNowImage(), m_obj->x + 20, m_obj->y - 20, { 255,255,255,hitAlpha }, 1.8, 1.8);
+			_bossHPBarLocate = -60;
+
 		}
 		else
 		{
-			m_phase2Img[m_bossState]->CenterRender(m_obj->x - 3, m_obj->y + 25, 1.8, 1.8, 0, 0, alpha);
+			if (_bossHPBarLocate <= 50)
+			{
+				_bossHPBarLocate += DELTA_TIME * 50;
+			}
+			if (m_bossState != -1)
+			{
+				m_phase2Img[m_bossState]->CenterRender(m_obj->x - 3, m_obj->y + 25, 1.8, 1.8, 0, 0, alpha);
+				IMAGEMANAGER->CenterRender(m_phase2Img[m_bossState]->GetNowImage(), m_obj->x - 3, m_obj->y + 25, { 255,255,255,hitAlpha }, 1.8, 1.8);
+			}
 		}
 	}
 	if (m_isMagicCircleImage == true)
@@ -739,6 +778,60 @@ void BossObject::Render()
 		}
 	}
 
+	if (m_page == 1)
+	{
+		if (m_currenthp <= 0)
+		{
+			m_currenthp = 0;
+			m_page = 2;
+			m_bossState = eDeathR;
+		}
+		IMAGEMANAGER->UICenterRender(bossHpbar, WINSIZE_X / 2, _bossHPBarLocate, 2, 2, 0);
+		IMAGEMANAGER->UIRender(hpImg, 277, _bossHPBarLocate, 547.f / maxHp * m_currenthp, 2.6);
+	}
+
+	if (m_page == 2)
+	{
+		_bossHPBarLocate -= DELTA_TIME * 50;
+		if (m_bossState != -1)
+			m_phase2Img[m_bossState]->CenterRender(m_obj->x - 3, m_obj->y + 25, 1.8, 1.8, 0, 0, alpha);
+		IMAGEMANAGER->UICenterRender(bossHpbar, WINSIZE_X / 2, _bossHPBarLocate, 2, 2, 0);
+		IMAGEMANAGER->UIRender(hpImg, 277, _bossHPBarLocate, 547.f / maxHp * m_currenthp, 2.6);
+		if (m_bossState == eDeathR)
+		{
+			if (m_phase2Img[m_bossState]->GetIsImageEnded() == true)
+			{
+				m_bossState = eDeathL;
+			}
+		}
+		if (m_bossState == eDeathL)
+		{
+
+		}
+	}
+	if (isEnd == false)
+	{
+		if (m_phase2Img[eDeathL]->GetIsImageEnded() == true)
+		{
+			if (m_bossState != -1)
+			{
+				for (int i = 0; i < 100; i++)
+				{
+					OBJECTMANAGER->AddObject("gold", m_obj->x, m_obj->y, eBossObject)->AddComponent<Gold>();
+				}
+			}
+			m_bossState = -1;
+			SCENEMANAGER->FadeInColor(0.005, [&]() {isEnd = true; }, 5611);
+			deathImg->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
+
+			if (isEnd == true)
+			{
+
+			}
+		}
+	}
+
+
 	//_imgPhase1BossBarrierIntroBehind;
 	//_imgPhase1BossBarrierLoopFront;
 	//_imgPhase1BossBarrierLoopBehind;
@@ -751,8 +844,23 @@ void BossObject::Release()
 {
 }
 
+void BossObject::HitEnemy(float dmg, float time)
+{
+	m_currenthp -= dmg;
+	hitAlpha = 1;
+	if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
+	{
+		EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 0, 1.5);
+	}
+	else
+	{
+		EFFECTMANAGER->AddEffect<SkulAttack>(m_obj->x - 5, m_obj->y - 10, 1, 1.5);
+	}
+}
+
 void BossObject::Page_2()
 {
+	coll->Setting(100, m_obj->x + 50, m_obj->y + 80, "hitBox");
 	if (m_phase2Patter == 1)
 	{
 		if (m_obj->y < 200)
@@ -765,11 +873,14 @@ void BossObject::Page_2()
 	else if (m_phase2Patter == 2)
 	{
 		m_patterTimer += DELTA_TIME;
+		coll->SetIsActive(true);
+
 		if (m_patterTimer > 1)
 		{
 			m_phase2Patter = 3;
 			m_patterTimer = 0;
 		}
+
 	}
 	else if (m_phase2Patter == 3)
 	{

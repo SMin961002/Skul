@@ -94,7 +94,8 @@ public:
 	virtual void Render() override;
 	virtual void UIRender() override;
 
-	virtual void OnCollision(string collisionName, Object* other) override;
+	virtual void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other) override;
+
 	void InputArtifactKey();
 
 	//↓====PlayerMove.cpp에 있습니다====↓//

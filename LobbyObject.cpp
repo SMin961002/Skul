@@ -245,9 +245,9 @@ void Elevator::Release()
 {
 }
 
-void Elevator::OnCollision(string collisionName, Object* other)
+void Elevator::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == "elevator")
+	if (coll1->GetName() == "elevator")
 	{
 		if (other->GetName()== "player")
 		{

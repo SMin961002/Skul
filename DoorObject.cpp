@@ -128,9 +128,9 @@ void DoorObject::UIRender()
 	}
 }
 
-void DoorObject::OnCollision(string collisionName, Object* other)
+void DoorObject::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_coll->GetName())
+	if (coll1->GetName() == m_coll->GetName())
 	{
 		if (m_isClear == true)
 		{

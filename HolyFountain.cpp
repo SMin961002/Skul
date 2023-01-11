@@ -37,7 +37,7 @@ void HolyFountainLeft::Update()
 	}
 
 
-	_collisionLeft->Setting(50, m_obj->x + 30, m_obj->y + 50, "Attack");
+	_collisionLeft->Setting(50, m_obj->x + 30, m_obj->y + 50, "hitBox");
 
 	left->isLeftDes = m_CurrentHP <= 0;
 	
@@ -122,7 +122,7 @@ void HolyFountainRight::Update()
 	}
 
 
-	_collisionRight->Setting(50, m_obj->x + 30, m_obj->y + 50, "Attack");
+	_collisionRight->Setting(50, m_obj->x + 30, m_obj->y + 50, "hitBox");
 
 	right->isRightDes = m_CurrentHP <= 0;
 

@@ -308,7 +308,7 @@ void Roulette::CollisionUpdate()
 		}
 	}
 }
-void Roulette::OnCollision(string collisionName, Object* other)
+void Roulette::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	bool hited = false;
 	for (auto iter : m_CollObjList)

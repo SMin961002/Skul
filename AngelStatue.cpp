@@ -105,7 +105,7 @@ void AngelStatue::Update()
 
 		m_state = eIdle;
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
-		m_collision->Setting(100, m_obj->x + 48, m_obj->y - 30, "Attack");
+		m_collision->Setting(100, m_obj->x + 48, m_obj->y - 30, "hitBox");
 
 		if (m_attack == true)
 		{
@@ -212,11 +212,10 @@ void AngelStatue::Release()
 }
 
 
-void AngelStatue::OnCollision(string collisionName, Object* other)
+void AngelStatue::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_collision->GetName())
+	if (coll1->GetName() == m_collision->GetName())
 	{
-
 		if (other->GetName() == "player")
 		{
 			//other->GetComponent<Player>()-플레이어 상태쉉
@@ -226,17 +225,20 @@ void AngelStatue::OnCollision(string collisionName, Object* other)
 		}
 	}
 
-	if (collisionName == m_hitpointcollision->GetName())
+	if (coll1->GetName() == m_hitpointcollision->GetName())
 	{
-		if (other->GetName() == "player")
+		if (coll2->GetName() == "PlayerHitRange")
 		{
-			//m_hitpoint = true;
-			if (m_attackcount < 1)
+			if (other->GetName() == "player")
 			{
-				Player* ply = other->GetComponent<Player>();
-				ply->HitPlayerMagicAttack(1);
-				m_hiteffecttimer = 0;
-				m_attackcount = 1;
+				//m_hitpoint = true;
+				if (m_attackcount < 1)
+				{
+					Player* ply = other->GetComponent<Player>();
+					ply->HitPlayerMagicAttack(1);
+					m_hiteffecttimer = 0;
+					m_attackcount = 1;
+				}
 			}
 		}
 	}

@@ -1,10 +1,7 @@
 #pragma once
 class Enemy : public Component
 {
-
 private:
-
-	
 
 protected:
 	float m_maxhp; // 멤버변수
@@ -13,7 +10,6 @@ protected:
 	float m_attack; 
 	float m_power;
 	Effect* effect;
-
 
 public:
 	// Component을(를) 통해 상속됨

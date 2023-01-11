@@ -16,7 +16,7 @@ public:
 	virtual void Render() override;
 
 	void CollisionUpdate();
-	virtual void OnCollision(string collisionName, Object* other)override;
+	virtual void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)override;
 
 	//BigHit여부를 전달받고 그에 따라 세팅 및 발동된다.
 	void Setting(bool isBigHit)

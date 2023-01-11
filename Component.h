@@ -1,6 +1,7 @@
 #pragma once
 
 class Object;
+class CollisionComponent;
 class Component
 {
 protected:
@@ -16,7 +17,7 @@ public:
 	virtual void Update() PURE;
 	virtual void Render() PURE;
 	virtual void Release() PURE;
-	virtual void OnCollision(string collisionName, Object* other);
+	virtual void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other);
 	virtual void HitEnemy(float dmg, float time) {}
 	virtual void UIRender() {}
 	bool GetIsActive()

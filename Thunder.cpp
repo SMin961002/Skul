@@ -36,7 +36,7 @@ void Thunder::CollisionUpdate()
 	}
 }
 
-void Thunder::OnCollision(string collisionName, Object* other)
+void Thunder::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	bool hited = false;
 	for (auto iter : m_CollObjList)

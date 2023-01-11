@@ -33,6 +33,6 @@ public:
 	void Off(); // 머리 안 던졌을때
 	void On(); // 머리 던졌을때
 
-	virtual void OnCollision(string collisionName, Object* other) override;
+	virtual void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other) override;
 };
 

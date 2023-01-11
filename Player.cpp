@@ -279,19 +279,21 @@ void Player::ChangeHead()
 	}
 }
 
-void Player::OnCollision(string collisionName, Object* other)
+void Player::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_collAutoAttack->GetName())
+	if (coll1->GetName() == m_collAutoAttack->GetName())
 	{
-		if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
+		if (coll2->GetName() == "hitBox")
+			if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 		{
 			cout << "적에게공격 - Auto" << endl;
 
 			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
 		}
 	}//end collision Name BasicAttack
-	else if (collisionName == m_collSkillTag->GetName())
+	else if (coll1->GetName() == m_collSkillTag->GetName())
 	{
+		if(coll2->GetName() == "hitBox")
 		if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 		{
 			cout << "적에게공격 - Tag" << endl;

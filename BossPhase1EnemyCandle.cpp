@@ -54,7 +54,7 @@ void BossPhase1EnemyCandle::Update()
 	else
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
-		m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "HitCollision");
+		m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "hitBox");
 		if (abs(m_obj->x - OBJECTMANAGER->m_player->GetplayerX()) < 200 || m_state == eAttackReady || m_state == eAttack)
 		{
 			if (img[eIdle]->GetIsImageEnded() == true)

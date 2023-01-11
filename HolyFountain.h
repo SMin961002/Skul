@@ -32,7 +32,6 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 	virtual void HitEnemy(float dmg, float time);
-
 	HolyFountainLeft() {}
 	~HolyFountainLeft() {}
 };

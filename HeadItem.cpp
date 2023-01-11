@@ -21,14 +21,14 @@ void HeadItem::Update()
 
 void HeadItem::Render()
 {
-	IMAGEMANAGER->CenterRender(img, m_obj->x, m_obj->y, 2, 2,0,0);
+	IMAGEMANAGER->CenterRender(img, m_obj->x, m_obj->y, 2, 2, 0, 0);
 }
 
 void HeadItem::Release()
 {
 }
 
-void HeadItem::OnCollision(string collisionName, Object* other)
+void HeadItem::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	if (other->GetName() == "player")
 	{

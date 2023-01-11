@@ -12,8 +12,14 @@ public:
 	vImage* img[eEnd];
 	int m_state;
 	Lazer() {}
-	~Lazer() { }
+	~Lazer() {}
+
+	CollisionComponent* collll1;
+	CollisionComponent* collll2;
+	CollisionComponent* collll3;
+	CollisionComponent* collll4;
 	// Component을(를) 통해 상속됨
+
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;

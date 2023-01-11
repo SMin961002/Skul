@@ -14,7 +14,7 @@ void BossScene::Init()
 	_imgFence = IMAGEMANAGER->FindImage("Fence");
 	IMAGEMANAGER->SetCameraPosition(0, 0);
 
-	OBJECTMANAGER->AddObject("Joanna", 850, 475, eBoss)->AddComponent<BossObject>();
+	OBJECTMANAGER->AddObject("Enemy", 850, 475,  eBoss)->AddComponent<BossObject>();
 
 	FILEMANAGER->SetNowStageFile("map_1");
 	FILEMANAGER->TileFileRead(&SCENEMANAGER->m_tiles);
@@ -35,13 +35,8 @@ void BossScene::Init()
 		}
 	}
 
-
-
-
 	//OBJECTMANAGER->AddObject("Enemy", 500, 670, eEnemy)->AddComponent<BossPhase1EnemyCandle>();
 	//OBJECTMANAGER->AddObject("Enemy", 600, 670, eEnemy)->AddComponent<BossPhase1EnemyFnatic>();
-
-
 }
 
 void BossScene::Update()

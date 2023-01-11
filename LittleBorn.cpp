@@ -463,7 +463,7 @@ void LittleBorn::OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg,
 	{
 		enemy->HitEnemy(dmg, delay);
 		m_CollObjList.push_back(obj);
-		OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(10);
+		OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBossObject)->AddComponent<HitDamageEffect>()->Setting(10);
 	}
 }
 
@@ -478,7 +478,7 @@ void LittleBorn::OnCollisionTagAttack(Component* enemy, Object* obj, float dmg, 
 	{
 		enemy->HitEnemy(dmg, delay);
 		m_CollObjList.push_back(obj);
-		OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(10);
+		OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBossObject)->AddComponent<HitDamageEffect>()->Setting(10);
 
 		Enemy* e = obj->GetComponent<Enemy>();
 		if (e != nullptr)

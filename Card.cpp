@@ -72,7 +72,7 @@ void Card::Release()
 {
 }
 
-void Card::OnCollision(string collisionName, Object* other)
+void Card::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	if (other->GetName() == "Enemy"||other->GetName() == "EnemyBoss")
 	{
@@ -212,7 +212,7 @@ void BlackJackCard::SetShoot()
 		EFFECTMANAGER->AddEffect<BlackJackSpark>(m_obj->x, m_obj->y, m_isLeft, 2);
 }
 
-void BlackJackCard::OnCollision(string collisionName, Object* other)
+void BlackJackCard::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 	{

@@ -43,7 +43,7 @@ void TentaclesOfLight::Init()
 void TentaclesOfLight::Update()
 {
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
-	m_collision->Setting(40, m_obj->x + 17, m_obj->y - 20, "Attack");
+	m_collision->Setting(40, m_obj->x + 17, m_obj->y - 20, "hitBox");
 
 	if (m_attacksound == true)
 	{
@@ -113,9 +113,9 @@ void TentaclesOfLight::Release()
 }
 
 
-void TentaclesOfLight::OnCollision(string collisionName, Object* other)
+void TentaclesOfLight::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (collisionName == m_collision->GetName())
+	if (coll1->GetName() == m_collision->GetName())
 	{
 		if (other->GetName() == "player")
 		{
@@ -142,27 +142,28 @@ void TentaclesOfLight::OnCollision(string collisionName, Object* other)
 		}
 	}
 
-	if (collisionName == m_hitpointcollision->GetName())
+	if (coll1->GetName() == m_hitpointcollision->GetName())
 	{
-		if (other->GetName() == "player")
-		{
-
-			if (m_attackcount < 1)
+		if (coll2->GetName() == "PlayerHitRange")
+			if (other->GetName() == "player")
 			{
-				Player* ply = other->GetComponent<Player>();
-				ply->HitPlayerMagicAttack(10);
-				ply->HitPlayerEffect();
-				if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+
+				if (m_attackcount < 1)
 				{
-					ply->HitPlayerKnockBack(-15, -5);
+					Player* ply = other->GetComponent<Player>();
+					ply->HitPlayerMagicAttack(10);
+					ply->HitPlayerEffect();
+					if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+					{
+						ply->HitPlayerKnockBack(-15, -5);
+					}
+					else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+					{
+						ply->HitPlayerKnockBack(15, -5);
+					}
+					m_attackcount = 1;
 				}
-				else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
-				{
-					ply->HitPlayerKnockBack(15, -5);
-				}
-				m_attackcount = 1;
 			}
-		}
 	}
 }
 

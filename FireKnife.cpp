@@ -44,7 +44,7 @@ void FireKnife::Release()
 {
 }
 
-void FireKnife::OnCollision(string collisionName, Object* other)
+void FireKnife::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
 	if (other->GetName() == "player")
 	{
