@@ -22,12 +22,15 @@ class AngelStatue : public Enemy
 	bool m_hit;
 	bool m_die;
 	bool m_effect;
+	bool m_attacksound;
+	bool m_attacksound2;
 
 	int m_state2;
 	int m_state;
 	int cheack;
 	int m_attackcount;
 
+	float m_attacksoundtimer;
 	float m_hitpoint;
 	float m_dietimer;
 	float m_hiteffecttimer;

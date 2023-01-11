@@ -111,7 +111,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_RouletteBigShotCircle", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShotCircle/", 1, 8);
 	AddImageVector("Gambler_Roulette_BlackBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Black_BigHit/", 1, 91);
 	AddImageVector("Gambler_Roulette_RedBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Red_BigHit/", 1, 49);
-	AddImageVector("Gambler_SlotMachine", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/", 1, 8);
+	AddImageVector("Gambler_SlotMachine", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/", 1, 4);
 	AddImageVector("Gambler_SlotMachine_Explosion", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Explosion/", 1, 17);
 	AddImageVector("Gambler_SlotMachine_ExplosionBigHit", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/BigHitExplosion/", 1, 17);
 	AddImageVector("Gambler_SlotMachine_Thunder", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Explosion/", 1, 17);
@@ -394,6 +394,10 @@ void ImageManager::LoadImages()
 	AddImage("FireKnife", L"./Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/FireKnife.png");
 	AddImage("hpBar", L"./Resources/hpBar.png");
 	AddImage("deathUI", L"./Resources/deathUI.png");
+	AddImage("goldUI", L"./Resources/goldUI.png");
+	AddImage("enemyUI", L"./Resources/enemyUI.png");
+	AddImage("GamblerHead", L"./Resources/HeadUI/Gambler #54692.png");
+
 
 
 	//==========================================================================================================
@@ -627,4 +631,29 @@ void ImageManager::LoadImages()
 	AddImage("IntroTitle", L"./Resources/IntroTitle.png");
 	AddImage("IntroClick", L"./Resources/IntroClick.png");
 	AddImage("IntroBg", L"./Resources/IntroBg.png");
+
+	// 엔딩신 이미지
+	AddImage("Ending_BG_SmallMountain", L"./Resources/EndingScene/BG/SmallMountain.png");
+	AddImage("Ending_BG_BigMountain", L"./Resources/EndingScene/BG/BigMountain.png");
+	AddImage("Ending_BG_SmallCloud", L"./Resources/EndingScene/BG/SmallCloud.png");
+	AddImage("Ending_BG_MediumCloud", L"./Resources/EndingScene/BG/MediumCloud.png");
+	AddImage("Ending_BG_BigCloud", L"./Resources/EndingScene/BG/BigCloud.png");
+	AddImage("Ending_BG_Sunset", L"./Resources/EndingScene/BG/Sunset.png");
+
+	AddImage("Ending_Castle_Front", L"./Resources/EndingScene/Castle/EndingCastle_Front.png");
+	AddImage("Ending_Castle_Back", L"./Resources/EndingScene/Castle/EndingCastle_Back.png");
+	
+	//AddImageVector("Ending_Cat_Idle");
+	AddImageVector("Ending_Cat_Walk", L"./Resources/EndingScene/Cat/Walk/Cat_Walk_", 1, 6);
+	//AddImageVector("Ending_Cat_Polymorph");
+	//AddImage("Ending_Cat_Polymorph_Loop");
+	//
+	AddImage("Ending_Duo_Talk_Loop", L"./Resources/EndingScene/Duo/Talk Loop/Duo_Talk.png");
+	//AddImageVector("Ending_Duo_SeeWitch");
+	//AddImage("Ending_Duo_SeeWitch_Loop");
+	//AddImageVector("Ending_Duo_ReturnKing");
+	//AddImage("Ending_Duo_ReturnKing_Loop");
+	//AddImageVector("Ending_Duo_ReturnSkul");
+	//AddImageVector("Ending_Duo_DuoThanks");
+	//AddImage("Ending_Duo_DuoThanks_Loop");
 }

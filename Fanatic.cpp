@@ -73,6 +73,10 @@ void Fanatic::Init()
 
 void Fanatic::Update()
 {
+	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
+	{
+		m_obj->y += 1;
+	}
 	if (m_effect == false)
 	{
 		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(false);

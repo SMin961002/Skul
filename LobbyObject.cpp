@@ -7,8 +7,6 @@ void Spider::Init()
 {
 	_img = IMAGEMANAGER->AddImageVectorCopy("Spider");
 	_img->Setting(0.1f, true);
-	GAMEMANAGER->enemyCount++;
-
 }
 
 void Spider::Update()
@@ -22,8 +20,6 @@ void Spider::Render()
 
 void Spider::Release()
 {
-	GAMEMANAGER->enemyCount--;
-
 }
 
 void LobbyNpc1::Init()

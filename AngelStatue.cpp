@@ -11,13 +11,16 @@
 #include"CSound.h"
 void AngelStatue::Init()
 {
-	m_maxhp = 100.0f;
-	m_currenthp = 100.0f;
+	m_maxhp = 200.0f;
+	m_currenthp = 200.0f;
 	m_die = false;
 	m_hit = false;
 	m_effect = false;
 	m_attackcount = 0;
-
+	m_attacksound = false;
+	m_attacksound2 = false;
+	m_attacksoundtimer = 0;
+	GAMEMANAGER->enemyCount++;
 	m_vimage[eIdle] = IMAGEMANAGER->AddImageVectorCopy("AStatue_Idle");
 	m_vimage[eIdle]->Setting(0.3f, true);
 
@@ -59,6 +62,19 @@ void AngelStatue::Init()
 
 void AngelStatue::Update()
 {
+	m_attacksoundtimer += DELTA_TIME;
+	if (m_attacksound == true)
+	{
+		SOUNDMANAGER->FindSound("AngleStatueAttackReady")->Play(false);
+		m_attacksound = false;
+		m_attacksoundtimer = 0;
+		m_attacksound2 = true;
+	}
+	if (m_attacksoundtimer >= 2.9 && m_attacksound2 == true)
+	{
+		SOUNDMANAGER->FindSound("AngleStatueAttack")->Play(false);
+		m_attacksound2 = false;
+	}
 	if (m_effect == false)
 	{
 
@@ -102,16 +118,14 @@ void AngelStatue::Update()
 		}
 		if (m_vimage[eAttackReadyEffect]->GetIsImageEnded())
 		{
-			SOUNDMANAGER->FindSound("AngleStatueAttackReady")->Play(false);
+
 			if (m_attack == true)
 			{
-				SOUNDMANAGER->FindSound("AngleStatueAttack")->Play(false);
 				m_state2 = eAttackEffect;
 			}
 		}
 		if (m_vimage[eAttackEffect]->GetFrame() >= 1 && m_vimage[eAttackEffect]->GetFrame() <= 16)
 		{
-
 			m_hitpointcollision->SetIsActive(true);
 			m_hitpointcollision->Setting(150, m_obj->x + 70, m_obj->y - 10, "AttackPoint");
 		}
@@ -123,6 +137,7 @@ void AngelStatue::Update()
 		if (m_vimage[eAttackEffect]->GetIsImageEnded())
 		{
 			m_attack = false;
+			m_collision->SetIsActive(true);
 			m_vimage[eAttack]->Reset();
 			m_vimage[eAttackReadyEffect]->Reset();
 			m_vimage[eEndAttack]->Reset();
@@ -184,11 +199,16 @@ void AngelStatue::Render()
 
 		}
 	}
+	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
+	{
+		m_obj->y += 1;
+	}
 }
 
 
 void AngelStatue::Release()
 {
+	GAMEMANAGER->enemyCount--;
 }
 
 
@@ -196,10 +216,13 @@ void AngelStatue::OnCollision(string collisionName, Object* other)
 {
 	if (collisionName == m_collision->GetName())
 	{
+
 		if (other->GetName() == "player")
 		{
 			//other->GetComponent<Player>()-플레이어 상태쉉
+			m_attacksound = true;
 			m_attack = true;
+			m_collision->SetIsActive(false);
 		}
 	}
 

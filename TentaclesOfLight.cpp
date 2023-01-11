@@ -17,13 +17,14 @@ void TentaclesOfLight::Init()
 	m_attack = false;
 	m_recovery = false;
 	m_hiteffecttimer = 0;
+	m_attacksound = false;
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 
 	m_vimage[eIdle] = IMAGEMANAGER->AddImageVectorCopy("Tentacles_Idle");
 	m_vimage[eIdle]->Setting(0.1f, true);
 
 	m_vimage[eAttack] = IMAGEMANAGER->AddImageVectorCopy("Tentacles_Attack");
-	m_vimage[eAttack]->Setting(0.1f, false);
+	m_vimage[eAttack]->Setting(0.15f, false);
 
 	m_vimage[eRecovery] = IMAGEMANAGER->AddImageVectorCopy("Tntackles_Recovery");
 	m_vimage[eRecovery]->Setting(0.1f, false);
@@ -44,6 +45,11 @@ void TentaclesOfLight::Update()
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 	m_collision->Setting(40, m_obj->x + 17, m_obj->y - 20, "Attack");
 
+	if (m_attacksound == true)
+	{
+		SOUNDMANAGER->FindSound("TentacleAttack")->Play(false);
+		m_attacksound = false;
+	}
 	if (m_vimage[eAttack]->GetFrame() >= 4 && m_vimage[eAttack]->GetFrame() <= 7)
 	{
 		m_hitpointcollision->SetIsActive(true);
@@ -85,6 +91,7 @@ void TentaclesOfLight::Update()
 		{
 			m_attack = false;
 			m_recovery = false;
+			m_collision->SetIsActive(true);
 		}
 	}
 	m_hiteffecttimer += DELTA_TIME;
@@ -112,7 +119,8 @@ void TentaclesOfLight::OnCollision(string collisionName, Object* other)
 	{
 		if (other->GetName() == "player")
 		{
-			
+			m_attacksound = true;
+			m_collision->SetIsActive(false);
 			if (m_attack == false)
 			{
 				m_vimage[eAttack]->Reset();
@@ -138,6 +146,7 @@ void TentaclesOfLight::OnCollision(string collisionName, Object* other)
 	{
 		if (other->GetName() == "player")
 		{
+
 			if (m_attackcount < 1)
 			{
 				Player* ply = other->GetComponent<Player>();

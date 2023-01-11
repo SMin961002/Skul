@@ -19,14 +19,14 @@ private:
 	bool isActive;
 	float alpha = 1;
 	float teleprotTimer;
-	bool isDivine =false;
+	bool isDivine = false;
 	bool isPhase3 = false;
 	bool isTeleport = false;
 	float chairX = 0;
 	bool isLazer;
 	float tpX;
 	float tpY;
-
+	CImage* hpImg;
 private:
 	HolyFountainLeft* _left;
 	HolyFountainRight* _right;
@@ -54,6 +54,7 @@ private:
 	vImage* _imgPhase1BossNervousAttackLoop;
 	vImage* _imgPhase1BossNervousEnd;
 
+	int castCount;
 	// 보스 1페이즈 캐스팅
 	vImage* _imgPhase1BossCastingReady;
 	vImage* _imgPhase1BossCastingAttack;
@@ -123,6 +124,7 @@ protected:
 	bool isMove;
 	bool _isIdleOn;
 	bool _patternLock;
+	int suf[4] = { 1,2,3,4 };
 	int devineCount = 0;
 	int _patternSelect;
 	float _patternDelay;
@@ -150,11 +152,11 @@ protected:
 	float _castingMotionDeltaTime;
 	float _consecrationDeltaTime;
 	float _locate;
+	bool nowPattern;
 
 	bool _isBaptismCheck;
 	float _baptismDeltaTime;
-	vector<Baptism*> _vBaptism;
-	vector<Baptism*>::iterator _viBaptism;
+
 
 protected:
 	bool _isWorshipCheck;
@@ -164,11 +166,6 @@ protected:
 
 	float _worshipDeltaTime;
 
-	vector<WorshipLeft*> _vWorshipLeft;
-	vector<WorshipLeft*>::iterator _viWorshipLeft;
-
-	vector<WorshipRight*> _vWorshipRight;
-	vector<WorshipRight*>::iterator _viWorshipRight;
 
 	int rand;
 

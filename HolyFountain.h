@@ -1,9 +1,10 @@
 #pragma once
 #include "Component.h"
+#include "Enemy.h"
 
 class HolyOrbLeft;
 class HolyOrbRight;
-class HolyFountainLeft : public Component
+class HolyFountainLeft : public Enemy
 {
 private:
 	vImage* _imgLeftFountainActivate;
@@ -21,6 +22,7 @@ private:
 	float m_DieTimer;
 
 	bool m_Hit;
+	float alpha = 0;
 
 public:
 	float getLeftCurrentHP() { return m_CurrentHP; }
@@ -35,7 +37,7 @@ public:
 	~HolyFountainLeft() {}
 };
 
-class HolyFountainRight : public Component
+class HolyFountainRight : public Enemy
 {
 private:
 	vImage* _imgRightFountainActivate;
@@ -53,7 +55,7 @@ private:
 	float m_DieTimer;
 
 	bool m_Hit;
-
+	float alpha = 0;
 public:
 	float getRightCurrentHP() { return m_CurrentHP; }
 	virtual void Init() override;

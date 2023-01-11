@@ -3,6 +3,7 @@
 #include "PixelCollisionComponent.h"
 #include "RigidBodyComponent.h"
 #include "Player.h"
+#include"CSound.h"
 
 void BossPhase1EnemyFnatic::Init()
 {
@@ -65,6 +66,7 @@ void BossPhase1EnemyFnatic::Update()
 		{
 			if (abs(OBJECTMANAGER->m_player->GetplayerX() - m_obj->x) < 100 || m_state == eAttack)
 			{
+				SOUNDMANAGER->FindSound("FanaticAttackReady")->Play(false);
 				m_state = eAttack;
 				if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
 				{
@@ -164,6 +166,7 @@ void BossPhase1EnemyFnatic::OnCollision(string collisionName, Object* other)
 		{
 			if (m_attackcount < 1)
 			{
+				SOUNDMANAGER->FindSound("FanaticAttack")->Play(false);
 				Player* ply = other->GetComponent<Player>();
 				ply->HitPlayerMagicAttack(10);
 				ply->HitPlayerEffect();

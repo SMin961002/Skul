@@ -9,6 +9,7 @@ void IntroTitleScene::Init()
 	imgtxt = IMAGEMANAGER->FindImage("IntroClick");
 	m_isTitleStart = false;
 	alpha = 0;
+
 	SOUNDMANAGER->FindSound("Intro")->Play(true);
 	alpha2 = 0;
 }

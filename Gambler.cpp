@@ -66,7 +66,7 @@ void Gambler::ParameterSetting()
 	m_attackCast[1] = false;
 	m_attackCool = 0.3;
 
-	m_tagCoolTime = 15;
+	m_tagCoolTime = 0;
 	m_skillNowCoolA = 0;
 	m_skillNowCoolS = 0;
 	m_skillCoolA = 12;	//∫Ì∑¢¿Ë
@@ -85,9 +85,9 @@ void Gambler::CollisionSetting()
 void Gambler::CoolDown()
 {
 	float deltaT = DELTA_TIME;
-	CoolDownDelay(m_skillNowCoolA, deltaT);
-	CoolDownDelay(m_skillNowCoolS, deltaT);
-	CoolDownDelay(m_attackNowCool, deltaT);
+	CoolDownDelay(&m_skillNowCoolA, deltaT);
+	CoolDownDelay(&m_skillNowCoolS, deltaT);
+	CoolDownDelay(&m_attackNowCool, deltaT);
 }
 
 void Gambler::ActionArrangement()

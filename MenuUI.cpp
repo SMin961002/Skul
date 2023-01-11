@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MenuUI.h"
+#include"CSound.h"
 
 MenuUI::MenuUI()
 {
@@ -30,7 +31,7 @@ void MenuUI::Update()
 			m_keyState = 5;
 		else
 			m_keyState--;
-
+		
 	}
 
 	if (KEYMANAGER->GetOnceKeyDown(VK_RETURN))
@@ -43,6 +44,23 @@ void MenuUI::Update()
 			break;
 		case 1:
 			isResetScene = true;
+			SOUNDMANAGER->FindSound("Intro")->Stop();
+			SOUNDMANAGER->FindSound("Lobby")->Stop();
+			SOUNDMANAGER->FindSound("Chapter4")->Stop();
+			SOUNDMANAGER->FindSound("Shop")->Stop();
+			SOUNDMANAGER->FindSound("Middle")->Stop();
+			SOUNDMANAGER->FindSound("Bossphase1")->Stop();
+			SCENEMANAGER->SetMenuActive(false);
+			SOUNDMANAGER->FindSound("Lobby")->Play(true);
+			break;
+		case 2:
+			SOUNDMANAGER->FindSound("Intro")->Stop();
+			SOUNDMANAGER->FindSound("Lobby")->Stop();
+			SOUNDMANAGER->FindSound("Chapter4")->Stop();
+			SOUNDMANAGER->FindSound("Shop")->Stop();
+			SOUNDMANAGER->FindSound("Middle")->Stop();
+			SOUNDMANAGER->FindSound("Bossphase1")->Stop();
+			SCENEMANAGER->ChangeScene("IntroTitleScene");
 			SCENEMANAGER->SetMenuActive(false);
 			break;
 		case 5:

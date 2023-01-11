@@ -49,9 +49,54 @@ void Main::Init()
 	SOUNDMANAGER->AddSound("Sacrifice", "./Resources/Sound/Sacrifice.wav");
 	SOUNDMANAGER->FindSound("Sacrifice")->SetVolume(60);
 	SOUNDMANAGER->AddSound("AngleStatueAttackReady", "./Resources/Sound/AngleStatueAttackReady.wav");
-	SOUNDMANAGER->FindSound("AngleStatueAttackReady")->SetVolume(60);
+	SOUNDMANAGER->FindSound("AngleStatueAttackReady")->SetVolume(100);
 	SOUNDMANAGER->AddSound("AngleStatueAttack", "./Resources/Sound/AngleStatueAttack.wav");
-	SOUNDMANAGER->FindSound("AngleStatueAttack")->SetVolume(60);
+	SOUNDMANAGER->FindSound("AngleStatueAttack")->SetVolume(100);
+	SOUNDMANAGER->AddSound("TentacleAttack", "./Resources/Sound/TentacleAttack.wav");
+	SOUNDMANAGER->FindSound("TentacleAttack")->SetVolume(100);
+	SOUNDMANAGER->AddSound("LeoniaSolderAttack", "./Resources/Sound/LeoniaSolderAttack.wav");
+	SOUNDMANAGER->FindSound("LeoniaSolderAttack")->SetVolume(100);
+	SOUNDMANAGER->AddSound("LeonialSolderAttackHit", "./Resources/Sound/LeonialSolderAttackHit.wav");
+	SOUNDMANAGER->FindSound("LeonialSolderAttackHit")->SetVolume(100);
+
+	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SlotMachineStart", "./Resources/Sound/Gambler_SlotMachine_Start.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineRunning", "./Resources/Sound/Gambler_SlotMachine.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineJackpot", "./Resources/Sound/Gambler_SlotMachine_Jackpot.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineFinish", "./Resources/Sound/Gambler_SlotMachine_Finish.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(80);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(80);
+
+
+
+	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SlotMachineStart", "./Resources/Sound/Gambler_SlotMachine_Start.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineRunning", "./Resources/Sound/Gambler_SlotMachine.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineJackpot", "./Resources/Sound/Gambler_SlotMachine_Jackpot.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineFinish", "./Resources/Sound/Gambler_SlotMachine_Finish.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(80);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(80);
+
+
+
+	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SlotMachineStart", "./Resources/Sound/Gambler_SlotMachine_Start.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineRunning", "./Resources/Sound/Gambler_SlotMachine.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineJackpot", "./Resources/Sound/Gambler_SlotMachine_Jackpot.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineFinish", "./Resources/Sound/Gambler_SlotMachine_Finish.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(80);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(80);
+
+
+
+	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SlotMachineStart", "./Resources/Sound/Gambler_SlotMachine_Start.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineRunning", "./Resources/Sound/Gambler_SlotMachine.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineJackpot", "./Resources/Sound/Gambler_SlotMachine_Jackpot.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineFinish", "./Resources/Sound/Gambler_SlotMachine_Finish.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(80);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(80);
+
 
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
@@ -63,6 +108,9 @@ void Main::Init()
 	inven->Init();
 	menu = new MenuUI;
 	menu->Init();
+	SOUNDMANAGER->AddSound("Dash", "./Resources/Sound/Dash.wav");
+	SOUNDMANAGER->AddSound("Jump", "./Resources/Sound/Jump.wav");
+
 	FILEMANAGER->SetNowStageFile("map_0");
 
 	SCENEMANAGER->ChangeScene("IntroTitleScene");
@@ -96,11 +144,14 @@ void Main::Update()
 		OBJECTMANAGER->Update();
 		EFFECTMANAGER->Update();
 	}
+	if (KEYMANAGER->GetOnceKeyDown(VK_F1))
+	{
+		SCENEMANAGER->ChangeScene("EndingScene");
+	}
 	if (KEYMANAGER->GetOnceKeyDown(VK_F5))
 	{
 		SCENEMANAGER->ChangeScene("ShopScene");
 	}
-
 	if (KEYMANAGER->GetOnceKeyDown(VK_F7))
 	{
 		SCENEMANAGER->ChangeScene("MapToolMapSelectScene");

@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "stdafx.h"
 #include "SlotMachine.h"
 #include "Player.h"
 #include "Thunder.h"
@@ -6,8 +7,7 @@
 
 void SlotMachine::Init()
 {
-
-	SOUNDMANAGER->FindSound("GamblerSwitch")->Play(false);
+	SOUNDMANAGER->FindSound("SlotMachineStart")->Play(false);
 	m_obj->y -= 46;
 
 	m_resultExplosion = 0;
@@ -26,34 +26,28 @@ void SlotMachine::Init()
 	switch (tmp)
 	{
 	case 0:	//»¡°­2, ³ë¶û1 - Æø¹ß + ½ã´õ(½ã´õ ¹Ì±¸Çö)
+		SOUNDMANAGER->FindSound("SlotMachineRunning")->Play(false);
 		m_imgResult = IMAGEMANAGER->FindImage("GamblerSlotMachineExplosion_Thunder");
 		m_imgExplosion = IMAGEMANAGER->FindImageVector("Gambler_SlotMachine_Explosion");
-		m_imgExplosion->Setting(0.11, false);
+		m_imgExplosion->Setting(0.05, false);
 		m_resultExplosion = 2;
 		m_resultThunder = 1;
 		break;
 	case 1:	//»¡°­3 - »¡°­ ´ë¼º°ø
+		SOUNDMANAGER->FindSound("SlotMachineJackpot")->Play(false);
 		m_imgResult = IMAGEMANAGER->FindImage("GamblerSlotMachineExplosion_BigHit");
 		m_imgExplosion = IMAGEMANAGER->FindImageVector("Gambler_SlotMachine_ExplosionBigHit");
-		m_imgExplosion->Setting(0, 0.5);
-		m_imgExplosion->Setting(1, 0.5);
-		for (int i = 3; i < 6; i++)
+		m_imgExplosion->Setting(0.117, false);
+		for (int i = 7; i < 17; i++)
 		{
-			m_imgExplosion->Setting(i, 0.15);
-		}
-		for (int i = 7; i < 11; i++)
-		{
-			m_imgExplosion->Setting(i, 0.08);
-		}
-		m_imgExplosion->Setting(11, 0.1);
-		for (int i = 12; i < m_imgExplosion->GetImageSize(); i++)
-		{
-			m_imgExplosion->Setting(i, 0.03);
+			m_imgExplosion->Setting(i, 0.05);
 		}
 		m_resultExplosion = 3;
 		break;
 	}
 	m_imgSlotMachine = IMAGEMANAGER->FindImageVector("Gambler_SlotMachine");
+	m_imgSlotMachine->Setting(0.016, false);
+	m_loopChecker = 0;
 
 	m_coll = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(m_coll);
@@ -67,11 +61,24 @@ void SlotMachine::Update()
 	{
 		if (m_imgSlotMachine->GetIsImageEnded())
 		{
-			m_slotMachineRunning = false;
-			m_printResult = true;
-			if (m_resultExplosion == 3)
-				EFFECTMANAGER->AddEffect<SlotMachineBigHit>(OBJECTMANAGER->m_player->GetplayerX(), OBJECTMANAGER->m_player->GetplayerY(), false, 2);
-			m_delay = 1.85;
+			if (m_loopChecker <15)
+			{
+				m_loopChecker++;
+				m_imgSlotMachine->Reset();
+			}
+			else
+			{
+				m_slotMachineRunning = false;
+				m_printResult = true;
+				SOUNDMANAGER->FindSound("SlotMachineFinish")->Play(false);
+				if (m_resultExplosion == 3)
+				{
+					EFFECTMANAGER->AddEffect<SlotMachineBigHit>(OBJECTMANAGER->m_player->GetplayerX(), OBJECTMANAGER->m_player->GetplayerY(), false, 2);
+					SOUNDMANAGER->FindSound("GamblerBigHit")->Play(false);
+				}
+
+				m_delay = 1.85;
+			}
 		}
 	}
 	else if (m_printResult)
@@ -79,7 +86,18 @@ void SlotMachine::Update()
 		m_delay -= DELTA_TIME;
 		if (m_delay < 1)
 		{
-			m_action = true;
+			if (m_action == false)
+			{
+				m_action = true;
+				if (m_resultExplosion > 0&& m_resultExplosion<3)
+				{
+					SOUNDMANAGER->FindSound("SlotMachineExplosion")->Play(false);
+				}
+				if (m_resultExplosion == 3)
+				{
+					SOUNDMANAGER->FindSound("SlotMachineExplosion3")->Play(false);
+				}
+			}
 		}
 		if (m_delay <= 0)
 		{
@@ -92,7 +110,7 @@ void SlotMachine::Update()
 	{
 		if (m_alpha > 0)
 		{
-			m_alpha -= DELTA_TIME;
+			m_alpha -= 10*DELTA_TIME;
 			if (m_alpha < 0)
 				m_alpha = 0;
 		}
