@@ -220,7 +220,8 @@ void SlotMachine::OnCollision(string collisionName, Object* other)
 	else if (collisionName == m_collThunderSmallRange->GetName())
 	{
 		Component* e = nullptr;
-		e = other->GetComponent<Enemy>();	//##보스인 경우에도 벡터에 넣어서 포함시켜야하는데 타격 가능한 보스obj 종류를 모르겠어서 추가 못함 추후 물어보기
+		e = other->GetComponent<Enemy>();	//##
+		//인 경우에도 벡터에 넣어서 포함시켜야하는데 타격 가능한 보스obj 종류를 모르겠어서 추가 못함 추후 물어보기
 		if (e != nullptr)
 		{
 			m_vectorThunderSmallList.push_back(other);
