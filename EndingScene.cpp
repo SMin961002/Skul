@@ -14,23 +14,22 @@ void EndingScene::Init()
 	_imgCastleFront = IMAGEMANAGER->FindImage("Ending_Castle_Front");
 
 	_imgDuoTalkLoop = IMAGEMANAGER->FindImage("Ending_Duo_Talk_Loop");
-	//_imgDuoSeeWitchLoop = IMAGEMANAGER->FindImage("");
-	//_imgDuoReturnKing = IMAGEMANAGER->FindImage("");
-	//_imgDuoThanksLoop = IMAGEMANAGER->FindImage("");
+	_imgDuoThanksLoop = IMAGEMANAGER->FindImage("Ending_Duo_DuoThanks_Loop");
 
-	//_duoImg[dSeeWitch] = IMAGEMANAGER->FindImageVector("");
-	//_duoImg[dReturnKing] = IMAGEMANAGER->FindImageVector("");
-	//_duoImg[dReturnSkul] = IMAGEMANAGER->FindImageVector("");
-	//_duoImg[dThanks] = IMAGEMANAGER->FindImageVector("");
+	_duoImg[dSeeWitch] = IMAGEMANAGER->FindImageVector("Ending_Duo_SeeWitch");
+	_duoImg[dSeeWitch]->Setting(0.1, false);
+	_duoImg[dReturnKing] = IMAGEMANAGER->FindImageVector("Ending_Duo_ReturnKing");
+	_duoImg[dReturnKing]->Setting(0.1, false);
+	_duoImg[dReturnSkul] = IMAGEMANAGER->FindImageVector("Ending_Duo_ReturnSkul");
+	_duoImg[dReturnSkul]->Setting(0.1, false);
+	_duoImg[dThanks] = IMAGEMANAGER->FindImageVector("Ending_Duo_DuoThanks");
+	_duoImg[dThanks]->Setting(0.1, false);
 
-	//_imgCatPolymorphLoop = IMAGEMANAGER->FindImage("");
 	_catImg[cWalk] = IMAGEMANAGER->FindImageVector("Ending_Cat_Walk");
-	//_catImg[cPolymorph] = IMAGEMANAGER->FindImageVector("");
-	//_catImg[cIdle] = IMAGEMANAGER->FindImageVector("");
+	_catImg[cPolymorph] = IMAGEMANAGER->FindImageVector("Ending_Cat_Polymorph");
 
 	_catImg[cWalk]->Setting(0.1, true);
-	//_catImg[cPolymorph]->Setting(0.1, false);
-	//_catImg[cIdle]->Setting(0.1, false);
+	_catImg[cPolymorph]->Setting(0.1, false);
 
 	_smallCloudLocate = 0;
 	_mediumCloudLocate = 0;
@@ -40,9 +39,14 @@ void EndingScene::Init()
 	_bigCloudLocate1 = -_imgBigCloud->GetWidth();
 
 	_catLocate = 0;
+	_polymorphY = 0;
+	_ReturnKingDeltaTime = 0;
+	_ReturnSkulDeltaTime = 0;
+	_ThanksDeltaTime = 0;
+	_ThanksLoopDeltaTime = 0;
 
 	m_catState = cWalk;
-	m_duoState = dSeeWitch;
+	m_duoState = dNone;
 }
 
 void EndingScene::Update()
@@ -80,9 +84,50 @@ void EndingScene::Update()
 		_bigCloudLocate = 0 - _imgBigCloud->GetWidth();
 	}
 
-	if (_catLocate < 200)
+	if (_catLocate <= 200)
 	{
 		_catLocate += 0.5f;
+	}
+	if (_catLocate == 200)
+	{
+		m_catState = cPolymorph;
+		_polymorphY = 51;
+	}
+	if (m_catState == cPolymorph)
+	{
+		m_duoState = dSeeWitch;
+		if (_ReturnKingDeltaTime <= 2 && _catImg[cPolymorph]->GetIsImageEnded() == true)
+		{
+			_ReturnKingDeltaTime += DELTA_TIME;
+		}
+	}
+	if (_ReturnKingDeltaTime >= 2)
+	{
+		m_duoState = dReturnKing;
+		if (_ReturnSkulDeltaTime <= 3 && _duoImg[dReturnKing]->GetIsImageEnded() == true)
+		{
+			_ReturnSkulDeltaTime += DELTA_TIME;
+		}
+	}
+	if (_ReturnSkulDeltaTime >= 3)
+	{
+		m_duoState = dReturnSkul;
+		if (_ThanksDeltaTime <= 3 && _duoImg[dReturnSkul]->GetIsImageEnded() == true)
+		{
+			_ThanksDeltaTime += DELTA_TIME;
+		}
+	}
+	if (_ThanksDeltaTime >= 3)
+	{
+		m_duoState = dThanks;
+		if (_ThanksLoopDeltaTime <= 3 && _duoImg[dThanks]->GetIsImageEnded() == true)
+		{
+			_ThanksLoopDeltaTime += DELTA_TIME;
+		}
+	}
+	if (_ThanksLoopDeltaTime >= 3)
+	{
+		m_duoState = dNone;
 	}
 }
 
@@ -105,11 +150,14 @@ void EndingScene::Render()
 
 	IMAGEMANAGER->Render(_imgCastleBack, 600, 0, 3, 3, 0, 0);
 
-	IMAGEMANAGER->Render(_imgDuoTalkLoop, 700, 340, 2, 2, 0, 0);
+	if (m_duoState == dNone && _duoImg[dThanks]->GetIsImageEnded() == false) IMAGEMANAGER->Render(_imgDuoTalkLoop, 700, 340, 2, 2, 0, 0);
+	if (m_duoState == dNone && _duoImg[dThanks]->GetIsImageEnded() == true) IMAGEMANAGER->Render(_imgDuoThanksLoop, 700, 340, 2, 2, 0, 0);
 
-	//m_catState->CenterRender(WINSIZE_X-_catLocate, 398, 2, 2, 0);
+	if (!m_duoState == dNone) _duoImg[m_duoState]->Render(700, 340, 2, 2, 0);
 
-	//IMAGEMANAGER->Render(_imgCastleFront, 600, 0, 3, 3, 0, 0);
+	_catImg[m_catState]->CenterRender(WINSIZE_X-_catLocate, 398-_polymorphY, 2, 2, 0);
+
+	IMAGEMANAGER->Render(_imgCastleFront, 600, 0, 3, 3, 0, 0);
 }
 
 void EndingScene::Release()
