@@ -3,6 +3,7 @@
 #include "RigidBodyComponent.h"
 #include "Enemy.h"
 #include "HitDamageEffect.h"
+#include"CSound.h"
 
 void LittleBorn::ImageSetting()
 {
@@ -94,7 +95,9 @@ void LittleBorn::ParameterSetting()
 	m_skillCoolS = 3;
 	m_headThrow = false;
 	m_imageChange = false;
-
+	
+	m_attacksound = false;
+	
 	m_nonCansleAction = false;
 	m_tagAttackDelay = 0.38;
 	m_tagAttackNowDelay = 0;
@@ -345,6 +348,7 @@ void LittleBorn::InputSkillKey()
 		if (m_skillNowCoolA == 0)
 			if (!m_headThrow)
 			{
+				SOUNDMANAGER->FindSound("SkulSkill1")->Play(false);
 				m_headThrow = true;
 				m_projectileHead->On();
 				m_projectileHead->SetSkullThrow(*m_x, *m_y, *m_isLeft);
@@ -378,6 +382,7 @@ void LittleBorn::InputAttackKey()
 				if (m_attackNowCool == 0)
 				{
 					m_action = eJumpAttack;
+					SOUNDMANAGER->FindSound("SkulAttack2")->Play(false);
 					m_imageChange = true;
 					m_attackCount++;
 				}
@@ -390,12 +395,19 @@ void LittleBorn::InputAttackKey()
 				if (m_attackNowCool == 0)
 				{
 					m_action = eAutoAttack_1;
+					SOUNDMANAGER->FindSound("SkulAttack1")->Play(false);
 					m_attackCount = 1;
 					m_imageChange = true;
+					m_attacksound = true;
 				}
 			}
 			else
 			{
+				if (m_attacksound == true)
+				{
+					SOUNDMANAGER->FindSound("SkulAttack2")->Play(false);
+					m_attacksound = false;
+				}
 				m_attackCast[0] = true;
 			}
 		}//end else jumpping

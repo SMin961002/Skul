@@ -8,6 +8,7 @@ private:
     vImage* img_headless[eActionTagNumber];
 	ProjectileHeadSkull* m_projectileHead;	//머리던지기 투사체 구조체
     bool m_headThrow;
+    bool m_attacksound;
     int count = 0;
     float m_tagAttackDelay;
     float m_tagAttackNowDelay;
