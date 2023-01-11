@@ -36,6 +36,23 @@ void Main::Init()
 	SOUNDMANAGER->FindSound("SkulSwitch")->SetVolume(50);
 	SOUNDMANAGER->AddSound("GamblerSwitch", "./Resources/Sound/GamblerSwitch.wav");
 	SOUNDMANAGER->FindSound("GamblerSwitch")->SetVolume(100);
+	SOUNDMANAGER->AddSound("FanaticAttackReady", "./Resources/Sound/FanaticAttack_Ready.wav");
+	SOUNDMANAGER->FindSound("FanaticAttackReady")->SetVolume(30);
+	SOUNDMANAGER->AddSound("FanaticAttack", "./Resources/Sound/FanaricAttack.wav");
+	SOUNDMANAGER->FindSound("FanaticAttack")->SetVolume(50);
+	SOUNDMANAGER->AddSound("CandleFanaticAttack","./Resources/Sound/CandleFanaticAttack.wav");
+	SOUNDMANAGER->FindSound("CandleFanaticAttack")->SetVolume(50);
+	SOUNDMANAGER->AddSound("CandleFanaticAttackHit", "./Resources/Sound/CandleFanaticAttackHit.wav");
+	SOUNDMANAGER->FindSound("CandleFanaticAttackHit")->SetVolume(50);
+	SOUNDMANAGER->AddSound("CandleFanaticFire", "./Resources/Sound/CandleFanaticFire.wav");
+	SOUNDMANAGER->FindSound("CandleFanaticFire")->SetVolume(50);
+	SOUNDMANAGER->AddSound("Sacrifice", "./Resources/Sound/Sacrifice.wav");
+	SOUNDMANAGER->FindSound("Sacrifice")->SetVolume(60);
+	SOUNDMANAGER->AddSound("AngleStatueAttackReady", "./Resources/Sound/AngleStatueAttackReady.wav");
+	SOUNDMANAGER->FindSound("AngleStatueAttackReady")->SetVolume(60);
+	SOUNDMANAGER->AddSound("AngleStatueAttack", "./Resources/Sound/AngleStatueAttack.wav");
+	SOUNDMANAGER->FindSound("AngleStatueAttack")->SetVolume(60);
+
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
 

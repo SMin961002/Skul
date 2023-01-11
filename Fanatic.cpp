@@ -8,6 +8,7 @@
 #include"Gold.h"
 #include"Hporb.h"
 #include"BlackRock.h"
+#include"CSound.h"
 void Fanatic::Init()
 {
 	m_attackcount = 0;
@@ -123,6 +124,7 @@ void Fanatic::Update()
 			{
 				if (xDest < 100 && xDest > -100)
 				{
+					SOUNDMANAGER->FindSound("FanaticAttackReady")->Play(false);
 					m_state = eAttack;
 					if (OBJECTMANAGER->m_player->GetplayerX() <= m_obj->x)
 					{
@@ -161,10 +163,12 @@ void Fanatic::Update()
 
 					if (!m_sercrieffect && 0 == m_isReverse)
 					{
+						SOUNDMANAGER->FindSound("Sacrifice")->Play(false);
 						EFFECTMANAGER->AddEffect<Secrifice>(m_obj->x + 50, m_obj->y - 20, 0, 1.5);
 					}
 					if (!m_sercrieffect && 1 == m_isReverse)
 					{
+						SOUNDMANAGER->FindSound("Sacrifice")->Play(false);
 						EFFECTMANAGER->AddEffect<Secrifice>(m_obj->x - 50, m_obj->y - 20, 1, 1.5);
 					}
 					m_sercrieffect = true;
@@ -261,6 +265,7 @@ void Fanatic::OnCollision(string collisionName, Object* other)
 		{
 			if (m_attackcount < 1)
 			{
+				SOUNDMANAGER->FindSound("FanaticAttack")->Play(false);
 				Player* ply = other->GetComponent<Player>();
 				ply->HitPlayerMagicAttack(10);
 				ply->HitPlayerEffect();

@@ -8,7 +8,7 @@
 #include"Effect.h"
 #include"PlayerEffect.h"
 #include"BlackRock.h"
-
+#include"CSound.h"
 void AngelStatue::Init()
 {
 	m_maxhp = 100.0f;
@@ -102,13 +102,16 @@ void AngelStatue::Update()
 		}
 		if (m_vimage[eAttackReadyEffect]->GetIsImageEnded())
 		{
+			SOUNDMANAGER->FindSound("AngleStatueAttackReady")->Play(false);
 			if (m_attack == true)
 			{
+				SOUNDMANAGER->FindSound("AngleStatueAttack")->Play(false);
 				m_state2 = eAttackEffect;
 			}
 		}
 		if (m_vimage[eAttackEffect]->GetFrame() >= 1 && m_vimage[eAttackEffect]->GetFrame() <= 16)
 		{
+
 			m_hitpointcollision->SetIsActive(true);
 			m_hitpointcollision->Setting(150, m_obj->x + 70, m_obj->y - 10, "AttackPoint");
 		}

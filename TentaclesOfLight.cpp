@@ -5,6 +5,7 @@
 #include "PixelCollisionComponent.h"
 #include"PixelCollisionComponent.h"
 #include"RigidBodyComponent.h"
+#include"CSound.h"
 
 void TentaclesOfLight::Init()
 {
@@ -111,6 +112,7 @@ void TentaclesOfLight::OnCollision(string collisionName, Object* other)
 	{
 		if (other->GetName() == "player")
 		{
+			
 			if (m_attack == false)
 			{
 				m_vimage[eAttack]->Reset();
