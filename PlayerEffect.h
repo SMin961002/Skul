@@ -69,6 +69,7 @@ class RouletteReady : public Effect
 {
 public:
 	void Init() override;
+	void Release() override;
 };
 
 class RouletteShot : public Effect

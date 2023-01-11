@@ -83,6 +83,11 @@ void RouletteReady::Init()
 {
 	Effect::Init();
 	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteEmerge");
+	SOUNDMANAGER->FindSound("RouletteSummon")->Play(false);
+}
+
+void RouletteReady::Release()
+{
 }
 
 void RouletteShot::Init()
@@ -95,11 +100,13 @@ void RouletteBigShot::Init()
 {
 	Effect::Init();
 	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteBigShotCircle");
+	SOUNDMANAGER->FindSound("RouletteSpike")->Play(false);
 }
 void RouletteBrokenEffect::Init()
 {
 	Effect::Init();
 	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteBroken");
+	m_img->Setting(0.05, false);
 }
 void RouletteBrokenEffectBigShot::Init()
 {

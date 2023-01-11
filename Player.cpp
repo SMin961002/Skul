@@ -4,11 +4,7 @@
 #include "Enemy.h"
 #include"CSound.h"
 #include "HitDamageEffect.h"
-/*
-플레이어가 가진
-collision컴포넌트를
-head에 전달해서 가공하기
-*/
+
 void Player::Init()
 {
 	m_HpMax = 100;
@@ -235,13 +231,11 @@ void Player::CoolDown()
 
 void Player::ChangeHead()
 {
-	cout << (int)m_headSlot << endl;
 	if (m_headSlot != eSkulSpecies::Empty)
 	{
 		eSkulSpecies tmp = m_nowHead->GetSpecies();
 		m_headTagCool = m_nowHead->GetTagCoolTime();
 		m_nowHead->ResetAll();
-
 		switch (m_headSlot)
 		{
 		case eSkulSpecies::eBasic:

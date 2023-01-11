@@ -101,7 +101,6 @@ void Player::InputJumpKey()
 					EFFECTMANAGER->AddEffect<DoubleJumpSmoke>(m_obj->x, m_obj->y, m_isLeft);
 				}
 
-				SOUNDMANAGER->AddSound("Jump", "./Resources/Sound/Jump.wav");
 				SOUNDMANAGER->FindSound("Jump")->SetVolume(50);
 				SOUNDMANAGER->FindSound("Jump")->Play(false);
 			}
@@ -130,7 +129,6 @@ void Player::InputDashKey()
 			m_dashNowTime = m_dashTime;
 			m_playerHitBox->SetIsActive(false);
 
-			SOUNDMANAGER->AddSound("Dash", "./Resources/Sound/Dash.wav");
 			SOUNDMANAGER->FindSound("Dash")->SetVolume(50);
 			SOUNDMANAGER->FindSound("Dash")->Play(false);
 		}

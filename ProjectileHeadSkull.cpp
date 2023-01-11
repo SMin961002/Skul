@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "LittleBorn.h"
 #include "Player.h"
+#include "CSound.h"
 void ProjectileHeadSkull::SetSkullThrow(float x, float y, bool reversed)
 {
 	m_hit = false;
@@ -111,6 +112,7 @@ void ProjectileHeadSkull::OnCollision(string collisionName, Object* other)
 				m_hit = true;
 				m_obj->GetComponent<RigidBodyComponent>()->SetGravityOnOff(true);
 				other->GetComponent<Enemy>()->HitEnemy(20, 1);//임의로 넣은것 추후제외
+				SOUNDMANAGER->FindSound("SkulAttackBluntLarge")->Play(false);
 			}
 		}//end nonhit
 	}

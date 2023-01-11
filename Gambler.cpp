@@ -5,6 +5,7 @@
 #include "Roulette.h"
 #include "SlotMachine.h"
 #include "BlackJack.h"
+#include"CSound.h"
 
 void Gambler::ImageSetting()
 {
@@ -32,7 +33,7 @@ void Gambler::ImageSetting()
 	img[eJumpLand]->Setting(0.1, false);
 	img[eSkill_1] = IMAGEMANAGER->FindImageVector("Gambler_AttackA1");
 	img[eSkill_1]->Setting(0.1, false);
-	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Gambler_AttackA1");
+	img[eSkill_2] = IMAGEMANAGER->FindImageVector("Gambler_Attack3");
 	img[eTagAction] = IMAGEMANAGER->FindImageVector("Gambler_TagAction");
 	img[eTagAction]->Setting(0.07f, false);
 
@@ -69,8 +70,8 @@ void Gambler::ParameterSetting()
 	m_tagCoolTime = 0;
 	m_skillNowCoolA = 0;
 	m_skillNowCoolS = 0;
-	m_skillCoolA = 12;	//喉发黎
-	m_skillCoolS = 15;	//逢房
+	m_skillCoolA = 15;	//喉发黎
+	m_skillCoolS = 12;	//逢房
 	m_imageChange = false;
 	m_effectOverap = false;
 	m_nonCansleAction = false;
@@ -117,10 +118,12 @@ void Gambler::ActionArrangement()
 				{
 					EFFECTMANAGER->AddEffect<GamblerAttack_2>(m_obj->x + 20, m_obj->y - 40, false, 2);
 				}
+				SOUNDMANAGER->FindSound("GamblerAtk2")->Play(false);
 				break;
 			case 3:
 			{
 				OBJECTMANAGER->AddObject("Card", *m_x, *m_y - 36, ePlayerProjectile)->AddComponent<Card>();
+				SOUNDMANAGER->FindSound("GamblerAtk3")->Play(false);
 			}
 			break;
 			default: break;
@@ -221,11 +224,6 @@ void Gambler::InputSkillKey()
 				blackJackSuccess = -1;
 			else blackJackSuccess = 0;
 
-			//if (m_isLeft)
-			//	OBJECTMANAGER->AddObject("BlackJackCard", *m_x + 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
-			//else
-			//	OBJECTMANAGER->AddObject("BlackJackCard", *m_x - 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJackCard>()->Setting(m_blackJack);
-
 			OBJECTMANAGER->AddObject("BlackJack", *m_x + 30, *m_y - 36, ePlayerProjectile)->AddComponent<BlackJack>()->Setting(blackJackSuccess);
 			if (blackJackSuccess == 0)
 				m_skillNowCoolA = m_skillCoolA;
@@ -251,7 +249,7 @@ void Gambler::InputSkillKey()
 			else
 				m_skillNowCoolS = 1.5;
 
-			SetAction(eSkill_1, true, true);
+			SetAction(eSkill_2, true, true);
 		}
 	}
 }
@@ -267,6 +265,7 @@ void Gambler::InputAttackKey()
 				if (m_attackNowCool == 0)
 				{
 					m_action = eJumpAttack;
+					SOUNDMANAGER->FindSound("GamblerAtk1")->Play(true);
 					m_imageChange = true;
 					m_attackCount++;
 					if (*m_isLeft)
@@ -298,6 +297,7 @@ void Gambler::InputAttackKey()
 					{
 						EFFECTMANAGER->AddEffect<GamblerAttack_1>(m_obj->x + 35, m_obj->y - 32, false, 2);
 					}
+					SOUNDMANAGER->FindSound("GamblerAtk1")->Play(false);
 				}//end if m_attackNowCool
 				break;
 			case 1:
