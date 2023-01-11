@@ -88,7 +88,7 @@ void BossObject::Init()
 	m_phase2Img[eCreateBallE] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_CreateBall_End");
 	m_phase2Img[eCreateBallE]->Setting(0.15, false);
 
-	m_page = 1;
+	m_page = 0;
 	m_phase2Img[eSoulChaseR] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_Ready");
 	m_phase2Img[eSoulChaseR]->Setting(0.1, false);
 	m_phase2Img[eSoulChaseA] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_Attack");
@@ -110,7 +110,9 @@ void BossObject::Init()
 	_imgPhase1BossNervousReadyLoop = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Ready_Loop");
 	_imgPhase1BossNervousReadyLoop->Setting(0.1, true);
 	_imgPhase1BossNervousAttack = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Attack");
-	_imgPhase1BossNervousAttack->Setting(0.1, true);
+	_imgPhase1BossNervousAttack->Setting(0.1, false);
+	_imgPhase1BossNervousAttackLoop = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Attack_Loop");
+	_imgPhase1BossNervousAttackLoop->Setting(0.1, true);
 	_imgPhase1BossNervousEnd = IMAGEMANAGER->FindImageVector("Boss_Nervousness_End");
 	_imgPhase1BossNervousEnd->Setting(0.1, false);
 
@@ -277,7 +279,12 @@ void BossObject::Update()
 		{
 			_castingMotionDeltaTime += DELTA_TIME;
 		}
-		if (_patternSelect == 2)
+		if (_patternCheck == 1)
+		{
+			_isBaptismCheck = true;
+			_baptismDeltaTime += DELTA_TIME;
+		}
+		if (_patternCheck == 2)
 		{
 			_isWorshipCheck = true;
 			_worshipDeltaTime += DELTA_TIME;
@@ -316,13 +323,12 @@ void BossObject::Render()
 		}
 		if (m_page == 0 && _isIntroOn == false)
 		{
-
 			IMAGEMANAGER->UICenterRender(_imgBossHPBar, WINSIZE_X / 2, _bossHPBarLocate, 2, 2, 0);
 
-			for (int i = 0; i <=  _left->getLeftCurrentHP(); i++)
-			{
-			IMAGEMANAGER->UIRender(_imgBossHP, WINSIZE_X / 2 - 297+i, _bossHPBarLocate + 10, 2, 2, 0);
-			}
+			//for (int i = 0; i <=  _left->getLeftCurrentHP(); i++)
+			//{
+			//IMAGEMANAGER->UIRender(_imgBossHP, WINSIZE_X / 2 - 297+i, _bossHPBarLocate + 10, 2, 2, 0);
+			//}
 		}
 
 		if (_isIdleOn == true)
@@ -351,21 +357,31 @@ void BossObject::Render()
 		// ¶¥Âï±â_°ø°Ý´ë±â 1ÃÊ ÈÄ
 		if (_nervousnessMotionDeltaTime > 1)
 		{
-			if (_nervousnessEffectDeltaTime < 2) _imgPhase1BossNervousAttack->CenterRender(m_obj->x, m_obj->y - 6, 1.8, 1.8, 0, false);
+			if (_nervousnessMotionDeltaTime < 3 && _isNervousnessMotionEnd == false)
+			{
+				_imgPhase1BossNervousAttack->CenterRender(m_obj->x, m_obj->y - 6, 1.8, 1.8, 0, false);
+			}
 
 			if (_isNervousnessAttackLoopOn == false)
 			{
-				OBJECTMANAGER->AddObject("NervousImpactShine", m_obj->x, m_obj->y - 20, 1)->AddComponent<ImpactShine>();
-				OBJECTMANAGER->AddObject("NervousImpactLeft", m_obj->x, m_obj->y + 120, 1)->AddComponent<LeftImpact>();
-				OBJECTMANAGER->AddObject("NervousImpactRight", m_obj->x, m_obj->y + 120, 1)->AddComponent<RightImpact>();
+				OBJECTMANAGER->AddObject("NervousImpactShine", m_obj->x, m_obj->y - 20, eBossObject)->AddComponent<ImpactShine>();
+				OBJECTMANAGER->AddObject("NervousImpactLeft", m_obj->x, m_obj->y + 120, eBossObject)->AddComponent<LeftImpact>();
+				OBJECTMANAGER->AddObject("NervousImpactRight", m_obj->x, m_obj->y + 120, eBossObject)->AddComponent<RightImpact>();
 			}
 			_isNervousnessAttackLoopOn = true;
+
+			if (_imgPhase1BossNervousAttack->GetIsImageEnded() == true &&_isNervousnessMotionEnd == false)
+			{
+				_imgPhase1BossNervousAttackLoop->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+			}
+
 		}
 		// ¶¥Âï±â_Ãæ°ÝÆÄ ¹ß»ç ÈÄ
 		if (_isNervousnessAttackLoopOn == true && _imgPhase1BossNervousEnd->GetIsImageEnded() == false)
 		{
-			if (_nervousnessEffectDeltaTime > 2)
+			if (_nervousnessEffectDeltaTime > 3)
 			{
+				_isNervousnessMotionEnd = true;
 				_imgPhase1BossNervousEnd->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
 			}
 		}
@@ -460,11 +476,13 @@ void BossObject::Render()
 			{
 				_patternCheck = MY_UTILITY::getFromIntTo(0, 2);
 				_locate = OBJECTMANAGER->m_player->GetplayerX();
+				cout << _patternCheck << endl;
 			}
 
 			switch (_patternCheck)
 			{
 			case 0:
+				// ·¹ÀÌÀú
 				_patternLock = true;
 				if (_isConsecrationLoopOn == false)
 				{
@@ -474,7 +492,7 @@ void BossObject::Render()
 				{
 					if (_isConsecrationLoopOn == false)
 					{
-						OBJECTMANAGER->AddObject("Consecration", _locate, m_obj->y - 130, 1)->AddComponent<Consecration>();
+						OBJECTMANAGER->AddObject("Consecration", _locate, m_obj->y - 130, eBossObject)->AddComponent<Consecration>();
 					}
 
 					_consecrationDeltaTime += DELTA_TIME;
@@ -483,7 +501,7 @@ void BossObject::Render()
 				if (_consecrationDeltaTime > 2)
 				{
 					_imgPhase1BossCastingEnd->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
-					_imgPhase1BossConsecrationEnd->CenterRender(m_obj->x, m_obj->y, 1.8, 1.8, 0, false);
+					_imgPhase1BossConsecrationEnd->CenterRender(_locate, m_obj->y, 1.8, 1.8, 0, false);
 				}
 				if (_imgPhase1BossConsecrationEnd->GetIsImageEnded() == true)
 				{
@@ -503,18 +521,37 @@ void BossObject::Render()
 				}
 				break;
 			case 1:
+				// ¹äÆ¼Áò
 				_patternLock = true;
 
-				_viBaptism = _vBaptism.begin();
-				for (; _viBaptism != _vBaptism.end(); ++_viBaptism)
+				if (_isBaptismCheck == true)
 				{
-					(*_viBaptism)->SetIsActive(true);
+					if (_baptismDeltaTime < 3)
+					{
+						_imgPhase1BossBaptismAttack->CenterRender(m_obj->x + 130, m_obj->y - 120, 1.8, 1.8, 0, false);
+					}
 				}
-
-				_imgPhase1BossBaptismAttack->CenterRender(m_obj->x + 130, m_obj->y - 120, 1.8, 1.8, 0, false);
-				break;
+				if (_baptismDeltaTime > 2)
+				{
+					_viBaptism = _vBaptism.begin();
+					for (; _viBaptism != _vBaptism.end(); ++_viBaptism)
+					{
+						(*_viBaptism)->SetIsActive(true);
+					}
+				}
+				if (_baptismDeltaTime > 3)
+				{
+					_imgPhase1BossCastingEnd->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
+					_patternLock = false;
+					_isBaptismCheck = false;
+					_imgPhase1BossBaptismAttack->Reset();
+					_baptismDeltaTime = 0;
+					break;
+				}
 			case 2:
+				// ¿ö½±
 				_patternLock = true;
+
 				for (int i = 0; i < 2; i++)
 				{
 					_vWorshipLeft[i]->SetIsActive(true);
