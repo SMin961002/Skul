@@ -37,3 +37,17 @@ void CSoundMgr::RegisterToBGM(CSound* _pSound)
 
 	m_pBGM = _pSound;
 }
+
+CSound* CSoundMgr::AddSound(string key, string path)
+{
+	CSound* sound = new CSound;
+	sound->Load(path);
+	m_sounds.insert(make_pair(key, sound));
+	return sound;
+}
+
+CSound* CSoundMgr::FindSound(string key)
+{
+	auto find = m_sounds.find(key);
+	return find->second;
+}

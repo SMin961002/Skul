@@ -93,24 +93,33 @@ void DoorObject::UIRender()
 		switch (m_kind)
 		{
 		case eNormal:
-			FILEMANAGER->SetNowStageFile("map_2");
-			SCENEMANAGER->FadeOut(0.02, []() {SCENEMANAGER->ChangeScene("Stage"); }, 2);
+
+			SCENEMANAGER->FadeOut(0.02, []() {
+				FILEMANAGER->SetNowStageFile("map_2");
+				SCENEMANAGER->ChangeScene("Stage"); }, 2);
 			break;
 		case eSkul:
-			FILEMANAGER->SetNowStageFile("map_3");
-			SCENEMANAGER->FadeOut(0.02, []() {SCENEMANAGER->ChangeScene("Stage"); }, 2);
+
+			SCENEMANAGER->FadeOut(0.02, []() {
+				FILEMANAGER->SetNowStageFile("map_3");
+				SCENEMANAGER->ChangeScene("Stage"); }, 2);
 			break;
 		case eShop:
-			FILEMANAGER->SetNowStageFile("Shop");
-			SCENEMANAGER->FadeOut(0.02, []() {SCENEMANAGER->ChangeScene("ShopScene"); }, 2);
+
+			SCENEMANAGER->FadeOut(0.02, []() {
+				FILEMANAGER->SetNowStageFile("Shop");
+				SCENEMANAGER->ChangeScene("ShopScene"); }, 2);
 			break;
 		case eSpdir:
-			FILEMANAGER->SetNowStageFile("map_4");
-			SCENEMANAGER->FadeOut(0.02, []() {SCENEMANAGER->ChangeScene("Stage"); }, 2);
+
+			SCENEMANAGER->FadeOut(0.02, []() {
+				FILEMANAGER->SetNowStageFile("map_4");
+				SCENEMANAGER->ChangeScene("Stage"); }, 2);
 			break;
 		case eBoss:
-			FILEMANAGER->SetNowStageFile("map_1");
-			SCENEMANAGER->FadeOut(0.02, []() {SCENEMANAGER->ChangeScene("BossScene"); }, 2);
+			SCENEMANAGER->FadeOut(0.02, []() {
+				FILEMANAGER->SetNowStageFile("map_1");
+				SCENEMANAGER->ChangeScene("BossScene"); }, 2);
 			break;
 		}
 
