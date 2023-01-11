@@ -58,6 +58,9 @@ private:
 	TeleportationToHead* effect = new TeleportationToHead;
 
 public:
+	int goldValue;
+	bool isHeadCheck;
+	
 	CollisionComponent* m_playerHitBox;
 	CollisionComponent* m_collAutoAttack;
 	CollisionComponent* m_collSkillA;

@@ -170,8 +170,6 @@ void Cat::Update()
 	{
 		m_obj->x -= 1;
 	}
-	cout << m_isleftcount << endl;
-
 }
 
 void Cat::Render()
