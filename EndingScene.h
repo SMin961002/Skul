@@ -14,6 +14,7 @@ private:
 	CImage* _imgCastleBack;
 
 	CImage* _imgDuoTalkLoop;
+	CImage* _imgDuoThanksLoop;
 
 	float _smallCloudLocate;
 	float _mediumCloudLocate;
@@ -22,12 +23,18 @@ private:
 	float _mediumCloudLocate1;
 	float _bigCloudLocate1;
 	float _catLocate;
+	float _ReturnKingDeltaTime;
+	float _ReturnSkulDeltaTime;
+	float _ThanksDeltaTime;
+	float _ThanksLoopDeltaTime;
 
 	int m_duoState;
 	int m_catState;
+	int _polymorphY;
 
 	enum DuoState
 	{
+		dNone,
 		dSeeWitch,
 		dReturnKing,
 		dReturnSkul,
@@ -38,7 +45,6 @@ private:
 	enum CatState
 	{
 		cWalk,
-		cIdle,
 		cPolymorph,
 		cEnd
 	};

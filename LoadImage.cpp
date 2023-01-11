@@ -643,17 +643,14 @@ void ImageManager::LoadImages()
 	AddImage("Ending_Castle_Front", L"./Resources/EndingScene/Castle/EndingCastle_Front.png");
 	AddImage("Ending_Castle_Back", L"./Resources/EndingScene/Castle/EndingCastle_Back.png");
 	
-	//AddImageVector("Ending_Cat_Idle");
 	AddImageVector("Ending_Cat_Walk", L"./Resources/EndingScene/Cat/Walk/Cat_Walk_", 1, 6);
-	//AddImageVector("Ending_Cat_Polymorph");
-	//AddImage("Ending_Cat_Polymorph_Loop");
-	//
-	AddImage("Ending_Duo_Talk_Loop", L"./Resources/EndingScene/Duo/Talk Loop/Duo_Talk.png");
-	//AddImageVector("Ending_Duo_SeeWitch");
-	//AddImage("Ending_Duo_SeeWitch_Loop");
-	//AddImageVector("Ending_Duo_ReturnKing");
-	//AddImage("Ending_Duo_ReturnKing_Loop");
-	//AddImageVector("Ending_Duo_ReturnSkul");
-	//AddImageVector("Ending_Duo_DuoThanks");
-	//AddImage("Ending_Duo_DuoThanks_Loop");
+	AddImageVector("Ending_Cat_Polymorph", L"./Resources/EndingScene/Cat/Polymorph/Cat_Polymorph_", 1, 21);
+
+	AddImage("Ending_Duo_Talk_Loop", L"./Resources/EndingScene/Duo/TalkLoop/Duo_Talk.png");
+	AddImageVector("Ending_Duo_SeeWitch", L"./Resources/EndingScene/Duo/SeeWitch/Duo_SeeWitch_", 1, 3);
+	AddImageVector("Ending_Duo_ReturnKing", L"./Resources/EndingScene/Duo/ReturnKing/Duo_ReturnKing_", 1, 3);
+	AddImageVector("Ending_Duo_ReturnSkul", L"./Resources/EndingScene/Duo/ReturnSkul/Duo_ReTurnSkul_", 1, 3);
+	AddImageVector("Ending_Duo_DuoThanks", L"./Resources/EndingScene/Duo/DuoThanks/Duo_Thanks_", 1, 3);
+	AddImage("Ending_Duo_DuoThanks_Loop", L"./Resources/EndingScene/Duo/DuoThanksLoop/Duo_Thanks_Loop.png");
+
 }
