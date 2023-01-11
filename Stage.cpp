@@ -17,6 +17,7 @@
 #include "CandleFanatic.h"
 #include"Fountain.h"
 #include"LobbyObject.h"
+#include"CSound.h"
 
 void Stage::Init()
 {

@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include"CSound.h"
 #include "DoorObject.h"
 #include "CollisionComponent.h"
 DoorObject::DoorObject()
@@ -83,7 +84,8 @@ void DoorObject::Render()
 
 void DoorObject::Release()
 {
-
+	//BackgroundMusic->Stop();
+	//SAFE_DELETE(BackgroundMusic);
 }
 
 void DoorObject::UIRender()

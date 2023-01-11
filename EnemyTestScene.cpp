@@ -14,6 +14,7 @@
 #include "BallFanatic.h"
 #include "Gold.h"
 #include"LobbyObject.h"
+#include"CSound.h"
 EnemyTestScene::EnemyTestScene()
 {
 }
@@ -32,6 +33,8 @@ void EnemyTestScene::Init()
 	m_backGround = IMAGEMANAGER->FindImage("Background");
 	m_castle = IMAGEMANAGER->FindImage("Castle");
 	m_cloude = IMAGEMANAGER->FindImage("Cloud");
+	SOUNDMANAGER->FindSound("Lobby")->Stop();
+	SOUNDMANAGER->FindSound("Chapter4")->Play(true);
 
 	FILEMANAGER->SetNowStageFile("map_0");
 	FILEMANAGER->TileFileRead(&SCENEMANAGER->m_tiles);

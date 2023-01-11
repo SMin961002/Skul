@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "CSound.h"
 #include "IntroTitleScene.h"
 
 void IntroTitleScene::Init()
@@ -8,6 +9,7 @@ void IntroTitleScene::Init()
 	imgtxt = IMAGEMANAGER->FindImage("IntroClick");
 	m_isTitleStart = false;
 	alpha = 0;
+	SOUNDMANAGER->FindSound("Intro")->Play(true);
 	alpha2 = 0;
 }
 
@@ -50,4 +52,6 @@ void IntroTitleScene::Render()
 
 void IntroTitleScene::Release()
 {
+	SOUNDMANAGER->FindSound("Lobby")->Play(true);
+	SOUNDMANAGER->FindSound("Intro")->Stop();
 }

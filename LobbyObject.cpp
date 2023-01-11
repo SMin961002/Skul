@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include"LobbyObject.h"
 #include "RigidBodyComponent.h"
+#include"CSound.h"
 
 void Spider::Init()
 {

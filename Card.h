@@ -5,7 +5,7 @@ class Card : public Component
 	//실패시 일반카드 24개 발사
 	//노말성공시 관통카드, spark effect, 15뎀
 	//대성공시 펑펑카드(bighit small), 마지막카드 big explosion, 뎀 30
-	//보스에너미 타격판정 바꾸기
+	//에너미 타격판정 바꾸기
 protected:
 	const float m_speed = 500;
 	CollisionComponent* m_coll;
