@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "HitDamageEffect.h"
 #include "Enemy.h"
+#include "CSound.h"
 void Card::Init()
 {
 	m_coll = m_obj->AddComponent<CollisionComponent>();
@@ -73,7 +74,7 @@ void Card::Release()
 
 void Card::OnCollision(string collisionName, Object* other)
 {
-	if (other->GetName() == "Enemy")
+	if (other->GetName() == "Enemy"||other->GetName() == "EnemyBoss")
 	{
 		bool isOtherHit = false;
 		for (auto iter : m_CollObjList)
@@ -87,6 +88,7 @@ void Card::OnCollision(string collisionName, Object* other)
 		if (!isOtherHit)
 		{
 			Component* e = other->GetComponent<Component>();
+			SOUNDMANAGER->FindSound("SkulAttackBluntSmall");
 			if (m_isJoker)
 			{
 				e->HitEnemy(20, IMAGEMANAGER->FindImageVector("Gambler_JockerExplosion")->GetTotalDelay());
@@ -183,6 +185,7 @@ void BlackJackCard::Setting(int success)
 	{
 	case -1:
 		m_isJoker = false;
+		m_isJokerHit = false;
 		m_img = IMAGEMANAGER->FindImage("GamblerCardNormal");
 		break;
 	case 1:
@@ -193,20 +196,32 @@ void BlackJackCard::Setting(int success)
 
 	default:
 		m_isJoker = false;
+		m_isJokerHit = false;
 		m_img = IMAGEMANAGER->FindImage("GamblerCardNormal");
 		break;
 	}
+}
+
+void BlackJackCard::SetShoot()
+{
+	m_shoot = true;
+	m_coll->SetIsActive(true);
+		string sound = "GamblerBlackJack"+to_string(m_success+2);
+		SOUNDMANAGER->FindSound(sound)->Play(false);
+	if (m_success >= 0)
+		EFFECTMANAGER->AddEffect<BlackJackSpark>(m_obj->x, m_obj->y, m_isLeft, 2);
 }
 
 void BlackJackCard::OnCollision(string collisionName, Object* other)
 {
 	if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 	{
-		if (m_success = -1)	//실패의 경우
+		if (m_success == -1)	//실패의 경우
 		{
 			Component* e = other->GetComponent<Component>();
 			e->HitEnemy(12, 0);
 			m_obj->ObjectDestroyed();
+			SOUNDMANAGER->FindSound("SkulAttackBluntSmall");
 			return;			//공격판정시 바로 파괴되므로 아래의 hited판정을 돌리지 않고 조기return한다
 		}
 
@@ -224,30 +239,33 @@ void BlackJackCard::OnCollision(string collisionName, Object* other)
 		{
 			if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 			{
+				m_CollObjList.push_back(other);
 				Component* e = other->GetComponent<Component>();
 				if (m_isJoker)
 				{
 					e->HitEnemy(15, 0);
 					OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(15);
+					SOUNDMANAGER->FindSound("SkulAttackBluntLarge");
 
 					if (!m_isJokerHit)
 					{
-						m_jokerExplosion = EFFECTMANAGER->AddEffect<BlackJackJokerExplosion>(m_obj->x, m_obj->y, m_isLeft, 2);
-						m_jokerExplosion->Init();
-						if (m_isLeft)
-							m_coll->Setting(160, m_obj->x + 80, m_obj->y + 80);
-						else
-							m_coll->Setting(160, m_obj->x + 80, m_obj->y + 80);
 						m_isJokerHit = true;
+						m_jokerExplosion = EFFECTMANAGER->AddEffect<BlackJackJokerExplosion>(m_obj->x, m_obj->y, m_isLeft, 2);
+						m_coll->Setting(120, m_obj->x + 60, m_obj->y + 60);
+						if (MY_UTILITY::getInt(2) == 0)	//2분의 1의 확률로 폭발음 출력하기 위함
+						{
+							SOUNDMANAGER->FindSound("GamblerBlackJackBigHit")->Play(false);
+						}
 					}//end if not jokerhit
 				}//end joker
 				else
 				{
 					OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(12);
+					SOUNDMANAGER->FindSound("SkulAttackBluntSmall");
 
 					e->HitEnemy(12, 0);
 				}//end not joker
-				m_CollObjList.push_back(other);
+
 			}//end if other Enemy ||EnemyBoss
 		}//end if nohit
 	}

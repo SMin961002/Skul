@@ -208,6 +208,7 @@ void SlotMachine::OnCollision(string collisionName, Object* other)
 					}
 					else { e->HitEnemy(15, 0); }
 					m_CollObjList.push_back(other);
+					SOUNDMANAGER->FindSound("SkulAttackExplosion")->Play(false);
 				}
 			}
 		}//end nohit

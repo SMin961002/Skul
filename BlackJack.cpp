@@ -1,14 +1,16 @@
 #include "stdafx.h"
 #include "BlackJack.h"
 #include "Card.h"
+#include "CSound.h"
 
 void BlackJack::Init()
 {
 	m_shotOn = false;
-	m_startDelay = 3.0f;
+	m_startDelay = 1.2f;
 	m_shotDelay = 0.15;
 	m_shotNowDelay = 0.0f;
 	m_success = 0;
+	SOUNDMANAGER->FindSound("GamblerBlackJackReady")->Play(false);
 }
 
 void BlackJack::Update()

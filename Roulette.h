@@ -17,11 +17,12 @@ private:
 	CImage* m_imageResult;
 	CollisionComponent* m_coll;
 
-	int m_rotateCount;
 	bool m_printRouletteResult;
 	bool m_boombRoulette;
 	bool m_isInBreakEffect;
+	bool m_isBlackBigHitSoundOn;
 	float m_delay;
+	short m_rouletteLoopCounter;
 
 	float m_alpha;
 

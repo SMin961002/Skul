@@ -21,7 +21,8 @@ private:
 	float m_headTagCool;
 
 	int m_HpMax;
-	int m_life;
+	int m_Hp;
+	bool m_isDead;
 	float m_attack;
 	float m_deffendence;
 
@@ -56,7 +57,6 @@ private:
 	float m_supperArmarTime;
 	float m_supperArmarNowTime;
 	//============end==========
-	TeleportationToHead* effect = new TeleportationToHead;
 
 public:
 	int goldValue;
@@ -105,13 +105,13 @@ public:
 	void InputArrowKey();
 	void Heal()
 	{
-		if ((m_life + 10) - m_HpMax > 0)
+		if ((m_Hp + 10) - m_HpMax > 0)
 		{
-			m_life = m_HpMax;
+			m_Hp = m_HpMax;
 		}
 		else
 		{
-			m_life += 10;
+			m_Hp += 10;
 		}
 	}
 	//↑====PlayerMove.cpp에 있습니다====↑//
@@ -145,7 +145,7 @@ public:
 		{
 		}
 	}
-	Player() : m_life(100) {};
+	Player() : m_Hp(100),m_HpMax(100), m_isDead(false) {};
 };
 
 

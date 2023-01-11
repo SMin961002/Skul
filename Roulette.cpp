@@ -2,8 +2,9 @@
 #include "Roulette.h"
 #include "Player.h"
 #include "HitDamageEffect.h"
+#include "CSound.h"
 
-void Roulette::Init()
+void Roulette::Init()	//효과음 Effect에도 넣었음
 {
 	if (OBJECTMANAGER->m_player->GetplayerIsLeft())
 	{
@@ -12,62 +13,64 @@ void Roulette::Init()
 	else m_obj->x -= 100;
 	m_obj->y -= 88;
 
+	EFFECTMANAGER->AddEffect<RouletteReady>(m_obj->x, m_obj->y, true, 2);
+
 	m_coll = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(m_coll);
 	m_coll->Setting(10, m_obj->x + 5, m_obj->y + 5, "GamblerRoulette");
 	m_coll->SetIsActive(true);
 
-	m_rotateCount = 0;
 	m_boombRoulette = false;
 	m_printRouletteResult = false;
 	m_isInBreakEffect = false;
+	m_isBlackBigHitSoundOn == true;	//블랙홀 빅히트인 경우에만 false로 두고 사운드넣을지 검사할 것
 	m_delay = 2;
 
 	ResultAndImageSetting();
-
-	EFFECTMANAGER->AddEffect<RouletteReady>(m_obj->x, m_obj->y, false, 2);
+	if (m_resultSuccess != -1)
+	{
+		SOUNDMANAGER->FindSound("RouletteSpin")->Play(false);
+	}
 }
 
 void Roulette::Update()
 {
-	if (m_roulette->GetIsImageEnded())
+	if (m_resultSuccess == -1)
 	{
-		if (m_resultSuccess == -1)
+		if (m_roulette->GetFrame() == 35)
+		{
+			SOUNDMANAGER->FindSound("RouletteFail")->Play(false);
+		}
+		else if (m_roulette->GetIsImageEnded())
 		{
 			m_obj->ObjectDestroyed();
 		}
-		else if (++m_rotateCount < 4)
+	}
+
+	else if (m_roulette->GetIsImageEnded())
+	{
+		if (--m_rouletteLoopCounter > 0)
 		{
 			m_roulette->Reset();
 			if (m_resultSuccess == 1)
 				EFFECTMANAGER->AddEffect<RouletteBigShot>(m_obj->x, m_obj->y, false, 2);
 			else
 				EFFECTMANAGER->AddEffect<RouletteShot>(m_obj->x, m_obj->y, false, 2);
-			if (m_rotateCount == 3)
+
+			if (m_rouletteLoopCounter == 1)
 			{
-				EFFECTMANAGER->AddEffect<RouletteBrokenEffect>(m_obj->x, m_obj->y, false, 2);
-				m_isInBreakEffect = true;
+				if (m_resultSuccess == 1)
+				{
+					m_roulette->Setting(0.03, false);
+				}
 			}
 		}
-		else if (!m_boombRoulette) m_printRouletteResult = true;
+		else if (!m_boombRoulette)
+		{
+			m_printRouletteResult = true;
+		}
 	}
 
-	if (m_printRouletteResult)
-	{
-		if (!m_isInBreakEffect)
-		{
-			m_isInBreakEffect = true;
-			if (m_resultSuccess == 1)
-				EFFECTMANAGER->AddEffect<RouletteBrokenEffectBigShot>(m_obj->x, m_obj->y, false, 2);
-		}
-		m_delay -= DELTA_TIME;
-		if (m_delay <= 0)
-		{
-			m_printRouletteResult = false;
-			m_boombRoulette = true;
-			m_delay = 1;
-		}
-	}
 	if (m_boombRoulette)
 	{
 		m_delay -= DELTA_TIME;
@@ -80,8 +83,62 @@ void Roulette::Update()
 				listObj().swap(m_CollObjList);
 			}
 		}
-		//##프레임당 collision 영역 세팅하기
 	}
+
+	if (m_printRouletteResult)
+	{
+		if (!m_isInBreakEffect)
+		{
+			m_isInBreakEffect = true;
+			if (m_resultColor == eRed)
+			{
+				SOUNDMANAGER->FindSound("RouletteResultRed")->Play(false);
+			}
+			else
+			{
+				SOUNDMANAGER->FindSound("RouletteResultBlack")->Play(false);
+			}
+
+			if (m_resultSuccess == 1)
+				EFFECTMANAGER->AddEffect<RouletteBrokenEffectBigShot>(m_obj->x, m_obj->y, false, 2);
+			else if(m_resultSuccess == 0)
+				EFFECTMANAGER->AddEffect<RouletteBrokenEffect>(m_obj->x, m_obj->y, false, 2);
+		}
+		m_delay -= DELTA_TIME;
+
+		if (m_delay <= 0)
+		{
+			m_printRouletteResult = false;
+			m_boombRoulette = true;
+			m_delay = 1;
+			//↓sound play↓
+			if (m_resultColor == eBlack)
+			{
+				switch (m_resultSuccess)
+				{
+				case 0:
+					SOUNDMANAGER->FindSound("RouletteHitBlack")->Play(false);
+					break;
+				case 1:
+					SOUNDMANAGER->FindSound("RouletteBigHitBlackCast")->Play(false);
+					break;
+				}
+			}//end if black
+			else
+			{
+				switch (m_resultSuccess)
+				{
+				case 0:
+					SOUNDMANAGER->FindSound("RouletteHitRed")->Play(false);
+					break;
+				case 1:
+					SOUNDMANAGER->FindSound("RouletteBigHitRed")->Play(false);
+					break;
+				}
+			}//end if red
+			//↑sound play↑
+		}//end if delay = 0
+	}//end if printRoulette
 
 	if (m_explosion->GetIsImageEnded())
 	{
@@ -110,23 +167,37 @@ void Roulette::Update()
 					else
 						e->SetPosition(e->GetX(), e->GetY() + 50);
 				}
-				//iter->GetComponent<Component>()->SetPosition(m_obj->x, m_obj->y);
 			}
 		}
 		m_obj->ObjectDestroyed();
+	}
+	if (m_isBlackBigHitSoundOn == false)
+	{
+		if (m_explosion->GetFrame() == 18)
+		{
+			SOUNDMANAGER->FindSound("RouletteBigHitBlack")->Play(false);
+		}
+		m_isBlackBigHitSoundOn = true;
 	}
 	CollisionUpdate();
 }
 void Roulette::Render()
 {
-	if (m_rotateCount < 4)
+	if (m_rouletteLoopCounter > 0)
 		m_roulette->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
 
 	if (m_printRouletteResult)
 		IMAGEMANAGER->CenterRender(m_imageResult, m_obj->x, m_obj->y, 2, 2, 0, false, m_delay);
 	if (m_boombRoulette)
 	{
-		m_explosion->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
+		if (m_resultColor == eBlack && m_resultSuccess == 1)
+		{
+			m_explosion->CenterRender(m_obj->x + 20, m_obj->y - 15, 2, 2, 0);
+		}
+		else
+		{
+			m_explosion->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
+		}
 	}
 }
 void Roulette::Release()
@@ -227,7 +298,7 @@ void Roulette::CollisionUpdate()
 			if (m_explosion->GetFrame() > 18)
 			{
 				m_coll->SetIsActive(true);
-				m_coll->Setting(200, m_obj->x + 80, m_obj->y + 115);
+				m_coll->Setting(200, m_obj->x + 100, m_obj->y + 100);
 			}
 			else m_coll->SetIsActive(false);
 
@@ -284,6 +355,7 @@ void Roulette::OnCollision(string collisionName, Object* other)
 			other->GetComponent<Component>()->HitEnemy(18, 0.1);
 			OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(18);
 			m_CollObjList.push_back(other);
+			SOUNDMANAGER->FindSound("SkulAttackExplosion")->Play(false);
 		}
 	}
 }
@@ -309,53 +381,79 @@ void Roulette::ResultAndImageSetting()
 	{
 		m_resultSuccess = 1;
 		boombImage.append("Big");
+		m_roulette = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteBigShot");
+		m_roulette->Setting(0.02, false);
+		m_rouletteLoopCounter = 6;
+		EFFECTMANAGER->AddEffect<RouletteBigShot>(m_obj->x, m_obj->y, false, 2);
+		if (boombImage == "GamblerRouletteBlackBig")
+		{
+			m_isBlackBigHitSoundOn == false;
+		}
 	}
 	else if (tmp > 1)
 	{
 		m_resultSuccess = 0;
+		m_roulette = IMAGEMANAGER->AddImageVectorCopy("Gambler_Roulette");
+		m_roulette->Setting(0.02, false);
+		m_rouletteLoopCounter = 3;
+		EFFECTMANAGER->AddEffect<RouletteShot>(m_obj->x, m_obj->y, false, 2);
 	}
 	else
 	{
 		m_resultSuccess = -1;
-	}
-	m_explosion = IMAGEMANAGER->AddImageVectorCopy(boombImage);
-	m_explosion->Setting(0.05, false);
-	if (m_resultColor == eRed && m_resultSuccess == 1)
-	{
-		for (int i = 31; i < 38; i++)
-		{
-			m_explosion->Setting(i, 0.07);
-		}
-	}
-	else if (m_resultColor == eRed && m_resultSuccess == 0)
-	{
-		for (int i = 5; i < 12; i++)
-		{
-			m_explosion->Setting(i, 0.07);
-		}
-	}
-
-
-	if (m_resultSuccess == 0)
-	{
-		m_roulette = IMAGEMANAGER->AddImageVectorCopy("Gambler_Roulette");
-		EFFECTMANAGER->AddEffect<RouletteShot>(m_obj->x, m_obj->y, false, 2);
-	}//end success
-	else if (m_resultSuccess == -1)
-	{
 		m_roulette = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteFail");
-		for (int i = 0; i < 37; i++)
+		for (int i = 0; i < 16; i++)
 		{
-			m_roulette->Setting(i, 0.08);
+			m_roulette->Setting(i, 0.0625);
+		}
+		for (int i = 16; i < 37; i++)
+		{
+			m_roulette->Setting(i, 0.075);
 		}
 		for (int i = 37; i < 51; i++)
 		{
 			m_roulette->Setting(i, 0.045);
 		}
-	}//end failed
-	else
+		m_rouletteLoopCounter = 1;
+	}
+	m_explosion = IMAGEMANAGER->AddImageVectorCopy(boombImage);
+	m_explosion->Setting(0.05, false);
+	if (m_resultColor == eRed)
 	{
-		m_roulette = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteBigShot");
-		EFFECTMANAGER->AddEffect<RouletteBigShot>(m_obj->x, m_obj->y, false, 2);
-	}//end bitshot
+		if (m_resultSuccess == 1)
+		{
+			for (int i = 31; i < 38; i++)
+			{
+				m_explosion->Setting(i, 0.08);
+			}
+		}
+		else if (m_resultSuccess == 0)
+		{
+			for (int i = 5; i < 12; i++)
+			{
+				m_explosion->Setting(i, 0.07);
+			}
+		}
+	}
+	else if (m_resultColor == eBlack)
+	{
+		if (m_resultSuccess == 1)
+		{
+			for (int i = 19; i < 91; i++)
+			{
+				m_explosion->Setting(i, 0.06);
+			}
+		}
+		else if (m_resultSuccess == 0)
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				m_explosion->Setting(i, 0.04);
+			}
+			for (int i = 20; i < 32; i++)
+			{
+				m_explosion->Setting(i, 0.03);
+			}
+		}
+	}
 }

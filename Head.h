@@ -170,6 +170,7 @@ public:
 
 			enemy->HitEnemy(dmg, delay);
 			m_CollObjList.push_back(obj);
+			SOUNDMANAGER->FindSound("SkulAttack");
 		}
 	};
 	
@@ -186,6 +187,7 @@ public:
 
 			enemy->HitEnemy(dmg, delay);
 			m_CollObjList.push_back(obj);
+			SOUNDMANAGER->FindSound("SkulAttack");
 		}
 	}
 

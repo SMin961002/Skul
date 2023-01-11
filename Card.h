@@ -46,12 +46,6 @@ public:
 	virtual void Release() override;
 	//성공0, 실패 -1, 대성공 1
 	void Setting(int success);
-	void SetShoot()
-	{
-		m_shoot = true;
-		m_coll->SetIsActive(true);
-		if (m_success >= 0)
-			EFFECTMANAGER->AddEffect<BlackJackSpark>(m_obj->x, m_obj->y, m_isLeft, 2);
-	}
+	void SetShoot();
 	virtual void OnCollision(string collisionName, Object* other)override;
 };

@@ -276,6 +276,9 @@
     <ClCompile Include="CSoundMgr.cpp">
       <Filter>Core\Manager\SoundManager</Filter>
     </ClCompile>
+    <ClCompile Include="BlackJack.cpp">
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -432,9 +435,6 @@
     <ClInclude Include="MenuUI.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectileHeadSkull.h">
-      <Filter>Game\Object\Charactor\Head</Filter>
-    </ClInclude>
     <ClInclude Include="ResultValue.h">
       <Filter>Game\Reward</Filter>
     </ClInclude>
@@ -513,6 +513,12 @@
     </ClInclude>
     <ClInclude Include="CSound.h">
       <Filter>Core\Manager\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackJack.h">
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileHeadSkull.h">
+      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
