@@ -263,6 +263,9 @@
     <ClCompile Include="Lazer.cpp" />
     <ClCompile Include="HitDamageEffect.cpp" />
     <ClCompile Include="BlackJack.cpp" />
+    <ClCompile Include="EndingScene.cpp">
+      <Filter>Game\Scene\EndingScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -494,6 +497,9 @@
     <ClInclude Include="Lazer.h" />
     <ClInclude Include="HitDamageEffect.h" />
     <ClInclude Include="BlackJack.h" />
+    <ClInclude Include="EndingScene.h">
+      <Filter>Game\Scene\EndingScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -666,6 +672,9 @@
     </Filter>
     <Filter Include="Game\Object\Enemy\LeoniaSoldier">
       <UniqueIdentifier>{2201dd90-e9cd-4469-a856-8b5402cb1f54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\EndingScene">
+      <UniqueIdentifier>{512d6be1-02a0-43e5-9251-40d6598de2fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

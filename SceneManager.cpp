@@ -8,6 +8,7 @@
 #include "BossScene.h"
 #include "IntroTitleScene.h"
 #include "Stage.h"
+#include "EndingScene.h"
 
 SceneManager::SceneManager()
 {
@@ -32,6 +33,7 @@ void SceneManager::Init()
 	AddScene("ShopScene", new ShopScene);
 	AddScene("IntroTitleScene", new IntroTitleScene);
 	AddScene("Stage", new Stage);
+	AddScene("EndingScene", new EndingScene);
 
 	AddScene("IntroTitleScene", new IntroTitleScene);
 	flag = 0;
