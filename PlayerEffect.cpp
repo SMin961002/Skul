@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PlayerEffect.h"
+#include "Player.h"
 
 void DoubleJumpSmoke::Init()
 {
@@ -102,5 +103,25 @@ void RouletteBrokenEffectBigShot::Init()
 {
 	Effect::Init();
 	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_RouletteBigShotBroken");
+	m_img->Setting(0.03, false);
+}
+
+void SlotMachineBigHit::Init()
+{
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_SlotMachineBigHitEffect");
+	m_img->Setting(0.03, false);
+}
+
+void SlotMachineBigHit::Move()
+{
+	x = OBJECTMANAGER->m_player->GetplayerX();
+	y = OBJECTMANAGER->m_player->GetplayerY()-46;
+}
+
+void SlotMachineThunder::Init()
+{
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_SlotMachine_Thunder");
 	m_img->Setting(0.03, false);
 }

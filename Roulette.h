@@ -8,6 +8,7 @@ private:
 	};
 	int m_resultColor;
 	int m_resultSuccess;	//-1실패 0성공 1대성공
+
 	vector<Object*> m_vectorCollisionList;
 	vImage* m_roulette;
 	vImage* m_explosion;
