@@ -35,12 +35,11 @@ void BossScene::Init()
 		}
 	}
 
-	OBJECTMANAGER->AddObject("FountainLeft", 100, 590, 0)->AddComponent<HolyFountainLeft>();
-	OBJECTMANAGER->AddObject("FountainRight", 1500, 590, 0)->AddComponent<HolyFountainRight>();
 
 
-	OBJECTMANAGER->AddObject("Enemy", 500, 670, eEnemy)->AddComponent<BossPhase1EnemyCandle>();
-	OBJECTMANAGER->AddObject("Enemy", 600, 670, eEnemy)->AddComponent<BossPhase1EnemyFnatic>();
+
+	//OBJECTMANAGER->AddObject("Enemy", 500, 670, eEnemy)->AddComponent<BossPhase1EnemyCandle>();
+	//OBJECTMANAGER->AddObject("Enemy", 600, 670, eEnemy)->AddComponent<BossPhase1EnemyFnatic>();
 
 
 }

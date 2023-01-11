@@ -125,8 +125,8 @@ void PixelCollisionComponent::PixcelCollision(float w, float h, bool isCheck, st
 	if (m_tiles[h][w] == 0 || m_tiles[h][w] == 1 || m_tiles[h][w] == 2 || m_tiles[h][w] == 3 || m_tiles[h][w] == 4 || m_tiles[h][w] == 7 || m_tiles[h][w] == 8 || m_tiles[h][w] == 9 || m_tiles[h][w] == 10 || m_tiles[h][w] == 11 || m_tiles[h][w] == 12 || m_tiles[h][w] == 13 || m_tiles[h][w] == 14 || m_tiles[h][w] == 36 || m_tiles[h][w] == 37 || m_tiles[h][w] == 38 || m_tiles[h][w] == 39 || m_tiles[h][w] == 40 || m_tiles[h][w] == 41 || m_tiles[h][w] == 42 || m_tiles[h][w] == 43 || m_tiles[h][w] == 107 || m_tiles[h][w] == 108 || m_tiles[h][w] == 106 || m_tiles[h][w] == 105 || m_tiles[h][w] == 104 || m_tiles[h][w] == 48 || m_tiles[h][w] == 49 || m_tiles[h][w] == 50 || m_tiles[h][w] == 51 || m_tiles[h][w] == 52 || m_tiles[h][w] == 53 || m_tiles[h][w] == 54 || m_tiles[h][w] == 55 || m_tiles[h][w] == 56)
 	{
 		float _x = int(*x) % int(m_image->GetWidth() - 1);
-		float _y = int(*y) % int(m_image->GetHight() - 1);
-		if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y >= 0 && _y <= m_image->GetHight() - 1)
+		float _y = int(*y) % int(m_image->GetHight() - 1)+1;
+		if (_x >= 0 && _x <= m_image->GetWidth() - 1 && _y > 0 && _y < m_image->GetHight() - 1)
 		{
 			COLORREF color = m_image->pixel[(int)_x][(int)_y];
 			int r = GetRValue(color);

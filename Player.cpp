@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "RigidBodyComponent.h"
 #include "Enemy.h"
+#include"CSound.h"
 #include "HitDamageEffect.h"
 /*
 플레이어가 가진
@@ -100,6 +101,7 @@ void Player::Init()
 	m_playerHitBox->Setting(25, m_obj->x + 14, m_obj->y - 15, "PlayerHitRange");
 	m_obj->AddCollisionComponent(m_playerHitBox);
 	m_obj->AddComponent<RigidBodyComponent>();
+	lastCheck = GAMEMANAGER->isHeadCheck;
 
 	m_collAutoAttack = m_obj->AddComponent<CollisionComponent>();
 	m_collSkillA = m_obj->AddComponent<CollisionComponent>();
@@ -122,15 +124,22 @@ void Player::Init()
 void Player::Update()
 {
 	Vector2 v;
-
 	m_nowHead->SetImageChange(false);
+	if (lastCheck != isHeadCheck)
+	{
+		lastCheck = isHeadCheck;
+		ChangeHead();
+	}
 	if (!m_nowHead->GetNonActionCansle())
 	{
 		Move();
-		if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
+		if (isHeadCheck == true)
 		{
-			if (m_headTagCool == 0)
-				ChangeHead();
+			if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
+			{
+				if (m_headTagCool == 0)
+					ChangeHead();
+			}
 		}
 	}
 	InputArtifactKey();
@@ -166,6 +175,12 @@ void Player::UIRender()
 	IMAGEMANAGER->UIRender(m_UIImage[ePlayerStatus], 0, 430, 2, 2, 0);
 	IMAGEMANAGER->UIRender(hpBar, 89, 518, 231.f / m_HpMax * m_life, 2, 0, 1);
 
+	IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("goldUI"), 0, 0, 1, 1);
+	IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("enemyUI"), 0, 0, 1, 1);
+
+	IMAGEMANAGER->D2dTextOut(to_wstring(goldValue), 970, 515, { 255,255,255,1 }, 0.8f);
+	IMAGEMANAGER->D2dTextOut(to_wstring(GAMEMANAGER->enemyCount), 970, 481, { 255,255,255,1 }, 0.8f);
+
 	if (m_life <= 0)
 	{
 		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("deathUI"), 0, 0, 1, 1);
@@ -175,6 +190,7 @@ void Player::UIRender()
 			SCENEMANAGER->ChangeScene("Stage");
 		}
 	}
+
 }
 
 void Player::InputArtifactKey()
@@ -232,7 +248,6 @@ void Player::CoolDown()
 
 void Player::ChangeHead()
 {
-	cout << (int)m_headSlot << endl;
 	if (m_headSlot != eSkulSpecies::Empty)
 	{
 		eSkulSpecies tmp = m_nowHead->GetSpecies();
@@ -242,12 +257,15 @@ void Player::ChangeHead()
 		switch (m_headSlot)
 		{
 		case eSkulSpecies::eBasic:
+			SOUNDMANAGER->FindSound("SkulSwitch")->Play(false);
 			m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eBasic)];
 			m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
 			m_nowHead->TagAction();
+
 			cout << "스컬 변경 : 리틀본" << endl;
 			break;
 		case eSkulSpecies::eGambler:
+			SOUNDMANAGER->FindSound("Switch")->Play(false);
 			m_nowHead = m_headList[static_cast<int>(eSkulSpecies::eGambler)];
 			m_nowHead->CollisionResetting(m_obj, m_collAutoAttack, m_collSkillA, m_collSkillS, m_collSkillTag);
 			m_nowHead->TagAction();
@@ -268,26 +286,21 @@ void Player::OnCollision(string collisionName, Object* other)
 {
 	if (collisionName == m_collAutoAttack->GetName())
 	{
-		if (other->GetName() == "Enemy")
+		if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 		{
-			cout << "적에게공격" << endl;
-
-			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
-
-		}
-		if (other->GetName() == "EnemyBoss")
-		{
-			cout << "적에게공격" << endl;
-
-			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
-		}
-		if (other->GetName() == "EnemyBoss")
-		{
-			cout << "적에게공격" << endl;
+			cout << "적에게공격 - Auto" << endl;
 
 			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
 		}
 	}//end collision Name BasicAttack
+	else if (collisionName == m_collSkillTag->GetName())
+	{
+		if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
+		{
+			cout << "적에게공격 - Tag" << endl;
+			m_nowHead->OnCollisionTagAttack(other->GetComponent<Component>(), other, 10, 0.01);
+		}
+	}//end collision Name TagAttack
 }
 
 void Player::HitPlayerPhysicAttack(float dmg)

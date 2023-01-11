@@ -111,7 +111,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_RouletteBigShotCircle", L"./Resources/Png/Skul/Gambler/Effect/Roulette/BigShotCircle/", 1, 8);
 	AddImageVector("Gambler_Roulette_BlackBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Black_BigHit/", 1, 91);
 	AddImageVector("Gambler_Roulette_RedBig", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Red_BigHit/", 1, 49);
-	AddImageVector("Gambler_SlotMachine", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/", 1, 8);
+	AddImageVector("Gambler_SlotMachine", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/", 1, 4);
 	AddImageVector("Gambler_SlotMachine_Explosion", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Explosion/", 1, 17);
 	AddImageVector("Gambler_SlotMachine_ExplosionBigHit", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/BigHitExplosion/", 1, 17);
 	AddImageVector("Gambler_SlotMachine_Thunder", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Explosion/", 1, 17);
@@ -394,6 +394,10 @@ void ImageManager::LoadImages()
 	AddImage("FireKnife", L"./Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/FireKnife.png");
 	AddImage("hpBar", L"./Resources/hpBar.png");
 	AddImage("deathUI", L"./Resources/deathUI.png");
+	AddImage("goldUI", L"./Resources/goldUI.png");
+	AddImage("enemyUI", L"./Resources/enemyUI.png");
+	AddImage("GamblerHead", L"./Resources/HeadUI/Gambler #54692.png");
+
 
 
 	//==========================================================================================================

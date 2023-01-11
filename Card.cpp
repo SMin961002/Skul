@@ -76,7 +76,7 @@ void Card::OnCollision(string collisionName, Object* other)
 	if (other->GetName() == "Enemy")
 	{
 		bool isOtherHit = false;
-		for (auto iter : m_vectorCollisionList)
+		for (auto iter : m_CollObjList)
 		{
 			if (iter == other)
 			{
@@ -107,7 +107,7 @@ void Card::OnCollision(string collisionName, Object* other)
 			{
 				e->HitEnemy(10, 0.2);
 			}//end not joker
-			m_vectorCollisionList.push_back(other);
+			m_CollObjList.push_back(other);
 		}//end if nohit
 	}
 }
@@ -200,50 +200,55 @@ void BlackJackCard::Setting(int success)
 
 void BlackJackCard::OnCollision(string collisionName, Object* other)
 {
-	if (other->GetName() == "Enemy" || other->GetName() == "Boss")
+	if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 	{
-		if (m_success = -1)
+		if (m_success = -1)	//실패의 경우
 		{
 			Component* e = other->GetComponent<Component>();
 			e->HitEnemy(12, 0);
 			m_obj->ObjectDestroyed();
+			return;			//공격판정시 바로 파괴되므로 아래의 hited판정을 돌리지 않고 조기return한다
 		}
 
-		bool isOtherHit = false;
-		for (auto iter : m_vectorCollisionList)
+		bool hited = false;
+		for (auto iter : m_CollObjList)
 		{
 			if (iter == other)
 			{
-				isOtherHit = true;
+				hited = true;
+				break;
 			}
 			else false;
 		}
-		if (!isOtherHit)
+		if (!hited)
 		{
-			Component* e = other->GetComponent<Component>();
-			if (m_isJoker)
+			if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
 			{
-				e->HitEnemy(15, 0);
-				OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(15);
-
-				if (!m_isJokerHit)
+				Component* e = other->GetComponent<Component>();
+				if (m_isJoker)
 				{
-					m_jokerExplosion = EFFECTMANAGER->AddEffect<BlackJackJokerExplosion>(m_obj->x, m_obj->y, m_isLeft, 2);
-					m_jokerExplosion->Init();
-					if (m_isLeft)
-						m_coll->Setting(160, m_obj->x + 80, m_obj->y + 80);
-					else
-						m_coll->Setting(160, m_obj->x + 80, m_obj->y + 80);
-					m_isJokerHit = true;
-				}//end if not jokerhit
-			}//end joker
-			else
-			{
-				OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(12);
+					e->HitEnemy(15, 0);
+					OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(15);
 
-				e->HitEnemy(12, 0);
-			}//end not joker
-			m_vectorCollisionList.push_back(other);
+					if (!m_isJokerHit)
+					{
+						m_jokerExplosion = EFFECTMANAGER->AddEffect<BlackJackJokerExplosion>(m_obj->x, m_obj->y, m_isLeft, 2);
+						m_jokerExplosion->Init();
+						if (m_isLeft)
+							m_coll->Setting(160, m_obj->x + 80, m_obj->y + 80);
+						else
+							m_coll->Setting(160, m_obj->x + 80, m_obj->y + 80);
+						m_isJokerHit = true;
+					}//end if not jokerhit
+				}//end joker
+				else
+				{
+					OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(12);
+
+					e->HitEnemy(12, 0);
+				}//end not joker
+				m_CollObjList.push_back(other);
+			}//end if other Enemy ||EnemyBoss
 		}//end if nohit
 	}
 }

@@ -81,8 +81,7 @@ protected:
 
 	bool m_nonCansleAction;
 
-	bool  m_imageChange;	//무언가 동작을 입력하면 true가 된다.
-	bool m_canAction[eActionTagNumber];
+	bool  m_imageChange;	//무언가 동작을 입력하면 true가 된다. ->Update의 ActionArrangement에서 이미지 바꿔준다
 
 public:
 
@@ -135,6 +134,17 @@ public:
 	virtual void Act();
 
 	virtual void CoolDown() {};
+	void CoolDownDelay(float *delay, float deltaTime = DELTA_TIME)
+	{
+		if (*delay > 0)
+		{
+			*delay -= deltaTime;
+			if (*delay < 0)
+			{
+				*delay = 0;
+			}
+		}
+	}
 	virtual void ActionArrangement() {};
 	virtual void CollisionUpdate() {};
 	//	in act
@@ -145,6 +155,8 @@ public:
 
 	//Render 안에 들어가는 함수
 	virtual void DrawCharactor();
+
+	//플레이어가 활용하는 함수
 	virtual void OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg, float delay)
 	{
 		bool isEnemyHit = false;
@@ -160,6 +172,22 @@ public:
 			m_CollObjList.push_back(obj);
 		}
 	};
+	
+	virtual void OnCollisionTagAttack(Component* enemy, Object* obj, float dmg, float delay)
+	{
+		bool isEnemyHit = false;
+		for (auto iter : m_CollObjList)
+		{
+			if (iter == obj) isEnemyHit = true;
+		}
+		if (!isEnemyHit)
+		{
+			OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(10);
+
+			enemy->HitEnemy(dmg, delay);
+			m_CollObjList.push_back(obj);
+		}
+	}
 
 	void SetPlayerMoveParameter(float* moveSpeed, float* dashSpeed, float* dashtime, float* dashCool, short* dashMax, bool* dashing, float* jumpSpeed, short* jumpMax, bool* jumpping)
 	{

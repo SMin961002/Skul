@@ -7,8 +7,6 @@ void Spider::Init()
 {
 	_img = IMAGEMANAGER->AddImageVectorCopy("Spider");
 	_img->Setting(0.1f, true);
-	GAMEMANAGER->enemyCount++;
-
 }
 
 void Spider::Update()
@@ -22,8 +20,6 @@ void Spider::Render()
 
 void Spider::Release()
 {
-	GAMEMANAGER->enemyCount--;
-
 }
 
 void LobbyNpc1::Init()
@@ -253,14 +249,17 @@ void Elevator::OnCollision(string collisionName, Object* other)
 {
 	if (collisionName == "elevator")
 	{
-		if (other->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision() == true)
+		if (other->GetName()== "player")
 		{
-			other->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
-			isUp = true;
-		}
-		if (isUp == true)
-		{
-			other->y -= 2.f;
+			if (other->GetComponent<PixelCollisionComponent>()->GetIsBottomCollision() == true)
+			{
+				other->GetComponent<RigidBodyComponent>()->SetGravityOnOff(false);
+				isUp = true;
+			}
+			if (isUp == true)
+			{
+				other->y -= 2.f;
+			}
 		}
 	}
 }

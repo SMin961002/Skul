@@ -24,6 +24,25 @@ void Main::Init()
 	SOUNDMANAGER->FindSound("Middle")->SetVolume(60);
 	SOUNDMANAGER->AddSound("Bossphase1", "./Resources/Sound/Bossphase1.wav");
 	SOUNDMANAGER->FindSound("Bossphase1")->SetVolume(60);
+	SOUNDMANAGER->AddSound("SkulAttack1", "./Resources/Sound/Skul_Atk 1.wav");
+	SOUNDMANAGER->FindSound("SkulAttack1")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SkulAttack2", "./Resources/Sound/Skul_Atk 2.wav");
+	SOUNDMANAGER->FindSound("SkulAttack2")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SkulSkill1", "./Resources/Sound/SkulSkill.wav");
+	SOUNDMANAGER->FindSound("SkulSkill1")->SetVolume(50);
+	SOUNDMANAGER->AddSound("Switch", "./Resources/Sound/Switch.wav");
+	SOUNDMANAGER->FindSound("Switch")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SkulSwitch", "./Resources/Sound/SkulSwitch.wav");
+	SOUNDMANAGER->FindSound("SkulSwitch")->SetVolume(50);
+
+	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SlotMachineStart", "./Resources/Sound/Gambler_SlotMachine_Start.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineRunning", "./Resources/Sound/Gambler_SlotMachine.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineJackpot", "./Resources/Sound/Gambler_SlotMachine_Jackpot.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineFinish", "./Resources/Sound/Gambler_SlotMachine_Finish.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(80);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(80);
+
 
 	IMAGEMANAGER->LoadImages();
 	TIMERMANAGER->Init();
@@ -35,6 +54,9 @@ void Main::Init()
 	inven->Init();
 	menu = new MenuUI;
 	menu->Init();
+	SOUNDMANAGER->AddSound("Dash", "./Resources/Sound/Dash.wav");
+	SOUNDMANAGER->AddSound("Jump", "./Resources/Sound/Jump.wav");
+
 	FILEMANAGER->SetNowStageFile("map_0");
 
 	SCENEMANAGER->ChangeScene("IntroTitleScene");

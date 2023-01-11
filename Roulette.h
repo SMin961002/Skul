@@ -2,6 +2,8 @@
 class Roulette: public Component
 {
 private:
+	typedef list<Object*> listObj;
+
 	enum Result
 	{
 		eBlack, eRed
@@ -9,7 +11,7 @@ private:
 	int m_resultColor;
 	int m_resultSuccess;	//-1실패 0성공 1대성공
 
-	vector<Object*> m_vectorCollisionList;
+	listObj m_CollObjList;
 	vImage* m_roulette;
 	vImage* m_explosion;
 	CImage* m_imageResult;
@@ -38,6 +40,6 @@ public:
 class BlackHole : public Component
 {
 private:
-	vector<Object*> m_vectorCollisionList;
+	vector<Object*> m_CollObjList;
 
 };
