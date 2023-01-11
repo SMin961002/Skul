@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PlayerEffect.h"
 #include "Player.h"
+#include"CSound.h"
 
 void DoubleJumpSmoke::Init()
 {
