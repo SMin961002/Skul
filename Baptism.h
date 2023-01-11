@@ -9,15 +9,10 @@ private:
 	vImage* _imgPhase1BossBaptismProjectile;
 	vImage* _imgPhase1BossBaptismProjectileDespawn;
 
-	bool _createLock;
-	bool _downCheck;
-
 	int _randX;
-	int _angle;
 	float _deltaMove;
 
 	CollisionComponent* _collision;
-	CollisionComponent* _hitCollision;
 
 public:
 	virtual void Init() override;
@@ -30,5 +25,3 @@ public:
 	Baptism() {}
 	~Baptism() {}
 };
-
-

@@ -151,6 +151,8 @@ protected:
 	float _consecrationDeltaTime;
 	float _locate;
 
+	bool _isBaptismCheck;
+	float _baptismDeltaTime;
 	vector<Baptism*> _vBaptism;
 	vector<Baptism*>::iterator _viBaptism;
 
