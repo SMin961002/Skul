@@ -196,6 +196,10 @@ void Fanatic::Update()
 
 void Fanatic::Render()
 {
+	if (alphaHit >= 0)
+	{
+		alphaHit -= 0.05;
+	}
 	if (m_effect == true)
 	{
 		if (m_currenthp >= 0)
@@ -241,6 +245,8 @@ void Fanatic::Render()
 
 		}
 	}
+	IMAGEMANAGER->CenterRender(m_vimage[m_state]->GetNowImage(), m_obj->x, m_obj->y - 50, { 255,255,255,alphaHit }, 2, 2, 0, m_isReverse);
+
 }
 
 void Fanatic::Release()
@@ -274,8 +280,9 @@ void Fanatic::OnCollision(string collisionName, Object* other)
 	}
 }
 
-void Fanatic::HitEnemy(float dmg,float time)
+void Fanatic::HitEnemy(float dmg, float time)
 {
+	alphaHit = 1;
 	m_hitpointCollision->SetIsActive(false);
 	if (!m_die2)
 	{

@@ -20,8 +20,11 @@
 
 void Stage::Init()
 {
+	if (FILEMANAGER->GetFileName() == "map_5")
+	{
+		GAMEMANAGER->Init();
+	}
 	IMAGEMANAGER->SetCameraPosition(0, 0);
-
 	GAMEMANAGER->enemyCount = 0;
 	trigger = new Trigger;
 	isFade = false;
@@ -263,7 +266,6 @@ void Stage::Render()
 	{
 		IMAGEMANAGER->DrawMapTilePixel(SCENEMANAGER->m_tiles);
 	}
-	cout << FILEMANAGER->GetFileName() << endl;
 	//IMAGEMANAGER->DrawColorRender(m_backGround, WINSIZE_X / 2, WINSIZE_Y / 2, 2, 2, 0, false, { 255,0,255,0.5 });
 }
 

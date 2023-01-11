@@ -26,7 +26,6 @@ void IntroTitleScene::Update()
 			{
 				FILEMANAGER->SetNowStageFile("map_5");
 				SCENEMANAGER->ChangeScene("Stage");
-				cout << i << endl;
 			}
 		}
 	}

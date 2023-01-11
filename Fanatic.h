@@ -22,7 +22,7 @@ private:
 		eHpbarUp,
 		eEnd
 	};
-	
+	float alphaHit = 0;
 	bool m_isReverse;
 	bool m_isHit;
 	bool m_isAttack;

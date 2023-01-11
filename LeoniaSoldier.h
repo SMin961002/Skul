@@ -19,6 +19,7 @@ private:
 	float m_lastX;
 
 	
+	float alphaHit;
 	vImage* m_vimage[eEnd];
 	
 	bool m_attack;

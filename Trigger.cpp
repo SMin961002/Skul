@@ -32,7 +32,6 @@ void Trigger::Update()
 	{
 		OnTrigger();
 	}
-	cout << size<<endl;
 }
 
 void Trigger::Render()
