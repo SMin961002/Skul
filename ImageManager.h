@@ -90,6 +90,7 @@ private:
 		float x, y;
 	};
 	sCamera camera;
+	bool isShake;
 
 	std::map <string, CImage*> m_imageList;
 	std::map <string, vImage*> m_vectorImageList;
@@ -105,6 +106,8 @@ private:
 	ID2D1Factory* pD2DFactory;
 	IDWriteTextFormat* tf;
 	ID2D1SolidColorBrush* m_brush;
+	void CameraShake() { isShake = true; }
+	void ResetShake() { isShake = false; }
 
 	bool m_isViewCollision = false;
 
@@ -148,7 +151,10 @@ public:
 	void DrawMapStructureFoward(vector<StructureData*> vec);
 	void DrawMapTilePixel(vector<vector<int>> vec);
 	void DrawColorRender(CImage* img, float x, float y, float sizeX, float sizeY, float rot, bool isReverse, D2D1_COLOR_F colr);
-
+	int timerFrmae = 0;
+	void SetShakeTime(int timerFrmae) { this->timerFrmae = timerFrmae; }
+	float camRot = 0;
+	void Shake() { if (isShake) { camera.y = camera.y + sin(camRot) * 5; camRot += 1.2; if (timerFrmae <= 0)isShake = false; timerFrmae += DELTA_TIME;   } }
 	sCamera GetCameraPosition()
 	{
 		return camera;

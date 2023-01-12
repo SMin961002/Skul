@@ -63,8 +63,8 @@ enum ObjectTag
 	eEnemy,
 	eItem,
 	eBoss,
-	eBossObject,
 	ePlayer,
+	eBossObject,
 	eEndTag
 };
 

@@ -34,8 +34,8 @@ void SceneManager::Init()
 	AddScene("IntroTitleScene", new IntroTitleScene);
 	AddScene("Stage", new Stage);
 	AddScene("EndingScene", new EndingScene);
-
 	AddScene("IntroTitleScene", new IntroTitleScene);
+
 	flag = 0;
 	// 페이드인아웃 할때 다른플레그이면 알파값을 초기화해줌
 	// 초기화를해줘야하는데 어떻게 해야할지 몰라서 해둠
@@ -130,7 +130,6 @@ bool SceneManager::FadeIn(float t, function<void()> func, int flag)
 	if (fadeImage->GetAlpha() <= 0)
 	{
 		func();
-		return true;
 	}
 
 	IMAGEMANAGER->UIRender(fadeImage, 0, 0, 2, 2, 0, fadeImage->GetAlpha());
@@ -151,7 +150,6 @@ bool SceneManager::FadeInColor(float t, function<void()> func, int flag)
 	if (fadeImage->GetAlpha() <= 0)
 	{
 		func();
-		return true;
 	}
 
 	IMAGEMANAGER->CenterRender(fadeImage, WINSIZE_X / 2 + IMAGEMANAGER->GetCameraPosition().x, WINSIZE_Y / 2 + IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,fadeImage->GetAlpha() }, 2, 2, 0);
@@ -172,7 +170,6 @@ bool SceneManager::FadeOut(float t, function<void()> func, int flag)
 	if (fadeImage->GetAlpha() >= 1)
 	{
 		func();
-		return true;
 	}
 	IMAGEMANAGER->UIRender(fadeImage, 0, 0, 2, 2, 0, fadeImage->GetAlpha());
 
@@ -192,7 +189,6 @@ bool SceneManager::FadeOutColor(float t, function<void()> func, int flag)
 	if (fadeImage->GetAlpha() >= 1)
 	{
 		func();
-		return true;
 	}
 	IMAGEMANAGER->CenterRender(fadeImage, WINSIZE_X / 2 + IMAGEMANAGER->GetCameraPosition().x, WINSIZE_Y / 2 + IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,fadeImage->GetAlpha() }, 2, 2, 0);
 

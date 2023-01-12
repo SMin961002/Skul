@@ -55,6 +55,7 @@ ImageManager::~ImageManager()
 
 void ImageManager::Init()
 {
+	isShake = false;
 	factory = nullptr;
 	RECT rc;
 	GetClientRect(_hWnd, &rc);

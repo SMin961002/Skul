@@ -267,9 +267,6 @@
     <ClCompile Include="CSoundMgr.cpp">
       <Filter>Core\Manager\SoundManager</Filter>
     </ClCompile>
-    <ClCompile Include="EndingScene.cpp">
-      <Filter>Game\Scene\EndingScene</Filter>
-    </ClCompile>
     <ClCompile Include="CSound.cpp">
       <Filter>Core\Manager\SoundManager</Filter>
     </ClCompile>
@@ -279,6 +276,9 @@
     <ClCompile Include="BlackJack.cpp">
       <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClCompile>
+    <ClCompile Include="EndingScene.cpp" />
+    <ClCompile Include="GodRay.cpp" />
+    <ClCompile Include="Outtro.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -505,9 +505,6 @@
     <ClInclude Include="Lazer.h" />
     <ClInclude Include="HitDamageEffect.h" />
     <ClInclude Include="BlackJack.h" />
-    <ClInclude Include="EndingScene.h">
-      <Filter>Game\Scene\EndingScene</Filter>
-    </ClInclude>
     <ClInclude Include="CSoundMgr.h">
       <Filter>Core\Manager\SoundManager</Filter>
     </ClInclude>
@@ -520,6 +517,9 @@
     <ClInclude Include="ProjectileHeadSkull.h">
       <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
     </ClInclude>
+    <ClInclude Include="EndingScene.h" />
+    <ClInclude Include="GodRay.h" />
+    <ClInclude Include="Outtro.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
