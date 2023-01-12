@@ -4,7 +4,8 @@
 void ImageManager::LoadImages()
 {
 	AddImage("CaerleonSword", L"./Resources/Item/CaerleonSword.png");
-
+	AddImage("Caerleonarmor", L"./Resources/Item/Caerleonarmor.png");
+	AddImage("BoneOfMana", L"./Resources/Item/BoneOfMana.png");
 	AddImage("Pause_Frame", L"./Resources/UI/Pause_Frame.png");
 
 	// 맵툴 UI 이미지
@@ -328,7 +329,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Boss_Baptism_Attack", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Attack/Phase1_Baptism_Attack_", 1, 36);
 	AddImageVector("Boss_Baptism_Projectile", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile/Phase1_Batism_Projectile_", 1, 21);
 	AddImageVector("Boss_Baptism_Projectile_Despawn", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Baptism/Projectile_Despawn/Phase1_Baptism_Projectile_Despawn_", 1, 24);
-	// 1페이즈_레이저
+	// 1페이즈_레이저z
 	AddImageVector("Boss_Consecration_Start", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/Start/Phase1_Consecration_Start_", 1, 27);
 	AddImageVector("Boss_Consecration_Sign", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/Sign/Phase1_Consecration_Sign_", 1, 23);
 	AddImageVector("Boss_Consecration_Loop", L"./Resources/Saint_Joanna/Phase_1/Casting/Effect/Consecration/Loop/Phase1_Consecration_Loop_", 1, 33);
@@ -668,4 +669,89 @@ void ImageManager::LoadImages()
 	AddImageVector("Ending_Duo_DuoThanks", L"./Resources/EndingScene/Duo/DuoThanks/Duo_Thanks_", 1, 3);
 	AddImage("Ending_Duo_DuoThanks_Loop", L"./Resources/EndingScene/Duo/DuoThanksLoop/Duo_Thanks_Loop.png");
 
+	SOUNDMANAGER->AddSound("Intro", "./Resources/Sound/Intro.wav");
+	SOUNDMANAGER->FindSound("Intro")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Lobby", "./Resources/Sound/Lobby.wav");
+	SOUNDMANAGER->FindSound("Lobby")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Chapter4", "./Resources/Sound/Chapter4.wav");
+	SOUNDMANAGER->FindSound("Chapter4")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Shop", "./Resources/Sound/Shop.wav");
+	SOUNDMANAGER->FindSound("Shop")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Middle", "./Resources/Sound/Middle.wav");
+	SOUNDMANAGER->AddSound("Dash", "./Resources/Sound/Dash.wav");
+	SOUNDMANAGER->FindSound("Middle")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Bossphase1", "./Resources/Sound/Bossphase1.wav");
+	SOUNDMANAGER->FindSound("Bossphase1")->SetVolume(60);
+	SOUNDMANAGER->AddSound("Jump", "./Resources/Sound/Jump.wav");
+	SOUNDMANAGER->AddSound("SkulAttack1", "./Resources/Sound/Skul_Atk 1.wav");
+	SOUNDMANAGER->FindSound("SkulAttack1")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SkulAttack2", "./Resources/Sound/Skul_Atk 2.wav");
+	SOUNDMANAGER->FindSound("SkulAttack2")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SkulSkill1", "./Resources/Sound/SkulSkill.wav");
+	SOUNDMANAGER->FindSound("SkulSkill1")->SetVolume(50);
+	SOUNDMANAGER->AddSound("Switch", "./Resources/Sound/Switch.wav");
+	SOUNDMANAGER->FindSound("Switch")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SkulSwitch", "./Resources/Sound/SkulSwitch.wav");
+	SOUNDMANAGER->FindSound("SkulSwitch")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SkulAttackSword", "./Resources/Sound/Hit_Sword_Small.wav");
+	SOUNDMANAGER->FindSound("SkulAttackSword")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SkulAttack", "./Resources/Sound/Hit_Sword_Small02.wav");
+	SOUNDMANAGER->FindSound("SkulAttack")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SkulAttackBluntLarge", "./Resources/Sound/Hit_Blunt_Large.wav");
+	SOUNDMANAGER->FindSound("SkulAttackBluntLarge")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SkulAttackBluntSmall", "./Resources/Sound/Hit_Blunt_Small.wav");
+	SOUNDMANAGER->FindSound("SkulAttackBluntSmall")->SetVolume(100);
+	SOUNDMANAGER->AddSound("SkulAttackExplosion", "./Resources/Sound/Legacy_Hit [Unused].wav");
+	SOUNDMANAGER->FindSound("SkulAttackExplosion")->SetVolume(100);
+	SOUNDMANAGER->AddSound("FanaticAttackReady", "./Resources/Sound/FanaticAttack_Ready.wav");
+	SOUNDMANAGER->FindSound("FanaticAttackReady")->SetVolume(30);
+	SOUNDMANAGER->AddSound("FanaticAttack", "./Resources/Sound/FanaricAttack.wav");
+	SOUNDMANAGER->FindSound("FanaticAttack")->SetVolume(50);
+	SOUNDMANAGER->AddSound("CandleFanaticAttack", "./Resources/Sound/CandleFanaticAttack.wav");
+	SOUNDMANAGER->FindSound("CandleFanaticAttack")->SetVolume(50);
+	SOUNDMANAGER->AddSound("CandleFanaticAttackHit", "./Resources/Sound/CandleFanaticAttackHit.wav");
+	SOUNDMANAGER->FindSound("CandleFanaticAttackHit")->SetVolume(50);
+	SOUNDMANAGER->AddSound("CandleFanaticFire", "./Resources/Sound/CandleFanaticFire.wav");
+	SOUNDMANAGER->FindSound("CandleFanaticFire")->SetVolume(50);
+	SOUNDMANAGER->AddSound("Sacrifice", "./Resources/Sound/Sacrifice.wav");
+	SOUNDMANAGER->FindSound("Sacrifice")->SetVolume(60);
+	SOUNDMANAGER->AddSound("AngleStatueAttackReady", "./Resources/Sound/AngleStatueAttackReady.wav");
+	SOUNDMANAGER->FindSound("AngleStatueAttackReady")->SetVolume(100);
+	SOUNDMANAGER->AddSound("AngleStatueAttack", "./Resources/Sound/AngleStatueAttack.wav");
+	SOUNDMANAGER->FindSound("AngleStatueAttack")->SetVolume(100);
+	SOUNDMANAGER->AddSound("TentacleAttack", "./Resources/Sound/TentacleAttack.wav");
+	SOUNDMANAGER->FindSound("TentacleAttack")->SetVolume(100);
+	SOUNDMANAGER->AddSound("LeoniaSolderAttack", "./Resources/Sound/LeoniaSolderAttack.wav");
+	SOUNDMANAGER->FindSound("LeoniaSolderAttack")->SetVolume(100);
+	SOUNDMANAGER->AddSound("LeonialSolderAttackHit", "./Resources/Sound/LeonialSolderAttackHit.wav");
+	SOUNDMANAGER->FindSound("LeonialSolderAttackHit")->SetVolume(100);
+
+	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(100);
+	SOUNDMANAGER->AddSound("GamblerSwitch", "./Resources/Sound/GamblerSwitch.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("GamblerAtk1", "./Resources/Sound/Gambler_AtkA.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("GamblerAtk2", "./Resources/Sound/Gambler_AtkB.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("GamblerAtk3", "./Resources/Sound/Gambler_AtkC.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("GamblerBigHit", "./Resources/Sound/Gambler_BigHit.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("GamblerBlackJackReady", "./Resources/Sound/Gambler_BlackJack_Ready.wav")->SetVolume(30);
+	SOUNDMANAGER->AddSound("GamblerBlackJack1", "./Resources/Sound/Gambler_BlackJack1.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("GamblerBlackJack2", "./Resources/Sound/Gambler_BlackJack2.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("GamblerBlackJack3", "./Resources/Sound/Gambler_BlackJack3.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("GamblerBlackJackBigHit", "./Resources/Sound/Gambler_BlackJack_BigHit.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineStart", "./Resources/Sound/Gambler_SlotMachine_Start.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineRunning", "./Resources/Sound/Gambler_SlotMachine.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineJackpot", "./Resources/Sound/Gambler_SlotMachine_Jackpot.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineFinish", "./Resources/Sound/Gambler_SlotMachine_Finish.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("RouletteSummon", "./Resources/Sound/Gambler_Roulette_Summon.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteSpin", "./Resources/Sound/Gambler_Roulette.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteSpike", "./Resources/Sound/Gambler_Roulette_Spike.wav")->SetVolume(10);
+	SOUNDMANAGER->AddSound("RouletteFail", "./Resources/Sound/Gambler_Roulette_Fail.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteResultBlack", "./Resources/Sound/Gambler_Roulette_Black.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteResultRed", "./Resources/Sound/Gambler_Roulette_Red.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteHitBlack", "./Resources/Sound/Gambler_DestinyRoulette_Success_Black.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteHitRed", "./Resources/Sound/Gambler_DestinyRoulette_Success_Red.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteBigHitBlackCast", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_BlackCast.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteBigHitBlack", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_BlackAtk.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("RouletteBigHitRed", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_Red.wav")->SetVolume(50);
 }

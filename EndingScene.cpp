@@ -178,7 +178,7 @@ void EndingScene::UIRender()
 	{
 		SCENEMANAGER->FadeInColor(0.005, []() {}, 515587);
 	}
-}
 	SOUNDMANAGER->FindSound("EndingScene")->Stop();
 	SOUNDMANAGER->FindSound("Intro")->Play(true);
+
 }
