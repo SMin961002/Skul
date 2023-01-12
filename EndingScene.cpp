@@ -4,7 +4,7 @@
 
 void EndingScene::Init()
 {
-	IMAGEMANAGER->SetCameraPosition(0,0);
+	IMAGEMANAGER->SetCameraPosition(0, 0);
 	_imgSmallMountain = IMAGEMANAGER->FindImage("Ending_BG_SmallMountain");
 	_imgBigMountain = IMAGEMANAGER->FindImage("Ending_BG_BigMountain");
 	_imgSmallCloud = IMAGEMANAGER->FindImage("Ending_BG_SmallCloud");
@@ -42,6 +42,7 @@ void EndingScene::Init()
 
 	_catLocate = 0;
 	_polymorphY = 0;
+	alpha = 0;
 	_ReturnKingDeltaTime = 0;
 	_ReturnSkulDeltaTime = 0;
 	_ThanksDeltaTime = 0;
@@ -166,6 +167,8 @@ void EndingScene::Render()
 
 void EndingScene::Release()
 {
+	SOUNDMANAGER->FindSound("EndingScene")->Stop();
+	SOUNDMANAGER->FindSound("Intro")->Play(true);
 }
 
 void EndingScene::UIRender()
@@ -180,5 +183,4 @@ void EndingScene::UIRender()
 	}
 	SOUNDMANAGER->FindSound("EndingScene")->Stop();
 	SOUNDMANAGER->FindSound("Intro")->Play(true);
-
 }

@@ -183,7 +183,7 @@ void NpcObject::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2
 			{
 				if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
 				{
-					coll1->SetIsActive(false);
+					this->coll1->SetIsActive(false);
 					OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
 				}
 			}
@@ -196,7 +196,7 @@ void NpcObject::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2
 			{
 				if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
 				{
-					coll2->SetIsActive(false);
+					this->coll2->SetIsActive(false);
 					OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
 				}
 			}
@@ -209,7 +209,7 @@ void NpcObject::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2
 			{
 				if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
 				{
-					coll3->SetIsActive(false);
+					this->coll3->SetIsActive(false);
 					OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
 				}
 			}
@@ -222,7 +222,7 @@ void NpcObject::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2
 			{
 				if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
 				{
-					coll4->SetIsActive(false);
+					this->coll4->SetIsActive(false);
 					OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
 				}
 			}

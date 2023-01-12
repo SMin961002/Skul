@@ -61,10 +61,7 @@ void Main::Update()
 		OBJECTMANAGER->Update();
 		EFFECTMANAGER->Update();
 	}
-	if (KEYMANAGER->GetOnceKeyDown(VK_F1))
-	{
-		SCENEMANAGER->ChangeScene("EndingScene");
-	}
+
 	if (KEYMANAGER->GetOnceKeyDown(VK_F5))
 	{
 		SCENEMANAGER->ChangeScene("ShopScene");

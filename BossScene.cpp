@@ -14,7 +14,7 @@ void BossScene::Init()
 	_imgFence = IMAGEMANAGER->FindImage("Fence");
 	IMAGEMANAGER->SetCameraPosition(0, 0);
 
-	OBJECTMANAGER->AddObject("Enemy", 850, 475,  eBoss)->AddComponent<BossObject>();
+	OBJECTMANAGER->AddObject("Enemy", 850, 475, eBoss)->AddComponent<BossObject>();
 
 	FILEMANAGER->SetNowStageFile("map_1");
 	FILEMANAGER->TileFileRead(&SCENEMANAGER->m_tiles);
@@ -63,6 +63,12 @@ void BossScene::Update()
 	if (IMAGEMANAGER->GetCameraPosition().x >= WINSIZE_X / 2 - 50)
 	{
 		IMAGEMANAGER->SetCameraPosition(WINSIZE_X / 2 - 50, IMAGEMANAGER->GetCameraPosition().y);
+	}
+
+	if (IMAGEMANAGER->GetCameraPosition().y < -150)
+	{
+		IMAGEMANAGER->SetCameraPosition(IMAGEMANAGER->GetCameraPosition().x, -150);
+
 	}
 	//cout << IMAGEMANAGER->GetCameraPosition().x - WINSIZE_X / 2 << endl;
 }

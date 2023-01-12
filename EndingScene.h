@@ -57,6 +57,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void Release() override;
+	float alpha= 0;
 	virtual void UIRender() override;
 };
 

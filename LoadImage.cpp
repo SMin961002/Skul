@@ -18,6 +18,10 @@ void ImageManager::LoadImages()
 	AddImageVector("DashSmoke", L"./Resources/Png/Skul/Effect/DashSmoke/", 1, 13);
 	AddImageVector("JumpSmoke", L"./Resources/Png/Skul/Effect/DoubleJumpSmoke/", 1, 10);
 	AddImageVector("PlayerHit", L"./Resources/Png/Skul/Effect/Hit/", 1, 12);
+
+	AddImageVector("GodRay_Loop", L"./Resources/GodRay_Loop/GodRay_Loop_", 1, 48);
+	AddImageVector("GodRay_Start", L"./Resources/GodRay_Start/GodRay_Start_", 1, 47);
+
 	//AddImageVector("PlayerCHit", L"./Resources/Png/Skul/Effect/Hit/", 1, 8);
 	//AddImageVector("PlayerCPublicHit", L"./Resources/Png/Skul/Effect/CriticalHit/", 1, 11);
 
@@ -102,7 +106,7 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_RouletteEmerge", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Emerge/", 1, 24);
 	AddImageVector("Gambler_Roulette", L"./Resources/Png/Skul/Gambler/Effect/Roulette/", 1, 18);
 	AddImageVector("Gambler_RouletteBroken", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Effect/", 1, 15);
-	AddImageVector("Gambler_RouletteCircle", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Circle/", 1,14);
+	AddImageVector("Gambler_RouletteCircle", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Circle/", 1, 14);
 	AddImageVector("Gambler_Roulette_Black", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Black/", 1, 32);
 	AddImageVector("Gambler_Roulette_Red", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Red/", 1, 23);
 	AddImageVector("Gambler_RouletteFail", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Failed/", 1, 51);
@@ -415,7 +419,7 @@ void ImageManager::LoadImages()
 	AddImage("colltime", L"./Resources/colltime.png");
 	AddImage("switchColl", L"./Resources/switchColl.png");
 
-	
+
 	//==========================================================================================================
 	// 맵 구조물 이미지
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");
@@ -588,7 +592,7 @@ void ImageManager::LoadImages()
 	AddImageVector("BossRoom", L"Resources/Door/BossRoom/", 1, 7);
 	AddImageVector("ShopRoom", L"Resources/Door/ShopRoom/", 1, 8);
 	AddImageVector("SpirderRoom", L"Resources/Door/SpirderRoom/", 1, 8);
-	
+
 	AddImageVector("Fountain", L"Resources/Tile/4Stage/Structure/fountain/", 1, 6);
 	AddImageVector("Spider", L"Resources/Tile/4Stage/Structure/spider/", 1, 11);
 	AddImageVector("LobbyNpc", L"Resources/Tile/4Stage/Structure/Npc1/", 1, 7);
@@ -658,7 +662,7 @@ void ImageManager::LoadImages()
 
 	AddImage("Ending_Castle_Front", L"./Resources/EndingScene/Castle/EndingCastle_Front.png");
 	AddImage("Ending_Castle_Back", L"./Resources/EndingScene/Castle/EndingCastle_Back.png");
-	
+
 	AddImageVector("Ending_Cat_Walk", L"./Resources/EndingScene/Cat/Walk/Cat_Walk_", 1, 6);
 	AddImageVector("Ending_Cat_Polymorph", L"./Resources/EndingScene/Cat/Polymorph/Cat_Polymorph_", 1, 21);
 

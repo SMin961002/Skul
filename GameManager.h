@@ -8,6 +8,7 @@ public:
 	bool isHeadCheck;
 	int playerHp;
 	int enemyCount;
+	vector<int> itemList;
 	GameManager() { Init(); }
 	~GameManager() {}
 	vector<Head* >m_headList;
@@ -15,6 +16,7 @@ public:
 	int tag;
 
 	void Init() {
+		itemList.clear();
 		tag = -1;
 		m_nowHead = nullptr;
 		m_headList.clear();
