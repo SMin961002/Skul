@@ -85,6 +85,10 @@ protected:
 	bool  m_imageChange;	//무언가 동작을 입력하면 true가 된다. ->Update의 ActionArrangement에서 이미지 바꿔준다
 
 public:
+	float GetCollTimeSkillA() { return m_skillCoolA; }
+	float GetCollTimeSkillS() { return m_skillCoolS; }
+	float GetCollNowTimeSkillA() { return m_skillNowCoolA; }
+	float GetCollNowTimeSkillS() { return m_skillNowCoolS; }
 
 	CImage* GetNowImage() { return img[m_action]->GetNowImage(); }
 	virtual void Init();
@@ -101,6 +105,7 @@ public:
 		nowImg = img[image];
 		m_action = isImageEqualAction ? image : action;
 	}
+
 	inline void SetAction(int action, bool doWantToChangeImage = true, bool actionImageReset = false)
 	{
 		m_action = action;

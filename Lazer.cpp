@@ -29,11 +29,26 @@ void Lazer::Init()
 	m_obj->AddCollisionComponent(collll2);
 	m_obj->AddCollisionComponent(collll3);
 	m_obj->AddCollisionComponent(collll4);
+	m_obj->AddCollisionComponent(collll4);
+	m_obj->AddCollisionComponent(m_obj->AddComponent<CollisionComponent>());
+	m_obj->AddCollisionComponent(m_obj->AddComponent<CollisionComponent>());
+	m_obj->AddCollisionComponent(m_obj->AddComponent<CollisionComponent>());
+
 	m_state = eStart;
+	for (auto iter : m_obj->GetCollisionComponent())
+	{
+		iter->SetIsActive(false);
+	}
 }
 
 void Lazer::Update()
 {
+	float xx = -400;
+	for (auto iter : m_obj->GetCollisionComponent())
+	{
+		xx += 100;
+		iter->Setting(60, m_obj->x + xx, m_obj->y, "gse");
+	}
 }
 
 void Lazer::Render()
@@ -41,13 +56,22 @@ void Lazer::Render()
 	if (img[eStart]->GetIsImageEnded() == true)
 	{
 		m_state = eLoop;
+		for (auto iter : m_obj->GetCollisionComponent())
+		{
+			iter->SetIsActive(true);
+		}
 	}
 	if (img[eLoop]->GetIsImageEnded() == true)
 	{
 		m_state = eLast;
+		for (auto iter : m_obj->GetCollisionComponent())
+		{
+			iter->SetIsActive(false);
+		}
 	}
 	if (img[eLast]->GetIsImageEnded() == true)
 	{
+
 		m_obj->ObjectDestroyed();
 	}
 	if (m_state == eLoop)
@@ -66,4 +90,29 @@ void Lazer::Render()
 
 void Lazer::Release()
 {
+}
+
+#include "Player.h"
+void Lazer::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
+{
+	if (other->GetName() == "player")
+	{
+		if (coll2->GetName() == "PlayerHitRange")
+		{
+			if (other->GetName() == "player")
+			{
+				Player* ply = other->GetComponent<Player>();
+
+				ply->HitPlayerMagicAttack(10);
+				if (other->x > m_obj->x)
+				{
+					other->GetComponent<Player>()->HitPlayerKnockBack(25, -25);
+				}
+				else
+				{
+					other->GetComponent<Player>()->HitPlayerKnockBack(-25, -25);
+				}
+			}
+		}
+	}
 }

@@ -124,10 +124,8 @@ bool SceneManager::FadeIn(float t, function<void()> func, int flag)
 		fadeImage->SetAlpha(1.f);
 		this->flag = flag;
 	}
-	else
-	{
-		fadeImage->SetAlpha(fadeImage->GetAlpha() - t);
-	}
+
+	fadeImage->SetAlpha(fadeImage->GetAlpha() - t);
 
 	if (fadeImage->GetAlpha() <= 0)
 	{
@@ -168,10 +166,8 @@ bool SceneManager::FadeOut(float t, function<void()> func, int flag)
 		fadeImage->SetAlpha(0.f);
 		this->flag = flag;
 	}
-	else
-	{
-		fadeImage->SetAlpha(fadeImage->GetAlpha() + t);
-	}
+
+	fadeImage->SetAlpha(fadeImage->GetAlpha() + t);
 
 	if (fadeImage->GetAlpha() >= 1)
 	{
@@ -179,6 +175,26 @@ bool SceneManager::FadeOut(float t, function<void()> func, int flag)
 		return true;
 	}
 	IMAGEMANAGER->UIRender(fadeImage, 0, 0, 2, 2, 0, fadeImage->GetAlpha());
+
+	return false;
+}
+
+bool SceneManager::FadeOutColor(float t, function<void()> func, int flag)
+{
+	if (this->flag != flag)
+	{
+		fadeImage->SetAlpha(0.f);
+		this->flag = flag;
+	}
+
+	fadeImage->SetAlpha(fadeImage->GetAlpha() + t);
+
+	if (fadeImage->GetAlpha() >= 1)
+	{
+		func();
+		return true;
+	}
+	IMAGEMANAGER->CenterRender(fadeImage, WINSIZE_X / 2 + IMAGEMANAGER->GetCameraPosition().x, WINSIZE_Y / 2 + IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,fadeImage->GetAlpha() }, 2, 2, 0);
 
 	return false;
 }

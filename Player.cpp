@@ -7,6 +7,13 @@
 
 void Player::Init()
 {
+	/*
+		("
+		(""
+		*/
+	m_headUI[0] = IMAGEMANAGER->FindImage("LittleHeadUI");
+	m_headUI[3] = IMAGEMANAGER->FindImage("GamblerHeadUI");
+
 	if (GAMEMANAGER->playerHp <= 0)
 	{
 		GAMEMANAGER->playerHp = m_HpMax;
@@ -188,7 +195,42 @@ void Player::UIRender()
 			SCENEMANAGER->ChangeScene("Stage");
 		}
 	}
+	if (m_headSlot == eSkulSpecies::eGambler)
+	{
+		IMAGEMANAGER->UICenterRender(m_headUI[0], 55, 475, 1.4, 1.4);
+		if (isHeadCheck == true)
+			IMAGEMANAGER->UICenterRender(m_headUI[3], 30, 515, 0.8f, 0.8f);
+		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("switchColl"), 55 - m_headUI[0]->GetWidth() * 1.4f / 2, 475 - m_headUI[0]->GetHeight() * 1.4f / 2, 1.4, 1.4 / 15 * m_headTagCool);
 
+	}
+	else
+	{
+		IMAGEMANAGER->UICenterRender(m_headUI[3], 55, 475, 1.4, 1.4);
+		IMAGEMANAGER->UICenterRender(m_headUI[0], 30, 515, 0.8f, 0.8f);
+		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("switchColl"), 55 - m_headUI[0]->GetWidth() * 1.4f / 2, 475 - m_headUI[0]->GetHeight() * 1.4f / 2, 1.4, 1.4 / 10 * m_headTagCool);
+	}
+
+	if (typeid(*m_nowHead) == typeid(LittleBorn))
+	{
+		IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("littleA"), 140, 483, 2.3, 2.3);
+		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("colltime"), 140 - IMAGEMANAGER->FindImage("colltime")->GetWidth() * 2.3 * 0.5, 483 - IMAGEMANAGER->FindImage("colltime")->GetHeight() * 2.3 * 0.5, 2.3, 2.3 / m_nowHead->GetCollTimeSkillA() * m_nowHead->GetCollNowTimeSkillA());
+
+		IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("littleS"), 209, 483, 2.3, 2.3);
+		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("colltime"), 209 - IMAGEMANAGER->FindImage("colltime")->GetWidth() * 2.3 * 0.5, 483 - IMAGEMANAGER->FindImage("colltime")->GetHeight() * 2.3 * 0.5, 2.3, 2.3 / m_nowHead->GetCollTimeSkillS() * m_nowHead->GetCollNowTimeSkillS());
+	}
+	else
+	{
+		IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("gamA"), 140, 483, 2.3, 2.3);
+		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("colltime"), 140 - IMAGEMANAGER->FindImage("colltime")->GetWidth() * 2.3 * 0.5, 483 - IMAGEMANAGER->FindImage("colltime")->GetHeight() * 2.3 * 0.5, 2.3, 2.3 / m_nowHead->GetCollTimeSkillA() * m_nowHead->GetCollNowTimeSkillA());
+		/*
+			float m_skillCoolA;
+	float m_skillNowCoolA;
+	float m_skillCoolS;
+	float m_skillNowCoolS;
+		*/
+		IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("gamS"), 209, 483, 2.3, 2.3);
+		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("colltime"), 209 - IMAGEMANAGER->FindImage("colltime")->GetWidth() * 2.3 * 0.5, 483 - IMAGEMANAGER->FindImage("colltime")->GetHeight() * 2.3 * 0.5, 2.3, 2.3 / m_nowHead->GetCollTimeSkillS() * m_nowHead->GetCollNowTimeSkillS());
+	}
 }
 
 void Player::InputArtifactKey()
@@ -251,6 +293,7 @@ void Player::ChangeHead()
 		eSkulSpecies tmp = m_nowHead->GetSpecies();
 		m_headTagCool = m_nowHead->GetTagCoolTime();
 		m_nowHead->ResetAll();
+		cout << m_headTagCool << endl;
 		switch (m_headSlot)
 		{
 		case eSkulSpecies::eBasic:
@@ -285,20 +328,20 @@ void Player::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, O
 	{
 		if (coll2->GetName() == "hitBox")
 			if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
-		{
-			cout << "적에게공격 - Auto" << endl;
+			{
+				cout << "적에게공격 - Auto" << endl;
 
-			m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
-		}
+				m_nowHead->OnCollisionAutoAttack(other->GetComponent<Component>(), other, 10, 0.01);
+			}
 	}//end collision Name BasicAttack
 	else if (coll1->GetName() == m_collSkillTag->GetName())
 	{
-		if(coll2->GetName() == "hitBox")
-		if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
-		{
-			cout << "적에게공격 - Tag" << endl;
-			m_nowHead->OnCollisionTagAttack(other->GetComponent<Component>(), other, 10, 0.01);
-		}
+		if (coll2->GetName() == "hitBox")
+			if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
+			{
+				cout << "적에게공격 - Tag" << endl;
+				m_nowHead->OnCollisionTagAttack(other->GetComponent<Component>(), other, 10, 0.01);
+			}
 	}//end collision Name TagAttack
 }
 

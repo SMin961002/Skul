@@ -4,6 +4,7 @@
 
 void IntroTitleScene::Init()
 {
+	IMAGEMANAGER->SetCameraPosition(0, 0);
 	img = IMAGEMANAGER->FindImage("IntroBg");
 	imgTitle = IMAGEMANAGER->FindImage("IntroTitle");
 	imgtxt = IMAGEMANAGER->FindImage("IntroClick");
