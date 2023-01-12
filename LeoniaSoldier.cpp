@@ -14,9 +14,9 @@ void LeoniaSoldier::Init()
 {
 	GAMEMANAGER->enemyCount++;
 
-	m_maxhp = 100.0f;
+	m_maxhp = 70.0f;
 	m_attackcount = 0;
-	m_currenthp = 100.0f;
+	m_currenthp = 70.0f;
 	m_hiteffecttimer = 0;
 	m_hpbartimer = 0;
 	m_hpbar = 0;
@@ -260,7 +260,7 @@ void LeoniaSoldier::OnCollision(CollisionComponent* coll1, CollisionComponent* c
 					SOUNDMANAGER->FindSound("LeonialSolderAttackHit")->Play(false);
 					m_hitpoint = true;
 					Player* ply = other->GetComponent<Player>();
-					ply->HitPlayerMagicAttack(10);
+					ply->HitPlayerMagicAttack(5);
 					ply->HitPlayerEffect();
 					if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
 					{

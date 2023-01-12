@@ -4,9 +4,12 @@
 #include "RigidBodyComponent.h"
 #include "Player.h"
 #include "BossObject.h"
+#include"CSound.h"
 
 void WorshipLeft::Init()
 {
+	
+	SOUNDMANAGER->FindSound("Wosrship")->Play(false);
 	_imgPhase1BossWorshipLeft = IMAGEMANAGER->FindImageVector("Boss_Worship");
 	_imgPhase1BossWorshipLeft->Setting(0.1, true);
 

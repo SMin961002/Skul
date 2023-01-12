@@ -18,9 +18,9 @@ void CandleFanatic::Init()
 	GAMEMANAGER->enemyCount++;
 
 	m_hpbartimer = 0;
-	m_maxhp = 100.0f;
+	m_maxhp = 80.0f;
 	m_hitTimer = 0;
-	m_currenthp = 100.0f;
+	m_currenthp = 80.0f;
 	m_sercrifice = false;
 	m_isHit = false;
 	m_sercrieffect = false;
