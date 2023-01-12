@@ -11,7 +11,7 @@ class HolyFountainRight;
 class BossObject : public Enemy
 {
 private:
-	const float maxHp = 10000;
+	const float maxHp = 600;
 	int circleCount = 0;
 	bool m_isMagicCircleImage;
 	int m_talkCount;

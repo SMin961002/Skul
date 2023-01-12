@@ -5,7 +5,7 @@ class LeftImpact : public Component
 {
 private:
 	vImage* _imgPhase1NervousEffectImpactRight;
-
+	float timer;
 	CollisionComponent* _collisionLeft;
 public:
 	virtual void Init() override;

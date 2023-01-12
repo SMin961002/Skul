@@ -47,7 +47,7 @@ void BossObject::Init()
 	m_teleportEffect->Setting(0.07f, false);
 
 	m_patterTimer = 0;
-	m_currenthp = 3000;
+	m_currenthp = 600;
 	chairY = m_obj->y;
 	chairX = m_obj->x;
 	m_isAttack = false;

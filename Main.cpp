@@ -117,6 +117,7 @@ void Main::Render()
 			menu->isResetScene = false;
 			}, 51);
 	}
+	TIMERMANAGER->Render();
 	IMAGEMANAGER->End();
 }
 

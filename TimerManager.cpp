@@ -41,8 +41,8 @@ void TimerManager::Render()
 		IMAGEMANAGER->D2dTextOut(wstr, 0, 40, { 255,255,255,1 });
 	}
 #else
-	sprintf_s(str, "FramePerSec: %d", _timer->gerFrameRate());
-	TextOut(hdc, 0, 0, str, strlen(str));
+	wstr = to_wstring(_timer->getFrameRate());
+	IMAGEMANAGER->D2dTextOut(wstr, 0, 0, { 255,255,255,1 });
 #endif // _DEBUG
 
 }

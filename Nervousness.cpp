@@ -7,6 +7,7 @@
 
 void LeftImpact::Init()
 {
+	timer = 0;
 	_imgPhase1NervousEffectImpactRight = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Effect_Projectile");
 	_imgPhase1NervousEffectImpactRight->Setting(0.1, true);
 	SOUNDMANAGER->FindSound("Nervousnessvoice")->Play(false);
@@ -24,14 +25,14 @@ void LeftImpact::Update()
 {
 	m_obj->x += 3;
 
-	if (m_obj->x > WINSIZE_X + WINSIZE_X/2 - 50)
+	if (m_obj->x > WINSIZE_X + WINSIZE_X / 2 - 50)
 	{
 		m_obj->ObjectDestroyed();
 	}
 	m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 	m_obj->GetComponent<PixelCollisionComponent>()->SetIsActive(true);
-
-	_collisionLeft->Setting(80, m_obj->x+40, m_obj->y+60, "Attack");
+	timer += DELTA_TIME;
+	_collisionLeft->Setting(80, m_obj->x + 40, m_obj->y + 60, "Attack");
 }
 
 void LeftImpact::Render()
@@ -48,16 +49,20 @@ void LeftImpact::OnCollision(CollisionComponent* coll1, CollisionComponent* coll
 {
 	if (other->GetName() == "player")
 	{
-		Player* player = other->GetComponent<Player>();
-		player->HitPlayerMagicAttack(10);
-		player->HitPlayerEffect();
-		if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+		if (timer >= 0.1)
 		{
-			player->HitPlayerKnockBack(-15, -5);
-		}
-		else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
-		{
-			player->HitPlayerKnockBack(-15, -5);
+			timer = 0;
+			Player* player = other->GetComponent<Player>();
+			player->HitPlayerMagicAttack(10);
+			player->HitPlayerEffect();
+			if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+			{
+				player->HitPlayerKnockBack(-15, -5);
+			}
+			else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+			{
+				player->HitPlayerKnockBack(-15, -5);
+			}
 		}
 	}
 }
