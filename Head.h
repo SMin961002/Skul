@@ -35,7 +35,6 @@ protected:
 	eSkulSpecies m_species;
 	Object* m_obj;
 	vImage* img[20];
-	vImage* img_reborn;
 	vImage* nowImg;
 	listObj m_CollObjList;
 	CollisionComponent* m_collAutoAttack;	//##공격 발동하면 여기에 어택collision을 대입한다.

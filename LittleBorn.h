@@ -33,6 +33,24 @@ public:
     void DrawCharactor() override;
     void OnCollisionAutoAttack(Component* enemy, Object* obj, float dmg, float delay) override;
     void OnCollisionTagAttack(Component* enemy, Object* obj, float dmg, float delay) override;
+	
+	void SetReborn()
+	{
+		m_action = eReborn;
+		nowImg = img[eReborn];
+		nowImg->Setting(0, 10.0f);
+		for (int i = 1; i < 15; i++)
+		{
+			nowImg->Setting(i, 0.15f);
+		}
+		for (int i = 15; i < 27; i++)
+		{
+			nowImg->Setting(i, 0.1f);
+		}
+		nowImg->Reset();
+
+		m_nonCansleAction = true;
+	}
 
 	void PutOnHead()
 	{

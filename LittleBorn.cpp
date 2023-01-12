@@ -32,6 +32,7 @@ void LittleBorn::ImageSetting()
 	img[eSkill_1]->Setting(0.1, false);
 	img[eTagAction] = IMAGEMANAGER->FindImageVector("Basic_TagAction");
 	img[eTagAction]->Setting(0.05, false);
+	img[eReborn] = IMAGEMANAGER->FindImageVector("Basic_Reborn");
 
 	img_headless[eIdle] = IMAGEMANAGER->FindImageVector("Basic_Headless_Idle");
 	img_headless[eIdle]->Setting(0.15f, true);
@@ -51,9 +52,6 @@ void LittleBorn::ImageSetting()
 	img_headless[eJumpDown]->Setting(0.1, true);
 	img_headless[eJumpLand] = IMAGEMANAGER->FindImageVector("Basic_Headless_JumpFall");
 	img_headless[eJumpLand]->Setting(0.1, false);
-
-	img_reborn = IMAGEMANAGER->FindImageVector("Basic_Reborn");
-	img_reborn->Setting(0.1f, true);
 
 	nowImg = img[eIdle];
 }
@@ -148,6 +146,17 @@ void LittleBorn::CoolDown()
 
 void LittleBorn::ActionArrangement()
 {
+	if (m_action == eReborn)
+	{
+		if (nowImg->GetFrame() == 0)
+		{
+			if (KEYMANAGER->GetOnceKeyDown(VK_LEFT) || KEYMANAGER->GetOnceKeyDown(VK_RIGHT)
+				|| KEYMANAGER->GetOnceKeyDown('Z') || KEYMANAGER->GetOnceKeyDown('X') || KEYMANAGER->GetOnceKeyDown('C'))
+			{
+				nowImg->Setting(0, 0.0f);
+			}
+		}
+	}
 	if (!m_headThrow)
 	{
 		if (nowImg->GetIsImageEnded())

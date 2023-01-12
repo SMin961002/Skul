@@ -230,8 +230,8 @@ void LeoniaSoldier::Render()
 }
 
 void LeoniaSoldier::Release()
-	GAMEMANAGER->enemyCount--;
 {
+	GAMEMANAGER->enemyCount--;
 }
 
 void LeoniaSoldier::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
