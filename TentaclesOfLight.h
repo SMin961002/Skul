@@ -21,6 +21,7 @@ private:
 	bool m_isleft;
 	bool m_recovery;
 	bool m_attacksound;
+	bool m_attacksound2;
 
 	float m_hiteffecttimer;
 

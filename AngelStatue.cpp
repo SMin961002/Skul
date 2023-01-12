@@ -19,6 +19,7 @@ void AngelStatue::Init()
 	m_attackcount = 0;
 	m_attacksound = false;
 	m_attacksound2 = false;
+	m_attacksound3 = false;
 	m_attacksoundtimer = 0;
 	GAMEMANAGER->enemyCount++;
 	m_vimage[eIdle] = IMAGEMANAGER->AddImageVectorCopy("AStatue_Idle");
@@ -144,6 +145,7 @@ void AngelStatue::Update()
 		}
 		if (m_attack == false)
 		{
+			m_attacksound3 = false;
 			m_vimage[eAttackEffect]->Reset();
 		}
 
@@ -219,9 +221,12 @@ void AngelStatue::OnCollision(CollisionComponent* coll1, CollisionComponent* col
 		if (other->GetName() == "player")
 		{
 			//other->GetComponent<Player>()-플레이어 상태쉉
-			m_attacksound = true;
-			m_attack = true;
-			m_collision->SetIsActive(false);
+			if (m_attacksound3 == false)
+			{
+				m_attacksound = true;
+			}
+				m_attacksound3 = true;
+				m_attack = true;
 		}
 	}
 
