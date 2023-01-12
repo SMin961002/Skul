@@ -72,7 +72,11 @@ void Fanatic::Init()
 }
 
 void Fanatic::Update()
-{
+{	
+	if (SCENEMANAGER->m_tiles.size() * 31 < m_obj->y)
+	{
+		m_obj->ObjectDestroyed();
+	}
 	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
 	{
 		m_obj->y += 1;
@@ -297,7 +301,7 @@ void Fanatic::HitEnemy(float dmg, float time)
 	if (!m_die2)
 	{
 		if (m_currenthp >= 50)
-			m_isAttack = false;
+		m_isAttack = false;
 		m_isHit = true;
 		m_state = eHit;
 		m_vimage[eHit]->Reset();

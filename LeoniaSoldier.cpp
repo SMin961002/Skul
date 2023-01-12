@@ -66,6 +66,10 @@ void LeoniaSoldier::Init()
 
 void LeoniaSoldier::Update()
 {
+	if (SCENEMANAGER->m_tiles.size() * 31 < m_obj->y)
+	{
+		m_obj->ObjectDestroyed();
+	}
 	if (alphaHit >= 0)
 	{
 		alphaHit -= 0.05;

@@ -1,6 +1,7 @@
 #pragma once
 #include "PlayerEffect.h"
 #include "HitDamageEffect.h"
+#include "CSound.h"
 class Enemy;
 //머리들이 계승받는 상위클래스
 class Head
@@ -84,6 +85,10 @@ protected:
 	bool  m_imageChange;	//무언가 동작을 입력하면 true가 된다. ->Update의 ActionArrangement에서 이미지 바꿔준다
 
 public:
+	float GetCollTimeSkillA() { return m_skillCoolA; }
+	float GetCollTimeSkillS() { return m_skillCoolS; }
+	float GetCollNowTimeSkillA() { return m_skillNowCoolA; }
+	float GetCollNowTimeSkillS() { return m_skillNowCoolS; }
 
 	CImage* GetNowImage() { return img[m_action]->GetNowImage(); }
 	virtual void Init();
@@ -100,6 +105,7 @@ public:
 		nowImg = img[image];
 		m_action = isImageEqualAction ? image : action;
 	}
+
 	inline void SetAction(int action, bool doWantToChangeImage = true, bool actionImageReset = false)
 	{
 		m_action = action;
@@ -166,11 +172,11 @@ public:
 		}
 		if (!isEnemyHit)
 		{
+			SOUNDMANAGER->FindSound("SkulAttack")->Play(false);
 			OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(10);
 
 			enemy->HitEnemy(dmg, delay);
 			m_CollObjList.push_back(obj);
-			SOUNDMANAGER->FindSound("SkulAttack");
 		}
 	};
 	
@@ -183,11 +189,11 @@ public:
 		}
 		if (!isEnemyHit)
 		{
+			SOUNDMANAGER->FindSound("SkulAttack")->Play(false);
 			OBJECTMANAGER->AddObject("Effect", obj->x + MY_UTILITY::getFromFloatTo(-40, 40), obj->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(10);
 
 			enemy->HitEnemy(dmg, delay);
 			m_CollObjList.push_back(obj);
-			SOUNDMANAGER->FindSound("SkulAttack");
 		}
 	}
 

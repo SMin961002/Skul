@@ -29,6 +29,7 @@ public:
 	bool FadeInColor(float t, function<void()> func, int flag);
 
 	bool FadeOut(float t, function<void()> func, int flag);
+	bool FadeOutColor(float t, function<void()> func, int flag);
 
 	void SetMenuActive(bool active) { m_isMenuActive = active; }
 	bool GetMenuActive() { return m_isMenuActive; }

@@ -265,7 +265,7 @@ void Gambler::InputAttackKey()
 				if (m_attackNowCool == 0)
 				{
 					m_action = eJumpAttack;
-					SOUNDMANAGER->FindSound("GamblerAtk1")->Play(true);
+					SOUNDMANAGER->FindSound("GamblerAtk1")->Play(false);
 					m_imageChange = true;
 					m_attackCount++;
 					if (*m_isLeft)

@@ -12,6 +12,7 @@ void TentaclesOfLight::Init()
 	GAMEMANAGER->enemyCount++;
 
 	m_attackcount = 0;
+	m_attacksound2 = false;
 	m_maxhp = 1;
 	m_memergeend = false;
 	m_attack = false;
@@ -89,6 +90,7 @@ void TentaclesOfLight::Update()
 		}
 		if (m_vimage[eRecovery]->GetIsImageEnded())
 		{
+			m_attacksound2 = false;
 			m_attack = false;
 			m_recovery = false;
 			m_collision->SetIsActive(true);
@@ -119,8 +121,11 @@ void TentaclesOfLight::OnCollision(CollisionComponent* coll1, CollisionComponent
 	{
 		if (other->GetName() == "player")
 		{
-			m_attacksound = true;
-			m_collision->SetIsActive(false);
+			if (m_attack == false)
+			{
+				m_attacksound = true;
+			}
+			m_attacksound2 = true;
 			if (m_attack == false)
 			{
 				m_vimage[eAttack]->Reset();
@@ -147,7 +152,6 @@ void TentaclesOfLight::OnCollision(CollisionComponent* coll1, CollisionComponent
 		if (coll2->GetName() == "PlayerHitRange")
 			if (other->GetName() == "player")
 			{
-
 				if (m_attackcount < 1)
 				{
 					Player* ply = other->GetComponent<Player>();
