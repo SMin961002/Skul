@@ -53,6 +53,6 @@ void IntroTitleScene::Render()
 
 void IntroTitleScene::Release()
 {
-	SOUNDMANAGER->FindSound("Lobby")->Play(true);
+	//SOUNDMANAGER->FindSound("Lobby")->Play(true);
 	SOUNDMANAGER->FindSound("Intro")->Stop();
 }
