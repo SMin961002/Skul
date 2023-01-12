@@ -13,6 +13,9 @@
 #include "GodRay.h"
 #include "Phase3B.h"
 #include"CSound.h"
+#include "BossPhase1EnemyCandle.h"
+#include "BossPhase1EnemyFnatic.h"
+
 void BossObject::Init()
 {
 	bossHpbar = IMAGEMANAGER->FindImage("bossHp");
@@ -458,6 +461,11 @@ void BossObject::Render()
 			// 초이스_동작완료
 			if (_imgPhase1BossChoiceSpark->GetIsImageEnded() == true)
 			{
+				if (_isChoiceAttackEnd == false)
+				{
+					OBJECTMANAGER->AddObject("Enemy", MY_UTILITY::getFromFloatTo(100, 1500), 600, eBossObject)->AddComponent<BossPhase1EnemyFnatic>();
+					OBJECTMANAGER->AddObject("Enemy", MY_UTILITY::getFromFloatTo(100, 1500), 600, eBossObject)->AddComponent<BossPhase1EnemyCandle>();
+				}
 				_isChoiceAttackEnd = true;
 
 			}
@@ -571,6 +579,11 @@ void BossObject::Render()
 						}
 						if (_imgPhase1BossCastingEnd->GetIsImageEnded() == true)
 						{
+							if (_left != nullptr)
+								_left->setLeftCurrentHP(_left->getLeftCurrentHP() + 50 < 300 ? _left->getLeftCurrentHP() + 50 : 300);
+							if (_right != nullptr)
+								_right->setRightCurrentHP(_right->getRightCurrentHP() + 50 < 300 ? _right->getRightCurrentHP() + 50 : 300);
+
 							_isCastingOn = false;
 							_isCastingAttackOn = false;
 							_isConsecrationLoopOn = false;
@@ -938,6 +951,10 @@ void BossObject::Page_2()
 	{
 		tpX = (float)MY_UTILITY::getFromFloatTo(200, 1400);
 		tpY = (int)MY_UTILITY::getFromFloatTo(100, 500);
+		if (isTeleport == false)
+		{
+			SOUNDMANAGER->FindSound("033_Archbishop_Teleport_In_a_v1")->Play(false);
+		}
 		isTeleport = true;
 	}
 	else if (m_phase2Patter == 7)
@@ -954,6 +971,8 @@ void BossObject::Page_2()
 			tpX = 200;
 			tpY = (int)MY_UTILITY::getFromFloatTo(100, 500);
 			isTeleport = true;
+			SOUNDMANAGER->FindSound("022_Archbishop_Voice_5_b_v1")->Play(false);
+
 		}
 	}
 	else if (m_phase2Patter == 8)
@@ -996,6 +1015,8 @@ void BossObject::Page_2()
 	{
 		if (isTeleport == false)
 		{
+			SOUNDMANAGER->FindSound("033_Archbishop_Teleport_In_a_v1")->Play(false);
+
 			tpX = (float)MY_UTILITY::getFromFloatTo(200, 1400);
 			tpY = (int)MY_UTILITY::getFromFloatTo(100, 500);
 			isTeleport = true;
@@ -1036,6 +1057,7 @@ void BossObject::Page_2()
 	{
 		if (isDivine == false)
 		{
+			SOUNDMANAGER->FindSound("022_Archbishop_Voice_5_b_v1")->Play(false);
 			m_phase2Img[eDivineImpactR]->Reset();
 			m_phase2Img[eDivineImpactA]->Reset();
 			m_phase2Img[eDivineImpactRL]->Reset();
@@ -1091,9 +1113,13 @@ void BossObject::Page_2()
 		{
 			m_bossState = ePhase_3R;
 			isPhase3 = true;
+			SOUNDMANAGER->FindSound("052_Archbishop_Sacrament_Voice_a_v1")->Play(false);
+
+
 		}
 		if (m_bossState == ePhase_3R)
 		{
+			SOUNDMANAGER->FindSound("053_Archbishop_Sacrament_Ready_a_v1")->Play(false);
 			if (m_phase2Img[ePhase_3R]->GetIsImageEnded() == true)
 			{
 				m_bossState = ePhase_3A;
@@ -1153,6 +1179,8 @@ void BossObject::Teleport()
 		}
 		if (teleprotTimer > 0.5f)
 		{
+			SOUNDMANAGER->FindSound("034_Archbishop_Teleport_Out_a_v1")->Play(false);
+
 			m_obj->x = tpX;
 			m_obj->y = tpY;
 

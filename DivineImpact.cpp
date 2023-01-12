@@ -10,13 +10,19 @@ void DivineImpact::Init()
 	coll = m_obj->AddComponent<CollisionComponent>();
 	coll->SetIsActive(false);
 	m_obj->AddCollisionComponent(coll);
+	count = 0;
 }
 
 void DivineImpact::Update()
 {
-	coll->Setting(30,m_obj->x,m_obj->y,"hit");
+	coll->Setting(30, m_obj->x, m_obj->y, "hit");
 	if (img->GetFrame() == 10)
 	{
+		if (count == 0)
+		{
+			count++;
+			SOUNDMANAGER->FindSound("036_Archbishop_DivineImpact_Explosion_a_v1")->Play(false);
+		}
 		coll->SetIsActive(true);
 	}
 	if (img->GetIsImageEnded() == true)
@@ -43,15 +49,15 @@ void DivineImpact::OnCollision(CollisionComponent* coll1, CollisionComponent* co
 		if (coll2->GetName() == "PlayerHitRange")
 		{
 
-		ply->HitPlayerMagicAttack(10);
-		if (other->x > m_obj->x)
-		{
-			other->GetComponent<Player>()->HitPlayerKnockBack(25, -25);
-		}
-		else
-		{
-			other->GetComponent<Player>()->HitPlayerKnockBack(-25, -25);
-		}
+			ply->HitPlayerMagicAttack(10);
+			if (other->x > m_obj->x)
+			{
+				other->GetComponent<Player>()->HitPlayerKnockBack(25, -25);
+			}
+			else
+			{
+				other->GetComponent<Player>()->HitPlayerKnockBack(-25, -25);
+			}
 		}
 	}
 }

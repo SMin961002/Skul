@@ -26,7 +26,7 @@ private:
 
 public:
 	float getLeftCurrentHP() { return m_CurrentHP; }
-	float setLeftCurrentHP(float a) { m_CurrentHP = a; }
+	void setLeftCurrentHP(float a) { m_CurrentHP = a; }
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;
@@ -56,6 +56,8 @@ private:
 	bool m_Hit;
 	float alpha = 0;
 public:
+
+	void setRightCurrentHP(float a) { m_CurrentHP = a; }
 	float getRightCurrentHP() { return m_CurrentHP; }
 	virtual void Init() override;
 	virtual void Update() override;

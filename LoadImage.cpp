@@ -671,6 +671,9 @@ void ImageManager::LoadImages()
 	AddImageVector("Ending_Duo_ReturnKing", L"./Resources/EndingScene/Duo/ReturnKing/Duo_ReturnKing_", 1, 3);
 	AddImageVector("Ending_Duo_ReturnSkul", L"./Resources/EndingScene/Duo/ReturnSkul/Duo_ReTurnSkul_", 1, 3);
 	AddImageVector("Ending_Duo_DuoThanks", L"./Resources/EndingScene/Duo/DuoThanks/Duo_Thanks_", 1, 3);
+
+	AddImageVector("food", L"./Resources/food/", 1, 15);
+
 	AddImage("Ending_Duo_DuoThanks_Loop", L"./Resources/EndingScene/Duo/DuoThanksLoop/Duo_Thanks_Loop.png");
 
 	SOUNDMANAGER->AddSound("Intro", "./Resources/Sound/Intro.wav");
@@ -758,4 +761,14 @@ void ImageManager::LoadImages()
 	SOUNDMANAGER->AddSound("RouletteBigHitBlackCast", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_BlackCast.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("RouletteBigHitBlack", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_BlackAtk.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("RouletteBigHitRed", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_Red.wav")->SetVolume(50);
+
+	SOUNDMANAGER->AddSound("033_Archbishop_Teleport_In_a_v1", "./Resources/Sound/보스 오디오/2페이즈/Teleport/033_Archbishop_Teleport_In_a_v1.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("034_Archbishop_Teleport_Out_a_v1", "./Resources/Sound/보스 오디오/2페이즈/Teleport/034_Archbishop_Teleport_Out_a_v1.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("022_Archbishop_Voice_5_b_v1", "./Resources/Sound/022_Archbishop_Voice_5_b_v1.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("Archbishop_DvineLight_Fire", "./Resources/Sound/보스 오디오/2페이즈/DivineLight/Archbishop_DvineLight_Fire.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("036_Archbishop_DivineImpact_Explosion_a_v1", "./Resources/Sound/보스 오디오/2페이즈/DivineImpact/036_Archbishop_DivineImpact_Explosion_a_v1.wav")->SetVolume(50);
+
+	SOUNDMANAGER->AddSound("052_Archbishop_Sacrament_Voice_a_v1", "./Resources/Sound/보스 오디오/2페이즈/Sacrament/052_Archbishop_Sacrament_Voice_a_v1.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("053_Archbishop_Sacrament_Ready_a_v1", "./Resources/Sound/보스 오디오/2페이즈/Sacrament/053_Archbishop_Sacrament_Ready_a_v1.wav")->SetVolume(50);
+
 }
