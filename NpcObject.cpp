@@ -63,7 +63,6 @@ void NpcObject::Setting(string name)
 		m_itemList.push_back(item4);
 
 	}
-	OBJECTMANAGER->m_player->goldValue = 5000;
 }
 
 void NpcObject::Init()
@@ -127,7 +126,7 @@ void NpcObject::Render()
 				if (coll4->GetIsActive() == true)
 				{
 					IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage(iter->key), m_obj->x - x, m_obj->y + sinf(rot) * 8 - 30, 2.5, 2.5);
-					IMAGEMANAGER->D2dTextOut(to_wstring(iter->m_account), m_obj->x - x - IMAGEMANAGER->GetCameraPosition().x - 40, m_obj->y - IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,255 }, 0.5);
+					IMAGEMANAGER->D2dTextOut(to_wstring(iter->m_account), m_obj->x - x - IMAGEMANAGER->GetCameraPosition().x - 40, m_obj->y + 68 - IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,255 }, 0.5);
 				}
 				break;
 			}
@@ -143,7 +142,7 @@ void NpcObject::Render()
 
 			food->CenterRender(m_obj->x + 125, m_obj->y + 67, 2.f, 2.f, 0);
 
-			IMAGEMANAGER->D2dTextOut(L"800", m_obj->x - IMAGEMANAGER->GetCameraPosition().x+20, m_obj->y - IMAGEMANAGER->GetCameraPosition().y-75, { 255,255,255,1 }, 0.8f);
+			IMAGEMANAGER->D2dTextOut(L"800", m_obj->x - IMAGEMANAGER->GetCameraPosition().x + 20, m_obj->y - IMAGEMANAGER->GetCameraPosition().y - 75, { 255,255,255,1 }, 0.8f);
 		}
 	}
 }

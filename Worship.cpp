@@ -8,7 +8,7 @@
 
 void WorshipLeft::Init()
 {
-	
+	timer = 0;
 	SOUNDMANAGER->FindSound("Wosrship")->Play(false);
 	_imgPhase1BossWorshipLeft = IMAGEMANAGER->FindImageVector("Boss_Worship");
 	_imgPhase1BossWorshipLeft->Setting(0.1, true);
@@ -27,7 +27,7 @@ void WorshipLeft::Update()
 		m_obj->ObjectDestroyed();
 	}
 
-	_collision->Setting(60, m_obj->x+100, m_obj->y, "Attack");
+	_collision->Setting(60, m_obj->x + 100, m_obj->y, "Attack");
 
 	if (OBJECTMANAGER->m_boss->_patternCheck == 2)
 	{
@@ -50,16 +50,20 @@ void WorshipLeft::OnCollision(CollisionComponent* coll1, CollisionComponent* col
 {
 	if (other->GetName() == "player")
 	{
-		Player* player = other->GetComponent<Player>();
-		player->HitPlayerMagicAttack(10);
-		player->HitPlayerEffect();
-		if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+		if (timer > 0.1)
 		{
-			player->HitPlayerKnockBack(-15, -5);
-		}
-		else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
-		{
-			player->HitPlayerKnockBack(-15, -5);
+			timer = 0;
+			Player* player = other->GetComponent<Player>();
+			player->HitPlayerMagicAttack(10);
+			player->HitPlayerEffect();
+			if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+			{
+				player->HitPlayerKnockBack(-15, -5);
+			}
+			else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+			{
+				player->HitPlayerKnockBack(-15, -5);
+			}
 		}
 	}
 }
@@ -68,7 +72,7 @@ void WorshipRight::Init()
 {
 	_imgPhase1BossWorshipRight = IMAGEMANAGER->FindImageVector("Boss_Worship");
 	_imgPhase1BossWorshipRight->Setting(0.1, true);
-	
+	timer = 0;
 	_collision = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(_collision);
 	_collision->SetIsActive(false);
@@ -77,7 +81,7 @@ void WorshipRight::Init()
 void WorshipRight::Update()
 {
 	m_obj->x -= 3;
-
+	timer += DELTA_TIME;
 	if (m_obj->x < 0)
 	{
 		m_obj->ObjectDestroyed();
@@ -103,16 +107,20 @@ void WorshipRight::OnCollision(CollisionComponent* coll1, CollisionComponent* co
 {
 	if (other->GetName() == "player")
 	{
-		Player* player = other->GetComponent<Player>();
-		player->HitPlayerMagicAttack(10);
-		player->HitPlayerEffect();
-		if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+		if (timer >= 0.1)
 		{
-			player->HitPlayerKnockBack(-15, -5);
-		}
-		else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
-		{
-			player->HitPlayerKnockBack(-15, -5);
+			timer = 0;
+			Player* player = other->GetComponent<Player>();
+			player->HitPlayerMagicAttack(10);
+			player->HitPlayerEffect();
+			if (OBJECTMANAGER->m_player->GetplayerX() < m_obj->x)
+			{
+				player->HitPlayerKnockBack(-15, -5);
+			}
+			else if (OBJECTMANAGER->m_player->GetplayerX() > m_obj->x)
+			{
+				player->HitPlayerKnockBack(-15, -5);
+			}
 		}
 	}
 
