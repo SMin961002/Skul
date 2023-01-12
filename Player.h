@@ -13,6 +13,7 @@ private:
 		eEnd
 	};
 	CImage* m_UIImage[UITag::eEnd];
+	CImage* m_headUI[static_cast<int>(eSkulSpecies::Empty) + 1];
 
 	Head* m_headList[static_cast<int>(eSkulSpecies::Empty) + 1];
 	bool lastCheck;
@@ -61,7 +62,7 @@ private:
 public:
 	int goldValue;
 	bool isHeadCheck;
-	
+
 	CollisionComponent* m_playerHitBox;
 	CollisionComponent* m_collAutoAttack;
 	CollisionComponent* m_collSkillA;
@@ -146,7 +147,7 @@ public:
 		{
 		}
 	}
-	Player() : m_Hp(100),m_HpMax(100), m_isDead(false) {};
+	Player() : m_Hp(100), m_HpMax(100), m_isDead(false) {};
 };
 
 

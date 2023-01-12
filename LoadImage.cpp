@@ -403,8 +403,18 @@ void ImageManager::LoadImages()
 	AddImage("bossHp", L"./Resources/bossHp.png");
 	AddImage("GamblerHead", L"./Resources/HeadUI/Gambler #54692.png");
 
+	AddImage("GamblerHeadUI", L"./Resources/2.png");
+	AddImage("LittleHeadUI", L"./Resources/3.png");
 
+	AddImage("gamA", L"./Resources/gamA.png");
+	AddImage("gamS", L"./Resources/gamS.png");
+	AddImage("littleA", L"./Resources/littleA.png");
+	AddImage("littleS", L"./Resources/littleS.png");
+	AddImage("skillBlank", L"./Resources/skillBlank.png");
+	AddImage("colltime", L"./Resources/colltime.png");
+	AddImage("switchColl", L"./Resources/switchColl.png");
 
+	
 	//==========================================================================================================
 	// 맵 구조물 이미지
 	AddStructureImage("statue", L"./Resources/Tile/4Stage/Structure/statue.png");

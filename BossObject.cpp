@@ -43,7 +43,7 @@ void BossObject::Init()
 	m_teleportEffect->Setting(0.07f, false);
 
 	m_patterTimer = 0;
-	m_currenthp = 10000;
+	m_currenthp = 3000;
 	chairY = m_obj->y;
 	chairX = m_obj->x;
 	m_isAttack = false;
@@ -132,7 +132,7 @@ Phase2_DeathLoop",
 	m_phase2Img[eCreateBallE] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Boss_CreateBall_End");
 	m_phase2Img[eCreateBallE]->Setting(0.15, false);
 
-	m_page = 1;
+	m_page = 0;
 	m_phase2Img[eSoulChaseR] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_Ready");
 	m_phase2Img[eSoulChaseR]->Setting(0.1, false);
 	m_phase2Img[eSoulChaseA] = IMAGEMANAGER->AddImageVectorCopy("Phase2_Ball_SoulChase_Attack");
@@ -629,9 +629,9 @@ void BossObject::Render()
 					m_bossState = eCreateBallA;
 					if (m_phase2Patter == 3)
 					{
-						bossBall[0] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eBossObject)->AddComponent<BossBall>();
-						bossBall[1] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eBossObject)->AddComponent<BossBall>();
-						bossBall[2] = OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eBossObject)->AddComponent<BossBall>();
+						bossBall[0] = OBJECTMANAGER->AddObject("Enemy2", m_obj->x, m_obj->y, eBossObject)->AddComponent<BossBall>();
+						bossBall[1] = OBJECTMANAGER->AddObject("Enemy2", m_obj->x, m_obj->y, eBossObject)->AddComponent<BossBall>();
+						bossBall[2] = OBJECTMANAGER->AddObject("Enemy2", m_obj->x, m_obj->y, eBossObject)->AddComponent<BossBall>();
 						bossBall[0]->Setting((2 * 3.141592) / 3 * 1);
 						bossBall[1]->Setting((2 * 3.141592) / 3 * 2);
 						bossBall[2]->Setting((2 * 3.141592) / 3 * 3);
@@ -706,7 +706,7 @@ void BossObject::Render()
 		if (magicCircleImage->GetFrame() == 15 && circleCount == 0)
 		{
 			circleCount++;
-			OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y + 80, eBossObject)->AddComponent<BossCircle>();
+			OBJECTMANAGER->AddObject("Enemy2", m_obj->x, m_obj->y + 80, eBossObject)->AddComponent<BossCircle>();
 		}
 		if (magicCircleImage->GetIsImageEnded() == true)
 		{
@@ -972,7 +972,7 @@ void BossObject::Page_2()
 		{
 			if (isLazer == false)
 			{
-				OBJECTMANAGER->AddObject("Enemy", m_obj->x + 400, m_obj->y, eEnemy)->AddComponent<Lazer>();
+				OBJECTMANAGER->AddObject("Enemy2", m_obj->x + 400, m_obj->y, eEnemy)->AddComponent<Lazer>();
 			}
 			isLazer = true;
 			m_bossState = eDivineLightA;
@@ -1060,7 +1060,7 @@ void BossObject::Page_2()
 				{
 					m_phase2Img[eDivineImpactA]->Reset();
 					devineCount++;
-					OBJECTMANAGER->AddObject("Enemy", m_obj->x, m_obj->y, eBossObject)->AddComponent<DivineImpact>();
+					OBJECTMANAGER->AddObject("Enemy2", m_obj->x, m_obj->y, eBossObject)->AddComponent<DivineImpact>();
 				}
 				else
 				{
@@ -1092,7 +1092,7 @@ void BossObject::Page_2()
 			{
 				m_bossState = ePhase_3A;
 				for (int i = 0; i < 50; i++)
-					OBJECTMANAGER->AddObject("Enemy", MY_UTILITY::getFromFloatTo(50, 1550), MY_UTILITY::getFromFloatTo(30, 650), eEnemy)->AddComponent<Phase3B>();
+					OBJECTMANAGER->AddObject("Enemy2", MY_UTILITY::getFromFloatTo(50, 1550), MY_UTILITY::getFromFloatTo(30, 650), eEnemy)->AddComponent<Phase3B>();
 			}
 		}
 		if (m_bossState == ePhase_3A)
