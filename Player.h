@@ -23,7 +23,7 @@ private:
 
 	int m_HpMax;
 	int m_Hp;
-	bool m_isDead;
+	bool m_reborn;
 	float m_attack;
 	float m_deffendence;
 
@@ -105,6 +105,7 @@ public:
 	void InputJumpKey();
 	void InputDashKey();
 	void InputArrowKey();
+	//↑====PlayerMove.cpp에 있습니다====↑//
 	void Heal()
 	{
 		if ((m_Hp + 10) - m_HpMax > 0)
@@ -116,7 +117,6 @@ public:
 			m_Hp += 10;
 		}
 	}
-	//↑====PlayerMove.cpp에 있습니다====↑//
 	void ResetJump() {
 		m_jumpCount = 0;
 		m_jumpping = false;
@@ -147,7 +147,7 @@ public:
 		{
 		}
 	}
-	Player() : m_Hp(100), m_HpMax(100), m_isDead(false) {};
+	Player() : m_Hp(100), m_HpMax(100) {};
 };
 
 

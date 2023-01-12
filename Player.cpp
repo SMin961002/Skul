@@ -11,6 +11,8 @@ void Player::Init()
 		("
 		(""
 		*/
+	m_reborn = false;	//부활모션판단
+
 	m_headUI[0] = IMAGEMANAGER->FindImage("LittleHeadUI");
 	m_headUI[3] = IMAGEMANAGER->FindImage("GamblerHeadUI");
 
@@ -18,6 +20,7 @@ void Player::Init()
 	{
 		GAMEMANAGER->playerHp = m_HpMax;
 		m_Hp = m_HpMax;
+		m_reborn = true;
 	}
 	else
 	{
@@ -120,6 +123,17 @@ void Player::Init()
 	m_knockBack = false;
 	OBJECTMANAGER->m_player = this;
 	m_supperArmarNowTime = 0;
+
+	if (m_reborn == true)
+	{
+		LittleBorn* lb = nullptr;
+		lb = dynamic_cast<LittleBorn*>(m_nowHead);
+		if (lb != nullptr)
+		{
+			lb->SetReborn();
+		}
+	}
+	m_reborn = false;
 }
 
 void Player::Update()
@@ -132,8 +146,6 @@ void Player::Update()
 		lastCheck = isHeadCheck;
 		ChangeHead();
 	}
-	if (m_isDead == false)
-	{
 		if (!m_nowHead->GetNonActionCansle())
 		{
 			Move();
@@ -156,7 +168,6 @@ void Player::Update()
 
 		CoolDown();
 		m_nowHead->Update();
-	}
 }
 
 void Player::Release()
@@ -350,7 +361,6 @@ void Player::HitPlayerPhysicAttack(float dmg)
 	m_supperArmarNowTime = m_supperArmarTime;
 	m_playerHitBox->SetIsActive(false);
 	m_Hp -= dmg;
-	if (m_Hp <= 0) m_isDead = true;
 	cout << "데미지 : " << dmg << ", 플레이어 HP : " << m_Hp << endl;
 }
 void Player::HitPlayerMagicAttack(float dmg)
@@ -358,7 +368,6 @@ void Player::HitPlayerMagicAttack(float dmg)
 	m_supperArmarNowTime = m_supperArmarTime;
 	m_playerHitBox->SetIsActive(false);
 	m_Hp -= dmg;
-	if (m_Hp <= 0) m_isDead = true;
 	cout << "데미지 : " << dmg << ", 플레이어 HP : " << m_Hp << endl;
 }
 void Player::HitPlayerKnockBack(float moveX, float moveY)
