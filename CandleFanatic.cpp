@@ -71,6 +71,10 @@ void CandleFanatic::Init()
 
 void CandleFanatic::Update()
 {
+	if (SCENEMANAGER->m_tiles.size() * 31 < m_obj->y)
+	{
+		m_obj->ObjectDestroyed();
+	}
 	ImageResetCheck();
 	if (m_effect == false)
 	{
@@ -261,6 +265,7 @@ void CandleFanatic::OnCollision(CollisionComponent* coll1, CollisionComponent* c
 
 void CandleFanatic::HitEnemy(float dmg, float time)
 {
+
 	alphaHit = 1;
 	m_isAttack = false;
 	m_isHit = true;

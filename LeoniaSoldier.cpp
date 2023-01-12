@@ -66,6 +66,10 @@ void LeoniaSoldier::Init()
 
 void LeoniaSoldier::Update()
 {
+	if (SCENEMANAGER->m_tiles.size() * 31 < m_obj->y)
+	{
+		m_obj->ObjectDestroyed();
+	}
 	if (alphaHit >= 0)
 	{
 		alphaHit -= 0.05;
@@ -230,8 +234,8 @@ void LeoniaSoldier::Render()
 }
 
 void LeoniaSoldier::Release()
-	GAMEMANAGER->enemyCount--;
 {
+	GAMEMANAGER->enemyCount--;
 }
 
 void LeoniaSoldier::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)

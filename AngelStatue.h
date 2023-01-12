@@ -24,6 +24,7 @@ class AngelStatue : public Enemy
 	bool m_effect;
 	bool m_attacksound;
 	bool m_attacksound2;
+	bool m_attacksound3;
 
 	int m_state2;
 	int m_state;
