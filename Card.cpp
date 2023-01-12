@@ -88,7 +88,7 @@ void Card::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Obj
 		if (!isOtherHit)
 		{
 			Component* e = other->GetComponent<Component>();
-			SOUNDMANAGER->FindSound("SkulAttackBluntSmall");
+			SOUNDMANAGER->FindSound("SkulAttackBluntSmall")->Play(false);;
 			if (m_isJoker)
 			{
 				e->HitEnemy(20, IMAGEMANAGER->FindImageVector("Gambler_JockerExplosion")->GetTotalDelay());
@@ -221,7 +221,7 @@ void BlackJackCard::OnCollision(CollisionComponent* coll1, CollisionComponent* c
 			Component* e = other->GetComponent<Component>();
 			e->HitEnemy(12, 0);
 			m_obj->ObjectDestroyed();
-			SOUNDMANAGER->FindSound("SkulAttackBluntSmall");
+			SOUNDMANAGER->FindSound("SkulAttackBluntSmall")->Play(false);
 			return;			//공격판정시 바로 파괴되므로 아래의 hited판정을 돌리지 않고 조기return한다
 		}
 
@@ -245,7 +245,7 @@ void BlackJackCard::OnCollision(CollisionComponent* coll1, CollisionComponent* c
 				{
 					e->HitEnemy(15, 0);
 					OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(15);
-					SOUNDMANAGER->FindSound("SkulAttackBluntLarge");
+					SOUNDMANAGER->FindSound("SkulAttackBluntLarge")->Play(false);
 
 					if (!m_isJokerHit)
 					{
@@ -261,7 +261,7 @@ void BlackJackCard::OnCollision(CollisionComponent* coll1, CollisionComponent* c
 				else
 				{
 					OBJECTMANAGER->AddObject("Effect", other->x + MY_UTILITY::getFromFloatTo(-40, 40), other->y - MY_UTILITY::getFromFloatTo(40, 100), eBoss)->AddComponent<HitDamageEffect>()->Setting(12);
-					SOUNDMANAGER->FindSound("SkulAttackBluntSmall");
+					SOUNDMANAGER->FindSound("SkulAttackBluntSmall")->Play(false);
 
 					e->HitEnemy(12, 0);
 				}//end not joker
