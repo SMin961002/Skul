@@ -71,11 +71,16 @@ void Lazer::Render()
 	}
 	if (img[eLast]->GetIsImageEnded() == true)
 	{
-
 		m_obj->ObjectDestroyed();
 	}
 	if (m_state == eLoop)
 	{
+		if (count == 0)
+		{
+			count++;
+			SOUNDMANAGER->FindSound("Archbishop_DvineLight_Fire")->Play(false);
+
+		}
 		img[m_state]->CenterRender(m_obj->x + 250, m_obj->y, 1.5, 3, 90);
 	}
 	else if (m_state == eStart)

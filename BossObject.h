@@ -32,8 +32,6 @@ private:
 	CImage* hpImg;
 	CollisionComponent* coll;
 private:
-	HolyFountainLeft* _left;
-	HolyFountainRight* _right;
 
 	CImage* _imgBossChair;
 	CImage* _imgBossHPBar;
@@ -197,5 +195,7 @@ public:
 	void Teleport();
 	void MovePos();
 
+	HolyFountainLeft* _left;
+	HolyFountainRight* _right;
 };
 

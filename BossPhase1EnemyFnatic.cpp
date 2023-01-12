@@ -193,6 +193,7 @@ void BossPhase1EnemyFnatic::OnCollision(CollisionComponent* coll1, CollisionComp
 void BossPhase1EnemyFnatic::HitEnemy(float dmg, float time)
 {
 	m_hitpointCollision->SetIsActive(false);
+	img[eAttack]->Reset();
 	if (!m_die2)
 	{
 		//if (m_currenthp >= 50) 희생 이미지 없음

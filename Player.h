@@ -22,7 +22,6 @@ private:
 	float m_headTagCool;
 
 	int m_HpMax;
-	int m_Hp;
 	bool m_reborn;
 	float m_attack;
 	float m_deffendence;
@@ -127,6 +126,7 @@ public:
 		m_dashNowTime = 0;
 		m_dashNowCool = 0;
 	}
+	int m_Hp;
 
 	void CoolDown();
 	void ChangeHead();

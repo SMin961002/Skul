@@ -16,6 +16,15 @@ void NpcObject::Setting(string name)
 	m_name = name;
 	m_shopImage = IMAGEMANAGER->FindImageVector(name);
 	m_shopImage->Setting(0.15f, true);
+	cout << m_name << endl;
+	if (m_name == "FoodShop")
+	{
+		food = IMAGEMANAGER->FindImageVector("food");
+		food->Setting(0.1f, true);
+		coll1 = m_obj->AddComponent<CollisionComponent>();
+		m_obj->AddCollisionComponent(coll1);
+	}
+
 	if (m_name == "ItemView")
 	{
 		coll1 = m_obj->AddComponent<CollisionComponent>();
@@ -71,7 +80,11 @@ void NpcObject::Update()
 void NpcObject::Render()
 {
 	int x = -125;
+
 	m_shopImage->CenterRender(m_obj->x, m_obj->y + 15, 2, 2, 0, 0);
+	if (m_name == "FoodShop")
+	{
+	}
 	if (m_name == "ItemView")
 	{
 		int  i = 0;
@@ -97,7 +110,7 @@ void NpcObject::Render()
 				if (coll2->GetIsActive() == true)
 				{
 					coll2->Setting(30, m_obj->x - x, m_obj->y + 50, "second");
-					IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage(iter->key), m_obj->x - x-10, m_obj->y + sinf(rot) * 8 - 30, 2.5, 2.5);
+					IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage(iter->key), m_obj->x - x - 10, m_obj->y + sinf(rot) * 8 - 30, 2.5, 2.5);
 					IMAGEMANAGER->D2dTextOut(to_wstring(iter->m_account), m_obj->x - x - IMAGEMANAGER->GetCameraPosition().x - 40, m_obj->y + 68 - IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,255 }, 0.5);
 				}
 				break;
@@ -105,7 +118,7 @@ void NpcObject::Render()
 				coll3->Setting(30, m_obj->x - x, m_obj->y + 50, "third");
 				if (coll3->GetIsActive() == true)
 				{
-					IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage(iter->key), m_obj->x - x-10, m_obj->y + sinf(rot) * 8 - 30, 2.5, 2.5);
+					IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage(iter->key), m_obj->x - x - 10, m_obj->y + sinf(rot) * 8 - 30, 2.5, 2.5);
 					IMAGEMANAGER->D2dTextOut(to_wstring(iter->m_account), m_obj->x - x - IMAGEMANAGER->GetCameraPosition().x - 40, m_obj->y + 68 - IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,255 }, 0.5);
 				}
 				break;
@@ -114,14 +127,23 @@ void NpcObject::Render()
 				if (coll4->GetIsActive() == true)
 				{
 					IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage(iter->key), m_obj->x - x, m_obj->y + sinf(rot) * 8 - 30, 2.5, 2.5);
-					IMAGEMANAGER->D2dTextOut(to_wstring(iter->m_account), m_obj->x - x - IMAGEMANAGER->GetCameraPosition().x - 40, m_obj->y + 68 - IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,255 }, 0.5);
+					IMAGEMANAGER->D2dTextOut(to_wstring(iter->m_account), m_obj->x - x - IMAGEMANAGER->GetCameraPosition().x - 40, m_obj->y - IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,255 }, 0.5);
 				}
 				break;
 			}
 
-
-
 			x += 167;
+		}
+	}
+	if (m_name == "FoodShop")
+	{
+		if (isSell == false)
+		{
+			coll1->Setting(30, m_obj->x + 155, m_obj->y + 107, "first");
+
+			food->CenterRender(m_obj->x + 125, m_obj->y + 67, 2.f, 2.f, 0);
+
+			IMAGEMANAGER->D2dTextOut(L"800", m_obj->x - IMAGEMANAGER->GetCameraPosition().x+20, m_obj->y - IMAGEMANAGER->GetCameraPosition().y-75, { 255,255,255,1 }, 0.8f);
 		}
 	}
 }
@@ -137,93 +159,118 @@ void NpcObject::Release()
 
 void NpcObject::UIRender()
 {
+
 	if (m_isState == true)
 	{
-		IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("ItemUI"), WINSIZE_X / 2 - 300, WINSIZE_Y / 2 - 100, 1.7, 1.7);
-		if (m_itemList[kind]->key == "CaerleonSword")
+		if (m_name == "ItemView")
 		{
-			IMAGEMANAGER->D2dTextOut(L"보급형 칼레온 검", 170, 50, { 0,0,0,1 }, 0.8f);
-			IMAGEMANAGER->D2dTextOut(L"묵직한 칼레온 군 보급용 검. 성능은 의심이 들지만, \n관리 된 검날은 예사롭지 않다.", 90, 115, { 0,0,0,1 }, 0.5f);
-			IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("CaerleonSword"), 170, 215, 1.5, 1.5);
-			IMAGEMANAGER->D2dTextOut(L"F 구매하기  ( " + to_wstring(m_itemList[kind]->m_account) + L" )", 160, 270, { 0,0,0,1 }, 0.8f);
-		}
-		if (m_itemList[kind]->key == "FireKnife")
-		{
-			IMAGEMANAGER->D2dTextOut(L"불의 검", 210, 50, { 0,0,0,1 }, 0.8f);
-			IMAGEMANAGER->D2dTextOut(L"묵직한 불의 검. 때렸을 때 불이 붙지 않지만, \n멋있다.", 90, 115, { 0,0,0,1 }, 0.5f);
-			IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("CaerleonSword"), 170, 215, 1.5, 1.5);
-			IMAGEMANAGER->D2dTextOut(L"F 구매하기  ( " + to_wstring(m_itemList[kind]->m_account) + L" )", 160, 270, { 0,0,0,1 }, 0.8f);
-		}
-		if (m_itemList[kind]->key == "Caerleonarmor")
-		{
-			IMAGEMANAGER->D2dTextOut(L"보급형 칼레온 갑옷", 155, 50, { 0,0,0,1 }, 0.8f);
-			IMAGEMANAGER->D2dTextOut(L"보기만 해도 진절머리 나는 칼레온 군 보급형 갑옷.", 93, 115, { 0,0,0,1 }, 0.5f);
-			IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("Caerleonarmor"), 163, 215, 1.5, 1.5);
-			IMAGEMANAGER->D2dTextOut(L"F 구매하기  ( " + to_wstring(m_itemList[kind]->m_account) + L" )", 160, 270, { 0,0,0,1 }, 0.8f);
-		}
-		if (m_itemList[kind]->key == "BoneOfMana")
-		{
-			IMAGEMANAGER->D2dTextOut(L"마나의 뼈", 200, 50, { 0,0,0,1 }, 0.8f);
-			IMAGEMANAGER->D2dTextOut(L"대체 어떤 부유한 스켈레톤이 이런걸 만들어서 쓸까?", 90, 115, { 0,0,0,1 }, 0.5f);
-			IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("BoneOfMana"), 163, 215, 1.5, 1.5);
-			IMAGEMANAGER->D2dTextOut(L"F 구매하기  ( " + to_wstring(m_itemList[kind]->m_account) + L" )", 160, 270, { 0,0,0,1 }, 0.8f);
+			IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("ItemUI"), WINSIZE_X / 2 - 300, WINSIZE_Y / 2 - 100, 1.7, 1.7);
+			if (m_itemList[kind]->key == "CaerleonSword")
+			{
+				IMAGEMANAGER->D2dTextOut(L"보급형 칼레온 검", 170, 50, { 0,0,0,1 }, 0.8f);
+				IMAGEMANAGER->D2dTextOut(L"묵직한 칼레온 군 보급용 검. 성능은 의심이 들지만, \n관리 된 검날은 예사롭지 않다.", 90, 115, { 0,0,0,1 }, 0.5f);
+				IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("CaerleonSword"), 170, 215, 1.5, 1.5);
+				IMAGEMANAGER->D2dTextOut(L"F 구매하기  ( " + to_wstring(m_itemList[kind]->m_account) + L" )", 160, 270, { 0,0,0,1 }, 0.8f);
+			}
+			if (m_itemList[kind]->key == "FireKnife")
+			{
+				IMAGEMANAGER->D2dTextOut(L"불의 검", 210, 50, { 0,0,0,1 }, 0.8f);
+				IMAGEMANAGER->D2dTextOut(L"묵직한 불의 검. 때렸을 때 불이 붙지 않지만, \n멋있다.", 90, 115, { 0,0,0,1 }, 0.5f);
+				IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("CaerleonSword"), 170, 215, 1.5, 1.5);
+				IMAGEMANAGER->D2dTextOut(L"F 구매하기  ( " + to_wstring(m_itemList[kind]->m_account) + L" )", 160, 270, { 0,0,0,1 }, 0.8f);
+			}
+			if (m_itemList[kind]->key == "Caerleonarmor")
+			{
+				IMAGEMANAGER->D2dTextOut(L"보급형 칼레온 갑옷", 155, 50, { 0,0,0,1 }, 0.8f);
+				IMAGEMANAGER->D2dTextOut(L"보기만 해도 진절머리 나는 칼레온 군 보급형 갑옷.", 93, 115, { 0,0,0,1 }, 0.5f);
+				IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("Caerleonarmor"), 163, 215, 1.5, 1.5);
+				IMAGEMANAGER->D2dTextOut(L"F 구매하기  ( " + to_wstring(m_itemList[kind]->m_account) + L" )", 160, 270, { 0,0,0,1 }, 0.8f);
+			}
+			if (m_itemList[kind]->key == "BoneOfMana")
+			{
+				IMAGEMANAGER->D2dTextOut(L"마나의 뼈", 200, 50, { 0,0,0,1 }, 0.8f);
+				IMAGEMANAGER->D2dTextOut(L"대체 어떤 부유한 스켈레톤이 이런걸 만들어서 쓸까?", 90, 115, { 0,0,0,1 }, 0.5f);
+				IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("BoneOfMana"), 163, 215, 1.5, 1.5);
+				IMAGEMANAGER->D2dTextOut(L"F 구매하기  ( " + to_wstring(m_itemList[kind]->m_account) + L" )", 160, 270, { 0,0,0,1 }, 0.8f);
+			}
 		}
 	}
 }
 
 void NpcObject::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (other->GetName() == "player")
+	if (m_name == "FoodShop")
 	{
-		if (coll1->GetName()  == "first")
+		if (other->GetName() == "player")
 		{
-			m_isState = true;
-			kind = 0;
-			if (KEYMANAGER->GetOnceKeyDown('F'))
+			if (isSell == false)
 			{
-				if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
+				if (KEYMANAGER->GetOnceKeyDown('F'))
 				{
-					this->coll1->SetIsActive(false);
-					OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
+					if (OBJECTMANAGER->m_player->goldValue >= 800)
+					{
+						OBJECTMANAGER->m_player->goldValue -= 800;
+						OBJECTMANAGER->m_player->m_Hp = OBJECTMANAGER->m_player->m_Hp + 50 <= 100 ? OBJECTMANAGER->m_player->m_Hp + 50 : 100;
+						isSell = true;
+					}
 				}
 			}
 		}
-		if (coll1->GetName() == "second")
+	}
+	if (m_name == "ItemView")
+	{
+		if (other->GetName() == "player")
 		{
-			m_isState = true;
-			kind = 1;
-			if (KEYMANAGER->GetOnceKeyDown('F'))
+			if (coll1->GetName() == "first")
 			{
-				if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
+				m_isState = true;
+				kind = 0;
+				if (KEYMANAGER->GetOnceKeyDown('F'))
 				{
-					this->coll2->SetIsActive(false);
-					OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
+					if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
+					{
+						this->coll1->SetIsActive(false);
+						OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
+					}
 				}
 			}
-		}
-		if (coll1->GetName() == "third")
-		{
-			m_isState = true;
-			kind = 2;
-			if (KEYMANAGER->GetOnceKeyDown('F'))
+			if (coll1->GetName() == "second")
 			{
-				if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
+				m_isState = true;
+				kind = 1;
+				if (KEYMANAGER->GetOnceKeyDown('F'))
 				{
-					this->coll3->SetIsActive(false);
-					OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
+					if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
+					{
+						this->coll2->SetIsActive(false);
+						OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
+					}
 				}
 			}
-		}
-		if (coll1->GetName() == "forth")
-		{
-			m_isState = true;
-			kind = 3;
-			if (KEYMANAGER->GetOnceKeyDown('F'))
+			if (coll1->GetName() == "third")
 			{
-				if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
+				m_isState = true;
+				kind = 2;
+				if (KEYMANAGER->GetOnceKeyDown('F'))
 				{
-					this->coll4->SetIsActive(false);
-					OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
+					if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
+					{
+						this->coll3->SetIsActive(false);
+						OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
+					}
+				}
+			}
+			if (coll1->GetName() == "forth")
+			{
+				m_isState = true;
+				kind = 3;
+				if (KEYMANAGER->GetOnceKeyDown('F'))
+				{
+					if (OBJECTMANAGER->m_player->goldValue >= m_itemList[kind]->m_account)
+					{
+						this->coll4->SetIsActive(false);
+						OBJECTMANAGER->m_player->goldValue -= m_itemList[kind]->m_account;
+					}
 				}
 			}
 		}

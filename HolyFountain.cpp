@@ -40,7 +40,7 @@ void HolyFountainLeft::Update()
 	_collisionLeft->Setting(50, m_obj->x + 30, m_obj->y + 50, "hitBox");
 
 	left->isLeftDes = m_CurrentHP <= 0;
-	
+
 	if (KEYMANAGER->GetOnceKeyDown('O'))
 	{
 		m_CurrentHP = -10;
@@ -62,7 +62,7 @@ void HolyFountainLeft::Render()
 		if (m_CurrentHP >= 0)
 		{
 			_imgLeftFountainActivate->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, false);
-			IMAGEMANAGER->CenterRender(_imgLeftFountainActivate->GetNowImage(), m_obj->x, m_obj->y, {1,1,1,alpha},2,2);
+			IMAGEMANAGER->CenterRender(_imgLeftFountainActivate->GetNowImage(), m_obj->x, m_obj->y, { 1,1,1,alpha }, 2, 2);
 		}
 	}
 }
@@ -104,7 +104,7 @@ void HolyFountainRight::Init()
 
 	//m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 	//m_obj->AddComponent<RigidBodyComponent>()->SetGravityOnOff(false);
-	
+
 	m_MaxHP = 300;
 	m_CurrentHP = 300;
 	m_HPBarTimer = 0;
@@ -176,13 +176,13 @@ void HolyFountainRight::HitEnemy(float dmg, float time)
 
 void HolyOrbLeft::Init()
 {
-	_imgLeftOrbStart = IMAGEMANAGER->FindImageVector("Boss_HolyFountain_Start_Left");
+	_imgLeftOrbStart = IMAGEMANAGER->AddImageVectorCopy("Boss_HolyFountain_Start_Left");
 	_imgLeftOrbStart->Setting(0.05, false);
 
-	_imgLeftOrbActing = IMAGEMANAGER->FindImageVector("Boss_HolyFountain_Orb");
+	_imgLeftOrbActing = IMAGEMANAGER->AddImageVectorCopy("Boss_HolyFountain_Orb");
 	_imgLeftOrbActing->Setting(0.1, true);
 
-	_imgLeftOrbEnd = IMAGEMANAGER->FindImageVector("Boss_HolyFountain_End_Left");
+	_imgLeftOrbEnd = IMAGEMANAGER->AddImageVectorCopy("Boss_HolyFountain_End_Left");
 	_imgLeftOrbEnd->Setting(0.1, false);
 
 	isLeftDes = false;
@@ -195,7 +195,10 @@ void HolyOrbLeft::Update()
 	{
 		_isLeftPlayOn = true;
 	}
-
+	if (OBJECTMANAGER->m_boss->_left== nullptr)
+	{
+		isLeftDes = true;
+	}
 	//if ()
 	//{
 	//	m_obj->ObjectDestroyed();
@@ -232,13 +235,13 @@ void HolyOrbLeft::Release()
 
 void HolyOrbRight::Init()
 {
-	_imgRightOrbStart = IMAGEMANAGER->FindImageVector("Boss_HolyFountain_Start_Right");
+	_imgRightOrbStart = IMAGEMANAGER->AddImageVectorCopy("Boss_HolyFountain_Start_Right");
 	_imgRightOrbStart->Setting(0.05, false);
 
-	_imgRightOrbActing = IMAGEMANAGER->FindImageVector("Boss_HolyFountain_Orb");
+	_imgRightOrbActing = IMAGEMANAGER->AddImageVectorCopy("Boss_HolyFountain_Orb");
 	_imgRightOrbActing->Setting(0.1, true);
 
-	_imgRightOrbEnd = IMAGEMANAGER->FindImageVector("Boss_HolyFountain_End_Right");
+	_imgRightOrbEnd = IMAGEMANAGER->AddImageVectorCopy("Boss_HolyFountain_End_Right");
 	_imgRightOrbEnd->Setting(0.05, false);
 
 	isRightDes = false;
@@ -251,6 +254,10 @@ void HolyOrbRight::Update()
 	if (OBJECTMANAGER->m_boss->getIdleOn() == true)
 	{
 		_isRightPlayOn = true;
+	}
+	if (OBJECTMANAGER->m_boss->_right == nullptr)
+	{
+		isRightDes = true;
 	}
 }
 
