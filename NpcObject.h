@@ -12,10 +12,11 @@ public:
 	CollisionComponent* coll3;
 	CollisionComponent* coll4;
 	int kind;
-
+	vImage* food;
 	bool m_isState;
 	vector<sItem*> m_itemList;
 	float rot;
+	bool isSell =false;
 	NpcObject();
 	~NpcObject();
 	vImage* m_npcImage;

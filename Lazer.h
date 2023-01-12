@@ -20,6 +20,7 @@ public:
 	CollisionComponent* collll4;
 	// Component을(를) 통해 상속됨
 
+	int count = 0;
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;
