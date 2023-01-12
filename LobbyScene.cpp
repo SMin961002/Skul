@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "LobbyScene.h"
 #include "Player.h"
-#include"LeoniaSoldier.h"
-#include"Fanatic.h"
-#include"BlackFanatic.h"
+#include "LeoniaSoldier.h"
+#include "Fanatic.h"
+#include "BlackFanatic.h"
+
 LobbyScene::LobbyScene()
 {
 }

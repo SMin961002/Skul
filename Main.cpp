@@ -97,6 +97,7 @@ void Main::Init()
 	SOUNDMANAGER->AddSound("RouletteBigHitBlackCast", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_BlackCast.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("RouletteBigHitBlack", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_BlackAtk.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("RouletteBigHitRed", "./Resources/Sound/Gambler_DestinyRoulette_BigHit_Red.wav")->SetVolume(50);
+	SOUNDMANAGER->AddSound("EndingScene", "./Resources/Sound/EndingScene.wav")->SetVolume(50);
 
 
 	IMAGEMANAGER->LoadImages();

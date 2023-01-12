@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "EndingScene.h"
+#include "CSound.h"
 
 void EndingScene::Init()
 {
@@ -48,16 +49,18 @@ void EndingScene::Init()
 
 	m_catState = cWalk;
 	m_duoState = dNone;
+
+	SOUNDMANAGER->FindSound("EndingScene")->Play(true);
 }
 
 void EndingScene::Update()
 {
-	_smallCloudLocate += 1.5f;
-	_mediumCloudLocate += 1.0f;
-	_bigCloudLocate += 0.5f;
-	_smallCloudLocate1 += 1.5f;
-	_mediumCloudLocate1 += 1.0f;
-	_bigCloudLocate1 += 0.5f;
+	_smallCloudLocate += 0.3f;
+	_mediumCloudLocate += 0.2f;
+	_bigCloudLocate += 0.1f;
+	_smallCloudLocate1 += 0.3f;
+	_mediumCloudLocate1 += 0.2f;
+	_bigCloudLocate1 += 0.1f;
 
 	if (_smallCloudLocate > _imgSmallCloud->GetWidth())
 	{
@@ -175,4 +178,7 @@ void EndingScene::UIRender()
 	{
 		SCENEMANAGER->FadeInColor(0.005, []() {}, 515587);
 	}
+}
+	SOUNDMANAGER->FindSound("EndingScene")->Stop();
+	SOUNDMANAGER->FindSound("Intro")->Play(true);
 }
