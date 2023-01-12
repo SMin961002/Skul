@@ -43,15 +43,16 @@ void NpcObject::Setting(string name)
 
 		sItem* item3 = new sItem;
 		item3->m_account = 500;
-		item3->key = "CaerleonSword";
+		item3->key = "Caerleonarmor";
 
 		m_itemList.push_back(item3);
 
 		sItem* item4 = new sItem;
 		item4->m_account = 5000;
-		item4->key = "CaerleonSword";
+		item4->key = "BoneOfMana";
 
 		m_itemList.push_back(item4);
+
 	}
 	OBJECTMANAGER->m_player->goldValue = 5000;
 }
@@ -96,7 +97,7 @@ void NpcObject::Render()
 				if (coll2->GetIsActive() == true)
 				{
 					coll2->Setting(30, m_obj->x - x, m_obj->y + 50, "second");
-					IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage(iter->key), m_obj->x - x, m_obj->y + sinf(rot) * 8 - 30, 2.5, 2.5);
+					IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage(iter->key), m_obj->x - x-10, m_obj->y + sinf(rot) * 8 - 30, 2.5, 2.5);
 					IMAGEMANAGER->D2dTextOut(to_wstring(iter->m_account), m_obj->x - x - IMAGEMANAGER->GetCameraPosition().x - 40, m_obj->y + 68 - IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,255 }, 0.5);
 				}
 				break;
@@ -104,7 +105,7 @@ void NpcObject::Render()
 				coll3->Setting(30, m_obj->x - x, m_obj->y + 50, "third");
 				if (coll3->GetIsActive() == true)
 				{
-					IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage(iter->key), m_obj->x - x, m_obj->y + sinf(rot) * 8 - 30, 2.5, 2.5);
+					IMAGEMANAGER->CenterRender(IMAGEMANAGER->FindImage(iter->key), m_obj->x - x-10, m_obj->y + sinf(rot) * 8 - 30, 2.5, 2.5);
 					IMAGEMANAGER->D2dTextOut(to_wstring(iter->m_account), m_obj->x - x - IMAGEMANAGER->GetCameraPosition().x - 40, m_obj->y + 68 - IMAGEMANAGER->GetCameraPosition().y, { 255,255,255,255 }, 0.5);
 				}
 				break;
@@ -151,6 +152,20 @@ void NpcObject::UIRender()
 			IMAGEMANAGER->D2dTextOut(L"불의 검", 210, 50, { 0,0,0,1 }, 0.8f);
 			IMAGEMANAGER->D2dTextOut(L"묵직한 불의 검. 때렸을 때 불이 붙지 않지만, \n멋있다.", 90, 115, { 0,0,0,1 }, 0.5f);
 			IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("CaerleonSword"), 170, 215, 1.5, 1.5);
+			IMAGEMANAGER->D2dTextOut(L"F 구매하기  ( " + to_wstring(m_itemList[kind]->m_account) + L" )", 160, 270, { 0,0,0,1 }, 0.8f);
+		}
+		if (m_itemList[kind]->key == "Caerleonarmor")
+		{
+			IMAGEMANAGER->D2dTextOut(L"보급형 칼레온 갑옷", 155, 50, { 0,0,0,1 }, 0.8f);
+			IMAGEMANAGER->D2dTextOut(L"보기만 해도 진절머리 나는 칼레온 군 보급형 갑옷.", 93, 115, { 0,0,0,1 }, 0.5f);
+			IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("Caerleonarmor"), 163, 215, 1.5, 1.5);
+			IMAGEMANAGER->D2dTextOut(L"F 구매하기  ( " + to_wstring(m_itemList[kind]->m_account) + L" )", 160, 270, { 0,0,0,1 }, 0.8f);
+		}
+		if (m_itemList[kind]->key == "BoneOfMana")
+		{
+			IMAGEMANAGER->D2dTextOut(L"마나의 뼈", 200, 50, { 0,0,0,1 }, 0.8f);
+			IMAGEMANAGER->D2dTextOut(L"대체 어떤 부유한 스켈레톤이 이런걸 만들어서 쓸까?", 90, 115, { 0,0,0,1 }, 0.5f);
+			IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("BoneOfMana"), 163, 215, 1.5, 1.5);
 			IMAGEMANAGER->D2dTextOut(L"F 구매하기  ( " + to_wstring(m_itemList[kind]->m_account) + L" )", 160, 270, { 0,0,0,1 }, 0.8f);
 		}
 	}
