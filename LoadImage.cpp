@@ -771,4 +771,20 @@ void ImageManager::LoadImages()
 	SOUNDMANAGER->AddSound("052_Archbishop_Sacrament_Voice_a_v1", "./Resources/Sound/보스 오디오/2페이즈/Sacrament/052_Archbishop_Sacrament_Voice_a_v1.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("053_Archbishop_Sacrament_Ready_a_v1", "./Resources/Sound/보스 오디오/2페이즈/Sacrament/053_Archbishop_Sacrament_Ready_a_v1.wav")->SetVolume(50);
 
+	SOUNDMANAGER->AddSound("SkulRise", "./Resources/Sound/SkulRise.wav");
+	SOUNDMANAGER->FindSound("SkulRise")->SetVolume(70);
+	SOUNDMANAGER->AddSound("SkulCape", "./Resources/Sound/SkulCape.wav");
+	SOUNDMANAGER->FindSound("SkulCape")->SetVolume(70);
+	SOUNDMANAGER->AddSound("Barrier", "./Resources/Sound/보스 오디오/1페이즈/Barrier/Barrier.wav");
+	SOUNDMANAGER->FindSound("Barrier")->SetVolume(70);
+	SOUNDMANAGER->AddSound("Nervousnessvoice", "./Resources/Sound/보스 오디오/1페이즈/Nervousness/Nervousnessvoice.wav");
+	SOUNDMANAGER->FindSound("Nervousnessvoice")->SetVolume(70);
+	SOUNDMANAGER->AddSound("Nervousness", "./Resources/Sound/보스 오디오/1페이즈/Nervousness/Nervousness.wav");
+	SOUNDMANAGER->FindSound("Nervousness")->SetVolume(70);
+	SOUNDMANAGER->AddSound("Worshipvoice", "./Resources/Sound/보스 오디오/1페이즈/Worship/Worshipvoice.wav");
+	SOUNDMANAGER->FindSound("Worshipvoice")->SetVolume(70);
+	SOUNDMANAGER->AddSound("Wosrship", "./Resources/Sound/보스 오디오/1페이즈/Worship/Wosrship.wav");
+	SOUNDMANAGER->FindSound("Wosrship")->SetVolume(70);
+	SOUNDMANAGER->AddSound("Consecration", "./Resources/Sound/보스 오디오/1페이즈/Consecration/Consecration.wav");
+	SOUNDMANAGER->FindSound("Consecration")->SetVolume(70);
 }

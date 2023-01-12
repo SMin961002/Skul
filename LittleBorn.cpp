@@ -68,6 +68,9 @@ void LittleBorn::ParameterSetting()
 	m_moveSpeed = 180;
 	m_isDown = false;
 
+	m_soundTrigerReborn1 = false;
+	m_soundTrigerReborn2 = false;
+
 	m_dashSpeed = 500;		//##dash 이동식 수정 필요
 	m_dashTime = 0.85 * img[eDash]->GetTotalDelay();
 	m_dashNowTime = 0.0f;	//대시 누르면 0.4, update시 -
@@ -148,6 +151,22 @@ void LittleBorn::ActionArrangement()
 {
 	if (m_action == eReborn)
 	{
+		if (m_soundTrigerReborn1 == false)
+		{
+			if (nowImg->GetFrame() == 1)
+			{
+				SOUNDMANAGER->FindSound("SkulRise")->Play(false);
+				m_soundTrigerReborn1 = true;
+			}
+		}
+		else if (m_soundTrigerReborn2 == false)
+		{
+			if (nowImg->GetFrame() == 11)
+			{
+				SOUNDMANAGER->FindSound("SkulCape")->Play(false);
+				m_soundTrigerReborn2 = true;
+			}
+		}
 		if (nowImg->GetFrame() == 0)
 		{
 			if (KEYMANAGER->GetOnceKeyDown(VK_LEFT) || KEYMANAGER->GetOnceKeyDown(VK_RIGHT)

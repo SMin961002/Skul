@@ -9,6 +9,8 @@ private:
 	ProjectileHeadSkull* m_projectileHead;	//머리던지기 투사체 구조체
     bool m_headThrow;
     bool m_attacksound;
+	bool m_soundTrigerReborn1;
+	bool m_soundTrigerReborn2;
     int count = 0;
     float m_tagAttackDelay;
     float m_tagAttackNowDelay;

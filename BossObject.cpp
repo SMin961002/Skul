@@ -70,7 +70,7 @@ Phase2_Death_Ready
 Phase2_DeathLoop",
 	*/
 
-
+	SOUNDMANAGER->FindSound("Barrier")->Play(false);
 	deathImg = IMAGEMANAGER->AddImageVectorCopy("Phase2_Death_Effect");
 	deathImg->Setting(0.1, false);
 	_imgPhase1BossBarrierIntroFront = IMAGEMANAGER->AddImageVectorCopy("Boss_Barrier_Intro_Front");
@@ -494,12 +494,18 @@ void BossObject::Render()
 			{
 				if (_imgPhase1BossCastingReady->GetIsImageEnded() == false)
 				{
+					if (soundon == false)
+					{
+						SOUNDMANAGER->FindSound("Worshipvoice")->Play(false);
+						soundon = true;
+					}
 					_imgPhase1BossCastingReady->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
 				}
 			}
 			// 캐스팅_공격모션
 			if (_imgPhase1BossCastingReady->GetIsImageEnded() == true)
 			{
+				soundon = false;
 				if (_consecrationDeltaTime < 2 && _worshipDeltaTime < 5 && _imgPhase1BossBaptismAttack->GetIsImageEnded() == false)
 				{
 					if (_imgPhase1BossCastingAttack->GetIsImageEnded() == false)
@@ -527,6 +533,11 @@ void BossObject::Render()
 				{
 				case 0:
 					// 레이저
+					if (soundon2 == false)
+					{
+						SOUNDMANAGER->FindSound("Consecration")->Play(false);
+						soundon2 = true;
+					}
 					_patternLock = true;
 					if (_isConsecrationLoopOn == false)
 					{
@@ -549,6 +560,7 @@ void BossObject::Render()
 					}
 					if (_imgPhase1BossCastingEnd->GetIsImageEnded() == true)
 					{
+						soundon2 = false;
 						_isCastingOn = false;
 						_isCastingAttackOn = false;
 						_isConsecrationLoopOn = false;

@@ -24,6 +24,8 @@ private:
 	bool isDivine = false;
 	bool isPhase3 = false;
 	bool isTeleport = false;
+	bool soundon = false;
+	bool soundon2 = false;
 	float chairX = 0;
 	bool isLazer;
 	float tpX;

@@ -3,12 +3,15 @@
 #include "PixelCollisionComponent.h"
 #include "RigidBodyComponent.h"
 #include "Player.h"
+#include "CSound.h"
 
 void LeftImpact::Init()
 {
 	_imgPhase1NervousEffectImpactRight = IMAGEMANAGER->FindImageVector("Boss_Nervousness_Effect_Projectile");
 	_imgPhase1NervousEffectImpactRight->Setting(0.1, true);
-	
+	SOUNDMANAGER->FindSound("Nervousnessvoice")->Play(false);
+	SOUNDMANAGER->FindSound("Nervousness")->Play(false);
+
 	_collisionLeft = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(_collisionLeft);
 
