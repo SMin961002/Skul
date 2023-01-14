@@ -24,8 +24,8 @@ void SlotMachine::Init()
 	m_alpha = 1.5;
 
 	m_thunder = nullptr;
-	//int tmp = MY_UTILITY::getInt(2);	//ÇöÀç´Â Æø¹ß 2Ä­, 3Ä­Â¥¸® °á°ú¸¸ »ç¿ëÇÏ¹Ç·Î 2·Î Á¦ÇÑÇÔ
-	int tmp = 3;
+	//int tmp = MY_UTILITY::getInt(3);	//ÇöÀç´Â Æø¹ß 2Ä­, 3Ä­Â¥¸® °á°ú¸¸ »ç¿ëÇÏ¹Ç·Î 2·Î Á¦ÇÑÇÔ
+	int tmp = 2;
 	switch (tmp)
 	{
 	case 0:	//»¡°­2, ³ë¶û1 - Æø¹ß + ½ã´õ
@@ -69,7 +69,7 @@ void SlotMachine::Init()
 	m_coll->SetIsActive(false);
 	if (m_resultThunder > 0)
 	{
-		m_thunder = OBJECTMANAGER->AddObject("GamblerThunderShoter", m_obj->x, m_obj->y, ePlayerProjectile)->AddComponent<ThunderShoter>();
+		m_thunder = OBJECTMANAGER->AddObject("GamblerThunderShoter", m_obj->x, m_obj->y, eSummons)->AddComponent<ThunderShoter>();
 		m_thunder->Setting(m_resultThunder);
 	}
 }
@@ -140,6 +140,15 @@ void SlotMachine::Update()
 	}
 	if (m_actionExplosion)
 	{
+		if (m_resultExplosion == 3)
+		{
+			m_delay -= DELTA_TIME;
+			if (m_delay <= 0)
+			{
+				m_delay = 1;
+				m_CollObjList.clear();
+			}
+		}
 		if (m_alpha > 0)
 		{
 			m_alpha -= 10 * DELTA_TIME;

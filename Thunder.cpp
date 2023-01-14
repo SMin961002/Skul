@@ -118,8 +118,12 @@ void ThunderShoter::Update()
 					}
 					else
 					{
-						OBJECTMANAGER->AddObject("SlotMachineThunder", m_targetList.front()->x, m_targetList.front()->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit, m_dmg);
-						m_targetList.pop_front();
+						OBJECTMANAGER->AddObject("SlotMachineThunder", (*m_iterList)->x, (*m_iterList)->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit, m_dmg);
+						m_iterList++;
+						if (m_iterList == m_targetList.end())
+						{
+							m_iterList = m_targetList.begin();
+						}
 					}
 				}//end if no bighit
 				m_shotCount--;

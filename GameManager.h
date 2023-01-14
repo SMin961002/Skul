@@ -22,7 +22,7 @@ public:
 		m_headList.clear();
 		enemyCount = 0;
 		goldValue = 0;
-		isHeadCheck = true;
+		isHeadCheck = false;
 		playerHp = 0;
 	}
 	int GetEnemyCount() { OBJECTMANAGER->GetEnemyCount(); }

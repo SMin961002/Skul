@@ -49,6 +49,7 @@ class ThunderShoter : public Component
 {
 private:
 	list<Object*> m_targetList;
+	list<Object*>::iterator m_iterList;
 	CollisionComponent* m_coll;
 	float m_checkTargetRange;
 	bool m_checkTarget;
@@ -110,5 +111,6 @@ public:
 			SOUNDMANAGER->FindSound("SlotMachineThunder3")->Play(false);
 			EFFECTMANAGER->AddEffect<SlotMachineThunder>(m_obj->x, m_obj->y, false, 2);
 		}
+		m_iterList = m_targetList.begin();
 	};
 };
