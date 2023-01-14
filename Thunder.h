@@ -2,11 +2,15 @@
 class Thunder : public Component
 {
 private:
-	vector<Object*> m_CollObjList;
+	typedef list<Object*> listObj;
+
+	listObj m_CollObjList;
 
 	CollisionComponent* m_coll;
 	//vImage* m_imgThunder;
 	Effect* m_thunder;
+	float m_dmg;
+	float m_delay;
 
 	bool m_isBigHit;
 
@@ -20,12 +24,13 @@ public:
 	virtual void OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)override;
 
 	//BigHit여부를 전달받고 그에 따라 세팅 및 발동된다.
-	void Setting(bool isBigHit)
+	void Setting(bool isBigHit, float dmg)
 	{
 		m_isBigHit = isBigHit;
+		m_dmg = dmg;
 		if (isBigHit)
 		{
-			m_obj->y -= 172;
+			m_obj->y -= 200;
 			m_thunder = EFFECTMANAGER->AddEffect<SlotMachineThunderBigHit>(m_obj->x, m_obj->y, false, 2);
 			string sound = "SlotMachineThunder3Impact";
 			char a = MY_UTILITY::getFromIntTo(65, 67);
@@ -74,14 +79,14 @@ public:
 
 		case 2:
 			m_shotCount = 3;
-			m_dmg = 15;
+			m_dmg = 10;
 			m_isBigHit = false;
 			m_checkTarget = true;
 			break;
 
 		case 3:
 			m_shotCount = 20;
-			m_dmg = 20;
+			m_dmg = 12;
 			m_isBigHit = true;
 			m_checkTarget = false;
 			m_coll->SetIsActive(false);
@@ -90,7 +95,7 @@ public:
 		case 1:
 		default:
 			m_shotCount = 1;
-			m_dmg = 15;
+			m_dmg = 10;
 			m_isBigHit = false;
 			m_checkTarget = true;
 			break;

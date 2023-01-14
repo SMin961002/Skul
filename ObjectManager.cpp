@@ -33,14 +33,14 @@ void ObjectManager::Update()
 {
 	for (int i = 0; i < eEndTag; i++)
 	{
-		//for (int j = 0; j < m_objects[i].size(); j++)
-		//{
-		//	m_objects[i][j]->Update();
-		//}
-		for (auto iter : m_objects[i])
+		for (int j = 0; j < m_objects[i].size(); j++)
 		{
-			(iter)->Update();
+			m_objects[i][j]->Update();
 		}
+		//for (auto iter : m_objects[i])
+		//{
+		//	(iter)->Update();
+		//}
 	}
 	for (int i = 0; i < eEndTag; i++)
 	{

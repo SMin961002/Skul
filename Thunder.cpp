@@ -7,6 +7,7 @@ void Thunder::Init()
 	m_coll = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddCollisionComponent(m_coll);
 	m_coll->Setting(10, m_obj->x + 50, m_obj->y + 5, "GamblerThunder");
+	m_delay = 1;
 }
 
 void Thunder::Update()
@@ -14,6 +15,12 @@ void Thunder::Update()
 	if (m_thunder->GetIsEnded())
 	{
 		m_obj->ObjectDestroyed();
+	}
+	m_delay -= DELTA_TIME;
+	if (m_delay < 0)
+	{
+		m_delay = 1;
+		m_CollObjList.clear();
 	}
 	CollisionUpdate();
 }
@@ -24,14 +31,13 @@ void Thunder::Release()
 
 void Thunder::Render()
 {
-	//m_imgThunder->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
 }
 
 void Thunder::CollisionUpdate()
 {
 	if (m_isBigHit)
 	{
-		m_coll->Setting(110, m_obj->x + 55, m_obj->y + 55);
+		m_coll->Setting(110, m_obj->x + 55, m_obj->y + 200 + 55);
 	}
 	else
 	{
@@ -41,40 +47,34 @@ void Thunder::CollisionUpdate()
 
 void Thunder::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (coll1 == m_coll)
+	bool hited = false;
+	for (auto iter : m_CollObjList)
 	{
-		if (coll2->GetName() == "hitBox")
+		if (other == iter)
 		{
-			if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
-			{
-				bool hited = false;
-				for (auto iter : m_CollObjList)
-				{
-					if (other == iter)
-					{
-						hited = true;
-						break;
-					}
-				}
+			hited = true;
+			break;
+		}
+	}
 
+	if (hited == false)
+	{
+		if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
+		{
+			if (coll2->GetName() == "hitBox")
+			{
+				m_CollObjList.push_back(other);
 				Component* e = nullptr;
 				e = other->GetComponent<Component>();
 				if (e != nullptr)
 				{
-					if (!hited)
-					{
-						e->HitEnemy(15, 0);
-						SOUNDMANAGER->FindSound("SkulAttack")->Play(false);
-						m_CollObjList.push_back(other);
-					}
-					else
-					{
-						e->HitEnemy(0, 0);
-					}
+					e->HitEnemy(m_dmg, 0);
+					SOUNDMANAGER->FindSound("SkulAttack")->Play(false);
 				}
 			}
 		}
 	}
+
 }
 
 //==================================================================================================
@@ -108,17 +108,17 @@ void ThunderShoter::Update()
 				m_delay = MY_UTILITY::getFloat();
 				if (m_isBigHit)
 				{
-					OBJECTMANAGER->AddObject("SlotMachineThunder", m_obj->x - 400 + MY_UTILITY::getFromFloatTo(0, 800), m_obj->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit);
+					OBJECTMANAGER->AddObject("SlotMachineThunder", m_obj->x - 400 + MY_UTILITY::getFromFloatTo(0, 800), m_obj->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit, m_dmg);
 				}//end if bighit
 				else
 				{
 					if (m_targetList.empty())
 					{
-						OBJECTMANAGER->AddObject("SlotMachineThunder", m_obj->x + m_shotCount, m_obj->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit);
+						OBJECTMANAGER->AddObject("SlotMachineThunder", m_obj->x + m_shotCount, m_obj->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit, m_dmg);
 					}
 					else
 					{
-						OBJECTMANAGER->AddObject("SlotMachineThunder", m_targetList.front()->x, m_targetList.front()->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit);
+						OBJECTMANAGER->AddObject("SlotMachineThunder", m_targetList.front()->x, m_targetList.front()->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit, m_dmg);
 						m_targetList.pop_front();
 					}
 				}//end if no bighit
