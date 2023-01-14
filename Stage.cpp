@@ -107,6 +107,98 @@ void Stage::Init()
 				trigger->trigger[2].bottom = iter->y;
 			}
 		}
+		else if (iter->key == "Trigger4")
+		{
+			if (trigger->trigger[3].left == 0)
+			{
+				trigger->trigger[3].left = iter->x;
+				trigger->trigger[3].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[3].right = iter->x;
+				trigger->trigger[3].bottom = iter->y;
+			}
+		}
+		else if (iter->key == "Trigger5")
+		{
+			if (trigger->trigger[4].left == 0)
+			{
+				trigger->trigger[4].left = iter->x;
+				trigger->trigger[4].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[4].right = iter->x;
+				trigger->trigger[4].bottom = iter->y;
+			}
+		}
+		else if (iter->key == "Trigger6")
+		{
+			if (trigger->trigger[5].left == 0)
+			{
+				trigger->trigger[5].left = iter->x;
+				trigger->trigger[5].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[5].right = iter->x;
+				trigger->trigger[5].bottom = iter->y;
+			}
+		}
+		else if (iter->key == "Trigger7")
+		{
+			if (trigger->trigger[6].left == 0)
+			{
+				trigger->trigger[6].left = iter->x;
+				trigger->trigger[6].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[6].right = iter->x;
+				trigger->trigger[6].bottom = iter->y;
+			}
+		}
+		else if (iter->key == "Trigger8")
+		{
+			if (trigger->trigger[7].left == 0)
+			{
+				trigger->trigger[7].left = iter->x;
+				trigger->trigger[7].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[7].right = iter->x;
+				trigger->trigger[7].bottom = iter->y;
+			}
+		}
+		else if (iter->key == "Trigger9")
+		{
+			if (trigger->trigger[8].left == 0)
+			{
+				trigger->trigger[8].left = iter->x;
+				trigger->trigger[8].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[8].right = iter->x;
+				trigger->trigger[8].bottom = iter->y;
+			}
+		}
+		else if (iter->key == "Trigger10")
+		{
+			if (trigger->trigger[9].left == 0)
+			{
+				trigger->trigger[9].left = iter->x;
+				trigger->trigger[9].top = iter->y;
+			}
+			else
+			{
+				trigger->trigger[9].right = iter->x;
+				trigger->trigger[9].bottom = iter->y;
+			}
+		}
+
 		else if (iter->key == "NormalRoom")
 		{
 			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(0);
