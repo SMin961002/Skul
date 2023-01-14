@@ -13,8 +13,8 @@ public:
 	Item* m_item;
 	ObjectManager();
 	~ObjectManager();
-	vector<Object*> m_objects[eEndTag];
 public:
+	vector<Object*> m_objects[eEndTag];
 	Object* AddObject(string name, float x, float y, int tagNum);
 	void Update();
 	void Render();

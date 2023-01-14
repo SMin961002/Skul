@@ -39,6 +39,7 @@ void BossPhase1EnemyCandle::Init()
 	m_obj->AddComponent<PixelCollisionComponent>()->setting(SCENEMANAGER->m_tiles, &m_obj->x, &m_obj->y);
 	m_hitCollision = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddComponent<RigidBodyComponent>();
+	m_hitCollision->SetIsActive(false);
 	m_obj->AddCollisionComponent(m_hitCollision);
 }
 
@@ -53,8 +54,9 @@ void BossPhase1EnemyCandle::Update()
 	}
 	else
 	{
-		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+		m_hitCollision->SetIsActive(true);
 		m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "hitBox");
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 		if (abs(m_obj->x - OBJECTMANAGER->m_player->GetplayerX()) < 200 || m_state == eAttackReady || m_state == eAttack)
 		{
 			if (img[eIdle]->GetIsImageEnded() == true)

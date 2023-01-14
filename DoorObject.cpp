@@ -36,6 +36,10 @@ void DoorObject::Setting(int state)
 		img = IMAGEMANAGER->FindImage("BossRoom");
 		vimg = IMAGEMANAGER->FindImageVector("BossRoom");
 		break;
+	case eNormal2:
+		img = IMAGEMANAGER->FindImage("NormalRoom");
+		vimg = IMAGEMANAGER->FindImageVector("NormalRoom");
+		break;
 	}
 	vimg->Setting(0.1, true);
 }
@@ -95,7 +99,6 @@ void DoorObject::UIRender()
 		switch (m_kind)
 		{
 		case eNormal:
-
 			SCENEMANAGER->FadeOut(0.02, []() {
 				FILEMANAGER->SetNowStageFile("map_2");
 				SCENEMANAGER->ChangeScene("Stage"); }, 2);
@@ -122,6 +125,10 @@ void DoorObject::UIRender()
 			SCENEMANAGER->FadeOut(0.02, []() {
 				FILEMANAGER->SetNowStageFile("map_1");
 				SCENEMANAGER->ChangeScene("BossScene"); }, 2);
+		case eNormal2:
+			SCENEMANAGER->FadeOut(0.02, []() {
+				FILEMANAGER->SetNowStageFile("map_6");
+			SCENEMANAGER->ChangeScene("Stage"); }, 2);
 			break;
 		}
 

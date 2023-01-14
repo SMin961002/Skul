@@ -17,6 +17,13 @@ Trigger::Trigger()
 	trigger[0] = { 0,0,0,0 };
 	trigger[1] = { 0,0,0,0 };
 	trigger[2] = { 0,0,0,0 };
+	trigger[3] = { 0,0,0,0 };
+	trigger[4] = { 0,0,0,0 };
+	trigger[5] = { 0,0,0,0 };
+	trigger[6] = { 0,0,0,0 };
+	trigger[7] = { 0,0,0,0 };
+	trigger[8] = { 0,0,0,0 };
+	trigger[9] = { 0,0,0,0 };
 }
 void Trigger::Init()
 {
@@ -40,8 +47,14 @@ void Trigger::Render()
 
 void Trigger::Release()
 {
-	if (m_structureData->size() > 0)
-		m_structureData->clear();
+	for (int i = 0; i < 10; i++)
+	{
+		for (auto iter : m_structureData[i])
+		{
+			SAFE_DELETE(iter);
+		}
+		m_structureData[i].clear();
+	}
 }
 
 void Trigger::OnTrigger()
@@ -57,6 +70,7 @@ void Trigger::SpawnEnemy()
 {
 	for (auto iter : m_structureData[nowTriggerIndex])
 	{
+		GAMEMANAGER->allEnemycount--;
 		if (iter->key == "AStatue")
 		{
 			OBJECTMANAGER->AddObject("Enemy", iter->x, iter->y, ObjectTag::eEnemy)->AddComponent<AngelStatue>();

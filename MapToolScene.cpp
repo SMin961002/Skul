@@ -127,6 +127,7 @@ void MapToolScene::Update()
 
 void MapToolScene::Render()
 {
+	cout << m_triggerPage<<endl;
 	IMAGEMANAGER->Render(IMAGEMANAGER->FindImage("exBg"), IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 1);
 
 	IMAGEMANAGER->DrawMapStructureBack(m_sturctDatas);

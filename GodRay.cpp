@@ -63,7 +63,7 @@ void GodRay::Release()
 
 void GodRay::OnCollision(CollisionComponent* coll1, CollisionComponent* coll2, Object* other)
 {
-	if (other)
+	if (other->GetName() == "player")
 	{
 		if (KEYMANAGER->GetOnceKeyDown('F'))
 		{

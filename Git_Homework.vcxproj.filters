@@ -106,7 +106,7 @@
       <Filter>Game\Scene\TestScene</Filter>
     </ClCompile>
     <ClCompile Include="HeadManager.cpp">
-      <Filter>Game\Effect\Charactor\Head</Filter>
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Game\Object\Item</Filter>
@@ -121,7 +121,7 @@
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="PlayerMove.cpp">
-      <Filter>Game\Effect\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="Baptism.cpp">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
@@ -150,9 +150,6 @@
     <ClCompile Include="HeadResult.cpp">
       <Filter>Game\Object\Item\LobbyObject\Reward\HeadResult</Filter>
     </ClCompile>
-    <ClCompile Include="ResultValue.cpp">
-      <Filter>Game\Object\Item\LobbyObject\Reward\HeadResult</Filter>
-    </ClCompile>
     <ClCompile Include="HeadItem.cpp">
       <Filter>Game\Object\Item</Filter>
     </ClCompile>
@@ -179,25 +176,25 @@
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClCompile>
     <ClCompile Include="Head.cpp">
-      <Filter>Game\Effect\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="LittleBorn.cpp">
-      <Filter>Game\Effect\Charactor\Head\LittleBorn</Filter>
+      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
     </ClCompile>
     <ClCompile Include="Gambler.cpp">
-      <Filter>Game\Effect\Charactor\Head\Gambler</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClCompile>
     <ClCompile Include="Card.cpp">
-      <Filter>Game\Effect\Charactor\Head\Gambler\Skill</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClCompile>
     <ClCompile Include="Roulette.cpp">
-      <Filter>Game\Effect\Charactor\Head\Gambler\Skill</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClCompile>
     <ClCompile Include="SlotMachine.cpp">
-      <Filter>Game\Effect\Charactor\Head\Gambler\Skill</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClCompile>
     <ClCompile Include="Thunder.cpp">
-      <Filter>Game\Effect\Charactor\Head\Gambler\Skill</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClCompile>
     <ClCompile Include="CSound.cpp">
       <Filter>Core\Manager\SoundManager</Filter>
@@ -221,7 +218,7 @@
       <Filter>Game\Object\Enemy\BallFanatic</Filter>
     </ClCompile>
     <ClCompile Include="BlackJack.cpp">
-      <Filter>Game\Effect\Charactor\Head\Gambler\Skill</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClCompile>
     <ClCompile Include="CSound.cpp">
       <Filter>Core\Manager\SoundManager</Filter>
@@ -272,10 +269,10 @@
       <Filter>Game\Effect</Filter>
     </ClCompile>
     <ClCompile Include="PlayerEffect.cpp">
-      <Filter>Game\Effect\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Game\Effect\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="HeadResult.cpp">
       <Filter>Game\Object\Item</Filter>
@@ -323,7 +320,7 @@
       <Filter>Core\Manager\FileManager</Filter>
     </ClCompile>
     <ClCompile Include="ProjectileHeadSkull.cpp">
-      <Filter>Game\Effect\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
       <Filter>Game\UI\Scene\Stage</Filter>
@@ -366,6 +363,10 @@
     </ClCompile>
     <ClCompile Include="Fanatic.cpp">
       <Filter>Game\Object\Enemy\Fanatic</Filter>
+    </ClCompile>
+    <ClCompile Include="BossDeathEffect.cpp" />
+    <ClCompile Include="ResultValue.cpp">
+      <Filter>Game\Object\Item\LobbyObject\Reward\HeadResult</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -433,7 +434,7 @@
       <Filter>Game\UI\Scene\BossScene</Filter>
     </ClInclude>
     <ClInclude Include="Head.h">
-      <Filter>Game\Effect\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClInclude>
     <ClInclude Include="HolyFountain.h">
       <Filter>Game\Object\Boss\HolyFountain</Filter>
@@ -467,7 +468,7 @@
       <Filter>Game\Effect</Filter>
     </ClInclude>
     <ClInclude Include="HeadManager.h">
-      <Filter>Game\Effect\Charactor\Head</Filter>
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Game\Object\Item</Filter>
@@ -497,13 +498,13 @@
       <Filter>Game\Object\Item\LobbyObject\Reward\Gold</Filter>
     </ClInclude>
     <ClInclude Include="Inventory.h">
-      <Filter>Game\Effect\Charactor\Inventory</Filter>
+      <Filter>Game\Object\Charactor\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="HeadItem.h">
-      <Filter>Game\Effect\Charactor\Head</Filter>
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
     <ClInclude Include="HeadResult.h">
-      <Filter>Game\Effect\Charactor\Head</Filter>
+      <Filter>Game\Object\Charactor\Head</Filter>
     </ClInclude>
     <ClInclude Include="Worship.h">
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
@@ -511,17 +512,14 @@
     <ClInclude Include="Nervousness.h">
       <Filter>Game\Object\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="ResultValue.h">
-      <Filter>Game\Object\Item\LobbyObject\Reward</Filter>
-    </ClInclude>
     <ClInclude Include="Gambler.h">
-      <Filter>Game\Effect\Charactor\Head\Gambler</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler</Filter>
     </ClInclude>
     <ClInclude Include="LittleBorn.h">
-      <Filter>Game\Effect\Charactor\Head\LittleBorn</Filter>
+      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
     </ClInclude>
     <ClInclude Include="ProjectileHeadSkull.h">
-      <Filter>Game\Effect\Charactor\Head\LittleBorn</Filter>
+      <Filter>Game\Object\Charactor\Head\LittleBorn</Filter>
     </ClInclude>
     <ClInclude Include="MenuUI.h">
       <Filter>Game\UI\Menu</Filter>
@@ -533,16 +531,16 @@
       <Filter>Game\Object\Boss\Casting Pattern</Filter>
     </ClInclude>
     <ClInclude Include="Card.h">
-      <Filter>Game\Effect\Charactor\Head\Gambler\Skill</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClInclude>
     <ClInclude Include="Roulette.h">
-      <Filter>Game\Effect\Charactor\Head\Gambler\Skill</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClInclude>
     <ClInclude Include="SlotMachine.h">
-      <Filter>Game\Effect\Charactor\Head\Gambler\Skill</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClInclude>
     <ClInclude Include="Thunder.h">
-      <Filter>Game\Effect\Charactor\Head\Gambler\Skill</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClInclude>
     <ClInclude Include="CSoundMgr.h">
       <Filter>Core\Manager\SoundManager</Filter>
@@ -563,7 +561,7 @@
       <Filter>Game\Object\Enemy\BallFanatic</Filter>
     </ClInclude>
     <ClInclude Include="BlackJack.h">
-      <Filter>Game\Effect\Charactor\Head\Gambler\Skill</Filter>
+      <Filter>Game\Object\Charactor\Head\Gambler\Skill</Filter>
     </ClInclude>
     <ClInclude Include="CSound.h">
       <Filter>Core\Manager\SoundManager</Filter>
@@ -611,10 +609,10 @@
       <Filter>Game\Effect</Filter>
     </ClInclude>
     <ClInclude Include="PlayerEffect.h">
-      <Filter>Game\Effect\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Game\Effect\Charactor</Filter>
+      <Filter>Game\Object\Charactor</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Game\UI\Scene</Filter>
@@ -681,6 +679,10 @@
     </ClInclude>
     <ClInclude Include="LobbyObject.h">
       <Filter>Game\Object\LobbyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BossDeathEffect.h" />
+    <ClInclude Include="ResultValue.h">
+      <Filter>Game\Object\Item\LobbyObject\Reward</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -786,9 +788,6 @@
     <Filter Include="Game\Object\Trigger">
       <UniqueIdentifier>{eed8242e-381a-444d-8b8f-bb5efddd2291}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Reward\HeadResult">
-      <UniqueIdentifier>{06ff99bc-2f80-4cc9-989d-01a265f7ef0a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Object\Enemy">
       <UniqueIdentifier>{5fe81d37-64a5-425f-b474-a46d7ebd14a1}</UniqueIdentifier>
     </Filter>
@@ -797,24 +796,6 @@
     </Filter>
     <Filter Include="Core\Manager\SoundManager">
       <UniqueIdentifier>{91bb3578-5794-420b-b725-0a442f12b050}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Effect\Charactor">
-      <UniqueIdentifier>{b02c8b66-cd68-4c8d-b8c6-2015530ad898}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Effect\Charactor\Head">
-      <UniqueIdentifier>{7528eb48-f244-4dc5-aab2-5f6e7dd1a441}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Effect\Charactor\Head\Gambler">
-      <UniqueIdentifier>{fb52118e-3419-431d-b739-5b69209f4304}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Effect\Charactor\Head\Gambler\Skill">
-      <UniqueIdentifier>{6bf30feb-4866-49d7-991f-12a5fd8d8ed5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Effect\Charactor\Head\LittleBorn">
-      <UniqueIdentifier>{91645030-351c-460b-8995-e860b4c731cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Effect\Charactor\Inventory">
-      <UniqueIdentifier>{c84c77fd-48d6-45c2-a0d5-2357772714a1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Object\Enemy\AngelStatue">
       <UniqueIdentifier>{78d14e47-1715-4192-8345-615d2c0b20af}</UniqueIdentifier>
@@ -890,6 +871,24 @@
     </Filter>
     <Filter Include="Game\Object\Item\LobbyObject\Reward\HeadResult">
       <UniqueIdentifier>{06ff99bc-2f80-4cc9-989d-01a265f7ef0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor">
+      <UniqueIdentifier>{b02c8b66-cd68-4c8d-b8c6-2015530ad898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Head">
+      <UniqueIdentifier>{7528eb48-f244-4dc5-aab2-5f6e7dd1a441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Head\Gambler">
+      <UniqueIdentifier>{fb52118e-3419-431d-b739-5b69209f4304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Head\Gambler\Skill">
+      <UniqueIdentifier>{6bf30feb-4866-49d7-991f-12a5fd8d8ed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Head\LittleBorn">
+      <UniqueIdentifier>{91645030-351c-460b-8995-e860b4c731cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Charactor\Inventory">
+      <UniqueIdentifier>{c84c77fd-48d6-45c2-a0d5-2357772714a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
