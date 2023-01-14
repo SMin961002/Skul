@@ -115,7 +115,7 @@ void MapToolScene::Update()
 			iter.push_back(-1);
 		}
 	}
-	if (KEYMANAGER->GetOnceKeyDown(VK_INSERT) && m_triggerPage != 3)
+	if (KEYMANAGER->GetOnceKeyDown(VK_INSERT) && m_triggerPage != 10)
 	{
 		m_triggerPage++;
 	}
