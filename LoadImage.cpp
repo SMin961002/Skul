@@ -119,13 +119,14 @@ void ImageManager::LoadImages()
 	AddImageVector("Gambler_SlotMachine", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/", 1, 4);
 	AddImageVector("Gambler_SlotMachine_Explosion", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Explosion/", 1, 17);
 	AddImageVector("Gambler_SlotMachine_ExplosionBigHit", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/BigHitExplosion/", 1, 17);
-	AddImageVector("Gambler_SlotMachine_Thunder", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Explosion/", 1, 17);
+	AddImageVector("Gambler_SlotMachine_Thunder", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Thunder/", 1, 16);
 	AddImageVector("Gambler_SlotMachine_ThunderBigHit", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/BigHitThunder/", 1, 20);
 	AddImage("GamblerCardNormal", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Normal.png");
 	AddImage("GamblerCardJoker", L"./Resources/Png/Skul/Gambler/Effect/Gambler_Card_Joker.png");
 	AddImage("GamblerRouletteBlack", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Black.png");
 	AddImage("GamblerRouletteRed", L"./Resources/Png/Skul/Gambler/Effect/Roulette/Stop_Red.png");
 	AddImage("GamblerSlotMachineExplosion_Thunder", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Explosion.png");
+	AddImage("GamblerSlotMachineThunder_Laiser", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Thunder.png");
 	AddImage("GamblerSlotMachineExplosion_BigHit", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/ExplosionBigHit.png");
 
 	// 타일 이미지
@@ -758,6 +759,11 @@ void ImageManager::LoadImages()
 	SOUNDMANAGER->AddSound("SlotMachineFinish", "./Resources/Sound/Gambler_SlotMachine_Finish.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("SlotMachineExplosion", "./Resources/Sound/Gambler_SlotMachine_Explosion.wav")->SetVolume(60);
 	SOUNDMANAGER->AddSound("SlotMachineExplosion3", "./Resources/Sound/Gambler_SlotMachine_Explosion3.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("SlotMachineThunder", "./Resources/Sound/Gambler_SlotMachine_Lightning.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("SlotMachineThunder3", "./Resources/Sound/Gambler_SlotMachine_Lightning3.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("SlotMachineThunder3ImpactA", "./Resources/Sound/Gambler_SlotMachine_Lightning3A.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("SlotMachineThunder3ImpactB", "./Resources/Sound/Gambler_SlotMachine_Lightning3B.wav")->SetVolume(60);
+	SOUNDMANAGER->AddSound("SlotMachineThunder3ImpactC", "./Resources/Sound/Gambler_SlotMachine_Lightning3C.wav")->SetVolume(60);
 	SOUNDMANAGER->AddSound("RouletteSummon", "./Resources/Sound/Gambler_Roulette_Summon.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("RouletteSpin", "./Resources/Sound/Gambler_Roulette.wav")->SetVolume(50);
 	SOUNDMANAGER->AddSound("RouletteSpike", "./Resources/Sound/Gambler_Roulette_Spike.wav")->SetVolume(10);

@@ -133,4 +133,9 @@ void SlotMachineThunder::Init()
 	Effect::Init();
 	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_SlotMachine_Thunder");
 	m_img->Setting(0.03, false);
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	m_img->Setting(i, 0.03);
+	//}
+	SOUNDMANAGER->FindSound("SlotMachineThunder")->Play(false);
 }

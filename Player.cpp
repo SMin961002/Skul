@@ -146,28 +146,28 @@ void Player::Update()
 		lastCheck = isHeadCheck;
 		ChangeHead();
 	}
-		if (!m_nowHead->GetNonActionCansle())
+	if (!m_nowHead->GetNonActionCansle())
+	{
+		Move();
+		if (isHeadCheck == true)
 		{
-			Move();
-			if (isHeadCheck == true)
+			if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
 			{
-				if (KEYMANAGER->GetOnceKeyDown(VK_SPACE))
-				{
-					if (m_headTagCool == 0)
-						ChangeHead();
-				}
+				if (m_headTagCool == 0)
+					ChangeHead();
 			}
 		}
-		InputArtifactKey();
+	}
+	InputArtifactKey();
 
-		m_playerHitBox->Setting(m_obj->x + 14, m_obj->y - 15);
-		if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
-		{
-			m_obj->y += 1;
-		}
+	m_playerHitBox->Setting(m_obj->x + 14, m_obj->y - 15);
+	if (false == m_obj->GetComponent<PixelCollisionComponent>()->GetIsCollision())
+	{
+		m_obj->y += 1;
+	}
 
-		CoolDown();
-		m_nowHead->Update();
+	CoolDown();
+	m_nowHead->Update();
 }
 
 void Player::Release()
