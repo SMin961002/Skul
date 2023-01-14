@@ -1,5 +1,6 @@
 // Project9.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
+//
 
 #include "stdafx.h"
 #include "Main.h"
@@ -7,6 +8,7 @@
 Main mg;
 int countS = 0;
 
+#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -73,6 +75,3 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	return mg.WndProc(hWnd, message, wParam, lParam);
 }
-
-//미사일 충돌처리
-//내가발사한 미사일로 적제거

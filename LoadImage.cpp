@@ -451,6 +451,10 @@ void ImageManager::LoadImages()
 	AddStructureImage("Lamp3", L"./Resources/Tile/4Stage/Structure/HangingLamp1.png");
 	AddStructureImage("Lamp4", L"./Resources/Tile/4Stage/Structure/HangingLamp2.png");
 	AddStructureImage("Box1", L"./Resources/Tile/4Stage/Structure/box1.png");
+	AddStructureImage("Box2", L"./Resources/Tile/4Stage/Structure/box2.png");
+	AddStructureImage("Box3", L"./Resources/Tile/4Stage/Structure/box3.png");
+	AddStructureImage("Box4", L"./Resources/Tile/4Stage/Structure/box4.png");
+	AddStructureImage("Guillotine", L"./Resources/Tile/4Stage/Structure/Guillotine.png");
 	AddStructureImage("Brokenbox1", L"./Resources/Tile/4Stage/Structure/Brokenbox1.png");
 	AddStructureImage("Chair1", L"./Resources/Tile/4Stage/Structure/chair1.png");
 	AddStructureImage("Fence1", L"./Resources/Tile/4Stage/Structure/Fence1.png");
