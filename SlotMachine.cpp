@@ -25,7 +25,7 @@ void SlotMachine::Init()
 
 	m_thunder = nullptr;
 	//int tmp = MY_UTILITY::getInt(2);	//ÇöÀç´Â Æø¹ß 2Ä­, 3Ä­Â¥¸® °á°ú¸¸ »ç¿ëÇÏ¹Ç·Î 2·Î Á¦ÇÑÇÔ
-	int tmp = 2;
+	int tmp = 3;
 	switch (tmp)
 	{
 	case 0:	//»¡°­2, ³ë¶û1 - Æø¹ß + ½ã´õ
@@ -52,6 +52,12 @@ void SlotMachine::Init()
 		m_imgResult = IMAGEMANAGER->FindImage("GamblerSlotMachineThunder_Laiser");
 		m_resultThunder = 2;
 		m_resultLaiser = 1;
+		break;
+	case 3:
+		SOUNDMANAGER->FindSound("SlotMachineJackpot")->Play(false);
+		m_imgResult = IMAGEMANAGER->FindImage("GamblerSlotMachineThunder_BigHit");
+		m_resultThunder = 3;
+		break;
 	}
 	m_imgSlotMachine = IMAGEMANAGER->FindImageVector("Gambler_SlotMachine");
 	m_imgSlotMachine->Setting(0.016, false);

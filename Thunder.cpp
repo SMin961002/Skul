@@ -12,7 +12,9 @@ void Thunder::Init()
 void Thunder::Update()
 {
 	if (m_thunder->GetIsEnded())
+	{
 		m_obj->ObjectDestroyed();
+	}
 	CollisionUpdate();
 }
 
@@ -22,13 +24,14 @@ void Thunder::Release()
 
 void Thunder::Render()
 {
+	//m_imgThunder->CenterRender(m_obj->x, m_obj->y, 2, 2, 0);
 }
 
 void Thunder::CollisionUpdate()
 {
 	if (m_isBigHit)
 	{
-		m_coll->Setting(192, m_obj->x + 96, m_obj->y + 188);
+		m_coll->Setting(110, m_obj->x + 55, m_obj->y + 55);
 	}
 	else
 	{
@@ -97,31 +100,35 @@ void ThunderShoter::Update()
 {
 	if (m_shot)
 	{
-		m_delay -= DELTA_TIME;
-		if (m_delay <= 0)
+		if (m_shotCount > 0)
 		{
-			m_delay = 0.3;
-			m_shotCount--;
-			if (m_isBigHit)
+			m_delay -= DELTA_TIME;
+			if (m_delay <= 0)
 			{
-				OBJECTMANAGER->AddObject("SlotMachineThunder", m_obj->x - 300 + MY_UTILITY::getFromFloatTo(0, 600), m_obj->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit);
-			}//end if bighit
-			else
-			{
-				if (m_targetList.empty())
+				m_delay = MY_UTILITY::getFloat();
+				if (m_isBigHit)
 				{
-					OBJECTMANAGER->AddObject("SlotMachineThunder", m_obj->x, m_obj->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit);
-				}
+					OBJECTMANAGER->AddObject("SlotMachineThunder", m_obj->x - 400 + MY_UTILITY::getFromFloatTo(0, 800), m_obj->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit);
+				}//end if bighit
 				else
 				{
-					OBJECTMANAGER->AddObject("SlotMachineThunder", m_targetList.front()->x, m_targetList.front()->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit);
-					m_targetList.pop_front();
-				}
-			}//end if no bighit
-			if (m_shotCount <= 0)
-				m_obj->ObjectDestroyed();
-
-		}//end if delay 0
+					if (m_targetList.empty())
+					{
+						OBJECTMANAGER->AddObject("SlotMachineThunder", m_obj->x + m_shotCount, m_obj->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit);
+					}
+					else
+					{
+						OBJECTMANAGER->AddObject("SlotMachineThunder", m_targetList.front()->x, m_targetList.front()->y, ePlayerProjectile)->AddComponent<Thunder>()->Setting(m_isBigHit);
+						m_targetList.pop_front();
+					}
+				}//end if no bighit
+				m_shotCount--;
+			}//end if delay 0
+		}
+		else
+		{
+			m_obj->ObjectDestroyed();
+		}
 	}//end if shot
 
 	if (m_checkTarget)

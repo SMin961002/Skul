@@ -106,3 +106,8 @@ class SlotMachineThunder :public Effect
 public :
 	void Init() override;
 };
+class SlotMachineThunderBigHit :public Effect
+{
+public :
+	void Init() override;
+};

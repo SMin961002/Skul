@@ -128,6 +128,7 @@ void ImageManager::LoadImages()
 	AddImage("GamblerSlotMachineExplosion_Thunder", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Explosion.png");
 	AddImage("GamblerSlotMachineThunder_Laiser", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/Thunder.png");
 	AddImage("GamblerSlotMachineExplosion_BigHit", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/ExplosionBigHit.png");
+	AddImage("GamblerSlotMachineThunder_BigHit", L"./Resources/Png/Skul/Gambler/Effect/SlotMachine/ThunderBigHit.png");
 
 	// 타일 이미지
 	AddTileImage(L"./Resources/Tile/4Stage/01.png"); // 0
