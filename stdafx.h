@@ -3,7 +3,6 @@
 #pragma comment (lib, "msimg32.lib") //마이크로소프트(ms) 이미지(img) 32비트(32) 라이브러리
 
 
-
 #include <wincodecsdk.h>
 #pragma comment(lib,"windowscodecs.lib")
 #include <mmsystem.h>
