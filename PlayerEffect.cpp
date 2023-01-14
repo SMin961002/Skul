@@ -132,5 +132,17 @@ void SlotMachineThunder::Init()
 {
 	Effect::Init();
 	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_SlotMachine_Thunder");
-	m_img->Setting(0.03, false);
+	m_img->Setting(0.05, false);
+	for (int i = 0; i < 8; i++)
+	{
+		m_img->Setting(i, 0.03);
+	}
+}
+
+void SlotMachineThunderBigHit::Init()
+{
+	Effect::Init();
+	m_img = IMAGEMANAGER->AddImageVectorCopy("Gambler_SlotMachine_ThunderBigHit");
+	m_img->Setting(0.05, false);
+
 }
