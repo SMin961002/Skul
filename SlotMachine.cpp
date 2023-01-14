@@ -24,8 +24,7 @@ void SlotMachine::Init()
 	m_alpha = 1.5;
 
 	m_thunder = nullptr;
-	//int tmp = MY_UTILITY::getInt(3);	//ÇöÀç´Â Æø¹ß 2Ä­, 3Ä­Â¥¸® °á°ú¸¸ »ç¿ëÇÏ¹Ç·Î 2·Î Á¦ÇÑÇÔ
-	int tmp = 2;
+	int tmp = MY_UTILITY::getInt(3);	//ÇöÀç´Â Æø¹ß 2Ä­, 3Ä­Â¥¸® °á°ú¸¸ »ç¿ëÇÏ¹Ç·Î 2·Î Á¦ÇÑÇÔ
 	switch (tmp)
 	{
 	case 0:	//»¡°­2, ³ë¶û1 - Æø¹ß + ½ã´õ
