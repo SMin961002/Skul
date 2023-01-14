@@ -58,7 +58,7 @@ void Stage::Init()
 	string strData2;
 	strData2 = FILEMANAGER->GetFileData("Object", "batch");
 	MY_UTILITY::ConvertStructureString2Vec(&m_objectDatas, strData2);
-	
+	GAMEMANAGER->allEnemycount = 0;
 	for (auto iter : m_objectDatas)
 	{
 		if (iter->key == "Basic")
@@ -198,7 +198,10 @@ void Stage::Init()
 				trigger->trigger[9].bottom = iter->y;
 			}
 		}
-
+		else if (iter->key == "NormalRoom2")
+		{
+			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(5);
+		}
 		else if (iter->key == "NormalRoom")
 		{
 			OBJECTMANAGER->AddObject("DoorObject", iter->x, iter->y, ObjectTag::eObject)->AddComponent<DoorObject>()->Setting(0);
@@ -269,6 +272,7 @@ void Stage::Init()
 		}
 		else
 		{
+			GAMEMANAGER->allEnemycount++;
 			trigger->m_structureData[iter->page].push_back(iter);
 		}
 	}
@@ -306,18 +310,18 @@ void Stage::Update()
 }
 
 void Stage::Render()
-{   
+{
 	m_speed += 100 * DELTA_TIME;
 	float RenderPos = (int)m_speed % (m_cloude->GetWidth() * 2);
 	if (FILEMANAGER->GetFileName() == "map_5")
 	{
-		IMAGEMANAGER->Render(m_backGround2, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y-200, 2, 2);
-		IMAGEMANAGER->Render(m_cloude3, IMAGEMANAGER->GetCameraPosition().x + (RenderPos*0.5), IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-		IMAGEMANAGER->Render(m_cloude4, (IMAGEMANAGER->GetCameraPosition().x*0.7), IMAGEMANAGER->GetCameraPosition().y+200, 3, 3);
-		IMAGEMANAGER->Render(m_Demoncastle, IMAGEMANAGER->GetCameraPosition().x*0.2, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-		IMAGEMANAGER->Render(m_ChandelierBack2, (IMAGEMANAGER->GetCameraPosition().x*0.2)+450, IMAGEMANAGER->GetCameraPosition().y-200, 2, 2);
+		IMAGEMANAGER->Render(m_backGround2, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y - 200, 2, 2);
+		IMAGEMANAGER->Render(m_cloude3, IMAGEMANAGER->GetCameraPosition().x + (RenderPos * 0.5), IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_cloude4, (IMAGEMANAGER->GetCameraPosition().x * 0.7), IMAGEMANAGER->GetCameraPosition().y + 200, 3, 3);
+		IMAGEMANAGER->Render(m_Demoncastle, IMAGEMANAGER->GetCameraPosition().x * 0.2, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
+		IMAGEMANAGER->Render(m_ChandelierBack2, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 450, IMAGEMANAGER->GetCameraPosition().y - 200, 2, 2);
 		IMAGEMANAGER->Render(m_ChandelierBack2, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 1800, IMAGEMANAGER->GetCameraPosition().y - 140, 2, 2);
-		IMAGEMANAGER->Render(m_ChandelierBack, (IMAGEMANAGER->GetCameraPosition().x *0.2)+1100, IMAGEMANAGER->GetCameraPosition().y-70, 2, 2);	
+		IMAGEMANAGER->Render(m_ChandelierBack, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 1100, IMAGEMANAGER->GetCameraPosition().y - 70, 2, 2);
 	}
 	if (FILEMANAGER->GetFileName() == "map_3")
 	{
@@ -349,13 +353,12 @@ void Stage::Render()
 	if (FILEMANAGER->GetFileName() == "map_4")
 	{
 		IMAGEMANAGER->Render(m_backGround3, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y, 2, 2);
-		IMAGEMANAGER->Render(m_castle2, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y-250, 2, 2);
-		IMAGEMANAGER->Render(m_backGround4, (IMAGEMANAGER->GetCameraPosition().x*0.2)-300,-1000, 2, 2);
-		IMAGEMANAGER->Render(m_backGround5, (IMAGEMANAGER->GetCameraPosition().x * 0.2)+150,100, 2, 2);
-		IMAGEMANAGER->Render(m_backGround6,(IMAGEMANAGER->GetCameraPosition().x * 0.2) + 850,100, 3, 3);
-		IMAGEMANAGER->Render(m_backGround7, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 1350,150, 3, 3);
-		IMAGEMANAGER->Render(m_backGround8, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 1350,0, 3, 3);
-
+		IMAGEMANAGER->Render(m_castle2, IMAGEMANAGER->GetCameraPosition().x, IMAGEMANAGER->GetCameraPosition().y - 250, 2, 2);
+		IMAGEMANAGER->Render(m_backGround4, (IMAGEMANAGER->GetCameraPosition().x * 0.2) - 300, -1000, 2, 2);
+		IMAGEMANAGER->Render(m_backGround5, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 150, 100, 2, 2);
+		IMAGEMANAGER->Render(m_backGround6, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 850, 100, 3, 3);
+		IMAGEMANAGER->Render(m_backGround7, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 1350, 150, 3, 3);
+		IMAGEMANAGER->Render(m_backGround8, (IMAGEMANAGER->GetCameraPosition().x * 0.2) + 1350, 0, 3, 3);
 	}
 
 	IMAGEMANAGER->DrawMapStructureBack(m_sturctDatas);
@@ -383,10 +386,6 @@ void Stage::Release()
 	}
 	m_sturctDatas.clear();
 
-	for (auto iter : m_objectDatas)
-	{
-		SAFE_DELETE(iter);
-	}
 	m_objectDatas.clear();
 }
 

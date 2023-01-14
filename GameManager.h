@@ -14,8 +14,10 @@ public:
 	vector<Head* >m_headList;
 	Head* m_nowHead;
 	int tag;
+	int allEnemycount = 0;
 
 	void Init() {
+		allEnemycount = 0;
 		itemList.clear();
 		tag = -1;
 		m_nowHead = nullptr;

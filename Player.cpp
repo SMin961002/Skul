@@ -140,6 +140,14 @@ void Player::Update()
 {
 
 	Vector2 v;
+	if (KEYMANAGER->GetOnceKeyDown(VK_F1))
+	{
+		for (auto iter : m_obj->GetCollisionComponent())
+		{
+			if (iter->GetName() == "PlayerHitRange")
+				iter->SetIsActive(!iter->GetIsActive());
+		}
+	}
 	m_nowHead->SetImageChange(false);
 	if (lastCheck != isHeadCheck)
 	{
@@ -208,16 +216,16 @@ void Player::UIRender()
 	}
 	if (m_headSlot == eSkulSpecies::eGambler)
 	{
-		IMAGEMANAGER->UICenterRender(m_headUI[0], 55, 475, 1.4, 1.4);
+		IMAGEMANAGER->UICenterRender(m_headUI[0], 55, 475, 1.813, 1.813);
 		if (isHeadCheck == true)
-			IMAGEMANAGER->UICenterRender(m_headUI[3], 30, 515, 0.8f, 0.8f);
+			IMAGEMANAGER->UICenterRender(m_headUI[3], 30, 515, 1.2f, 1.2f);
 		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("switchColl"), 55 - m_headUI[0]->GetWidth() * 1.4f / 2, 475 - m_headUI[0]->GetHeight() * 1.4f / 2, 1.4, 1.4 / 15 * m_headTagCool);
 
 	}
 	else
 	{
-		IMAGEMANAGER->UICenterRender(m_headUI[3], 55, 475, 1.4, 1.4);
-		IMAGEMANAGER->UICenterRender(m_headUI[0], 30, 515, 0.8f, 0.8f);
+		IMAGEMANAGER->UICenterRender(m_headUI[3], 55, 475, 1.813, 1.813);
+		IMAGEMANAGER->UICenterRender(m_headUI[0], 30, 515, 1.2f, 1.2f);
 		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("switchColl"), 55 - m_headUI[0]->GetWidth() * 1.4f / 2, 475 - m_headUI[0]->GetHeight() * 1.4f / 2, 1.4, 1.4 / 10 * m_headTagCool);
 	}
 
@@ -233,12 +241,7 @@ void Player::UIRender()
 	{
 		IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("gamA"), 140, 483, 2.3, 2.3);
 		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("colltime"), 140 - IMAGEMANAGER->FindImage("colltime")->GetWidth() * 2.3 * 0.5, 483 - IMAGEMANAGER->FindImage("colltime")->GetHeight() * 2.3 * 0.5, 2.3, 2.3 / m_nowHead->GetCollTimeSkillA() * m_nowHead->GetCollNowTimeSkillA());
-		/*
-			float m_skillCoolA;
-	float m_skillNowCoolA;
-	float m_skillCoolS;
-	float m_skillNowCoolS;
-		*/
+
 		IMAGEMANAGER->UICenterRender(IMAGEMANAGER->FindImage("gamS"), 209, 483, 2.3, 2.3);
 		IMAGEMANAGER->UIRender(IMAGEMANAGER->FindImage("colltime"), 209 - IMAGEMANAGER->FindImage("colltime")->GetWidth() * 2.3 * 0.5, 483 - IMAGEMANAGER->FindImage("colltime")->GetHeight() * 2.3 * 0.5, 2.3, 2.3 / m_nowHead->GetCollTimeSkillS() * m_nowHead->GetCollNowTimeSkillS());
 	}

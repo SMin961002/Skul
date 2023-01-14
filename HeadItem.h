@@ -5,7 +5,8 @@ private:
 	int m_kind;
 	CImage* img;
 	CollisionComponent* coll;
-
+	vImage* imgBegin[2];
+	vImage* imgBack[2];
 public:
 	HeadItem() {}
 	~HeadItem() {}

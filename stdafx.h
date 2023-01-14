@@ -64,6 +64,7 @@ enum ObjectTag
 	eBoss,
 	ePlayer,
 	eBossObject,
+	eBossObject2,
 	eEndTag
 };
 

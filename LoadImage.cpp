@@ -400,6 +400,12 @@ void ImageManager::LoadImages()
 	AddImageVector("Phase2_Boss_CreateBall_Ready", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/Ready/Sacrament_Ready_", 1, 6);
 	AddImageVector("Phase2_Boss_CreateBall_Attack", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/Attack/Sacrament_Attack_Loop_", 1, 7);
 	AddImageVector("Phase2_Boss_CreateBall_End", L"./Resources/Saint_Joanna/Phase_2/CreateBall/Boss/End/Sacrament_End_", 1, 7);
+
+	AddImageVector("LootGear_Legendary_Behind_Loop_", L"./Resources/HeadUI/Behind/Loop/LootGear_Legendary_Behind_Loop_", 1, 36);
+	AddImageVector("LootGear_Lengedary_Behind_Start_", L"./Resources/HeadUI/Behind/Start/LootGear_Lengedary_Behind_Start_", 1, 66);
+	AddImageVector("LootGear_Legendaryr_Front_Loop_", L"./Resources/HeadUI/Front/Loop/LootGear_Legendaryr_Front_Loop_", 1, 36);
+	AddImageVector("LootGear_Legendary_Front_Start_", L"./Resources/HeadUI/Front/Start/LootGear_Legendary_Front_Start_",2, 66);
+
 	// 2페이즈_상단 텔포, 직선 레이저
 
 	AddImage("FireKnife", L"./Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/FireKnife.png");
@@ -410,7 +416,7 @@ void ImageManager::LoadImages()
 	AddImage("bossHp", L"./Resources/bossHp.png");
 	AddImage("GamblerHead", L"./Resources/HeadUI/Gambler #54692.png");
 
-	AddImage("GamblerHeadUI", L"./Resources/2.png");
+	AddImage("GamblerHeadUI", L"./Resources/HeadUI/Gambler #57092.png");
 	AddImage("LittleHeadUI", L"./Resources/3.png");
 
 	AddImage("gamA", L"./Resources/gamA.png");
@@ -572,6 +578,8 @@ void ImageManager::LoadImages()
 	AddImageVector("Normal_Monster2_Idle", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Idle/", 2, 6);
 	AddImageVector("Normal_Monster2_Move", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Move/", 8, 14);
 	AddImageVector("Normal_Monster2_Up", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster2/Up/", 27, 83);
+	AddImageVector("MapReward_Spawn", L"Resources/MapRe/MapReward_Spawn_", 1, 40);
+
 
 	AddImageVector("Normal_Monster1_Up", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/Up/", 9, 58);
 	AddImageVector("Normal_Monster1_Idle", L"Resources/Saint_Joanna/Phase_1/Normal_Monster/Monster/Idle/", 87, 91);
@@ -594,6 +602,7 @@ void ImageManager::LoadImages()
 
 	//맵 오브젝트 애니메이션
 	AddImageVector("NormalRoom", L"Resources/Door/NormalRoom/", 1, 8);
+	AddImageVector("NormalRoom2", L"Resources/Door/NormalRoom/", 1, 8);
 	AddImageVector("SkulRoom", L"Resources/Door/SkulRoom/", 1, 7);
 	AddImageVector("BossRoom", L"Resources/Door/BossRoom/", 1, 7);
 	AddImageVector("ShopRoom", L"Resources/Door/ShopRoom/", 1, 8);
@@ -621,6 +630,7 @@ void ImageManager::LoadImages()
 	AddObjectImage("Befanatic", L"Resources/Monster/Bell_Fanatic/Idle/01.png");
 	AddObjectImage("AStatue", L"Resources/Monster/Angel_Statue/Idle/01.png");
 	AddObjectImage("NormalRoom", L"Resources/Door/NormalRoom/Deactivate_0.png");
+	AddObjectImage("NormalRoom2", L"Resources/Door/NormalRoom/Deactivate_0.png");
 	AddObjectImage("SkulRoom", L"Resources/Door/SkulRoom/Deactivate_0.png");
 	AddObjectImage("BossRoom", L"Resources/Door/BossRoom/08.png");
 	AddObjectImage("ShopRoom", L"Resources/Door/ShopRoom/Deactivate_0 #80139.png");

@@ -177,11 +177,6 @@ void EnemyTestScene::Release()
 	}
 	m_sturctDatas.clear();
 
-	for (auto iter : m_objectDatas)
-	{
-		SAFE_DELETE(iter);
-	}
-	m_objectDatas.clear();
 }
 
 void EnemyTestScene::UIRender()

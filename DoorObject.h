@@ -8,7 +8,8 @@ private:
 		eSkul,
 		eShop,
 		eSpdir,
-		eBoss
+		eBoss,
+		eNormal2
 	};
 	CollisionComponent* m_coll;
 	CImage* img;

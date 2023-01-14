@@ -148,6 +148,7 @@
     <ClCompile Include="BlackRock.cpp" />
     <ClCompile Include="BossBall.cpp" />
     <ClCompile Include="BossCircle.cpp" />
+    <ClCompile Include="BossDeathEffect.cpp" />
     <ClCompile Include="BossEffect.cpp" />
     <ClCompile Include="BossObject.cpp" />
     <ClCompile Include="BossPhase1EnemyFnatic.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="GoldResult.cpp" />
     <ClCompile Include="Head.cpp" />
     <ClCompile Include="HeadItem.cpp" />
+    <ClCompile Include="HeadItemSpawn.cpp" />
     <ClCompile Include="HeadResult.cpp" />
     <ClCompile Include="HeadManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -247,6 +249,7 @@
     <ClInclude Include="BlackRock.h" />
     <ClInclude Include="BossBall.h" />
     <ClInclude Include="BossCircle.h" />
+    <ClInclude Include="BossDeathEffect.h" />
     <ClInclude Include="BossEffect.h" />
     <ClInclude Include="BossObject.h" />
     <ClInclude Include="BossPhase1EnemyFnatic.h" />
@@ -279,6 +282,7 @@
     <ClInclude Include="GoldResult.h" />
     <ClInclude Include="Head.h" />
     <ClInclude Include="HeadItem.h" />
+    <ClInclude Include="HeadItemSpawn.h" />
     <ClInclude Include="HeadResult.h" />
     <ClInclude Include="HeadManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

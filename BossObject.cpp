@@ -250,14 +250,13 @@ void BossObject::Update()
 	if (_left == nullptr && _right == nullptr)
 	{
 		m_page = 1;
+		for (auto iter : OBJECTMANAGER->m_objects[eBossObject2])
+		{
+			SAFE_DELETE(iter)
+		}
+		OBJECTMANAGER->m_objects[eBossObject2].clear();
+	}
 
-	}
-	if (isTeleport)
-		Teleport();
-	if (isMove)
-	{
-		MovePos();
-	}
 	if (m_page == 0)
 	{
 		if (_isIntroOn == false && _bossHPBarLocate <= 50 && _left != nullptr && _right != nullptr)
@@ -323,13 +322,19 @@ void BossObject::Update()
 	}
 	else if (m_page == 1)
 	{
+		if (isTeleport)
+			Teleport();
+		if (isMove)
+		{
+			MovePos();
+		}
 		Page_2();
 	}
 }
 
 void BossObject::Render()
 {
-	if (isTeleport == true)
+	if (isTeleport == true && m_page == 1)
 	{
 		m_teleportEffect->CenterRender(m_obj->x, m_obj->y, 2, 2, 0, 0);
 	}
@@ -339,7 +344,6 @@ void BossObject::Render()
 	// 보스 대기
 	if (m_bossState != -1)
 	{
-
 		if (m_page == 0)
 		{
 			if (_isIntroOn == true)
@@ -432,6 +436,32 @@ void BossObject::Render()
 				_imgPhase1BossNervousEnd->Reset();
 			}
 
+			if (_isCastingOn == true)
+			{
+				if (_imgPhase1BossCastingReady->GetIsImageEnded() == false)
+				{
+					if (soundon == false)
+					{
+						SOUNDMANAGER->FindSound("Worshipvoice")->Play(false);
+						soundon = true;
+					}
+					_imgPhase1BossCastingReady->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
+				}
+			}
+			// 캐스팅_공격모션
+			if (_imgPhase1BossCastingReady->GetIsImageEnded() == true)
+			{
+				soundon = false;
+				if (_consecrationDeltaTime < 2 && _worshipDeltaTime < 5 && _imgPhase1BossBaptismAttack->GetIsImageEnded() == false)
+				{
+					if (_imgPhase1BossCastingAttack->GetIsImageEnded() == false)
+					{
+						_imgPhase1BossCastingAttack->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
+					}
+				}
+
+				_isCastingAttackOn = true;
+			}
 			// 초이스 On
 			if (_isChoiceOn == true)
 			{
@@ -463,8 +493,8 @@ void BossObject::Render()
 			{
 				if (_isChoiceAttackEnd == false)
 				{
-					OBJECTMANAGER->AddObject("Enemy", MY_UTILITY::getFromFloatTo(100, 1500), 600, eBossObject)->AddComponent<BossPhase1EnemyFnatic>();
-					OBJECTMANAGER->AddObject("Enemy", MY_UTILITY::getFromFloatTo(100, 1500), 600, eBossObject)->AddComponent<BossPhase1EnemyCandle>();
+					OBJECTMANAGER->AddObject("Enemy", MY_UTILITY::getFromFloatTo(100, 1500), 600, eBossObject2)->AddComponent<BossPhase1EnemyFnatic>();
+					OBJECTMANAGER->AddObject("Enemy", MY_UTILITY::getFromFloatTo(100, 1500), 600, eBossObject2)->AddComponent<BossPhase1EnemyCandle>();
 				}
 				_isChoiceAttackEnd = true;
 
@@ -490,32 +520,7 @@ void BossObject::Render()
 			}
 
 			// 캐스팅 On
-			if (_isCastingOn == true)
-			{
-				if (_imgPhase1BossCastingReady->GetIsImageEnded() == false)
-				{
-					if (soundon == false)
-					{
-						SOUNDMANAGER->FindSound("Worshipvoice")->Play(false);
-						soundon = true;
-					}
-					_imgPhase1BossCastingReady->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
-				}
-			}
-			// 캐스팅_공격모션
-			if (_imgPhase1BossCastingReady->GetIsImageEnded() == true)
-			{
-				soundon = false;
-				if (_consecrationDeltaTime < 2 && _worshipDeltaTime < 5 && _imgPhase1BossBaptismAttack->GetIsImageEnded() == false)
-				{
-					if (_imgPhase1BossCastingAttack->GetIsImageEnded() == false)
-					{
-						_imgPhase1BossCastingAttack->CenterRender(m_obj->x, m_obj->y - 26, 1.8, 1.8, 0, false);
-					}
-				}
 
-				_isCastingAttackOn = true;
-			}
 			// 캐스팅_패턴 선택
 			if (_castingMotionDeltaTime > 0.5 && _isCastingAttackOn == true)
 			{
@@ -603,6 +608,8 @@ void BossObject::Render()
 							_imgPhase1BossCastingReady->Reset();
 							_imgPhase1BossCastingEnd->Reset();
 							_imgPhase1BossBaptismAttack->Reset();
+							_consecrationDeltaTime = 0;
+							_worshipDeltaTime = 0;
 							nowPattern = false;
 							_patternLock = false;
 						}
@@ -633,19 +640,29 @@ void BossObject::Render()
 					}
 					if (_imgPhase1BossCastingEnd->GetIsImageEnded() == true)
 					{
+						soundon2 = false;
 						_isCastingOn = false;
 						_isCastingAttackOn = false;
 						_isConsecrationLoopOn = false;
-						_worshipDeltaTime = 0;
+						_consecrationDeltaTime = 0;
+						_castingMotionDeltaTime = 0;
+						_consecrationDeltaTime = 0;
+						nowPattern = false;
 						_imgPhase1BossCastingReady->Reset();
 						_imgPhase1BossCastingEnd->Reset();
-						nowPattern = false;
+						_imgPhase1BossBaptismAttack->Reset();
+						_imgPhase1BossConsecrationStart->Reset();
+						_imgPhase1BossConsecrationEnd->Reset();
+						_imgPhase1BossCastingAttack->Reset();
+						_consecrationDeltaTime = 0;
+						_worshipDeltaTime = 0;
 						_patternLock = false;
 					}
 
 					break;
 				}
 			}
+
 		}
 		else if (m_page == 1)
 		{
@@ -730,24 +747,27 @@ void BossObject::Render()
 				}
 			}
 		}
-		if (m_isMagicCircleImage == true)
+		if (m_page == 1)
 		{
-			if (magicCircleImage->GetFrame() == 15 && circleCount == 0)
+			if (m_isMagicCircleImage == true)
 			{
-				circleCount++;
-				OBJECTMANAGER->AddObject("Enemy2", m_obj->x, m_obj->y + 80, eBossObject)->AddComponent<BossCircle>();
+				if (magicCircleImage->GetFrame() == 15 && circleCount == 0)
+				{
+					circleCount++;
+					OBJECTMANAGER->AddObject("Enemy2", m_obj->x, m_obj->y + 80, eBossObject)->AddComponent<BossCircle>();
+				}
+				if (magicCircleImage->GetIsImageEnded() == true)
+				{
+					m_bossState = eSoulChaseE;
+				}
+				magicCircleImage->CenterRender(m_obj->x - 15, m_obj->y + 80, 1.5, 1.5, 0, 0);
+				trailImg->CenterRender(m_obj->x, m_obj->y + 80, 1.5, 1.5, 0, 0);
 			}
-			if (magicCircleImage->GetIsImageEnded() == true)
+			if (isLazer == true)
 			{
-				m_bossState = eSoulChaseE;
+				divineLightEf1->CenterRender(m_obj->x + 100, m_obj->y, 1.5, 1.5, 0, 0, 1);
+				divineLightEf2->CenterRender(m_obj->x + 190, m_obj->y, 1.5, 1.5, 0, 0, 1);
 			}
-			magicCircleImage->CenterRender(m_obj->x - 15, m_obj->y + 80, 1.5, 1.5, 0, 0);
-			trailImg->CenterRender(m_obj->x, m_obj->y + 80, 1.5, 1.5, 0, 0);
-		}
-		if (isLazer == true)
-		{
-			divineLightEf1->CenterRender(m_obj->x + 100, m_obj->y, 1.5, 1.5, 0, 0, 1);
-			divineLightEf2->CenterRender(m_obj->x + 190, m_obj->y, 1.5, 1.5, 0, 0, 1);
 		}
 		if (_left != nullptr)
 			IMAGEMANAGER->UIRender(hpImg, 250, _bossHPBarLocate, 245.f / 300 * _left->getLeftCurrentHP(), 2.7);
@@ -846,6 +866,7 @@ void BossObject::Render()
 			if (m_bossState != -1)
 			{
 				OBJECTMANAGER->AddObject("gold", 870, 120, eBossObject)->AddComponent<GodRay>();
+			
 				for (int i = 0; i < 100; i++)
 				{
 					OBJECTMANAGER->AddObject("gold", m_obj->x, m_obj->y, eBossObject)->AddComponent<Gold>();

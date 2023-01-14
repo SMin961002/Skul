@@ -44,6 +44,7 @@ void BossPhase1EnemyFnatic::Init()
 	m_hitCollision = m_obj->AddComponent<CollisionComponent>();
 	m_hitpointCollision = m_obj->AddComponent<CollisionComponent>();
 	m_obj->AddComponent<RigidBodyComponent>();
+	m_hitCollision->SetIsActive(false);
 	m_obj->AddCollisionComponent(m_hitCollision);
 	m_obj->AddCollisionComponent(m_hitpointCollision);
 }
@@ -59,8 +60,9 @@ void BossPhase1EnemyFnatic::Update()
 	}
 	else
 	{
-		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
+		m_hitCollision->SetIsActive(true);
 		m_hitCollision->Setting(30, m_obj->x + 15, m_obj->y - 10, "hitBox");
+		m_obj->GetComponent<RigidBodyComponent>()->SetIsActive(true);
 
 		if (img[eIdle]->GetIsImageEnded() == true)
 		{
