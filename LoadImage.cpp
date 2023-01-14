@@ -631,6 +631,14 @@ void ImageManager::LoadImages()
 	AddObjectImage("Trigger1", L"./Resources/Trigger1.png");
 	AddObjectImage("Trigger2", L"./Resources/Trigger2.png");
 	AddObjectImage("Trigger3", L"./Resources/Trigger3.png");
+	AddObjectImage("Trigger4", L"./Resources/Trigger4.png");
+	AddObjectImage("Trigger5", L"./Resources/Trigger5.png");
+	AddObjectImage("Trigger6", L"./Resources/Trigger6.png");
+	AddObjectImage("Trigger7", L"./Resources/Trigger7.png");
+	AddObjectImage("Trigger8", L"./Resources/Trigger8.png");
+	AddObjectImage("Trigger9", L"./Resources/Trigger9.png");
+	AddObjectImage("Trigger10", L"./Resources/Trigger10.png");
+
 	AddObjectImage("Fountain", L"./Resources/Tile/4Stage/Structure/fountain/01.png");
 	AddObjectImage("Spider", L"./Resources/Tile/4Stage/Structure/spider/01.png");
 	AddObjectImage("LobbyNpc", L"./Resources/Tile/4Stage/Structure/Npc1/01.png");

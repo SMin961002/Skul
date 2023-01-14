@@ -4,8 +4,8 @@ class Trigger
 {
 public:
 	int nowTriggerIndex;
-	RECT trigger[3];
-	vector<StructureData* > m_structureData[4];
+	RECT trigger[10];
+	vector<StructureData*> m_structureData[10];
 
 	Trigger();
 	~Trigger() {}
